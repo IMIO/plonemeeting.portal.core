@@ -25,6 +25,11 @@ class IItem(model.Schema):
 
     uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
+    representative_group_in_charge_key = schema.TextLine(
+        title=_(u"Reprensentative group in charge key"),
+        required=False
+    )
+
     decision = RichText(title=_(u"Decision"), required=False)
 
     point_type = schema.Choice(
