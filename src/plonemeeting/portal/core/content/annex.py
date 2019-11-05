@@ -19,7 +19,7 @@ class IAnnex(model.Schema):
     )
 
     annex_file = namedfile.NamedBlobFile(
-        title=_(u"Annexe"),
+        title=_(u"Annex"),
         required=True,
         # readonly=True
     )
