@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+
 from Products.CMFPlone import PloneMessageFactory as plone_
 from plone.dexterity.content import Item
 from plone.namedfile import field as namedfile
 from plone.supermodel import model
-from plonemeeting.portal.core import _
 from zope import schema
 from zope.interface import implementer
+
+from plonemeeting.portal.core import _
 
 
 class IAnnex(model.Schema):

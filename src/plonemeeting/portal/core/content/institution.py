@@ -52,6 +52,7 @@ class IInstitution(model.Schema):
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
         value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
+        required=False,
     )
 
     representatives_mappings = schema.List(
@@ -59,9 +60,10 @@ class IInstitution(model.Schema):
         value_type=DictRow(
             title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
         ),
+        required=False,
     )
 
-    text = RichText(title=_(u"Text"))
+    text = RichText(title=_(u"Text"), required=False)
 
 
 @implementer(IInstitution)
