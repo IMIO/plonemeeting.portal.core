@@ -7,6 +7,8 @@
 # (e.g. locales/de/LC_MESSAGES/plonemeeting.portal.core.po)
 
 domain=plonemeeting.portal.core
-
 i18ndude rebuild-pot --pot $domain.pot --create $domain ../
+i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po
+
+domain=plone
 i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po
