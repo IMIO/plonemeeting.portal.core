@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="meeting_workflow" title="Meeting Workflow"
+             state_variable="review_state" initial_state="private" manager_bypass="False">
+    <permission>Access contents information</permission>
+    <permission>Modify portal content</permission>
+    <permission>View</permission>
+    <state state_id="draft" title="Draft">
+        <description></description>
+        <exit-transition transition_id="publish"/>
+        <exit-transition transition_id="retract"/>
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Reader</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Reader</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+    </state>
+    <state state_id="private" title="Private">
+        <description></description>
+        <exit-transition transition_id="submit"/>
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Reader</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Reader</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+    </state>
+    <state state_id="published" title="Published decision">
+        <description></description>
+        <exit-transition transition_id="unpublish"/>
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Anonymous</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Manager</permission-role>
+            <permission-role>Owner</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Site Administrator</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Anonymous</permission-role>
+        </permission-map>
+    </state>
+    <transition transition_id="publish" title="" new_state="published" trigger="USER" before_script="" after_script="">
+        <description></description>
+        <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish decision</action>
+        <guard>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+    </transition>
+    <transition transition_id="retract" title="" new_state="private" trigger="USER" before_script="" after_script="">
+        <description></description>
+        <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Return to private</action>
+        <guard>
+            <guard-permission>Request review</guard-permission>
+        </guard>
+    </transition>
+    <transition transition_id="unpublish" title="" new_state="draft" trigger="USER" before_script="" after_script="">
+        <description></description>
+        <action url="%(content_url)s/content_status_modify?workflow_action=unpublish" category="workflow" icon="">Return to draft</action>
+        <guard>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+    </transition>
+    <transition transition_id="submit" title="" new_state="draft" trigger="USER" before_script="" after_script="">
+        <description></description>
+        <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Send to draft</action>
+        <guard>
+            <guard-permission>Request review</guard-permission>
+        </guard>
+    </transition>
+    <worklist worklist_id="reviewer_queue" title="">
+        <description>Reviewer tasks</description>
+        <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
+        <guard>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+        <match name="review_state" values="pending"/>
+    </worklist>
+    <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+        <description>Previous transition</description>
+        <default>
+            <expression>transition/getId|nothing</expression>
+        </default>
+        <guard>
+  </guard>
+    </variable>
+    <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+        <description>The ID of the user who performed the previous transition</description>
+        <default>
+            <expression>user/getId</expression>
+        </default>
+        <guard>
+  </guard>
+    </variable>
+    <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+        <description>Comment about the last transition</description>
+        <default>
+            <expression>python:state_change.kwargs.get('comment', '')</expression>
+        </default>
+        <guard>
+  </guard>
+    </variable>
+    <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+        <description>Provides access to workflow history</description>
+        <default>
+            <expression>state_change/getHistory</expression>
+        </default>
+        <guard>
+            <guard-permission>Request review</guard-permission>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+    </variable>
+    <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+        <description>When the previous transition was performed</description>
+        <default>
+            <expression>state_change/getDateTime</expression>
+        </default>
+        <guard>
+  </guard>
+    </variable>
+</dc-workflow>
