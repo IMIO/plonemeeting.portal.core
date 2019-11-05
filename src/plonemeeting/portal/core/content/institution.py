@@ -15,18 +15,15 @@ from plonemeeting.portal.core import _
 
 
 class ICategoryMappingRowSchema(Interface):
-    global_category = schema.TextLine(title=_(u"Global category"))
-    local_category = schema.TextLine(title=_(u"Local category"))
+    global_category_id = schema.TextLine(title=_(u"Global category id"))
+    local_category_id = schema.TextLine(title=_(u"Local category id"))
 
 
 class IRepresentativeMappingRowSchema(Interface):
     representative_key = schema.TextLine(title=_(u"Reprensentative key"))
     representative_value = schema.TextLine(title=_(u"Reprensentative value"))
     representative_long_value = schema.TextLine(title=_(u"Reprensentative long values"))
-    representative_group_in_charge_key = schema.TextLine(
-        title=_(u"Reprensentative group in charge key")
-    )
-    active = schema.Bool(title=_(u"Active"))
+    active = schema.Bool(title=_(u"Active"), default=True)
 
 
 class IInstitution(model.Schema):
