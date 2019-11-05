@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 13:56+0000\n"
+"POT-Creation-Date: 2019-11-05 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../content/annex.py:22
+#: ../content/annex.py:24
 #: ../profiles/default/types/Annex.xml
 msgid "Annex"
 msgstr ""
@@ -34,8 +34,12 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/item.py:39
+#: ../content/item.py:35
 msgid "Category/Matter"
+msgstr ""
+
+#: ../content/item.py:28
+msgid "Decision"
 msgstr ""
 
 #: ../profiles/default/types/Annex.xml
@@ -48,8 +52,9 @@ msgstr ""
 msgid "Emergency"
 msgstr ""
 
+#: ../content/item.py:38
 #: ../content/meeting.py:31
-msgid "Extra Info"
+msgid "Extra info"
 msgstr ""
 
 #: ../content/institution.py:18
@@ -102,11 +107,11 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../content/item.py:27
+#: ../content/item.py:24
 msgid "Point number"
 msgstr ""
 
-#: ../content/item.py:35
+#: ../content/item.py:31
 msgid "Point type"
 msgstr ""
 
@@ -126,16 +131,15 @@ msgstr ""
 msgid "Reprensentative value"
 msgstr ""
 
-#: ../content/institution.py:58
+#: ../content/institution.py:59
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:64
-#: ../content/item.py:31
+#: ../content/institution.py:66
 msgid "Text"
 msgstr ""
 
-#: ../content/item.py:29
+#: ../content/item.py:26
 msgid "UID Plonemeeting"
 msgstr ""
 

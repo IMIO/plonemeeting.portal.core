@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 13:56+0000\n"
+"POT-Creation-Date: 2019-11-05 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Active"
 msgstr "Actif"
 
-#: ../content/annex.py:22
+#: ../content/annex.py:24
 #: ../profiles/default/types/Annex.xml
 msgid "Annex"
 msgstr "Annexe"
@@ -31,9 +31,13 @@ msgstr "Présences"
 msgid "Categories mappings"
 msgstr "Equivalences de catégories"
 
-#: ../content/item.py:39
+#: ../content/item.py:35
 msgid "Category/Matter"
 msgstr "Catégorie/Matière"
+
+#: ../content/item.py:28
+msgid "Decision"
+msgstr "Décision"
 
 #: ../profiles/default/types/Annex.xml
 #: ../profiles/default/types/Institution.xml
@@ -45,9 +49,10 @@ msgstr "Editer"
 msgid "Emergency"
 msgstr "En urgence"
 
+#: ../content/item.py:38
 #: ../content/meeting.py:31
-msgid "Extra Info"
-msgstr "Informations supplémentaires"
+msgid "Extra info"
+msgstr "Informations complémentaires"
 
 #: ../content/institution.py:18
 #: ../vocabulary.py:10
@@ -99,11 +104,11 @@ msgstr "Mot de passe"
 msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
-#: ../content/item.py:27
+#: ../content/item.py:24
 msgid "Point number"
 msgstr "Numéro de point"
 
-#: ../content/item.py:35
+#: ../content/item.py:31
 msgid "Point type"
 msgstr "Type de point"
 
@@ -123,16 +128,15 @@ msgstr "Valeur longue de mandataire"
 msgid "Reprensentative value"
 msgstr "Valeur de mandataire"
 
-#: ../content/institution.py:58
+#: ../content/institution.py:59
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/institution.py:64
-#: ../content/item.py:31
+#: ../content/institution.py:66
 msgid "Text"
 msgstr "Texte"
 
-#: ../content/item.py:29
+#: ../content/item.py:26
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"
 
