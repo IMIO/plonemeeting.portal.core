@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="meeting_workflow" title="Meeting Workflow"
-             state_variable="review_state" initial_state="private" manager_bypass="False">
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             i18n:domain="plone"
+             workflow_id="meeting_workflow" title="Meeting Workflow"
+             state_variable="review_state" initial_state="private" manager_bypass="False"
+             i18n:attributes="title">
     <permission>Access contents information</permission>
     <permission>Modify portal content</permission>
     <permission>View</permission>
-    <state state_id="draft" title="Draft">
+    <state state_id="in_project" title="In project" i18n:attributes="title">
         <description></description>
         <exit-transition transition_id="publish"/>
-        <exit-transition transition_id="retract"/>
+        <exit-transition transition_id="back_to_private"/>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
@@ -32,9 +35,9 @@
             <permission-role>Site Administrator</permission-role>
         </permission-map>
     </state>
-    <state state_id="private" title="Private">
+    <state state_id="private" title="Private" i18n:attributes="title">
         <description></description>
-        <exit-transition transition_id="submit"/>
+        <exit-transition transition_id="send_to_project"/>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
@@ -58,9 +61,9 @@
             <permission-role>Site Administrator</permission-role>
         </permission-map>
     </state>
-    <state state_id="published" title="Published decision">
+    <state state_id="published" title="Published decision" i18n:attributes="title">
         <description></description>
-        <exit-transition transition_id="unpublish"/>
+        <exit-transition transition_id="back_to_project"/>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Anonymous</permission-role>
         </permission-map>
@@ -74,30 +77,30 @@
             <permission-role>Anonymous</permission-role>
         </permission-map>
     </state>
-    <transition transition_id="publish" title="" new_state="published" trigger="USER" before_script="" after_script="">
+    <transition transition_id="publish" title="Publish decision" new_state="published" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
         <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish decision</action>
         <guard>
             <guard-permission>Review portal content</guard-permission>
         </guard>
     </transition>
-    <transition transition_id="retract" title="" new_state="private" trigger="USER" before_script="" after_script="">
+    <transition transition_id="back_to_private" title="Back to private" new_state="private" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
-        <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Return to private</action>
+        <action url="%(content_url)s/content_status_modify?workflow_action=back_to_private" category="workflow" icon="">Back to private</action>
         <guard>
             <guard-permission>Request review</guard-permission>
         </guard>
     </transition>
-    <transition transition_id="unpublish" title="" new_state="draft" trigger="USER" before_script="" after_script="">
+    <transition transition_id="back_to_project" title="Back to project" new_state="in_project" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
-        <action url="%(content_url)s/content_status_modify?workflow_action=unpublish" category="workflow" icon="">Return to draft</action>
+        <action url="%(content_url)s/content_status_modify?workflow_action=back_to_project" category="workflow" icon="">Back to project</action>
         <guard>
             <guard-permission>Review portal content</guard-permission>
         </guard>
     </transition>
-    <transition transition_id="submit" title="" new_state="draft" trigger="USER" before_script="" after_script="">
+    <transition transition_id="send_to_project" title="Send to project" new_state="in_project" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
-        <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Send to draft</action>
+        <action url="%(content_url)s/content_status_modify?workflow_action=send_to_project" category="workflow" icon="">Send to project</action>
         <guard>
             <guard-permission>Request review</guard-permission>
         </guard>
