@@ -1,0 +1,6 @@
+[report]
+include =
+    src/plonemeeting/*
+omit =
+    */test*
+    */upgrades/*

@@ -1,0 +1,4 @@
+graft src/plonemeeting
+graft docs
+include *.rst
+global-exclude *.pyc
