@@ -61,11 +61,11 @@ msgstr "Catégorie globale"
 
 #: ../content/institution.py:49
 msgid "Info annex formatting tal expression"
-msgstr "Tal expression pour le formatage des infos annexes"
+msgstr "Expression TAL pour le formatage des infos annexes"
 
 #: ../content/institution.py:45
 msgid "Info points formatting tal expression"
-msgstr "Tal expression pour le formatage des infos points"
+msgstr "Expression TAL pour le formatage des infos points"
 
 #: ../configure.zcml:29
 msgid "Installs the plonemeeting.portal.core add-on."
