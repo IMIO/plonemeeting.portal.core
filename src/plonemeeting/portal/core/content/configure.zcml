@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+
+    <!-- Institution add / edit form -->
+
+    <adapter
+        for="Products.CMFCore.interfaces.IFolderish
+             zope.publisher.interfaces.browser.IDefaultBrowserLayer
+             plone.dexterity.interfaces.IDexterityFTI"
+        provides="zope.publisher.interfaces.browser.IBrowserPage"
+        factory=".institution.AddView"
+        name="Institution"
+        />
+    <class class=".institution.AddView">
+        <require
+            permission="plonemeeting.portal.core.AddInstitution"
+            interface="zope.publisher.interfaces.browser.IBrowserPage"
+            />
+    </class>
+
+    <browser:page
+      for=".institution.IInstitution"
+      name="edit"
+      class=".institution.EditForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+</configure>

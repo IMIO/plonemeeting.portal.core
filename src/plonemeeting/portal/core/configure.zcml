@@ -12,10 +12,12 @@
     Better import explicite packages or configurations ;)
   -->
   <!--<includeDependencies package="." />-->
-
-  <include package=".browser" />
+  <include package="collective.z3cform.datagridfield" />
 
   <include file="permissions.zcml" />
+  <include package=".browser" />
+  <include package=".content" />
+
 
   <genericsetup:registerProfile
       name="default"

@@ -1,63 +1,92 @@
 # -*- coding: utf-8 -*-
-# from plone.app.textfield import RichText
-# from plone.autoform import directives
+
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
+from plone.app.textfield import RichText
+from plone.dexterity.browser import add
+from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
-# from plone.namedfile import field as namedfile
 from plone.supermodel import model
-# from plone.supermodel.directives import fieldset
-# from z3c.form.browser.radio import RadioFieldWidget
-# from zope import schema
+from zope import schema
 from zope.interface import implementer
+from zope.interface import Interface
+
+from plonemeeting.portal.core import _
 
 
-# from plonemeeting.portal.core import _
+class ICategoryMappingRowSchema(Interface):
+    global_category = schema.TextLine(title=_(u"Global category"))
+    local_category = schema.TextLine(title=_(u"Local category"))
+
+
+class IRepresentativeMappingRowSchema(Interface):
+    representative_key = schema.TextLine(title=_(u"Reprensentative key"))
+    representative_value = schema.TextLine(title=_(u"Reprensentative value"))
+    representative_long_value = schema.TextLine(title=_(u"Reprensentative long values"))
+    representative_group_in_charge_key = schema.TextLine(
+        title=_(u"Reprensentative group in charge key")
+    )
+    active = schema.Bool(title=_(u"Active"))
 
 
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
-    # If you want, you can load a xml model created TTW here
-    # and customize it in Python:
 
-    # model.load('institution.xml')
+    url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
-    # directives.widget(level=RadioFieldWidget)
-    # level = schema.Choice(
-    #     title=_(u'Sponsoring Level'),
-    #     vocabulary=LevelVocabulary,
-    #     required=True
-    # )
+    username = schema.TextLine(title=_(u"Username"), required=False)
 
-    # text = RichText(
-    #     title=_(u'Text'),
-    #     required=False
-    # )
+    password = schema.Password(title=_(u"Password"), required=False)
 
-    # url = schema.URI(
-    #     title=_(u'Link'),
-    #     required=False
-    # )
+    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
 
-    # fieldset('Images', fields=['logo', 'advertisement'])
-    # logo = namedfile.NamedBlobImage(
-    #     title=_(u'Logo'),
-    #     required=False,
-    # )
+    info_points_formatting_tal = schema.TextLine(
+        title=_(u"Info points formatting tal expression"), required=False
+    )
 
-    # advertisement = namedfile.NamedBlobImage(
-    #     title=_(u'Advertisement (Gold-sponsors and above)'),
-    #     required=False,
-    # )
+    info_annex_formatting_tal = schema.TextLine(
+        title=_(u"Info annex formatting tal expression"), required=False
+    )
 
-    # directives.read_permission(notes='cmf.ManagePortal')
-    # directives.write_permission(notes='cmf.ManagePortal')
-    # notes = RichText(
-    #     title=_(u'Secret Notes (only for site-admins)'),
-    #     required=False
-    # )
+    categories_mappings = schema.List(
+        title=_(u"Categories mappings"),
+        value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
+    )
+
+    representatives_mappings = schema.List(
+        title=_(u"Representatives mappings"),
+        value_type=DictRow(
+            title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
+        ),
+    )
+
+    text = RichText(title=_(u"Text"))
 
 
 @implementer(IInstitution)
 class Institution(Container):
     """
     """
+
+
+class AddForm(add.DefaultAddForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(AddForm, self).updateFields()
+        self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
+        self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
+
+
+class AddView(add.DefaultAddView):
+    form = AddForm
+
+
+class EditForm(edit.DefaultEditForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(EditForm, self).updateFields()
+        self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
+        self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
