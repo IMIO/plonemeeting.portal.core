@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from plone.app.textfield import RichText
+from plone.app.textfield import RichText
 # from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.namedfile import field as namedfile
@@ -19,17 +19,17 @@ class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
 
-    point_number = schema.Text(
+    point_number = schema.TextLine(
         title=_(u'Point number'),
         required=True
     )
 
-    uid = schema.Text(
+    uid = schema.TextLine(
         title=_(u'PM UID'),
         required=True
     )
 
-    text = schema.RichText(
+    text = RichText(
         title=_(u'Text'),
         required=False
     )
@@ -52,7 +52,7 @@ class IItem(model.Schema):
         required=True,
     )
 
-    description = schema.RichText(
+    description = RichText(
         title=_(u'Text'),
         required=False
     )
