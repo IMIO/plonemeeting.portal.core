@@ -19,11 +19,12 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import plone.restapi
+
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=plonemeeting.portal.core)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'plonemeeting.portal.core:default')
+        applyProfile(portal, "plonemeeting.portal.core:default")
 
 
 PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
@@ -31,13 +32,13 @@ PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
 
 PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING = IntegrationTesting(
     bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,),
-    name='PlonemeetingPortalCoreLayer:IntegrationTesting',
+    name="PlonemeetingPortalCoreLayer:IntegrationTesting",
 )
 
 
 PLONEMEETING_PORTAL_CORE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,),
-    name='PlonemeetingPortalCoreLayer:FunctionalTesting',
+    name="PlonemeetingPortalCoreLayer:FunctionalTesting",
 )
 
 
@@ -47,5 +48,5 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='PlonemeetingPortalCoreLayer:AcceptanceTesting',
+    name="PlonemeetingPortalCoreLayer:AcceptanceTesting",
 )
