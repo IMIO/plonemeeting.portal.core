@@ -15,15 +15,15 @@ from plonemeeting.portal.core import _
 class IMeeting(model.Schema):
     """ Marker interface and Dexterity Python Schema for Meeting
     """
-    datetime = schema.DateTime(
+    datetime = schema.Datetime(
         title=_(u'MeetingDatetime'),
-        requiered=True,
+        required=True,
         readonly=True,
     )
 
     attentees = schema.Text(
         title=_(u'Assembly'),
-        requiered=True,
+        required=True,
     )
 
 
