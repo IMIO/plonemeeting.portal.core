@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 14:08+0000\n"
+"POT-Creation-Date: 2019-11-05 15:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,29 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../content/institution.py:29
+#: ../content/institution.py:26
 msgid "Active"
-msgstr ""
-
-#: ../content/annex.py:24
-#: ../profiles/default/types/Annex.xml
-msgid "Annex"
 msgstr ""
 
 #: ../content/meeting.py:29
 msgid "Assembly"
 msgstr ""
 
-#: ../content/institution.py:53
+#: ../content/institution.py:50
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/item.py:35
+#: ../content/item.py:40
 msgid "Category/Matter"
 msgstr ""
 
-#: ../content/item.py:28
+#: ../content/item.py:33
 msgid "Decision"
 msgstr ""
 
-#: ../profiles/default/types/Annex.xml
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
 msgid "Edit"
 msgstr ""
 
@@ -52,21 +47,24 @@ msgstr ""
 msgid "Emergency"
 msgstr ""
 
-#: ../content/item.py:38
+#: ../content/item.py:43
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr ""
 
-#: ../content/institution.py:18
 #: ../vocabulary.py:10
 msgid "Global category"
 msgstr ""
 
-#: ../content/institution.py:49
+#: ../content/institution.py:18
+msgid "Global category id"
+msgstr ""
+
+#: ../content/institution.py:46
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../content/institution.py:45
+#: ../content/institution.py:42
 msgid "Info points formatting tal expression"
 msgstr ""
 
@@ -82,16 +80,19 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../content/institution.py:19
 #: ../vocabulary.py:9
 msgid "Local category"
+msgstr ""
+
+#: ../content/institution.py:19
+msgid "Local category id"
 msgstr ""
 
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
 
-#: ../content/institution.py:42
+#: ../content/institution.py:39
 msgid "Meeting config ID"
 msgstr ""
 
@@ -99,11 +100,11 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: ../content/institution.py:40
+#: ../content/institution.py:37
 msgid "Password"
 msgstr ""
 
-#: ../content/institution.py:36
+#: ../content/institution.py:33
 msgid "Plonemeeting URL"
 msgstr ""
 
@@ -111,11 +112,11 @@ msgstr ""
 msgid "Point number"
 msgstr ""
 
-#: ../content/item.py:31
+#: ../content/item.py:36
 msgid "Point type"
 msgstr ""
 
-#: ../content/institution.py:27
+#: ../content/item.py:29
 msgid "Reprensentative group in charge key"
 msgstr ""
 
@@ -131,11 +132,11 @@ msgstr ""
 msgid "Reprensentative value"
 msgstr ""
 
-#: ../content/institution.py:59
+#: ../content/institution.py:56
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:66
+#: ../content/institution.py:63
 msgid "Text"
 msgstr ""
 
@@ -147,13 +148,13 @@ msgstr ""
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:38
+#: ../content/institution.py:35
 msgid "Username"
 msgstr ""
 
-#: ../profiles/default/types/Annex.xml
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
 msgid "View"
 msgstr ""
 
