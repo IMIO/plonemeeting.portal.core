@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <rolemap>
   <permissions>
-  <!-- -*- extra stuff goes here -*- -->
 
     <permission name="plonemeeting.portal.core: Add Annex" acquire="True">
       <role name="Manager"/>
@@ -10,14 +9,12 @@
       <role name="Contributor"/>
     </permission>
 
-
     <permission name="plonemeeting.portal.core: Add Item" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
       <role name="Contributor"/>
     </permission>
-
 
     <permission name="plonemeeting.portal.core: Add Meeting" acquire="True">
       <role name="Manager"/>
@@ -26,14 +23,12 @@
       <role name="Contributor"/>
     </permission>
 
-
     <permission name="plonemeeting.portal.core: Add Institution" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
       <role name="Contributor"/>
     </permission>
-
 
   </permissions>
 </rolemap>
