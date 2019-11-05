@@ -2,7 +2,6 @@
 from plone.app.textfield import RichText
 # from plone.autoform import directives
 from plone.dexterity.content import Container
-from plone.namedfile import field as namedfile
 # from plone.namedfile import field as namedfile
 from plone.supermodel import model
 # from plone.supermodel.directives import fieldset
@@ -45,11 +44,6 @@ class IItem(model.Schema):
         title=_(u'Category/Matter'),
         vocabulary=vocabulary.item_category,
         required=True
-    )
-
-    annexe = namedfile.NamedBlobFile(
-        title=_(u"annexe", default=u"File"),
-        required=True,
     )
 
     description = RichText(
