@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 13:10+0000\n"
+"POT-Creation-Date: 2019-11-05 13:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,12 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: ../content/annex.py:22
 #: ../profiles/default/types/Annex.xml
 msgid "Annex"
 msgstr ""
 
-#: ../content/meeting.py:25
+#: ../content/meeting.py:29
 msgid "Assembly"
 msgstr ""
 
@@ -33,7 +34,7 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/item.py:45
+#: ../content/item.py:39
 msgid "Category/Matter"
 msgstr ""
 
@@ -43,12 +44,17 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../content/institution.py:18
-msgid "Global category"
+#: ../vocabulary.py:17
+msgid "Emergency"
 msgstr ""
 
-#: ../vocabulary.py:9
-msgid "Globale"
+#: ../content/meeting.py:31
+msgid "Extra Info"
+msgstr ""
+
+#: ../content/institution.py:18
+#: ../vocabulary.py:10
+msgid "Global category"
 msgstr ""
 
 #: ../content/institution.py:49
@@ -72,11 +78,8 @@ msgid "Item"
 msgstr ""
 
 #: ../content/institution.py:19
+#: ../vocabulary.py:9
 msgid "Local category"
-msgstr ""
-
-#: ../vocabulary.py:8
-msgid "Locale"
 msgstr ""
 
 #: ../profiles/default/types/Meeting.xml
@@ -87,16 +90,8 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../content/meeting.py:19
-msgid "MeetingDatetime"
-msgstr ""
-
-#: ../vocabulary.py:13
+#: ../vocabulary.py:16
 msgid "Normal"
-msgstr ""
-
-#: ../content/item.py:28
-msgid "PM UID"
 msgstr ""
 
 #: ../content/institution.py:40
@@ -107,11 +102,11 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../content/item.py:23
+#: ../content/item.py:27
 msgid "Point number"
 msgstr ""
 
-#: ../content/item.py:39
+#: ../content/item.py:35
 msgid "Point type"
 msgstr ""
 
@@ -135,13 +130,13 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../vocabulary.py:14
-msgid "Significant"
+#: ../content/institution.py:64
+#: ../content/item.py:31
+msgid "Text"
 msgstr ""
 
-#: ../content/institution.py:64
-#: ../content/item.py:33
-msgid "Text"
+#: ../content/item.py:29
+msgid "UID Plonemeeting"
 msgstr ""
 
 #: ../configure.zcml:38
@@ -156,21 +151,6 @@ msgstr ""
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
 msgid "View"
-msgstr ""
-
-#. Default: "File"
-#: ../content/item.py:51
-msgid "annexe"
-msgstr ""
-
-#. Default: "File"
-#: ../content/annex.py:22
-msgid "label_file"
-msgstr ""
-
-#. Default: "Title"
-#: ../content/annex.py:16
-msgid "label_title"
 msgstr ""
 
 #: ../configure.zcml:29

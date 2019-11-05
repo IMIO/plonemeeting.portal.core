@@ -27,7 +27,7 @@ class IItem(model.Schema):
 
     point_number = schema.TextLine(title=_(u"Point number"), required=True)
 
-    uid = schema.TextLine(title=_(u"PM UID"), required=True)
+    uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
     text = RichText(title=_(u"Text"), required=False)
 

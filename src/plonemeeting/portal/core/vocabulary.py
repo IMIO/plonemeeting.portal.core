@@ -6,14 +6,14 @@ from plonemeeting.portal.core import _
 
 item_category = SimpleVocabulary(
     [
-        SimpleTerm(value=u"locale", title=_(u"Locale")),
-        SimpleTerm(value=u"globale", title=_(u"Globale")),
+        SimpleTerm(value=u"local", title=_(u"Local category")),
+        SimpleTerm(value=u"global", title=_(u"Global category")),
     ]
 )
 
 item_point_type = SimpleVocabulary(
     [
         SimpleTerm(value=u"normal", title=_(u"Normal")),
-        SimpleTerm(value=u"significant", title=_(u"Significant")),
+        SimpleTerm(value=u"emergency", title=_(u"Emergency")),
     ]
 )
