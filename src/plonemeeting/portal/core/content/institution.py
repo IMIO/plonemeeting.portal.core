@@ -8,8 +8,8 @@ from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope import schema
-from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface import implementer
 
 from plonemeeting.portal.core import _
 
