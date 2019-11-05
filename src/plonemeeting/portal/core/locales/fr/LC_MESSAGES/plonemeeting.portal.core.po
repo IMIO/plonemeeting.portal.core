@@ -43,7 +43,7 @@ msgstr "Editer"
 
 #: ../vocabulary.py:17
 msgid "Emergency"
-msgstr ""
+msgstr "En urgence"
 
 #: ../content/meeting.py:31
 msgid "Extra Info"
@@ -64,7 +64,7 @@ msgstr "Tal expression pour le formatage des infos points"
 
 #: ../configure.zcml:29
 msgid "Installs the plonemeeting.portal.core add-on."
-msgstr ""
+msgstr "Installe le module plonemeeting.portal.core."
 
 #: ../profiles/default/types/Institution.xml
 msgid "Institution"
@@ -138,7 +138,7 @@ msgstr "UID Plonemeeting"
 
 #: ../configure.zcml:38
 msgid "Uninstalls the plonemeeting.portal.core add-on."
-msgstr ""
+msgstr "Désinstalle le module plonemeeting.portal.core."
 
 #: ../content/institution.py:38
 msgid "Username"
