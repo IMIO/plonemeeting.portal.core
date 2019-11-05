@@ -13,13 +13,13 @@ class IAnnex(model.Schema):
     """ Marker interface and Dexterity Python Schema for Annex
     """
     title = schema.TextLine(
-        title=_(u"label_title", default=u"Title"),
+        title=_(u"Title"),
         required=True,
         # readonly=True
     )
 
-    file = namedfile.NamedBlobFile(
-        title=_(u"label_file", default=u"File"),
+    annex_file = namedfile.NamedBlobFile(
+        title=_(u"Annexe"),
         required=True,
         # readonly=True
     )
