@@ -25,7 +25,7 @@ class ItemIntegrationTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            "Meeting", self.portal, "parent_container", title="Parent container",
+            "Meeting", self.portal, "parent_container", title="Parent container"
         )
         self.parent = self.portal[parent_id]
 
@@ -44,15 +44,15 @@ class ItemIntegrationTest(unittest.TestCase):
         obj = createObject(factory)
 
         self.assertTrue(
-            IItem.providedBy(obj), u"IItem not provided by {0}!".format(obj,),
+            IItem.providedBy(obj), u"IItem not provided by {0}!".format(obj)
         )
 
     def test_ct_item_adding(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
-        obj = api.content.create(container=self.parent, type="Item", id="item",)
+        obj = api.content.create(container=self.parent, type="Item", id="item")
 
         self.assertTrue(
-            IItem.providedBy(obj), u"IItem not provided by {0}!".format(obj.id,),
+            IItem.providedBy(obj), u"IItem not provided by {0}!".format(obj.id)
         )
 
         parent = obj.__parent__
@@ -72,10 +72,10 @@ class ItemIntegrationTest(unittest.TestCase):
         fti = queryUtility(IDexterityFTI, name="Item")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            fti.id, self.portal, "item_id", title="Item container",
+            fti.id, self.portal, "item_id", title="Item container"
         )
         self.parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
             api.content.create(
-                container=self.parent, type="Document", title="My Content",
+                container=self.parent, type="Document", title="My Content"
             )

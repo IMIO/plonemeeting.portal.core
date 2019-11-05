@@ -40,18 +40,18 @@ class InstitutionIntegrationTest(unittest.TestCase):
 
         self.assertTrue(
             IInstitution.providedBy(obj),
-            u"IInstitution not provided by {0}!".format(obj,),
+            u"IInstitution not provided by {0}!".format(obj),
         )
 
     def test_ct_institution_adding(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
         obj = api.content.create(
-            container=self.portal, type="Institution", id="institution",
+            container=self.portal, type="Institution", id="institution"
         )
 
         self.assertTrue(
             IInstitution.providedBy(obj),
-            u"IInstitution not provided by {0}!".format(obj.id,),
+            u"IInstitution not provided by {0}!".format(obj.id),
         )
 
         parent = obj.__parent__
@@ -73,10 +73,10 @@ class InstitutionIntegrationTest(unittest.TestCase):
         fti = queryUtility(IDexterityFTI, name="Institution")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            fti.id, self.portal, "institution_id", title="Institution container",
+            fti.id, self.portal, "institution_id", title="Institution container"
         )
         self.parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
             api.content.create(
-                container=self.parent, type="Document", title="My Content",
+                container=self.parent, type="Document", title="My Content"
             )

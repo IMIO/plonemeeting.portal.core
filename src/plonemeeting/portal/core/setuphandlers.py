@@ -7,9 +7,7 @@ from zope.interface import implementer
 class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
-        return [
-            "plonemeeting.portal.core:uninstall",
-        ]
+        return ["plonemeeting.portal.core:uninstall"]
 
 
 def post_install(context):

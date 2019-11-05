@@ -23,7 +23,7 @@ class AnnexIntegrationTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            "Item", self.portal, "parent_container", title="Parent container",
+            "Item", self.portal, "parent_container", title="Parent container"
         )
         self.parent = self.portal[parent_id]
 
@@ -42,15 +42,15 @@ class AnnexIntegrationTest(unittest.TestCase):
         obj = createObject(factory)
 
         self.assertTrue(
-            IAnnex.providedBy(obj), u"IAnnex not provided by {0}!".format(obj,),
+            IAnnex.providedBy(obj), u"IAnnex not provided by {0}!".format(obj)
         )
 
     def test_ct_annex_adding(self):
         setRoles(self.portal, TEST_USER_ID, ["Contributor"])
-        obj = api.content.create(container=self.parent, type="Annex", id="annex",)
+        obj = api.content.create(container=self.parent, type="Annex", id="annex")
 
         self.assertTrue(
-            IAnnex.providedBy(obj), u"IAnnex not provided by {0}!".format(obj.id,),
+            IAnnex.providedBy(obj), u"IAnnex not provided by {0}!".format(obj.id)
         )
 
         parent = obj.__parent__
