@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="plonemeeting.portal.core.AddMeeting"
+        title="plonemeeting.portal.core: Add Meeting"
+    />
+
+
+    <permission
         id="plonemeeting.portal.core.AddInstitution"
         title="plonemeeting.portal.core: Add Institution"
     />

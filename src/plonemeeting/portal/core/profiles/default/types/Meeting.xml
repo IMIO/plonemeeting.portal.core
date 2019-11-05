@@ -1,38 +1,37 @@
 <?xml version="1.0"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    name="Institution"
+    name="Meeting"
     meta_type="Dexterity FTI"
     i18n:domain="plonemeeting.portal.core">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">Institution</property>
+      name="title">Meeting</property>
   <property
       i18n:translate=""
       name="description"></property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">Institution</property>
+  <property name="factory">Meeting</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
-  <property name="global_allow">True</property>
+  <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="Meeting" />
-      <!--
+  <!--
     <element value="Document" />
     <element value="File" />
   -->
   </property>
   <!-- Schema, class and security -->
-  <property name="add_permission">plonemeeting.portal.core.AddInstitution</property>
-  <property name="klass">plonemeeting.portal.core.content.institution.Institution</property>
+  <property name="add_permission">plonemeeting.portal.core.AddMeeting</property>
+  <property name="klass">plonemeeting.portal.core.content.meeting.Meeting</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">plonemeeting.portal.core.content.institution.IInstitution</property>
+  <property name="schema">plonemeeting.portal.core.content.meeting.IMeeting</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
@@ -62,7 +61,7 @@
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++Institution</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Meeting</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>
