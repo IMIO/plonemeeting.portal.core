@@ -44,7 +44,7 @@ class InstitutionIntegrationTest(unittest.TestCase):
         )
 
     def test_ct_institution_adding(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         obj = api.content.create(
             container=self.portal, type="Institution", id="institution"
         )
@@ -62,14 +62,14 @@ class InstitutionIntegrationTest(unittest.TestCase):
         self.assertNotIn("institution", parent.objectIds())
 
     def test_ct_institution_globally_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Institution")
         self.assertTrue(
             fti.global_allow, u"{0} is not globally addable!".format(fti.id)
         )
 
     def test_ct_institution_filter_content_type_true(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Institution")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
