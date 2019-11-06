@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone.interfaces import INonInstallable
+import os
 from datetime import datetime
+
+from Products.CMFPlone.interfaces import INonInstallable
 from dateutil.relativedelta import relativedelta
 from plone import api
 from plone.api import content
 from plone.app.textfield.value import RichTextValue
 from plone.namedfile.file import NamedFile
 from zope.interface import implementer
-import os
 
 
 @implementer(INonInstallable)
@@ -76,69 +77,7 @@ def create_item(
         create_file(item, file_name)
 
 
-def create_demo_content(context):
-    """
-    Initializes demo profile with demo content
-    :param context:
-    """
-    portal = api.portal.get()
-    liege = getattr(portal, "liege", None)
-    if not liege:
-        liege = content.create(
-            container=portal, id="liege", type="Institution", title=u"Liège"
-        )
-
-    namur = getattr(portal, "namur", None)
-    if not namur:
-        namur = content.create(
-            container=portal, id="namur", type="Institution", title=u"Namur"
-        )
-
-    liege.representatives_mappings = [
-        {
-            "representative_key": "zfz4ze6r4zg6zr4gze85",
-            "representative_value": "Mr Canard",
-            "representative_long_value": "Mr Canard Bourgmestre F.F.",
-            "active": True,
-        },
-        {
-            "representative_key": "ezab8qv5sv8sz54ev846",
-            "representative_value": "Mr Lapinou",
-            "representative_long_value": "Mme Coin Coin 1ère Échevin",
-            "active": True,
-        },
-        {
-            "representative_key": "zaefzg6ze5fd4ze6854s",
-            "representative_value": "Mr Onizuka",
-            "representative_long_value": "Mr Onizuka, Échevin de l'éducation",
-            "active": True,
-        },
-    ]
-    liege.categories_mappings = [
-        {"global_category_id": "secretariat", "local_category_id": "administration"},
-        {"global_category_id": "ecoles", "local_category_id": "education"},
-    ]
-    namur.representatives_mappings = [
-        {
-            "representative_key": "afezgf5ezd486ze4d",
-            "representative_value": "Mme Lapine",
-            "representative_long_value": "Mme Lapine Bourgmestre",
-            "active": True,
-        },
-        {
-            "representative_key": "zef687ezf4z68z7",
-            "representative_value": "Mme Canard",
-            "representative_long_value": "Mme Canard 1ère Échevine",
-            "active": True,
-        },
-        {
-            "representative_key": "loiuytrezdfg7",
-            "representative_value": "Mr Mugiwara",
-            "representative_long_value": "Mr Mugiwara, Échevin du tourisme",
-            "active": True,
-        },
-    ]
-
+def add_items_in_meeting(institution, meeting):
     fake_deliberation = (
         u"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do "
         u"eiusmod tempor incididunt ut labore et dolore magna aliqua. Vulputate "
@@ -201,18 +140,115 @@ def create_demo_content(context):
         u"tortor id aliquet lectus proin.</p> "
     )
 
-    now = datetime.now()
-    meeting1 = create_meeting(liege, now + relativedelta(months=-1))
-
     create_item(
-        meeting=meeting1,
-        representative=liege.representatives_mappings[-1]["representative_key"],
+        meeting=meeting,
+        representative=institution.representatives_mappings[-1]["representative_key"],
         title=u"Premier point",
         number="1",
         item_type="normal",
         file_names=[u"profiles/demo/data/delibe-1.pdf"],
-        category="education",
+        category=institution.categories_mappings[-1]['local_category_id'],
         deliberation=fake_deliberation,
     )
-    meeting2 = create_meeting(liege, now)
-    meeting3 = create_meeting(liege, now + relativedelta(months=1))
+
+    create_item(
+        meeting=meeting,
+        representative=institution.representatives_mappings[0]["representative_key"],
+        title=u"Deuxième point",
+        number="2",
+        item_type="normal",
+        category=institution.categories_mappings[0]['local_category_id'],
+        deliberation=fake_deliberation,
+    )
+
+    create_item(
+        meeting=meeting,
+        representative=institution.representatives_mappings[0]["representative_key"],
+        title=u"Point urgent",
+        number="2.1",
+        item_type="late",
+        category=institution.categories_mappings[0]['local_category_id'],
+        deliberation=fake_deliberation,
+    )
+
+
+def fill_demo_institution(institution):
+    now = datetime.now()
+    meeting1 = create_meeting(institution, now + relativedelta(months=-1))
+    add_items_in_meeting(institution, meeting1)
+
+    meeting2 = create_meeting(institution, now)
+    add_items_in_meeting(institution, meeting2)
+
+    meeting3 = create_meeting(institution, now + relativedelta(months=1))
+    add_items_in_meeting(institution, meeting3)
+
+
+def create_demo_content(context):
+    """
+    Initializes demo profile with demo content
+    :param context:
+    """
+    portal = api.portal.get()
+    liege = getattr(portal, "liege", None)
+    if not liege:
+        liege = content.create(
+            container=portal, id="liege", type="Institution", title=u"Liège"
+        )
+
+    namur = getattr(portal, "namur", None)
+    if not namur:
+        namur = content.create(
+            container=portal, id="namur", type="Institution", title=u"Namur"
+        )
+
+    liege.representatives_mappings = [
+        {
+            "representative_key": "zfz4ze6r4zg6zr4gze85",
+            "representative_value": "Mr Canard",
+            "representative_long_value": "Mr Canard Bourgmestre F.F.",
+            "active": True,
+        },
+        {
+            "representative_key": "ezab8qv5sv8sz54ev846",
+            "representative_value": "Mr Lapinou",
+            "representative_long_value": "Mme Coin Coin 1ère Échevin",
+            "active": True,
+        },
+        {
+            "representative_key": "zaefzg6ze5fd4ze6854s",
+            "representative_value": "Mr Onizuka",
+            "representative_long_value": "Mr Onizuka, Échevin de l'éducation",
+            "active": True,
+        },
+    ]
+    liege.categories_mappings = [
+        {"global_category_id": "secretariat", "local_category_id": "administration"},
+        {"global_category_id": "ecoles", "local_category_id": "education"},
+    ]
+    fill_demo_institution(liege)
+    namur.representatives_mappings = [
+        {
+            "representative_key": "afezgf5ezd486ze4d",
+            "representative_value": "Mme Lapine",
+            "representative_long_value": "Mme Lapine Bourgmestre",
+            "active": True,
+        },
+        {
+            "representative_key": "zef687ezf4z68z7",
+            "representative_value": "Mme Canard",
+            "representative_long_value": "Mme Canard 1ère Échevine",
+            "active": True,
+        },
+        {
+            "representative_key": "loiuytrezdfg7",
+            "representative_value": "Mr Mugiwara",
+            "representative_long_value": "Mr Mugiwara, Échevin du tourisme",
+            "active": True,
+        },
+    ]
+    namur.categories_mappings = [
+        {"global_category_id": "secretariat", "local_category_id": "administration"},
+        {"global_category_id": "tourisme", "local_category_id": "tourisme"},
+    ]
+    fill_demo_institution(namur)
