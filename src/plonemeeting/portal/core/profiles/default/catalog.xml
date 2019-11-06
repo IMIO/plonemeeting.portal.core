@@ -1,4 +1,20 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
-  <!--<column value="my_meta_column"/>-->
+
+    <index name="year" meta_type="FieldIndex">
+      <indexed_attr value="year"/>
+    </index>
+
+    <index name="meeting_datetime" meta_type="DateIndex">
+      <indexed_attr value="meeting_datetime"/>
+    </index>
+
+    <index name="category" meta_type="FieldIndex">
+      <indexed_attr value="category"/>
+    </index>
+
+    <index name="representative_group_in_charge_key" meta_type="FieldIndex">
+      <indexed_attr value="representative_group_in_charge_key"/>
+    </index>
+
 </object>

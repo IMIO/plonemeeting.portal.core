@@ -27,4 +27,9 @@
       permission="cmf.ModifyPortalContent"
       />
 
+    <!-- Indexers -->
+
+    <adapter name="meeting_datetime" factory=".item.get_datetime_from_meeting" />
+    <adapter name="year" factory=".item.get_year_from_meeting" />
+
 </configure>

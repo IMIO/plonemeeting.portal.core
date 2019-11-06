@@ -43,6 +43,16 @@
       name="plonemeeting.portal.core-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <utility
+    component=".vocabularies.CategoryVocabulary"
+    name="plonemeeting.portal.vocabularies.categories"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.ItemTypeVocabulary"
+    name="plonemeeting.portal.vocabularies.item_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
 
 </configure>
