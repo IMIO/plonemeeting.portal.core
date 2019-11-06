@@ -34,15 +34,15 @@ Test Teardown  Close all browsers
 
 *** Test Cases ***************************************************************
 
-Scenario: As a site administrator I can add a Institution
-  Given a logged-in site administrator
+Scenario: As a manager I can add a Institution
+  Given a logged-in manager
     and an add Institution form
    When I type 'My Institution' into the title field
     and I submit the form
    Then a Institution with the title 'My Institution' has been created
 
-Scenario: As a site administrator I can view a Institution
-  Given a logged-in site administrator
+Scenario: As a manager I can view a Institution
+  Given a logged-in manager
     and a Institution 'My Institution'
    When I go to the Institution view
    Then I can see the Institution title 'My Institution'
@@ -52,8 +52,8 @@ Scenario: As a site administrator I can view a Institution
 
 # --- Given ------------------------------------------------------------------
 
-a logged-in site administrator
-  Enable autologin as  Site Administrator
+a logged-in Manager
+  Enable autologin as  Manager
 
 an add Institution form
   Go To  ${PLONE_URL}/++add++Institution
