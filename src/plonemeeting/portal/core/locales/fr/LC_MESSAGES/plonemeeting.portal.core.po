@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 15:49+0000\n"
+"POT-Creation-Date: 2019-11-06 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,10 @@ msgstr ""
 msgid "Active"
 msgstr "Actif"
 
+#: ../browser/templates/item.pt:51
+msgid "Annexes"
+msgstr "Annexes"
+
 #: ../content/meeting.py:29
 msgid "Assembly"
 msgstr "Présences"
@@ -26,13 +30,18 @@ msgstr "Présences"
 msgid "Categories mappings"
 msgstr "Equivalences de catégories"
 
-#: ../content/item.py:40
+#: ../browser/templates/item.pt:33
+msgid "Category"
+msgstr "Thème"
+
+#: ../content/item.py:41
 msgid "Category/Matter"
 msgstr "Catégorie/Matière"
 
-#: ../content/item.py:33
-msgid "Decision"
-msgstr "Décision"
+#: ../browser/templates/item.pt:44
+#: ../content/item.py:32
+msgid "Deliberation"
+msgstr "Délibération"
 
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
@@ -40,16 +49,17 @@ msgstr "Décision"
 msgid "Edit"
 msgstr "Editer"
 
-#: ../vocabulary.py:17
+#: ../vocabularies.py:26
 msgid "Emergency"
 msgstr "En urgence"
 
-#: ../content/item.py:43
+#: ../browser/templates/item.pt:38
+#: ../content/item.py:46
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr "Informations complémentaires"
 
-#: ../vocabulary.py:10
+#: ../vocabularies.py:13
 msgid "Global category"
 msgstr "Catégorie globale"
 
@@ -65,7 +75,7 @@ msgstr "Expression TAL pour le formatage des infos annexes"
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -77,7 +87,17 @@ msgstr "Institution"
 msgid "Item"
 msgstr "Point"
 
-#: ../vocabulary.py:9
+#: ../browser/templates/item.pt:21
+#: ../content/item.py:24
+msgid "Item number"
+msgstr "Numéro de point"
+
+#: ../browser/templates/item.pt:25
+#: ../content/item.py:35
+msgid "Item type"
+msgstr "Type de point"
+
+#: ../vocabularies.py:12
 msgid "Local category"
 msgstr "Catégorie locale"
 
@@ -93,7 +113,7 @@ msgstr "Séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de séance"
 
-#: ../vocabulary.py:16
+#: ../vocabularies.py:25
 msgid "Normal"
 msgstr "Normal"
 
@@ -104,14 +124,6 @@ msgstr "Mot de passe"
 #: ../content/institution.py:33
 msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
-
-#: ../content/item.py:24
-msgid "Point number"
-msgstr "Numéro de point"
-
-#: ../content/item.py:36
-msgid "Point type"
-msgstr "Type de point"
 
 #: ../content/item.py:29
 msgid "Reprensentative group in charge key"
@@ -129,6 +141,10 @@ msgstr "Valeur longue de mandataire"
 msgid "Reprensentative value"
 msgstr "Valeur de mandataire"
 
+#: ../browser/templates/item.pt:29
+msgid "Representative"
+msgstr "Mandataire"
+
 #: ../content/institution.py:56
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
@@ -141,7 +157,7 @@ msgstr "Texte"
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -155,10 +171,10 @@ msgstr "Nom d'utilisateur"
 msgid "View"
 msgstr "Voir"
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""

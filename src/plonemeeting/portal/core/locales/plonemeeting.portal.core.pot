@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 15:49+0000\n"
+"POT-Creation-Date: 2019-11-06 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: ../browser/templates/item.pt:51
+msgid "Annexes"
+msgstr ""
+
 #: ../content/meeting.py:29
 msgid "Assembly"
 msgstr ""
@@ -29,12 +33,17 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/item.py:40
+#: ../browser/templates/item.pt:33
+msgid "Category"
+msgstr ""
+
+#: ../content/item.py:41
 msgid "Category/Matter"
 msgstr ""
 
-#: ../content/item.py:33
-msgid "Decision"
+#: ../browser/templates/item.pt:44
+#: ../content/item.py:32
+msgid "Deliberation"
 msgstr ""
 
 #: ../profiles/default/types/Institution.xml
@@ -43,16 +52,17 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../vocabulary.py:17
+#: ../vocabularies.py:26
 msgid "Emergency"
 msgstr ""
 
-#: ../content/item.py:43
+#: ../browser/templates/item.pt:38
+#: ../content/item.py:46
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr ""
 
-#: ../vocabulary.py:10
+#: ../vocabularies.py:13
 msgid "Global category"
 msgstr ""
 
@@ -68,7 +78,7 @@ msgstr ""
 msgid "Info points formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -80,7 +90,17 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../vocabulary.py:9
+#: ../browser/templates/item.pt:21
+#: ../content/item.py:24
+msgid "Item number"
+msgstr ""
+
+#: ../browser/templates/item.pt:25
+#: ../content/item.py:35
+msgid "Item type"
+msgstr ""
+
+#: ../vocabularies.py:12
 msgid "Local category"
 msgstr ""
 
@@ -96,7 +116,7 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../vocabulary.py:16
+#: ../vocabularies.py:25
 msgid "Normal"
 msgstr ""
 
@@ -106,14 +126,6 @@ msgstr ""
 
 #: ../content/institution.py:33
 msgid "Plonemeeting URL"
-msgstr ""
-
-#: ../content/item.py:24
-msgid "Point number"
-msgstr ""
-
-#: ../content/item.py:36
-msgid "Point type"
 msgstr ""
 
 #: ../content/item.py:29
@@ -132,6 +144,10 @@ msgstr ""
 msgid "Reprensentative value"
 msgstr ""
 
+#: ../browser/templates/item.pt:29
+msgid "Representative"
+msgstr ""
+
 #: ../content/institution.py:56
 msgid "Representatives mappings"
 msgstr ""
@@ -144,7 +160,7 @@ msgstr ""
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -158,10 +174,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
