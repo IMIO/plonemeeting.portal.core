@@ -25,8 +25,10 @@ class IItem(model.Schema):
 
     uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
-    representative_group_in_charge_key = schema.TextLine(
-        title=_(u"Reprensentative group in charge key"), required=False
+    representative_group_in_charge = schema.Choice(
+        title=_(u"Reprensentative group in charge"),
+        vocabulary="plonemeeting.portal.vocabularies.representatives",
+        required=False,
     )
 
     deliberation = RichText(title=_(u"Deliberation"), required=False)

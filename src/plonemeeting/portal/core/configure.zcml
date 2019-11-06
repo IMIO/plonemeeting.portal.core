@@ -55,4 +55,11 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 
+  <utility
+    component=".vocabularies.RepresentativeVocabulary"
+    name="plonemeeting.portal.vocabularies.representatives"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+
 </configure>

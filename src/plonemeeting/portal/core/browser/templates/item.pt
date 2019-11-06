@@ -26,7 +26,7 @@
         </div>
 
         <div class="representative">
-             <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representative_group_in_charge_key/render" />
+             <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representative_group_in_charge/render" />
         </div>
 
         <div class="category">

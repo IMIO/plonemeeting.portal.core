@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -29,3 +30,20 @@ class ItemTypeVocabularyFactory:
 
 
 ItemTypeVocabulary = ItemTypeVocabularyFactory()
+
+
+class RepresentativeVocabularyFactory:
+    def __call__(self, context):
+        institution = api.portal.get_navigation_root(context)
+        mapping = institution.representatives_mappings
+        return SimpleVocabulary(
+            [
+                SimpleTerm(
+                    value=elem["representative_key"], title=elem["representative_value"]
+                )
+                for elem in mapping
+            ]
+        )
+
+
+RepresentativeVocabulary = RepresentativeVocabularyFactory()
