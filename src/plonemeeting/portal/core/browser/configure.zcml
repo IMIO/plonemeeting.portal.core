@@ -18,4 +18,12 @@
       directory="static"
       />
 
+  <browser:page
+      name="view"
+      for="plonemeeting.portal.core.content.item.IItem"
+      class=".item.ItemView"
+      template="templates/item.pt"
+      permission="zope2.View"
+      />
+
 </configure>

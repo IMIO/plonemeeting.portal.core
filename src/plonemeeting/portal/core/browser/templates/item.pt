@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plonemeeting.portal.core">
+<body>
+
+<metal:text fill-slot="content-core">
+    <tal:text-macro metal:define-macro="content-core">
+
+        <div class="meeting-title"
+             tal:define="meeting nocall: context/aq_parent">
+            <a href=""
+               tal:content="meeting/title"
+               tal:attributes="href meeting/absolute_url" />
+        </div>
+
+        <div class="item-number">
+             <span i18n:translate="">Item number</span> : <span tal:content="context/item_number" />
+        </div>
+
+        <div class="item-type">
+             <span i18n:translate="">Item type</span> : <span tal:content="context/item_type" />
+        </div>
+
+        <div class="representative">
+             <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representative_group_in_charge_key/render" />
+        </div>
+
+        <div class="category">
+             <span i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
+        </div>
+
+        <div class="extra-info"
+             tal:condition="context/extra_info">
+             <span i18n:translate="">Extra info</span>
+             <span tal:content="structure context/extra_info/output" />
+        </div>
+
+        <div class="deliberation"
+             tal:condition="context/deliberation">
+             <span i18n:translate="">Deliberation</span>
+             <span tal:content="structure context/deliberation/output" />
+        </div>
+
+        <div class="annexes"
+             tal:define="files view/get_files"
+             tal:condition="files">
+          <h2 i18n:translate="">Annexes</h2>
+          <ul>
+            <li tal:repeat="file files">
+              <a href=""
+                 tal:content="file/Title"
+                 tal:attributes="href file/getURL" />
+            </li>
+          </ul>
+        </div>
+
+    </tal:text-macro>
+</metal:text>
+
+</body>
+</html>
