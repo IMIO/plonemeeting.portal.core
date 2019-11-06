@@ -13,6 +13,7 @@
   -->
   <!--<includeDependencies package="." />-->
   <include package="collective.z3cform.datagridfield" />
+  <include package="eea.facetednavigation" />
 
   <include file="permissions.zcml" />
   <include package=".browser" />

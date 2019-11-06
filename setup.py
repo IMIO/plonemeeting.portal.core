@@ -55,6 +55,7 @@ setup(
         "plone.restapi",
         "plone.app.dexterity",
         "collective.z3cform.datagridfield",
+        "eea.facetednavigation",
     ],
     extras_require={
         "test": [
