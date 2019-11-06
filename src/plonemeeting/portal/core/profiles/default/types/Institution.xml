@@ -43,6 +43,7 @@
     <element value="plone.categorization"/>
     <element value="plone.basic"/>
     <element value="plone.locking" />
+    <element value="plone.navigationroot" />
   </property>
 
   <!-- View information -->
