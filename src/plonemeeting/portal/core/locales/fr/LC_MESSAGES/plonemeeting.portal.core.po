@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-06 10:52+0000\n"
+"POT-Creation-Date: 2019-11-06 11:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Annexes"
 msgid "Assembly"
 msgstr "Présences"
 
-#: ../content/institution.py:50
+#: ../content/institution.py:52
 msgid "Categories mappings"
 msgstr "Equivalences de catégories"
 
@@ -34,12 +34,12 @@ msgstr "Equivalences de catégories"
 msgid "Category"
 msgstr "Thème"
 
-#: ../content/item.py:41
+#: ../content/item.py:43
 msgid "Category/Matter"
 msgstr "Catégorie/Matière"
 
 #: ../browser/templates/item.pt:44
-#: ../content/item.py:32
+#: ../content/item.py:34
 msgid "Deliberation"
 msgstr "Délibération"
 
@@ -49,17 +49,17 @@ msgstr "Délibération"
 msgid "Edit"
 msgstr "Editer"
 
-#: ../vocabularies.py:26
+#: ../vocabularies.py:27
 msgid "Emergency"
 msgstr "En urgence"
 
 #: ../browser/templates/item.pt:38
-#: ../content/item.py:46
+#: ../content/item.py:48
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr "Informations complémentaires"
 
-#: ../vocabularies.py:13
+#: ../vocabularies.py:14
 msgid "Global category"
 msgstr "Catégorie globale"
 
@@ -67,11 +67,11 @@ msgstr "Catégorie globale"
 msgid "Global category id"
 msgstr "ID de catégorie globale"
 
-#: ../content/institution.py:46
+#: ../content/institution.py:48
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
-#: ../content/institution.py:42
+#: ../content/institution.py:44
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
@@ -93,11 +93,11 @@ msgid "Item number"
 msgstr "Numéro de point"
 
 #: ../browser/templates/item.pt:25
-#: ../content/item.py:35
+#: ../content/item.py:37
 msgid "Item type"
 msgstr "Type de point"
 
-#: ../vocabularies.py:12
+#: ../vocabularies.py:13
 msgid "Local category"
 msgstr "Catégorie locale"
 
@@ -105,15 +105,19 @@ msgstr "Catégorie locale"
 msgid "Local category id"
 msgstr "ID de catégorie locale"
 
+#: ../content/institution.py:39
+msgid "Logo"
+msgstr "Logo"
+
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
 
-#: ../content/institution.py:39
+#: ../content/institution.py:41
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de séance"
 
-#: ../vocabularies.py:25
+#: ../vocabularies.py:26
 msgid "Normal"
 msgstr "Normal"
 
@@ -126,8 +130,8 @@ msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
 #: ../content/item.py:29
-msgid "Reprensentative group in charge key"
-msgstr "Clé de groupe en charge"
+msgid "Reprensentative group in charge"
+msgstr "Mandataire"
 
 #: ../content/institution.py:23
 msgid "Reprensentative key"
@@ -145,7 +149,7 @@ msgstr "Valeur de mandataire"
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/institution.py:56
+#: ../content/institution.py:58
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 

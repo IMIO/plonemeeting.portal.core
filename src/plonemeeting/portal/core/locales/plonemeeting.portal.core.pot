@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-06 10:52+0000\n"
+"POT-Creation-Date: 2019-11-06 11:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Assembly"
 msgstr ""
 
-#: ../content/institution.py:50
+#: ../content/institution.py:52
 msgid "Categories mappings"
 msgstr ""
 
@@ -37,12 +37,12 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: ../content/item.py:41
+#: ../content/item.py:43
 msgid "Category/Matter"
 msgstr ""
 
 #: ../browser/templates/item.pt:44
-#: ../content/item.py:32
+#: ../content/item.py:34
 msgid "Deliberation"
 msgstr ""
 
@@ -52,17 +52,17 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../vocabularies.py:26
+#: ../vocabularies.py:27
 msgid "Emergency"
 msgstr ""
 
 #: ../browser/templates/item.pt:38
-#: ../content/item.py:46
+#: ../content/item.py:48
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr ""
 
-#: ../vocabularies.py:13
+#: ../vocabularies.py:14
 msgid "Global category"
 msgstr ""
 
@@ -70,11 +70,11 @@ msgstr ""
 msgid "Global category id"
 msgstr ""
 
-#: ../content/institution.py:46
+#: ../content/institution.py:48
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../content/institution.py:42
+#: ../content/institution.py:44
 msgid "Info points formatting tal expression"
 msgstr ""
 
@@ -96,11 +96,11 @@ msgid "Item number"
 msgstr ""
 
 #: ../browser/templates/item.pt:25
-#: ../content/item.py:35
+#: ../content/item.py:37
 msgid "Item type"
 msgstr ""
 
-#: ../vocabularies.py:12
+#: ../vocabularies.py:13
 msgid "Local category"
 msgstr ""
 
@@ -108,15 +108,19 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
+#: ../content/institution.py:39
+msgid "Logo"
+msgstr ""
+
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
 
-#: ../content/institution.py:39
+#: ../content/institution.py:41
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../vocabularies.py:25
+#: ../vocabularies.py:26
 msgid "Normal"
 msgstr ""
 
@@ -129,7 +133,7 @@ msgid "Plonemeeting URL"
 msgstr ""
 
 #: ../content/item.py:29
-msgid "Reprensentative group in charge key"
+msgid "Reprensentative group in charge"
 msgstr ""
 
 #: ../content/institution.py:23
@@ -148,7 +152,7 @@ msgstr ""
 msgid "Representative"
 msgstr ""
 
-#: ../content/institution.py:56
+#: ../content/institution.py:58
 msgid "Representatives mappings"
 msgstr ""
 
