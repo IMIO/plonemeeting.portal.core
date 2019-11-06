@@ -21,7 +21,7 @@ class IItem(model.Schema):
         # readonly=True
     )
 
-    point_number = schema.TextLine(title=_(u"Point number"), required=True)
+    item_number = schema.TextLine(title=_(u"Item number"), required=True)
 
     uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
@@ -29,7 +29,7 @@ class IItem(model.Schema):
         title=_(u"Reprensentative group in charge key"), required=False
     )
 
-    decision = RichText(title=_(u"Decision"), required=False)
+    deliberation = RichText(title=_(u"Deliberation"), required=False)
 
     item_type = schema.Choice(
         title=_(u"Item type"),
