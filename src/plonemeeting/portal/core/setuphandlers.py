@@ -46,7 +46,7 @@ def create_file(container, filename):
     if os.path.isfile(file_path):
         title = file_path.split(u"/")[-1]
         file_obj = content.create(container=container, type="File", title=title)
-        fd = open(file_path, "r")
+        fd = open(file_path, "rb")
         file_obj.file = NamedFile(
             data=fd, filename=title, contentType="application/pdf"
         )
