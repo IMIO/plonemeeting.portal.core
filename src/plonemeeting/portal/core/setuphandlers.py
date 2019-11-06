@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
-from datetime import datetime
 
 from Products.CMFPlone.interfaces import INonInstallable
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from plone import api
 from plone.api import content
 from plone.app.textfield.value import RichTextValue
 from plone.namedfile.file import NamedFile
 from zope.interface import implementer
+import os
 
 
 @implementer(INonInstallable)
