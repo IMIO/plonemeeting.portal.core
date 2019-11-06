@@ -56,7 +56,9 @@ class IInstitution(model.Schema):
 
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
-        value_type=DictRow(title=u"Representative mapping", schema=IRepresentativeMappingRowSchema),
+        value_type=DictRow(
+            title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
+        ),
         required=False,
     )
 
