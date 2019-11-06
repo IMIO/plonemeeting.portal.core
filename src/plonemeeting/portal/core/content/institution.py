@@ -36,7 +36,7 @@ class IInstitution(model.Schema):
 
     password = schema.Password(title=_(u"Password"), required=False)
 
-    logo = NamedBlobImage(title=_(u"Logo"))
+    logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
 
