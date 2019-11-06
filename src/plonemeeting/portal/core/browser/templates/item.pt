@@ -18,7 +18,7 @@
         </div>
 
         <div class="item-number">
-             <span i18n:translate="">Item number</span> : <span tal:content="context/item_number" />
+             <span i18n:translate="">Item number</span> : <span tal:content="context/number" />
         </div>
 
         <div class="item-type">

@@ -30,6 +30,15 @@
       />
 
   <genericsetup:registerProfile
+      name="demo"
+      title="plonemeeting.portal.core (demo)"
+      directory="profiles/demo"
+      description="Demo profile for the plonemeeting.portal.core add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.create_demo_content"
+      />
+
+  <genericsetup:registerProfile
       name="uninstall"
       title="plonemeeting.portal.core (uninstall)"
       directory="profiles/uninstall"

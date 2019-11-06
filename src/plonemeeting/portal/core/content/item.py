@@ -21,7 +21,7 @@ class IItem(model.Schema):
         # readonly=True
     )
 
-    item_number = schema.TextLine(title=_(u"Item number"), required=True)
+    number = schema.TextLine(title=_(u"Item number"), required=True)
 
     uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
