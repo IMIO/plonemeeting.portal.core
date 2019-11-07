@@ -35,8 +35,8 @@ class TestMeetingWorkflow(unittest.TestCase):
 
         applyProfile(self.portal, "plonemeeting.portal.core:demo")
         login(self.portal, "manager")
-        liege = getattr(self.portal, "liege")
-        brains = api.content.find(context=liege, portal_type="Meeting")
+        city1 = getattr(self.portal, "city1")
+        brains = api.content.find(context=city1, portal_type="Meeting")
         self.meeting = brains[0].getObject()
 
     def _check_state(self, obj, expected_review_state):
