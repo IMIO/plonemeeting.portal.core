@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-14 14:04+0000\n"
+"POT-Creation-Date: 2019-11-14 14:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,7 @@ msgstr "Point"
 
 #: ../browser/templates/item.pt:21
 #: ../content/item.py:24
+#: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro de point"
 
