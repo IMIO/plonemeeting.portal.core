@@ -20,9 +20,9 @@ class ICategoryMappingRowSchema(Interface):
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.TextLine(title=_(u"Reprensentative key"))
-    representative_value = schema.TextLine(title=_(u"Reprensentative value"))
-    representative_long_value = schema.TextLine(title=_(u"Reprensentative long values"))
+    representative_key = schema.TextLine(title=_(u"Representative key"))
+    representative_value = schema.TextLine(title=_(u"Representative value"))
+    representative_long_value = schema.TextLine(title=_(u"Representative long values"))
     active = schema.Bool(title=_(u"Active"), default=True)
 
 

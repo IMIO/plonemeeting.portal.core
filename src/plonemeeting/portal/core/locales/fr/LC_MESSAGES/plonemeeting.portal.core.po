@@ -130,19 +130,19 @@ msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
 #: ../content/item.py:29
-msgid "Reprensentative group in charge"
+msgid "Representative group in charge"
 msgstr "Mandataire"
 
 #: ../content/institution.py:23
-msgid "Reprensentative key"
+msgid "Representative key"
 msgstr "Clé de mandataire"
 
 #: ../content/institution.py:25
-msgid "Reprensentative long values"
+msgid "Representative long values"
 msgstr "Valeur longue de mandataire"
 
 #: ../content/institution.py:24
-msgid "Reprensentative value"
+msgid "Representative value"
 msgstr "Valeur de mandataire"
 
 #: ../browser/templates/item.pt:29
