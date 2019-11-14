@@ -29,6 +29,7 @@
 
     <!-- Indexers -->
 
+    <adapter name="item_number" factory=".item.get_item_number" />
     <adapter name="linkedMeetingUID" factory=".item.get_UID_from_meeting" />
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />
     <adapter name="year" factory=".item.get_year_from_meeting" />

@@ -10,6 +10,10 @@
         <indexed_attr value="linkedMeetingUID"/>
     </index>
 
+    <index name="item_number" meta_type="FieldIndex">
+        <indexed_attr value="item_number"/>
+    </index>
+
     <index name="getCategory" meta_type="FieldIndex">
       <indexed_attr value="category"/>
     </index>

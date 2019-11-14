@@ -3,6 +3,26 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plonemeeting.portal.core">
 
-<!-- -*- extra stuff goes here -*- -->
+    <records interface="plone.app.querystring.interfaces.IQueryField"
+             prefix="plone.app.querystring.field.item_number">
+        <value key="title" i18n:translate="">Item number</value>
+        <value key="description" i18n:translate=""></value>
+        <value key="enabled">False</value>
+        <value key="sortable">True</value>
+        <value key="operations" />
+        <value key="group" i18n:domain="plone"
+                           i18n:translate="">Metadata</value>
+    </records>
+
+    <records interface="plone.app.querystring.interfaces.IQueryField"
+             prefix="plone.app.querystring.field.linkedMeetingDate">
+        <value key="title" i18n:translate="">Related meeting date</value>
+        <value key="description" i18n:translate=""></value>
+        <value key="enabled">False</value>
+        <value key="sortable">True</value>
+        <value key="operations" />
+        <value key="group" i18n:domain="plone"
+                           i18n:translate="">Metadata</value>
+    </records>
 
 </registry>

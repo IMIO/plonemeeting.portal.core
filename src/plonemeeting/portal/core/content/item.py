@@ -55,6 +55,11 @@ class Item(Container):
 
 
 @indexer(IItem)
+def get_item_number(object):
+    return object.number
+
+
+@indexer(IItem)
 def get_datetime_from_meeting(object):
     meeting = object.aq_parent
     return meeting.date_time

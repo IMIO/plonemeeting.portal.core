@@ -133,6 +133,10 @@ msgstr "Mot de passe"
 msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
+#: ../profiles/default/registry.xml
+msgid "Related meeting date"
+msgstr "Date de la séance"
+
 #: ../faceted/widget.py:24
 msgid "Relative path"
 msgstr "Chemin relatif"
