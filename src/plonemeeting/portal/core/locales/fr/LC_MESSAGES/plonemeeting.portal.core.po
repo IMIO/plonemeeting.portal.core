@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-06 11:14+0000\n"
+"POT-Creation-Date: 2019-11-14 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,6 +43,10 @@ msgstr "Catégorie/Matière"
 msgid "Deliberation"
 msgstr "Délibération"
 
+#: ../configure.zcml:40
+msgid "Demo profile for the plonemeeting.portal.core add-on."
+msgstr "Profil de démo pour le module plonemeeting.portal.core."
+
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
 #: ../profiles/default/types/Meeting.xml
@@ -75,7 +79,7 @@ msgstr "Expression TAL pour le formatage des infos annexes"
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -133,6 +137,10 @@ msgstr "URL Plonemeeting"
 msgid "Relative path"
 msgstr "Chemin relatif"
 
+#: ../browser/templates/item.pt:29
+msgid "Representative"
+msgstr "Mandataire"
+
 #: ../content/item.py:29
 msgid "Representative group in charge"
 msgstr "Mandataire"
@@ -149,15 +157,11 @@ msgstr "Valeur longue de mandataire"
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
-#: ../browser/templates/item.pt:29
-msgid "Representative"
-msgstr "Mandataire"
-
 #: ../content/institution.py:58
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/institution.py:63
+#: ../content/institution.py:65
 msgid "Text"
 msgstr "Texte"
 
@@ -165,7 +169,7 @@ msgstr "Texte"
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"
 
-#: ../configure.zcml:39
+#: ../configure.zcml:49
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -179,10 +183,14 @@ msgstr "Nom d'utilisateur"
 msgid "View"
 msgstr "Voir"
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:39
+#: ../configure.zcml:40
+msgid "plonemeeting.portal.core (demo)"
+msgstr ""
+
+#: ../configure.zcml:49
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
