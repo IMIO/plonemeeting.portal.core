@@ -132,6 +132,10 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
+#: ../faceted/widget.py:24
+msgid "Relative path"
+msgstr ""
+
 #: ../content/item.py:29
 msgid "Representative group in charge"
 msgstr ""

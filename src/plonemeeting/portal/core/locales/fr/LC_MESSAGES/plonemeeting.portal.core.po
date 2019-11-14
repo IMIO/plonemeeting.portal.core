@@ -129,6 +129,10 @@ msgstr "Mot de passe"
 msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
+#: ../faceted/widget.py:24
+msgid "Relative path"
+msgstr "Chemin relatif"
+
 #: ../content/item.py:29
 msgid "Representative group in charge"
 msgstr "Mandataire"

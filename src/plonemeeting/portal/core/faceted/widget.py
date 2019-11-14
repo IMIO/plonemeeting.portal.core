@@ -21,7 +21,7 @@ class RelativePathWidget(Widget):
     """
 
     widget_type = "relative_path"
-    widget_label = _("Relative path widget")
+    widget_label = _("Relative path")
     groups = (DefaultSchemata,)
 
     index = ViewPageTemplateFile("widget.pt")
