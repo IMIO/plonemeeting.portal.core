@@ -5,16 +5,19 @@
       <indexed_attr value="year"/>
     </index>
 
-    <index name="meeting_datetime" meta_type="DateIndex">
-      <indexed_attr value="meeting_datetime"/>
+    <index name="linkedMeetingDate" meta_type="DateIndex" />
+    <index name="linkedMeetingUID" meta_type="FieldIndex">
+        <indexed_attr value="linkedMeetingUID"/>
     </index>
 
-    <index name="category" meta_type="FieldIndex">
+    <index name="getCategory" meta_type="FieldIndex">
       <indexed_attr value="category"/>
     </index>
 
-    <index name="representative_group_in_charge_key" meta_type="FieldIndex">
-      <indexed_attr value="representative_group_in_charge_key"/>
+    <index name="getGroupInCharge" meta_type="FieldIndex">
+      <indexed_attr value="representative_group_in_charge"/>
     </index>
+
+    <column value="date_time" />
 
 </object>

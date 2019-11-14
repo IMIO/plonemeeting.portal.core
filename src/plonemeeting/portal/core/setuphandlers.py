@@ -29,13 +29,13 @@ def uninstall(context):
     # Do something at the end of the uninstallation of this package.
 
 
-def create_meeting(institution, meeting_datetime):
-    title = meeting_datetime.strftime("%d %B %Y (%H:%M)")
+def create_meeting(institution, date_time):
+    title = date_time.strftime("%d %B %Y (%H:%M)")
     return content.create(
         container=institution,
         type="Meeting",
         title=title,
-        meeting_datetime=meeting_datetime,
+        date_time=date_time,
         attendees=u"Présents :\nMr XXX, Bourgmestre,\nMme YYYY, Échevine\n...",
     )
 

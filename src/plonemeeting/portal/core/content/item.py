@@ -57,12 +57,18 @@ class Item(Container):
 @indexer(IItem)
 def get_datetime_from_meeting(object):
     meeting = object.aq_parent
-    return meeting.meeting_datetime
+    return meeting.date_time
+
+
+@indexer(IItem)
+def get_UID_from_meeting(object):
+    meeting = object.aq_parent
+    return meeting.UID()
 
 
 @indexer(IItem)
 def get_year_from_meeting(object):
     meeting = object.aq_parent
-    meeting_datetime = meeting.meeting_datetime
-    if meeting_datetime:
-        return meeting_datetime.year
+    date_time = meeting.date_time
+    if date_time:
+        return date_time.year

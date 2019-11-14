@@ -20,7 +20,7 @@ class IMeeting(model.Schema):
         # readonly=True
     )
 
-    meeting_datetime = schema.Datetime(
+    date_time = schema.Datetime(
         title=plone_(u"Date"),
         required=True,
         # readonly=True,
