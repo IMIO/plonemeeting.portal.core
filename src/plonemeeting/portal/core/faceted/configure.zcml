@@ -1,0 +1,10 @@
+<configure
+  xmlns:faceted="http://namespaces.zope.org/faceted"
+  i18n_domain="plonemeeting.portal.core">
+
+  <faceted:widget
+    factory=".widget.RelativePathWidget"
+    schema="eea.facetednavigation.widgets.interfaces.ISchema"
+  />
+
+</configure>
