@@ -13,7 +13,7 @@
   </criterion>
   <criterion name="c8">
    <property name="widget">select</property>
-   <property name="title">Thème</property>
+   <property name="title">Matière</property>
    <property name="index">getCategory</property>
    <property
       name="vocabulary">plonemeeting.portal.vocabularies.categories</property>

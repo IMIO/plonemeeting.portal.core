@@ -55,8 +55,8 @@
       />
 
   <utility
-    component=".vocabularies.CategoryVocabulary"
-    name="plonemeeting.portal.vocabularies.categories"
+    component=".vocabularies.GlobalCategoryVocabulary"
+    name="plonemeeting.portal.vocabularies.global_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

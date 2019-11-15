@@ -14,8 +14,12 @@ from zope.interface import implementer
 
 
 class ICategoryMappingRowSchema(Interface):
-    global_category_id = schema.TextLine(title=_(u"Global category id"))
     local_category_id = schema.TextLine(title=_(u"Local category id"))
+    global_category_id = schema.Choice(
+        title=_(u"Global category"),
+        vocabulary="plonemeeting.portal.vocabularies.global_categories",
+        required=True,
+    )
 
 
 class IRepresentativeMappingRowSchema(Interface):

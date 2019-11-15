@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from plone import api
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -6,17 +7,20 @@ from zope.schema.vocabulary import SimpleVocabulary
 from plonemeeting.portal.core import _
 
 
-class CategoryVocabularyFactory:
+class GlobalCategoryVocabularyFactory:
     def __call__(self, context):
+        global_categories = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.global_categories"
+        )
         return SimpleVocabulary(
             [
-                SimpleTerm(value=u"local", title=_(u"Local category")),
-                SimpleTerm(value=u"global", title=_(u"Global category")),
+                SimpleTerm(value=category_id, title=category_title)
+                for category_id, category_title in global_categories.items()
             ]
         )
 
 
-CategoryVocabulary = CategoryVocabularyFactory()
+GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 
 class ItemTypeVocabularyFactory:

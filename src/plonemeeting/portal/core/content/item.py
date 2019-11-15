@@ -41,8 +41,8 @@ class IItem(model.Schema):
     )
 
     category = schema.Choice(
-        title=_(u"Category/Matter"),
-        vocabulary="plonemeeting.portal.vocabularies.categories",
+        title=_(u"Category"),
+        vocabulary="plonemeeting.portal.vocabularies.global_categories",
         required=True,
     )
 

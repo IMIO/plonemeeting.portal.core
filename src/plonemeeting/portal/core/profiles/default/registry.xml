@@ -25,4 +25,16 @@
                            i18n:translate="">Metadata</value>
     </records>
 
+    <record name="plonemeeting.portal.core.global_categories">
+      <field type="plone.registry.field.Dict">
+        <title i18n:translate="">Global categories</title>
+        <key_type type="plone.registry.field.TextLine">
+          <title i18n:translate="">Global category id</title>
+        </key_type>
+        <value_type type="plone.registry.field.TextLine">
+          <title i18n:translate="">Global category title</title>
+        </value_type>
+      </field>
+    </record>
+
 </registry>
