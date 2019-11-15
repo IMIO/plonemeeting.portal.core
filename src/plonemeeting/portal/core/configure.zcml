@@ -19,6 +19,7 @@
   <include package=".browser" />
   <include package=".content" />
   <include package=".faceted" />
+  <include package=".viewlets" />
 
 
   <genericsetup:registerProfile
