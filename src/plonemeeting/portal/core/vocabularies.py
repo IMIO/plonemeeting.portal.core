@@ -12,6 +12,8 @@ class GlobalCategoryVocabularyFactory:
         global_categories = api.portal.get_registry_record(
             name="plonemeeting.portal.core.global_categories"
         )
+        if not global_categories:
+            return SimpleVocabulary([])
         return SimpleVocabulary(
             [
                 SimpleTerm(value=category_id, title=category_title)
