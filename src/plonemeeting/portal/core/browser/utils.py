@@ -26,7 +26,7 @@ class UtilsView(BrowserView):
         if not meeting_folder_brains:
             return
         UID = UID or meeting.UID()
-        url = "{0}#c4={1}".format(meeting_folder_brains[0].getURL(), UID)
+        url = "{0}#c1={1}".format(meeting_folder_brains[0].getURL(), UID)
         return url
 
     def get_state(self, meeting):
