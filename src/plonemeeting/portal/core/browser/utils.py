@@ -2,6 +2,7 @@
 
 from Products.Five.browser import BrowserView
 from plone import api
+from plone.api.validation import mutually_exclusive_parameters
 
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
@@ -16,6 +17,7 @@ class UtilsView(BrowserView):
         meeting = api.content.get(UID=meeting_UID)
         return meeting
 
+    @mutually_exclusive_parameters("meeting", "UID")
     def get_meeting_url(self, meeting=None, UID=None):
         institution = api.portal.get_navigation_root(self.context)
         meeting_folder_brains = api.content.find(
