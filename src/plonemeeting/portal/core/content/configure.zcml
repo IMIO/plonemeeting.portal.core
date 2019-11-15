@@ -34,4 +34,13 @@
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />
     <adapter name="year" factory=".item.get_year_from_meeting" />
 
+    <!-- Subscribers -->
+
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".subscriber.handle_institution_creation"
+        />
+
+
 </configure>
