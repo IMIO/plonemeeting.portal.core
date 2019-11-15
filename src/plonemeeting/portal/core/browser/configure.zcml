@@ -36,4 +36,12 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="utils_view"
+      for="*"
+      class=".utils.UtilsView"
+      permission="zope2.View"
+      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+      />
+
 </configure>

@@ -1,10 +1,33 @@
 <configure
   xmlns:faceted="http://namespaces.zope.org/faceted"
+  xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="plonemeeting.portal.core">
 
+  <faceted:view
+    name="faceted-preview-meeting-items"
+    template="preview_meeting_items.pt"
+    title="Faceted meeting items preview"
+    permission="zope2.View"
+    />
+
+  <faceted:view
+    name="faceted-preview-meeting"
+    template="preview_meeting.pt"
+    title="Faceted meeting preview"
+    permission="zope2.View"
+    />
+
   <faceted:widget
-    factory=".widget.RelativePathWidget"
+    factory=".widget.NavigationRootPathWidget"
     schema="eea.facetednavigation.widgets.interfaces.ISchema"
-  />
+    />
+
+  <browser:page
+    name="faceted_pm_macros"
+    for="eea.facetednavigation.interfaces.IFacetedNavigable"
+    template="macros.pt"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    />
 
 </configure>

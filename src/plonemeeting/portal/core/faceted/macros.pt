@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="plonemeeting.portal.core">
+
+  <metal:macro define-macro="preview_meeting_item">
+
+    <div class="item-metadata">
+      <div class="meeting-title" tal:content="brain/linkedMeetingTitle" />
+      <div class="item-number" tal:content="brain/number" />
+      <div class="item-representative" tal:content="brain/pretty_representative" />
+      <div class="item-category" tal:content="nothing" />
+    </div>
+
+    <div class="item-main">
+      <div class="public-meeting"
+           i18n:translate="">Public meeting</div>
+      <div class="item-title" tal:content="brain/Title" />
+    </div>
+
+  </metal:macro>
+
+</html>
