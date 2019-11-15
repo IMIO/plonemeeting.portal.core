@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
+from zope.interface import alsoProvides
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import set_constrain_types
 
@@ -14,7 +16,8 @@ def handle_institution_creation(obj, event):
     group_title = "{0} Institution Managers".format(institution_title.encode("utf-8"))
     api.group.create(groupname=group_id, title=group_title)
     obj.manage_setLocalRoles(group_id, ["Editor", "Reader", "Contributor", "Reviewer"])
-    create_faceted_folder(obj, _(u"Meetings"))
+    meetings = create_faceted_folder(obj, _(u"Meetings"))
+    alsoProvides(meetings, IMeetingsFolder)
     create_faceted_folder(obj, _(u"Items"))
     # Unauthorize Folder creation in Institution now
     set_constrain_types(obj, ["Meeting"])

@@ -10,6 +10,7 @@ def create_faceted_folder(container, title):
     api.content.transition(folder, to_state="published")
     subtyper = folder.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
+    return folder
 
 
 def set_constrain_types(obj, list_contraint):
