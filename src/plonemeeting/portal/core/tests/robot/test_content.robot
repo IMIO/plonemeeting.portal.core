@@ -41,12 +41,6 @@ Scenario: As a manager I can add a Institution
     and I submit the form
    Then a Institution with the title 'My Institution' has been created
 
-Scenario: As a manager I can view a Institution
-  Given a logged-in manager
-    and a Institution 'My Institution'
-   When I go to the Institution view
-   Then I can see the Institution title 'My Institution'
-
 
 *** Keywords *****************************************************************
 
@@ -71,16 +65,15 @@ I submit the form
 
 I go to the Institution view
   Go To  ${PLONE_URL}/my-institution
-  Wait until page contains  Site Map
+  Wait until page contains  My Institution
 
 
 # --- THEN -------------------------------------------------------------------
 
 a Institution with the title '${title}' has been created
-  Wait until page contains  Site Map
+  Wait until page contains  Item created
   Page should contain  ${title}
   Page should contain  Item created
 
 I can see the Institution title '${title}'
-  Wait until page contains  Site Map
   Page should contain  ${title}
