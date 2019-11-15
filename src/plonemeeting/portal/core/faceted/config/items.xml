@@ -16,7 +16,7 @@
    <property name="title">Matière</property>
    <property name="index">getCategory</property>
    <property
-      name="vocabulary">plonemeeting.portal.vocabularies.categories</property>
+      name="vocabulary">plonemeeting.portal.vocabularies.global_categories</property>
    <property name="catalog">portal_catalog</property>
    <property name="position">top</property>
    <property name="section">default</property>
