@@ -7,11 +7,6 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <!--
-    Be careful if you use general includeDependencies, it can have sideffects!
-    Better import explicite packages or configurations ;)
-  -->
-  <!--<includeDependencies package="." />-->
   <include package="collective.z3cform.datagridfield" />
   <include package="eea.facetednavigation" />
 
@@ -21,6 +16,7 @@
   <include package=".faceted" />
   <include package=".viewlets" />
 
+  <!-- Profiles -->
 
   <genericsetup:registerProfile
       name="default"
@@ -53,6 +49,8 @@
       factory=".setuphandlers.HiddenProfiles"
       name="plonemeeting.portal.core-hiddenprofiles"
       />
+
+  <!-- Vocabularies -->
 
   <utility
     component=".vocabularies.GlobalCategoryVocabulary"
