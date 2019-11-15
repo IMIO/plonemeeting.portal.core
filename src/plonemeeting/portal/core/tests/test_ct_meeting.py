@@ -47,7 +47,7 @@ class MeetingIntegrationTest(unittest.TestCase):
         )
 
     def test_ct_meeting_adding(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         obj = api.content.create(container=self.parent, type="Meeting", id="meeting")
 
         self.assertTrue(
@@ -62,12 +62,12 @@ class MeetingIntegrationTest(unittest.TestCase):
         self.assertNotIn("meeting", parent.objectIds())
 
     def test_ct_meeting_globally_not_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Meeting")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))
 
     def test_ct_meeting_filter_content_type_true(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Meeting")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(

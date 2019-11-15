@@ -4,16 +4,10 @@
 
     <permission name="plonemeeting.portal.core: Add Item" acquire="True">
       <role name="Manager"/>
-      <role name="Site Administrator"/>
-      <role name="Owner"/>
-      <role name="Contributor"/>
     </permission>
 
     <permission name="plonemeeting.portal.core: Add Meeting" acquire="True">
       <role name="Manager"/>
-      <role name="Site Administrator"/>
-      <role name="Owner"/>
-      <role name="Contributor"/>
     </permission>
 
     <permission name="plonemeeting.portal.core: Add Institution" acquire="True">

@@ -7,7 +7,6 @@ from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.dexterity.interfaces import IDexterityItem
 from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import createObject
 from zope.component import queryUtility
@@ -48,7 +47,7 @@ class ItemIntegrationTest(unittest.TestCase):
         )
 
     def test_ct_item_adding(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         obj = api.content.create(container=self.parent, type="Item", id="item")
 
         self.assertTrue(
@@ -63,12 +62,12 @@ class ItemIntegrationTest(unittest.TestCase):
         self.assertNotIn("item", parent.objectIds())
 
     def test_ct_item_globally_not_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Item")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))
 
     def test_ct_item_filter_content_type_true(self):
-        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Item")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
