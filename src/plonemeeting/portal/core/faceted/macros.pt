@@ -7,17 +7,30 @@
 
   <metal:macro define-macro="preview_meeting_item">
 
-    <div class="item-metadata">
-      <div class="meeting-title" tal:content="brain/linkedMeetingTitle" />
-      <div class="item-number" tal:content="brain/number" />
-      <div class="item-representative" tal:content="brain/pretty_representative" />
-      <div class="item-category" tal:content="nothing" />
-    </div>
+    <div class=""
+         tal:define="review_state brain/linkedMeetingReviewState"
+         tal:attributes="class string:item-preview ${review_state}">
 
-    <div class="item-main">
-      <div class="public-meeting"
-           i18n:translate="">Public meeting</div>
-      <div class="item-title" tal:content="brain/Title" />
+      <div class="item-metadata">
+        <a href=""
+           tal:define="utils_view nocall:context/@@utils_view;"
+           tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)">
+          <div class="meeting-title" tal:content="brain/linkedMeetingTitle" />
+        </a>
+        <div class="item-number" tal:content="brain/number" />
+        <div class="item-representative" tal:content="brain/pretty_representative" />
+        <div class="item-category" tal:content="nothing" />
+      </div>
+
+      <div class="item-main">
+        <div class="public-meeting"
+             i18n:translate="">Public meeting</div>
+        <a href=""
+           tal:attributes="href brain/getURL">
+          <div class="item-title" tal:content="brain/Title" />
+        </a>
+      </div>
+
     </div>
 
   </metal:macro>

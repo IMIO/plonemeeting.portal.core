@@ -19,9 +19,11 @@
         <div class="pm-preview-meeting">
 
           <span tal:condition="folderContents">
-            <div class="meeting-infos"
+            <div class=""
                  tal:define="utils_view nocall:context/@@utils_view;
-                             meeting python: utils_view.get_linked_meeting(batch)">
+                             meeting python: utils_view.get_linked_meeting(batch);
+                             review_state python: utils_view.get_state(meeting)"
+                 tal:attributes="class string:meeting-infos ${review_state}">
 
               <div class="meeting-title"
                    tal:content="meeting/title" />
