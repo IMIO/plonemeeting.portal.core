@@ -18,6 +18,16 @@
       directory="static"
       />
 
+  <configure package="plone.dexterity.browser">
+    <browser:page
+        name="view"
+        for="plonemeeting.portal.core.content.institution.IInstitution"
+        class="plonemeeting.portal.core.browser.institution.InstitutionView"
+        template="item.pt"
+        permission="zope2.View"
+        />
+  </configure>
+
   <browser:page
       name="view"
       for="plonemeeting.portal.core.content.item.IItem"
