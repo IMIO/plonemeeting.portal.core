@@ -3,7 +3,6 @@
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.namedfile.field import NamedBlobImage
-from plone.app.textfield import RichText
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
@@ -61,8 +60,6 @@ class IInstitution(model.Schema):
         ),
         required=False,
     )
-
-    text = RichText(title=_(u"Text"), required=False)
 
 
 @implementer(IInstitution)

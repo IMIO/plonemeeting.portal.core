@@ -166,10 +166,6 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/institution.py:65
-msgid "Text"
-msgstr "Texte"
-
 #: ../content/item.py:26
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"

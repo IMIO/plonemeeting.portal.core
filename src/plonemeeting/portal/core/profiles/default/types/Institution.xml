@@ -22,8 +22,6 @@
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Meeting" />
-    <element value="File" />
-    <element value="Image" />
   </property>
 
   <!-- Schema, class and security -->

@@ -169,10 +169,6 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:65
-msgid "Text"
-msgstr ""
-
 #: ../content/item.py:26
 msgid "UID Plonemeeting"
 msgstr ""
