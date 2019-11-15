@@ -12,6 +12,9 @@
     <index name="linkedMeetingTitle" meta_type="FieldIndex">
         <indexed_attr value="linkedMeetingTitle"/>
     </index>
+    <index name="linkedMeetingReviewState" meta_type="FieldIndex">
+        <indexed_attr value="linkedMeetingReviewState"/>
+    </index>
 
     <index name="item_number" meta_type="FieldIndex">
         <indexed_attr value="item_number"/>
@@ -34,5 +37,6 @@
     <column value="pretty_representative" />
     <column value="linkedMeetingUID" />
     <column value="linkedMeetingTitle" />
+    <column value="linkedMeetingReviewState" />
 
 </object>

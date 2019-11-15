@@ -25,3 +25,9 @@ def handle_institution_creation(obj, event):
     create_faceted_folder(obj, translate(_(u"Items"), target_language=current_lang))
     # Unauthorize Folder creation in Institution now
     set_constrain_types(obj, ["Meeting"])
+
+
+def meeting_state_changed(obj, event):
+    items = obj.listFolderContents(contentFilter={"portal_type": "Item"})
+    for item in items:
+        item.reindexObject(idxs=["linkedMeetingReviewState"])

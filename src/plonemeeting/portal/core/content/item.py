@@ -92,6 +92,12 @@ def get_datetime_from_meeting(object):
 
 
 @indexer(IItem)
+def get_review_state_from_meeting(object):
+    meeting = object.aq_parent
+    return api.content.get_state(meeting)
+
+
+@indexer(IItem)
 def get_year_from_meeting(object):
     meeting = object.aq_parent
     date_time = meeting.date_time
