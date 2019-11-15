@@ -4,7 +4,6 @@ from plonemeeting.portal.core.testing import (
     PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
 )  # noqa
 from plone import api
-from plone.api.exc import InvalidParameterError
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
@@ -65,16 +64,3 @@ class ItemIntegrationTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         fti = queryUtility(IDexterityFTI, name="Item")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))
-
-    def test_ct_item_filter_content_type_true(self):
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        fti = queryUtility(IDexterityFTI, name="Item")
-        portal_types = self.portal.portal_types
-        parent_id = portal_types.constructContent(
-            fti.id, self.portal, "item_id", title="Item container"
-        )
-        self.parent = self.portal[parent_id]
-        with self.assertRaises(InvalidParameterError):
-            api.content.create(
-                container=self.parent, type="Document", title="My Content"
-            )
