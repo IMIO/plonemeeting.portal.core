@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone import PloneMessageFactory as plone_
+from plone import api
 from plone.app.textfield import RichText
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
@@ -60,15 +61,34 @@ def get_item_number(object):
 
 
 @indexer(IItem)
-def get_datetime_from_meeting(object):
+def get_pretty_representative(object):
+    representative_key = object.representative_group_in_charge
+    if not representative_key:
+        raise AttributeError
+    institution = api.portal.get_navigation_root(object)
+    mapping = institution.representatives_mappings
+    for infos in mapping:
+        if infos["representative_key"] == representative_key:
+            return infos["representative_value"]
+    raise AttributeError
+
+
+@indexer(IItem)
+def get_title_from_meeting(object):
     meeting = object.aq_parent
-    return meeting.date_time
+    return meeting.title
 
 
 @indexer(IItem)
 def get_UID_from_meeting(object):
     meeting = object.aq_parent
     return meeting.UID()
+
+
+@indexer(IItem)
+def get_datetime_from_meeting(object):
+    meeting = object.aq_parent
+    return meeting.date_time
 
 
 @indexer(IItem)

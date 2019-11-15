@@ -9,9 +9,16 @@
     <index name="linkedMeetingUID" meta_type="FieldIndex">
         <indexed_attr value="linkedMeetingUID"/>
     </index>
+    <index name="linkedMeetingTitle" meta_type="FieldIndex">
+        <indexed_attr value="linkedMeetingTitle"/>
+    </index>
 
     <index name="item_number" meta_type="FieldIndex">
         <indexed_attr value="item_number"/>
+    </index>
+
+    <index name="pretty_representative" meta_type="FieldIndex">
+        <indexed_attr value="pretty_representative"/>
     </index>
 
     <index name="getCategory" meta_type="FieldIndex">
@@ -23,5 +30,9 @@
     </index>
 
     <column value="date_time" />
+    <column value="number" />
+    <column value="pretty_representative" />
+    <column value="linkedMeetingUID" />
+    <column value="linkedMeetingTitle" />
 
 </object>
