@@ -90,12 +90,35 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
 
-    def testViewIsNotAcquiredInPublishedState(self):
+    def testViewIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
         login(self.portal, "manager")
         self.workflow.doActionFor(self.meeting, "send_to_project")
+        self.assertEqual(self.meeting.acquiredRolesAreUsedBy(View), "")  # not checked
         self.workflow.doActionFor(self.meeting, "publish")
         self.assertEqual(self.meeting.acquiredRolesAreUsedBy(View), "")  # not checked
+
+    def testViewInProjectMeeting(self):
+        # transition requires Review portal content
+        login(self.portal, "manager")
+        self.workflow.doActionFor(self.meeting, "send_to_project")
+        # Owner is allowed
+        self.assertTrue(checkPerm(View, self.meeting))
+        # Member is allowed
+        login(self.portal, "member")
+        self.assertTrue(checkPerm(View, self.meeting))
+        # Reviewer is denied  but he acquires through Anonymous Role
+        login(self.portal, "reviewer")
+        self.assertTrue(checkPerm(View, self.meeting))
+        # Anonymous is allowed
+        logout()
+        self.assertTrue(checkPerm(View, self.meeting))
+        # Editor is allowed
+        login(self.portal, "editor")
+        self.assertTrue(checkPerm(View, self.meeting))
+        # Reader is allowed
+        login(self.portal, "reader")
+        self.assertTrue(checkPerm(View, self.meeting))
 
     def testViewPublishedMeeting(self):
         # transition requires Review portal content
@@ -150,11 +173,36 @@ class TestMeetingWorkflow(unittest.TestCase):
     def testAccessContentsInformationIsNotAcquiredInPublishedState(self):
         # transition requires Review portal content
         self.workflow.doActionFor(self.meeting, "send_to_project")
+        # not checked
+        self.assertEqual(
+            self.meeting.acquiredRolesAreUsedBy(AccessContentsInformation), ""
+        )
         self.workflow.doActionFor(self.meeting, "publish")
         # not checked
         self.assertEqual(
             self.meeting.acquiredRolesAreUsedBy(AccessContentsInformation), ""
         )
+
+    def testAccessContentsInformationInProjectMeeting(self):
+        # transition requires Review portal content
+        self.workflow.doActionFor(self.meeting, "send_to_project")
+        # Owner is allowed
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        # Member is allowed
+        login(self.portal, "member")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        # Reviewer is denied but he acquires through Anonymous Role
+        login(self.portal, "reviewer")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        # Anonymous is allowed
+        logout()
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        # Editor is allowed
+        login(self.portal, "editor")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        # Reader is allowed
+        login(self.portal, "reader")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
 
     def testAccessContentsInformationPublishedMeeting(self):
         # transition requires Review portal content
@@ -205,11 +253,35 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
 
-    def testModifyPortalContentIsNotAcquiredInPublishedState(self):
+    def testModifyPortalContentIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
         self.workflow.doActionFor(self.meeting, "send_to_project")
+        self.assertEqual(self.meeting.acquiredRolesAreUsedBy(ModifyPortalContent), "")
         self.workflow.doActionFor(self.meeting, "publish")
         self.assertEqual(self.meeting.acquiredRolesAreUsedBy(ModifyPortalContent), "")
+
+    def testModifyInProjectMeeting(self):
+        # transition requires Review portal content
+        self.workflow.doActionFor(self.meeting, "send_to_project")
+        # Manager is allowed
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        # Owner is allowed
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        # Member is denied
+        login(self.portal, "member")
+        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
+        # Reviewer is denied
+        login(self.portal, "reviewer")
+        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
+        # Anonymous is denied
+        logout()
+        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
+        # Editor is allowed
+        login(self.portal, "editor")
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        # Reader is denied
+        login(self.portal, "reader")
+        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
 
     def testModifyPublishedMeeting(self):
         # transition requires Review portal content
