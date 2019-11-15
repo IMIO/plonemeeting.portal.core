@@ -142,7 +142,7 @@ msgid "Related meeting date"
 msgstr ""
 
 #: ../faceted/widget.py:24
-msgid "Relative path"
+msgid "Navigation root path"
 msgstr ""
 
 #: ../browser/templates/item.pt:29

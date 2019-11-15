@@ -4,6 +4,7 @@ from eea.facetednavigation.widgets import ViewPageTemplateFile
 from eea.facetednavigation.widgets.interfaces import DefaultSchemata as DS
 from eea.facetednavigation.widgets.interfaces import ISchema
 from eea.facetednavigation.widgets.widget import Widget
+from plone import api
 from z3c.form import field
 
 from plonemeeting.portal.core import _
@@ -16,19 +17,20 @@ class DefaultSchemata(DS):
     fields = field.Fields(ISchema).select(u"title")
 
 
-class RelativePathWidget(Widget):
-    """ Filter on objects from current folder
+class NavigationRootPathWidget(Widget):
+    """ Filter on objects from current navigation root
     """
 
-    widget_type = "relative_path"
-    widget_label = _("Relative path")
+    widget_type = "navigation_root_path"
+    widget_label = _("Navigation root path")
     groups = (DefaultSchemata,)
 
     index = ViewPageTemplateFile("widget.pt")
 
     def query(self, form):
-        """ Returns only objects from current folder
+        """ Returns only objects from current navigation root
         """
-        current_path = "/".join(self.context.getPhysicalPath())
-        query = {"path": {"query": current_path}}
+        nav_root = api.portal.get_navigation_root(self.context)
+        path = "/".join(nav_root.getPhysicalPath())
+        query = {"path": {"query": path}}
         return query

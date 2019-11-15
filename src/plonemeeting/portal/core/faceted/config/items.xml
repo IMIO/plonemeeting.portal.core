@@ -71,8 +71,8 @@
    <property name="sortreversed">False</property>
   </criterion>
   <criterion name="c11">
-   <property name="widget">relative_path</property>
-   <property name="title">Chemin du dossier courant</property>
+   <property name="widget">navigation_root_path</property>
+   <property name="title">Chemin de la racine de navigation</property>
   </criterion>
   <criterion name="c3">
    <property name="widget">criteria</property>

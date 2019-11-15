@@ -139,8 +139,8 @@ msgid "Related meeting date"
 msgstr "Date de la séance"
 
 #: ../faceted/widget.py:24
-msgid "Relative path"
-msgstr "Chemin relatif"
+msgid "Navigation root path"
+msgstr "Chemin de la racine de navigation"
 
 #: ../browser/templates/item.pt:29
 msgid "Representative"
