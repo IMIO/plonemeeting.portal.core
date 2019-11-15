@@ -37,4 +37,21 @@
       </field>
     </record>
 
+    <records prefix="plone.resources/plonemeeting.portal.core"
+             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="css">++plone++plonemeeting.portal.core/core.css</value>
+    </records>
+
+    <records prefix="plone.bundles/plonemeeting.portal.core"
+             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+      <value key="resources">
+        <element>plonemeeting.portal.core</element>
+      </value>
+      <value key="depends">plone</value>
+      <value key="enabled">True</value>
+      <value key="compile">True</value>
+      <value key="csscompilation">++plone++plonemeeting.portal.core/core-compiled.css</value>
+      <value key="last_compilation">2019-11-15 16:30:00</value>
+    </records>
+
 </registry>
