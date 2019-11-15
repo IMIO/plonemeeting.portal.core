@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-15 12:47+0000\n"
+"POT-Creation-Date: 2019-11-15 13:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../content/institution.py:25
+#: ../content/institution.py:29
 msgid "Active"
 msgstr ""
 
@@ -29,16 +29,13 @@ msgstr ""
 msgid "Assembly"
 msgstr ""
 
-#: ../content/institution.py:51
+#: ../content/institution.py:55
 msgid "Categories mappings"
 msgstr ""
 
 #: ../browser/templates/item.pt:33
-msgid "Category"
-msgstr ""
-
 #: ../content/item.py:44
-msgid "Category/Matter"
+msgid "Category"
 msgstr ""
 
 #: ../browser/templates/item.pt:44
@@ -46,7 +43,7 @@ msgstr ""
 msgid "Deliberation"
 msgstr ""
 
-#: ../configure.zcml:41
+#: ../configure.zcml:37
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -56,7 +53,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../vocabularies.py:27
+#: ../vocabularies.py:31
 msgid "Emergency"
 msgstr ""
 
@@ -74,23 +71,31 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../vocabularies.py:14
+#: ../profiles/default/registry.xml
+msgid "Global categories"
+msgstr ""
+
+#: ../content/institution.py:19
 msgid "Global category"
 msgstr ""
 
-#: ../content/institution.py:17
+#: ../profiles/default/registry.xml
 msgid "Global category id"
 msgstr ""
 
-#: ../content/institution.py:47
+#: ../profiles/default/registry.xml
+msgid "Global category title"
+msgstr ""
+
+#: ../content/institution.py:51
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../content/institution.py:43
+#: ../content/institution.py:47
 msgid "Info points formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:32
+#: ../configure.zcml:28
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -113,19 +118,15 @@ msgstr ""
 msgid "Item type"
 msgstr ""
 
-#: ../content/subscriber.py:21
+#: ../content/subscriber.py:25
 msgid "Items"
 msgstr ""
 
-#: ../vocabularies.py:13
-msgid "Local category"
-msgstr ""
-
-#: ../content/institution.py:18
+#: ../content/institution.py:17
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:38
+#: ../content/institution.py:42
 msgid "Logo"
 msgstr ""
 
@@ -133,11 +134,11 @@ msgstr ""
 msgid "Meeting"
 msgstr ""
 
-#: ../content/institution.py:40
+#: ../content/institution.py:44
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../content/subscriber.py:19
+#: ../content/subscriber.py:22
 msgid "Meetings"
 msgstr ""
 
@@ -145,15 +146,15 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../vocabularies.py:26
+#: ../vocabularies.py:30
 msgid "Normal"
 msgstr ""
 
-#: ../content/institution.py:36
+#: ../content/institution.py:40
 msgid "Password"
 msgstr ""
 
-#: ../content/institution.py:32
+#: ../content/institution.py:36
 msgid "Plonemeeting URL"
 msgstr ""
 
@@ -173,19 +174,19 @@ msgstr ""
 msgid "Representative group in charge"
 msgstr ""
 
-#: ../content/institution.py:22
+#: ../content/institution.py:26
 msgid "Representative key"
 msgstr ""
 
-#: ../content/institution.py:24
+#: ../content/institution.py:28
 msgid "Representative long values"
 msgstr ""
 
-#: ../content/institution.py:23
+#: ../content/institution.py:27
 msgid "Representative value"
 msgstr ""
 
-#: ../content/institution.py:57
+#: ../content/institution.py:61
 msgid "Representatives mappings"
 msgstr ""
 
@@ -193,11 +194,11 @@ msgstr ""
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../configure.zcml:50
+#: ../configure.zcml:46
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:34
+#: ../content/institution.py:38
 msgid "Username"
 msgstr ""
 
@@ -211,14 +212,14 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
-#: ../configure.zcml:32
+#: ../configure.zcml:28
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:41
+#: ../configure.zcml:37
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:50
+#: ../configure.zcml:46
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
