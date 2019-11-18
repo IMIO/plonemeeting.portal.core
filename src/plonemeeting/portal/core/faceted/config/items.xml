@@ -7,7 +7,7 @@
    <property name="index">linkedMeetingUID</property>
    <property
       name="vocabulary">plonemeeting.portal.vocabularies.meeting_dates</property>
-   <property name="catalog">portal_catalog</property>
+   <property name="catalog"></property>
    <property name="hidealloption">True</property>
    <property name="position">top</property>
    <property name="section">default</property>
