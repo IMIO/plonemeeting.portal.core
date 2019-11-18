@@ -35,7 +35,7 @@ class TestMeetingWorkflow(unittest.TestCase):
 
         applyProfile(self.portal, "plonemeeting.portal.core:demo")
         login(self.portal, "manager")
-        city1 = getattr(self.portal, "city1")
+        city1 = getattr(self.portal, "amityville")
         brains = api.content.find(context=city1, portal_type="Meeting")
         self.meeting = brains[0].getObject()
         brains = api.content.find(context=self.meeting, portal_type="Item")
