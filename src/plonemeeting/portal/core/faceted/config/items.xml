@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="city1" meta_type="Dexterity Container">
  <criteria>
-  <criterion name="c1">
+  <criterion name="seance">
    <property name="widget">select</property>
    <property name="title">Date de la séance</property>
    <property name="index">linkedMeetingUID</property>
@@ -17,7 +17,7 @@
    <property name="sortreversed">False</property>
    <property name="hidealloption">True</property>
   </criterion>
-  <criterion name="c7">
+  <criterion name="text">
    <property name="widget">text</property>
    <property name="title">Titre</property>
    <property name="index">SearchableText</property>
@@ -27,7 +27,7 @@
    <property name="section">default</property>
    <property name="hidden">False</property>
   </criterion>
-  <criterion name="c8">
+  <criterion name="matiere">
    <property name="widget">select</property>
    <property name="title">Matière</property>
    <property name="index">getCategory</property>
@@ -42,7 +42,7 @@
    <property name="hidezerocount">True</property>
    <property name="sortreversed">False</property>
   </criterion>
-  <criterion name="c5">
+  <criterion name="mandataire">
    <property name="widget">select</property>
    <property name="title">Mandataire</property>
    <property name="index">getGroupInCharge</property>
@@ -57,7 +57,7 @@
    <property name="hidezerocount">True</property>
    <property name="sortreversed">False</property>
   </criterion>
-  <criterion name="c10">
+  <criterion name="annee">
    <property name="widget">select</property>
    <property name="title">Année</property>
    <property name="index">year</property>
@@ -71,18 +71,18 @@
    <property name="hidezerocount">True</property>
    <property name="sortreversed">True</property>
   </criterion>
-  <criterion name="c11">
+  <criterion name="racine">
    <property name="widget">navigation_root_path</property>
    <property name="title">Chemin de la racine de navigation</property>
   </criterion>
-  <criterion name="c3">
+  <criterion name="courante">
    <property name="widget">criteria</property>
    <property name="title">Current search</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">False</property>
   </criterion>
-  <criterion name="c0">
+  <criterion name="resultats">
    <property name="widget">resultsperpage</property>
    <property name="title">Results per page</property>
    <property name="default">20</property>
@@ -93,7 +93,7 @@
    <property name="end">20</property>
    <property name="step">5</property>
   </criterion>
-  <criterion name="c4">
+  <criterion name="type">
    <property name="widget">checkbox</property>
    <property name="title">Portal type</property>
    <property name="index">portal_type</property>
@@ -112,7 +112,7 @@
    <property name="maxitems">5</property>
    <property name="sortreversed">True</property>
   </criterion>
-  <criterion name="c2">
+  <criterion name="tri">
    <property name="widget">sorting</property>
    <property name="title">Tri par date de séance</property>
    <property name="vocabulary"></property>
@@ -121,7 +121,7 @@
    <property name="section">default</property>
    <property name="hidden">True</property>
   </criterion>
-  <criterion name="c9">
+  <criterion name="tri2">
    <property name="widget">sorting</property>
    <property name="title">Tri par numéro de point</property>
    <property name="vocabulary"></property>
