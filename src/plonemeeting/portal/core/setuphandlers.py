@@ -29,8 +29,8 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    current_lang = api.portal.get_current_language()[:2]
     portal = api.portal.get()
+    current_lang = api.portal.get_default_language()[:2]
     faceted_config = "/faceted/config/items.xml"
 
     if "config" in portal.objectIds():

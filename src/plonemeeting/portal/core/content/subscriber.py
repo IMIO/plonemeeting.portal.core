@@ -13,7 +13,7 @@ from plonemeeting.portal.core.utils import set_constrain_types
 
 
 def handle_institution_creation(obj, event):
-    current_lang = api.portal.get_current_language()[:2]
+    current_lang = api.portal.get_default_language()[:2]
     institution_id = obj.id
     institution_title = obj.title
 
