@@ -10,6 +10,11 @@ from z3c.form import field
 from plonemeeting.portal.core import _
 
 
+class INavigationRootPathSchema(ISchema):
+    """
+    """
+
+
 class DefaultSchemata(DS):
     """ Schemata default
     """
@@ -25,7 +30,7 @@ class NavigationRootPathWidget(Widget):
     widget_label = _("Navigation root path")
     groups = (DefaultSchemata,)
 
-    index = ViewPageTemplateFile("widget.pt")
+    index = ViewPageTemplateFile("root_path.pt")
 
     def query(self, form):
         """ Returns only objects from current navigation root
