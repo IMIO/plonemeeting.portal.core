@@ -19,7 +19,7 @@
   </criterion>
   <criterion name="text">
    <property name="widget">text</property>
-   <property name="title">Titre</property>
+   <property name="title">Texte</property>
    <property name="index">SearchableText</property>
    <property name="onlyallelements">True</property>
    <property name="wildcard">False</property>
