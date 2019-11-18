@@ -56,6 +56,7 @@ setup(
         "plone.app.dexterity",
         "collective.z3cform.datagridfield",
         "eea.facetednavigation",
+        "collective.dexteritytextindexer",
     ],
     extras_require={
         "test": [

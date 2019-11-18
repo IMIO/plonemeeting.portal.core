@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone import PloneMessageFactory as plone_
+from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.dexterity.content import Container
@@ -16,6 +17,7 @@ class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
 
+    dexteritytextindexer.searchable("title")
     title = schema.TextLine(
         title=plone_(u"Title"),
         required=True,
@@ -32,6 +34,7 @@ class IItem(model.Schema):
         required=False,
     )
 
+    dexteritytextindexer.searchable("deliberation")
     deliberation = RichText(title=_(u"Deliberation"), required=False)
 
     item_type = schema.Choice(
