@@ -5,8 +5,13 @@ from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from plone import api
 
 
-def create_faceted_folder(container, title):
-    folder = api.content.create(type="Folder", title=title, container=container)
+def create_faceted_folder(container, title, id=None):
+    if id:
+        folder = api.content.create(
+            type="Folder", title=title, container=container, id=id
+        )
+    else:
+        folder = api.content.create(type="Folder", title=title, container=container)
     api.content.transition(folder, to_state="published")
     subtyper = folder.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()

@@ -12,6 +12,8 @@ from zope.interface import implementer
 import os
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.utils import create_faceted_folder
 
 
@@ -33,12 +35,17 @@ def post_install(context):
 
     # Create global config folder
     config_folder = api.content.create(
-        container=portal, type="Folder", title=_(u"Configuration folder"), id="config"
+        container=portal,
+        type="Folder",
+        title=_(u"Configuration folder"),
+        id=CONFIG_FOLDER_ID,
     )
 
     # Create global faceted folder
     faceted = create_faceted_folder(
-        config_folder, translate(_(u"Faceted"), target_language=current_lang)
+        config_folder,
+        translate(_(u"Faceted"), target_language=current_lang),
+        id=FACETED_FOLDER_ID,
     )
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()

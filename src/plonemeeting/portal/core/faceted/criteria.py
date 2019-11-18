@@ -4,6 +4,9 @@ from eea.facetednavigation.criteria.handler import Criteria
 from plone import api
 import copy
 
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+
 
 class MeetingsCriteria(Criteria):
     """
@@ -16,8 +19,8 @@ class MeetingsCriteria(Criteria):
         """ Gets global faceted criteria and unset hidealloption if needed
         """
         portal = api.portal.get()
-        config_folder = getattr(portal, "config")
-        faceted = getattr(config_folder, "faceted")
+        config_folder = getattr(portal, CONFIG_FOLDER_ID)
+        faceted = getattr(config_folder, FACETED_FOLDER_ID)
         self.context = faceted
         criteria = copy.deepcopy(self._criteria())
         if not must_choose_meeting:
