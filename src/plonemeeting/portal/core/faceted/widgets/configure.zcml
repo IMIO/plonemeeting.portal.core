@@ -7,4 +7,9 @@
     schema=".root_path.INavigationRootPathSchema"
     />
 
+  <faceted:widget
+    factory=".sort.ItemsSortWidget"
+    schema=".sort.IItemsSortSchema"
+    />
+
 </configure>
