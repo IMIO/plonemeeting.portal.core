@@ -15,6 +15,7 @@
    <property name="sortcountable">False</property>
    <property name="hidezerocount">True</property>
    <property name="sortreversed">False</property>
+   <property name="hidealloption">True</property>
   </criterion>
   <criterion name="c7">
    <property name="widget">text</property>
