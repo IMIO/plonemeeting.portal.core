@@ -1,9 +1,20 @@
 <configure
+  xmlns="http://namespaces.zope.org/zope"
   xmlns:faceted="http://namespaces.zope.org/faceted"
   xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="plonemeeting.portal.core">
 
   <include package=".widgets" />
+
+  <adapter
+    for="plonemeeting.portal.core.interfaces.IItemsFolder"
+    provides="eea.facetednavigation.interfaces.ICriteria"
+    factory=".criteria.ItemsCriteria" />
+
+  <adapter
+    for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+    provides="eea.facetednavigation.interfaces.ICriteria"
+    factory=".criteria.MeetingsCriteria" />
 
   <faceted:view
     name="faceted-preview-meeting-items"
