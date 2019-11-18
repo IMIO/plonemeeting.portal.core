@@ -14,6 +14,7 @@ import os
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
 
 
@@ -32,6 +33,8 @@ def post_install(context):
 
     if "config" in portal.objectIds():
         return
+
+    cleanup_contents()
 
     # Create global config folder
     config_folder = api.content.create(
