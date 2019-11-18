@@ -57,7 +57,7 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 class RepresentativeVocabularyFactory:
     def __call__(self, context):
         institution = api.portal.get_navigation_root(context)
-        mapping = institution.representatives_mappings
+        mapping = getattr(institution, "representatives_mappings", [])
         return SimpleVocabulary(
             [
                 SimpleTerm(
