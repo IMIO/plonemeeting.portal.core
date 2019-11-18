@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="city1" meta_type="Dexterity Container">
+<object name="faceted" meta_type="Dexterity Container">
  <criteria>
   <criterion name="seance">
    <property name="widget">select</property>
@@ -8,6 +8,7 @@
    <property
       name="vocabulary">plonemeeting.portal.vocabularies.meeting_dates</property>
    <property name="catalog">portal_catalog</property>
+   <property name="hidealloption">True</property>
    <property name="position">top</property>
    <property name="section">default</property>
    <property name="hidden">False</property>
@@ -15,7 +16,6 @@
    <property name="sortcountable">False</property>
    <property name="hidezerocount">True</property>
    <property name="sortreversed">False</property>
-   <property name="hidealloption">True</property>
   </criterion>
   <criterion name="text">
    <property name="widget">text</property>
@@ -71,10 +71,6 @@
    <property name="hidezerocount">True</property>
    <property name="sortreversed">True</property>
   </criterion>
-  <criterion name="racine">
-   <property name="widget">navigation_root_path</property>
-   <property name="title">Chemin de la racine de navigation</property>
-  </criterion>
   <criterion name="courante">
    <property name="widget">criteria</property>
    <property name="title">Current search</property>
@@ -112,22 +108,16 @@
    <property name="maxitems">5</property>
    <property name="sortreversed">True</property>
   </criterion>
-  <criterion name="tri">
-   <property name="widget">sorting</property>
-   <property name="title">Tri par date de séance</property>
-   <property name="vocabulary"></property>
-   <property name="default">linkedMeetingDate(reverse)</property>
+  <criterion name="racine">
+   <property name="widget">navigation_root_path</property>
+   <property name="title">Chemin de la racine de navigation</property>
    <property name="position">right</property>
-   <property name="section">default</property>
    <property name="hidden">True</property>
   </criterion>
-  <criterion name="tri2">
-   <property name="widget">sorting</property>
-   <property name="title">Tri par numéro de point</property>
-   <property name="vocabulary"></property>
-   <property name="default">item_number</property>
+  <criterion name="tri">
+   <property name="widget">items_sort</property>
+   <property name="title">Tri des points (par date, puis numéro)</property>
    <property name="position">right</property>
-   <property name="section">default</property>
    <property name="hidden">True</property>
   </criterion>
  </criteria>
