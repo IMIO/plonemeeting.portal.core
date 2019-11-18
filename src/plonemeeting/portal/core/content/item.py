@@ -102,4 +102,4 @@ def get_year_from_meeting(object):
     meeting = object.aq_parent
     date_time = meeting.date_time
     if date_time:
-        return date_time.year
+        return str(date_time.year)
