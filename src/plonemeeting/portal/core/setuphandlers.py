@@ -47,6 +47,7 @@ def post_install(context):
         title=translate(_(u"Configuration folder"), target_language=current_lang),
         id=CONFIG_FOLDER_ID,
     )
+    config_folder.exclude_from_nav = True
 
     # Create global faceted folder
     faceted = create_faceted_folder(
