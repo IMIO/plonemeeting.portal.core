@@ -23,9 +23,11 @@ class MeetingsCriteria(Criteria):
         faceted = getattr(config_folder, FACETED_FOLDER_ID)
         self.context = faceted
         criteria = copy.deepcopy(self._criteria())
-        if not must_choose_meeting:
-            meetings_criteria = criteria[0]
-            meetings_criteria.hidealloption = False
+        if must_choose_meeting:
+            return criteria
+        for criterion in criteria:
+            if criterion.getId() == "seance":
+                criterion.hidealloption = False
         return criteria
 
 
