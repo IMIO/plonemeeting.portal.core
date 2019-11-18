@@ -16,6 +16,8 @@ from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import remove_left_portlets
+from plonemeeting.portal.core.utils import remove_right_portlets
 
 
 @implementer(INonInstallable)
@@ -34,6 +36,8 @@ def post_install(context):
     if "config" in portal.objectIds():
         return
 
+    remove_left_portlets()
+    remove_right_portlets()
     cleanup_contents()
 
     # Create global config folder

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-
 from plone import api
+from plone.portlets.interfaces import IPortletAssignmentMapping
+from plone.portlets.interfaces import IPortletManager
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 
@@ -34,3 +37,19 @@ def cleanup_contents():
         content = getattr(portal, content_id, None)
         if content:
             api.content.delete(content)
+
+
+def remove_left_portlets():
+    remove_portlets("plone.leftcolumn")
+
+
+def remove_right_portlets():
+    remove_portlets("plone.rightcolumn")
+
+
+def remove_portlets(column):
+    portal = api.portal.get()
+    manager = getUtility(IPortletManager, name=column, context=portal)
+    assignments = getMultiAdapter((portal, manager), IPortletAssignmentMapping)
+    for portlet in assignments:
+        del assignments[portlet]
