@@ -2,14 +2,14 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      i18n:domain="plonemeeting.portal.core">
+      lang="en">
 
   <metal:macro define-macro="preview_meeting_item">
 
     <div class=""
          tal:define="review_state brain/linkedMeetingReviewState"
-         tal:attributes="class string:item-preview ${review_state}">
+         tal:attributes="class string:item-preview ${review_state}"
+         i18n:domain="plonemeeting.portal.core">
 
       <div class="item-metadata">
         <a href=""
@@ -23,6 +23,15 @@
       </div>
 
       <div class="item-main">
+        <div class="meeting-state"
+             i18n:domain="plone">
+            <span tal:condition="python: review_state == 'private'"
+                  i18n:translate="">Private</span>
+            <span tal:condition="python: review_state == 'in_project'"
+                  i18n:translate="">In project</span>
+            <span tal:condition="python: review_state == 'published'"
+                  i18n:translate="">Published</span>
+        </div>
         <div class="public-meeting"
              i18n:translate="">Public meeting</div>
         <a href=""
