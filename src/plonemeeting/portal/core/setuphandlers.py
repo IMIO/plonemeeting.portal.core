@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import os
-from datetime import datetime
-
 from Products.CMFPlone.interfaces import INonInstallable
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from plone import api
 from plone.api import content
 from plone.app.textfield.value import RichTextValue
 from plone.namedfile.file import NamedFile
+from zope.i18n import translate
 from zope.interface import implementer
+import os
+
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.utils import create_faceted_folder
 
 
 @implementer(INonInstallable)
@@ -21,7 +24,27 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    # Do something at the end of the installation of this package.
+    current_lang = api.portal.get_current_language()[:2]
+    portal = api.portal.get()
+    faceted_config = "/faceted/config/items.xml"
+
+    if "config" in portal.objectIds():
+        return
+
+    # Create global config folder
+    config_folder = api.content.create(
+        container=portal, type="Folder", title=_(u"Configuration folder"), id="config"
+    )
+
+    # Create global faceted folder
+    faceted = create_faceted_folder(
+        config_folder, translate(_(u"Faceted"), target_language=current_lang)
+    )
+    subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
+    subtyper.enable()
+    faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+        import_file=open(os.path.dirname(__file__) + faceted_config)
+    )
 
 
 def uninstall(context):
