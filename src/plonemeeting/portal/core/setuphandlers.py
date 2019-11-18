@@ -37,7 +37,7 @@ def post_install(context):
     config_folder = api.content.create(
         container=portal,
         type="Folder",
-        title=_(u"Configuration folder"),
+        title=translate(_(u"Configuration folder"), target_language=current_lang),
         id=CONFIG_FOLDER_ID,
     )
 
