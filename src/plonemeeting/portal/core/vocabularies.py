@@ -41,7 +41,12 @@ ItemTypeVocabulary = ItemTypeVocabularyFactory()
 class MeetingDateVocabularyFactory:
     def __call__(self, context):
         institution = api.portal.get_navigation_root(context)
-        brains = api.content.find(context=institution, portal_type="Meeting")
+        brains = api.content.find(
+            context=institution,
+            portal_type="Meeting",
+            sort_on="date_time",
+            sort_order="descending",
+        )
         terms = []
         for b in brains:
             term = SimpleVocabulary.createTerm(

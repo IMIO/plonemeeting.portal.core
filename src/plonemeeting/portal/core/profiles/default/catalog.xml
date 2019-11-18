@@ -5,6 +5,10 @@
       <indexed_attr value="year"/>
     </index>
 
+    <index name="date_time" meta_type="FieldIndex">
+        <indexed_attr value="date_time"/>
+    </index>
+
     <index name="linkedMeetingDate" meta_type="DateIndex" />
     <index name="linkedMeetingUID" meta_type="FieldIndex">
         <indexed_attr value="linkedMeetingUID"/>
