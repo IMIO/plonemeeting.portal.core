@@ -30,7 +30,7 @@ class ItemTypeVocabularyFactory:
         return SimpleVocabulary(
             [
                 SimpleTerm(value=u"normal", title=_(u"Normal")),
-                SimpleTerm(value=u"emergency", title=_(u"Emergency")),
+                SimpleTerm(value=u"late", title=_(u"Emergency")),
             ]
         )
 
