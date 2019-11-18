@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-15 13:37+0000\n"
+"POT-Creation-Date: 2019-11-18 12:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../browser/templates/item.pt:51
+#: ../browser/templates/item.pt:56
 msgid "Annexes"
 msgstr ""
 
@@ -33,12 +33,16 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../browser/templates/item.pt:33
+#: ../browser/templates/item.pt:38
 #: ../content/item.py:44
 msgid "Category"
 msgstr ""
 
-#: ../browser/templates/item.pt:44
+#: ../setuphandlers.py:36
+msgid "Configuration folder"
+msgstr ""
+
+#: ../browser/templates/item.pt:49
 #: ../content/item.py:35
 msgid "Deliberation"
 msgstr ""
@@ -53,21 +57,25 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../vocabularies.py:31
+#: ../vocabularies.py:33
 msgid "Emergency"
 msgstr ""
 
-#: ../browser/templates/item.pt:38
+#: ../browser/templates/item.pt:43
 #: ../content/item.py:49
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr ""
 
-#: ../faceted/configure.zcml:11
+#: ../setuphandlers.py:41
+msgid "Faceted"
+msgstr ""
+
+#: ../faceted/configure.zcml:24
 msgid "Faceted meeting items preview"
 msgstr ""
 
-#: ../faceted/configure.zcml:18
+#: ../faceted/configure.zcml:31
 msgid "Faceted meeting preview"
 msgstr ""
 
@@ -107,19 +115,23 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../browser/templates/item.pt:21
+#: ../browser/templates/item.pt:26
 #: ../content/item.py:25
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr ""
 
-#: ../browser/templates/item.pt:25
+#: ../browser/templates/item.pt:30
 #: ../content/item.py:38
 msgid "Item type"
 msgstr ""
 
-#: ../content/subscriber.py:25
+#: ../content/subscriber.py:35
 msgid "Items"
+msgstr ""
+
+#: ../faceted/widgets/sort.py:29
+msgid "Items sort order"
 msgstr ""
 
 #: ../content/institution.py:17
@@ -138,15 +150,15 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../content/subscriber.py:22
+#: ../content/subscriber.py:28
 msgid "Meetings"
 msgstr ""
 
-#: ../faceted/widget.py:25
+#: ../faceted/widgets/root_path.py:30
 msgid "Navigation root path"
 msgstr ""
 
-#: ../vocabularies.py:30
+#: ../vocabularies.py:32
 msgid "Normal"
 msgstr ""
 
@@ -158,7 +170,7 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../faceted/macros.pt:18
+#: ../faceted/macros.pt:26
 msgid "Public meeting"
 msgstr ""
 
@@ -166,7 +178,7 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/templates/item.pt:29
+#: ../browser/templates/item.pt:34
 msgid "Representative"
 msgstr ""
 
