@@ -77,5 +77,11 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 
+  <utility
+    component=".vocabularies.RemoteMeetingsVocabulary"
+    name="plonemeeting.portal.vocabularies.remote_meetings"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
 
 </configure>

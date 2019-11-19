@@ -3,8 +3,11 @@
 from plone import api
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+import json
+import requests
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 class GlobalCategoryVocabularyFactory:
@@ -74,3 +77,28 @@ class RepresentativeVocabularyFactory:
 
 
 RepresentativeVocabulary = RepresentativeVocabularyFactory()
+
+
+class RemoteMeetingsVocabularyFactory:
+    def __call__(self, context):
+        institution = context
+        url = get_api_url_for_meetings(institution)
+        if not url:
+            return SimpleVocabulary([])
+        headers = {"Content-type": "application/json", "Accept": "application/json"}
+        response = requests.get(
+            url, auth=(institution.username, institution.password), headers=headers
+        )
+        if response.status_code != 200:
+            return SimpleVocabulary([])
+
+        json_meetings = json.loads(response.text)
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=elem["UID"], title=elem["title"])
+                for elem in json_meetings.get("items", [])
+            ]
+        )
+
+
+RemoteMeetingsVocabulary = RemoteMeetingsVocabularyFactory()

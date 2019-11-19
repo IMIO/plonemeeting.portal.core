@@ -57,6 +57,7 @@ setup(
         "collective.z3cform.datagridfield",
         "eea.facetednavigation",
         "collective.dexteritytextindexer",
+        "requests",
     ],
     extras_require={
         "test": [
