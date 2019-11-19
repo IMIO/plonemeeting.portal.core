@@ -33,7 +33,7 @@ class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
 
-    url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
+    plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)
 
