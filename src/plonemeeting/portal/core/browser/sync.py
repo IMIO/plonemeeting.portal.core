@@ -20,9 +20,10 @@ def sync_meeting(institution, meeting_data):
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_UID
     )
     if not brains:
-        meeting = api.content.create(
-            container=institution, type="Meeting", title=meeting_title
-        )
+        with api.env.adopt_user("admin"):
+            meeting = api.content.create(
+                container=institution, type="Meeting", title=meeting_title
+            )
         meeting.plonemeeting_uid = meeting_UID
     else:
         meeting = brains[0].getObject()

@@ -39,7 +39,7 @@
   <browser:page
       name="import_meeting"
       for="plonemeeting.portal.core.content.institution.IInstitution"
-      permission="plonemeeting.portal.core.AddMeeting"
+      permission="cmf.ModifyPortalContent"
       class=".sync.ImportMeetingForm"
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />

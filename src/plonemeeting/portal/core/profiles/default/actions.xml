@@ -14,7 +14,7 @@
      <property name="url_expr">string:$object_url/@@import_meeting</property>
      <property name="available_expr"></property>
      <property name="permissions">
-      <element value="plonemeeting.portal.core: Add Meeting"/>
+      <element value="Modify portal content"/>
      </property>
      <property name="visible">True</property>
     </object>
