@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-19 12:12+0000\n"
+"POT-Creation-Date: 2019-11-19 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,12 @@ msgstr ""
 msgid "Annexes"
 msgstr ""
 
-#: ../content/meeting.py:29
+#: ../content/meeting.py:35
 msgid "Assembly"
+msgstr ""
+
+#: ../browser/sync.py:81
+msgid "Cancel"
 msgstr ""
 
 #: ../content/institution.py:63
@@ -44,6 +48,10 @@ msgstr ""
 #: ../browser/templates/item.pt:48
 #: ../content/item.py:47
 msgid "Category"
+msgstr ""
+
+#: ../browser/sync.py:54
+msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
 #: ../setuphandlers.py:48
@@ -65,13 +73,13 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../vocabularies.py:33
+#: ../vocabularies.py:36
 msgid "Emergency"
 msgstr ""
 
 #: ../browser/templates/item.pt:53
 #: ../content/item.py:52
-#: ../content/meeting.py:31
+#: ../content/meeting.py:37
 msgid "Extra info"
 msgstr ""
 
@@ -101,6 +109,14 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Global category title"
+msgstr ""
+
+#: ../browser/sync.py:56
+msgid "Import"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Import meeting"
 msgstr ""
 
 #: ../content/institution.py:59
@@ -150,12 +166,21 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
+#: ../browser/sync.py:40
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
 
 #: ../content/institution.py:42
 msgid "Meeting config ID"
+msgstr ""
+
+#: ../browser/sync.py:53
+msgid "Meeting import form"
+msgstr ""
+
+#: ../browser/sync.py:79
+msgid "Meeting imported !"
 msgstr ""
 
 #: ../content/subscriber.py:28
@@ -166,7 +191,7 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../vocabularies.py:32
+#: ../vocabularies.py:35
 msgid "Normal"
 msgstr ""
 
@@ -211,7 +236,12 @@ msgid "Representatives mappings"
 msgstr ""
 
 #: ../content/item.py:29
+#: ../content/meeting.py:24
 msgid "UID Plonemeeting"
+msgstr ""
+
+#: ../browser/sync.py:75
+msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
 #: ../configure.zcml:47
@@ -226,6 +256,10 @@ msgstr ""
 #: ../profiles/default/types/Item.xml
 #: ../profiles/default/types/Meeting.xml
 msgid "View"
+msgstr ""
+
+#: ../browser/sync.py:70
+msgid "Webservice connection error !"
 msgstr ""
 
 #: ../browser/institution.py:21

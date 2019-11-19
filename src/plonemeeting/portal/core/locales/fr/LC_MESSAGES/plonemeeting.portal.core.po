@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-19 12:12+0000\n"
+"POT-Creation-Date: 2019-11-19 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,9 +30,13 @@ msgstr "Paramètres additionnels d'URL de Points Publiés"
 msgid "Annexes"
 msgstr "Annexes"
 
-#: ../content/meeting.py:29
+#: ../content/meeting.py:35
 msgid "Assembly"
 msgstr "Présences"
+
+#: ../browser/sync.py:81
+msgid "Cancel"
+msgstr "Annuler"
 
 #: ../content/institution.py:63
 msgid "Categories mappings"
@@ -42,6 +46,10 @@ msgstr "Equivalences de matières"
 #: ../content/item.py:47
 msgid "Category"
 msgstr "Matière"
+
+#: ../browser/sync.py:54
+msgid "Choose the meeting you want to import in the portal."
+msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
 #: ../setuphandlers.py:48
 msgid "Configuration folder"
@@ -62,13 +70,13 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
-#: ../vocabularies.py:33
+#: ../vocabularies.py:36
 msgid "Emergency"
 msgstr "En urgence"
 
 #: ../browser/templates/item.pt:53
 #: ../content/item.py:52
-#: ../content/meeting.py:31
+#: ../content/meeting.py:37
 msgid "Extra info"
 msgstr "Informations complémentaires"
 
@@ -99,6 +107,14 @@ msgstr "Identifiant de matière globale"
 #: ../profiles/default/registry.xml
 msgid "Global category title"
 msgstr "Titre de matière globale"
+
+#: ../browser/sync.py:56
+msgid "Import"
+msgstr "Importer"
+
+#: ../profiles/default/actions.xml
+msgid "Import meeting"
+msgstr "Importer une séance"
 
 #: ../content/institution.py:59
 msgid "Info annex formatting tal expression"
@@ -147,6 +163,7 @@ msgstr "Identifiant de matière locale"
 msgid "Logo"
 msgstr "Logo"
 
+#: ../browser/sync.py:40
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
@@ -154,6 +171,14 @@ msgstr "Séance"
 #: ../content/institution.py:42
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de Séance"
+
+#: ../browser/sync.py:53
+msgid "Meeting import form"
+msgstr "Importation de Séance"
+
+#: ../browser/sync.py:79
+msgid "Meeting imported !"
+msgstr "Séance importée !"
 
 #: ../content/subscriber.py:28
 msgid "Meetings"
@@ -163,7 +188,7 @@ msgstr "Séances"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../vocabularies.py:32
+#: ../vocabularies.py:35
 msgid "Normal"
 msgstr "Normal"
 
@@ -208,8 +233,13 @@ msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
 #: ../content/item.py:29
+#: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"
+
+#: ../browser/sync.py:75
+msgid "Unexpected meeting count in webservice response !"
+msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
 #: ../configure.zcml:47
 msgid "Uninstalls the plonemeeting.portal.core add-on."
@@ -224,6 +254,10 @@ msgstr "Nom d'utilisateur"
 #: ../profiles/default/types/Meeting.xml
 msgid "View"
 msgstr "Voir"
+
+#: ../browser/sync.py:70
+msgid "Webservice connection error !"
+msgstr "Erreur de connexion au webservice !"
 
 #: ../browser/institution.py:21
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
