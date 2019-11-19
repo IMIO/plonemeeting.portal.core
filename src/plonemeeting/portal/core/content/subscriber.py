@@ -2,6 +2,7 @@
 
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
+from zope.globalrequest import getRequest
 from zope.interface import alsoProvides
 from zope.i18n import translate
 
@@ -39,6 +40,9 @@ def handle_institution_creation(obj, event):
 
     # Unauthorize Folder creation in Institution now
     set_constrain_types(obj, ["Meeting"])
+
+    request = getRequest()
+    request.response.redirect(obj.absolute_url())
 
 
 def meeting_state_changed(obj, event):
