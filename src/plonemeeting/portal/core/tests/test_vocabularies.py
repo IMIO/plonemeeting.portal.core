@@ -48,7 +48,7 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
         values_city1 = vocab(self.meeting_item)
         values_city2 = vocab(self.meeting_item2)
-        self.failIf(len(values_city1) == len(values_city2))
+        self.assertFalse(len(values_city1) == len(values_city2))
 
     def testMeetingDatesVocabulary(self):
         vocab = queryUtility(
