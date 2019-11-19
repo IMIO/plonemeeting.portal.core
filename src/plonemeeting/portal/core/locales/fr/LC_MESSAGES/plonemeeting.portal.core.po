@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-18 12:03+0000\n"
+"POT-Creation-Date: 2019-11-19 12:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,15 @@ msgstr ""
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/templates/item.pt:56
+#: ../content/institution.py:45
+msgid "Additional Meeting query string"
+msgstr "Paramètres additionnels d'URL de Séances"
+
+#: ../content/institution.py:49
+msgid "Additional Published Items query string"
+msgstr "Paramètres additionnels d'URL de Points Publiés"
+
+#: ../browser/templates/item.pt:66
 msgid "Annexes"
 msgstr "Annexes"
 
@@ -26,25 +34,25 @@ msgstr "Annexes"
 msgid "Assembly"
 msgstr "Présences"
 
-#: ../content/institution.py:55
+#: ../content/institution.py:63
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
-#: ../browser/templates/item.pt:38
-#: ../content/item.py:44
+#: ../browser/templates/item.pt:48
+#: ../content/item.py:47
 msgid "Category"
 msgstr "Matière"
 
-#: ../setuphandlers.py:36
+#: ../setuphandlers.py:48
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../browser/templates/item.pt:49
-#: ../content/item.py:35
+#: ../browser/templates/item.pt:59
+#: ../content/item.py:38
 msgid "Deliberation"
 msgstr "Délibération"
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
@@ -58,13 +66,13 @@ msgstr "Editer"
 msgid "Emergency"
 msgstr "En urgence"
 
-#: ../browser/templates/item.pt:43
-#: ../content/item.py:49
+#: ../browser/templates/item.pt:53
+#: ../content/item.py:52
 #: ../content/meeting.py:31
 msgid "Extra info"
 msgstr "Informations complémentaires"
 
-#: ../setuphandlers.py:41
+#: ../setuphandlers.py:56
 msgid "Faceted"
 msgstr "Facettes"
 
@@ -92,15 +100,15 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../content/institution.py:51
+#: ../content/institution.py:59
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
-#: ../content/institution.py:47
+#: ../content/institution.py:55
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -112,14 +120,14 @@ msgstr "Institution"
 msgid "Item"
 msgstr "Point"
 
-#: ../browser/templates/item.pt:26
-#: ../content/item.py:25
+#: ../browser/templates/item.pt:36
+#: ../content/item.py:27
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro de point"
 
-#: ../browser/templates/item.pt:30
-#: ../content/item.py:38
+#: ../browser/templates/item.pt:40
+#: ../content/item.py:41
 msgid "Item type"
 msgstr "Type de point"
 
@@ -135,7 +143,7 @@ msgstr "Ordre de tri des points"
 msgid "Local category id"
 msgstr "Identifiant de matière locale"
 
-#: ../content/institution.py:42
+#: ../content/institution.py:52
 msgid "Logo"
 msgstr "Logo"
 
@@ -143,9 +151,9 @@ msgstr "Logo"
 msgid "Meeting"
 msgstr "Séance"
 
-#: ../content/institution.py:44
+#: ../content/institution.py:42
 msgid "Meeting config ID"
-msgstr "Identifiant de configuration de séance"
+msgstr "Identifiant de configuration de Séance"
 
 #: ../content/subscriber.py:28
 msgid "Meetings"
@@ -167,7 +175,7 @@ msgstr "Mot de passe"
 msgid "Plonemeeting URL"
 msgstr "URL Plonemeeting"
 
-#: ../faceted/macros.pt:26
+#: ../faceted/macros.pt:35
 msgid "Public meeting"
 msgstr "Séance publique"
 
@@ -175,11 +183,11 @@ msgstr "Séance publique"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/templates/item.pt:34
+#: ../browser/templates/item.pt:44
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:30
+#: ../content/item.py:32
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -195,15 +203,15 @@ msgstr "Valeur longue de mandataire"
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
-#: ../content/institution.py:61
+#: ../content/institution.py:69
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/item.py:27
+#: ../content/item.py:29
 msgid "UID Plonemeeting"
 msgstr "UID Plonemeeting"
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -221,14 +229,14 @@ msgstr "Voir"
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
