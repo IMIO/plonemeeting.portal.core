@@ -39,9 +39,17 @@ class IInstitution(model.Schema):
 
     password = schema.Password(title=_(u"Password"), required=False)
 
-    logo = NamedBlobImage(title=_(u"Logo"), required=False)
-
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
+
+    additional_meeting_query_string = schema.TextLine(
+        title=_(u"Additional Meeting query string"), required=False
+    )
+
+    additional_published_items_query_string = schema.TextLine(
+        title=_(u"Additional Published Items query string"), required=False
+    )
+
+    logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
     info_points_formatting_tal = schema.TextLine(
         title=_(u"Info points formatting tal expression"), required=False
