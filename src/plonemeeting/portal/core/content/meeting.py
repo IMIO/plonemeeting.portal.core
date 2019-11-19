@@ -20,6 +20,12 @@ class IMeeting(model.Schema):
         # readonly=True
     )
 
+    plonemeeting_uid = schema.TextLine(
+        title=_(u"UID Plonemeeting"),
+        required=True,
+        # readonly=True,
+    )
+
     date_time = schema.Datetime(
         title=plone_(u"Date"),
         required=True,

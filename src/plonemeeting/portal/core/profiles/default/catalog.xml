@@ -5,6 +5,10 @@
       <indexed_attr value="year"/>
     </index>
 
+    <index name="plonemeeting_uid" meta_type="FieldIndex">
+        <indexed_attr value="plonemeeting_uid"/>
+    </index>
+
     <index name="date_time" meta_type="FieldIndex">
         <indexed_attr value="date_time"/>
     </index>

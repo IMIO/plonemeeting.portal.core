@@ -26,7 +26,7 @@ class IItem(model.Schema):
 
     number = schema.TextLine(title=_(u"Item number"), required=True)
 
-    uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
+    plonemeeting_uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
     representative_group_in_charge = schema.Choice(
         title=_(u"Representative group in charge"),
