@@ -29,7 +29,7 @@
                    tal:content="meeting/title" />
 
               <div class="meeting-attendees"
-                   tal:content="meeting/attendees" />
+                   tal:content="structure meeting/attendees/output" />
 
               <div class="meeting-extra-info"
                    tal:condition="meeting/extra_info"

@@ -39,9 +39,9 @@
       ],
       "meetings": [
         {
-          "title": "Jeudi 20 décembre 2018",
+          "title": "20 décembre 2018",
           "datetime": "2018-12-20T18:25:43.511Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevine\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
@@ -83,9 +83,9 @@
           ]
         },
         {
-          "title": "Mercredi 13 mars 2019",
+          "title": "13 mars 2019",
           "datetime": "2019-03-13T18:00:00.000Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevine\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
@@ -124,9 +124,9 @@
           ]
         },
         {
-          "title": "Vendredi 13 mars 2020",
+          "title": "13 mars 2020",
           "datetime": "2020-03-13T18:00:00.000Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevine\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
@@ -186,13 +186,19 @@
           "representative_value": "Mr Wara",
           "representative_long_value": "Mr Wara, Échevin du tourisme",
           "active": true
+        },
+        {
+          "representative_key": "8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+          "representative_value": "Mr Bara",
+          "representative_long_value": "Mr Bara, Échevin du Développement économique",
+          "active": true
         }
       ],
       "meetings": [
         {
-          "title": "Vendredi 16 novembre 2018 (08:30)",
+          "title": "16 novembre 2018 (08:30)",
           "datetime": "2018-11-16T08:30:00.511Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevin\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {
@@ -231,9 +237,9 @@
           ]
         },
         {
-          "title": "Mercredi 13 mars 2019",
+          "title": "13 mars 2019",
           "datetime": "2019-03-13T18:00:00.000Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevin\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {
@@ -269,9 +275,9 @@
           ]
         },
         {
-          "title": "Vendredi 13 mars 2020",
+          "title": "13 mars 2020",
           "datetime": "2020-03-13T18:00:00.000Z",
-          "attendees": "Présents :\\nMr XXX, Bourgmestre,\\nMme YYYY, Échevin\\n...",
+          "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {

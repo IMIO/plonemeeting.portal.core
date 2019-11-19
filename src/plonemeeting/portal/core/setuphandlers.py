@@ -8,6 +8,7 @@ from plone.namedfile.file import NamedFile
 from zope.i18n import translate
 from zope.interface import implementer
 
+import dateutil.parser
 import json
 import os
 
@@ -103,15 +104,16 @@ def create_demo_content(context):
             )
 
             for meeting in institution["meetings"]:
-                import dateutil.parser
-
+                attendees = RichTextValue(
+                    meeting["attendees"], "text/html", "text/html"
+                )
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
                     container=intitution_obj,
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
-                    attendees=meeting["attendees"],
+                    attendees=attendees,
                     extra_info=meeting["extra_info"],
                 )
 

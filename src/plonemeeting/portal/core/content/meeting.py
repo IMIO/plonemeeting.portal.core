@@ -26,7 +26,7 @@ class IMeeting(model.Schema):
         # readonly=True,
     )
 
-    attendees = schema.Text(title=_(u"Assembly"), required=True)
+    attendees = RichText(title=_(u"Assembly"), required=True)
 
     extra_info = RichText(title=_(u"Extra info"), required=False)
 
