@@ -72,12 +72,12 @@ def create_file(container, filename):
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/demo/data/", filename)
     if os.path.isfile(file_path):
-        title = file_path.split(u"/")[-1]
-        file_obj = content.create(container=container, type="File", title=title)
-        fd = open(file_path, "rb")
-        file_obj.file = NamedFile(
-            data=fd, filename=title, contentType="application/pdf"
-        )
+        with open(file_path, 'rb') as fd:
+            title = file_path.split(u"/")[-1]
+            file_obj = content.create(container=container, type="File", title=title)
+            file_obj.file = NamedFile(
+                data=fd, filename=title, contentType="application/pdf"
+            )
 
 
 def create_demo_content(context):
