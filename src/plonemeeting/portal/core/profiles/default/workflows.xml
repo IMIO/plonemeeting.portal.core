@@ -5,7 +5,6 @@
   <type type_id="Meeting">
     <bound-workflow workflow_id="meeting_workflow"/>
   </type>
-  <type type_id="Institution"/>
   <type type_id="Item"/>
  </bindings>
 </object>
