@@ -2,3 +2,7 @@ graft src/plonemeeting
 graft docs
 include *.rst
 global-exclude *.pyc
+include *.GPL
+include *.txt
+exclude *.yml
+include tox.ini
