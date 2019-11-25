@@ -19,9 +19,9 @@
         </a>
 
         <div class="item-last-pm-modified"
-                   tal:condition='python: checkPermission("Modify portal content", context)' >
-                   <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib :</span>
-                   <span tal:content="brain/plonemeeting_last_modified" />
+             tal:condition='not: isAnon' >
+             <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib :</span>
+             <span tal:content="brain/plonemeeting_last_modified" />
         </div>
 
         <div class="item-number" tal:content="brain/number" />
