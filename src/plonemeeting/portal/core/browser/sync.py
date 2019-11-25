@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
+from plone.app.textfield.value import RichTextValue
 from plone.autoform.form import AutoExtensibleForm
 from z3c.form import button
 from z3c.form.form import Form
@@ -12,6 +13,22 @@ import requests
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
+
+
+def format_attendees(meeting_data):
+    assembly = ""
+    assembly_excused = ""
+    assembly_absents = ""
+    if meeting_data.get("assembly").get("data") != "":
+        assembly = "<b>{}:<b><br>{}".format(_("Attendees"), meeting_data.get("assembly").get("data"))
+    if meeting_data.get("assemblyExcused").get("data") != "":
+        assembly_excused = "<p><b>{}:</b><br>{}</p>".format(_("Excused"), meeting_data.get("assemblyExcused").get("data"))
+    if meeting_data.get("assemblyAbsents").get("data") != "":
+        assembly_absents = "<p><b>{}:</b><br>{}</p>".format(_("Absents"), meeting_data.get("assemblyAbsents").get("data"))
+    formated_attendees = u"{} {} {}".format(assembly, assembly_excused, assembly_absents)
+    return RichTextValue(
+        formated_attendees, "text/html", "text/html"
+    )
 
 
 def sync_meeting(institution, meeting_data):
@@ -29,6 +46,7 @@ def sync_meeting(institution, meeting_data):
         meeting.plonemeeting_uid = meeting_UID
     else:
         meeting = brains[0].getObject()
+    meeting.attendees = format_attendees(meeting_data)
     meeting.title = meeting_title
     meeting.date_time = dateutil.parser.parse(meeting_date)  # XXX incorrect timezone
     meeting.reindexObject()
