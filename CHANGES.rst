@@ -11,6 +11,9 @@ Changelog
 - Fix institution view
   [laulaz]
 
+- Don't use plone.directives anymore (deprecated)
+  [laulaz]
+
 
 1.0a1 (2019-11-25)
 ------------------
