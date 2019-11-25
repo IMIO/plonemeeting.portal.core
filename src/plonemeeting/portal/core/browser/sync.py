@@ -77,9 +77,10 @@ def sync_items(to_localized_time, meeting, items_data):
         item.plonemeeting_last_modified = modification_date
         item.title = item_title
         item.number = str(item_data.get("itemNumber") / 100.0)
-        for group in item_data.get("groupsInCharge"):
-            # TODO item.representative_group_in_charge =
-            pass
+        groups_in_charge = item_data.get("groupsInCharge")
+        if groups_in_charge:
+            # TODO Handle multiple groups in charge
+            item.representative_group_in_charge = groups_in_charge[0]
         # TODO item.deliberation (with tal formatting)
         item.item_type = item_data.get("listType")
         item.category = item_data.get("category")
