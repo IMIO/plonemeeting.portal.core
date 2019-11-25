@@ -52,7 +52,7 @@ class IItem(model.Schema):
     extra_info = RichText(title=_(u"Extra info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
-        title=_(u"Last modification in ia.Delib"), required=True, readonly=True,
+        title=_(u"Last modification in ia.Delib"), required=True, readonly=True
     )
 
 

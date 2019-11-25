@@ -7,7 +7,6 @@ from plonemeeting.portal.core.content.institution import IInstitution
 
 
 class PMLogoViewlet(LogoViewlet):
-
     def update(self):
         super(PMLogoViewlet, self).update()
 

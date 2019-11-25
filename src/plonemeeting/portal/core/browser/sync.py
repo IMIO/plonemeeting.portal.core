@@ -24,15 +24,21 @@ def format_attendees(meeting_data):
     assembly_excused = ""
     assembly_absents = ""
     if meeting_data.get("assembly").get("data") != "":
-        assembly = "<b>{}:<b><br>{}".format(_("Attendees"), meeting_data.get("assembly").get("data"))
+        assembly = "<b>{}:<b><br>{}".format(
+            _("Attendees"), meeting_data.get("assembly").get("data")
+        )
     if meeting_data.get("assemblyExcused").get("data") != "":
-        assembly_excused = "<p><b>{}:</b><br>{}</p>".format(_("Excused"), meeting_data.get("assemblyExcused").get("data"))
+        assembly_excused = "<p><b>{}:</b><br>{}</p>".format(
+            _("Excused"), meeting_data.get("assemblyExcused").get("data")
+        )
     if meeting_data.get("assemblyAbsents").get("data") != "":
-        assembly_absents = "<p><b>{}:</b><br>{}</p>".format(_("Absents"), meeting_data.get("assemblyAbsents").get("data"))
-    formated_attendees = u"{} {} {}".format(assembly, assembly_excused, assembly_absents)
-    return RichTextValue(
-        formated_attendees, "text/html", "text/html"
+        assembly_absents = "<p><b>{}:</b><br>{}</p>".format(
+            _("Absents"), meeting_data.get("assemblyAbsents").get("data")
+        )
+    formated_attendees = u"{} {} {}".format(
+        assembly, assembly_excused, assembly_absents
     )
+    return RichTextValue(formated_attendees, "text/html", "text/html")
 
 
 def sync_meeting(institution, meeting_data):
