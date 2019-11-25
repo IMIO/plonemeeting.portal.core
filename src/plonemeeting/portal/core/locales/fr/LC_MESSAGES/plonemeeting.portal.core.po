@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-19 15:38+0000\n"
+"POT-Creation-Date: 2019-11-25 14:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,14 +14,24 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: ../browser/templates/institution.pt:61
+msgid "(Disabled)"
+msgstr "(Inactif)"
+
+#: ../browser/sync.py:36
+msgid "Absents"
+msgstr "Absents"
+
 #: ../content/institution.py:29
 msgid "Active"
 msgstr "Actif"
 
+#: ../browser/templates/institution.pt:28
 #: ../content/institution.py:45
 msgid "Additional Meeting query string"
 msgstr "Paramètres additionnels d'URL de Séances"
 
+#: ../browser/templates/institution.pt:32
 #: ../content/institution.py:49
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
@@ -34,10 +44,15 @@ msgstr "Annexes"
 msgid "Assembly"
 msgstr "Présences"
 
-#: ../browser/sync.py:81
+#: ../browser/sync.py:28
+msgid "Attendees"
+msgstr "Présents"
+
+#: ../browser/sync.py:189
 msgid "Cancel"
 msgstr "Annuler"
 
+#: ../browser/templates/institution.pt:44
 #: ../content/institution.py:63
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
@@ -47,7 +62,7 @@ msgstr "Equivalences de matières"
 msgid "Category"
 msgstr "Matière"
 
-#: ../browser/sync.py:54
+#: ../browser/sync.py:136
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
@@ -70,9 +85,13 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
-#: ../vocabularies.py:36
+#: ../vocabularies.py:37
 msgid "Emergency"
 msgstr "En urgence"
+
+#: ../browser/sync.py:32
+msgid "Excused"
+msgstr "Excusés"
 
 #: ../browser/templates/item.pt:53
 #: ../content/item.py:52
@@ -108,7 +127,7 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../browser/sync.py:56
+#: ../browser/sync.py:138
 msgid "Import"
 msgstr "Importer"
 
@@ -116,10 +135,12 @@ msgstr "Importer"
 msgid "Import meeting"
 msgstr "Importer une séance"
 
+#: ../browser/templates/institution.pt:40
 #: ../content/institution.py:59
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
+#: ../browser/templates/institution.pt:36
 #: ../content/institution.py:55
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
@@ -147,13 +168,20 @@ msgstr "Numéro de point"
 msgid "Item type"
 msgstr "Type de point"
 
-#: ../content/subscriber.py:35
+#: ../content/subscriber.py:36
 msgid "Items"
 msgstr "Points"
 
 #: ../faceted/widgets/sort.py:29
 msgid "Items sort order"
 msgstr "Ordre de tri des points"
+
+#. Default: "Last modification in ia.Delib :"
+#: ../content/item.py:55
+#: ../content/meeting.py:40
+#: ../faceted/macros.pt:27
+msgid "Last modification in ia.Delib"
+msgstr "Date de dernière modification dans ia.Delib"
 
 #: ../content/institution.py:17
 msgid "Local category id"
@@ -163,24 +191,21 @@ msgstr "Identifiant de matière locale"
 msgid "Logo"
 msgstr "Logo"
 
-#: ../browser/sync.py:40
+#: ../browser/sync.py:122
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
 
+#: ../browser/templates/institution.pt:24
 #: ../content/institution.py:42
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de Séance"
 
-#: ../browser/sync.py:53
+#: ../browser/sync.py:135
 msgid "Meeting import form"
 msgstr "Importation de Séance"
 
-#: ../browser/sync.py:79
-msgid "Meeting imported !"
-msgstr "Séance importée !"
-
-#: ../content/subscriber.py:28
+#: ../content/subscriber.py:29
 msgid "Meetings"
 msgstr "Séances"
 
@@ -188,7 +213,7 @@ msgstr "Séances"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../vocabularies.py:35
+#: ../vocabularies.py:36
 msgid "Normal"
 msgstr "Normal"
 
@@ -196,11 +221,12 @@ msgstr "Normal"
 msgid "Password"
 msgstr "Mot de passe"
 
+#: ../browser/templates/institution.pt:16
 #: ../content/institution.py:36
 msgid "Plonemeeting URL"
-msgstr "URL Plonemeeting"
+msgstr "URL ia.Delib"
 
-#: ../faceted/macros.pt:35
+#: ../faceted/macros.pt:46
 msgid "Public meeting"
 msgstr "Séance publique"
 
@@ -228,6 +254,7 @@ msgstr "Valeur longue de mandataire"
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
+#: ../browser/templates/institution.pt:55
 #: ../content/institution.py:69
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
@@ -235,9 +262,9 @@ msgstr "Equivalences de mandataires"
 #: ../content/item.py:29
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
-msgstr "UID Plonemeeting"
+msgstr "UID ia.Delib"
 
-#: ../browser/sync.py:75
+#: ../browser/sync.py:161
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
@@ -245,6 +272,7 @@ msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
+#: ../browser/templates/institution.pt:20
 #: ../content/institution.py:38
 msgid "Username"
 msgstr "Nom d'utilisateur"
@@ -255,13 +283,18 @@ msgstr "Nom d'utilisateur"
 msgid "View"
 msgstr "Voir"
 
-#: ../browser/sync.py:70
+#: ../browser/sync.py:156
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au webservice !"
 
 #: ../browser/institution.py:21
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
+
+#. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
+#: ../browser/sync.py:178
+msgid "meeting_imported"
+msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
 #: ../configure.zcml:29
 msgid "plonemeeting.portal.core"
