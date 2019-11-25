@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
-from plone.directives import form
+from plone.autoform.form import AutoExtensibleForm
+from plone.supermodel import model
 from z3c.form import button
 from zope import schema
 import dateutil.parser
@@ -33,7 +34,7 @@ def sync_meeting(institution, meeting_data):
     return meeting
 
 
-class IImportMeetingForm(form.Schema):
+class IImportMeetingForm(model.Schema):
     """
     """
 
@@ -44,7 +45,7 @@ class IImportMeetingForm(form.Schema):
     )
 
 
-class ImportMeetingForm(form.SchemaForm):
+class ImportMeetingForm(AutoExtensibleForm):
     """
     """
 
