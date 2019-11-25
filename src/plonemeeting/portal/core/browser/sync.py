@@ -41,7 +41,57 @@ def format_attendees(meeting_data):
     return RichTextValue(formated_attendees, "text/html", "text/html")
 
 
-def sync_meeting(institution, meeting_data):
+def sync_items(to_localized_time, meeting, items_data):
+    nb_created = nb_modified = nb_deleted = 0
+    existing_items_brains = api.content.find(
+        context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
+    )
+    existing_items = {
+        b.plonemeeting_uid: {"last_modified": b.plonemeeting_last_modified, "brain": b}
+        for b in existing_items_brains
+    }
+    synced_uids = [i.get("UID") for i in items_data.get("items")]
+    for item_data in items_data.get("items"):
+        modification_date_str = item_data.get("modification_date")
+        localized_time = to_localized_time(modification_date_str, long_format=1)
+        modification_date = dateutil.parser.parse(localized_time)
+        item_uid = item_data.get("UID")
+        item_title = item_data.get("title")
+        created = False
+        if item_uid not in existing_items.keys():
+            # Item must be created
+            with api.env.adopt_user("admin"):
+                item = api.content.create(
+                    container=meeting, type="Item", title=item_title
+                )
+            item.plonemeeting_uid = item_uid
+            created = True
+        else:
+            existing_last_modified = existing_items.get(item_uid).get("last_modified")
+            if existing_last_modified and existing_last_modified <= modification_date:
+                # Item must NOT be synced
+                continue
+            item = existing_items.get(item_uid).get("brain").getObject()
+
+        # XXX Sync item fields values
+        item.plonemeeting_last_modified = modification_date
+        item.reindexObject()
+        if created:
+            nb_created += 1
+        else:
+            nb_modified += 1
+
+    # Delete existing items that have been removed in PM
+    for uid, infos in existing_items.items():
+        if uid not in synced_uids:
+            obj = infos.get("brain").getObject()
+            api.content.delete(obj)
+            nb_deleted += 1
+
+    return {"created": nb_created, "modified": nb_modified, "deleted": nb_deleted}
+
+
+def sync_meeting(to_localized_time, institution, meeting_data):
     meeting_UID = meeting_data.get("UID")
     meeting_date = meeting_data.get("date")
     meeting_title = meeting_data.get("title")
