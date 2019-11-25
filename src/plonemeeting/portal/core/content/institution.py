@@ -37,7 +37,7 @@ class IInstitution(model.Schema):
 
     username = schema.TextLine(title=_(u"Username"), required=False)
 
-    password = schema.Password(title=_(u"Password"), required=False)
+    password = schema.TextLine(title=_(u"Password"), required=False)
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
 
