@@ -7,6 +7,7 @@ import json
 import requests
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
@@ -85,9 +86,8 @@ class RemoteMeetingsVocabularyFactory:
         url = get_api_url_for_meetings(institution)
         if not url:
             return SimpleVocabulary([])
-        headers = {"Content-type": "application/json", "Accept": "application/json"}
         response = requests.get(
-            url, auth=(institution.username, institution.password), headers=headers
+            url, auth=(institution.username, institution.password), headers=API_HEADERS
         )
         if response.status_code != 200:
             return SimpleVocabulary([])

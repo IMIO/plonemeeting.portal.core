@@ -49,5 +49,6 @@
     <column value="linkedMeetingTitle" />
     <column value="linkedMeetingReviewState" />
     <column value="plonemeeting_last_modified" />
+    <column value="plonemeeting_uid" />
 
 </object>

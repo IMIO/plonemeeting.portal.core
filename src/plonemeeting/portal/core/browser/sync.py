@@ -6,13 +6,17 @@ from plone.autoform.form import AutoExtensibleForm
 from z3c.form import button
 from z3c.form.form import Form
 from zope import schema
+from zope.component import getMultiAdapter
+from zope.i18n import translate
 from zope.interface import Interface
 import dateutil.parser
 import json
 import requests
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 
 
 def format_attendees(meeting_data):
@@ -48,7 +52,8 @@ def sync_meeting(institution, meeting_data):
         meeting = brains[0].getObject()
     meeting.attendees = format_attendees(meeting_data)
     meeting.title = meeting_title
-    meeting.date_time = dateutil.parser.parse(meeting_date)  # XXX incorrect timezone
+    localized_time = to_localized_time(meeting_date, long_format=1)
+    meeting.date_time = dateutil.parser.parse(localized_time)
     meeting.reindexObject()
     return meeting
 
@@ -82,10 +87,14 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
 
         institution = self.context
-        url = get_api_url_for_meetings(institution, meeting_UID=data.get("meeting"))
-        headers = {"Content-type": "application/json", "Accept": "application/json"}
+        meeting_uid = data.get("meeting")
+        current_lang = api.portal.get_default_language()[:2]
+        to_localized_time = getMultiAdapter(
+            (self.context, self.request), name="plone"
+        ).toLocalizedTime
+        url = get_api_url_for_meetings(institution, meeting_UID=meeting_uid)
         response = requests.get(
-            url, auth=(institution.username, institution.password), headers=headers
+            url, auth=(institution.username, institution.password), headers=API_HEADERS
         )
         if response.status_code != 200:
             self.status = _(u"Webservice connection error !")
@@ -96,8 +105,30 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             self.status = _(u"Unexpected meeting count in webservice response !")
             return
 
-        meeting = sync_meeting(institution, json_meeting.get("items")[0])
-        self.status = _(u"Meeting imported !")
+        meeting = sync_meeting(
+            to_localized_time, institution, json_meeting.get("items")[0]
+        )
+        url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)
+        response = requests.get(
+            url, auth=(institution.username, institution.password), headers=API_HEADERS
+        )
+        if response.status_code != 200:
+            self.status = _(u"Webservice connection error !")
+            return
+
+        json_items = json.loads(response.text)
+        results = sync_items(to_localized_time, meeting, json_items)
+
+        status_msg = _(
+            u"meeting_imported",
+            default=u"Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items.",
+            mapping={
+                u"created": results["created"],
+                u"modified": results["modified"],
+                u"deleted": results["deleted"],
+            },
+        )
+        self.status = translate(status_msg, target_language=current_lang)
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handleCancel(self, action):
