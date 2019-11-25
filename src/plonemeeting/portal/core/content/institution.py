@@ -41,8 +41,8 @@ class IInstitution(model.Schema):
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
 
-    additional_meeting_query_string = schema.TextLine(
-        title=_(u"Additional Meeting query string"), required=False
+    additional_meeting_query_string_for_list = schema.TextLine(
+        title=_(u"Additional Meeting query string for list"), required=False
     )
 
     additional_published_items_query_string = schema.TextLine(

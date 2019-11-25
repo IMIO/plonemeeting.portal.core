@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Use additional query strings in API requests
+  [laulaz]
+
 - Add basic sync for meeting items & fix localized date conversion
   [laulaz]
 

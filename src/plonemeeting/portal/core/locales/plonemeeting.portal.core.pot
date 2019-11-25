@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../browser/templates/institution.pt:28
 #: ../content/institution.py:45
-msgid "Additional Meeting query string"
+msgid "Additional Meeting query string for list"
 msgstr ""
 
 #: ../browser/templates/institution.pt:32

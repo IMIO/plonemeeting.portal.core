@@ -24,8 +24,8 @@
              <span i18n:translate="">Meeting config ID</span> : <span tal:content="context/meeting_config_id" />
         </div>
 
-        <div class="institution-additionalmeetingquerystring">
-             <span i18n:translate="">Additional Meeting query string</span> : <span tal:content="context/additional_meeting_query_string" />
+        <div class="institution-additionalmeetingquerystringforlist">
+             <span i18n:translate="">Additional Meeting query string for list</span> : <span tal:content="context/additional_meeting_query_string_for_list" />
         </div>
 
         <div class="institution-additionalpublisheditemsquerystring">
