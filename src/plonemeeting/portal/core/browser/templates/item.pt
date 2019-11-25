@@ -45,7 +45,7 @@
         </div>
 
         <div class="category">
-             <span i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
+            <span i18n:translate="">Category</span> : <span tal:content="python: view.get_global_category()"/>
         </div>
 
         <div class="extra-info"

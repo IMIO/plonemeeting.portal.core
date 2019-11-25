@@ -43,9 +43,8 @@ class IItem(model.Schema):
         required=True,
     )
 
-    category = schema.Choice(
+    category = schema.TextLine(
         title=_(u"Category"),
-        vocabulary="plonemeeting.portal.vocabularies.global_categories",
         required=True,
     )
 
