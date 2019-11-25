@@ -3,6 +3,8 @@
 from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
+from zope.component import queryUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
@@ -31,3 +33,10 @@ class UtilsView(BrowserView):
 
     def get_state(self, meeting):
         return api.content.get_state(meeting)
+
+    def get_categories_mappings_value(self, key):
+        factory = queryUtility(
+            IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories"
+        )
+        vocab = factory(self.context)
+        return vocab.getTerm(key).title

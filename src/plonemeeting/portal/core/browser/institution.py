@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from Products.Five.browser import BrowserView
 from plone import api
-from plone.dexterity.browser.view import DefaultView
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
 
-class InstitutionView(DefaultView):
+class InstitutionView(BrowserView):
     """
     """
 

@@ -5,7 +5,8 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix institution view
+  [laulaz]
 
 
 1.0a1 (2019-11-25)
