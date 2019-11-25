@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Restrict import action to institutions
+  [laulaz]
+
 - set and format attendees (assembly, assembly excused, assembly absents)
   [duchenean, boulch]
 
