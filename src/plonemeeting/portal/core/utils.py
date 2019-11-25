@@ -9,6 +9,7 @@ from zope.component import getUtility
 
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
+from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
 
 
 def get_api_url_for_meetings(institution, meeting_UID=None):
@@ -21,6 +22,18 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
     )
     if meeting_UID:
         url = "{0}&UID={1}&fullobjects=True".format(url, meeting_UID)
+    return url
+
+
+def get_api_url_for_meeting_items(institution, meeting_UID):
+    if not institution.plonemeeting_url or not institution.meeting_config_id:
+        return
+    url = "{0}/{1}?getConfigId={2}&linkedMeetingUID={3}&fullobjects=True".format(
+        institution.plonemeeting_url.rstrip("/"),
+        PLONEMEETING_API_MEETING_ITEMS_VIEW,
+        institution.meeting_config_id,
+        meeting_UID,
+    )
     return url
 
 

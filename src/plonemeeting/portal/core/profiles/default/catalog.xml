@@ -40,11 +40,15 @@
       <indexed_attr value="representative_group_in_charge"/>
     </index>
 
+    <index name="plonemeeting_last_modified" meta_type="DateIndex" />
+
     <column value="date_time" />
     <column value="number" />
     <column value="pretty_representative" />
     <column value="linkedMeetingUID" />
     <column value="linkedMeetingTitle" />
     <column value="linkedMeetingReviewState" />
+    <column value="plonemeeting_last_modified" />
+    <column value="plonemeeting_uid" />
 
 </object>

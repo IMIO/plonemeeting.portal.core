@@ -12,7 +12,8 @@
         folderContents folderContents | python:context.getFolderContents();
         Batch python:modules['Products.CMFPlone'].Batch;
         b_start python:request.get('b_start', 0);
-        batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);">
+        batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
+        checkPermission nocall: context/portal_membership/checkPermission;">
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
 
@@ -27,6 +28,12 @@
 
               <div class="meeting-title"
                    tal:content="meeting/title" />
+
+              <div class="meeting-last-pm-modified"
+                   tal:condition='python: checkPermission("Modify portal content", context)' >
+                   <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib :</span>
+                   <span tal:content="meeting/plonemeeting_last_modified" />
+              </div>
 
               <div class="meeting-attendees"
                    tal:content="structure meeting/attendees/output" />

@@ -6,12 +6,16 @@ from plone.api.validation import mutually_exclusive_parameters
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
+from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
 
 class UtilsView(BrowserView):
     """
     """
+
+    def is_institution(self):
+        return IInstitution.providedBy(self.context)
 
     def get_linked_meeting(self, batch):
         brain = batch[0]

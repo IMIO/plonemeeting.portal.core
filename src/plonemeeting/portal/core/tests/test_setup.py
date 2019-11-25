@@ -58,7 +58,9 @@ class TestUninstall(unittest.TestCase):
 
     def test_product_uninstalled(self):
         """Test if plonemeeting.portal.core is cleanly uninstalled."""
-        self.assertFalse(self.installer.is_product_installed("plonemeeting.portal.core"))
+        self.assertFalse(
+            self.installer.is_product_installed("plonemeeting.portal.core")
+        )
 
     def test_browserlayer_removed(self):
         """Test that IPlonemeetingPortalCoreLayer is removed."""

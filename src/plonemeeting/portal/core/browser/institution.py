@@ -30,8 +30,7 @@ class InstitutionView(BrowserView):
 
         institution = api.portal.get_navigation_root(self.context)
         meeting_folder_brains = api.content.find(
-            context=institution,
-            object_provides=IMeetingsFolder.__identifier__
+            context=institution, object_provides=IMeetingsFolder.__identifier__
         )
         if not meeting_folder_brains:
             return super(InstitutionView, self).__call__()

@@ -17,6 +17,17 @@
            tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)">
           <div class="meeting-title" tal:content="brain/linkedMeetingTitle" />
         </a>
+
+        <div class="item-last-pm-modified"
+             tal:condition='python: checkPermission("Modify portal content", context)'
+             tal:content="brain/plonemeeting_last_modified" />
+
+        <div class="item-last-pm-modified"
+                   tal:condition='python: checkPermission("Modify portal content", context)' >
+                   <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib :</span>
+                   <span tal:content="brain/plonemeeting_last_modified" />
+        </div>
+
         <div class="item-number" tal:content="brain/number" />
         <div class="item-representative" tal:content="brain/pretty_representative" />
         <div class="item-category" tal:content="nothing" />
