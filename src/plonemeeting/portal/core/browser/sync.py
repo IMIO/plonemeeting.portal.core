@@ -73,8 +73,16 @@ def sync_items(to_localized_time, meeting, items_data):
                 continue
             item = existing_items.get(item_uid).get("brain").getObject()
 
-        # XXX Sync item fields values
+        # Sync item fields values
         item.plonemeeting_last_modified = modification_date
+        item.title = item_title
+        item.number = str(item_data.get("itemNumber") / 100.0)
+        for group in item_data.get("groupsInCharge"):
+            # TODO item.representative_group_in_charge =
+            pass
+        # TODO item.deliberation (with tal formatting)
+        item.item_type = item_data.get("listType")
+        item.category = item_data.get("category")
         item.reindexObject()
         if created:
             nb_created += 1
@@ -106,6 +114,7 @@ def sync_meeting(to_localized_time, institution, meeting_data):
         meeting.plonemeeting_uid = meeting_UID
     else:
         meeting = brains[0].getObject()
+    meeting.plonemeeting_last_modified = meeting_data.get("modification_date")
     meeting.attendees = format_attendees(meeting_data)
     meeting.title = meeting_title
     localized_time = to_localized_time(meeting_date, long_format=1)
