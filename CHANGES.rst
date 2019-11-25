@@ -5,6 +5,8 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Added plonemeeting_last_modified to keep track of sync status more easily
+  [odelaere]
 - Restrict import action to institutions
   [laulaz]
 
