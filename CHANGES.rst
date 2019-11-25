@@ -5,7 +5,8 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- set and format attendees (assembly, assembly excused, assembly absents)
+  [duchenean, boulch]
 
 
 1.0a2 (2019-11-25)
