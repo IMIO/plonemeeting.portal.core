@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Fix import meeting form
+  [laulaz]
+
 - Fix institution view
   [laulaz]
 
