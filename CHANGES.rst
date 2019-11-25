@@ -5,6 +5,12 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Add basic sync for meeting items & fix localized date conversion
+  [laulaz]
+
+- Added plonemeeting_last_modified to keep track of sync status more easily
+  [odelaere]
+
 - Restrict import action to institutions
   [laulaz]
 
