@@ -48,7 +48,7 @@
       "meetings": [
         {
           "title": "20 décembre 2018",
-          "datetime": "2018-12-20T18:25:43.511Z",
+          "datetime": "2018-12-20T18:25:43.511",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
@@ -92,7 +92,7 @@
         },
         {
           "title": "13 mars 2019",
-          "datetime": "2019-03-13T18:00:00.000Z",
+          "datetime": "2019-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
@@ -133,7 +133,7 @@
         },
         {
           "title": "13 mars 2020",
-          "datetime": "2020-03-13T18:00:00.000Z",
+          "datetime": "2020-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
@@ -213,7 +213,7 @@
       "meetings": [
         {
           "title": "16 novembre 2018 (08:30)",
-          "datetime": "2018-11-16T08:30:00.511Z",
+          "datetime": "2018-11-16T08:30:00.511",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
@@ -254,7 +254,7 @@
         },
         {
           "title": "13 mars 2019",
-          "datetime": "2019-03-13T18:00:00.000Z",
+          "datetime": "2019-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
@@ -292,7 +292,7 @@
         },
         {
           "title": "13 mars 2020",
-          "datetime": "2020-03-13T18:00:00.000Z",
+          "datetime": "2020-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
