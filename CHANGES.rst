@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Add a validator for meeting and meeting item import additional parameters
+  [mpeeters]
+
 - Fix robot tests
   [mpeeters]
 

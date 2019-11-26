@@ -11,6 +11,20 @@ from plonemeeting.portal.core import _
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
+from zope.schema import ValidationError
+
+
+class InvalidUrlParameters(ValidationError):
+    """Exception for invalid url parameters"""
+
+    __doc__ = _(u"Invalid url parameters, the value should start with '&'")
+
+
+def validate_url_parameters(value):
+    """Validate if the url parameters"""
+    if value and value[0] != "&":
+        raise InvalidUrlParameters(value)
+    return True
 
 
 class ICategoryMappingRowSchema(Interface):
@@ -42,11 +56,15 @@ class IInstitution(model.Schema):
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
 
     additional_meeting_query_string_for_list = schema.TextLine(
-        title=_(u"Additional Meeting query string for list"), required=False
+        title=_(u"Additional Meeting query string for list"),
+        required=False,
+        constraint=validate_url_parameters,
     )
 
     additional_published_items_query_string = schema.TextLine(
-        title=_(u"Additional Published Items query string"), required=False
+        title=_(u"Additional Published Items query string"),
+        required=False,
+        constraint=validate_url_parameters,
     )
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
