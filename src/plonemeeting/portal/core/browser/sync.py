@@ -22,9 +22,9 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 def format_attendees(meeting_data):
-    assembly = ""
-    assembly_excused = ""
-    assembly_absents = ""
+    assembly = u""
+    assembly_excused = u""
+    assembly_absents = u""
     if meeting_data.get("assembly").get("data") != "":
         assembly = "<b>{}:<b><br>{}".format(
             _("Attendees"), meeting_data.get("assembly").get("data")
