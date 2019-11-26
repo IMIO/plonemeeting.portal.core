@@ -30,7 +30,7 @@
     <!-- Indexers -->
 
     <adapter name="item_number" factory=".item.get_item_number" />
-    <adapter name="pretty_representative" factory=".item.get_pretty_representative" />
+    <adapter name="pretty_representatives" factory=".item.get_pretty_representatives" />
     <adapter name="linkedMeetingTitle" factory=".item.get_title_from_meeting" />
     <adapter name="linkedMeetingUID" factory=".item.get_UID_from_meeting" />
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />

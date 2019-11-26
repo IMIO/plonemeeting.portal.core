@@ -13,6 +13,8 @@ Changelog
 
 - Redirect on faceted view after importing a meeting
   [mpeeters]
+- They may be 0 or 1 or more Representatives in charge of an item
+  [odelaere]
 
 - Use additional query strings in API requests
   [laulaz]

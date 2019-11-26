@@ -101,6 +101,18 @@ def create_demo_content(context):
                 type="Institution",
                 title=institution["title"],
                 representatives_mappings=institution["representatives_mappings"],
+                plonemeeting_url=institution["plonemeeting_url"],
+                username=institution["username"],
+                password=institution["password"],
+                meeting_config_id=institution["meeting_config_id"],
+                additional_meeting_query_string_for_list=institution[
+                    "additional_meeting_query_string_for_list"
+                ],
+                additional_published_items_query_string=institution[
+                    "additional_published_items_query_string"
+                ],
+                info_points_formatting_tal=institution["info_points_formatting_tal"],
+                info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
 
             for meeting in institution["meetings"]:
@@ -126,9 +138,7 @@ def create_demo_content(context):
                         type="Item",
                         title=item["title"],
                         number=item["number"],
-                        representative_group_in_charge=item[
-                            "representative_group_in_charge"
-                        ],
+                        representatives_in_charge=item["representatives_in_charge"],
                         deliberation=deliberation,
                         item_type=item["item_type"],
                         category=item["category"],

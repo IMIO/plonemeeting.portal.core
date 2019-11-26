@@ -25,7 +25,7 @@
         </div>
 
         <div class="item-number" tal:content="brain/number" />
-        <div class="item-representative" tal:content="brain/pretty_representative" />
+        <div class="item-representative" tal:content="brain/pretty_representatives" />
         <div class="item-category" tal:content="nothing" />
       </div>
 

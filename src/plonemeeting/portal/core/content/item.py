@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
 
 from Products.CMFPlone import PloneMessageFactory as plone_
 from collective import dexteritytextindexer
@@ -28,9 +29,11 @@ class IItem(model.Schema):
 
     plonemeeting_uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
 
-    representative_group_in_charge = schema.Choice(
+    representatives_in_charge = schema.List(
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.vocabularies.representatives",
+        ),
         title=_(u"Representative group in charge"),
-        vocabulary="plonemeeting.portal.vocabularies.representatives",
         required=False,
     )
 
@@ -43,10 +46,7 @@ class IItem(model.Schema):
         required=True,
     )
 
-    category = schema.TextLine(
-        title=_(u"Category"),
-        required=True,
-    )
+    category = schema.TextLine(title=_(u"Category"), required=True,)
 
     extra_info = RichText(title=_(u"Extra info"), required=False)
 
@@ -67,15 +67,25 @@ def get_item_number(object):
 
 
 @indexer(IItem)
-def get_pretty_representative(object):
-    representative_key = object.representative_group_in_charge
-    if not representative_key:
+def get_pretty_representatives(object):
+    representative_keys = deepcopy(object.representatives_in_charge)
+
+    if not representative_keys:
         raise AttributeError
+    res = []
     institution = api.portal.get_navigation_root(object)
     mapping = institution.representatives_mappings
     for infos in mapping:
-        if infos["representative_key"] == representative_key:
-            return infos["representative_value"]
+        representative_key = infos["representative_key"]
+        if representative_key in representative_keys:
+            representative_keys.remove(representative_key)
+            res.append(infos["representative_value"])
+
+    for missing_keys in representative_keys:
+        res.append(missing_keys)
+
+    if res:
+        return ", ".join(res)
     raise AttributeError
 
 

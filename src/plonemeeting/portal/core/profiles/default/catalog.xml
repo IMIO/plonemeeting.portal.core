@@ -28,23 +28,23 @@
         <indexed_attr value="item_number"/>
     </index>
 
-    <index name="pretty_representative" meta_type="FieldIndex">
-        <indexed_attr value="pretty_representative"/>
+    <index name="pretty_representatives" meta_type="FieldIndex">
+        <indexed_attr value="pretty_representatives"/>
     </index>
 
     <index name="getCategory" meta_type="FieldIndex">
       <indexed_attr value="category"/>
     </index>
 
-    <index name="getGroupInCharge" meta_type="FieldIndex">
-      <indexed_attr value="representative_group_in_charge"/>
+    <index name="getGroupInCharge" meta_type="KeywordIndex">
+      <indexed_attr value="representatives_in_charge"/>
     </index>
 
     <index name="plonemeeting_last_modified" meta_type="DateIndex" />
 
     <column value="date_time" />
     <column value="number" />
-    <column value="pretty_representative" />
+    <column value="pretty_representatives" />
     <column value="linkedMeetingUID" />
     <column value="linkedMeetingTitle" />
     <column value="linkedMeetingReviewState" />

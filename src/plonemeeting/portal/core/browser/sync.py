@@ -78,11 +78,9 @@ def sync_items(to_localized_time, meeting, items_data):
         # Sync item fields values
         item.plonemeeting_last_modified = modification_date
         item.title = item_title
+        # TODO use formatted intem number when available
         item.number = str(item_data.get("itemNumber") / 100.0)
-        groups_in_charge = item_data.get("groupsInCharge")
-        if groups_in_charge:
-            # TODO Handle multiple groups in charge
-            item.representative_group_in_charge = groups_in_charge[0]
+        item.representatives_in_charge = item_data.get("groupsInCharge")
         # TODO item.deliberation (with tal formatting)
         item.item_type = item_data.get("listType")
         item.category = item_data.get("category")

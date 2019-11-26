@@ -17,6 +17,14 @@
   "institutions": [
     {
       "title": "Amityville",
+      "plonemeeting_url": "https://demo-pm.imio.be",
+      "username": "dgen",
+      "password": "meeting",
+      "meeting_config_id": "meeting-config-council",
+      "additional_meeting_query_string_for_list": "&review_state=frozen",
+      "additional_published_items_query_string": "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
+      "info_points_formatting_tal": "",
+      "info_annex_formatting_tal": "",
       "representatives_mappings": [
         {
           "representative_key": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
@@ -47,7 +55,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
+              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -59,7 +67,7 @@
             {
               "title": "Point jeunesse",
               "number": "2",
-              "representative_group_in_charge": "8c4e1a3d-6e45-4bd0-a52e-4084f52cf524",
+              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "jeunesse",
@@ -71,7 +79,7 @@
             {
               "title": "Point Éducation urgent",
               "number": "2.1",
-              "representative_group_in_charge": "8c4e1a3d-6e45-4bd0-a52e-4084f52cf524",
+              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "late",
               "category": "education",
@@ -91,7 +99,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
+              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -103,7 +111,7 @@
             {
               "title": "Point urba",
               "number": "2",
-              "representative_group_in_charge": "d6565ab9-88b7-4a70-9a91-398cba1fd09b",
+              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -115,7 +123,7 @@
             {
               "title": "Point travaux",
               "number": "3",
-              "representative_group_in_charge": "d6565ab9-88b7-4a70-9a91-398cba1fd09b",
+              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "education",
@@ -132,7 +140,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
+              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -144,7 +152,7 @@
             {
               "title": "Point urba",
               "number": "2",
-              "representative_group_in_charge": "d6565ab9-88b7-4a70-9a91-398cba1fd09b",
+              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -153,7 +161,7 @@
             {
               "title": "Point jeunesse",
               "number": "3",
-              "representative_group_in_charge": "8c4e1a3d-6e45-4bd0-a52e-4084f52cf524",
+              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "jeunesse",
@@ -168,6 +176,14 @@
     },
     {
       "title": "Belleville",
+      "plonemeeting_url": "https://demo-pm.imio.be",
+      "username": "dgen",
+      "password": "meeting",
+      "meeting_config_id": "meeting-config-college",
+      "additional_meeting_query_string_for_list": "&review_state=frozen",
+      "additional_published_items_query_string": "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
+      "info_points_formatting_tal": "",
+      "info_annex_formatting_tal": "",
       "representatives_mappings": [
         {
           "representative_key": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
@@ -204,7 +220,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
+              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -216,7 +232,7 @@
             {
               "title": "Point tourisme",
               "number": "2",
-              "representative_group_in_charge": "39d90590-a112-436a-80ff-d96c2082a553",
+              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",
@@ -225,7 +241,7 @@
             {
               "title": "Point tourisme urgent",
               "number": "2.1",
-              "representative_group_in_charge": "39d90590-a112-436a-80ff-d96c2082a553",
+              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "late",
               "category": "tourisme",
@@ -245,7 +261,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
+              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -257,7 +273,7 @@
             {
               "title": "Point urba",
               "number": "2",
-              "representative_group_in_charge": "12c8f011-e164-40c8-914b-f4f11b440ae8",
+              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -266,7 +282,7 @@
             {
               "title": "Point travaux",
               "number": "3",
-              "representative_group_in_charge": "12c8f011-e164-40c8-914b-f4f11b440ae8",
+              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",
@@ -283,7 +299,7 @@
             {
               "title": "Approbation du PV du XXX",
               "number": "1",
-              "representative_group_in_charge": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
+              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -296,7 +312,7 @@
             {
               "title": "Point urba",
               "number": "2",
-              "representative_group_in_charge": "12c8f011-e164-40c8-914b-f4f11b440ae8",
+              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -308,7 +324,7 @@
             {
               "title": "Point tourisme",
               "number": "3",
-              "representative_group_in_charge": "39d90590-a112-436a-80ff-d96c2082a553",
+              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",
