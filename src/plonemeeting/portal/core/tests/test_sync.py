@@ -5,3 +5,6 @@ from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_INTEGRATIO
 
 class TestMeetingSynchronization(unittest.TestCase):
     layer = PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING
+
+    def test_in_progress(self):
+        pass
