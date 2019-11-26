@@ -70,7 +70,7 @@ def sync_items(to_localized_time, meeting, items_data):
             created = True
         else:
             existing_last_modified = existing_items.get(item_uid).get("last_modified")
-            if existing_last_modified and existing_last_modified <= modification_date:
+            if existing_last_modified and existing_last_modified >= modification_date:
                 # Item must NOT be synced
                 continue
             item = existing_items.get(item_uid).get("brain").getObject()

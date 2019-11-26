@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Fix update of meeting items during sync
+  [mpeeters]
+
 - Add a validator for meeting and meeting item import additional parameters
   [mpeeters]
 
