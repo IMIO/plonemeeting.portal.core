@@ -48,7 +48,7 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertEqual(self.meeting_item.number, indexes.get("item_number"))
         self.assertEqual(self.meeting.title, indexes.get("linkedMeetingTitle"))
         self.assertEqual(self.meeting.UID(), indexes.get("linkedMeetingUID"))
-        self.assertEqual(indexes.get("linkedMeetingDate"), 1081567765)
+        self.assertEqual(indexes.get("linkedMeetingDate"), 1081567825)
         self.assertEqual(str(self.meeting.date_time.year), indexes.get("year"))
 
     def testMeetingReviewState(self):
