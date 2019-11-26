@@ -18,6 +18,8 @@ class ItemView(DefaultView):
         utils_view = getMultiAdapter((self.context, self.request), name="utils_view")
         institution = self.context.aq_parent.aq_parent
         global_category = ""
+        if not institution.categories_mappings:
+            return item_local_category
         for mapping in institution.categories_mappings:
             if mapping["local_category_id"] == item_local_category:
                 global_category = mapping["global_category_id"]
