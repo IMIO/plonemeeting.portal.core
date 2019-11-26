@@ -25,16 +25,17 @@ def format_attendees(meeting_data):
     assembly = u""
     assembly_excused = u""
     assembly_absents = u""
+    import ipdb; ipdb.set_trace()  # noqa
     if meeting_data.get("assembly").get("data") != "":
-        assembly = "<b>{}:<b><br>{}".format(
+        assembly = u"<b>{}:<b><br>{}".format(
             _("Attendees"), meeting_data.get("assembly").get("data")
         )
     if meeting_data.get("assemblyExcused").get("data") != "":
-        assembly_excused = "<p><b>{}:</b><br>{}</p>".format(
+        assembly_excused = u"<p><b>{}:</b><br>{}</p>".format(
             _("Excused"), meeting_data.get("assemblyExcused").get("data")
         )
     if meeting_data.get("assemblyAbsents").get("data") != "":
-        assembly_absents = "<p><b>{}:</b><br>{}</p>".format(
+        assembly_absents = u"<p><b>{}:</b><br>{}</p>".format(
             _("Absents"), meeting_data.get("assemblyAbsents").get("data")
         )
     formated_attendees = u"{} {} {}".format(
