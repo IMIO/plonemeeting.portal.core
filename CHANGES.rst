@@ -5,6 +5,12 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Fix robot tests
+  [mpeeters]
+
+- Redirect on faceted view after importing a meeting
+  [mpeeters]
+
 - Use additional query strings in API requests
   [laulaz]
 
