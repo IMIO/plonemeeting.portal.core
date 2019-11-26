@@ -54,3 +54,13 @@ class TestMeetingSynchronization(unittest.TestCase):
         results = sync_items(self.to_localized_time, meeting, self.json_meeting_items)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
+
+    def test_sync_no_modif_date_no_update(self):
+        meeting = sync_meeting(self.to_localized_time, self.institution, self.json_meeting.get("items")[0])
+        results = sync_items(self.to_localized_time, meeting, self.json_meeting_items)
+        decision = {"content-type": "text/html",
+                    "data": u"<p>Nouvelle décision</p>"}
+        self.json_meeting_items.get("items")[0].get("decision").update(decision)
+        results = sync_items(self.to_localized_time, meeting, self.json_meeting_items)
+        self.assertEqual(results.get("created"), 0)
+        self.assertEqual(results.get("modified"), 0)
