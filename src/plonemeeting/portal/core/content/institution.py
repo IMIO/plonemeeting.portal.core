@@ -2,10 +2,10 @@
 
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
-from plone.namedfile.field import NamedBlobImage
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
+from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from zope import schema
