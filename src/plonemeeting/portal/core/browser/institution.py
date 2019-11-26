@@ -13,10 +13,8 @@ class InstitutionView(BrowserView):
 
     def __call__(self):
         # Don't redirect if user can edit institution
-        user = api.user.get_current()
-        if api.user.has_permission(
-            "Modify portal content", user=user, obj=self.context
-        ):
+        # Don't use api.user.has_permission since the method breaks robot tests
+        if api.user.get_permissions(obj=self.context).get("Modify portal content"):
             api.portal.show_message(
                 _(
                     "You see this page because you have permissions to edit it. "
