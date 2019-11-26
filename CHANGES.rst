@@ -4,6 +4,11 @@ Changelog
 
 1.0a3 (unreleased)
 ------------------
+- Fix attendees unicode
+  [boulch]
+
+- Add sync Tests
+  [boulch]
 
 - Fix update of meeting items during sync
   [mpeeters]
