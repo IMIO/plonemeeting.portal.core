@@ -1,0 +1,3670 @@
+{
+  "@id": "https://demo-pm.imio.be/@search_meeting_items?getConfigId=meeting-config-college&linkedMeetingUID=72b63d88d85e444cb9d89e094b529863&fullobjects=True",
+  "items": [
+    {
+      "@id": "https://demo-pm.imio.be/Members/urban_pm/mymeetings/meeting-config-college/permis-durbanisme-ndeg-pu-2019-6-introduit-par-monsieur-dutest-jean-visant-a-test-lien-delib-benoit-a-ladresse-rue-de-leglise-1-a-4620-fleron",
+      "@type": "MeetingItemCollege",
+      "UID": "ecd55a85b1ee4039bfe22c7c4988876d",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "urbanisme",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-01-29T10:38:56+00:00",
+      "creators": [
+        "urban_pm"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p><strong>D E C I D E :</strong></p>\n<p> </p>\n<p>Article 1er. : Le permis d’urbanisme sollicité par <strong>Monsieur Dutest Jean</strong> est <strong>OCTROYE – REFUSE.</strong></p>\n<p> </p>\n<p>Le titulaire du permis devra :</p>\n<p> </p>\n<p>- respecter les conditions suivantes … ;</p>\n<p>- réaliser les charges suivantes … ;</p>\n<p>- fournir les garanties financières suivantes … ;</p>\n<p> </p>\n<p><u>Article … </u>: Les travaux ou actes seront réalisés en ... phases successives, comme il est précisé ci-après : …</p>\n<p> </p>\n<p><u>Article … </u>: Les travaux ou actes permis ne peuvent être maintenus au-delà du …</p>\n<p> </p>\n<p><u>Article … </u>: La présente proposition de décision vaut décision en application de l’article D.IV.47, §2 du Code.</p>\n<p> </p>\n<p><u>Article … </u>: Expédition de la présente décision est transmise au demandeur, - et - au Fonctionnaire délégué - et au Collège communal.</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Test</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "a486512d4a1a472ea5ce05767cc5cea5",
+      "groupsInCharge": [],
+      "id": "permis-durbanisme-ndeg-pu-2019-6-introduit-par-monsieur-dutest-jean-visant-a-test-lien-delib-benoit-a-ladresse-rue-de-leglise-1-a-4620-fleron",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 100,
+      "itemReference": "URB/20191114-1",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>Vu le Code du Développement Territorial (ci-après, le Code) ;</p>\n<p>Vu le Livre Ier du Code de l'environnement ;</p>\n<p>Vu l'article 1123-23, 1° du Code de la Démocratie locale et de la Décentralisation ;</p>\n<p>Considérant que Monsieur Dutest Jean a/ont introduit une demande de permis d'urbanisme relative à un bien sis à Rue de l'Eglise 1 à 4620 Fléron, cadastré Fléron section A n° 100V, et ayant pour objet Test lien délib Benoit ;</p>\n<p>Considérant que la demande complète fait l'objet, en application de l'article D.IV.33 du Code, d'un accusé de réception envoyé en date du XXXXX ;</p>\n<p>Considérant qu’à défaut de l’envoi de l’accusé de réception visé à l’article D.IV.33 du Code, la demande est considérée comme recevable ;</p>\n<p> </p>\n<p>Considérant qu'en vertu de l'article du CoDT, cette demande ne requiert pas l'avis du Fonctionnaire délégué pour le motif suivant:travaux d'impact limité (à vérifier) ;</p>\n<p>Considérant que préalablement à l’introduction de la demande, une réunion de projet s’est tenue le XXXXX ;</p>\n<p>Considérant qu’un certificat d’urbanisme n°2 non périmé relatif à l’objet de la demande a été délivré en date du XXXXX ;</p>\n<p>Considérant que la demande de permis ne concerne pas un projet figurant sur la liste arrêtée par le Gouvernement et qui, en raison de sa nature, de ses dimensions ou de sa localisation, est soumis à étude d'incidences sur l'environnement, compte tenu des critères de sélection visés à l’article D.66 du Code de l’environnement ;</p>\n<p>Considérant que la demande de permis est accompagnée d’une notice d’évaluation des incidences sur l’environnement, que cette notice est complète en identifiant, décrivant et évaluant<strong> </strong>de manière appropriée, les effets directs et indirects, à court, à moyen et à long terme, de l'implantation et de la mise en œuvre du projet sur l'homme, la faune et la flore; le sol, l'eau, l'air, le climat et le paysage; les biens matériels et le patrimoine culturel; l'interaction entre les facteurs visés ci avant ;</p>\n<p>Considérant que la demande de permis n'est pas accompagnée d'une étude d'incidences, que l'autorité estime au vu de la notice précitée et des plans, que tenant compte des critères de sélection pertinents visés à l'article D.66, §2, le projet n’est pas susceptible d'avoir des incidences notables sur l'environnement ;</p>\n<p>Considérant qu’une étude d'incidences sur l’environnement a été réalisée pour le(s) motif(s)suivant(s) : <strong>A COMPLETER</strong><strong> </strong>;</p>\n<p> </p>\n<p>Considérant que la demande se rapporte :</p>\n<p> </p>\n<p><strong>A COMPLETER ou SUPPRIMER</strong><strong> </strong></p>\n<p>-  à un bien comportant un arbre - arbuste - une haie remarquable ;</p>\n<p>-  à un bien immobilier exposé à un risque naturel ou à une contrainte géotechnique majeurs : l’inondation comprise dans les zones soumises à l’aléa inondation au sens de l’article D.53 du Code de l’eau - le glissement de terrain - le karst - les affaissements miniers - le risque sismique – autre risque naturel ou contrainte géotechnique majeurs : … ;</p>\n<p>-  à un bien situé dans le périmètre du Plan d’Assainissement du qui reprend celui-ci en ;</p>\n<p>Considérant que le bien est soumis à l’application :</p>\n<p>- du plan de secteur de Liège adopté par arrêté de l'Exécutif régional wallon en date du 26 novembre 1987, et qui n'a pas cessé de produire ses effets pour le bien précité : en zone zone Natura 2000, dans le périmètre type de périmètre  ;</p>\n<p>- du guide régional d'urbanisme (GRU) :</p>\n<ul>\n<li>\n<p>règlement général sur les bâtisses relatif à l’accessibilité et à l'usage des espaces et bâtiments ou parties de bâtiments ouverts au public ou à usage collectif, par les personnes à mobilité réduite (art. 414 et 415 et suivants) ;</p>\n</li>\n<li>\n<p>règlement général d’urbanisme relatif aux enseignes et aux dispositifs de publicité (art. 431 et suivants) ;</p>\n</li>\n</ul>\n<p>- du guide communal d’urbanisme (GCU) du 8 novembre 1935 ;</p>\n<p> </p>\n<p>- du schéma d’orientation local, ancien plan communal d'aménagement approuvé par approbateur PCA du XXX et qui n'a pas cessé de produire ses effets pour le bien précité : en Zone de construction en annexe dans le périmètre du SOL ;</p>\n<p> </p>\n<p>- du permis d'urbanisation n°self/parcellings/label non périmé autorisé par approbateur du lotissement du date approbation lotissement, dans le lot n°Détail PURB ;</p>\n<p> </p>\n<p>Considérant que la demande déroge à au plan de secteur pour les motifs suivants : ;</p>\n<p> </p>\n<p>Considérant que la demande s'écarte de au permis d'urbanisation pour les motifs suivants : Ecart ;</p>\n<p> </p>\n<p>Considérant que la demande est soumise conformément à l’article D.IV.40 - R.IV.40-1 à une enquête publique pour les motifs suivants :;</p>\n<p> </p>\n<p>Considérant que l'enquête a eu lieu du au , conformément aux articles D.VIII.6 et suivants du Code; que 0 réclamations ont été introduites ;</p>\n<p> </p>\n<p>Considérant que les services ou commissions ci-après a-ont été consultés pour les motifs suivants (A PERSONNALISER):</p>\n<ul>\n<li>Belgacom : (motif) ... ; que son avis sollicité en date du 29 janvier 2019 et transmis en date   est</li>\n</ul>\n<ul>\n<li>CILE : (motif) ... ; que son avis sollicité en date du 29 janvier 2019 et transmis en date   est</li>\n</ul>\n<ul>\n<li>CCATM : (motif) ... ; que son avis sollicité en date du 29 janvier 2019 et transmis en date   est</li>\n</ul>\n<p>Considérant que le demandeur a produit des plans modificatifs - ayant fait l’objet, en application de l’article D.IV.43 du Code, d’un accusé de réception daté du … ; que ces plans ont été soumis - à une annonce de projet – à une enquête publique - et - à la consultation de service ou commission ; que … ;</p>\n<p>(A REFORMULER)</p>\n<p>Considérant que les travaux (ne) sont (pas) admissibles pour l'endroit considéré ; que dès lors le permis (ne) peut être délivré ;</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "c00627439dd840f48ceeef642c6c18ae",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Permis d'urbanisme n° PU/2019/6/ introduit par Monsieur Dutest Jean visant à Test lien délib Benoit à l'adresse Rue de l'Eglise 1 à 4620 Fléron.",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy78_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "@type": "MeetingItemCollege",
+      "UID": "12e7d68685074605a2750f0888b0bf52",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-14T13:14:51+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Procès-verbal approuvé</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Approuve le procès-verbal de la séance antérieure</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy78_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 200,
+      "itemReference": "DG/20191114-2",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-14T13:15:40+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "72b63d88d85e444cb9d89e094b529863",
+      "privacy": "public",
+      "proposingGroup": "40ad578e0f1c4853ab5a221bee9a4045",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Approuve le procès-verbal de la séance antérieure",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy58_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "@type": "MeetingItemCollege",
+      "UID": "765ec8ae7ec145b987ab9b21ec45ef14",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-07-12T12:13:57+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<table>\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor #000000; border-style:solid none none solid; border-width:1px medium medium 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor; border-style:solid none none; border-width:1px medium medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor #000000; border-style:solid none none solid; border-width:1px medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 #000000 currentcolor; border-style:solid solid none; border-width:1px 2px medium 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor #000000 #000000; border-style:solid none solid solid; border-width:1px medium 1px 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor; border-style:solid none; border-width:1px medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor #000000; border-style:solid none none solid; border-width:1px medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000; border-style:solid; border-width:1px 2px 1px 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor; border-style:none; border-width:medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor #000000; border-style:solid none none solid; border-width:1px medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000; border-style:none solid; border-width:medium 2px medium 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor; border-style:none; border-width:medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000; border-style:none solid; border-width:medium 2px medium 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor #000000 #000000; border-style:none none solid solid; border-width:medium medium 1px 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor #000000; border-style:none none solid; border-width:medium medium 1px; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:1px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000 #000000; border-style:none solid solid; border-width:medium 2px 1px 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor; border-style:none; border-width:medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:#000000 currentcolor currentcolor #000000; border-style:solid none none solid; border-width:1px medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:1px solid #000000; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000; border-style:none solid; border-width:medium 2px medium 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor; border-style:none; border-width:medium; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor currentcolor #000000; border-style:none none none solid; border-width:medium medium medium 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:none; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000; border-style:none solid; border-width:medium 2px medium 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor #000000 #000000; border-style:none none solid solid; border-width:medium medium 2px 2px; width:91px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor #000000; border-style:none none solid; border-width:medium medium 2px; width:42px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor currentcolor #000000 #000000; border-style:none none solid solid; border-width:medium medium 2px 1px; width:55px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:73px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:54px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-bottom:2px solid #000000; border-left:1px solid #000000; border-right:none; border-top:none; width:64px\">&nbsp;</td>\r\n\t\t\t<td style=\"border-color:currentcolor #000000 #000000; border-style:none solid solid; border-width:medium 2px 2px 1px; width:195px\">&nbsp;</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Approuve le procès-verbal de la séance antérieure</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>Description Pt 3 - Reunion DRH Marche</p>\r\n\r\n<p><img src=\"https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-3-reunion-drh-marche/1.jpg\" alt=\"\" style=\"height:521px; width:700px\" title=\"1\" /></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy58_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 300,
+      "itemReference": "DG/20191114-3",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "ab94a023b4474a369761d193e282286c",
+      "privacy": "public",
+      "proposingGroup": "40ad578e0f1c4853ab5a221bee9a4045",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Approuve le procès-verbal de la séance antérieure",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy71_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "@type": "MeetingItemCollege",
+      "UID": "aa79bc1b61884e289849999c014acc67",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-10T08:32:35+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Procès-verbal approuvé</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Approuve le procès-verbal de la séance antérieure</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy71_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 400,
+      "itemReference": "DG/20191114-4",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy70_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "40ad578e0f1c4853ab5a221bee9a4045",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Approuve le procès-verbal de la séance antérieure",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_engagement-temporaire-2",
+      "@type": "MeetingItemCollege",
+      "UID": "9902ec3f258e464bbaf0e5f3d221c162",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-08T11:12:24+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>&nbsp;</p>\r\n\r\n<p><strong>Article 1er</strong> :</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Au scrutin secret et à l’unanimité, de désigner Monsieur XXX, né le XXX à XXX et domicilié à XXX, en qualité d’instituteur maternel temporaire mi-temps en remplacement de Madame XXX aux écoles communales fondamentales de Sambreville (section de XXX) du XXX au XXX.</p>\r\n\r\n<p><strong>Article 2</strong> :</p>\r\n\r\n<p>L’horaire hebdomadaire de l’intéressé est fixé à 13 périodes.</p>\r\n\r\n<p><strong>Article 3&nbsp;:</strong></p>\r\n\r\n<p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise au Bureau Régional de l’Enseignement primaire et maternel, à l’Inspectrice Cantonale et à la direction concernée.</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Engagement temporaire</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy_of_engagement-temporaire-2",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 500,
+      "itemReference": "PERS/20191114-5",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>Considérant qu’il y a lieu de pourvoir au remplacement de Madame XXX, XXX bénéficiant d’une interruption de carrière pour convenances personnelles pour l’année scolaire 2009/2010. &nbsp;</p>\r\n\r\n<p>Attendu qu’un appel public a été lancé au mois de mai dernier;</p>\r\n\r\n<p>Vu la circulaire N° 2772 de la Communauté Française&nbsp;du 29 juin 2009 concernant &nbsp;la gestion des carrières administrative et pécuniaire dans l’enseignement fondamental ordinaire et principalement le chapitre 3 relatif aux engagements temporaires pendant l’année scolaire 2009/2010;</p>\r\n\r\n<p>Vu la proposition du directeur concerné d’attribuer cet emploi à Monsieur XXX, titulaire des titres requis;</p>\r\n\r\n<p>Vu le décret de la Communauté Française du 13 juillet 1998 portant restructuration de l’enseignement&nbsp;maternel et primaire ordinaires avec effet au 1er octobre 1998;</p>\r\n\r\n<p>Vu la loi du 29 mai 1959 (Pacte scolaire) et les articles L1122-19 et L1213-1 du Code de la démocratie locale et de la décentralisation;</p>\r\n\r\n<p>Vu l’avis favorable de l’Echevin de l’Enseignement;</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/engagement-temporaire-2",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Engagement temporaire",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_personnel",
+      "@type": "MeetingItemCollege",
+      "UID": "e66269c9342f4e6c861eaff123b20bcb",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-11T09:23:22+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>yfutfgou</p>"
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy_of_personnel",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 600,
+      "itemReference": "PERS/20191114-6",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "no_vote",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/personnel",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "PERSONNEL",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-5-reunion-drh-marche-evaluation-du-stagiaire",
+      "@type": "MeetingItemCollege",
+      "UID": "eead17fde7d548069f6934deb4794d8e",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "bf97167a1b3846ce993d3e83ade27120_reviewers"
+      ],
+      "creation_date": "2019-10-25T09:40:09+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Le collège prend connaissance du rapport d'évaluation réalisé par Mr Fred Agent et de l'analyse de compatibilité faite.</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Le service communication a besoin d'un renfort ponctuel pour compléter le nouveau site web, un stagiaire a soumis spontanément une demande de stage qui cadre avec le besoin de renfort ponctuel.&nbsp; Cette occasion tombe à pic.</p>\r\n\r\n<p>Le collège de zone a demandé d'évaluer cette candidature, l'évaluation est bonne.</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>Le service communication a besoin d'un renfort ponctuel pour compléter le nouveau site web.</p>\r\n\r\n<p>Pour finaliser le site web, il y a lieu de :</p>\r\n\r\n<ul>\r\n\t<li>Créer du contenu texte</li>\r\n\t<li>Collecter les visuels d'intervention pour contextualiser les contenus texte</li>\r\n\t<li>Définir l'arborescence du menu pour favoriser l'expérience utilisateur</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>un stagiaire a soumis spontanément une demande de stage qui cadre avec le besoin de renfort ponctuel, en effet son profil fait apparaître les compétences suivantes :</p>\r\n\r\n<ul>\r\n\t<li>Structuration de contenu du site</li>\r\n\t<li>Rédaction et éditorialiste</li>\r\n\t<li>Photographe professionnel (carrière antécédente à la formation de Webmaster)</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Il apparaît comme évident que cette candidature tombe à point nommé pour renforcer ponctuellement le service communication</p>\r\n\r\n<p>L'évaluation fait apparaître une cohérence à 85% entre le besoin et les compétences détenues, le différenciel provient majoritairement de la méconnaissance du domaine policier par le stagiaire, cette méconnaissance sera vite comblée</p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "pt-5-reunion-drh-marche-evaluation-du-stagiaire",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 700,
+      "itemReference": "PERS/20191114-7",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [
+        "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-4-reunion-drh-marche-demande-de-stage"
+      ],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>Considérant le besoin de renfort ponctuel</p>\r\n\r\n<p>Considérant le projet de renouvellement du contenu du site web</p>\r\n\r\n<p>Vu la demande de stage envoyée par Mr Stagiaire</p>\r\n\r\n<p>Considérant que les compétences sont en lien avec les besoins fonctionnels du renouvellement du contenu</p>\r\n\r\n<p>Vu le rapport favorable émis par l'école au sein de laquelle Mr Stagiaire suit ses études</p>\r\n\r\n<p>Vu le rapport d'évaluation rédigé par Mr Fred Agent du service du personnel sur base de la rencontre du 28 Octobre 2019</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Pt 5 - Reunion DRH Marche - Evaluation du stagiaire",
+      "toDiscuss": false,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-1-reunion-drh-marche-2",
+      "@type": "MeetingItemCollege",
+      "UID": "bc259f420114485c85bbe03340b700b6",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "a8ff94b7132b43f0a7334607da594992_observers"
+      ],
+      "creation_date": "2019-10-28T10:44:43+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Le Collège décide de reporter le point.</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Description Pt 1 - Reunion DRH Marche</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>Description détaillée Pt 1 - Reunion DRH Marche</p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "pt-1-reunion-drh-marche-2",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 800,
+      "itemReference": "PERS/20191114-8",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:41+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "40ad578e0f1c4853ab5a221bee9a4045"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [
+        "meeting-config-council"
+      ],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-1-reunion-drh-marche",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": true,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Pt 1 - Reunion DRH Marche",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/test-creation-point-1",
+      "@type": "MeetingItemCollege",
+      "UID": "d6635b8e5bf44690b5af0d863c6d4bb6",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-07T11:46:59+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>test création point 1 par un agentPers</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>description détaillée point 1 agentPers</p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "test-creation-point-1",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 900,
+      "itemReference": "PERS/20191114-9",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:41+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>motivation point 1</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "test creation point 1",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/tracert-nouveaux-passages-pietons",
+      "@type": "MeetingItemCollege",
+      "UID": "81242c2e827446d8aeda26d3bc5b6a94",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "fbfddec64ea24a4f94640f22d6ab5e2c_reviewers"
+      ],
+      "creation_date": "2016-12-12T23:24:35+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>tracert nouveaux passages pietons</p><p>à la rue des espoirs</p>\r\n"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>à la rue des espoirs</p>\r\n"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>utiliser la peinture résiduelle</p>\r\n\r\n<p>avec le sstagiaires de l'école de TP</p>\r\n"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "tracert-nouveaux-passages-pietons",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 1000,
+      "itemReference": "PERS/20191114-10",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "d0498dc9f3bf48ccb9ba8dea42cde945__rowid__2014-02-12.8046494526"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [
+        "meeting-config-council"
+      ],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "tracert nouveaux passages pietons",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-college/titre-courrier-farciennes-1",
+      "@type": "MeetingItemCollege",
+      "UID": "4ac2d240d33b4c59866f3108a938b68a",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "ec7c84bef8e542c68fda920121b0b6ed_reviewers"
+      ],
+      "creation_date": "2016-12-15T15:01:19+00:00",
+      "creators": [
+        "chefPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Le collège communal n'autorise pas la location de la salle par Mr Jean Menfout à la date du12/02/2015 de 11h à 18h pour l'organisation d'un anniversaire.</p>\n"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>candidature à un poste d'ouvrier communal\nMonsieur l'Echevin,\nMême si aucun poste n'est actuellement vacant au sein de vos services, je souhaite\nintroduire une candidature spontanée afin de figurer dans la liste des candidats potentiels.</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "titre-courrier-farciennes-1",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 1100,
+      "itemReference": "PERS/20191114-11",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Titre courrier Farciennes 1",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-college/tracert-nouveaux-passages-pietons",
+      "@type": "MeetingItemCollege",
+      "UID": "4001f453feaa4e96a0bf54d7aa712b21",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "fbfddec64ea24a4f94640f22d6ab5e2c_reviewers"
+      ],
+      "creation_date": "2016-12-14T11:11:27+00:00",
+      "creators": [
+        "chefPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>tracert nouveaux passages pietons</p><p>à la rue des espoirs</p>\r\n"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>à la rue des espoirs</p>\r\n"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>utiliser la peinture résiduelle</p>\r\n\r\n<p>avec le sstagiaires de l'école de TP</p>\r\n"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "tracert-nouveaux-passages-pietons",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 1200,
+      "itemReference": "PERS/20191114-12",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "d0498dc9f3bf48ccb9ba8dea42cde945__rowid__2014-02-12.8046494526"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [
+        "meeting-config-council"
+      ],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "tracert nouveaux passages pietons",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/exemple-vivalia",
+      "@type": "MeetingItemCollege",
+      "UID": "316d69b09e0b49b3a2cc4bf2fd4e3eb0",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "personnel",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2017-01-19T11:37:26+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Je suis à Vivalia :-)</p>\n"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Lettre de demande de stage:dédé</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "101696e171cd42299b0054f9c59fb3be",
+      "groupsInCharge": [],
+      "id": "exemple-vivalia",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 1300,
+      "itemReference": "PERS/20191114-13",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ec7c84bef8e542c68fda920121b0b6ed",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Exemple Vivalia",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy74_of_autorise-et-signe-les-bons-de-commande-de-la-semaine",
+      "@type": "MeetingItemCollege",
+      "UID": "73b1ef0c365d461fbfd0898d43ae3259",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-14T13:14:52+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Bons de commande signés</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Autorise et signe les bons de commande de la semaine</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy74_of_autorise-et-signe-les-bons-de-commande-de-la-semaine",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1400,
+      "itemReference": "SECR/20191114-14",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-14T13:15:48+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "72b63d88d85e444cb9d89e094b529863",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "refused",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Autorise et signe les bons de commande de la semaine",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy73_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "@type": "MeetingItemCollege",
+      "UID": "dd48704cfba74f159789eedeb745bfe7",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-14T13:14:52+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p style=\"text-align:center\"><em><strong>DECIDE </strong></em></p>  <p>De reporter le point.</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Ordonnance et signe les mandats de paiement de la semaine</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy73_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1500,
+      "itemReference": "SECR/20191114-15",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-14T13:15:44+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "72b63d88d85e444cb9d89e094b529863",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "delayed",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Ordonnance et signe les mandats de paiement de la semaine",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/testadu/mymeetings/meeting-config-college/test-de-modele",
+      "@type": "MeetingItemCollege",
+      "UID": "97667c0a99a84287ab04d355e1ee6c8c",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-15T11:10:44+00:00",
+      "creators": [
+        "testadu"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "test-de-modele",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1600,
+      "itemReference": "SECR/20191114-16",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [
+        "meeting-config-council"
+      ],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/html",
+        "data": "<p>blabla\r<br />blabla2</p>"
+      },
+      "title": "Test de modèle",
+      "toDiscuss": false,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy66_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "@type": "MeetingItemCollege",
+      "UID": "c8e2793f99d04c168d15f9d6ef9b9802",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-10T08:33:21+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Mandats de paiement de la semaine approuvés</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Ordonnance et signe les mandats de paiement de la semaine</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy66_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1700,
+      "itemReference": "SECR/20191114-17",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy65_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Ordonnance et signe les mandats de paiement de la semaine",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy53_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "@type": "MeetingItemCollege",
+      "UID": "d97c62e01383469ca816f141c1807cca",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-07-12T12:13:58+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Mandats de paiement de la semaine approuvés</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Ordonnance et signe les mandats de paiement de la semaine</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy53_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": true,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1800,
+      "itemReference": "SECR/20191114-18",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr-be",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "ab94a023b4474a369761d193e282286c",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Ordonnance et signe les mandats de paiement de la semaine",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/test-de-modele-passe-aussi-au-cc-1",
+      "@type": "MeetingItemCollege",
+      "UID": "b69c3be30b3140bb981608b63ce06c39",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-01T13:54:01+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "test-de-modele-passe-aussi-au-cc-1",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 1900,
+      "itemReference": "SECR/20191114-19",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [
+        "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_test-de-modele-passe-aussi-au-cc-1"
+      ],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [
+        "meeting-config-council"
+      ],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "ca4cc653fbf24ee2b69c054d9daabcee",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/html",
+        "data": "<p>blabla\r<br />blabla2</p>"
+      },
+      "title": "Test de modèle (passe aussi au CC)",
+      "toDiscuss": false,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/modif-ia-delib-test-sambreville-ac-cpas",
+      "@type": "MeetingItemCollege",
+      "UID": "910790db4d484801b23dfb58582b7304",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "divers",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-20T13:27:28+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Par la présente, je vous confirme notre souhait d’organiser notre braderie annuelle sur la place Communale, ainsi que la Grand Rue.</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p><a href=\"https://demo-ged.imio.be/incoming-mail/dmsincomingmail-1574255126.34\">E0319 - Test Sambreville - AC / CPAS</a></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "fa45742ecf9b43699b40bb7c1ed39513",
+      "groupsInCharge": [],
+      "id": "modif-ia-delib-test-sambreville-ac-cpas",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2000,
+      "itemReference": "DG-MT/20191114-20",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "3e49f99cebfc471ab70c9c449b5dd2c7",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Modif iA.Délib - Test Sambreville - AC / CPAS",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/modification-pt-ia-delib-ac-chaumont-gistoux-test-ia.docs",
+      "@type": "MeetingItemCollege",
+      "UID": "6ad83301d36c4d489453717ac30ab8cb",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "locations",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "bf97167a1b3846ce993d3e83ade27120_reviewers"
+      ],
+      "creation_date": "2019-10-03T09:51:04+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>aaaa</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Par la présente, je vous confirme notre souhait d’organiser notre braderie annuelle sur la place Communale, ainsi que la Grand Rue. Celle-ci aura lieu les samedi et dimanche du premier week-end de septembre.</p>\r\n\r\n<p>Ajout éléments d'informations</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p><a href=\"https://demo-ged.imio.be/incoming-mail/dmsincomingmail-1570095461.96\">E0309 - AC Chaumont Gistoux - Test iA.Docs</a></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "40561bc697e94b30be088b852d7866a8",
+      "groupsInCharge": [],
+      "id": "modification-pt-ia-delib-ac-chaumont-gistoux-test-ia.docs",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2100,
+      "itemReference": "DG-MT/20191114-21",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>sss</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "3e49f99cebfc471ab70c9c449b5dd2c7"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "3e49f99cebfc471ab70c9c449b5dd2c7",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "modification Pt iA.Délib AC Chaumont Gistoux - Test iA.Docs",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pret-podiums-orphee",
+      "@type": "MeetingItemCollege",
+      "UID": "38f3afe56e4840cea3c51b1aef02de52",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "travaux",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-11-18T10:34:57+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "pret-podiums-orphee",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2200,
+      "itemReference": "COMPT/20191114-22",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "3e49f99cebfc471ab70c9c449b5dd2c7",
+        "40ad578e0f1c4853ab5a221bee9a4045"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "prêt podiums Orphée ",
+      "toDiscuss": false,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-3-reunion-drh-marche",
+      "@type": "MeetingItemCollege",
+      "UID": "18a35e2010f843b288d0852a08c1d560",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "locations",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "a8ff94b7132b43f0a7334607da594992_reviewers"
+      ],
+      "creation_date": "2019-10-25T09:08:58+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Décision Pt 3 - Reunion DRH Marche</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Description Pt 3 - Reunion DRH Marche</p>\n\n<p><img src=\"https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-3-reunion-drh-marche/1.jpg\" alt=\"\" style=\"height:521px; width:700px\" title=\"1\" /></p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>Description détaillée Pt 3 - Reunion DRH Marche</p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "pt-3-reunion-drh-marche",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2300,
+      "itemReference": "COMPT/20191114-23",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:40+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>Motivation Pt 3 - Reunion DRH Marche</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "ec7c84bef8e542c68fda920121b0b6ed"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Pt 3 - Reunion DRH Marche",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/copy_of_pt-2-reunion-drh-marche",
+      "@type": "MeetingItemCollege",
+      "UID": "a4f56355de8640a9b3111aa61a1f9e2a",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "travaux",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "bf97167a1b3846ce993d3e83ade27120_reviewers"
+      ],
+      "creation_date": "2019-10-28T10:36:33+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Décision Pt 2 - Reunion DRH Marche</p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p>Description Pt 2 - Reunion DRH Marche</p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p>Description détaillée Pt 2 - Reunion DRH Marche</p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy_of_pt-2-reunion-drh-marche",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2400,
+      "itemReference": "COMPT/20191114-24",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:41+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p>Motivation Pt 2 - Reunion DRH Marche</p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "a8ff94b7132b43f0a7334607da594992",
+        "d0498dc9f3bf48ccb9ba8dea42cde945",
+        "c00627439dd840f48ceeef642c6c18ae"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-2-reunion-drh-marche",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": true,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Pt 2 - Reunion DRH Marche",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/achat-dune-imprimante",
+      "@type": "MeetingItemCollege",
+      "UID": "4a103f00becb4f7cb2afd6ba24fc3ed9",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": true,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [
+        "fbfddec64ea24a4f94640f22d6ab5e2c_reviewers"
+      ],
+      "creation_date": "2016-12-24T14:17:13+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Achat d'une imprimante</p>"
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "achat-dune-imprimante",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 2500,
+      "itemReference": "COMPT/20191114-25",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [
+        "ca4cc653fbf24ee2b69c054d9daabcee",
+        "a8ff94b7132b43f0a7334607da594992"
+      ],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Achat d'une imprimante",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/this-is-a-test",
+      "@type": "MeetingItemCollege",
+      "UID": "8abe5f227ac0437dbb527dc2d0e221c1",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2017-02-03T12:30:02+00:00",
+      "creators": [
+        "agentPers"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>This is a test</p><p></p>"
+      },
+      "description": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "detailedDescription": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "URBAWEB",
+      "groupsInCharge": [],
+      "id": "this-is-a-test",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 2600,
+      "itemReference": "COMPT/20191114-26",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/html",
+        "data": "<p></p>"
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "This is a test",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dfin/mymeetings/meeting-config-college/rapport-accompagnant-le-budget-de-lexercice-2017-prise-de-connaissance",
+      "@type": "MeetingItemCollege",
+      "UID": "0c004374641c47608ebf8f8048065e04",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": true,
+      "category": "comptabilite",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2017-01-18T08:14:03+00:00",
+      "creators": [
+        "dfin"
+      ],
+      "decision": {
+        "content-type": "text/html",
+        "data": "<p>Rapport accompagnant le budget de l'exercice 2017 - Prise de connaissance</p>"
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "rapport-accompagnant-le-budget-de-lexercice-2017-prise-de-connaissance",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": true,
+      "itemKeywords": "",
+      "itemNumber": 2700,
+      "itemReference": "COMPT/20191114-27",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:42+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": null,
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Rapport accompagnant le budget de l'exercice 2017 - Prise de connaissance",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    },
+    {
+      "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_demande-de-stage-pour-aurelie",
+      "@type": "MeetingItemCollege",
+      "UID": "ddfe5b583d5e4d0a9804c5fce4893516",
+      "allowDiscussion": false,
+      "associatedGroups": [],
+      "budgetInfos": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "budgetRelated": false,
+      "category": "locations",
+      "classifier": null,
+      "completeness": "completeness_not_yet_evaluated",
+      "contributors": [],
+      "copyGroups": [],
+      "creation_date": "2019-10-17T10:19:01+00:00",
+      "creators": [
+        "dgen"
+      ],
+      "decision": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "description": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "detailedDescription": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "effectiveDate": null,
+      "emergency": "no_emergency",
+      "expirationDate": null,
+      "externalIdentifier": "",
+      "groupsInCharge": [],
+      "id": "copy_of_demande-de-stage-pour-aurelie",
+      "inAndOutMoves": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "internalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "isAcceptableOutOfMeeting": false,
+      "is_folderish": false,
+      "itemAssembly": {
+        "content-type": "text/html",
+        "data": "<p>Charles Exemple- Gouverneur,\r<br />[[Pol Lejeune - 1er Echevin,]]\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>"
+      },
+      "itemAssemblyAbsents": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemAssemblyExcused": {
+        "content-type": "text/html",
+        "data": "<p>John Doe, Anonyme</p>"
+      },
+      "itemAssemblyGuests": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "itemInitiator": [],
+      "itemIsSigned": false,
+      "itemKeywords": "",
+      "itemNumber": 2800,
+      "itemReference": "COMPT/20191114-28",
+      "itemSignatures": {
+        "content-type": "text/plain",
+        "data": "Le Secrétaire communal\r\nPierre Dupont\r\nLe Bourgmestre\r\nCharles Exemple"
+      },
+      "itemTags": [],
+      "language": "fr",
+      "layout": "meetingitem_view",
+      "listType": "normal",
+      "location": "",
+      "manuallyLinkedItems": [],
+      "marginalNotes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "meetingTransitionInsertingMe": "",
+      "modification_date": "2019-11-25T14:42:43+00:00",
+      "motivation": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "notes": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "observations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "optionalAdvisers": [],
+      "oralQuestion": false,
+      "otherMeetingConfigsClonableTo": [],
+      "otherMeetingConfigsClonableToEmergency": [],
+      "otherMeetingConfigsClonableToPrivacy": [],
+      "pollType": "freehand",
+      "pollTypeObservations": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "predecessor": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/demande-de-stage-pour-aurelie",
+      "preferredMeeting": "whatever",
+      "privacy": "public",
+      "proposingGroup": "e4767b84c3d84112b6c8c7f42d49312c",
+      "proposingGroupWithGroupInCharge": "",
+      "review_state": "accepted",
+      "rights": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "sendToAuthority": false,
+      "subject": [],
+      "takenOverBy": "",
+      "templateUsingGroups": [],
+      "textCheckList": {
+        "content-type": "text/plain",
+        "data": ""
+      },
+      "title": "Demande de stage pour Aurélie",
+      "toDiscuss": true,
+      "votesAreSecret": false
+    }
+  ],
+  "items_total": 28
+}
