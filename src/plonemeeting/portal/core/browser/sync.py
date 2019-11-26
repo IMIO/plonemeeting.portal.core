@@ -9,14 +9,16 @@ from zope import schema
 from zope.component import getMultiAdapter
 from zope.i18n import translate
 from zope.interface import Interface
+
 import dateutil.parser
 import json
 import requests
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 def format_attendees(meeting_data):
@@ -195,9 +197,20 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             },
         )
         self.status = translate(status_msg, target_language=current_lang)
+        self._redirect_to_faceted(meeting.UID())
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handleCancel(self, action):
         """
         """
         self.request.response.redirect(self.context.absolute_url())
+
+    def _redirect_to_faceted(self, uid):
+        """Redirect to the faceted view"""
+        brains = api.content.find(
+            context=self.context, object_provides=IMeetingsFolder.__identifier__
+        )
+        if brains:
+            self.request.response.redirect(
+                "{0}#seance={1}".format(brains[0].getURL(), uid)
+            )
