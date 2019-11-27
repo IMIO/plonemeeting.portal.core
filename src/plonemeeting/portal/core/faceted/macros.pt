@@ -7,7 +7,8 @@
   <metal:macro define-macro="preview_meeting_item">
 
     <div class=""
-         tal:define="review_state brain/linkedMeetingReviewState"
+         tal:define="review_state brain/linkedMeetingReviewState;
+                     meeting_utils_view nocall:brain/@@utils_view"
          tal:attributes="class string:item-preview ${review_state}"
          i18n:domain="plonemeeting.portal.core">
 
@@ -21,7 +22,7 @@
         <div class="item-last-pm-modified"
              tal:condition='not: isAnon' >
              <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib :</span>
-             <span tal:content="brain/plonemeeting_last_modified" />
+             <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
         </div>
 
         <div class="item-number" tal:content="brain/number" />

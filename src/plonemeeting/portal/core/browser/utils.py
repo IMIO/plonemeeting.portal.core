@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 from Products.Five.browser import BrowserView
 from plone import api
@@ -22,6 +23,17 @@ class UtilsView(BrowserView):
         meeting_UID = brain.linkedMeetingUID
         meeting = api.content.get(UID=meeting_UID)
         return meeting
+
+    def get_plonemeeting_last_modified(self):
+        if self.context.portal_type == 'Item':
+            if self.context.plonemeeting_last_modified:
+                if not(self.context.plonemeeting_last_modified.hour == 0
+                       and self.context.plonemeeting_last_modified.minute == 0):
+                    return self.context.plonemeeting_last_modified.strftime("%d/%m/%Y %H:%M:%S")
+        elif self.context.portal_type == 'Meeting':
+            plonemeeting_last_modified_object = datetime.datetime.strptime(self.context.plonemeeting_last_modified,
+                                                                           "%Y-%m-%dT%H:%M:%S+00:00")
+            return plonemeeting_last_modified_object.strftime("%d/%m/%Y %H:%M:%S")
 
     @mutually_exclusive_parameters("meeting", "UID")
     def get_meeting_url(self, meeting=None, UID=None):
