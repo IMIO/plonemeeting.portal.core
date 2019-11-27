@@ -116,7 +116,9 @@ def sync_meeting(to_localized_time, institution, meeting_data):
         meeting.plonemeeting_uid = meeting_UID
     else:
         meeting = brains[0].getObject()
-    meeting.plonemeeting_last_modified = meeting_data.get("modification_date")
+    modification_date_str = meeting_data.get("modification_date")
+    localized_time = to_localized_time(modification_date_str, long_format=1)
+    meeting.plonemeeting_last_modified = dateutil.parser.parse(localized_time)
     meeting.attendees = format_attendees(meeting_data)
     meeting.title = meeting_title
     localized_time = to_localized_time(meeting_date, long_format=1)
