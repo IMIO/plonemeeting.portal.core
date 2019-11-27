@@ -5,7 +5,7 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Add tests for utils view
+- Add tests for utils, item and institution views
   [mpeeters]
 
 - Add `plonemeeting_last_modified` for demo data
