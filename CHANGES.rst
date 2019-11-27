@@ -4,6 +4,10 @@ Changelog
 
 1.0a3 (unreleased)
 ------------------
+
+- Add `plonemeeting_last_modified` for demo data
+  [mpeeters]
+
 - Fix attendees unicode
   [boulch]
 

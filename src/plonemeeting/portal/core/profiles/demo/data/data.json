@@ -49,11 +49,13 @@
         {
           "title": "20 décembre 2018",
           "datetime": "2018-12-20T18:25:43.511",
+          "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "1",
               "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -66,6 +68,7 @@
             },
             {
               "title": "Point jeunesse",
+              "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "2",
               "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -78,6 +81,7 @@
             },
             {
               "title": "Point Éducation urgent",
+              "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "2.1",
               "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -93,11 +97,13 @@
         {
           "title": "13 mars 2019",
           "datetime": "2019-03-13T18:00:00.000",
+          "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "1",
               "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -110,6 +116,7 @@
             },
             {
               "title": "Point urba",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "2",
               "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -122,6 +129,7 @@
             },
             {
               "title": "Point travaux",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "3",
               "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -134,11 +142,13 @@
         {
           "title": "13 mars 2020",
           "datetime": "2020-03-13T18:00:00.000",
+          "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevine<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "1",
               "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -151,6 +161,7 @@
             },
             {
               "title": "Point urba",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "2",
               "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -160,6 +171,7 @@
             },
             {
               "title": "Point jeunesse",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "3",
               "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -214,11 +226,13 @@
         {
           "title": "16 novembre 2018 (08:30)",
           "datetime": "2018-11-16T08:30:00.511",
+          "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "1",
               "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -231,6 +245,7 @@
             },
             {
               "title": "Point tourisme",
+              "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "2",
               "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -240,6 +255,7 @@
             },
             {
               "title": "Point tourisme urgent",
+              "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "2.1",
               "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -255,11 +271,13 @@
         {
           "title": "13 mars 2019",
           "datetime": "2019-03-13T18:00:00.000",
+          "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "1",
               "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -272,6 +290,7 @@
             },
             {
               "title": "Point urba",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "2",
               "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -281,6 +300,7 @@
             },
             {
               "title": "Point travaux",
+              "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "3",
               "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -293,11 +313,13 @@
         {
           "title": "13 mars 2020",
           "datetime": "2020-03-13T18:00:00.000",
+          "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
           "attendees": "<p>Présents :<br/>Mr XXX, Bourgmestre,<br/>Mme YYYY, Échevin<br/>...</p>",
           "extra_info": "",
           "items": [
             {
               "title": "Approbation du PV du XXX",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "1",
               "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
               "deliberation": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong > </u> le procès-verbal de la séance du <em>XXX</em>.</p>",
@@ -311,6 +333,7 @@
             },
             {
               "title": "Point urba",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "2",
               "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
               "deliberation": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
@@ -323,6 +346,7 @@
             },
             {
               "title": "Point tourisme",
+              "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "3",
               "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
               "deliberation": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong > </u><strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",

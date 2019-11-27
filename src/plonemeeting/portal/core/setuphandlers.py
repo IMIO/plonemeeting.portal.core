@@ -127,6 +127,9 @@ def create_demo_content(context):
                     date_time=date_time,
                     attendees=attendees,
                     extra_info=meeting["extra_info"],
+                    plonemeeting_last_modified=dateutil.parser.parse(
+                        meeting["plonemeeting_last_modified"]
+                    ),
                 )
 
                 for item in meeting["items"]:
@@ -143,6 +146,9 @@ def create_demo_content(context):
                         item_type=item["item_type"],
                         category=item["category"],
                         extra_info=item["extra_info"],
+                        plonemeeting_last_modified=dateutil.parser.parse(
+                            meeting["plonemeeting_last_modified"]
+                        ),
                     )
 
                     if "files" in item:
