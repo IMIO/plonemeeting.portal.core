@@ -42,7 +42,8 @@ def handle_institution_creation(obj, event):
     set_constrain_types(obj, ["Meeting"])
 
     request = getRequest()
-    request.response.redirect(obj.absolute_url())
+    if request:  # Request can be `None` during test setup
+        request.response.redirect(obj.absolute_url())
 
 
 def meeting_state_changed(obj, event):
