@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
+from datetime import datetime
 from plone import api
 from plone.app.testing import applyProfile
 from plone.app.testing import login
@@ -48,7 +50,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertEqual(self.meeting_item.number, indexes.get("item_number"))
         self.assertEqual(self.meeting.title, indexes.get("linkedMeetingTitle"))
         self.assertEqual(self.meeting.UID(), indexes.get("linkedMeetingUID"))
-        self.assertEqual(indexes.get("linkedMeetingDate"), 1081567825)
+        self.assertEqual(
+            indexes.get("linkedMeetingDate"),
+            DateIndex("test")._convert(datetime(2018, 12, 20, 18, 25, 43, 51100)),
+        )
         self.assertEqual(str(self.meeting.date_time.year), indexes.get("year"))
 
     def testMeetingReviewState(self):
