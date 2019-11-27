@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Add tests for faceted criteria
+  [mpeeters]
+
 - Add tests for utils, item and institution views
   [mpeeters]
 
