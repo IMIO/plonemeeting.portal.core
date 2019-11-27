@@ -84,7 +84,7 @@ def remove_portlets(column):
         del assignments[portlet]
 
 
-def format_meeting_date(date, format=u"%d %B %Y (%H:%M)", lang=None):
+def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
     """
     Format the meeting date while managing translations of months and weekdays
     :param date: Datetime reprensenting the meeting date
@@ -113,17 +113,21 @@ def format_meeting_date(date, format=u"%d %B %Y (%H:%M)", lang=None):
         5: "weekday_sat",
         6: "weekday_sun",
     }
+    format = format.replace("%B", "[month]").replace("%A", "[weekday]")
+    res = safe_unicode(date.strftime(format))
+
     if not lang:
         lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
-    if u"%B" in format:
+    if u"[month]" in res:
         month = translate(MONTHS_IDS[date.month], domain="plonelocales", target_language=lang)
-        format = format.replace(u"%B", month)
-    if u"%A" in format:
+        res = res.replace("[month]", month)
+
+    if u"[weekday]" in res:
         weekday = translate(
             WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
         )
-        format = format.replace(u"%A", weekday)
-    return safe_unicode(date.strftime(str(format.encode("utf-8"))))
+        res = res.replace(u"[weekday]", weekday)
+    return res
 
 
 def get_global_category(institution, item_local_category):
