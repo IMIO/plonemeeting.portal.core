@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Publish demo profile content
+  [mpeeters]
+
 - Add tests for faceted criteria
   [mpeeters]
 

@@ -96,7 +96,7 @@ def create_demo_content(context):
         )
 
         for institution in data["institutions"]:
-            intitution_obj = content.create(
+            institution_obj = content.create(
                 container=portal,
                 type="Institution",
                 title=institution["title"],
@@ -114,6 +114,7 @@ def create_demo_content(context):
                 item_decision_formatting_tal=institution["item_decision_formatting_tal"],
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
+            content.transition(obj=institution_obj, transition="publish")
 
             for meeting in institution["meetings"]:
                 attendees = RichTextValue(
@@ -121,7 +122,7 @@ def create_demo_content(context):
                 )
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
-                    container=intitution_obj,
+                    container=institution_obj,
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
@@ -131,6 +132,8 @@ def create_demo_content(context):
                         meeting["plonemeeting_last_modified"]
                     ),
                 )
+                content.transition(obj=meeting_obj, transition="send_to_project")
+                content.transition(obj=meeting_obj, transition="publish")
 
                 for item in meeting["items"]:
                     deliberation = RichTextValue(
