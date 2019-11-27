@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import safe_unicode
 from plone import api
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
@@ -86,7 +86,7 @@ def remove_portlets(column):
         del assignments[portlet]
 
 
-def format_meeting_date(date, format=u"%d %B %Y (%H:%M)"):
+def format_meeting_date(date, format=u"%d %B %Y (%H:%M)", lang=None):
     """
     Format the meeting date while managing translations of months and weekdays
     :param date: Datetime reprensenting the meeting date
@@ -107,25 +107,25 @@ def format_meeting_date(date, format=u"%d %B %Y (%H:%M)"):
         12: "month_dec",
     }
     WEEKDAYS_IDS = {
-        0: "weekday_sun",
-        1: "weekday_mon",
-        2: "weekday_tue",
-        3: "weekday_wed",
-        4: "weekday_thu",
-        5: "weekday_fri",
-        6: "weekday_sat",
+        0: "weekday_mon",
+        1: "weekday_tue",
+        2: "weekday_wed",
+        3: "weekday_thu",
+        4: "weekday_fri",
+        5: "weekday_sat",
+        6: "weekday_sun",
     }
-
-    lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
-    if "%B" in format:
+    if not lang:
+        lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
+    if u"%B" in format:
         month = translate(MONTHS_IDS[date.month], domain="plonelocales", target_language=lang)
-        format = format.replace("%B", month)
-    if "%A" in format:
+        format = format.replace(u"%B", month)
+    if u"%A" in format:
         weekday = translate(
             WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
         )
-        format.replace("%A", weekday)
-    return date.strftime(format.encode("utf-8"))
+        format = format.replace(u"%A", weekday)
+    return safe_unicode(date.strftime(str(format.encode('utf-8'))))
 
   
 def get_global_category(institution, item_local_category):
