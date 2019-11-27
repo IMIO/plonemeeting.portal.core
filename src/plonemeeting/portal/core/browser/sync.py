@@ -3,6 +3,7 @@
 from plone import api
 from plone.app.textfield.value import RichTextValue
 from plone.autoform.form import AutoExtensibleForm
+from Products.CMFCore.Expression import Expression, getExprContext
 from z3c.form import button
 from z3c.form.form import Form
 from zope import schema
@@ -44,7 +45,19 @@ def format_attendees(meeting_data):
     return RichTextValue(formated_attendees, "text/html", "text/html")
 
 
-def sync_items(to_localized_time, meeting, items_data):
+def get_decision_from_json(deliberation_tal_format, item, item_data):
+    if not deliberation_tal_format:
+        raise AttributeError(
+            "deliberation_tal_format is invalid {}".format(deliberation_tal_format)
+        )
+    expression = Expression(deliberation_tal_format)
+    expression_context = getExprContext(item)
+    expression_context.vars["json"] = item_data
+    expression_result = expression(expression_context)
+    return expression_result
+
+
+def sync_items(to_localized_time, meeting, items_data, deliberation_tal_format):
     nb_created = nb_modified = nb_deleted = 0
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
@@ -82,9 +95,15 @@ def sync_items(to_localized_time, meeting, items_data):
         # TODO use formatted item number when available
         item.number = str(item_data.get("itemNumber") / 100.0)
         item.representatives_in_charge = item_data.get("groupsInCharge")
-        # TODO item.deliberation (with tal formatting)
+
+        item.deliberation = get_decision_from_json(
+            deliberation_tal_format, item, item_data
+        )
+
         item.item_type = item_data.get("listType")
-        item.category = get_global_category(meeting.aq_parent, item_data.get("category"))
+        item.category = get_global_category(
+            meeting.aq_parent, item_data.get("category")
+        )
         item.reindexObject()
         if created:
             nb_created += 1
@@ -186,7 +205,12 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
 
         json_items = json.loads(response.text)
-        results = sync_items(to_localized_time, meeting, json_items)
+        results = sync_items(
+            to_localized_time,
+            meeting,
+            json_items,
+            institution.item_decision_formatting_tal,
+        )
 
         status_msg = _(
             u"meeting_imported",

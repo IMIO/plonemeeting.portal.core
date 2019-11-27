@@ -111,7 +111,7 @@ def create_demo_content(context):
                 additional_published_items_query_string=institution[
                     "additional_published_items_query_string"
                 ],
-                info_points_formatting_tal=institution["info_points_formatting_tal"],
+                item_decision_formatting_tal=institution["item_decision_formatting_tal"],
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
 
