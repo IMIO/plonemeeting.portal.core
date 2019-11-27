@@ -19,6 +19,7 @@ from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import get_global_category
 
 
 def format_attendees(meeting_data):
@@ -83,7 +84,7 @@ def sync_items(to_localized_time, meeting, items_data):
         item.representatives_in_charge = item_data.get("groupsInCharge")
         # TODO item.deliberation (with tal formatting)
         item.item_type = item_data.get("listType")
-        item.category = item_data.get("category")
+        item.category = get_global_category(meeting.aq_parent, item_data.get("category"))
         item.reindexObject()
         if created:
             nb_created += 1

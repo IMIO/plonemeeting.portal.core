@@ -83,3 +83,14 @@ def remove_portlets(column):
     assignments = getMultiAdapter((portal, manager), IPortletAssignmentMapping)
     for portlet in assignments:
         del assignments[portlet]
+
+
+def get_global_category(institution, item_local_category):
+    global_category = ""
+    if not institution.categories_mappings:
+        return item_local_category
+    for mapping in institution.categories_mappings:
+        if mapping["local_category_id"] == item_local_category:
+            return mapping["global_category_id"]
+    if not global_category:
+        return item_local_category
