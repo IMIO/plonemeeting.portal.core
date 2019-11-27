@@ -10,6 +10,7 @@ from zope.component import getUtility
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
+from zope.i18n import translate
 
 
 def get_api_url_for_meetings(institution, meeting_UID=None):
@@ -83,3 +84,45 @@ def remove_portlets(column):
     assignments = getMultiAdapter((portal, manager), IPortletAssignmentMapping)
     for portlet in assignments:
         del assignments[portlet]
+
+
+def format_meeting_date(date, format=u"%d %B %Y (%H:%M)"):
+    """
+    Format the meeting date while managing translations of months and weekdays
+    :param date: Datetime reprensenting the meeting date
+    :param format: format of the returning date. See strftime for directives.
+    """
+    MONTHS_IDS = {
+        1: "month_jan",
+        2: "month_feb",
+        3: "month_mar",
+        4: "month_apr",
+        5: "month_may",
+        6: "month_jun",
+        7: "month_jul",
+        8: "month_aug",
+        9: "month_sep",
+        10: "month_oct",
+        11: "month_nov",
+        12: "month_dec",
+    }
+    WEEKDAYS_IDS = {
+        0: "weekday_sun",
+        1: "weekday_mon",
+        2: "weekday_tue",
+        3: "weekday_wed",
+        4: "weekday_thu",
+        5: "weekday_fri",
+        6: "weekday_sat",
+    }
+
+    lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
+    if "%B" in format:
+        month = translate(MONTHS_IDS[date.month], domain="plonelocales", target_language=lang)
+        format = format.replace("%B", month)
+    if "%A" in format:
+        weekday = translate(
+            WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
+        )
+        format.replace("%A", weekday)
+    return date.strftime(format.encode("utf-8"))
