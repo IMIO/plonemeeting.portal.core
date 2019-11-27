@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import datetime
 
 from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
+from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-from plonemeeting.portal.core.content.institution import IInstitution
-from plonemeeting.portal.core.interfaces import IMeetingsFolder
+import datetime
 
 
 class UtilsView(BrowserView):
@@ -26,13 +26,18 @@ class UtilsView(BrowserView):
 
     def get_plonemeeting_last_modified(self):
         if self.context.plonemeeting_last_modified:
-            if self.context.portal_type == 'Item':
-                if not(self.context.plonemeeting_last_modified.hour == 0
-                       and self.context.plonemeeting_last_modified.minute == 0):
-                    return self.context.plonemeeting_last_modified.strftime("%d/%m/%Y %H:%M:%S")
-            elif self.context.portal_type == 'Meeting':
-                plonemeeting_last_modified_object = datetime.datetime.strptime(self.context.plonemeeting_last_modified,
-                                                                               "%Y-%m-%dT%H:%M:%S+00:00")
+            if self.context.portal_type == "Item":
+                if not (
+                    self.context.plonemeeting_last_modified.hour == 0
+                    and self.context.plonemeeting_last_modified.minute == 0
+                ):
+                    return self.context.plonemeeting_last_modified.strftime(
+                        "%d/%m/%Y %H:%M:%S"
+                    )
+            elif self.context.portal_type == "Meeting":
+                plonemeeting_last_modified_object = datetime.datetime.strptime(
+                    self.context.plonemeeting_last_modified, "%Y-%m-%dT%H:%M:%S+00:00"
+                )
                 return plonemeeting_last_modified_object.strftime("%d/%m/%Y %H:%M:%S")
 
     @mutually_exclusive_parameters("meeting", "UID")

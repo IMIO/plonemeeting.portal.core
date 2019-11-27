@@ -52,7 +52,7 @@
         </div>
 
         <div class="category">
-            <span i18n:translate="">Category</span> : <span tal:content="view/get_global_category" />
+            <span i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
         </div>
 
         <div class="extra-info"
