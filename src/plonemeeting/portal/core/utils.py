@@ -43,9 +43,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
 
 def create_faceted_folder(container, title, id=None):
     if id:
-        folder = api.content.create(
-            type="Folder", title=title, container=container, id=id
-        )
+        folder = api.content.create(type="Folder", title=title, container=container, id=id)
     else:
         folder = api.content.create(type="Folder", title=title, container=container)
     api.content.transition(folder, to_state="published")
@@ -125,9 +123,9 @@ def format_meeting_date(date, format=u"%d %B %Y (%H:%M)", lang=None):
             WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
         )
         format = format.replace(u"%A", weekday)
-    return safe_unicode(date.strftime(str(format.encode('utf-8'))))
+    return safe_unicode(date.strftime(str(format.encode("utf-8"))))
 
-  
+
 def get_global_category(institution, item_local_category):
     global_category = ""
     if not institution.categories_mappings:
@@ -137,4 +135,3 @@ def get_global_category(institution, item_local_category):
             return mapping["global_category_id"]
     if not global_category:
         return item_local_category
-
