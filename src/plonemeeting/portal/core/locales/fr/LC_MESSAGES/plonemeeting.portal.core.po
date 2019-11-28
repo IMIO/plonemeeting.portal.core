@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-25 14:21+0000\n"
+"POT-Creation-Date: 2019-11-28 13:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,25 @@ msgstr ""
 msgid "(Disabled)"
 msgstr "(Inactif)"
 
-#: ../browser/sync.py:36
+#: ../browser/sync.py:41
 msgid "Absents"
 msgstr "Absents"
 
-#: ../content/institution.py:29
+#: ../content/institution.py:43
 msgid "Active"
 msgstr "Actif"
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:45
+#: ../content/institution.py:59
 msgid "Additional Meeting query string for list"
 msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:49
+#: ../content/institution.py:65
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:66
+#: ../browser/templates/item.pt:73
 msgid "Annexes"
 msgstr "Annexes"
 
@@ -44,25 +44,25 @@ msgstr "Annexes"
 msgid "Assembly"
 msgstr "Présences"
 
-#: ../browser/sync.py:28
+#: ../browser/sync.py:33
 msgid "Attendees"
 msgstr "Présents"
 
-#: ../browser/sync.py:189
+#: ../browser/sync.py:251
 msgid "Cancel"
 msgstr "Annuler"
 
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:63
+#: ../content/institution.py:81
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
-#: ../browser/templates/item.pt:48
-#: ../content/item.py:47
+#: ../browser/templates/item.pt:55
+#: ../content/item.py:49
 msgid "Category"
 msgstr "Matière"
 
-#: ../browser/sync.py:136
+#: ../browser/sync.py:235
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
@@ -70,12 +70,12 @@ msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../browser/templates/item.pt:59
-#: ../content/item.py:38
+#: ../browser/templates/item.pt:66
+#: ../content/item.py:41
 msgid "Deliberation"
 msgstr "Délibération"
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
@@ -89,12 +89,12 @@ msgstr "Editer"
 msgid "Emergency"
 msgstr "En urgence"
 
-#: ../browser/sync.py:32
+#: ../browser/sync.py:37
 msgid "Excused"
 msgstr "Excusés"
 
-#: ../browser/templates/item.pt:53
-#: ../content/item.py:52
+#: ../browser/templates/item.pt:60
+#: ../content/item.py:51
 #: ../content/meeting.py:37
 msgid "Extra info"
 msgstr "Informations complémentaires"
@@ -111,11 +111,15 @@ msgstr "Vue facettes Points (de Séances)"
 msgid "Faceted meeting preview"
 msgstr "Vue facettes Séance"
 
+#: ../profiles/default/actions.xml
+msgid "Force reimport this meeting"
+msgstr "Réimporter cette séance"
+
 #: ../profiles/default/registry.xml
 msgid "Global categories"
 msgstr "Matières globales"
 
-#: ../content/institution.py:19
+#: ../content/institution.py:33
 msgid "Global category"
 msgstr "Matière globale"
 
@@ -127,7 +131,7 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../browser/sync.py:138
+#: ../browser/sync.py:237
 msgid "Import"
 msgstr "Importer"
 
@@ -136,16 +140,16 @@ msgid "Import meeting"
 msgstr "Importer une séance"
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:59
+#: ../content/institution.py:77
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
 #: ../browser/templates/institution.pt:36
-#: ../content/institution.py:55
+#: ../content/institution.py:73
 msgid "Info points formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -153,18 +157,22 @@ msgstr "Installe le module plonemeeting.portal.core."
 msgid "Institution"
 msgstr "Institution"
 
+#: ../content/institution.py:20
+msgid "Invalid url parameters, the value should start with '&'"
+msgstr "Paramètres de l'URL invalides, la valeeur doit commencer par '&'"
+
 #: ../profiles/default/types/Item.xml
 msgid "Item"
 msgstr "Point"
 
-#: ../browser/templates/item.pt:36
-#: ../content/item.py:27
+#: ../browser/templates/item.pt:43
+#: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro de point"
 
-#: ../browser/templates/item.pt:40
-#: ../content/item.py:41
+#: ../browser/templates/item.pt:47
+#: ../content/item.py:44
 msgid "Item type"
 msgstr "Type de point"
 
@@ -177,31 +185,31 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
-#: ../content/item.py:55
+#: ../browser/templates/item.pt:38
+#: ../content/item.py:54
 #: ../content/meeting.py:40
-#: ../faceted/macros.pt:27
 msgid "Last modification in ia.Delib"
 msgstr "Date de dernière modification dans ia.Delib"
 
-#: ../content/institution.py:17
+#: ../content/institution.py:31
 msgid "Local category id"
 msgstr "Identifiant de matière locale"
 
-#: ../content/institution.py:52
+#: ../content/institution.py:70
 msgid "Logo"
 msgstr "Logo"
 
-#: ../browser/sync.py:122
+#: ../browser/sync.py:161
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
 
 #: ../browser/templates/institution.pt:24
-#: ../content/institution.py:42
+#: ../content/institution.py:56
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de Séance"
 
-#: ../browser/sync.py:135
+#: ../browser/sync.py:234
 msgid "Meeting import form"
 msgstr "Importation de Séance"
 
@@ -217,16 +225,16 @@ msgstr "Chemin de la racine de navigation"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../content/institution.py:40
+#: ../content/institution.py:54
 msgid "Password"
 msgstr "Mot de passe"
 
 #: ../browser/templates/institution.pt:16
-#: ../content/institution.py:36
+#: ../content/institution.py:50
 msgid "Plonemeeting URL"
 msgstr "URL ia.Delib"
 
-#: ../faceted/macros.pt:46
+#: ../faceted/macros.pt:43
 msgid "Public meeting"
 msgstr "Séance publique"
 
@@ -234,46 +242,46 @@ msgstr "Séance publique"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/templates/item.pt:44
+#: ../browser/templates/item.pt:51
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:32
+#: ../content/item.py:36
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
-#: ../content/institution.py:26
+#: ../content/institution.py:40
 msgid "Representative key"
 msgstr "Clé de mandataire"
 
-#: ../content/institution.py:28
+#: ../content/institution.py:42
 msgid "Representative long values"
 msgstr "Valeur longue de mandataire"
 
-#: ../content/institution.py:27
+#: ../content/institution.py:41
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
 #: ../browser/templates/institution.pt:55
-#: ../content/institution.py:69
+#: ../content/institution.py:87
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/item.py:29
+#: ../content/item.py:30
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID ia.Delib"
 
-#: ../browser/sync.py:161
+#: ../browser/sync.py:186
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
-#: ../configure.zcml:47
+#: ../configure.zcml:48
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
 #: ../browser/templates/institution.pt:20
-#: ../content/institution.py:38
+#: ../content/institution.py:52
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -283,27 +291,27 @@ msgstr "Nom d'utilisateur"
 msgid "View"
 msgstr "Voir"
 
-#: ../browser/sync.py:156
+#: ../browser/sync.py:182
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au webservice !"
 
-#: ../browser/institution.py:21
+#: ../browser/institution.py:19
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:178
+#: ../browser/sync.py:210
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../configure.zcml:29
+#: ../configure.zcml:30
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:47
+#: ../configure.zcml:48
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
