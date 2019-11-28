@@ -20,4 +20,16 @@
     </object>
    </object>
 
+  <object name="object_buttons" meta_type="CMF Action Category">
+    <object name="reimport_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
+     <property name="title" i18n:translate="">Force reimport this meeting</property>
+     <property name="url_expr">string:$object_url/@@reimport_meeting</property>
+     <property name="available_expr">context/@@utils_view/is_meeting</property>
+     <property name="permissions">
+      <element value="Modify portal content"/>
+     </property>
+     <property name="visible">True</property>
+    </object>
+   </object>
+
 </object>

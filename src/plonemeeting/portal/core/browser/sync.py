@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Products.Five import BrowserView
 from plone import api
 from plone.app.textfield.value import RichTextValue
 from plone.autoform.form import AutoExtensibleForm
@@ -58,7 +58,9 @@ def get_decision_from_json(deliberation_tal_format, item, item_data):
     return expression_result
 
 
-def sync_items_data(to_localized_time, meeting, items_data, deliberation_tal_format):
+def sync_items_data(
+    to_localized_time, meeting, items_data, deliberation_tal_format, force=False
+):
     nb_created = nb_modified = nb_deleted = 0
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
@@ -85,7 +87,11 @@ def sync_items_data(to_localized_time, meeting, items_data, deliberation_tal_for
             created = True
         else:
             existing_last_modified = existing_items.get(item_uid).get("last_modified")
-            if existing_last_modified and existing_last_modified >= modification_date:
+            if (
+                not force
+                and existing_last_modified
+                and existing_last_modified >= modification_date
+            ):
                 # Item must NOT be synced
                 continue
             item = existing_items.get(item_uid).get("brain").getObject()
@@ -158,9 +164,10 @@ class IImportMeetingForm(Interface):
     )
 
 
-def sync_meeting(institution, meeting_uid):
+def sync_meeting(institution, meeting_uid, force=False):
     """
     synchronizes a single meeting through ia.Delib web services (Rest/JSON)
+    :param force: Should force reload items. Default False
     :param institution: current institution
     :param meeting_uid: the uid of the meeting to fetch from ia.Delib
     :return: the sync status, the new meeting's UID
@@ -181,7 +188,6 @@ def sync_meeting(institution, meeting_uid):
     to_localized_time = getMultiAdapter(
         (api.portal.get(), getRequest()), name="plone"
     ).toLocalizedTime
-
     meeting = sync_meeting_data(
         to_localized_time, institution, json_meeting.get("items")[0]
     )
@@ -198,6 +204,7 @@ def sync_meeting(institution, meeting_uid):
         meeting,
         json_items,
         institution.item_decision_formatting_tal,
+        force,
     )
 
     status_msg = _(
@@ -237,12 +244,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         institution = self.context
         meeting_uid = data.get("meeting")
         self.status, new_meeting_uid = sync_meeting(institution, meeting_uid)
-        if new_meeting_uid:
-            self._redirect_to_faceted(new_meeting_uid, self.status)
-        else:
-            api.portal.show_message(
-                message=self.status, request=self.request, type="error"
-            )
+        _handle_sync_meeting_response(
+            new_meeting_uid, self.request, self.context, self.status
+        )
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
@@ -250,15 +254,35 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         """
         self.request.response.redirect(self.context.absolute_url())
 
-    def _redirect_to_faceted(self, uid, status_message):
-        """Redirect to the faceted view"""
-        brains = api.content.find(
-            context=self.context, object_provides=IMeetingsFolder.__identifier__
+
+class ReimportMeetingView(BrowserView):
+    def __call__(self):
+        meeting = self.context
+        institution = meeting.aq_parent
+        status, new_meeting_uid = sync_meeting(
+            institution, meeting.plonemeeting_uid, force=True
         )
-        if brains:
-            self.request.response.redirect(
-                "{0}#seance={1}".format(brains[0].getURL(), uid)
-            )
-            api.portal.show_message(
-                message=self.status, request=self.request, type="info"
-            )
+        _handle_sync_meeting_response(
+            new_meeting_uid, self.request, institution, status
+        )
+
+
+def _handle_sync_meeting_response(
+    new_meeting_uid, request, institution, status_message
+):
+    if new_meeting_uid:
+        _redirect_to_faceted(new_meeting_uid, request, institution, status_message)
+    else:
+        api.portal.show_message(message=status_message, request=request, type="error")
+
+
+def _redirect_to_faceted(uid, request, institution, status_message):
+    """Redirect to the faceted view"""
+
+    brains = api.content.find(
+        context=institution, object_provides=IMeetingsFolder.__identifier__
+    )
+
+    if brains:
+        request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), uid))
+        api.portal.show_message(message=status_message, request=request, type="info")

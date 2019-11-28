@@ -42,6 +42,14 @@
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
+    <browser:page
+      name="reimport_meeting"
+      for="plonemeeting.portal.core.content.meeting.IMeeting"
+      permission="cmf.ModifyPortalContent"
+      class=".sync.ReimportMeetingView"
+      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+      />
+
   <browser:page
       name="utils_view"
       for="*"
