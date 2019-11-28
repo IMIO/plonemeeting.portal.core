@@ -62,8 +62,8 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertEqual(
             api.content.get_state(self.meeting), indexes.get("linkedMeetingReviewState")
         )
-        self.assertEqual(indexes.get("linkedMeetingReviewState"), "private")
-        self.workflow.doActionFor(self.meeting, "send_to_project")
+        self.assertEqual(indexes.get("linkedMeetingReviewState"), "published")
+        self.workflow.doActionFor(self.meeting, "back_to_project")
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
         self.assertEqual(
             api.content.get_state(self.meeting), indexes.get("linkedMeetingReviewState")
