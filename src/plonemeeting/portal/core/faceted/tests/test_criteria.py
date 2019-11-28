@@ -16,16 +16,16 @@ class TestFacetedCriteria(unittest.TestCase):
     def test_compute_criteria(self):
         criteria = ICriteria(self.belleville["meetings"])
         # The criteria must be the same
-        self.assertItemsEqual(
-            [c.__dict__ for c in criteria._criteria()],
-            [c.__dict__ for c in criteria.criteria],
+        self.assertListEqual(
+            sorted([c.__dict__ for c in criteria._criteria()]),
+            sorted([c.__dict__ for c in criteria.criteria]),
         )
 
     def test_items_criteria(self):
         criteria = ICriteria(self.belleville["items-1"])
-        self.assertItemsEqual(
-            [c.__dict__ for c in criteria._criteria() if c.getId() != "seance"],
-            [c.__dict__ for c in criteria.criteria if c.getId() != "seance"],
+        self.assertListEqual(
+            sorted([c.__dict__ for c in criteria._criteria() if c.getId() != "seance"]),
+            sorted([c.__dict__ for c in criteria.criteria if c.getId() != "seance"]),
         )
         old_criterion = [c for c in criteria._criteria() if c.getId() == "seance"][0]
         new_criterion = [c for c in criteria.criteria if c.getId() == "seance"][0]

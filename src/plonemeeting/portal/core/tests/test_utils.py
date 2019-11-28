@@ -99,13 +99,13 @@ class TestUtils(unittest.TestCase):
 
     def test_set_constrain_types(self):
         constraints = ISelectableConstrainTypes(self.belleville)
-        self.assertItemsEqual(["Meeting"], constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
         utils.set_constrain_types(self.belleville, ["Meeting", "Folder"])
-        self.assertItemsEqual(
-            ["Meeting", "Folder"], constraints.getLocallyAllowedTypes()
+        self.assertListEqual(
+            sorted(["Meeting", "Folder"]), sorted(constraints.getLocallyAllowedTypes())
         )
         utils.set_constrain_types(self.belleville, ["Meeting"])
-        self.assertItemsEqual(["Meeting"], constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
 
     def test_cleanup_contents(self):
         api.content.create(container=self.portal, id="news", type="Folder")
