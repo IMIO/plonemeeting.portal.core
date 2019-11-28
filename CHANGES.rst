@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Add `collective.fingerpointing` to the package dependencies
+  [mpeeters]
+
 - Add tests for utils functions
   [mpeeters]
 

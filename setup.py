@@ -50,14 +50,15 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "z3c.jbot",
-        "plone.api>=1.8.4",
-        "plone.restapi",
-        "plone.app.dexterity",
+        "collective.dexteritytextindexer",
+        "collective.fingerpointing",
         "collective.z3cform.datagridfield",
         "eea.facetednavigation",
-        "collective.dexteritytextindexer",
+        "plone.api>=1.8.4",
+        "plone.app.dexterity",
+        "plone.restapi",
         "requests",
+        "z3c.jbot",
     ],
     extras_require={
         "test": [
