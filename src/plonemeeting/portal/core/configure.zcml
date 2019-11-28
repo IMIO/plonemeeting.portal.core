@@ -9,6 +9,7 @@
 
   <include package="collective.dexteritytextindexer" />
   <include package="collective.z3cform.datagridfield" />
+  <include package="collective.fingerpointing" />
   <include package="eea.facetednavigation" />
 
   <include file="permissions.zcml" />
