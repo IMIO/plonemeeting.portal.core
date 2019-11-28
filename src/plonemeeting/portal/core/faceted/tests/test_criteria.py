@@ -29,5 +29,5 @@ class TestFacetedCriteria(unittest.TestCase):
         )
         old_criterion = [c for c in criteria._criteria() if c.getId() == "seance"][0]
         new_criterion = [c for c in criteria.criteria if c.getId() == "seance"][0]
-        self.assertTrue(old_criterion.hidealloption)
+        self.assertTrue(getattr(old_criterion, "hidealloption", True))
         self.assertFalse(new_criterion.hidealloption)
