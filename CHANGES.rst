@@ -5,6 +5,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Add tests for utils functions
+  [mpeeters]
+
 - Publish demo profile content
   [mpeeters]
 
