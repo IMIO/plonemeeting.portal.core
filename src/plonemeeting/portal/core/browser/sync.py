@@ -103,8 +103,10 @@ def sync_items_data(
         item.number = str(item_data.get("itemNumber") / 100.0)
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
-        item.deliberation = get_decision_from_json(
-            deliberation_tal_format, item, item_data
+        item.deliberation = RichTextValue(
+            get_decision_from_json(deliberation_tal_format, item, item_data),
+            "text/html",
+            "text/html",
         )
 
         item.item_type = item_data.get("listType")
