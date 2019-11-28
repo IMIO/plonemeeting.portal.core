@@ -5,6 +5,24 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
+- Update french translations
+  [mpeeters]
+
+- Added feature : force resync a meeting
+  [odelaere]
+
+- factorize sync methods
+  [odelaere]
+
+- Drop Plone 5.1 and 5.0 support
+  [mpeeters]
+
+- Managed info_points_formatting_tal in sync
+  [odelaere]
+
+- Manage last modification date sync format for meeting
+  [jjaumotte]
+
 - Add `collective.fingerpointing` to the package dependencies
   [mpeeters]
 
@@ -40,6 +58,7 @@ Changelog
 
 - Redirect on faceted view after importing a meeting
   [mpeeters]
+
 - They may be 0 or 1 or more Representatives in charge of an item
   [odelaere]
 
