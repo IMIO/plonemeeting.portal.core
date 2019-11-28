@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a3 (unreleased)
+1.0a3 (2019-11-28)
 ------------------
 
 - Update french translations
