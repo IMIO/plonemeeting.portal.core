@@ -36,10 +36,17 @@ class TestMeetingWorkflow(unittest.TestCase):
         applyProfile(self.portal, "plonemeeting.portal.core:demo")
         login(self.portal, "manager")
         city1 = getattr(self.portal, "amityville")
-        brains = api.content.find(context=city1, portal_type="Meeting")
-        self.meeting = brains[0].getObject()
-        brains = api.content.find(context=self.meeting, portal_type="Item")
-        self.meeting_item = brains[0].getObject()
+        self.meeting = api.content.create(
+            container=city1, title="My meeting", type="Meeting"
+        )
+        self.meeting_item = api.content.create(
+            container=self.meeting, title="My item", type="Item"
+        )
+
+    def tearDown(self):
+        login(self.portal, "manager")
+        api.content.delete(obj=self.meeting)
+        logout()
 
     def _check_index(self, obj, index_name, expected_value):
         brain = api.content.find(UID=obj.UID())[0]
@@ -64,7 +71,6 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
 
     def testReviewStateIndexing(self):
-        self._check_state(self.meeting, "private")
         self._check_index(self.meeting_item, "linkedMeetingReviewState", "private")
         self.workflow.doActionFor(self.meeting, "send_to_project")
         self._check_index(self.meeting_item, "linkedMeetingReviewState", "in_project")

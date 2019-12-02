@@ -6,6 +6,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
+from plone.testing.zope import makeTestRequest
 
 import plonemeeting.portal.core
 
@@ -22,6 +23,13 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=plonemeeting.portal.core)
+
+        # Patch collective.fingerpointing
+        from collective.fingerpointing import utils
+
+        def patched_getRequest():
+            return makeTestRequest(environ={})
+        utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plonemeeting.portal.core:default")

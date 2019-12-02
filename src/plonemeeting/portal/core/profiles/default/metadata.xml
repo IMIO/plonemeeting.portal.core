@@ -5,5 +5,6 @@
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-eea.facetednavigation:default</dependency>
+    <dependency>profile-collective.fingerpointing:default</dependency>
   </dependencies>
 </metadata>

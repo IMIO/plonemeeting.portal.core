@@ -4,6 +4,7 @@ from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
@@ -17,6 +18,9 @@ class UtilsView(BrowserView):
 
     def is_institution(self):
         return IInstitution.providedBy(self.context)
+
+    def is_meeting(self):
+        return IMeeting.providedBy(self.context)
 
     def get_linked_meeting(self, batch):
         brain = batch[0]

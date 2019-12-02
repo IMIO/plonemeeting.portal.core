@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="plonemeeting.portal.core",
-    version="1.0a3.dev0",
+    version="1.0a4.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -50,14 +50,15 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "z3c.jbot",
-        "plone.api>=1.8.4",
-        "plone.restapi",
-        "plone.app.dexterity",
+        "collective.dexteritytextindexer",
+        "collective.fingerpointing",
         "collective.z3cform.datagridfield",
         "eea.facetednavigation",
-        "collective.dexteritytextindexer",
+        "plone.api>=1.8.4",
+        "plone.app.dexterity",
+        "plone.restapi",
         "requests",
+        "z3c.jbot",
     ],
     extras_require={
         "test": [
