@@ -12,6 +12,7 @@ from plonemeeting.portal.core.testing import (
     PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
 )  # noqa
 from plonemeeting.portal.core import utils
+from plonemeeting.portal.core.utils import format_meeting_date
 
 import unittest
 

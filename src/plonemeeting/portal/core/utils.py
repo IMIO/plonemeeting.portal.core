@@ -43,7 +43,9 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
 
 def create_faceted_folder(container, title, id=None):
     if id:
-        folder = api.content.create(type="Folder", title=title, container=container, id=id)
+        folder = api.content.create(
+            type="Folder", title=title, container=container, id=id
+        )
     else:
         folder = api.content.create(type="Folder", title=title, container=container)
     api.content.transition(folder, to_state="published")
@@ -119,7 +121,9 @@ def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
     if not lang:
         lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
     if u"[month]" in res:
-        month = translate(MONTHS_IDS[date.month], domain="plonelocales", target_language=lang)
+        month = translate(
+            MONTHS_IDS[date.month], domain="plonelocales", target_language=lang
+        )
         res = res.replace("[month]", month)
 
     if u"[weekday]" in res:
