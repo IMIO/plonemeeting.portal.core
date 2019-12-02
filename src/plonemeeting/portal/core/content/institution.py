@@ -69,7 +69,7 @@ class IInstitution(model.Schema):
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
-    info_points_formatting_tal = schema.TextLine(
+    item_decision_formatting_tal = schema.TextLine(
         title=_(u"Info points formatting tal expression"), required=False
     )
 

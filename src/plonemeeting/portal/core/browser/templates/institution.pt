@@ -32,8 +32,8 @@
              <span i18n:translate="">Additional Published Items query string</span> : <span tal:content="context/additional_published_items_query_string" />
         </div>
 
-        <div class="institution-infopointsformattingtal">
-             <span i18n:translate="">Info points formatting tal expression</span> : <span tal:content="context/info_points_formatting_tal" />
+        <div class="institution-itemdecisionformattingtal">
+             <span i18n:translate="">Info points formatting tal expression</span> : <span tal:content="context/item_decision_formatting_tal" />
         </div>
 
         <div class="institution-infoannexformattingtal">
