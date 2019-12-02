@@ -76,7 +76,7 @@
    <property name="title">Current search</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">True</property>
+   <property name="hidden">False</property>
   </criterion>
   <criterion name="resultats">
    <property name="widget">resultsperpage</property>
