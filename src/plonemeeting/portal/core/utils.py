@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import safe_unicode
 from plone import api
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
@@ -10,6 +10,7 @@ from zope.component import getUtility
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
+from zope.i18n import translate
 
 
 def get_api_url_for_meetings(institution, meeting_UID=None):
@@ -83,6 +84,54 @@ def remove_portlets(column):
     assignments = getMultiAdapter((portal, manager), IPortletAssignmentMapping)
     for portlet in assignments:
         del assignments[portlet]
+
+
+def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
+    """
+    Format the meeting date while managing translations of months and weekdays
+    :param date: Datetime reprensenting the meeting date
+    :param format: format of the returning date. See strftime for directives.
+    """
+    MONTHS_IDS = {
+        1: "month_jan",
+        2: "month_feb",
+        3: "month_mar",
+        4: "month_apr",
+        5: "month_may",
+        6: "month_jun",
+        7: "month_jul",
+        8: "month_aug",
+        9: "month_sep",
+        10: "month_oct",
+        11: "month_nov",
+        12: "month_dec",
+    }
+    WEEKDAYS_IDS = {
+        0: "weekday_mon",
+        1: "weekday_tue",
+        2: "weekday_wed",
+        3: "weekday_thu",
+        4: "weekday_fri",
+        5: "weekday_sat",
+        6: "weekday_sun",
+    }
+    format = format.replace("%B", "[month]").replace("%A", "[weekday]")
+    res = safe_unicode(date.strftime(format))
+
+    if not lang:
+        lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
+    if u"[month]" in res:
+        month = translate(
+            MONTHS_IDS[date.month], domain="plonelocales", target_language=lang
+        )
+        res = res.replace("[month]", month)
+
+    if u"[weekday]" in res:
+        weekday = translate(
+            WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
+        )
+        res = res.replace(u"[weekday]", weekday)
+    return res
 
 
 def get_global_category(institution, item_local_category):

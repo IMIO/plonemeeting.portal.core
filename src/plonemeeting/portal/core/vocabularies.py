@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone import api
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -8,7 +7,7 @@ import requests
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import get_api_url_for_meetings, format_meeting_date
 
 
 class GlobalCategoryVocabularyFactory:
@@ -54,8 +53,7 @@ class MeetingDateVocabularyFactory:
         terms = []
         for b in brains:
             term = SimpleVocabulary.createTerm(
-                b.UID, b.UID, b.date_time.strftime("%d %B %Y (%H:%M)")
-            )
+                b.UID, b.UID, format_meeting_date(b.date_time))
             terms.append(term)
         return SimpleVocabulary(terms)
 
