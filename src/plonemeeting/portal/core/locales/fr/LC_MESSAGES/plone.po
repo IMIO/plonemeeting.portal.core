@@ -24,7 +24,7 @@ msgstr "Retour en projet"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "In project"
-msgstr "En projet"
+msgstr "Projet de décision"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Meeting Workflow"
@@ -45,3 +45,7 @@ msgstr "Décision publiée"
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"
 msgstr "Mettre en projet"
+
+#: ../profiles/default/workflows/comment_review_workflow/definition.xml
+msgid "Published"
+msgstr "Décision"
