@@ -117,16 +117,12 @@ def create_demo_content(context):
             content.transition(obj=institution_obj, transition="publish")
 
             for meeting in institution["meetings"]:
-                attendees = RichTextValue(
-                    meeting["attendees"], "text/html", "text/html"
-                )
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
                     container=institution_obj,
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
-                    attendees=attendees,
                     extra_info=meeting["extra_info"],
                     plonemeeting_last_modified=dateutil.parser.parse(
                         meeting["plonemeeting_last_modified"]

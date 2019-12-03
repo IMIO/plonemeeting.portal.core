@@ -5,7 +5,7 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed attendees attribute on meeting.
 
 
 1.0a3 (2019-11-28)

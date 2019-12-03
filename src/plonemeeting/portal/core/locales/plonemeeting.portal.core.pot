@@ -47,10 +47,6 @@ msgstr ""
 msgid "Assembly"
 msgstr ""
 
-#: ../browser/sync.py:33
-msgid "Attendees"
-msgstr ""
-
 #: ../browser/sync.py:251
 msgid "Cancel"
 msgstr ""

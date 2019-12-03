@@ -24,28 +24,6 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
 
 
-def format_attendees(meeting_data):
-    assembly = u""
-    assembly_excused = u""
-    assembly_absents = u""
-    if meeting_data.get("assembly").get("data") != "":
-        assembly = u"<b>{}:<b><br>{}".format(
-            _("Attendees"), meeting_data.get("assembly").get("data")
-        )
-    if meeting_data.get("assemblyExcused").get("data") != "":
-        assembly_excused = u"<p><b>{}:</b><br>{}</p>".format(
-            _("Excused"), meeting_data.get("assemblyExcused").get("data")
-        )
-    if meeting_data.get("assemblyAbsents").get("data") != "":
-        assembly_absents = u"<p><b>{}:</b><br>{}</p>".format(
-            _("Absents"), meeting_data.get("assemblyAbsents").get("data")
-        )
-    formatted_attendees = u"{} {} {}".format(
-        assembly, assembly_excused, assembly_absents
-    )
-    return RichTextValue(formatted_attendees, "text/html", "text/html")
-
-
 def get_decision_from_json(deliberation_tal_format, item, item_data):
     if not deliberation_tal_format:
         raise AttributeError(
@@ -147,7 +125,6 @@ def sync_meeting_data(to_localized_time, institution, meeting_data):
     modification_date_str = meeting_data.get("modification_date")
     localized_time = to_localized_time(modification_date_str, long_format=1)
     meeting.plonemeeting_last_modified = dateutil.parser.parse(localized_time)
-    meeting.attendees = format_attendees(meeting_data)
     meeting.title = meeting_title
     localized_time = to_localized_time(meeting_date, long_format=1)
     meeting.date_time = dateutil.parser.parse(localized_time)

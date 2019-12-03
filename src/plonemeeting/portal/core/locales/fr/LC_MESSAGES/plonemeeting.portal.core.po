@@ -44,10 +44,6 @@ msgstr "Annexes"
 msgid "Assembly"
 msgstr "Présences"
 
-#: ../browser/sync.py:33
-msgid "Attendees"
-msgstr "Présents"
-
 #: ../browser/sync.py:251
 msgid "Cancel"
 msgstr "Annuler"

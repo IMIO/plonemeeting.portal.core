@@ -110,7 +110,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 .meeting-title{
     font-weight: bold;
 }
-.meeting-attendees, .meeting-extra-info{
+.meeting-extra-info{
     opacity: .7;
     font-size: 16px;
 }
@@ -133,10 +133,10 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     color:#469721;
 }
 .item-preview.published .item-metadata a{
-    color: #007bb1; 
+    color: #007bb1;
 }
 .item-preview.private .item-metadata a{
-    color: #c21b1b; 
+    color: #c21b1b;
 }
 .item-preview .item-metadata{
     display: flex;
@@ -191,9 +191,9 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 }
 .meeting-state{
     position: absolute;
-    top: 50%; 
-    right: 30px;  
-    opacity: .6;  
+    top: 50%;
+    right: 30px;
+    opacity: .6;
     transform: translateY(-50%);
 }
 .in_project .meeting-state{
@@ -230,7 +230,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
         font-size: 25px;
         margin-top: 10px;
     }
-    
+
     .item-main{
         margin-left: 30px;
     }

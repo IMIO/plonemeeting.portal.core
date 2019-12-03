@@ -32,8 +32,6 @@ class IMeeting(model.Schema):
         # readonly=True,
     )
 
-    attendees = RichText(title=_(u"Assembly"), required=True)
-
     extra_info = RichText(title=_(u"Extra info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
