@@ -17,8 +17,8 @@ class TestFacetedCriteria(unittest.TestCase):
         criteria = ICriteria(self.belleville["meetings"])
         # The criteria must be the same
         self.assertListEqual(
-            sorted([c.__dict__.items() for c in criteria._criteria()]),
-            sorted([c.__dict__.items() for c in criteria.criteria]),
+            sorted([sorted(c.__dict__.items()) for c in criteria._criteria()]),
+            sorted([sorted(c.__dict__.items()) for c in criteria.criteria]),
         )
 
     def test_items_criteria(self):
@@ -26,13 +26,17 @@ class TestFacetedCriteria(unittest.TestCase):
         self.assertListEqual(
             sorted(
                 [
-                    c.__dict__.items()
+                    sorted(c.__dict__.items())
                     for c in criteria._criteria()
                     if c.getId() != "seance"
                 ]
             ),
             sorted(
-                [c.__dict__.items() for c in criteria.criteria if c.getId() != "seance"]
+                [
+                    sorted(c.__dict__.items())
+                    for c in criteria.criteria
+                    if c.getId() != "seance"
+                ]
             ),
         )
         old_criterion = [c for c in criteria._criteria() if c.getId() == "seance"][0]
