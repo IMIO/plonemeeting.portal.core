@@ -120,6 +120,10 @@ def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
 
     if not lang:
         lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
+
+    # in some cases month are not properly translated using sublocales
+    lang = lang.split("-")[0]
+
     if u"[month]" in res:
         month = translate(
             MONTHS_IDS[date.month], domain="plonelocales", target_language=lang
