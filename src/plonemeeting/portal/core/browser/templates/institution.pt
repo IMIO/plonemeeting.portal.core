@@ -33,7 +33,7 @@
         </div>
 
         <div class="institution-itemdecisionformattingtal">
-             <span i18n:translate="">Info points formatting tal expression</span> : <span tal:content="context/item_decision_formatting_tal" />
+             <span i18n:translate="">Item decision formatting tal expression</span> : <span tal:content="context/item_decision_formatting_tal" />
         </div>
 
         <div class="institution-infoannexformattingtal">

@@ -145,7 +145,7 @@ msgstr ""
 
 #: ../browser/templates/institution.pt:36
 #: ../content/institution.py:73
-msgid "Info points formatting tal expression"
+msgid "Item decision formatting tal expression"
 msgstr ""
 
 #: ../configure.zcml:30
