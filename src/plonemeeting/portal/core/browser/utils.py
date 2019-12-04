@@ -9,8 +9,6 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-import datetime
-
 
 class UtilsView(BrowserView):
     """
