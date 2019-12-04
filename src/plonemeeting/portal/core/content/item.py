@@ -37,8 +37,8 @@ class IItem(model.Schema):
         required=False,
     )
 
-    dexteritytextindexer.searchable("deliberation")
-    deliberation = RichText(title=_(u"Deliberation"), required=False)
+    dexteritytextindexer.searchable("decision")
+    decision = RichText(title=_(u"Decision"), required=False)
 
     item_type = schema.Choice(
         title=_(u"Item type"),

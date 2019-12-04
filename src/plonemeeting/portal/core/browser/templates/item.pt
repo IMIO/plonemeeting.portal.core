@@ -61,10 +61,14 @@
              <span tal:content="structure context/extra_info/output" />
         </div>
 
-        <div class="deliberation"
-             tal:condition="context/deliberation">
-             <span i18n:translate="">Deliberation</span>
-             <span tal:content="structure context/deliberation/output" />
+        <div class="decision"
+             tal:condition="context/decision"
+             i18n:domain="plone">
+            <span tal:condition="python: review_state != 'published'"
+                  i18n:translate="">In project</span>
+            <span tal:condition="python: review_state == 'published'"
+                  i18n:translate="">Published</span>
+            <span tal:content="structure context/decision/output" />
         </div>
 
         <div class="annexes"

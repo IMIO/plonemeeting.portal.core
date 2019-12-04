@@ -71,7 +71,7 @@ msgstr ""
 
 #: ../browser/templates/item.pt:66
 #: ../content/item.py:41
-msgid "Deliberation"
+msgid "Decision"
 msgstr ""
 
 #: ../configure.zcml:39

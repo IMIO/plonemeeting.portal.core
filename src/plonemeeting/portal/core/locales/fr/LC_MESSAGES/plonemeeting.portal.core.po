@@ -68,8 +68,8 @@ msgstr "Dossier de configuration"
 
 #: ../browser/templates/item.pt:66
 #: ../content/item.py:41
-msgid "Deliberation"
-msgstr "Délibération"
+msgid "Decision"
+msgstr "Décision"
 
 #: ../configure.zcml:39
 msgid "Demo profile for the plonemeeting.portal.core add-on."

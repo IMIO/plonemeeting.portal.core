@@ -24,12 +24,12 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
 
 
-def get_decision_from_json(deliberation_tal_format, item, item_data):
-    if not deliberation_tal_format:
+def get_decision_from_json(decision_tal_format, item, item_data):
+    if not decision_tal_format:
         raise AttributeError(
-            "deliberation_tal_format is invalid {}".format(deliberation_tal_format)
+            "decision_tal_format is invalid {}".format(decision_tal_format)
         )
-    expression = Expression(deliberation_tal_format)
+    expression = Expression(decision_tal_format)
     expression_context = getExprContext(item)
     expression_context.vars["json"] = item_data
     expression_result = expression(expression_context)
@@ -37,7 +37,7 @@ def get_decision_from_json(deliberation_tal_format, item, item_data):
 
 
 def sync_items_data(
-    to_localized_time, meeting, items_data, deliberation_tal_format, force=False
+    to_localized_time, meeting, items_data, decision_tal_format, force=False
 ):
     nb_created = nb_modified = nb_deleted = 0
     existing_items_brains = api.content.find(
@@ -81,8 +81,8 @@ def sync_items_data(
         item.number = str(item_data.get("itemNumber") / 100.0)
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
-        item.deliberation = RichTextValue(
-            get_decision_from_json(deliberation_tal_format, item, item_data),
+        item.decision = RichTextValue(
+            get_decision_from_json(decision_tal_format, item, item_data),
             "text/html",
             "text/html",
         )

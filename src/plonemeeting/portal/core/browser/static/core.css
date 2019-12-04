@@ -281,10 +281,10 @@ body .item-infos .selected-option{
     font-size: 16px!important;
     font-weight: 400!important;
 }
-.item-infos .deliberation {
+.item-infos .decision {
     margin-top: 2.5em;
 }
-.item-infos .deliberation span:first-child{
+.item-infos .decision span:first-child{
     font-weight:bold;
     font-size: 25px;
     margin: 0 0 15px 0;

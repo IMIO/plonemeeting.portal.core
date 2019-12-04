@@ -34,15 +34,15 @@ class TestMeetingWorkflow(unittest.TestCase):
 
     def testSearchableText(self):
         self.meeting_item.title = "test_title"
-        self.meeting_item.deliberation = RichTextValue(
-            "test_deliberation", "text/html", "text/html"
+        self.meeting_item.decision = RichTextValue(
+            "test_decision", "text/html", "text/html"
         )
         self.meeting_item.reindexObject()
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
         searchable_text = indexes.get("SearchableText")
         self.assertTrue("test_title" in searchable_text)
-        self.assertTrue("test_deliberation" in searchable_text)
+        self.assertTrue("test_decision" in searchable_text)
 
     def testMeetingValues(self):
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]

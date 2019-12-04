@@ -132,8 +132,8 @@ def create_demo_content(context):
                 content.transition(obj=meeting_obj, transition="publish")
 
                 for item in meeting["items"]:
-                    deliberation = RichTextValue(
-                        item["deliberation"], "text/html", "text/html"
+                    decision = RichTextValue(
+                        item["decision"], "text/html", "text/html"
                     )
                     item_obj = content.create(
                         container=meeting_obj,
@@ -141,7 +141,7 @@ def create_demo_content(context):
                         title=item["title"],
                         number=item["number"],
                         representatives_in_charge=item["representatives_in_charge"],
-                        deliberation=deliberation,
+                        decision=decision,
                         item_type=item["item_type"],
                         category=item["category"],
                         extra_info=item["extra_info"],
