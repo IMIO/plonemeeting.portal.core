@@ -33,6 +33,11 @@
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
         </div>
 
+        <div class="project-disclaimer"
+             tal:condition="python: review_state != 'published'">
+            <span tal:content="structure python: utils_view.get_project_decision_disclaimer().output" />
+        </div>
+
         <div class="item-last-pm-modified"
          tal:condition='not: isAnon' >
          <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :

@@ -32,6 +32,14 @@
              <span i18n:translate="">Additional Published Items query string</span> : <span tal:content="context/additional_published_items_query_string" />
         </div>
 
+        <div class="institution-itemdecisionprojectdisclaimer">
+             <span i18n:translate="">Project decision disclaimer</span> : <span tal:content="structure context/project_decision_disclaimer/output" />
+        </div>
+
+        <div class="institution-itemtitledecisionformattingtal">
+             <span i18n:translate="">Item title formatting tal expression. If empty the default title will be used</span> : <span tal:content="structure context/item_title_formatting_tal" />
+        </div>
+
         <div class="institution-itemdecisionformattingtal">
              <span i18n:translate="">Item decision formatting tal expression</span> : <span tal:content="context/item_decision_formatting_tal" />
         </div>

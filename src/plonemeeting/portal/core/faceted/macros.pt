@@ -41,11 +41,17 @@
                   i18n:translate="">Published</span>
         </div>
         <div class="public-meeting"
-             i18n:translate="">Public meeting</div>
+             i18n:translate="">Public meeting
+        </div>
         <a href=""
            tal:attributes="href brain/getURL">
           <div class="item-title" tal:content="brain/Title" />
         </a>
+        <div class="project-disclaimer"
+             tal:define="utils_view nocall:context/@@utils_view;"
+             tal:condition="python: review_state != 'published'">
+            <span tal:content="structure python: utils_view.get_project_decision_disclaimer().output" />
+        </div>
       </div>
 
     </div>

@@ -14,6 +14,9 @@ class UtilsView(BrowserView):
     """
     """
 
+    def _get_current_institution(self):
+        return api.portal.get_navigation_root(self.context)
+
     def is_institution(self):
         return IInstitution.providedBy(self.context)
 
@@ -38,7 +41,7 @@ class UtilsView(BrowserView):
 
     @mutually_exclusive_parameters("meeting", "UID")
     def get_meeting_url(self, meeting=None, UID=None):
-        institution = api.portal.get_navigation_root(self.context)
+        institution = self._get_current_institution()
         meeting_folder_brains = api.content.find(
             context=institution, object_provides=IMeetingsFolder.__identifier__
         )
@@ -57,3 +60,7 @@ class UtilsView(BrowserView):
         )
         vocab = factory(self.context)
         return vocab.getTerm(key).title
+
+    def get_project_decision_disclaimer(self):
+        institution = self._get_current_institution()
+        return institution.project_decision_disclaimer
