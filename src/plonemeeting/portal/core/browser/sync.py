@@ -87,7 +87,6 @@ def sync_items_data(
             "text/html",
         )
 
-        item.item_type = item_data.get("listType")
         item.category = get_global_category(
             meeting.aq_parent, item_data.get("category")
         )

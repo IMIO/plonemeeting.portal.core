@@ -40,12 +40,6 @@ class IItem(model.Schema):
     dexteritytextindexer.searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False)
 
-    item_type = schema.Choice(
-        title=_(u"Item type"),
-        vocabulary="plonemeeting.portal.vocabularies.item_types",
-        required=True,
-    )
-
     category = schema.TextLine(title=_(u"Category"), required=True,)
 
     extra_info = RichText(title=_(u"Extra info"), required=False)

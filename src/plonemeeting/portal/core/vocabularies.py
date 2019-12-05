@@ -28,19 +28,6 @@ class GlobalCategoryVocabularyFactory:
 GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 
-class ItemTypeVocabularyFactory:
-    def __call__(self, context):
-        return SimpleVocabulary(
-            [
-                SimpleTerm(value=u"normal", title=_(u"Normal")),
-                SimpleTerm(value=u"late", title=_(u"Emergency")),
-            ]
-        )
-
-
-ItemTypeVocabulary = ItemTypeVocabularyFactory()
-
-
 class MeetingDateVocabularyFactory:
     def __call__(self, context):
         institution = api.portal.get_navigation_root(context)

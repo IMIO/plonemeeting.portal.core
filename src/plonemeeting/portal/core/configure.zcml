@@ -61,12 +61,6 @@
     />
 
   <utility
-    component=".vocabularies.ItemTypeVocabulary"
-    name="plonemeeting.portal.vocabularies.item_types"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-    />
-
-  <utility
     component=".vocabularies.MeetingDateVocabulary"
     name="plonemeeting.portal.vocabularies.meeting_dates"
     provides="zope.schema.interfaces.IVocabularyFactory"

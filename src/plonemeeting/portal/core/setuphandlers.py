@@ -142,7 +142,6 @@ def create_demo_content(context):
                         number=item["number"],
                         representatives_in_charge=item["representatives_in_charge"],
                         decision=decision,
-                        item_type=item["item_type"],
                         category=item["category"],
                         extra_info=item["extra_info"],
                         plonemeeting_last_modified=dateutil.parser.parse(

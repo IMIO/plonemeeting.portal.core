@@ -43,10 +43,6 @@
              <span i18n:translate="">Item number</span> : <span tal:content="context/number" />
         </div>
 
-        <div class="item-type">
-             <span i18n:translate="">Item type</span> : <span tal:content="context/item_type" />
-        </div>
-
         <div class="representative">
              <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representatives_in_charge/render" />
         </div>
