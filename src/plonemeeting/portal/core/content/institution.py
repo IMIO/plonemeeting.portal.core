@@ -2,6 +2,7 @@
 
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
+from plone.app.textfield import RichText
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
@@ -54,6 +55,13 @@ class IInstitution(model.Schema):
     password = schema.TextLine(title=_(u"Password"), required=False)
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
+
+    project_decision_disclaimer = RichText(
+        title=_(u"Project decision disclaimer"),
+        required=False,
+        readonly=True,
+        default=_(u"Default project decision disclaimer"),
+    )
 
     additional_meeting_query_string_for_list = schema.TextLine(
         title=_(u"Additional Meeting query string for list"),
