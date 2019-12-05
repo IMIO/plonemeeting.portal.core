@@ -59,7 +59,6 @@ class IInstitution(model.Schema):
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
         required=False,
-        readonly=True,
         default=_(u"Default project decision disclaimer"),
     )
 
@@ -76,6 +75,14 @@ class IInstitution(model.Schema):
     )
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
+
+    item_title_formatting_tal = schema.TextLine(
+        title=_(
+            u"Item title formatting tal expression. "
+            u"If empty the default title will be used"
+        ),
+        required=False,
+    )
 
     item_decision_formatting_tal = schema.TextLine(
         title=_(u"Item decision formatting tal expression"), required=False
