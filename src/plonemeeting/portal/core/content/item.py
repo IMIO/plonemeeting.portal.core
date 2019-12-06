@@ -19,11 +19,14 @@ class IItem(model.Schema):
     """
 
     dexteritytextindexer.searchable("title")
+
     title = schema.TextLine(
         title=plone_(u"Title"),
         required=True,
-        # readonly=True
+        readonly=True
     )
+
+    formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
     number = schema.TextLine(title=_(u"Item number"), required=True)
 

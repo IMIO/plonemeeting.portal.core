@@ -4,6 +4,7 @@ from plone import api
 from plone.app.textfield.value import RichTextValue
 from plone.autoform.form import AutoExtensibleForm
 from Products.CMFCore.Expression import Expression, getExprContext
+from plone.namedfile.file import NamedBlobFile
 from z3c.form import button
 from z3c.form.form import Form
 from zope import schema
@@ -24,6 +25,17 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
 
 
+def _call_delib_rest_api(url, institution):
+    response = requests.get(
+        url, auth=(institution.username, institution.password), headers=API_HEADERS
+    )
+
+    if response.status_code != 200:
+        raise ValueError(_(u"Webservice connection error !"))
+
+    return response
+
+
 def get_decision_from_json(decision_tal_format, item, item_data):
     if not decision_tal_format:
         raise AttributeError(
@@ -36,9 +48,29 @@ def get_decision_from_json(decision_tal_format, item, item_data):
     return expression_result
 
 
-def sync_items_data(
-    to_localized_time, meeting, items_data, decision_tal_format, force=False
-):
+def sync_annexes(item, institution, annexes_json):
+
+    response = _call_delib_rest_api(annexes_json.get("@id"), institution)
+    for annex_data in response.json():
+
+        if annex_data.get("publishable"):
+            file_json = annex_data.get("file")
+            file_title = annex_data.get("category_title")
+            dl_link = file_json.get("download")
+            file_content_type = file_json.get("content-type")
+            response = _call_delib_rest_api(dl_link, institution)
+            blob_str = response.text
+
+            annex = api.content.create(container=item, type="File", title=file_title)
+            file_name = u"{}.{}".format(
+                annex.id, file_json.get("filename").split(".")[-1]
+            )
+            annex.file = NamedBlobFile(
+                data=blob_str, contentType=file_content_type, filename=file_name
+            )
+
+
+def sync_items_data(to_localized_time, meeting, items_data, institution, force=False):
     nb_created = nb_modified = nb_deleted = 0
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
@@ -82,7 +114,9 @@ def sync_items_data(
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
         item.decision = RichTextValue(
-            get_decision_from_json(decision_tal_format, item, item_data),
+            get_decision_from_json(
+                institution.item_decision_formatting_tal, item, item_data
+            ),
             "text/html",
             "text/html",
         )
@@ -91,6 +125,7 @@ def sync_items_data(
             meeting.aq_parent, item_data.get("category")
         )
         item.reindexObject()
+        sync_annexes(item, institution, item_data.get("@components").get("annexes"))
         if created:
             nb_created += 1
         else:
@@ -131,17 +166,6 @@ def sync_meeting_data(to_localized_time, institution, meeting_data):
     return meeting
 
 
-class IImportMeetingForm(Interface):
-    """
-    """
-
-    meeting = schema.Choice(
-        title=_(u"Meeting"),
-        vocabulary="plonemeeting.portal.vocabularies.remote_meetings",
-        required=True,
-    )
-
-
 def sync_meeting(institution, meeting_uid, force=False):
     """
     synchronizes a single meeting through ia.Delib web services (Rest/JSON)
@@ -153,9 +177,8 @@ def sync_meeting(institution, meeting_uid, force=False):
     UID may be none in case of error from the web service
     """
     url = get_api_url_for_meetings(institution, meeting_UID=meeting_uid)
-    response = requests.get(
-        url, auth=(institution.username, institution.password), headers=API_HEADERS
-    )
+    response = _call_delib_rest_api(url, institution)
+
     if response.status_code != 200:
         return _(u"Webservice connection error !"), None
 
@@ -170,19 +193,13 @@ def sync_meeting(institution, meeting_uid, force=False):
         to_localized_time, institution, json_meeting.get("items")[0]
     )
     url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)
-    response = requests.get(
-        url, auth=(institution.username, institution.password), headers=API_HEADERS
-    )
+    response = _call_delib_rest_api(url, institution)
     if response.status_code != 200:
         return _(u"Webservice connection error !"), None
 
     json_items = json.loads(response.text)
     results = sync_items_data(
-        to_localized_time,
-        meeting,
-        json_items,
-        institution.item_decision_formatting_tal,
-        force,
+        to_localized_time, meeting, json_items, institution, force,
     )
 
     status_msg = _(
@@ -200,6 +217,17 @@ def sync_meeting(institution, meeting_uid, force=False):
     current_lang = api.portal.get_default_language()[:2]
     status = translate(status_msg, target_language=current_lang)
     return status, meeting.UID()
+
+
+class IImportMeetingForm(Interface):
+    """
+    """
+
+    meeting = schema.Choice(
+        title=_(u"Meeting"),
+        vocabulary="plonemeeting.portal.vocabularies.remote_meetings",
+        required=True,
+    )
 
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
