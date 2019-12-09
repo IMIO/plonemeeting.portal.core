@@ -5,7 +5,65 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Removed attendees attribute on meeting.
+- Added annexe file synchronization
+  [odelaere]
+
+- Added item project decision disclaimer views
+  [odelaere]
+
+- Added item_title_formatting_tal
+  [odelaere]
+
+- Added disclaimer for decision in project
+  [odelaere]
+
+- Fixed robot
+  [odelaere]
+
+- Removed refused feature : item-type
+  [odelaere]
+
+- Fix label for item_decision_formatting_tal
+  [odelaere]
+
+- Removed count on meeting date vocabulary
+  [odelaere]
+
+- Fix month was not properly translated in meeting_date vocabulary
+  [odelaere]
+
+- Removed unused import
+  [odelaere]
+
+- Renamed deliberation to decision so it's less confusing
+  [odelaere]
+
+- Update translations
+  [odelaere]
+
+- Fix tests in python 2.7
+  [odelaere]
+
+- Removed attendees from meeting
+  [odelaere]
+
+- format_meeting_date() done. Using it in MeetingDateVocabularyFactory. (#1)
+  [duchenean]
+
+- roll back
+  [odelaere]
+
+- re enable current selected filter view
+  [odelaere]
+
+- Use @search_items instead @search_meeting_items
+  [gbastien]
+
+- Avoid an error with dict comparison on Python 3.7
+  [mpeeters]
+
+- Fix item deliberation format
+  [odelaere]
 
 
 1.0a3 (2019-11-28)
