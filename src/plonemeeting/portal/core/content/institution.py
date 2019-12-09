@@ -8,11 +8,13 @@ from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-from plonemeeting.portal.core import _
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
 from zope.schema import ValidationError
+
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.utils import default_translator
 
 
 class InvalidUrlParameters(ValidationError):
@@ -59,7 +61,7 @@ class IInstitution(model.Schema):
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
         required=False,
-        default=_(u"Default project decision disclaimer"),
+        defaultFactory=default_translator(_(u"default_in_project_disclaimer", default=""))
     )
 
     additional_meeting_query_string_for_list = schema.TextLine(

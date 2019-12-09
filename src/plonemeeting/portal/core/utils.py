@@ -7,13 +7,16 @@ from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.globalrequest import getRequest
+from zope.i18n import translate
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
 import six
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
-from zope.i18n import translate
 
 
 def get_text_from_richtext(field):
@@ -28,6 +31,17 @@ def get_text_from_richtext(field):
             .strip()
         )
         return safe_unicode(text)
+
+
+def default_translator(msgstring, **replacements):
+    @provider(IContextAwareDefaultFactory)
+    def context_provider(context):
+        value = translate(msgstring, context=getRequest())
+        if replacements:
+            value = value.format(**replacements)
+        return value
+
+    return context_provider
 
 
 def get_api_url_for_meetings(institution, meeting_UID=None):
