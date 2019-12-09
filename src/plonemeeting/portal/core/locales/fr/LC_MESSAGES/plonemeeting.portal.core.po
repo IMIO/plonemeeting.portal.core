@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-09 10:22+0000\n"
+"POT-Creation-Date: 2019-12-09 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,11 +32,11 @@ msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:78
+#: ../browser/templates/item.pt:86
 msgid "Annexes"
 msgstr "Annexes"
 
-#: ../browser/sync.py:257
+#: ../browser/sync.py:272
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -45,12 +45,12 @@ msgstr "Annuler"
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
-#: ../browser/templates/item.pt:56
-#: ../content/item.py:46
+#: ../browser/templates/item.pt:64
+#: ../content/item.py:43
 msgid "Category"
 msgstr "Matière"
 
-#: ../browser/sync.py:241
+#: ../browser/sync.py:256
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
@@ -58,13 +58,9 @@ msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../content/item.py:44
+#: ../content/item.py:41
 msgid "Decision"
 msgstr "Décision"
-
-#: ../content/institution.py:62
-msgid "Default project decision disclaimer"
-msgstr ""
 
 #: ../configure.zcml:39
 msgid "Demo profile for the plonemeeting.portal.core add-on."
@@ -76,8 +72,8 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
-#: ../browser/templates/item.pt:61
-#: ../content/item.py:48
+#: ../browser/templates/item.pt:69
+#: ../content/item.py:45
 #: ../content/meeting.py:35
 msgid "Extra info"
 msgstr "Informations complémentaires"
@@ -114,7 +110,7 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../browser/sync.py:243
+#: ../browser/sync.py:258
 msgid "Import"
 msgstr "Importer"
 
@@ -148,8 +144,8 @@ msgstr "Point"
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../browser/templates/item.pt:48
-#: ../content/item.py:31
+#: ../browser/templates/item.pt:56
+#: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro de point"
@@ -157,7 +153,7 @@ msgstr "Numéro de point"
 #: ../browser/templates/institution.pt:40
 #: ../content/institution.py:80
 msgid "Item title formatting tal expression. If empty the default title will be used"
-msgstr ""
+msgstr "Expression TAL pour le formatage du titre. Si laissé vide, le titre par défaut sera utilisé."
 
 #: ../content/subscriber.py:36
 msgid "Items"
@@ -168,8 +164,8 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
-#: ../browser/templates/item.pt:43
-#: ../content/item.py:51
+#: ../browser/templates/item.pt:51
+#: ../content/item.py:48
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr "Date de dernière modification dans ia.Delib"
@@ -182,7 +178,7 @@ msgstr "Identifiant de matière locale"
 msgid "Logo"
 msgstr "Logo"
 
-#: ../browser/sync.py:227
+#: ../browser/sync.py:242
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
@@ -192,7 +188,7 @@ msgstr "Séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de Séance"
 
-#: ../browser/sync.py:240
+#: ../browser/sync.py:255
 msgid "Meeting import form"
 msgstr "Importation de Séance"
 
@@ -216,9 +212,9 @@ msgstr "URL ia.Delib"
 #: ../browser/templates/institution.pt:36
 #: ../content/institution.py:60
 msgid "Project decision disclaimer"
-msgstr ""
+msgstr "Avertissement de projets de décisions"
 
-#: ../faceted/macros.pt:43
+#: ../faceted/macros.pt:42
 msgid "Public meeting"
 msgstr "Séance publique"
 
@@ -226,11 +222,11 @@ msgstr "Séance publique"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/templates/item.pt:52
+#: ../browser/templates/item.pt:60
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:39
+#: ../content/item.py:36
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -251,12 +247,12 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/item.py:33
+#: ../content/item.py:30
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID ia.Delib"
 
-#: ../browser/sync.py:187
+#: ../browser/sync.py:202
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
@@ -283,13 +279,17 @@ msgstr "Erreur de connexion au webservice !"
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
+#: ../content/institution.py:62
+msgid "default_in_project_disclaimer"
+msgstr "<p>Ce <strong><em>projet de délibération</em></strong> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p><p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Cette délibération <span>n'a pas encore été adoptée</span> par l'autorité communale.</strong></p>"
+
 #. Default: "In project"
-#: ../config.py:18
+#: ../config.py:16
 msgid "in_project"
 msgstr "Projet de décision"
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:205
+#: ../browser/sync.py:220
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
@@ -306,11 +306,11 @@ msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
 #. Default: "Private"
-#: ../config.py:17
+#: ../config.py:16
 msgid "private"
 msgstr "Privé"
 
 #. Default: "Published"
-#: ../config.py:19
+#: ../config.py:16
 msgid "published"
 msgstr "Décision"

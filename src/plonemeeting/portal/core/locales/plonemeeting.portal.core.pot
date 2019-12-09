@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-09 10:22+0000\n"
+"POT-Creation-Date: 2019-12-09 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,11 +35,11 @@ msgstr ""
 msgid "Additional Published Items query string"
 msgstr ""
 
-#: ../browser/templates/item.pt:78
+#: ../browser/templates/item.pt:86
 msgid "Annexes"
 msgstr ""
 
-#: ../browser/sync.py:257
+#: ../browser/sync.py:272
 msgid "Cancel"
 msgstr ""
 
@@ -48,12 +48,12 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../browser/templates/item.pt:56
-#: ../content/item.py:46
+#: ../browser/templates/item.pt:64
+#: ../content/item.py:43
 msgid "Category"
 msgstr ""
 
-#: ../browser/sync.py:241
+#: ../browser/sync.py:256
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
@@ -61,12 +61,8 @@ msgstr ""
 msgid "Configuration folder"
 msgstr ""
 
-#: ../content/item.py:44
+#: ../content/item.py:41
 msgid "Decision"
-msgstr ""
-
-#: ../content/institution.py:62
-msgid "Default project decision disclaimer"
 msgstr ""
 
 #: ../configure.zcml:39
@@ -79,8 +75,8 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../browser/templates/item.pt:61
-#: ../content/item.py:48
+#: ../browser/templates/item.pt:69
+#: ../content/item.py:45
 #: ../content/meeting.py:35
 msgid "Extra info"
 msgstr ""
@@ -117,7 +113,7 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
-#: ../browser/sync.py:243
+#: ../browser/sync.py:258
 msgid "Import"
 msgstr ""
 
@@ -151,8 +147,8 @@ msgstr ""
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: ../browser/templates/item.pt:48
-#: ../content/item.py:31
+#: ../browser/templates/item.pt:56
+#: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr ""
@@ -170,8 +166,8 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
-#: ../browser/templates/item.pt:43
-#: ../content/item.py:51
+#: ../browser/templates/item.pt:51
+#: ../content/item.py:48
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr ""
@@ -184,7 +180,7 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: ../browser/sync.py:227
+#: ../browser/sync.py:242
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
@@ -194,7 +190,7 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:240
+#: ../browser/sync.py:255
 msgid "Meeting import form"
 msgstr ""
 
@@ -220,7 +216,7 @@ msgstr ""
 msgid "Project decision disclaimer"
 msgstr ""
 
-#: ../faceted/macros.pt:43
+#: ../faceted/macros.pt:42
 msgid "Public meeting"
 msgstr ""
 
@@ -228,11 +224,11 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/templates/item.pt:52
+#: ../browser/templates/item.pt:60
 msgid "Representative"
 msgstr ""
 
-#: ../content/item.py:39
+#: ../content/item.py:36
 msgid "Representative group in charge"
 msgstr ""
 
@@ -253,12 +249,12 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/item.py:33
+#: ../content/item.py:30
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:187
+#: ../browser/sync.py:202
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
@@ -285,13 +281,16 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
-#. Default: "In project"
-#: ../config.py:18
+#: ../content/institution.py:62
+msgid "default_in_project_disclaimer"
+msgstr ""
+
+#: ../config.py:16
 msgid "in_project"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:205
+#: ../browser/sync.py:220
 msgid "meeting_imported"
 msgstr ""
 
@@ -307,12 +306,10 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#. Default: "Private"
-#: ../config.py:17
+#: ../config.py:16
 msgid "private"
 msgstr ""
 
-#. Default: "Published"
-#: ../config.py:19
+#: ../config.py:16
 msgid "published"
 msgstr ""
