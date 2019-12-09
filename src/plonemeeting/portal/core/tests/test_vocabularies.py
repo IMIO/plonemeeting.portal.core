@@ -56,6 +56,6 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
         values_city1 = vocab(self.meeting_item)
         terms = [t for t in values_city1]
-        self.assertEqual(terms[0].title, "13 March 2020 (18:00)")
-        self.assertEqual(terms[1].title, "13 March 2019 (18:00)")
-        self.assertEqual(terms[2].title, "20 December 2018 (18:25)")
+        self.assertEqual(terms[0].title, "13 March 2020 (18:00) — published")
+        self.assertEqual(terms[1].title, "13 March 2019 (18:00) — published")
+        self.assertEqual(terms[2].title, "20 December 2018 (18:25) — published")

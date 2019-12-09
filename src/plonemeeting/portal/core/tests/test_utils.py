@@ -12,7 +12,7 @@ from plonemeeting.portal.core.testing import (
     PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
 )  # noqa
 from plonemeeting.portal.core import utils
-from plonemeeting.portal.core.utils import format_meeting_date
+from plonemeeting.portal.core.utils import format_meeting_date_and_state
 
 import unittest
 
@@ -128,16 +128,20 @@ class TestUtils(unittest.TestCase):
         institution = type("institution", (object,), {"categories_mappings": mapping})()
         self.assertEqual("bar", utils.get_global_category(institution, "foo"))
 
-    def test_format_meeting_date(self):
+    def test_format_meeting_date_and_state(self):
         date = datetime(2019, 12, 31, 23, 59)
         # Base test
-        formated_meeting_date = format_meeting_date(date)
-        self.assertEqual(formated_meeting_date, u"31 December 2019 (23:59)")
+        formated_meeting_date = format_meeting_date_and_state(date, "private")
+        self.assertEqual(formated_meeting_date, u"31 December 2019 (23:59) — private")
         # Test translation
-        french_formated_meeting_date = format_meeting_date(date, lang="fr")
-        self.assertEqual(french_formated_meeting_date, u"31 Décembre 2019 (23:59)")
+        french_formated_meeting_date = format_meeting_date_and_state(date, "private", lang="fr")
+        self.assertEqual(french_formated_meeting_date, u"31 Décembre 2019 (23:59) — Privé")
+        french_formated_meeting_date = format_meeting_date_and_state(date, "in_project", lang="fr")
+        self.assertEqual(french_formated_meeting_date, u"31 Décembre 2019 (23:59) — Projet de décision")
+        french_formated_meeting_date = format_meeting_date_and_state(date, "published", lang="fr")
+        self.assertEqual(french_formated_meeting_date, u"31 Décembre 2019 (23:59) — Décision")
         # Test custom format
-        french_custom_formated_meeting_date = format_meeting_date(
-            date, format="%A %d %B %Y", lang="fr"
+        french_custom_formated_meeting_date = format_meeting_date_and_state(
+            date, "private", format="%A %d %B %Y", lang="fr"
         )
-        self.assertEqual(french_custom_formated_meeting_date, u"Mardi 31 Décembre 2019")
+        self.assertEqual(french_custom_formated_meeting_date, u"Mardi 31 Décembre 2019 — Privé")

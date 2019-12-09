@@ -7,6 +7,7 @@ from plone.portlets.interfaces import IPortletManager
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
+from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
@@ -86,7 +87,7 @@ def remove_portlets(column):
         del assignments[portlet]
 
 
-def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
+def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)", lang=None):
     """
     Format the meeting date while managing translations of months and weekdays
     :param date: Datetime reprensenting the meeting date
@@ -116,7 +117,7 @@ def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
         6: "weekday_sun",
     }
     format = format.replace("%B", "[month]").replace("%A", "[weekday]")
-    res = safe_unicode(date.strftime(format))
+    date_str = safe_unicode(date.strftime(format))
 
     if not lang:
         lang = api.portal.get_tool("portal_languages").getDefaultLanguage()
@@ -124,18 +125,20 @@ def format_meeting_date(date, format="%d %B %Y (%H:%M)", lang=None):
     # in some cases month are not properly translated using sublocales
     lang = lang.split("-")[0]
 
-    if u"[month]" in res:
+    if u"[month]" in date_str:
         month = translate(
             MONTHS_IDS[date.month], domain="plonelocales", target_language=lang
         )
-        res = res.replace("[month]", month)
+        date_str = date_str.replace("[month]", month)
 
-    if u"[weekday]" in res:
+    if u"[weekday]" in date_str:
         weekday = translate(
             WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
         )
-        res = res.replace(u"[weekday]", weekday)
-    return res
+        date_str = date_str.replace(u"[weekday]", weekday)
+
+    state = translate(_(state_id), target_language=lang)
+    return "{0} — {1}".format(date_str, state)
 
 
 def get_global_category(institution, item_local_category):

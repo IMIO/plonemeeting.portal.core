@@ -5,9 +5,9 @@ from zope.schema.vocabulary import SimpleVocabulary
 import json
 import requests
 
-from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.utils import get_api_url_for_meetings, format_meeting_date
+from plonemeeting.portal.core.utils import format_meeting_date_and_state
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 class GlobalCategoryVocabularyFactory:
@@ -39,8 +39,8 @@ class MeetingDateVocabularyFactory:
         )
         terms = []
         for b in brains:
-            term = SimpleVocabulary.createTerm(
-                b.UID, b.UID, format_meeting_date(b.date_time))
+            title = format_meeting_date_and_state(b.date_time, b.review_state)
+            term = SimpleVocabulary.createTerm(b.UID, b.UID, title)
             terms.append(term)
         return SimpleVocabulary(terms)
 

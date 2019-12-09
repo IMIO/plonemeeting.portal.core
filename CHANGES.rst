@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Improve faceted criteria : PMLIE-381
+  [laulaz]
+
 - Added annexe file synchronization
   [odelaere]
 
