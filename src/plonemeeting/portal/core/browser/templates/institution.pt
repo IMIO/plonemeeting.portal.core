@@ -33,7 +33,7 @@
         </div>
 
         <div class="institution-itemdecisionprojectdisclaimer">
-             <span i18n:translate="">Project decision disclaimer</span> : <span tal:content="structure context/project_decision_disclaimer/output" />
+             <span i18n:translate="">Project decision disclaimer</span> : <span tal:content="structure context/project_decision_disclaimer/output | nothing" />
         </div>
 
         <div class="institution-itemtitledecisionformattingtal">
