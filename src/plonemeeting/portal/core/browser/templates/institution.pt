@@ -37,7 +37,7 @@
         </div>
 
         <div class="institution-itemtitledecisionformattingtal">
-             <span i18n:translate="">Item title formatting tal expression. If empty the default title will be used</span> : <span tal:content="structure context/item_title_formatting_tal" />
+             <span i18n:translate="">Item title formatting tal expression. If empty the default title will be used</span> : <span tal:content="context/item_title_formatting_tal" />
         </div>
 
         <div class="institution-itemdecisionformattingtal">
