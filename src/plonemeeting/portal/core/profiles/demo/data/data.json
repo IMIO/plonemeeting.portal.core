@@ -25,6 +25,7 @@
       "additional_published_items_query_string": "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
       "item_decision_formatting_tal": "python: json['decision']['data']",
       "info_annex_formatting_tal": "",
+      "item_title_formatting_tal": "",
       "representatives_mappings": [
         {
           "representative_key": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
@@ -196,7 +197,7 @@
       "additional_published_items_query_string": "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
       "item_decision_formatting_tal": "python: '{motivation}<p><b><u>DECIDE</u> :</b></p>{decision}'.format(motivation=json['motivation']['data'], decision=json['decision']['data'])",
       "info_annex_formatting_tal": "",
-      "item_title_formatting_tal": "python: '{objet}'.format(objet=json['objet']['data'])",
+      "item_title_formatting_tal": "python: '{description}'.format(description=json['description']['data'])",
       "representatives_mappings": [
         {
           "representative_key": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
