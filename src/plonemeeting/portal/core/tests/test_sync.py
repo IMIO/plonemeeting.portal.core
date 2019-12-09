@@ -53,7 +53,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time,
             meeting,
             self.json_meeting_items,
-            self.institution.item_decision_formatting_tal,
+            self.institution,
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
 
@@ -66,7 +66,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time,
             meeting,
             self.json_meeting_items,
-            self.institution.item_decision_formatting_tal,
+            self.institution,
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
@@ -77,7 +77,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time,
             meeting,
             self.json_meeting_items,
-            self.institution.item_decision_formatting_tal,
+            self.institution,
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
@@ -90,7 +90,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time,
             meeting,
             self.json_meeting_items,
-            self.institution.item_decision_formatting_tal,
+            self.institution,
         )
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
@@ -98,7 +98,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time,
             meeting,
             self.json_meeting_items,
-            self.institution.item_decision_formatting_tal,
+            self.institution,
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)

@@ -15,10 +15,21 @@ class TestFacetedCriteria(unittest.TestCase):
 
     def test_compute_criteria(self):
         criteria = ICriteria(self.belleville["meetings"])
-        # The criteria must be the same
         self.assertListEqual(
-            sorted([sorted(c.__dict__.items()) for c in criteria._criteria()]),
-            sorted([sorted(c.__dict__.items()) for c in criteria.criteria]),
+            sorted(
+                [
+                    sorted(c.__dict__.items())
+                    for c in criteria._criteria()
+                    if c.getId() != "annee"
+                ]
+            ),
+            sorted(
+                [
+                    sorted(c.__dict__.items())
+                    for c in criteria.criteria
+                    if c.getId() != "annee"
+                ]
+            ),
         )
 
     def test_items_criteria(self):
