@@ -79,6 +79,7 @@
           <ul>
             <li tal:repeat="file files">
               <a href=""
+                 target="_blank"
                  tal:content="file/Title"
                  tal:attributes="href file/getURL" />
             </li>

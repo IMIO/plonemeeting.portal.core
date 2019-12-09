@@ -52,22 +52,21 @@ def sync_annexes(item, institution, annexes_json):
 
     response = _call_delib_rest_api(annexes_json.get("@id"), institution)
     for annex_data in response.json():
+        # if annex_data.get("publishable"):
+        file_json = annex_data.get("file")
+        file_title = annex_data.get("category_title")
+        dl_link = file_json.get("download")
+        file_content_type = file_json.get("content-type")
+        response = _call_delib_rest_api(dl_link, institution)
+        file_blob = response.content
 
-        if annex_data.get("publishable"):
-            file_json = annex_data.get("file")
-            file_title = annex_data.get("category_title")
-            dl_link = file_json.get("download")
-            file_content_type = file_json.get("content-type")
-            response = _call_delib_rest_api(dl_link, institution)
-            blob_str = response.text
-
-            annex = api.content.create(container=item, type="File", title=file_title)
-            file_name = u"{}.{}".format(
-                annex.id, file_json.get("filename").split(".")[-1]
-            )
-            annex.file = NamedBlobFile(
-                data=blob_str, contentType=file_content_type, filename=file_name
-            )
+        annex = api.content.create(container=item, type="File", title=file_title)
+        file_name = u"{}.{}".format(
+            annex.id, file_json.get("filename").split(".")[-1]
+        )
+        annex.file = NamedBlobFile(
+            data=file_blob, contentType=file_content_type, filename=file_name
+        )
 
 
 def sync_items_data(to_localized_time, meeting, items_data, institution, force=False):
