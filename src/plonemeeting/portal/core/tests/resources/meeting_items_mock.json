@@ -4,6 +4,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/urban_pm/mymeetings/meeting-config-college/permis-durbanisme-ndeg-pu-2019-6-introduit-par-monsieur-dutest-jean-visant-a-test-lien-delib-benoit-a-ladresse-rue-de-leglise-1-a-4620-fleron",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "ecd55a85b1ee4039bfe22c7c4988876d",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -133,6 +134,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy78_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "12e7d68685074605a2750f0888b0bf52",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -262,6 +264,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy58_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "765ec8ae7ec145b987ab9b21ec45ef14",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -391,6 +394,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy71_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "aa79bc1b61884e289849999c014acc67",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -520,6 +524,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_engagement-temporaire-2",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "9902ec3f258e464bbaf0e5f3d221c162",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -649,6 +654,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_personnel",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "e66269c9342f4e6c861eaff123b20bcb",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -778,6 +784,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-5-reunion-drh-marche-evaluation-du-stagiaire",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "eead17fde7d548069f6934deb4794d8e",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -911,6 +918,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-1-reunion-drh-marche-2",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "bc259f420114485c85bbe03340b700b6",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1046,6 +1054,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/test-creation-point-1",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "d6635b8e5bf44690b5af0d863c6d4bb6",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1175,6 +1184,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/tracert-nouveaux-passages-pietons",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "81242c2e827446d8aeda26d3bc5b6a94",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1310,6 +1320,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-college/titre-courrier-farciennes-1",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "4ac2d240d33b4c59866f3108a938b68a",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1441,6 +1452,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-college/tracert-nouveaux-passages-pietons",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "4001f453feaa4e96a0bf54d7aa712b21",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1576,6 +1588,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/exemple-vivalia",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "316d69b09e0b49b3a2cc4bf2fd4e3eb0",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1705,6 +1718,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy74_of_autorise-et-signe-les-bons-de-commande-de-la-semaine",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "73b1ef0c365d461fbfd0898d43ae3259",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1834,6 +1848,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy73_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "dd48704cfba74f159789eedeb745bfe7",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -1963,6 +1978,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/testadu/mymeetings/meeting-config-college/test-de-modele",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "97667c0a99a84287ab04d355e1ee6c8c",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2094,6 +2110,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy66_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "c8e2793f99d04c168d15f9d6ef9b9802",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2223,6 +2240,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy53_of_ordonnance-et-signe-les-mandats-de-paiement-de-la-semaine",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "d97c62e01383469ca816f141c1807cca",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2352,6 +2370,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/test-de-modele-passe-aussi-au-cc-1",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "b69c3be30b3140bb981608b63ce06c39",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2485,6 +2504,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/modif-ia-delib-test-sambreville-ac-cpas",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "910790db4d484801b23dfb58582b7304",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2614,6 +2634,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/modification-pt-ia-delib-ac-chaumont-gistoux-test-ia.docs",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "6ad83301d36c4d489453717ac30ab8cb",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2747,6 +2768,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pret-podiums-orphee",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "38f3afe56e4840cea3c51b1aef02de52",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -2879,6 +2901,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/pt-3-reunion-drh-marche",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "18a35e2010f843b288d0852a08c1d560",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -3012,6 +3035,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/copy_of_pt-2-reunion-drh-marche",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "a4f56355de8640a9b3111aa61a1f9e2a",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -3147,6 +3171,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/achat-dune-imprimante",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "4a103f00becb4f7cb2afd6ba24fc3ed9",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -3281,6 +3306,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/this-is-a-test",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "8abe5f227ac0437dbb527dc2d0e221c1",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -3410,6 +3436,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dfin/mymeetings/meeting-config-college/rapport-accompagnant-le-budget-de-lexercice-2017-prise-de-connaissance",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "0c004374641c47608ebf8f8048065e04",
       "allowDiscussion": false,
       "associatedGroups": [],
@@ -3539,6 +3566,7 @@
     {
       "@id": "https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-college/copy_of_demande-de-stage-pour-aurelie",
       "@type": "MeetingItemCollege",
+      "@components": {"annexes":[]},
       "UID": "ddfe5b583d5e4d0a9804c5fce4893516",
       "allowDiscussion": false,
       "associatedGroups": [],
