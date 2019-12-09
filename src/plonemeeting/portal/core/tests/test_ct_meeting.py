@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from plonemeeting.portal.core.content.meeting import IMeeting  # NOQA E501
-from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING  # noqa
+from plonemeeting.portal.core.testing import (
+    PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
+)  # noqa
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.testing import setRoles
@@ -40,13 +42,17 @@ class MeetingIntegrationTest(unittest.TestCase):
         factory = fti.factory
         obj = createObject(factory)
 
-        self.assertTrue(IMeeting.providedBy(obj), u"IMeeting not provided by {0}!".format(obj))
+        self.assertTrue(
+            IMeeting.providedBy(obj), u"IMeeting not provided by {0}!".format(obj)
+        )
 
     def test_ct_meeting_adding(self):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         obj = api.content.create(container=self.parent, type="Meeting", id="meeting")
 
-        self.assertTrue(IMeeting.providedBy(obj), u"IMeeting not provided by {0}!".format(obj.id))
+        self.assertTrue(
+            IMeeting.providedBy(obj), u"IMeeting not provided by {0}!".format(obj.id)
+        )
 
         parent = obj.__parent__
         self.assertIn("meeting", parent.objectIds())
@@ -69,4 +75,6 @@ class MeetingIntegrationTest(unittest.TestCase):
         )
         self.parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
-            api.content.create(container=self.parent, type="Document", title="My Content")
+            api.content.create(
+                container=self.parent, type="Document", title="My Content"
+            )

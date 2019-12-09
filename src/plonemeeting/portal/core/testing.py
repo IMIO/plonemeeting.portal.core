@@ -29,6 +29,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
         def patched_getRequest():
             return makeTestRequest(environ={})
+
         utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
@@ -64,6 +65,7 @@ class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plonemeeting.portal.core:demo")
         import transaction
+
         transaction.commit()
 
 

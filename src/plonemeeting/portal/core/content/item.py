@@ -31,7 +31,7 @@ class IItem(model.Schema):
 
     representatives_in_charge = schema.List(
         value_type=schema.Choice(
-            vocabulary="plonemeeting.portal.vocabularies.representatives",
+            vocabulary="plonemeeting.portal.vocabularies.representatives"
         ),
         title=_(u"Representative group in charge"),
         required=False,
@@ -40,7 +40,7 @@ class IItem(model.Schema):
     dexteritytextindexer.searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False)
 
-    category = schema.TextLine(title=_(u"Category"), required=True,)
+    category = schema.TextLine(title=_(u"Category"), required=True)
 
     extra_info = RichText(title=_(u"Extra info"), required=False)
 

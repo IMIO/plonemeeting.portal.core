@@ -6,7 +6,10 @@ import unittest
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plonemeeting.portal.core.browser.sync import sync_items_data, get_decision_from_json
+from plonemeeting.portal.core.browser.sync import (
+    sync_items_data,
+    get_decision_from_json,
+)
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
@@ -50,10 +53,7 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
         )
         results = sync_items_data(
-            self.to_localized_time,
-            meeting,
-            self.json_meeting_items,
-            self.institution,
+            self.to_localized_time, meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
 
@@ -63,10 +63,7 @@ class TestMeetingSynchronization(unittest.TestCase):
         )
         # results {'deleted': 0, 'modified': 0, 'created': 28}
         results = sync_items_data(
-            self.to_localized_time,
-            meeting,
-            self.json_meeting_items,
-            self.institution,
+            self.to_localized_time, meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
@@ -74,10 +71,7 @@ class TestMeetingSynchronization(unittest.TestCase):
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         self.json_meeting_items.get("items")[0].update(modification_date)
         results = sync_items_data(
-            self.to_localized_time,
-            meeting,
-            self.json_meeting_items,
-            self.institution,
+            self.to_localized_time, meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
@@ -87,18 +81,12 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
         )
         results = sync_items_data(
-            self.to_localized_time,
-            meeting,
-            self.json_meeting_items,
-            self.institution,
+            self.to_localized_time, meeting, self.json_meeting_items, self.institution
         )
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         results = sync_items_data(
-            self.to_localized_time,
-            meeting,
-            self.json_meeting_items,
-            self.institution,
+            self.to_localized_time, meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)

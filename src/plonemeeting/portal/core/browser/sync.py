@@ -71,9 +71,7 @@ def sync_annexes(item, institution, annexes_json):
         file_blob = response.content
 
         annex = api.content.create(container=item, type="File", title=file_title)
-        file_name = u"{}.{}".format(
-            annex.id, file_json.get("filename").split(".")[-1]
-        )
+        file_name = u"{}.{}".format(annex.id, file_json.get("filename").split(".")[-1])
         annex.file = NamedBlobFile(
             data=file_blob, contentType=file_content_type, filename=file_name
         )
@@ -216,7 +214,7 @@ def sync_meeting(institution, meeting_uid, force=False):
 
     json_items = json.loads(response.text)
     results = sync_items_data(
-        to_localized_time, meeting, json_items, institution, force,
+        to_localized_time, meeting, json_items, institution, force
     )
 
     status_msg = _(

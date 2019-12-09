@@ -111,7 +111,9 @@ def create_demo_content(context):
                 additional_published_items_query_string=institution[
                     "additional_published_items_query_string"
                 ],
-                item_decision_formatting_tal=institution["item_decision_formatting_tal"],
+                item_decision_formatting_tal=institution[
+                    "item_decision_formatting_tal"
+                ],
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
             content.transition(obj=institution_obj, transition="publish")
@@ -132,9 +134,7 @@ def create_demo_content(context):
                 content.transition(obj=meeting_obj, transition="publish")
 
                 for item in meeting["items"]:
-                    decision = RichTextValue(
-                        item["decision"], "text/html", "text/html"
-                    )
+                    decision = RichTextValue(item["decision"], "text/html", "text/html")
                     item_obj = content.create(
                         container=meeting_obj,
                         type="Item",
