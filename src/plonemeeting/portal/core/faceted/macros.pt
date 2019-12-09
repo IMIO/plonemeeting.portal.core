@@ -13,6 +13,9 @@
          i18n:domain="plonemeeting.portal.core">
 
       <div class="item-metadata">
+        <div class="item-number" tal:content="brain/number" />
+        <div class="item-category" tal:content="nothing" />
+        <div class="item-representatives" tal:content="brain/pretty_representatives" />
         <a href=""
            tal:define="utils_view nocall:context/@@utils_view;"
            tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)">
@@ -24,10 +27,6 @@
              <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
              <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
         </div>
-
-        <div class="item-number" tal:content="brain/number" />
-        <div class="item-representatives" tal:content="brain/pretty_representatives" />
-        <div class="item-category" tal:content="nothing" />
       </div>
 
       <div class="item-main">
@@ -47,13 +46,13 @@
            tal:attributes="href brain/getURL">
           <div class="item-title" tal:content="brain/Title" />
         </a>
-        <div class="project-disclaimer"
-             tal:define="utils_view nocall:context/@@utils_view;"
-             tal:condition="python: review_state != 'published'">
-            <span tal:content="structure python: utils_view.get_project_decision_disclaimer().output" />
-        </div>
       </div>
 
+      <div class="project-disclaimer"
+           tal:define="utils_view nocall:context/@@utils_view;"
+           tal:condition="python: review_state != 'published'">
+          <span tal:content="structure python: utils_view.get_project_decision_disclaimer().output" />
+      </div>
     </div>
 
   </metal:macro>
