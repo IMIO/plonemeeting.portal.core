@@ -24,7 +24,11 @@ class MeetingsCriteria(Criteria):
         self.context = faceted
         criteria = copy.deepcopy(self._criteria())
         if must_choose_meeting:
-            return criteria
+            filtered_criteria = []
+            for criterion in criteria:
+                if criterion.getId() != "annee":
+                    filtered_criteria.append(criterion)
+            return filtered_criteria
         for criterion in criteria:
             if criterion.getId() == "seance":
                 criterion.hidealloption = False
