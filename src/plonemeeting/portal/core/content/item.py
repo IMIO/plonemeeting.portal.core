@@ -12,20 +12,17 @@ from zope import schema
 from zope.interface import implementer
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.utils import get_text_from_richtext
 
 
 class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
 
-    dexteritytextindexer.searchable("title")
+    dexteritytextindexer.searchable("base_title")
+    base_title = schema.TextLine(title=plone_(u"Title"), required=True, readonly=True)
 
-    title = schema.TextLine(
-        title=plone_(u"Title"),
-        required=True,
-        readonly=True
-    )
-
+    dexteritytextindexer.searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
     number = schema.TextLine(title=_(u"Item number"), required=True)
@@ -56,6 +53,17 @@ class IItem(model.Schema):
 class Item(Container):
     """
     """
+
+    def get_title(self):
+        title = get_text_from_richtext(self.formatted_title)
+        if not title:
+            title = self.base_title
+        return title
+
+    def set_title(self, value):
+        self.base_title = value
+
+    title = property(get_title, set_title)
 
 
 @indexer(IItem)

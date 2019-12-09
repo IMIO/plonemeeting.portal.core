@@ -2,16 +2,32 @@
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from Products.CMFPlone.utils import safe_unicode
 from plone import api
+from plone.app.textfield.value import IRichTextValue
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+import six
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
 from zope.i18n import translate
+
+
+def get_text_from_richtext(field):
+    if IRichTextValue.providedBy(field):
+        transforms = api.portal.get_tool("portal_transforms")
+        raw = safe_unicode(field.raw)
+        if six.PY2:
+            raw = raw.encode("utf-8", "replace")
+        text = (
+            transforms.convertTo("text/plain", raw, mimetype=field.mimeType)
+            .getData()
+            .strip()
+        )
+        return safe_unicode(text)
 
 
 def get_api_url_for_meetings(institution, meeting_UID=None):

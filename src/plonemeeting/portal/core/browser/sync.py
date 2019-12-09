@@ -36,16 +36,26 @@ def _call_delib_rest_api(url, institution):
     return response
 
 
+def get_formatted_data_from_json(tal_expression, item, item_data):
+    expression = Expression(tal_expression)
+    expression_context = getExprContext(item)
+    expression_context.vars["json"] = item_data
+    expression_result = expression(expression_context)
+    return expression_result
+
+
+def get_formatted_title_from_json(title_tal_format, item, item_data):
+    if not title_tal_format:
+        return
+    return get_formatted_data_from_json(title_tal_format, item, item_data)
+
+
 def get_decision_from_json(decision_tal_format, item, item_data):
     if not decision_tal_format:
         raise AttributeError(
             "decision_tal_format is invalid {}".format(decision_tal_format)
         )
-    expression = Expression(decision_tal_format)
-    expression_context = getExprContext(item)
-    expression_context.vars["json"] = item_data
-    expression_result = expression(expression_context)
-    return expression_result
+    return get_formatted_data_from_json(decision_tal_format, item, item_data)
 
 
 def sync_annexes(item, institution, annexes_json):
@@ -108,6 +118,14 @@ def sync_items_data(to_localized_time, meeting, items_data, institution, force=F
         # Sync item fields values
         item.plonemeeting_last_modified = modification_date
         item.title = item_title
+        formatted_title = get_formatted_title_from_json(
+            institution.item_title_formatting_tal, item, item_data
+        )
+        if formatted_title is not None:
+            item.formatted_title = RichTextValue(
+                formatted_title, "text/html", "text/html"
+            )
+
         # TODO use formatted item number when available
         item.number = str(item_data.get("itemNumber") / 100.0)
         item.representatives_in_charge = item_data.get("groupsInCharge")

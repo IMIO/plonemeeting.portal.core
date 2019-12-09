@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Use conditional formatted title for items : PMLIE-381
+  [laulaz]
+
 - Improve faceted criteria : PMLIE-381
   [laulaz]
 
