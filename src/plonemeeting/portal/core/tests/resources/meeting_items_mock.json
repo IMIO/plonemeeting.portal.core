@@ -27,7 +27,7 @@
       },
       "description": {
         "content-type": "text/html",
-        "data": "<p>Test</p>"
+        "data": "<p>Permis d'urbanisme n° PU/2019/6/ introduit par Monsieur Dutest Jean visant à Test lien délib Benoit à l'adresse Rue de l'Eglise 1 à 4620 Fléron.</p>"
       },
       "detailedDescription": {
         "content-type": "text/html",
@@ -126,7 +126,7 @@
         "content-type": "text/plain",
         "data": ""
       },
-      "title": "Permis d'urbanisme n° PU/2019/6/ introduit par Monsieur Dutest Jean visant à Test lien délib Benoit à l'adresse Rue de l'Eglise 1 à 4620 Fléron.",
+      "title": "Permis d'urbanisme n° PU/2019/6/ - Fléron.",
       "toDiscuss": true,
       "votesAreSecret": false
     },
@@ -672,7 +672,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Engagement de Mme <b>XXXXXX</b></p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -1200,7 +1200,7 @@
       },
       "description": {
         "content-type": "text/html",
-        "data": "<p>à la rue des espoirs</p>\r\n"
+        "data": "<p>Tracé de nouveaux passages piétons à la rue des espoirs</p>\r\n"
       },
       "detailedDescription": {
         "content-type": "text/html",
@@ -1303,7 +1303,7 @@
         "content-type": "text/plain",
         "data": ""
       },
-      "title": "tracert nouveaux passages pietons",
+      "title": "tracer nouveaux passages pietons",
       "toDiscuss": true,
       "votesAreSecret": false
     },
@@ -1466,7 +1466,7 @@
       },
       "description": {
         "content-type": "text/html",
-        "data": "<p>à la rue des espoirs</p>\r\n"
+        "data": "<p>Tracé de nouveaux passages piétons à la rue des espoirs</p>\r\n"
       },
       "detailedDescription": {
         "content-type": "text/html",
@@ -1986,7 +1986,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Modèle qui marche</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -2375,7 +2375,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Modèle CC</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -2770,7 +2770,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Prêt de matériel</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -3172,7 +3172,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Marché publique de fournitures</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -3304,7 +3304,7 @@
       },
       "description": {
         "content-type": "text/html",
-        "data": "<p></p>"
+        "data": "<p>Vide inter-sidéral</p>"
       },
       "detailedDescription": {
         "content-type": "text/html",
@@ -3433,7 +3433,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Rapport accompagnant le budget de l'exercice 2017 - Prise de connaissance</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
@@ -3562,7 +3562,7 @@
       },
       "description": {
         "content-type": "text/plain",
-        "data": ""
+        "data": "<p>Demande de stage pour le service compta</p>"
       },
       "detailedDescription": {
         "content-type": "text/plain",
