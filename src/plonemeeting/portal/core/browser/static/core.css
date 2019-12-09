@@ -1,7 +1,7 @@
 /* --- header --- */
 
 body{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 #portal-logo img{
     max-width: 250px;
@@ -18,14 +18,29 @@ h1{
 fieldset{
     border: none!important;
 }
-body input[type="color"], body input[type="date"], body input[type="datetime-local"], body input[type="email"], body input[type="month"], body input[type="number"], body input[type="password"], body input[type="range"], body input[type="search"], body input[type="tel"], body input[type="text"], body input[type="time"], body input[type="url"], body input[type="week"], body textarea, body select {
+body.template-facetednavigation_view input[type="color"], 
+body.template-facetednavigation_view input[type="date"], 
+body.template-facetednavigation_view input[type="datetime-local"], 
+body.template-facetednavigation_view input[type="email"], 
+body.template-facetednavigation_view input[type="month"], 
+body.template-facetednavigation_view input[type="number"], 
+body.template-facetednavigation_view input[type="password"], 
+body.template-facetednavigation_view input[type="range"], 
+body.template-facetednavigation_view input[type="search"], 
+body.template-facetednavigation_view input[type="tel"], 
+body.template-facetednavigation_view input[type="text"], 
+body.template-facetednavigation_view input[type="time"], 
+body.template-facetednavigation_view input[type="url"], 
+body.template-facetednavigation_view input[type="week"], 
+body.template-facetednavigation_view textarea, 
+body.template-facetednavigation_view select {
     width: 100%;
     display: block;
     height: 55px;
     padding: 6px 12px;
     font-size: 15px;
     line-height: 1.42857143;
-    color: #adadaf;
+    color: #333;
     background-color:#fff;
     background-image: none;
     border: none;
@@ -33,17 +48,17 @@ body input[type="color"], body input[type="date"], body input[type="datetime-loc
     box-shadow: none;
     /* -webkit-appearance: button; */
 }
-input:hover, select:hover, input:focus, select:focus{
-    opacity: .9;
+.template-facetednavigation_view input:hover, select:hover, input:focus, select:focus{
+    opacity: 1  ;
     box-shadow: none!important;
 }
-#top-area{
+.template-facetednavigation_view #top-area{
     background:#007BB1!important;
     position: relative;
     margin-bottom: 2.5em;
     padding: 2em 0;
 }
-#top-area:after{
+.template-facetednavigation_view #top-area:after{
     content: "";
     position: absolute;
     background: #007BB1;
@@ -54,11 +69,11 @@ input:hover, select:hover, input:focus, select:focus{
     left: 50%;
     transform: translateX(-50%);
 }
-body #top-area legend{
+body.template-facetednavigation_view #top-area legend{
     color: #fff;
     border: none;
 }
-body .searchButton{
+body.template-facetednavigation_view .searchButton{
     background:#fff;
     z-index: 1;
     position: relative;
@@ -72,7 +87,7 @@ body .searchButton{
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-body .searchButton:hover{
+body.template-facetednavigation_view .searchButton:hover{
     background: rgb(195, 219, 248);
 }
 .section-texte form{
@@ -92,14 +107,17 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 }
 @media screen and (min-width: 1000px){
 
-    #top---default---widgets{
+    .template-facetednavigation_view #top---default---widgets{
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
     }
-    #top-area{
+    .template-facetednavigation_view #top-area{
         background: #ffffff;
         padding: 3rem;
+    }
+    .template-facetednavigation_view #top-area{
+        padding: 3rem 0;
     }
 }
 
@@ -118,6 +136,9 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     font-size: 20px;
     margin-top: 10px;
 }
+.public-meeting{
+    margin: 1rem 0;
+}
 #faceted-results{
     margin: 2em 0;
 }
@@ -126,24 +147,33 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     border-bottom: 1px solid#dedede;
     padding: 10px 0;
     position: relative;
+    background: rgb(241, 241, 241);
 }
 
 
 .item-preview.in_project .item-metadata a{
-    color:#469721;
+    color:#fff;
 }
 .item-preview.published .item-metadata a{
-    color: #007bb1;
+    color: #fff;
 }
 .item-preview.private .item-metadata a{
-    color: #c21b1b;
+    color: #fff;
+}
+.item-preview.in_project .item-metadata a:hover{
+    color:#007bb1;
+}
+.item-preview.published .item-metadata a:hover{
+    color: #007bb1;
+}   
+.item-preview.private .item-metadata a:hover{
+    color: #007bb1;
 }
 .item-preview .item-metadata{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px 0 0;
 }
 .item-preview .item-metadata a{
     border-bottom: none!important;
@@ -155,7 +185,6 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 }
 .item-preview .item-number{
     font-size: 25px;
-    margin-top: 10px;
 }
 
 .item-main{
@@ -170,34 +199,58 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     margin-bottom: 10px;
     width: 100%;
 }
-.item-main a{
+.item-metadata > a{
     background:#007BB1;
     border-radius: 25px;
     padding: 11px 21px;
     color:#fff;
     display: inline-block;
-    margin: 15px 0 0 0;
+    margin: 15px 0;
     font-size: 16px;
     border: 1px solid #007BB1!important;
     transition: all .15s ease;
-
+    width: 100%;
+    text-align: center;
 }
-.item-main a:hover, .item-main:focus{
+.item-metadata > a:hover, .item-metadata > a:focus{
     background:transparent;
     color:#007BB1;
     border: 1px solid #007BB1!important;
     text-decoration: none;
 
 }
+.item-title{
+    font-size: 25px;
+}
+.item-main .item-title::after {
+    content: url(++plone++plonemeeting.portal.core/assets/right-arrow.svg);
+    width: 30px;
+    float: right;
+    margin-left: 15px;
+    display: block;
+    margin-top: 2px;
+}
 .meeting-state{
     position: absolute;
-    top: 50%;
     right: 30px;
     opacity: .6;
-    transform: translateY(-50%);
 }
 .in_project .meeting-state{
     color:#469721;
+}
+.item-infos.in_project:after {
+    content: "";
+    font-size: 100px;
+    position: absolute;
+    top: 0;
+    background:url(++plone++plonemeeting.portal.core/assets/project.jpg);
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .25;
+    background-size: 20%;
 }
 .published .meeting-state{
     color:#007BB1;
@@ -213,13 +266,18 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
         margin: 40px 0;
         padding: 2em 2em;
         display: flex;
-        align-items: center;
         background: rgb(241, 241, 241);
         border-radius: 8px;
+        flex-wrap: wrap;
+    }
+    .project-disclaimer{
+        width: 100%;
+        margin-top: 3rem;
+        font-style: italic;
     }
     .item-preview .item-metadata{
         flex-direction:column;
-        align-items: center;
+        flex-direction: column;
         border-right: 1px solid #dedede;
         max-width: 209px;
     }
@@ -244,6 +302,8 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     .item-preview .item-metadata{
         width: 265px;
         max-width: 265px;
+        padding: 0 30px 0 0;
+
     }
     .item-main {
         margin-left: 50px;
@@ -298,6 +358,9 @@ body .item-infos .selected-option{
 .annexes{
     font-size: 20px;
     margin: 0 0 15px 0;
+}
+.annexes ul{
+    padding: 0;
 }
 .annexes h2{
     font-weight: bold;

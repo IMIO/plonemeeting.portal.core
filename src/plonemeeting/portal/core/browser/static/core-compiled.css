@@ -1,1 +1,402 @@
-body{overflow-x:hidden}#portal-logo img{max-width:250px}h1{font-weight:700!important}#faceted-form fieldset{margin:.5em;padding:1em .5em 1.5em .5em!important}fieldset{border:none!important}body.template-facetednavigation_view input[type=color],body.template-facetednavigation_view input[type=date],body.template-facetednavigation_view input[type=datetime-local],body.template-facetednavigation_view input[type=email],body.template-facetednavigation_view input[type=month],body.template-facetednavigation_view input[type=number],body.template-facetednavigation_view input[type=password],body.template-facetednavigation_view input[type=range],body.template-facetednavigation_view input[type=search],body.template-facetednavigation_view input[type=tel],body.template-facetednavigation_view input[type=text],body.template-facetednavigation_view input[type=time],body.template-facetednavigation_view input[type=url],body.template-facetednavigation_view input[type=week],body.template-facetednavigation_view select,body.template-facetednavigation_view textarea{width:100%;display:block;height:55px;padding:6px 12px;font-size:15px;line-height:1.42857143;color:#333;background-color:#fff;background-image:none;border:none;border-radius:4px;box-shadow:none}.template-facetednavigation_view input:hover,input:focus,select:focus,select:hover{opacity:1;box-shadow:none!important}.template-facetednavigation_view #top-area{background:#007bb1!important;position:relative;margin-bottom:2.5em;padding:2em 0}.template-facetednavigation_view #top-area:after{content:"";position:absolute;background:#007bb1;z-index:-1;width:100vw;top:0;bottom:0;left:50%;transform:translateX(-50%)}body.template-facetednavigation_view #top-area legend{color:#fff;border:none}body.template-facetednavigation_view .searchButton{background:#fff;z-index:1;position:relative;margin-right:0;transform:translateX(-2px);border:none;border-left-color:currentcolor;border-left-style:none;border-left-width:medium;border-left:1px solid #007bb1;border-top-left-radius:0;border-bottom-left-radius:0}body.template-facetednavigation_view .searchButton:hover{background:#c3dbf8}.section-texte form{display:flex}html body .faceted-criteria-hide,html body .faceted-criteria-reset a{padding:10px;border:1px solid #007bb1!important;border-radius:25px;float:none;display:inline-block;transition:all .3s ease}html body .faceted-criteria-hide-show:hover a,html body .faceted-criteria-reset a:hover{color:#fff!important;background:#007bb1}@media screen and (min-width:1000px){.template-facetednavigation_view #top---default---widgets{display:flex;flex-wrap:wrap;justify-content:flex-start}.template-facetednavigation_view #top-area{background:#fff;padding:3rem}.template-facetednavigation_view #top-area{padding:3rem 0}}.meeting-infos{font-size:25px}.meeting-title{font-weight:700}.meeting-attendees,.meeting-extra-info{opacity:.7;font-size:16px}.meeting-extra-info{font-size:20px;margin-top:10px}#faceted-results{margin:2em 0}.item-preview{margin:20px 0;border-bottom:1px solid#dedede;padding:10px 0;position:relative}.item-preview.in_project .item-metadata a{color:#469721}.item-preview.published .item-metadata a{color:#007bb1}.item-preview.private .item-metadata a{color:#c21b1b}.item-preview .item-metadata{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:0 30px 0 0}.item-preview .item-metadata a{border-bottom:none!important}.item-preview .meeting-title{font-size:18px}.item-preview .item-number{font-size:25px;margin-top:10px}.item-main{font-size:20px}.item-representative{font-size:16px;width:100%}.item-category{font-size:16px;margin-bottom:10px;width:100%}.item-main a{background:#007bb1;border-radius:25px;padding:11px 21px;color:#fff;display:inline-block;margin:15px 0 0 0;font-size:16px;border:1px solid #007bb1!important;transition:all .15s ease}.item-main a:hover,.item-main:focus{background:0 0;color:#007bb1;border:1px solid #007bb1!important;text-decoration:none}.meeting-state{position:absolute;top:50%;right:30px;opacity:.6;transform:translateY(-50%)}.in_project .meeting-state{color:#469721}.published .meeting-state{color:#007bb1}.private .meeting-state{color:#c21b1b}@media screen and (min-width:1000px){#faceted-results{margin:2em 0}.item-preview{margin:40px 0;padding:2em 2em;display:flex;align-items:center;background:#f1f1f1;border-radius:8px}.item-preview .item-metadata{flex-direction:column;align-items:center;border-right:1px solid #dedede;max-width:209px}.item-preview .meeting-title{font-weight:700}.item-preview .item-number{font-size:25px;margin-top:10px}.item-main{margin-left:30px}.item-category,.item-representative{margin-top:10px;text-align:center}}@media screen and (min-width:1140px){.item-preview .item-metadata{width:265px;max-width:265px}.item-main{margin-left:50px}.meeting-state{font-size:50px;top:20px;transform:none}}.item-infos{font-size:16px}.item-infos .meeting-title{font-size:25px;color:#007bb1;font-weight:700;margin:1em 0 10px 0}.item-infos.published .meeting-title a{color:#007bb1}.item-infos.in_project .meeting-title a{color:#469721}.item-infos.private .meeting-title a{color:#c21b1b}.item-infos .category span:first-child,.item-infos .extra-info span:first-child,.item-infos .item-number span:first-child,.item-infos .item-type span:first-child,.item-infos .representative span:first-child{font-weight:700;font-size:18px}body .item-infos .selected-option{font-size:16px!important;font-weight:400!important}.item-infos .decision{margin-top:2.5em}.item-infos .decision span:first-child{font-weight:700;font-size:25px;margin:0 0 15px 0}.item-infos .meeting-state{position:relative;top:18px;font-size:25px;right:0}.annexes{font-size:20px;margin:0 0 15px 0}.annexes h2{font-weight:700;font-size:25px;margin:0 0 15px 0}.annexes li{list-style:none}.annexes li a{background:#007bb1;border-radius:25px;padding:11px 21px;color:#fff;display:inline-block;margin:15px 0 0 0;font-size:16px;border:1px solid #007bb1!important;transition:all .15s ease}.annexes li a:hover{background:0 0;border-radius:25px;color:#007bb1;display:inline-block;margin:15px 0 0 0;font-size:16px;border:1px solid #007bb1!important;transition:all .15s ease;text-decoration:none}@media screen and (min-width:1140px){.item-infos .meeting-state{top:-15px;font-size:50px;position:absolute}}
+/* --- header --- */
+
+body{
+    overflow-x: hidden;
+}
+#portal-logo img{
+    max-width: 250px;
+}
+h1{
+    font-weight: bold!important;
+}
+#faceted-form fieldset {
+    margin: .5em;
+    padding: 1em .5em 1.5em .5em!important;
+
+}
+/* --- Filters --- */
+fieldset{
+    border: none!important;
+}
+body.template-facetednavigation_view input[type="color"], 
+body.template-facetednavigation_view input[type="date"], 
+body.template-facetednavigation_view input[type="datetime-local"], 
+body.template-facetednavigation_view input[type="email"], 
+body.template-facetednavigation_view input[type="month"], 
+body.template-facetednavigation_view input[type="number"], 
+body.template-facetednavigation_view input[type="password"], 
+body.template-facetednavigation_view input[type="range"], 
+body.template-facetednavigation_view input[type="search"], 
+body.template-facetednavigation_view input[type="tel"], 
+body.template-facetednavigation_view input[type="text"], 
+body.template-facetednavigation_view input[type="time"], 
+body.template-facetednavigation_view input[type="url"], 
+body.template-facetednavigation_view input[type="week"], 
+body.template-facetednavigation_view textarea, 
+body.template-facetednavigation_view select {
+    width: 100%;
+    display: block;
+    height: 55px;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color:#fff;
+    background-image: none;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    /* -webkit-appearance: button; */
+}
+.template-facetednavigation_view input:hover, select:hover, input:focus, select:focus{
+    opacity: 1  ;
+    box-shadow: none!important;
+}
+.template-facetednavigation_view #top-area{
+    background:#007BB1!important;
+    position: relative;
+    margin-bottom: 2.5em;
+    padding: 2em 0;
+}
+.template-facetednavigation_view #top-area:after{
+    content: "";
+    position: absolute;
+    background: #007BB1;
+    z-index: -1;
+    width: 100vw;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+body.template-facetednavigation_view #top-area legend{
+    color: #fff;
+    border: none;
+}
+body.template-facetednavigation_view .searchButton{
+    background:#fff;
+    z-index: 1;
+    position: relative;
+    margin-right: 0;
+    transform: translateX(-2px);
+    border: none;
+    border-left-color: currentcolor;
+    border-left-style: none;
+    border-left-width: medium;
+    border-left: 1px solid #007BB1;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+body.template-facetednavigation_view .searchButton:hover{
+    background: rgb(195, 219, 248);
+}
+.section-texte form{
+    display: flex;
+}
+html body .faceted-criteria-hide, html body .faceted-criteria-reset a {
+    padding: 10px;
+    border: 1px solid #007BB1 !important;
+    border-radius: 25px;
+    float: none;
+    display: inline-block;
+    transition: all .3s ease;
+}
+html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset a:hover{
+    color: #fff!important;
+    background: #007BB1;
+}
+@media screen and (min-width: 1000px){
+
+    .template-facetednavigation_view #top---default---widgets{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .template-facetednavigation_view #top-area{
+        background: #ffffff;
+        padding: 3rem;
+    }
+    .template-facetednavigation_view #top-area{
+        padding: 3rem 0;
+    }
+}
+
+/* --- Results --- */
+.meeting-infos{
+    font-size: 25px;
+}
+.meeting-title{
+    font-weight: bold;
+}
+.meeting-extra-info{
+    opacity: .7;
+    font-size: 16px;
+}
+.meeting-extra-info{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.public-meeting{
+    margin: 1rem 0;
+}
+#faceted-results{
+    margin: 2em 0;
+}
+.item-preview{
+    margin: 20px 0;
+    border-bottom: 1px solid#dedede;
+    padding: 10px 0;
+    position: relative;
+    background: rgb(241, 241, 241);
+}
+
+
+.item-preview.in_project .item-metadata a{
+    color:#fff;
+}
+.item-preview.published .item-metadata a{
+    color: #fff;
+}
+.item-preview.private .item-metadata a{
+    color: #fff;
+}
+.item-preview.in_project .item-metadata a:hover{
+    color:#007bb1;
+}
+.item-preview.published .item-metadata a:hover{
+    color: #007bb1;
+}   
+.item-preview.private .item-metadata a:hover{
+    color: #007bb1;
+}
+.item-preview .item-metadata{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-preview .item-metadata a{
+    border-bottom: none!important;
+}
+
+.item-preview .meeting-title{
+
+    font-size: 18px;
+}
+.item-preview .item-number{
+    font-size: 25px;
+}
+
+.item-main{
+    font-size: 20px;
+}
+.item-representative{
+    font-size: 16px;
+    width: 100%;
+}
+.item-category{
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.item-metadata > a{
+    background:#007BB1;
+    border-radius: 25px;
+    padding: 11px 21px;
+    color:#fff;
+    display: inline-block;
+    margin: 15px 0;
+    font-size: 16px;
+    border: 1px solid #007BB1!important;
+    transition: all .15s ease;
+    width: 100%;
+    text-align: center;
+}
+.item-metadata > a:hover, .item-metadata > a:focus{
+    background:transparent;
+    color:#007BB1;
+    border: 1px solid #007BB1!important;
+    text-decoration: none;
+
+}
+.item-title{
+    font-size: 25px;
+}
+.item-main .item-title::after {
+    content: url(++plone++plonemeeting.portal.core/assets/right-arrow.svg);
+    width: 30px;
+    float: right;
+    margin-left: 15px;
+    display: block;
+    margin-top: 2px;
+}
+.meeting-state{
+    position: absolute;
+    right: 30px;
+    opacity: .6;
+}
+.in_project .meeting-state{
+    color:#469721;
+}
+.item-infos.in_project:after {
+    content: "";
+    font-size: 100px;
+    position: absolute;
+    top: 0;
+    background:url(++plone++plonemeeting.portal.core/assets/project.jpg);
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .25;
+    background-size: 20%;
+}
+.published .meeting-state{
+    color:#007BB1;
+}
+.private .meeting-state{
+    color:#c21b1b
+}
+@media screen and (min-width: 1000px){
+    #faceted-results{
+        margin: 2em 0;
+    }
+    .item-preview{
+        margin: 40px 0;
+        padding: 2em 2em;
+        display: flex;
+        background: rgb(241, 241, 241);
+        border-radius: 8px;
+        flex-wrap: wrap;
+    }
+    .project-disclaimer{
+        width: 100%;
+        margin-top: 3rem;
+        font-style: italic;
+    }
+    .item-preview .item-metadata{
+        flex-direction:column;
+        flex-direction: column;
+        border-right: 1px solid #dedede;
+        max-width: 209px;
+    }
+    .item-preview .meeting-title{
+        font-weight: bold;
+    }
+    .item-preview .item-number{
+        font-size: 25px;
+        margin-top: 10px;
+    }
+
+    .item-main{
+        margin-left: 30px;
+    }
+    .item-representative,.item-category{
+        margin-top: 10px;
+        text-align: center;
+    }
+
+}
+@media screen and (min-width: 1140px){
+    .item-preview .item-metadata{
+        width: 265px;
+        max-width: 265px;
+        padding: 0 30px 0 0;
+
+    }
+    .item-main {
+        margin-left: 50px;
+    }
+    .meeting-state{
+        font-size: 50px;
+        top: 20px;
+        transform: none;
+    }
+}
+/*point*/
+.item-infos{
+    font-size: 16px;
+}
+.item-infos .meeting-title{
+    font-size: 25px;
+    color: #007BB1;
+    font-weight: bold;
+    margin: 1em 0 10px 0;
+}
+.item-infos.published .meeting-title a{
+    color: #007BB1;
+}
+.item-infos.in_project .meeting-title a{
+    color:  #469721;
+}
+.item-infos.private .meeting-title a{
+    color: #c21b1b;
+}
+.item-infos .item-number span:first-child, .item-infos .item-type span:first-child , .item-infos .representative span:first-child, .item-infos .category span:first-child, .item-infos .extra-info span:first-child {
+    font-weight: bold;
+    font-size: 18px;
+}
+body .item-infos .selected-option{
+    font-size: 16px!important;
+    font-weight: 400!important;
+}
+.item-infos .decision {
+    margin-top: 2.5em;
+}
+.item-infos .decision span:first-child{
+    font-weight:bold;
+    font-size: 25px;
+    margin: 0 0 15px 0;
+}
+.item-infos .meeting-state{
+    position: relative;
+    top: 18px;
+    font-size: 25px;
+    right: 0;
+}
+.annexes{
+    font-size: 20px;
+    margin: 0 0 15px 0;
+}
+.annexes ul{
+    padding: 0;
+}
+.annexes h2{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0 0 15px 0;
+}
+.annexes li{
+    list-style: none;
+}
+.annexes li a{
+    background: #007BB1;
+border-radius: 25px;
+padding: 11px 21px;
+color: #fff;
+display: inline-block;
+margin: 15px 0 0 0;
+font-size: 16px;
+border: 1px solid #007BB1 !important;
+transition: all .15s ease;
+}
+.annexes li a:hover{
+    background: transparent;
+border-radius: 25px;
+color: #007BB1;
+display: inline-block;
+margin: 15px 0 0 0;
+font-size: 16px;
+border: 1px solid #007BB1 !important;
+transition: all .15s ease;
+text-decoration: none;
+}
+
+@media screen and (min-width: 1140px){
+    .item-infos .meeting-state{
+        top: -15px;
+        font-size: 50px;
+        position: absolute;
+    }
+}
