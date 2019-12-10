@@ -222,14 +222,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 .item-title{
     font-size: 25px;
 }
-.item-main .item-title::after {
-    content: url(++plone++plonemeeting.portal.core/assets/right-arrow.svg);
-    width: 30px;
-    float: right;
-    margin-left: 15px;
-    display: block;
-    margin-top: 2px;
-}
+
 .meeting-state{
     position: absolute;
     right: 30px;
