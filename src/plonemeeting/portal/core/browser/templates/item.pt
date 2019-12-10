@@ -43,7 +43,7 @@
 
         <div class="project-disclaimer"
              tal:condition="python: review_state != 'published'">
-            <span tal:content="structure python: utils_view.get_project_decision_disclaimer().output" />
+            <span tal:content="structure utils_view/get_project_decision_disclaimer_output" />
         </div>
 
         <div class="item-last-pm-modified"

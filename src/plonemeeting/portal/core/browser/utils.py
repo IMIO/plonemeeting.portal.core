@@ -3,6 +3,7 @@
 from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
+from plone.app.textfield import RichTextValue
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
@@ -61,6 +62,10 @@ class UtilsView(BrowserView):
         vocab = factory(self.context)
         return vocab.getTerm(key).title
 
-    def get_project_decision_disclaimer(self):
+    def get_project_decision_disclaimer_output(self):
         institution = self._get_current_institution()
-        return institution.project_decision_disclaimer
+        disclaimer = institution.project_decision_disclaimer
+        if isinstance(disclaimer, str):
+            return disclaimer
+        elif isinstance(disclaimer, RichTextValue):
+            return disclaimer.output
