@@ -216,7 +216,7 @@ msgstr "Avertissement de projets de décisions"
 
 #: ../faceted/macros.pt:42
 msgid "Public meeting"
-msgstr "Séance publique"
+msgstr "Séance publique du Conseil communal"
 
 #: ../profiles/default/registry.xml
 msgid "Related meeting date"
