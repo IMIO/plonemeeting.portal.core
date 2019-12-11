@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a4 (unreleased)
+1.0a4 (2019-12-11)
 ------------------
 
 - Use conditional formatted title for items : PMLIE-381
