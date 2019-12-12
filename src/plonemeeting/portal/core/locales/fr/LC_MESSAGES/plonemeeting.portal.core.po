@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-09 14:04+0000\n"
+"POT-Creation-Date: 2019-12-12 20:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,39 +18,39 @@ msgstr ""
 msgid "(Disabled)"
 msgstr "(Inactif)"
 
-#: ../content/institution.py:44
+#: ../content/institution.py:46
 msgid "Active"
 msgstr "Actif"
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:66
+#: ../content/institution.py:68
 msgid "Additional Meeting query string for list"
 msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:72
+#: ../content/institution.py:74
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:86
+#: ../browser/templates/item.pt:90
 msgid "Annexes"
 msgstr "Annexes"
 
-#: ../browser/sync.py:272
+#: ../browser/sync.py:273
 msgid "Cancel"
 msgstr "Annuler"
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:96
+#: ../content/institution.py:98
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
-#: ../browser/templates/item.pt:64
+#: ../browser/templates/item.pt:38
 #: ../content/item.py:43
 msgid "Category"
 msgstr "Matière"
 
-#: ../browser/sync.py:256
+#: ../browser/sync.py:257
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
@@ -72,7 +72,7 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
-#: ../browser/templates/item.pt:69
+#: ../browser/templates/item.pt:77
 #: ../content/item.py:45
 #: ../content/meeting.py:35
 msgid "Extra info"
@@ -98,7 +98,7 @@ msgstr "Réimporter cette séance"
 msgid "Global categories"
 msgstr "Matières globales"
 
-#: ../content/institution.py:34
+#: ../content/institution.py:36
 msgid "Global category"
 msgstr "Matière globale"
 
@@ -110,7 +110,7 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../browser/sync.py:258
+#: ../browser/sync.py:259
 msgid "Import"
 msgstr "Importer"
 
@@ -119,7 +119,7 @@ msgid "Import meeting"
 msgstr "Importer une séance"
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:92
+#: ../content/institution.py:94
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
@@ -131,7 +131,7 @@ msgstr "Installe le module plonemeeting.portal.core."
 msgid "Institution"
 msgstr "Institution"
 
-#: ../content/institution.py:21
+#: ../content/institution.py:23
 msgid "Invalid url parameters, the value should start with '&'"
 msgstr "Paramètres de l'URL invalides, la valeeur doit commencer par '&'"
 
@@ -140,18 +140,18 @@ msgid "Item"
 msgstr "Point"
 
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:88
+#: ../content/institution.py:90
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../browser/templates/item.pt:56
+#: ../browser/templates/item.pt:35
 #: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro du point"
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:80
+#: ../content/institution.py:82
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr "Expression TAL pour le formatage du titre. Si laissé vide, le titre par défaut sera utilisé."
 
@@ -164,31 +164,31 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
-#: ../browser/templates/item.pt:51
+#: ../browser/templates/item.pt:45
 #: ../content/item.py:48
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr "Date de dernière modification dans ia.Delib"
 
-#: ../content/institution.py:32
+#: ../content/institution.py:34
 msgid "Local category id"
 msgstr "Identifiant de matière locale"
 
-#: ../content/institution.py:77
+#: ../content/institution.py:79
 msgid "Logo"
 msgstr "Logo"
 
-#: ../browser/sync.py:242
+#: ../browser/sync.py:243
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
 
 #: ../browser/templates/institution.pt:24
-#: ../content/institution.py:57
+#: ../content/institution.py:59
 msgid "Meeting config ID"
 msgstr "Identifiant de configuration de Séance"
 
-#: ../browser/sync.py:255
+#: ../browser/sync.py:256
 msgid "Meeting import form"
 msgstr "Importation de Séance"
 
@@ -200,21 +200,22 @@ msgstr "Séances"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../content/institution.py:55
+#: ../content/institution.py:57
 msgid "Password"
 msgstr "Mot de passe"
 
 #: ../browser/templates/institution.pt:16
-#: ../content/institution.py:51
+#: ../content/institution.py:53
 msgid "Plonemeeting URL"
 msgstr "URL ia.Delib"
 
 #: ../browser/templates/institution.pt:36
-#: ../content/institution.py:60
+#: ../content/institution.py:62
 msgid "Project decision disclaimer"
 msgstr "Avertissement de projets de décisions"
 
-#: ../faceted/macros.pt:42
+#: ../browser/templates/item.pt:65
+#: ../faceted/macros.pt:20
 msgid "Public meeting"
 msgstr "Séance publique du Conseil communal"
 
@@ -222,7 +223,7 @@ msgstr "Séance publique du Conseil communal"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/templates/item.pt:60
+#: ../browser/templates/item.pt:41
 msgid "Representative"
 msgstr "Mandataire"
 
@@ -230,20 +231,20 @@ msgstr "Mandataire"
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
-#: ../content/institution.py:41
+#: ../content/institution.py:43
 msgid "Representative key"
 msgstr "Clé de mandataire"
 
-#: ../content/institution.py:43
+#: ../content/institution.py:45
 msgid "Representative long values"
 msgstr "Valeur longue de mandataire"
 
-#: ../content/institution.py:42
+#: ../content/institution.py:44
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:102
+#: ../content/institution.py:104
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
@@ -252,7 +253,7 @@ msgstr "Equivalences de mandataires"
 msgid "UID Plonemeeting"
 msgstr "UID ia.Delib"
 
-#: ../browser/sync.py:202
+#: ../browser/sync.py:206
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
@@ -261,7 +262,7 @@ msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
 #: ../browser/templates/institution.pt:20
-#: ../content/institution.py:53
+#: ../content/institution.py:55
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -271,7 +272,7 @@ msgstr "Nom d'utilisateur"
 msgid "View"
 msgstr "Voir"
 
-#: ../browser/sync.py:34
+#: ../browser/sync.py:33
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au webservice !"
 
@@ -279,9 +280,9 @@ msgstr "Erreur de connexion au webservice !"
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
-#: ../content/institution.py:62
+#: ../content/institution.py:64
 msgid "default_in_project_disclaimer"
-msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style="text-decoration: underline;">n'a pas encore été adoptée</span> par l'autorité communale.</strong></p>"
+msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adoptée</span> par l'autorité communale.</strong></p>"
 
 #. Default: "In project"
 #: ../config.py:16
@@ -289,7 +290,7 @@ msgid "in_project"
 msgstr "Projet de décision"
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:220
+#: ../browser/sync.py:221
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 

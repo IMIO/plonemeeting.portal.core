@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-09 14:04+0000\n"
+"POT-Creation-Date: 2019-12-12 20:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,39 +21,39 @@ msgstr ""
 msgid "(Disabled)"
 msgstr ""
 
-#: ../content/institution.py:44
+#: ../content/institution.py:46
 msgid "Active"
 msgstr ""
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:66
+#: ../content/institution.py:68
 msgid "Additional Meeting query string for list"
 msgstr ""
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:72
+#: ../content/institution.py:74
 msgid "Additional Published Items query string"
 msgstr ""
 
-#: ../browser/templates/item.pt:86
+#: ../browser/templates/item.pt:90
 msgid "Annexes"
 msgstr ""
 
-#: ../browser/sync.py:272
+#: ../browser/sync.py:273
 msgid "Cancel"
 msgstr ""
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:96
+#: ../content/institution.py:98
 msgid "Categories mappings"
 msgstr ""
 
-#: ../browser/templates/item.pt:64
+#: ../browser/templates/item.pt:38
 #: ../content/item.py:43
 msgid "Category"
 msgstr ""
 
-#: ../browser/sync.py:256
+#: ../browser/sync.py:257
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../browser/templates/item.pt:69
+#: ../browser/templates/item.pt:77
 #: ../content/item.py:45
 #: ../content/meeting.py:35
 msgid "Extra info"
@@ -101,7 +101,7 @@ msgstr ""
 msgid "Global categories"
 msgstr ""
 
-#: ../content/institution.py:34
+#: ../content/institution.py:36
 msgid "Global category"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
-#: ../browser/sync.py:258
+#: ../browser/sync.py:259
 msgid "Import"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgid "Import meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:92
+#: ../content/institution.py:94
 msgid "Info annex formatting tal expression"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Institution"
 msgstr ""
 
-#: ../content/institution.py:21
+#: ../content/institution.py:23
 msgid "Invalid url parameters, the value should start with '&'"
 msgstr ""
 
@@ -143,18 +143,18 @@ msgid "Item"
 msgstr ""
 
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:88
+#: ../content/institution.py:90
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: ../browser/templates/item.pt:56
+#: ../browser/templates/item.pt:35
 #: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr ""
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:80
+#: ../content/institution.py:82
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -166,31 +166,31 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
-#: ../browser/templates/item.pt:51
+#: ../browser/templates/item.pt:45
 #: ../content/item.py:48
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr ""
 
-#: ../content/institution.py:32
+#: ../content/institution.py:34
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:77
+#: ../content/institution.py:79
 msgid "Logo"
 msgstr ""
 
-#: ../browser/sync.py:242
+#: ../browser/sync.py:243
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:24
-#: ../content/institution.py:57
+#: ../content/institution.py:59
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:255
+#: ../browser/sync.py:256
 msgid "Meeting import form"
 msgstr ""
 
@@ -202,21 +202,22 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../content/institution.py:55
+#: ../content/institution.py:57
 msgid "Password"
 msgstr ""
 
 #: ../browser/templates/institution.pt:16
-#: ../content/institution.py:51
+#: ../content/institution.py:53
 msgid "Plonemeeting URL"
 msgstr ""
 
 #: ../browser/templates/institution.pt:36
-#: ../content/institution.py:60
+#: ../content/institution.py:62
 msgid "Project decision disclaimer"
 msgstr ""
 
-#: ../faceted/macros.pt:42
+#: ../browser/templates/item.pt:65
+#: ../faceted/macros.pt:20
 msgid "Public meeting"
 msgstr ""
 
@@ -224,7 +225,7 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/templates/item.pt:60
+#: ../browser/templates/item.pt:41
 msgid "Representative"
 msgstr ""
 
@@ -232,20 +233,20 @@ msgstr ""
 msgid "Representative group in charge"
 msgstr ""
 
-#: ../content/institution.py:41
+#: ../content/institution.py:43
 msgid "Representative key"
 msgstr ""
 
-#: ../content/institution.py:43
+#: ../content/institution.py:45
 msgid "Representative long values"
 msgstr ""
 
-#: ../content/institution.py:42
+#: ../content/institution.py:44
 msgid "Representative value"
 msgstr ""
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:102
+#: ../content/institution.py:104
 msgid "Representatives mappings"
 msgstr ""
 
@@ -254,7 +255,7 @@ msgstr ""
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:202
+#: ../browser/sync.py:206
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
@@ -263,7 +264,7 @@ msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../browser/templates/institution.pt:20
-#: ../content/institution.py:53
+#: ../content/institution.py:55
 msgid "Username"
 msgstr ""
 
@@ -273,7 +274,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../browser/sync.py:34
+#: ../browser/sync.py:33
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -281,7 +282,7 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
-#: ../content/institution.py:62
+#: ../content/institution.py:64
 msgid "default_in_project_disclaimer"
 msgstr ""
 
@@ -290,7 +291,7 @@ msgid "in_project"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:220
+#: ../browser/sync.py:221
 msgid "meeting_imported"
 msgstr ""
 

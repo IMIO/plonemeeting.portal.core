@@ -31,7 +31,7 @@
                    tal:content="meeting/title" />
 
               <div class="meeting-last-pm-modified"
-                   tal:condition='not: isAnon' >
+                   tal:condition='not: isAnon'>
                    <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
                    <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
               </div>
