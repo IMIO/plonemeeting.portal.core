@@ -12,9 +12,28 @@
          tal:attributes="class string:item-preview ${review_state}"
          i18n:domain="plonemeeting.portal.core">
 
+      <div class="item-main">
+        <a href=""
+           tal:attributes="href brain/getURL">
+          <div class="item-title" tal:content="brain/Title" />
+        </a>
+        <div class="public-meeting"
+             i18n:translate="">Public meeting
+        </div>
+      </div>
+
       <div class="item-metadata">
+        <div class="meeting-state"
+             i18n:domain="plone">
+            <span tal:condition="python: review_state == 'private'"
+                  i18n:translate="">Private</span>
+            <span tal:condition="python: review_state == 'in_project'"
+                  i18n:translate="">In project</span>
+            <span tal:condition="python: review_state == 'published'"
+                  i18n:translate="">Published</span>
+        </div>
         <div class="item-number" tal:content="brain/number" />
-        <div class="item-category" tal:content="nothing" />
+        <div class="item-category" tal:content="brain/category" />
         <div class="item-representatives" tal:content="brain/pretty_representatives" />
         <a href=""
            tal:define="utils_view nocall:context/@@utils_view;"
@@ -27,25 +46,6 @@
              <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
              <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
         </div>
-      </div>
-
-      <div class="item-main">
-        <div class="meeting-state"
-             i18n:domain="plone">
-            <span tal:condition="python: review_state == 'private'"
-                  i18n:translate="">Private</span>
-            <span tal:condition="python: review_state == 'in_project'"
-                  i18n:translate="">In project</span>
-            <span tal:condition="python: review_state == 'published'"
-                  i18n:translate="">Published</span>
-        </div>
-        <div class="public-meeting"
-             i18n:translate="">Public meeting
-        </div>
-        <a href=""
-           tal:attributes="href brain/getURL">
-          <div class="item-title" tal:content="brain/Title" />
-        </a>
       </div>
 
       <div class="project-disclaimer"
