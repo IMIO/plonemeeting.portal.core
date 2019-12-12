@@ -126,7 +126,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
             )
 
         # TODO use formatted item number when available
-        item.number = str(item_data.get("itemNumber") / 100.0)
+        item.number = item_data.get("formatted_itemNumber")
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
         item.decision = RichTextValue(
