@@ -9,7 +9,7 @@
         <indexed_attr value="plonemeeting_uid"/>
     </index>
 
-    <index name="date_time" meta_type="FieldIndex">
+    <index name="date_time" meta_type="DateIndex">
         <indexed_attr value="date_time"/>
     </index>
 

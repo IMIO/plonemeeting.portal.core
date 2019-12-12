@@ -148,7 +148,7 @@ msgstr "Expression TAL pour le formatage des infos points"
 #: ../content/item.py:28
 #: ../profiles/default/registry.xml
 msgid "Item number"
-msgstr "Numéro de point"
+msgstr "Numéro du point"
 
 #: ../browser/templates/institution.pt:40
 #: ../content/institution.py:80

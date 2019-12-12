@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
 import os
+import pytz
 import unittest
 
+from datetime import datetime
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -13,7 +15,6 @@ from plonemeeting.portal.core.browser.sync import (
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
-from zope.component import getMultiAdapter
 
 
 class TestMeetingSynchronization(unittest.TestCase):
@@ -27,9 +28,6 @@ class TestMeetingSynchronization(unittest.TestCase):
             0
         ].getObject()
         self.item = api.content.find(self.meeting, portal_type="Item")[0].getObject()
-        self.to_localized_time = getMultiAdapter(
-            (self.institution, self.layer["request"]), name="plone"
-        ).toLocalizedTime
         with open(
             os.path.join(os.path.dirname(__file__), "resources/meeting_mock.json")
         ) as json_file:
@@ -41,29 +39,34 @@ class TestMeetingSynchronization(unittest.TestCase):
 
     def test_sync_meeting_data(self):
         meeting = sync_meeting_data(
-            self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
+            self.institution, self.json_meeting.get("items")[0]
         )
         self.assertTrue(
             IMeeting.providedBy(meeting),
             u"IMeeting not provided by {0}!".format(meeting),
         )
+        timezone = api.portal.get_registry_record('plone.portal_timezone')
+        self.assertEqual(timezone, 'UTC')
+        date_time = datetime(2019, 11, 9, 23, 0)
+        date_time = date_time.astimezone(pytz.timezone(timezone))
+        self.assertEqual(meeting.date_time, date_time)
 
     def test_sync_meeting_items(self):
         meeting = sync_meeting_data(
-            self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
+            self.institution, self.json_meeting.get("items")[0]
         )
         results = sync_items_data(
-            self.to_localized_time, meeting, self.json_meeting_items, self.institution
+            meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
 
     def test_sync_with_updates_meeting_items(self):
         meeting = sync_meeting_data(
-            self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
+            self.institution, self.json_meeting.get("items")[0]
         )
         # results {'deleted': 0, 'modified': 0, 'created': 28}
         results = sync_items_data(
-            self.to_localized_time, meeting, self.json_meeting_items, self.institution
+            meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(len(meeting.items()), results.get("created"))
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
@@ -71,22 +74,22 @@ class TestMeetingSynchronization(unittest.TestCase):
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         self.json_meeting_items.get("items")[0].update(modification_date)
         results = sync_items_data(
-            self.to_localized_time, meeting, self.json_meeting_items, self.institution
+            meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
 
     def test_sync_no_modif_date_no_update(self):
         meeting = sync_meeting_data(
-            self.to_localized_time, self.institution, self.json_meeting.get("items")[0]
+            self.institution, self.json_meeting.get("items")[0]
         )
         results = sync_items_data(
-            self.to_localized_time, meeting, self.json_meeting_items, self.institution
+            meeting, self.json_meeting_items, self.institution
         )
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         results = sync_items_data(
-            self.to_localized_time, meeting, self.json_meeting_items, self.institution
+            meeting, self.json_meeting_items, self.institution
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)

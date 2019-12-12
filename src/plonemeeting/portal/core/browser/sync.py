@@ -8,13 +8,12 @@ from plone.namedfile.file import NamedBlobFile
 from z3c.form import button
 from z3c.form.form import Form
 from zope import schema
-from zope.component import getMultiAdapter
-from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import Interface
 
 import dateutil.parser
 import json
+import pytz
 import requests
 
 from plonemeeting.portal.core import _
@@ -78,8 +77,9 @@ def sync_annexes(item, institution, annexes_json):
             )
 
 
-def sync_items_data(to_localized_time, meeting, items_data, institution, force=False):
+def sync_items_data(meeting, items_data, institution, force=False):
     nb_created = nb_modified = nb_deleted = 0
+    timezone = api.portal.get_registry_record('plone.portal_timezone')
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
     )
@@ -90,8 +90,8 @@ def sync_items_data(to_localized_time, meeting, items_data, institution, force=F
     synced_uids = [i.get("UID") for i in items_data.get("items")]
     for item_data in items_data.get("items"):
         modification_date_str = item_data.get("modification_date")
-        localized_time = to_localized_time(modification_date_str, long_format=1)
-        modification_date = dateutil.parser.parse(localized_time)
+        modification_date = dateutil.parser.parse(modification_date_str)
+        modification_date.astimezone(pytz.timezone(timezone))
         item_uid = item_data.get("UID")
         item_title = item_data.get("title")
         created = False
@@ -157,10 +157,11 @@ def sync_items_data(to_localized_time, meeting, items_data, institution, force=F
     return {"created": nb_created, "modified": nb_modified, "deleted": nb_deleted}
 
 
-def sync_meeting_data(to_localized_time, institution, meeting_data):
+def sync_meeting_data(institution, meeting_data):
     meeting_uid = meeting_data.get("UID")
-    meeting_date = meeting_data.get("date")
+    meeting_date_str = meeting_data.get("date")
     meeting_title = meeting_data.get("title")
+    timezone = api.portal.get_registry_record('plone.portal_timezone')
     brains = api.content.find(
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
@@ -173,11 +174,13 @@ def sync_meeting_data(to_localized_time, institution, meeting_data):
     else:
         meeting = brains[0].getObject()
     modification_date_str = meeting_data.get("modification_date")
-    localized_time = to_localized_time(modification_date_str, long_format=1)
-    meeting.plonemeeting_last_modified = dateutil.parser.parse(localized_time)
+    modification_date = dateutil.parser.parse(modification_date_str)
+    modification_date.astimezone(pytz.timezone(timezone))
+    meeting.plonemeeting_last_modified = modification_date
     meeting.title = meeting_title
-    localized_time = to_localized_time(meeting_date, long_format=1)
-    meeting.date_time = dateutil.parser.parse(localized_time)
+    date_time = dateutil.parser.parse(meeting_date_str)
+    date_time = date_time.astimezone(pytz.timezone(timezone))
+    meeting.date_time = date_time
     meeting.reindexObject()
     return meeting
 
@@ -202,11 +205,8 @@ def sync_meeting(institution, meeting_uid, force=False):
     if json_meeting.get("items_total") != 1:
         return _(u"Unexpected meeting count in webservice response !"), None
 
-    to_localized_time = getMultiAdapter(
-        (api.portal.get(), getRequest()), name="plone"
-    ).toLocalizedTime
     meeting = sync_meeting_data(
-        to_localized_time, institution, json_meeting.get("items")[0]
+        institution, json_meeting.get("items")[0]
     )
     url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)
     response = _call_delib_rest_api(url, institution)
@@ -215,7 +215,7 @@ def sync_meeting(institution, meeting_uid, force=False):
 
     json_items = json.loads(response.text)
     results = sync_items_data(
-        to_localized_time, meeting, json_items, institution, force
+        meeting, json_items, institution, force
     )
 
     status_msg = _(
