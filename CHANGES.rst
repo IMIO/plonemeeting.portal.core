@@ -5,8 +5,14 @@ Changelog
 1.0a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improved Item View
+  [odelaere]
 
+- Improved CSS
+  [thomlamb]
+
+- Fixed date management in Sync
+  [gbastien]
 
 1.0a4 (2019-12-11)
 ------------------
