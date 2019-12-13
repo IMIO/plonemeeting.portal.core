@@ -33,7 +33,7 @@
 
       <div class="item-metadata">
         <div class="item-number" tal:content="brain/number" />
-        <div class="item-category" tal:content="nothing" />
+        <div class="item-category" tal:content="brain/pretty_category" />
         <div class="item-representatives" tal:content="brain/pretty_representatives" />
         <a href=""
            tal:define="utils_view nocall:context/@@utils_view;"

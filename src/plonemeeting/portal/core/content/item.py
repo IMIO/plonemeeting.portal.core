@@ -25,9 +25,11 @@ class IItem(model.Schema):
     dexteritytextindexer.searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
-    number = schema.TextLine(title=_(u"Item number"), required=True)
+    number = schema.TextLine(title=_(u"Item number"), required=True, readonly=True)
 
-    plonemeeting_uid = schema.TextLine(title=_(u"UID Plonemeeting"), required=True)
+    plonemeeting_uid = schema.TextLine(
+        title=_(u"UID Plonemeeting"), required=True, readonly=True
+    )
 
     representatives_in_charge = schema.List(
         value_type=schema.Choice(
@@ -35,12 +37,18 @@ class IItem(model.Schema):
         ),
         title=_(u"Representative group in charge"),
         required=False,
+        readonly=True,
     )
 
     dexteritytextindexer.searchable("decision")
-    decision = RichText(title=_(u"Decision"), required=False)
+    decision = RichText(title=_(u"Decision"), required=False, readonly=True)
 
-    category = schema.TextLine(title=_(u"Category"), required=True)
+    category = schema.Choice(
+        vocabulary="plonemeeting.portal.vocabularies.global_categories",
+        title=_(u"Category"),
+        required=False,
+        readonly=True,
+    )
 
     extra_info = RichText(title=_(u"Extra info"), required=False)
 
@@ -92,6 +100,17 @@ def get_pretty_representatives(object):
     if res:
         return ", ".join(res)
     raise AttributeError
+
+
+@indexer(IItem)
+def get_pretty_category(object):
+    global_categories = api.portal.get_registry_record(
+        name="plonemeeting.portal.core.global_categories"
+    )
+    if not global_categories or not object.category in global_categories:
+        raise AttributeError
+
+    return global_categories[object.category]
 
 
 @indexer(IItem)

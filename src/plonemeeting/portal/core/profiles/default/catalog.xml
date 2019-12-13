@@ -32,6 +32,10 @@
         <indexed_attr value="pretty_representatives"/>
     </index>
 
+    <index name="pretty_category" meta_type="FieldIndex">
+        <indexed_attr value="pretty_category"/>
+    </index>
+
     <index name="getCategory" meta_type="FieldIndex">
       <indexed_attr value="category"/>
     </index>
@@ -45,6 +49,7 @@
     <column value="date_time" />
     <column value="number" />
     <column value="pretty_representatives" />
+    <column value="pretty_category" />
     <column value="linkedMeetingUID" />
     <column value="linkedMeetingTitle" />
     <column value="linkedMeetingReviewState" />

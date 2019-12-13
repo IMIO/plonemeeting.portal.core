@@ -31,6 +31,7 @@
 
     <adapter name="item_number" factory=".item.get_item_number" />
     <adapter name="pretty_representatives" factory=".item.get_pretty_representatives" />
+    <adapter name="pretty_category" factory=".item.get_pretty_category" />
     <adapter name="linkedMeetingTitle" factory=".item.get_title_from_meeting" />
     <adapter name="linkedMeetingUID" factory=".item.get_UID_from_meeting" />
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />
