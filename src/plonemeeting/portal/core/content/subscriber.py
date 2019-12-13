@@ -20,7 +20,7 @@ def handle_institution_creation(obj, event):
 
     # Configure manager group & local permissions
     group_id = "{0}-institution_managers".format(institution_id)
-    group_title = "{0} Institution Managers".format(institution_title.encode("utf-8"))
+    group_title = "{0} Institution Managers".format(institution_title)
     api.group.create(groupname=group_id, title=group_title)
     obj.manage_setLocalRoles(group_id, ["Editor", "Reader", "Contributor", "Reviewer"])
 
