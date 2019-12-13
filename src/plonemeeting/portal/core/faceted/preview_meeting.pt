@@ -28,8 +28,15 @@
                              review_state python: utils_view.get_state(meeting)"
                  tal:attributes="class string:meeting-infos ${review_state}">
 
-              <div class="meeting-title"
-                   tal:content="meeting/title" />
+              <div class="meeting-title">
+                <tal:if tal:condition="isAnon">
+                  <span tal:content="meeting/title" />
+                </tal:if>
+                <tal:else tal:condition='not: isAnon'>
+                  <a tal:content="meeting/title"
+                     tal:attributes="href meeting/absolute_url"/>
+                </tal:else>
+              </div>
 
               <div class="meeting-last-pm-modified"
                    tal:condition='not: isAnon'>
