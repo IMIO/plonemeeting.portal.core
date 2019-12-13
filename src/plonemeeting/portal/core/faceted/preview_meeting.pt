@@ -8,7 +8,8 @@
 <body>
   <metal:content-core fill-slot="content-core">
     <metal:block define-macro="content-core">
-      <div tal:define="
+      <div i18n:domain="plonemeeting.portal.core"
+           tal:define="
         folderContents folderContents | python:context.getFolderContents();
         Batch python:modules['Products.CMFPlone'].Batch;
         b_start python:request.get('b_start', 0);

@@ -41,7 +41,7 @@
             <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representatives_in_charge/render" />
           </div>
           <div class="item-last-pm-modified"
-               tal:condition='not: isAnon' >
+               tal:condition='not: isAnon'>
             <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
             <span tal:content="utils_view/get_plonemeeting_last_modified" />
           </div>
