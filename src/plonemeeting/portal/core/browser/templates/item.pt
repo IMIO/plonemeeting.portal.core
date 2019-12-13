@@ -67,9 +67,10 @@
           </div>
         </div>
 
-        <div class="project-disclaimer"
+        <div class="portalMessage info"
              tal:condition="python: review_state != 'published'">
-            <span tal:content="structure utils_view/get_project_decision_disclaimer_output" />
+            <strong>Info</strong>
+          <div class="project-disclaimer" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
         </div>
 
         <div class="extra-info"
