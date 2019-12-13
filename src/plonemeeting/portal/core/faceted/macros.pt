@@ -20,9 +20,6 @@
         <div class="public-meeting"
              i18n:translate="">Public meeting
         </div>
-      </div>
-
-      <div class="item-metadata">
         <div class="meeting-state"
              i18n:domain="plone">
             <span tal:condition="python: review_state == 'private'"
@@ -32,6 +29,9 @@
             <span tal:condition="python: review_state == 'published'"
                   i18n:translate="">Published</span>
         </div>
+      </div>
+
+      <div class="item-metadata">
         <div class="item-number" tal:content="brain/number" />
         <div class="item-category" tal:content="nothing" />
         <div class="item-representatives" tal:content="brain/pretty_representatives" />
