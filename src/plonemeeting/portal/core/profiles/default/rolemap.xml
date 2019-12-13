@@ -14,5 +14,8 @@
       <role name="Manager"/>
     </permission>
 
+    <permission name="eea.facetednavigation: Configure faceted" acquire="True">
+      <role name="Manager"/>
+    </permission>
   </permissions>
 </rolemap>
