@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a5 (unreleased)
+1.0a5 (2019-12-13)
 ------------------
 
 - Improved Item View
