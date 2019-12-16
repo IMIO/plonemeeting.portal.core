@@ -5,7 +5,8 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- The watermark "in project" is also displayed when the item is still private
+  [odelaere]
 
 
 1.0a5 (2019-12-13)

@@ -18,21 +18,21 @@ h1{
 fieldset{
     border: none!important;
 }
-body.template-facetednavigation_view input[type="color"], 
-body.template-facetednavigation_view input[type="date"], 
-body.template-facetednavigation_view input[type="datetime-local"], 
-body.template-facetednavigation_view input[type="email"], 
-body.template-facetednavigation_view input[type="month"], 
-body.template-facetednavigation_view input[type="number"], 
-body.template-facetednavigation_view input[type="password"], 
-body.template-facetednavigation_view input[type="range"], 
-body.template-facetednavigation_view input[type="search"], 
-body.template-facetednavigation_view input[type="tel"], 
-body.template-facetednavigation_view input[type="text"], 
-body.template-facetednavigation_view input[type="time"], 
-body.template-facetednavigation_view input[type="url"], 
-body.template-facetednavigation_view input[type="week"], 
-body.template-facetednavigation_view textarea, 
+body.template-facetednavigation_view input[type="color"],
+body.template-facetednavigation_view input[type="date"],
+body.template-facetednavigation_view input[type="datetime-local"],
+body.template-facetednavigation_view input[type="email"],
+body.template-facetednavigation_view input[type="month"],
+body.template-facetednavigation_view input[type="number"],
+body.template-facetednavigation_view input[type="password"],
+body.template-facetednavigation_view input[type="range"],
+body.template-facetednavigation_view input[type="search"],
+body.template-facetednavigation_view input[type="tel"],
+body.template-facetednavigation_view input[type="text"],
+body.template-facetednavigation_view input[type="time"],
+body.template-facetednavigation_view input[type="url"],
+body.template-facetednavigation_view input[type="week"],
+body.template-facetednavigation_view textarea,
 body.template-facetednavigation_view select {
     width: 100%;
     display: block;
@@ -165,7 +165,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 }
 .item-preview.published .item-metadata a:hover{
     color: #484849;
-}   
+}
 .item-preview.private .item-metadata a:hover{
     color: #484849;
 }
@@ -228,7 +228,7 @@ body .item-metadata > a{
 .in_project .meeting-state{
     color:#469721;
 }
-.item-infos.in_project:after {
+.item-infos.in_project:after, .item-infos.private:after{
     content: "";
     font-size: 100px;
     position: absolute;
@@ -424,7 +424,7 @@ text-decoration: none;
 
 /* COLOR */
 
- .site-liege .item-preview.in_project .item-metadata a:hover, .site-liege .annexes li a:hover, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .item-title, .site-liege .item-metadata > a:hover{ 
+ .site-liege .item-preview.in_project .item-metadata a:hover, .site-liege .annexes li a:hover, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
     color: #d7004e!important;
 }
 .site-liege a:hover{
