@@ -8,6 +8,9 @@ Changelog
 - The watermark "in project" is also displayed when the item is still private
   [odelaere]
 
+- Added publishable management for annexe synchronization
+  [odelaere]
+
 
 1.0a5 (2019-12-13)
 ------------------
