@@ -125,7 +125,6 @@ def create_demo_content(context):
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
-                    custom_info=meeting["custom_info"],
                     plonemeeting_last_modified=dateutil.parser.parse(
                         meeting["plonemeeting_last_modified"]
                     ),

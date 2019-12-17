@@ -40,6 +40,10 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    additional_data = RichText(
+        title=_(u"Additional data"), required=False, readonly=True
+    )
+
     dexteritytextindexer.searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False, readonly=True)
 

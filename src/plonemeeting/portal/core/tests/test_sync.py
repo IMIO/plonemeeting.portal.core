@@ -10,8 +10,8 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plonemeeting.portal.core.browser.sync import (
     sync_items_data,
-    get_decision_from_json,
     sync_annexes_data,
+    get_formatted_data_from_json,
 )
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
@@ -94,22 +94,20 @@ class TestMeetingSynchronization(unittest.TestCase):
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)
 
-    def test_get_decision_from_json(self):
+    def test_get_formatted_data_from_json(self):
         item_jsons = self.json_meeting_items.get("items")
 
-        self.assertRaises(
-            AttributeError, get_decision_from_json, "", self.item, item_jsons[0]
-        )
+        self.assertIsNone(get_formatted_data_from_json("", self.item, item_jsons[0]))
         item_json = item_jsons[0]
         self.assertEqual(
-            get_decision_from_json(
+            get_formatted_data_from_json(
                 u"python: json['decision']['data']", self.item, item_json
             ),
             item_jsons[0]["decision"]["data"],
         )
         item_json = item_jsons[1]
         self.assertEqual(
-            get_decision_from_json(
+            get_formatted_data_from_json(
                 u"python: '{}<p>DECIDE</p>{}'.format("
                 u"json['motivation']['data'], json['decision']['data'])",
                 self.item,

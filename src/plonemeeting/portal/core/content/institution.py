@@ -61,7 +61,9 @@ class IInstitution(model.Schema):
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
         required=False,
-        defaultFactory=default_translator(_(u"default_in_project_disclaimer", default=""))
+        defaultFactory=default_translator(
+            _(u"default_in_project_disclaimer", default="")
+        ),
     )
 
     additional_meeting_query_string_for_list = schema.TextLine(
@@ -87,7 +89,9 @@ class IInstitution(model.Schema):
     )
 
     item_decision_formatting_tal = schema.TextLine(
-        title=_(u"Item decision formatting tal expression"), required=False
+        title=_(u"Item decision formatting tal expression"),
+        required=True,
+        default="python: json['decision']['data']",
     )
 
     item_additional_data_formatting_tal = schema.TextLine(

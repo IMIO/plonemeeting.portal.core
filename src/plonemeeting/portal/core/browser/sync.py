@@ -36,25 +36,13 @@ def _call_delib_rest_api(url, institution):
 
 
 def get_formatted_data_from_json(tal_expression, item, item_data):
+    if not tal_expression:
+        return None
     expression = Expression(tal_expression)
     expression_context = getExprContext(item)
     expression_context.vars["json"] = item_data
     expression_result = expression(expression_context)
     return expression_result
-
-
-def get_formatted_title_from_json(title_tal_format, item, item_data):
-    if not title_tal_format:
-        return
-    return get_formatted_data_from_json(title_tal_format, item, item_data)
-
-
-def get_decision_from_json(decision_tal_format, item, item_data):
-    if not decision_tal_format:
-        raise AttributeError(
-            "decision_tal_format is invalid {}".format(decision_tal_format)
-        )
-    return get_formatted_data_from_json(decision_tal_format, item, item_data)
 
 
 def sync_annexes_data(item, institution, annexes_json):
@@ -126,7 +114,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         # Sync item fields values
         item.plonemeeting_last_modified = modification_date
         item.title = item_title
-        formatted_title = get_formatted_title_from_json(
+        formatted_title = get_formatted_data_from_json(
             institution.item_title_formatting_tal, item, item_data
         )
         if formatted_title is not None:
@@ -138,8 +126,16 @@ def sync_items_data(meeting, items_data, institution, force=False):
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
         item.decision = RichTextValue(
-            get_decision_from_json(
+            get_formatted_data_from_json(
                 institution.item_decision_formatting_tal, item, item_data
+            ),
+            "text/html",
+            "text/html",
+        )
+
+        item.additional_data = RichTextValue(
+            get_formatted_data_from_json(
+                institution.item_additional_data_formatting_tal, item, item_data
             ),
             "text/html",
             "text/html",

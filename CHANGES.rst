@@ -11,6 +11,9 @@ Changelog
 - Added publishable management for annexe synchronization
   [odelaere]
 
+- Added Additional data field on items to tweak the display of some data depending of the institution config.
+  [odelaere]
+
 
 1.0a5 (2019-12-13)
 ------------------
