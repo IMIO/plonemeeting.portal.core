@@ -134,7 +134,6 @@ def sync_items_data(meeting, items_data, institution, force=False):
                 formatted_title, "text/html", "text/html"
             )
 
-        # TODO use formatted item number when available
         item.number = item_data.get("formatted_itemNumber")
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
