@@ -90,6 +90,10 @@ class IInstitution(model.Schema):
         title=_(u"Item decision formatting tal expression"), required=False
     )
 
+    item_additional_data_formatting_tal = schema.TextLine(
+        title=_(u"Item additional data formatting tal expression"), required=False
+    )
+
     info_annex_formatting_tal = schema.TextLine(
         title=_(u"Info annex formatting tal expression"), required=False
     )

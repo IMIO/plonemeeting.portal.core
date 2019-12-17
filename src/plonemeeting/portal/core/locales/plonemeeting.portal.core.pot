@@ -78,7 +78,7 @@ msgstr ""
 #: ../browser/templates/item.pt:77
 #: ../content/item.py:45
 #: ../content/meeting.py:35
-msgid "Extra info"
+msgid "Custom info"
 msgstr ""
 
 #: ../setuphandlers.py:56

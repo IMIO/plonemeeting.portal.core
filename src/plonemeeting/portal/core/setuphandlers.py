@@ -125,7 +125,7 @@ def create_demo_content(context):
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
-                    extra_info=meeting["extra_info"],
+                    custom_info=meeting["custom_info"],
                     plonemeeting_last_modified=dateutil.parser.parse(
                         meeting["plonemeeting_last_modified"]
                     ),
@@ -143,7 +143,6 @@ def create_demo_content(context):
                         representatives_in_charge=item["representatives_in_charge"],
                         decision=decision,
                         category=item["category"],
-                        extra_info=item["extra_info"],
                         plonemeeting_last_modified=dateutil.parser.parse(
                             meeting["plonemeeting_last_modified"]
                         ),

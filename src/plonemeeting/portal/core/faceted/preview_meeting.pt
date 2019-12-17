@@ -44,9 +44,9 @@
                    <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
               </div>
 
-              <div class="meeting-extra-info"
-                   tal:condition="meeting/extra_info"
-                   tal:content="structure meeting/extra_info/output" />
+              <div class="meeting-custom-info"
+                   tal:condition="meeting/custom_info"
+                   tal:content="structure meeting/custom_info/output" />
 
             </div>
 
