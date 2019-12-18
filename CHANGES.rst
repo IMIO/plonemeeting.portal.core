@@ -5,6 +5,10 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Change permissions / wokflows for institutions, meetings, items & folders
+  Institution Managers have now less possibilities & actions
+  [laulaz]
+
 - The watermark "in project" is also displayed when the item is still private
   [odelaere]
 
