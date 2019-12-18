@@ -4,7 +4,9 @@ from Products.CMFPlone.interfaces import INonInstallable
 from plone import api
 from plone.api import content
 from plone.app.textfield.value import RichTextValue
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
+from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
 
@@ -95,10 +97,13 @@ def create_demo_content(context):
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
 
+        normalizer = getUtility(IIDNormalizer)
         for institution in data["institutions"]:
+            institution_id = normalizer.normalize(institution["title"])
             institution_obj = content.create(
                 container=portal,
                 type="Institution",
+                id=institution_id,
                 title=institution["title"],
                 representatives_mappings=institution["representatives_mappings"],
                 plonemeeting_url=institution["plonemeeting_url"],
