@@ -219,6 +219,10 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: ../passwords.py:17
+msgid "Passwords must be at least 8 characters in length."
+msgstr ""
+
 #: ../browser/templates/institution.pt:16
 #: ../content/institution.py:53
 msgid "Plonemeeting URL"

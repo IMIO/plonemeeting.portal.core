@@ -8,6 +8,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="collective.dexteritytextindexer" />
+  <include package="collective.pwexpiry" />
   <include package="collective.z3cform.datagridfield" />
   <include package="collective.fingerpointing" />
   <include package="eea.facetednavigation" />
@@ -51,6 +52,15 @@
       factory=".setuphandlers.HiddenProfiles"
       name="plonemeeting.portal.core-hiddenprofiles"
       />
+
+  <!-- Password policy -->
+
+  <adapter
+    name="plonemeeting_password_policy"
+    factory=".passwords.PloneMeetingPasswordValidator"
+    provides="collective.pwexpiry.interfaces.ICustomPasswordValidator"
+    for="zope.interface.Interface"
+    />
 
   <!-- Vocabularies -->
 
