@@ -60,9 +60,10 @@ def post_install(context):
     )
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
-    faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-        import_file=open(os.path.dirname(__file__) + faceted_config, "rb")
-    )
+    with open(os.path.dirname(__file__) + faceted_config, "rb") as faceted_config:
+        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+            import_file=faceted_config
+        )
 
 
 def uninstall(context):
