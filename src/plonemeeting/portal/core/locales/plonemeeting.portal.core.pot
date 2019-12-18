@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-12 20:41+0000\n"
+"POT-Creation-Date: 2019-12-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,16 +26,21 @@ msgid "Active"
 msgstr ""
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:68
+#: ../content/institution.py:70
 msgid "Additional Meeting query string for list"
 msgstr ""
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:74
+#: ../content/institution.py:76
 msgid "Additional Published Items query string"
 msgstr ""
 
-#: ../browser/templates/item.pt:90
+#: ../browser/templates/item.pt:50
+#: ../content/item.py:44
+msgid "Additional data"
+msgstr ""
+
+#: ../browser/templates/item.pt:96
 msgid "Annexes"
 msgstr ""
 
@@ -44,12 +49,12 @@ msgid "Cancel"
 msgstr ""
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:98
+#: ../content/institution.py:106
 msgid "Categories mappings"
 msgstr ""
 
 #: ../browser/templates/item.pt:38
-#: ../content/item.py:43
+#: ../content/item.py:52
 msgid "Category"
 msgstr ""
 
@@ -57,11 +62,17 @@ msgstr ""
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
-#: ../setuphandlers.py:48
+#: ../setuphandlers.py:50
 msgid "Configuration folder"
 msgstr ""
 
-#: ../content/item.py:41
+#: ../browser/templates/item.pt:83
+#: ../content/item.py:57
+#: ../content/meeting.py:35
+msgid "Custom info"
+msgstr ""
+
+#: ../content/item.py:48
 msgid "Decision"
 msgstr ""
 
@@ -75,13 +86,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../browser/templates/item.pt:77
-#: ../content/item.py:45
-#: ../content/meeting.py:35
-msgid "Custom info"
-msgstr ""
-
-#: ../setuphandlers.py:56
+#: ../setuphandlers.py:58
 msgid "Faceted"
 msgstr ""
 
@@ -122,7 +127,7 @@ msgid "Import meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:94
+#: ../content/institution.py:102
 msgid "Info annex formatting tal expression"
 msgstr ""
 
@@ -142,8 +147,12 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
+#: ../content/institution.py:98
+msgid "Item additional data formatting tal expression"
+msgstr ""
+
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:90
+#: ../content/institution.py:92
 msgid "Item decision formatting tal expression"
 msgstr ""
 
@@ -154,7 +163,7 @@ msgid "Item number"
 msgstr ""
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:82
+#: ../content/institution.py:84
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -167,7 +176,7 @@ msgid "Items sort order"
 msgstr ""
 
 #: ../browser/templates/item.pt:45
-#: ../content/item.py:48
+#: ../content/item.py:60
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr ""
@@ -176,7 +185,7 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:79
+#: ../content/institution.py:81
 msgid "Logo"
 msgstr ""
 
@@ -216,7 +225,7 @@ msgstr ""
 msgid "Project decision disclaimer"
 msgstr ""
 
-#: ../browser/templates/item.pt:65
+#: ../browser/templates/item.pt:70
 #: ../faceted/macros.pt:20
 msgid "Public meeting"
 msgstr ""
@@ -229,7 +238,7 @@ msgstr ""
 msgid "Representative"
 msgstr ""
 
-#: ../content/item.py:36
+#: ../content/item.py:38
 msgid "Representative group in charge"
 msgstr ""
 
@@ -246,16 +255,16 @@ msgid "Representative value"
 msgstr ""
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:104
+#: ../content/institution.py:112
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/item.py:30
+#: ../content/item.py:31
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:206
+#: ../browser/sync.py:210
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
@@ -282,7 +291,7 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
-#: ../content/institution.py:64
+#: ../content/institution.py:65
 msgid "default_in_project_disclaimer"
 msgstr ""
 

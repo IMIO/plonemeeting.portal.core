@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-12 20:41+0000\n"
+"POT-Creation-Date: 2019-12-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,16 +23,21 @@ msgid "Active"
 msgstr "Actif"
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:68
+#: ../content/institution.py:70
 msgid "Additional Meeting query string for list"
 msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:74
+#: ../content/institution.py:76
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:90
+#: ../browser/templates/item.pt:50
+#: ../content/item.py:44
+msgid "Additional data"
+msgstr "Contenu additionnel"
+
+#: ../browser/templates/item.pt:96
 msgid "Annexes"
 msgstr "Annexes"
 
@@ -41,12 +46,12 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:98
+#: ../content/institution.py:106
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
 #: ../browser/templates/item.pt:38
-#: ../content/item.py:43
+#: ../content/item.py:52
 msgid "Category"
 msgstr "Matière"
 
@@ -54,11 +59,17 @@ msgstr "Matière"
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
-#: ../setuphandlers.py:48
+#: ../setuphandlers.py:50
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../content/item.py:41
+#: ../browser/templates/item.pt:83
+#: ../content/item.py:57
+#: ../content/meeting.py:35
+msgid "Custom info"
+msgstr "Informations complémentaires"
+
+#: ../content/item.py:48
 msgid "Decision"
 msgstr "Décision"
 
@@ -72,13 +83,7 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
-#: ../browser/templates/item.pt:77
-#: ../content/item.py:45
-#: ../content/meeting.py:35
-msgid "Custom info"
-msgstr "Informations complémentaires"
-
-#: ../setuphandlers.py:56
+#: ../setuphandlers.py:58
 msgid "Faceted"
 msgstr "Facettes"
 
@@ -119,7 +124,7 @@ msgid "Import meeting"
 msgstr "Importer une séance"
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:94
+#: ../content/institution.py:102
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
@@ -139,8 +144,12 @@ msgstr "Paramètres de l'URL invalides, la valeeur doit commencer par '&'"
 msgid "Item"
 msgstr "Point"
 
+#: ../content/institution.py:98
+msgid "Item additional data formatting tal expression"
+msgstr "Expression TAL pour le formatage du contenu additionnel"
+
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:90
+#: ../content/institution.py:92
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
@@ -151,7 +160,7 @@ msgid "Item number"
 msgstr "Numéro du point"
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:82
+#: ../content/institution.py:84
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr "Expression TAL pour le formatage du titre. Si laissé vide, le titre par défaut sera utilisé."
 
@@ -165,7 +174,7 @@ msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
 #: ../browser/templates/item.pt:45
-#: ../content/item.py:48
+#: ../content/item.py:60
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr "Date de dernière modification dans ia.Delib"
@@ -174,7 +183,7 @@ msgstr "Date de dernière modification dans ia.Delib"
 msgid "Local category id"
 msgstr "Identifiant de matière locale"
 
-#: ../content/institution.py:79
+#: ../content/institution.py:81
 msgid "Logo"
 msgstr "Logo"
 
@@ -214,7 +223,7 @@ msgstr "URL ia.Delib"
 msgid "Project decision disclaimer"
 msgstr "Avertissement de projets de décisions"
 
-#: ../browser/templates/item.pt:65
+#: ../browser/templates/item.pt:70
 #: ../faceted/macros.pt:20
 msgid "Public meeting"
 msgstr "Séance publique du Conseil communal"
@@ -227,7 +236,7 @@ msgstr "Date de la séance"
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:36
+#: ../content/item.py:38
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -244,16 +253,16 @@ msgid "Representative value"
 msgstr "Valeur de mandataire"
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:104
+#: ../content/institution.py:112
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/item.py:30
+#: ../content/item.py:31
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID ia.Delib"
 
-#: ../browser/sync.py:206
+#: ../browser/sync.py:210
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
@@ -280,7 +289,7 @@ msgstr "Erreur de connexion au webservice !"
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
-#: ../content/institution.py:64
+#: ../content/institution.py:65
 msgid "default_in_project_disclaimer"
 msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adoptée</span> par l'autorité communale.</strong></p>"
 
@@ -310,3 +319,7 @@ msgstr ""
 #: ../config.py:16
 msgid "private"
 msgstr "Privé"
+
+#: ../config.py:16
+msgid "published"
+msgstr "Décision"
