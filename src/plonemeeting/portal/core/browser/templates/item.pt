@@ -60,7 +60,7 @@
             <span tal:condition="python: review_state == 'in_project'"
                   i18n:translate="">In project</span>
             <span tal:condition="python: review_state == 'published'"
-                  i18n:translate="">Published</span>
+                  i18n:translate="">Published decision</span>
           </div>
           <div class="meeting-title">
             <a href=""

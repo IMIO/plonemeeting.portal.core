@@ -310,8 +310,3 @@ msgstr ""
 #: ../config.py:16
 msgid "private"
 msgstr "Privé"
-
-#. Default: "Published"
-#: ../config.py:16
-msgid "published"
-msgstr "Décision"

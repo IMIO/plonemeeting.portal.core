@@ -48,7 +48,3 @@ msgstr ""
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"
 msgstr ""
-
-#: ../profiles/default/workflows/comment_review_workflow/definition.xml
-msgid "Published"
-msgstr ""

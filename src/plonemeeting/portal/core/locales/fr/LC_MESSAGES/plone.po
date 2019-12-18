@@ -38,10 +38,6 @@ msgstr "Privé"
 msgid "Publish decision"
 msgstr "Publier"
 
-#: ../profiles/default/workflows/comment_review_workflow/definition.xml
-msgid "Published"
-msgstr "Décision"
-
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Published decision"
 msgstr "Décision publiée"
