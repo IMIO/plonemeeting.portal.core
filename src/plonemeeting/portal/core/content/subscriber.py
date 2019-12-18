@@ -10,16 +10,16 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IItemsFolder
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
 
 
 def handle_institution_creation(obj, event):
     current_lang = api.portal.get_default_language()[:2]
-    institution_id = obj.id
     institution_title = obj.title
 
     # Configure manager group & local permissions
-    group_id = "{0}-institution_managers".format(institution_id)
+    group_id = format_institution_managers_group_id(obj)
     group_title = "{0} Institution Managers".format(institution_title)
     api.group.create(groupname=group_id, title=group_title)
     obj.manage_setLocalRoles(group_id, ["Editor", "Reader", "Contributor", "Reviewer"])
