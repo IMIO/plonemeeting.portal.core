@@ -113,7 +113,7 @@ def get_pretty_category(object):
     global_categories = api.portal.get_registry_record(
         name="plonemeeting.portal.core.global_categories"
     )
-    if not global_categories or not object.category in global_categories:
+    if not global_categories or object.category not in global_categories:
         raise AttributeError
 
     return global_categories[object.category]
