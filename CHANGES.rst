@@ -5,6 +5,9 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Allow inline 'style' attribute
+  [laulaz]
+
 - Change permissions / wokflows for institutions, meetings, items & folders
   Institution Managers have now less possibilities & actions
   [laulaz]
