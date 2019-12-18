@@ -157,7 +157,8 @@ def get_annexes_infos(object):
     request = getRequest()
     if request is None:
         raise AttributeError
-    for annexe in object.listFolderContents():
+    files = object.listFolderContents(contentFilter={"portal_type": "File"})
+    for annexe in files:
         utils_view = getMultiAdapter((annexe, request), name="file_view")
         icon = utils_view.get_mimetype_icon()
         # Unfortunately, we can't store dicts
