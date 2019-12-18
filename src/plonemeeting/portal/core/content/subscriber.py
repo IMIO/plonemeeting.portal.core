@@ -22,7 +22,7 @@ def handle_institution_creation(obj, event):
     group_id = format_institution_managers_group_id(obj)
     group_title = "{0} Institution Managers".format(institution_title)
     api.group.create(groupname=group_id, title=group_title)
-    obj.manage_setLocalRoles(group_id, ["Editor", "Reader", "Contributor", "Reviewer"])
+    obj.manage_setLocalRoles(group_id, ["Institution Manager"])
 
     # Create meetings faceted folder
     meetings = create_faceted_folder(
