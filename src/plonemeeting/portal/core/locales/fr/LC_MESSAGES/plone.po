@@ -39,9 +39,5 @@ msgid "Publish decision"
 msgstr "Publier"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
-msgid "Published decision"
-msgstr "Décision publiée"
-
-#: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"
 msgstr "Mettre en projet"

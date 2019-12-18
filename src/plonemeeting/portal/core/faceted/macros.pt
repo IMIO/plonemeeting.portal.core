@@ -26,8 +26,8 @@
                   i18n:translate="">Private</span>
             <span tal:condition="python: review_state == 'in_project'"
                   i18n:translate="">In project</span>
-            <span tal:condition="python: review_state == 'published'"
-                  i18n:translate="">Published decision</span>
+            <span tal:condition="python: review_state == 'decision'"
+                  i18n:translate="">Decision</span>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
 
       <div class="project-disclaimer"
            tal:define="utils_view nocall:context/@@utils_view;"
-           tal:condition="python: review_state != 'published'">
+           tal:condition="python: review_state != 'decision'">
           <span tal:content="structure utils_view/get_project_decision_disclaimer_output" />
       </div>
     </div>

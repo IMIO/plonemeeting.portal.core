@@ -80,7 +80,7 @@
             <permission-role>Institution Manager</permission-role>
         </permission-map>
     </state>
-    <state state_id="published" title="Published decision" i18n:attributes="title">
+    <state state_id="decision" title="Decision" i18n:attributes="title">
         <description></description>
         <exit-transition transition_id="back_to_project"/>
         <permission-map name="Access contents information" acquired="False">
@@ -109,7 +109,7 @@
             <permission-role>Institution Manager</permission-role>
         </permission-map>
     </state>
-    <transition transition_id="publish" title="Publish decision" new_state="published" trigger="USER" before_script="" after_script="" i18n:attributes="title">
+    <transition transition_id="publish" title="Publish decision" new_state="decision" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
         <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish decision</action>
         <guard>

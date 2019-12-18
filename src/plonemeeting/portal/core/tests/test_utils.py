@@ -148,7 +148,7 @@ class TestUtils(unittest.TestCase):
             u"31 Décembre 2019 (23:59) — Projet de décision",
         )
         french_formated_meeting_date = format_meeting_date_and_state(
-            date, "published", lang="fr"
+            date, "decision", lang="fr"
         )
         self.assertEqual(
             french_formated_meeting_date, u"31 Décembre 2019 (23:59) — Décision"

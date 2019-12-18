@@ -75,7 +75,7 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "send_to_project")
         self._check_index(self.meeting_item, "linkedMeetingReviewState", "in_project")
         self.workflow.doActionFor(self.meeting, "publish")
-        self._check_index(self.meeting_item, "linkedMeetingReviewState", "published")
+        self._check_index(self.meeting_item, "linkedMeetingReviewState", "decision")
 
     def testOwnerSubmitAPrivateMeetingAndRetract(self):
         self._check_state(self.meeting, "private")

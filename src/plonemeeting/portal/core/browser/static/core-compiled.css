@@ -154,7 +154,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 .item-preview.in_project .item-metadata a{
     color:#fff;
 }
-.item-preview.published .item-metadata a{
+.item-preview.decision .item-metadata a{
     color: #fff;
 }
 .item-preview.private .item-metadata a{
@@ -163,7 +163,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 .item-preview.in_project .item-metadata a:hover{
     color:#484849;
 }
-.item-preview.published .item-metadata a:hover{
+.item-preview.decision .item-metadata a:hover{
     color: #484849;
 }
 .item-preview.private .item-metadata a:hover{
@@ -242,7 +242,7 @@ body .item-metadata > a{
     opacity: .25;
     background-size: 20%;
 }
-.published .meeting-state{
+.decision .meeting-state{
     color:#007BB1;
 }
 .private .meeting-state{
@@ -326,7 +326,7 @@ body .item-metadata > a{
     font-weight: bold;
     margin: 10px 0 10px 0;
 }
-.item-infos.published .meeting-title a{
+.item-infos.decision .meeting-title a{
     color: #007BB1;
 }
 .item-infos.in_project .meeting-title a{

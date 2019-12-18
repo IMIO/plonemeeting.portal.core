@@ -82,7 +82,7 @@ class TestBrowserUtils(unittest.TestCase):
     def test_get_state(self):
         meeting = self.belleville["16-novembre-2018-08-30"]
         utils_view = meeting.restrictedTraverse("@@utils_view")
-        self.assertEqual("published", utils_view.get_state(meeting))
+        self.assertEqual("decision", utils_view.get_state(meeting))
 
     def test_get_categories_mappings_value(self):
         meeting = self.belleville["16-novembre-2018-08-30"]

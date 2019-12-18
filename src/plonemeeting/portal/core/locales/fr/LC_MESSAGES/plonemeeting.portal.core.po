@@ -321,5 +321,5 @@ msgid "private"
 msgstr "Privé"
 
 #: ../config.py:16
-msgid "published"
+msgid "decision"
 msgstr "Décision"
