@@ -155,6 +155,8 @@ def get_year_from_meeting(object):
 def get_annexes_infos(object):
     index = []
     request = getRequest()
+    if request is None:
+        raise AttributeError
     for annexe in object.listFolderContents():
         utils_view = getMultiAdapter((annexe, request), name="file_view")
         icon = utils_view.get_mimetype_icon()
