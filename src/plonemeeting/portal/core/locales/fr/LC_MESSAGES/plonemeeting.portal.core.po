@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-18 11:42+0000\n"
+"POT-Creation-Date: 2019-12-18 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,14 +32,18 @@ msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:50
-#: ../content/item.py:44
+#: ../browser/templates/item.pt:51
+#: ../content/item.py:46
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../browser/templates/item.pt:96
+#: ../browser/templates/item.pt:97
 msgid "Annexes"
 msgstr "Annexes"
+
+#: ../profiles/default/sharing.xml
+msgid "Can manage institution"
+msgstr ""
 
 #: ../browser/sync.py:273
 msgid "Cancel"
@@ -50,8 +54,8 @@ msgstr "Annuler"
 msgid "Categories mappings"
 msgstr "Equivalences de matières"
 
-#: ../browser/templates/item.pt:38
-#: ../content/item.py:52
+#: ../browser/templates/item.pt:39
+#: ../content/item.py:54
 msgid "Category"
 msgstr "Matière"
 
@@ -63,13 +67,13 @@ msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../browser/templates/item.pt:83
-#: ../content/item.py:57
+#: ../browser/templates/item.pt:84
+#: ../content/item.py:59
 #: ../content/meeting.py:35
 msgid "Custom info"
 msgstr "Informations complémentaires"
 
-#: ../content/item.py:48
+#: ../content/item.py:50
 msgid "Decision"
 msgstr "Décision"
 
@@ -153,8 +157,8 @@ msgstr "Expression TAL pour le formatage du contenu additionnel"
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos points"
 
-#: ../browser/templates/item.pt:35
-#: ../content/item.py:28
+#: ../browser/templates/item.pt:36
+#: ../content/item.py:30
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr "Numéro du point"
@@ -173,8 +177,8 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
-#: ../browser/templates/item.pt:45
-#: ../content/item.py:60
+#: ../browser/templates/item.pt:46
+#: ../content/item.py:62
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr "Date de dernière modification dans ia.Delib"
@@ -223,8 +227,8 @@ msgstr "URL ia.Delib"
 msgid "Project decision disclaimer"
 msgstr "Avertissement de projets de décisions"
 
-#: ../browser/templates/item.pt:70
-#: ../faceted/macros.pt:20
+#: ../browser/templates/item.pt:71
+#: ../faceted/macros.pt:21
 msgid "Public meeting"
 msgstr "Séance publique du Conseil communal"
 
@@ -232,11 +236,11 @@ msgstr "Séance publique du Conseil communal"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/templates/item.pt:41
+#: ../browser/templates/item.pt:42
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:38
+#: ../content/item.py:40
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -257,7 +261,7 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
-#: ../content/item.py:31
+#: ../content/item.py:33
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID ia.Delib"
@@ -289,12 +293,16 @@ msgstr "Erreur de connexion au webservice !"
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
+#: ../config.py:17
+msgid "decision"
+msgstr "Décision"
+
 #: ../content/institution.py:65
 msgid "default_in_project_disclaimer"
 msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adoptée</span> par l'autorité communale.</strong></p>"
 
 #. Default: "In project"
-#: ../config.py:16
+#: ../config.py:17
 msgid "in_project"
 msgstr "Projet de décision"
 
@@ -316,10 +324,6 @@ msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
 #. Default: "Private"
-#: ../config.py:16
+#: ../config.py:17
 msgid "private"
 msgstr "Privé"
-
-#: ../config.py:16
-msgid "decision"
-msgstr "Décision"

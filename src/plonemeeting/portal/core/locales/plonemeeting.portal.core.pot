@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-18 11:42+0000\n"
+"POT-Creation-Date: 2019-12-18 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,13 +35,17 @@ msgstr ""
 msgid "Additional Published Items query string"
 msgstr ""
 
-#: ../browser/templates/item.pt:50
-#: ../content/item.py:44
+#: ../browser/templates/item.pt:51
+#: ../content/item.py:46
 msgid "Additional data"
 msgstr ""
 
-#: ../browser/templates/item.pt:96
+#: ../browser/templates/item.pt:97
 msgid "Annexes"
+msgstr ""
+
+#: ../profiles/default/sharing.xml
+msgid "Can manage institution"
 msgstr ""
 
 #: ../browser/sync.py:273
@@ -53,8 +57,8 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../browser/templates/item.pt:38
-#: ../content/item.py:52
+#: ../browser/templates/item.pt:39
+#: ../content/item.py:54
 msgid "Category"
 msgstr ""
 
@@ -66,13 +70,13 @@ msgstr ""
 msgid "Configuration folder"
 msgstr ""
 
-#: ../browser/templates/item.pt:83
-#: ../content/item.py:57
+#: ../browser/templates/item.pt:84
+#: ../content/item.py:59
 #: ../content/meeting.py:35
 msgid "Custom info"
 msgstr ""
 
-#: ../content/item.py:48
+#: ../content/item.py:50
 msgid "Decision"
 msgstr ""
 
@@ -156,8 +160,8 @@ msgstr ""
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: ../browser/templates/item.pt:35
-#: ../content/item.py:28
+#: ../browser/templates/item.pt:36
+#: ../content/item.py:30
 #: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr ""
@@ -175,8 +179,8 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
-#: ../browser/templates/item.pt:45
-#: ../content/item.py:60
+#: ../browser/templates/item.pt:46
+#: ../content/item.py:62
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
 msgstr ""
@@ -225,8 +229,8 @@ msgstr ""
 msgid "Project decision disclaimer"
 msgstr ""
 
-#: ../browser/templates/item.pt:70
-#: ../faceted/macros.pt:20
+#: ../browser/templates/item.pt:71
+#: ../faceted/macros.pt:21
 msgid "Public meeting"
 msgstr ""
 
@@ -234,11 +238,11 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/templates/item.pt:41
+#: ../browser/templates/item.pt:42
 msgid "Representative"
 msgstr ""
 
-#: ../content/item.py:38
+#: ../content/item.py:40
 msgid "Representative group in charge"
 msgstr ""
 
@@ -259,7 +263,7 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/item.py:31
+#: ../content/item.py:33
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr ""
@@ -291,11 +295,15 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
+#: ../config.py:17
+msgid "decision"
+msgstr ""
+
 #: ../content/institution.py:65
 msgid "default_in_project_disclaimer"
 msgstr ""
 
-#: ../config.py:16
+#: ../config.py:17
 msgid "in_project"
 msgstr ""
 
@@ -316,10 +324,6 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../config.py:16
+#: ../config.py:17
 msgid "private"
-msgstr ""
-
-#: ../config.py:16
-msgid "decision"
 msgstr ""
