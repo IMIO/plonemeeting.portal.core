@@ -34,6 +34,9 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plonemeeting.portal.core:default")
+        import transaction
+
+        transaction.commit()
 
 
 PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
