@@ -5,6 +5,9 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Add annexes on faceted, and handle icons
+  [laulaz]
+
 - Allow inline 'style' attribute
   [laulaz]
 

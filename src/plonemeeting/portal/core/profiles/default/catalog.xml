@@ -46,6 +46,14 @@
 
     <index name="plonemeeting_last_modified" meta_type="DateIndex" />
 
+    <index name="annexes_infos" meta_type="FieldIndex">
+      <indexed_attr value="annexes_infos"/>
+    </index>
+
+    <index name="icon" meta_type="FieldIndex">
+      <indexed_attr value="icon"/>
+    </index>
+
     <column value="date_time" />
     <column value="number" />
     <column value="pretty_representatives" />
@@ -55,5 +63,7 @@
     <column value="linkedMeetingReviewState" />
     <column value="plonemeeting_last_modified" />
     <column value="plonemeeting_uid" />
+    <column value="annexes_infos" />
+    <column value="icon" />
 
 </object>

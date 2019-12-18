@@ -24,7 +24,8 @@
     <tal:text-macro metal:define-macro="content-core">
 
       <div class=""
-           tal:define="utils_view nocall:context/@@utils_view;
+           tal:define="portal_url context/@@plone_portal_state/portal_url;
+                       utils_view nocall:context/@@utils_view;
                        meeting nocall:context/aq_parent;
                        review_state python: utils_view.get_state(meeting);
                        isAnon context/@@plone_portal_state/anonymous;"
@@ -98,8 +99,11 @@
             <li tal:repeat="file files">
               <a href=""
                  target="_blank"
-                 tal:content="file/Title"
-                 tal:attributes="href file/getURL" />
+                 tal:attributes="href file/getURL">
+                 <img src=""
+                      tal:attributes="src string: ${portal_url}/${file/icon}"
+                      ><span tal:replace="file/Title" />
+              </a>
             </li>
           </ul>
         </div>

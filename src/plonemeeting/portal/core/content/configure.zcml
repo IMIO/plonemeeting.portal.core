@@ -37,6 +37,8 @@
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />
     <adapter name="linkedMeetingReviewState" factory=".item.get_review_state_from_meeting" />
     <adapter name="year" factory=".item.get_year_from_meeting" />
+    <adapter name="annexes_infos" factory=".item.get_annexes_infos" />
+    <adapter name="icon" factory=".file.get_icon" />
 
     <!-- Subscribers -->
 

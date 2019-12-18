@@ -9,5 +9,7 @@ class ItemView(DefaultView):
     """
 
     def get_files(self):
-        brains = api.content.find(portal_type="File", context=self.context)
+        brains = api.content.find(
+            portal_type="File", context=self.context, sort_on="getObjPositionInParent"
+        )
         return brains

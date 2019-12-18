@@ -9,6 +9,8 @@ from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel import model
 from zope import schema
+from zope.component import getMultiAdapter
+from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 from plonemeeting.portal.core import _
@@ -147,3 +149,15 @@ def get_year_from_meeting(object):
     date_time = meeting.date_time
     if date_time:
         return str(date_time.year)
+
+
+@indexer(IItem)
+def get_annexes_infos(object):
+    index = []
+    request = getRequest()
+    for annexe in object.listFolderContents():
+        utils_view = getMultiAdapter((annexe, request), name="file_view")
+        icon = utils_view.get_mimetype_icon()
+        # Unfortunately, we can't store dicts
+        index.append((annexe.title, annexe.absolute_url(), icon))
+    return index
