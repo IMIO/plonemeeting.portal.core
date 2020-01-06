@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-18 14:09+0000\n"
+"POT-Creation-Date: 2020-01-06 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,11 @@ msgstr "Informations complémentaires"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../configure.zcml:39
+#: ../content/subscriber.py:36
+msgid "Decisions"
+msgstr "Décisions"
+
+#: ../configure.zcml:40
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
@@ -132,7 +136,7 @@ msgstr "Importer une séance"
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des infos annexes"
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -168,10 +172,6 @@ msgstr "Numéro du point"
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr "Expression TAL pour le formatage du titre. Si laissé vide, le titre par défaut sera utilisé."
 
-#: ../content/subscriber.py:36
-msgid "Items"
-msgstr "Points"
-
 #: ../faceted/widgets/sort.py:29
 msgid "Items sort order"
 msgstr "Ordre de tri des points"
@@ -181,7 +181,7 @@ msgstr "Ordre de tri des points"
 #: ../content/item.py:62
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
-msgstr "Date de dernière modification dans ia.Delib"
+msgstr "Dernière modification dans ia.Delib"
 
 #: ../content/institution.py:34
 msgid "Local category id"
@@ -274,7 +274,7 @@ msgstr "UID ia.Delib"
 msgid "Unexpected meeting count in webservice response !"
 msgstr "Nombre de Séances inatendu dans la réponse du webservice !"
 
-#: ../configure.zcml:48
+#: ../configure.zcml:49
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -315,15 +315,15 @@ msgstr "Projet de décision"
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:39
+#: ../configure.zcml:40
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:48
+#: ../configure.zcml:49
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

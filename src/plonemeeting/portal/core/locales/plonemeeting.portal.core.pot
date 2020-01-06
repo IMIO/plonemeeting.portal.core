@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-18 14:09+0000\n"
+"POT-Creation-Date: 2020-01-06 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,7 +80,11 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../configure.zcml:39
+#: ../content/subscriber.py:36
+msgid "Decisions"
+msgstr ""
+
+#: ../configure.zcml:40
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -135,7 +139,7 @@ msgstr ""
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -169,10 +173,6 @@ msgstr ""
 #: ../browser/templates/institution.pt:40
 #: ../content/institution.py:84
 msgid "Item title formatting tal expression. If empty the default title will be used"
-msgstr ""
-
-#: ../content/subscriber.py:36
-msgid "Items"
 msgstr ""
 
 #: ../faceted/widgets/sort.py:29
@@ -276,7 +276,7 @@ msgstr ""
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
-#: ../configure.zcml:48
+#: ../configure.zcml:49
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -316,15 +316,15 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:30
+#: ../configure.zcml:31
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:39
+#: ../configure.zcml:40
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:48
+#: ../configure.zcml:49
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

@@ -33,7 +33,7 @@ def handle_institution_creation(obj, event):
 
     # Create items faceted folder
     items = create_faceted_folder(
-        obj, translate(_(u"Items"), target_language=current_lang)
+        obj, translate(_(u"Decisions"), target_language=current_lang)
     )
     alsoProvides(items, IItemsFolder)
     IFacetedLayout(items).update_layout("faceted-preview-meeting-items")
