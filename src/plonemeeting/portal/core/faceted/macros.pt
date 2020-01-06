@@ -7,7 +7,8 @@
   <metal:macro define-macro="preview_meeting_item">
 
     <div class=""
-         tal:define="review_state brain/linkedMeetingReviewState;
+         tal:define="portal_url context/@@plone_portal_state/portal_url;
+                     review_state brain/linkedMeetingReviewState;
                      meeting_utils_view nocall:brain/@@utils_view"
          tal:attributes="class string:item-preview ${review_state}"
          i18n:domain="plonemeeting.portal.core">
@@ -26,8 +27,24 @@
                   i18n:translate="">Private</span>
             <span tal:condition="python: review_state == 'in_project'"
                   i18n:translate="">In project</span>
-            <span tal:condition="python: review_state == 'published'"
-                  i18n:translate="">Published</span>
+            <span tal:condition="python: review_state == 'decision'"
+                  i18n:translate="">Decision</span>
+        </div>
+
+        <div class="annexes">
+          <ul>
+            <li tal:repeat="annexe brain/annexes_infos">
+              <a href=""
+                 tal:define="title python: annexe[0];
+                             url python: annexe[1];
+                             icon python: annexe[2]"
+                 tal:attributes="href url">
+                <img src=""
+                     tal:attributes="src string: ${portal_url}/${icon}"
+                     ><span tal:replace="title" />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -50,7 +67,7 @@
 
       <div class="project-disclaimer"
            tal:define="utils_view nocall:context/@@utils_view;"
-           tal:condition="python: review_state != 'published'">
+           tal:condition="python: review_state != 'decision'">
           <span tal:content="structure utils_view/get_project_decision_disclaimer_output" />
       </div>
     </div>

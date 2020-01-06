@@ -52,7 +52,8 @@ class UtilsView(BrowserView):
         url = "{0}#seance={1}".format(meeting_folder_brains[0].getURL(), UID)
         return url
 
-    def get_state(self, meeting):
+    @staticmethod
+    def get_state(meeting):
         return api.content.get_state(meeting)
 
     def get_categories_mappings_value(self, key):

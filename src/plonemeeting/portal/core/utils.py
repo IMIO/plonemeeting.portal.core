@@ -18,6 +18,10 @@ from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
 
 
+def format_institution_managers_group_id(institution):
+    return "{0}-institution_managers".format(institution.id)
+
+
 def get_text_from_richtext(field):
     if IRichTextValue.providedBy(field):
         transforms = api.portal.get_tool("portal_transforms")

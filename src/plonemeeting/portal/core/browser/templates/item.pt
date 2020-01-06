@@ -24,7 +24,8 @@
     <tal:text-macro metal:define-macro="content-core">
 
       <div class=""
-           tal:define="utils_view nocall:context/@@utils_view;
+           tal:define="portal_url context/@@plone_portal_state/portal_url;
+                       utils_view nocall:context/@@utils_view;
                        meeting nocall:context/aq_parent;
                        review_state python: utils_view.get_state(meeting);
                        isAnon context/@@plone_portal_state/anonymous;"
@@ -45,6 +46,11 @@
             <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
             <span tal:content="utils_view/get_plonemeeting_last_modified" />
           </div>
+          <div class="additional-data"
+             tal:condition="context/additional_data">
+             <span i18n:translate="">Additional data</span>
+             <span tal:content="structure context/additional_data/output" />
+          </div>
         </div>
 
         <div class="meeting-metadata">
@@ -54,8 +60,8 @@
                   i18n:translate="">Private</span>
             <span tal:condition="python: review_state == 'in_project'"
                   i18n:translate="">In project</span>
-            <span tal:condition="python: review_state == 'published'"
-                  i18n:translate="">Published</span>
+            <span tal:condition="python: review_state == 'decision'"
+                  i18n:translate="">Decision</span>
           </div>
           <div class="meeting-title">
             <a href=""
@@ -68,15 +74,15 @@
         </div>
 
         <div class="portalMessage info"
-             tal:condition="python: review_state != 'published'">
+             tal:condition="python: review_state != 'decision'">
             <strong>Info</strong>
           <div class="project-disclaimer" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
         </div>
 
-        <div class="extra-info"
-             tal:condition="context/extra_info">
-             <span i18n:translate="">Extra info</span>
-             <span tal:content="structure context/extra_info/output" />
+        <div class="custom-info"
+             tal:condition="context/custom_info">
+             <span i18n:translate="">Custom info</span>
+             <span tal:content="structure context/custom_info/output" />
         </div>
 
         <div class="decision"
@@ -93,8 +99,11 @@
             <li tal:repeat="file files">
               <a href=""
                  target="_blank"
-                 tal:content="file/Title"
-                 tal:attributes="href file/getURL" />
+                 tal:attributes="href file/getURL">
+                 <img src=""
+                      tal:attributes="src string: ${portal_url}/${file/icon}"
+                      ><span tal:replace="file/Title" />
+              </a>
             </li>
           </ul>
         </div>

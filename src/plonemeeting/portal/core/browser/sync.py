@@ -36,6 +36,8 @@ def _call_delib_rest_api(url, institution):
 
 
 def get_formatted_data_from_json(tal_expression, item, item_data):
+    if not tal_expression:
+        return None
     expression = Expression(tal_expression)
     expression_context = getExprContext(item)
     expression_context.vars["json"] = item_data
@@ -43,26 +45,12 @@ def get_formatted_data_from_json(tal_expression, item, item_data):
     return expression_result
 
 
-def get_formatted_title_from_json(title_tal_format, item, item_data):
-    if not title_tal_format:
-        return
-    return get_formatted_data_from_json(title_tal_format, item, item_data)
-
-
-def get_decision_from_json(decision_tal_format, item, item_data):
-    if not decision_tal_format:
-        raise AttributeError(
-            "decision_tal_format is invalid {}".format(decision_tal_format)
-        )
-    return get_formatted_data_from_json(decision_tal_format, item, item_data)
-
-
-def sync_annexes(item, institution, annexes_json):
-
-    if annexes_json:
-        response = _call_delib_rest_api(annexes_json.get("@id"), institution)
-        for annex_data in response.json():
-            # if annex_data.get("publishable"):
+def sync_annexes_data(item, institution, annexes_json):
+    for annex_data in annexes_json:
+        publishable_activated = annex_data.get("publishable_activated")
+        publishable = annex_data.get("publishable")
+        # download all annexes except if annex publication is enabled in ia.Delib AND this annex not publishable
+        if not publishable_activated or publishable:
             file_json = annex_data.get("file")
             file_title = annex_data.get("category_title")
             dl_link = file_json.get("download")
@@ -71,15 +59,24 @@ def sync_annexes(item, institution, annexes_json):
             file_blob = response.content
 
             annex = api.content.create(container=item, type="File", title=file_title)
-            file_name = u"{}.{}".format(annex.id, file_json.get("filename").split(".")[-1])
+            file_name = u"{}.{}".format(
+                annex.id, file_json.get("filename").split(".")[-1]
+            )
             annex.file = NamedBlobFile(
                 data=file_blob, contentType=file_content_type, filename=file_name
             )
+            annex.reindexObject()
+
+
+def sync_annexes(item, institution, annexes_json):
+    if annexes_json:
+        response = _call_delib_rest_api(annexes_json.get("@id"), institution)
+        sync_annexes_data(item, institution, response.json())
 
 
 def sync_items_data(meeting, items_data, institution, force=False):
     nb_created = nb_modified = nb_deleted = 0
-    timezone = api.portal.get_registry_record('plone.portal_timezone')
+    timezone = api.portal.get_registry_record("plone.portal_timezone")
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
     )
@@ -117,7 +114,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         # Sync item fields values
         item.plonemeeting_last_modified = modification_date
         item.title = item_title
-        formatted_title = get_formatted_title_from_json(
+        formatted_title = get_formatted_data_from_json(
             institution.item_title_formatting_tal, item, item_data
         )
         if formatted_title is not None:
@@ -125,13 +122,20 @@ def sync_items_data(meeting, items_data, institution, force=False):
                 formatted_title, "text/html", "text/html"
             )
 
-        # TODO use formatted item number when available
         item.number = item_data.get("formatted_itemNumber")
         item.representatives_in_charge = item_data.get("groupsInCharge")
 
         item.decision = RichTextValue(
-            get_decision_from_json(
+            get_formatted_data_from_json(
                 institution.item_decision_formatting_tal, item, item_data
+            ),
+            "text/html",
+            "text/html",
+        )
+
+        item.additional_data = RichTextValue(
+            get_formatted_data_from_json(
+                institution.item_additional_data_formatting_tal, item, item_data
             ),
             "text/html",
             "text/html",
@@ -161,7 +165,7 @@ def sync_meeting_data(institution, meeting_data):
     meeting_uid = meeting_data.get("UID")
     meeting_date_str = meeting_data.get("date")
     meeting_title = meeting_data.get("title")
-    timezone = api.portal.get_registry_record('plone.portal_timezone')
+    timezone = api.portal.get_registry_record("plone.portal_timezone")
     brains = api.content.find(
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
@@ -205,18 +209,14 @@ def sync_meeting(institution, meeting_uid, force=False):
     if json_meeting.get("items_total") != 1:
         return _(u"Unexpected meeting count in webservice response !"), None
 
-    meeting = sync_meeting_data(
-        institution, json_meeting.get("items")[0]
-    )
+    meeting = sync_meeting_data(institution, json_meeting.get("items")[0])
     url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)
     response = _call_delib_rest_api(url, institution)
     if response.status_code != 200:
         return _(u"Webservice connection error !"), None
 
     json_items = json.loads(response.text)
-    results = sync_items_data(
-        meeting, json_items, institution, force
-    )
+    results = sync_items_data(meeting, json_items, institution, force)
 
     status_msg = _(
         u"meeting_imported",

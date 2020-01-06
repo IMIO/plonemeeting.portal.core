@@ -13,4 +13,5 @@ PLONEMEETING_API_MEETING_ITEMS_VIEW = "@search_items"
 
 API_HEADERS = {"Content-type": "application/json", "Accept": "application/json"}
 
-REVIEW_STATES_IDS = [_(u"private"), _(u"in_project"), _(u"published")]
+# keep those ids in translations files
+REVIEW_STATES_IDS = [_(u"private"), _(u"in_project"), _(u"decision")]

@@ -4,7 +4,9 @@ from Products.CMFPlone.interfaces import INonInstallable
 from plone import api
 from plone.api import content
 from plone.app.textfield.value import RichTextValue
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
+from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
 
@@ -58,9 +60,10 @@ def post_install(context):
     )
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
-    faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-        import_file=open(os.path.dirname(__file__) + faceted_config, "rb")
-    )
+    with open(os.path.dirname(__file__) + faceted_config, "rb") as faceted_config:
+        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+            import_file=faceted_config
+        )
 
 
 def uninstall(context):
@@ -95,10 +98,13 @@ def create_demo_content(context):
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
 
+        normalizer = getUtility(IIDNormalizer)
         for institution in data["institutions"]:
+            institution_id = normalizer.normalize(institution["title"])
             institution_obj = content.create(
                 container=portal,
                 type="Institution",
+                id=institution_id,
                 title=institution["title"],
                 representatives_mappings=institution["representatives_mappings"],
                 plonemeeting_url=institution["plonemeeting_url"],
@@ -125,7 +131,6 @@ def create_demo_content(context):
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
-                    extra_info=meeting["extra_info"],
                     plonemeeting_last_modified=dateutil.parser.parse(
                         meeting["plonemeeting_last_modified"]
                     ),
@@ -143,7 +148,6 @@ def create_demo_content(context):
                         representatives_in_charge=item["representatives_in_charge"],
                         decision=decision,
                         category=item["category"],
-                        extra_info=item["extra_info"],
                         plonemeeting_last_modified=dateutil.parser.parse(
                             meeting["plonemeeting_last_modified"]
                         ),

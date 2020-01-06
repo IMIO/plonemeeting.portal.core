@@ -3,6 +3,14 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plonemeeting.portal.core">
 
+    <record name="plone.custom_attributes"
+            interface="Products.CMFPlone.interfaces.controlpanel.IFilterSchema"
+            field="custom_attributes">
+      <value purge="true">
+        <element>style</element>
+      </value>
+    </record>
+
     <records interface="plone.app.querystring.interfaces.IQueryField"
              prefix="plone.app.querystring.field.item_number">
         <value key="title" i18n:translate="">Item number</value>

@@ -9,6 +9,8 @@ from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel import model
 from zope import schema
+from zope.component import getMultiAdapter
+from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 from plonemeeting.portal.core import _
@@ -40,6 +42,10 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    additional_data = RichText(
+        title=_(u"Additional data"), required=False, readonly=True
+    )
+
     dexteritytextindexer.searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False, readonly=True)
 
@@ -50,7 +56,7 @@ class IItem(model.Schema):
         readonly=True,
     )
 
-    extra_info = RichText(title=_(u"Extra info"), required=False)
+    custom_info = RichText(title=_(u"Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
         title=_(u"Last modification in ia.Delib"), required=True, readonly=True
@@ -107,7 +113,7 @@ def get_pretty_category(object):
     global_categories = api.portal.get_registry_record(
         name="plonemeeting.portal.core.global_categories"
     )
-    if not global_categories or not object.category in global_categories:
+    if not global_categories or object.category not in global_categories:
         raise AttributeError
 
     return global_categories[object.category]
@@ -143,3 +149,18 @@ def get_year_from_meeting(object):
     date_time = meeting.date_time
     if date_time:
         return str(date_time.year)
+
+
+@indexer(IItem)
+def get_annexes_infos(object):
+    index = []
+    request = getRequest()
+    if request is None:
+        raise AttributeError
+    files = object.listFolderContents(contentFilter={"portal_type": "File"})
+    for annexe in files:
+        utils_view = getMultiAdapter((annexe, request), name="file_view")
+        icon = utils_view.get_mimetype_icon()
+        # Unfortunately, we can't store dicts
+        index.append((annexe.title, annexe.absolute_url(), icon))
+    return index

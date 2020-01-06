@@ -5,7 +5,24 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add annexes on faceted, and handle icons
+  [laulaz]
+
+- Allow inline 'style' attribute
+  [laulaz]
+
+- Change permissions / wokflows for institutions, meetings, items & folders
+  Institution Managers have now less possibilities & actions
+  [laulaz]
+
+- The watermark "in project" is also displayed when the item is still private
+  [odelaere]
+
+- Added publishable management for annexe synchronization
+  [odelaere]
+
+- Added Additional data field on items to tweak the display of some data depending of the institution config.
+  [odelaere]
 
 
 1.0a5 (2019-12-13)

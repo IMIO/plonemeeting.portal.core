@@ -17,22 +17,22 @@ class IMeeting(model.Schema):
     title = schema.TextLine(
         title=plone_(u"Title"),
         required=True,
-        # readonly=True
+        readonly=True
     )
 
     plonemeeting_uid = schema.TextLine(
         title=_(u"UID Plonemeeting"),
         required=True,
-        # readonly=True,
+        readonly=True,
     )
 
     date_time = schema.Datetime(
         title=plone_(u"Date"),
         required=True,
-        # readonly=True,
+        readonly=True,
     )
 
-    extra_info = RichText(title=_(u"Extra info"), required=False)
+    custom_info = RichText(title=_(u"Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
         title=_(u"Last modification in ia.Delib"), required=True, readonly=True

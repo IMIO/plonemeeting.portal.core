@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-05 15:06+0000\n"
+"POT-Creation-Date: 2019-12-18 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: ../profiles/default/workflows/institution_workflow/definition.xml
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Back to private"
 msgstr "Retour en privé"
@@ -23,28 +24,36 @@ msgid "Back to project"
 msgstr "Retour en projet"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
+msgid "Decision"
+msgstr "Décision"
+
+#: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "In project"
 msgstr "Projet de décision"
+
+#: ../profiles/default/workflows/institution_workflow/definition.xml
+msgid "Institution Workflow"
+msgstr "Processus de publication des Institutions"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Meeting Workflow"
 msgstr "Processus de publication des Séances"
 
-#: ../profiles/default/workflows/meeting_workflow/definition.xml
+#: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Private"
 msgstr "Privé"
+
+#: ../profiles/default/workflows/institution_workflow/definition.xml
+msgid "Publish"
+msgstr "Publier"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Publish decision"
 msgstr "Publier"
 
-#: ../profiles/default/workflows/comment_review_workflow/definition.xml
+#: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Published"
-msgstr "Décision"
-
-#: ../profiles/default/workflows/meeting_workflow/definition.xml
-msgid "Published decision"
-msgstr "Décision publiée"
+msgstr "Publié"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"

@@ -52,6 +52,7 @@ setup(
         # -*- Extra requirements: -*-
         "collective.dexteritytextindexer",
         "collective.fingerpointing",
+        "collective.pwexpiry",
         "collective.z3cform.datagridfield",
         "eea.facetednavigation",
         "plone.api>=1.8.4",
