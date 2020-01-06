@@ -123,7 +123,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
             )
 
         item.number = item_data.get("formatted_itemNumber")
-        item.representatives_in_charge = item_data.get("groupsInCharge")
+        item.representatives_in_charge = item_data.get("groupsInCharge") or item_data.get("all_groupsInCharge")
 
         item.decision = RichTextValue(
             get_formatted_data_from_json(

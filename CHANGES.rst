@@ -24,6 +24,10 @@ Changelog
 - Added Additional data field on items to tweak the display of some data depending of the institution config.
   [odelaere]
 
+- While importing an item, if `groupsInCharge` is empty, use the
+  `all_groupsInCharge` data on item that contains groupsInCharge
+  defined on ithe item proposingGroup or category.
+  [gbastien]
 
 1.0a5 (2019-12-13)
 ------------------
