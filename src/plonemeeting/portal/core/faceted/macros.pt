@@ -18,9 +18,20 @@
            tal:attributes="href brain/getURL">
           <div class="item-title" tal:content="brain/Title" />
         </a>
-        <div class="public-meeting"
-             i18n:translate="">Public meeting
+
+        <div class="item-number">
+          <span i18n:translate="">Item number</span> : <span tal:content="brain/number" />
         </div>
+        <div class="item-category">
+          <span i18n:translate="">Category</span> : <span tal:content="brain/pretty_category" />
+        </div>
+        <div class="item-representative">
+          <span i18n:translate="">Representative</span> : <span tal:content="brain/pretty_representatives" />
+        </div>
+
+      </div>
+
+      <div class="item-metadata">
         <div class="meeting-state"
              i18n:domain="plone">
             <span tal:condition="python: review_state == 'private'"
@@ -30,28 +41,9 @@
             <span tal:condition="python: review_state == 'decision'"
                   i18n:translate="">Decision</span>
         </div>
-
-        <div class="annexes">
-          <ul>
-            <li tal:repeat="annexe brain/annexes_infos">
-              <a href=""
-                 tal:define="title python: annexe[0];
-                             url python: annexe[1];
-                             icon python: annexe[2]"
-                 tal:attributes="href url">
-                <img src=""
-                     tal:attributes="src string: ${portal_url}/${icon}"
-                     ><span tal:replace="title" />
-              </a>
-            </li>
-          </ul>
+        <div class="public-meeting"
+             i18n:translate="">Public meeting
         </div>
-      </div>
-
-      <div class="item-metadata">
-        <div class="item-number" tal:content="brain/number" />
-        <div class="item-category" tal:content="brain/pretty_category" />
-        <div class="item-representatives" tal:content="brain/pretty_representatives" />
         <a href=""
            tal:define="utils_view nocall:context/@@utils_view;"
            tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)">
@@ -63,6 +55,22 @@
              <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
              <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
         </div>
+      </div>
+
+      <div class="annexes">
+        <ul>
+          <li tal:repeat="annexe brain/annexes_infos">
+            <a href=""
+               tal:define="title python: annexe[0];
+                           url python: annexe[1];
+                           icon python: annexe[2]"
+               tal:attributes="href url">
+              <img src=""
+                   tal:attributes="src string: ${portal_url}/${icon}"
+                   ><span tal:replace="title" />
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div class="project-disclaimer"

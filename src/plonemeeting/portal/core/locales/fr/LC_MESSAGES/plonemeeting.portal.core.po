@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-01-06 12:18+0000\n"
+"POT-Creation-Date: 2020-01-06 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Paramètres additionnels d'URL de Séances pour la liste à importer"
 msgid "Additional Published Items query string"
 msgstr "Paramètres additionnels d'URL de Points Publiés"
 
-#: ../browser/templates/item.pt:51
+#: ../browser/templates/item.pt:46
 #: ../content/item.py:46
 msgid "Additional data"
 msgstr "Contenu additionnel"
@@ -40,6 +40,10 @@ msgstr "Contenu additionnel"
 #: ../browser/templates/item.pt:97
 msgid "Annexes"
 msgstr "Annexes"
+
+#: ../browser/templates/item.pt:78
+msgid "Attention"
+msgstr "Attention"
 
 #: ../profiles/default/sharing.xml
 msgid "Can manage institution"
@@ -56,6 +60,7 @@ msgstr "Equivalences de matières"
 
 #: ../browser/templates/item.pt:39
 #: ../content/item.py:54
+#: ../faceted/macros.pt:26
 msgid "Category"
 msgstr "Matière"
 
@@ -163,7 +168,7 @@ msgstr "Expression TAL pour le formatage des infos points"
 
 #: ../browser/templates/item.pt:36
 #: ../content/item.py:30
-#: ../profiles/default/registry.xml
+#: ../faceted/macros.pt:23
 msgid "Item number"
 msgstr "Numéro du point"
 
@@ -177,7 +182,7 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #. Default: "Last modification in ia.Delib :"
-#: ../browser/templates/item.pt:46
+#: ../browser/templates/item.pt:71
 #: ../content/item.py:62
 #: ../content/meeting.py:38
 msgid "Last modification in ia.Delib"
@@ -231,8 +236,8 @@ msgstr "URL ia.Delib"
 msgid "Project decision disclaimer"
 msgstr "Avertissement de projets de décisions"
 
-#: ../browser/templates/item.pt:71
-#: ../faceted/macros.pt:21
+#: ../browser/templates/item.pt:61
+#: ../faceted/macros.pt:44
 msgid "Public meeting"
 msgstr "Séance publique du Conseil communal"
 
@@ -241,6 +246,7 @@ msgid "Related meeting date"
 msgstr "Date de la séance"
 
 #: ../browser/templates/item.pt:42
+#: ../faceted/macros.pt:29
 msgid "Representative"
 msgstr "Mandataire"
 

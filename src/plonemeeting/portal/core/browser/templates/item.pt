@@ -41,11 +41,6 @@
           <div class="representative">
             <span i18n:translate="">Representative</span> : <span tal:content="structure view/w/representatives_in_charge/render" />
           </div>
-          <div class="item-last-pm-modified"
-               tal:condition='not: isAnon'>
-            <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
-            <span tal:content="utils_view/get_plonemeeting_last_modified" />
-          </div>
           <div class="additional-data"
              tal:condition="context/additional_data">
              <span i18n:translate="">Additional data</span>
@@ -63,19 +58,24 @@
             <span tal:condition="python: review_state == 'decision'"
                   i18n:translate="">Decision</span>
           </div>
+          <div class="public-meeting"
+               i18n:translate="">Public meeting
+          </div>
           <div class="meeting-title">
             <a href=""
                tal:content="meeting/title"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
           </div>
-          <div class="public-meeting"
-               i18n:translate="">Public meeting
+          <div class="item-last-pm-modified"
+               tal:condition='not: isAnon'>
+            <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
+            <span tal:content="utils_view/get_plonemeeting_last_modified" />
           </div>
         </div>
 
-        <div class="portalMessage info"
+        <div class="portalMessage warning"
              tal:condition="python: review_state != 'decision'">
-            <strong>Info</strong>
+            <strong i18n:translate="">Attention</strong>
           <div class="project-disclaimer" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
         </div>
 
