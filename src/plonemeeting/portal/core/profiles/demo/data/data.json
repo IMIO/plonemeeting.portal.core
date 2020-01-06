@@ -1,18 +1,34 @@
 {
   "categories": {
-    "administration": "Administration",
+    "administration": "Administration générale",
+    "immo": "Affaires immobilières",
+    "espaces-publics": "Aménagement des espaces publics",
+    "batiments-communaux": "Bâtiments communaux",
+    "animaux": "Bien-être animal",
+    "communication": "Communication & Relations extérieures",
+    "cultes": "Cultes",
+    "culture": "Cultures",
+    "economie": "Développement économique et commercial",
+    "enseignement": "Enseignement",
+    "population": "État civil & Population",
     "finances": "Finances",
-    "marches-publiques": "Marchés publiques",
-    "education": "Éducation",
-    "jeunesse": "Jeunesse",
-    "social": "Aides Sociales",
-    "urbanisme": "Urbanisme",
-    "travaux": "Travaux",
-    "environnement": "Environnement",
-    "population": "Population / État civil",
     "informatique": "Informatique",
-    "personnel": "Ressources humaines",
-    "tourisme": "Tourisme"
+    "interculturalite": "Interculturalité et Égalité",
+    "jeunesse": "Jeunesse",
+    "logement": "Logement",
+    "mobilite": "Mobilité",
+    "quartier": "Participation relation avec les quartiers",
+    "patrimoine": "Patrimoine",
+    "enfance": "Petite enfance",
+    "politique": "Politique générale",
+    "environnement": "Propreté & Environnement",
+    "sante": "Santé",
+    "securité": "Sécurité & Prévention",
+    "social": "Services sociaux",
+    "sport": "Sport",
+    "tourisme": "Tourisme",
+    "urbanisme": "Urbanisme & Aménagement du territoire",
+    "police": "Zone de police"
   },
   "institutions": [
     {
@@ -87,7 +103,7 @@
               "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "late",
-              "category": "education",
+              "category": "enseignement",
               "extra_info": "",
               "files": [
                 "photo.png"
@@ -135,7 +151,7 @@
               "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
-              "category": "education",
+              "category": "enseignement",
               "extra_info": ""
             }
           ]
