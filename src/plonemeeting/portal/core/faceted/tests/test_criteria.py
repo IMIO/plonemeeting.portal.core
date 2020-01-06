@@ -33,7 +33,7 @@ class TestFacetedCriteria(unittest.TestCase):
         )
 
     def test_items_criteria(self):
-        criteria = ICriteria(self.belleville["items-1"])
+        criteria = ICriteria(self.belleville["decisions"])
         self.assertListEqual(
             sorted(
                 [
