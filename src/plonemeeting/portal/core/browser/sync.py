@@ -61,9 +61,6 @@ def sync_annexes_data(item, institution, annexes_json):
         return None
 
     def annex_should_be_updated(annex_obj, pm_last_modified):
-        import ipdb
-
-        ipdb.set_trace()
         return (
             not hasattr(annex_obj, "plonemeeting_last_modified")
             or annex.plonemeeting_last_modified < pm_last_modified
@@ -83,7 +80,9 @@ def sync_annexes_data(item, institution, annexes_json):
                 annex and annex_should_be_updated(annex, annex_pm_last_modified)
             ) or not annex:
                 file_title = annex_data.get("category_title")
-                if not annex:
+                if annex:
+                    annex.title = file_title
+                else:
                     annex = api.content.create(
                         container=item, type="File", title=file_title
                     )

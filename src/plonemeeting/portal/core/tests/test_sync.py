@@ -45,10 +45,22 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.json_annexes_not_publishable_mock = json.load(json_file)
         with open(
             os.path.join(
+                os.path.dirname(__file__), "resources/annexes_not_publishable_updated_mock.json"
+            )
+        ) as json_file:
+            self.json_annexes_not_publishable_updated_mock = json.load(json_file)
+        with open(
+            os.path.join(
                 os.path.dirname(__file__), "resources/annexes_publishable_mock.json"
             )
         ) as json_file:
             self.json_annexes_publishable_mock = json.load(json_file)
+        with open(
+            os.path.join(
+                os.path.dirname(__file__), "resources/annexes_publishable_updated_mock.json"
+            )
+        ) as json_file:
+            self.json_annexes_publishable_updated_mock = json.load(json_file)
 
     def test_sync_meeting_data(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
@@ -119,15 +131,36 @@ class TestMeetingSynchronization(unittest.TestCase):
         )
 
     def test_sync_annexes_publishable_disabled(self):
-        annexes_json = self.json_annexes_not_publishable_mock
         self.assertEqual(len(self.item.listFolderContents()), 1)
-        sync_annexes_data(self.item, self.institution, annexes_json)
-        self.assertEqual(len(self.item.listFolderContents()), 2)
+        annex = self.item.listFolderContents()[0]
+        # delete existing annex and add the new one
+        sync_annexes_data(
+            self.item, self.institution, self.json_annexes_not_publishable_mock
+        )
+        self.assertEqual(len(self.item.listFolderContents()), 1)
+        annex2 = self.item.listFolderContents()[0]
+        self.assertNotEqual(annex.UID(), annex2.UID())
 
         file = self.item.listFolderContents()[-1]
         self.assertEqual(file.portal_type, "File")
         self.assertEqual(file.id, "test-annexe")
         self.assertEqual(file.title, "Test Annexe")
+        self.assertEqual(file.content_type(), "image/jpeg")
+
+        blobs = file.file
+        self.assertEqual(blobs.filename, "test-annexe.jpeg")
+        self.assertEqual(blobs.contentType, "image/jpeg")
+        self.assertEqual(blobs.size, 103911)
+        # test update
+        self.assertEqual(len(self.item.listFolderContents()), 1)
+        sync_annexes_data(
+            self.item, self.institution, self.json_annexes_not_publishable_updated_mock
+        )
+        self.assertEqual(len(self.item.listFolderContents()), 1)
+        file = self.item.listFolderContents()[-1]
+        self.assertEqual(file.portal_type, "File")
+        self.assertEqual(file.id, "test-annexe")
+        self.assertEqual(file.title, "Updated")
         self.assertEqual(file.content_type(), "image/jpeg")
 
         blobs = file.file
@@ -142,14 +175,35 @@ class TestMeetingSynchronization(unittest.TestCase):
             1,
             "If there are les than 2 annexes in the json, the tes is irrelevant",
         )
+        annex = self.item.listFolderContents()[0]
+        # delete existing annex and add the new one
+        sync_annexes_data(
+            self.item, self.institution, annexes_json
+        )
         self.assertEqual(len(self.item.listFolderContents()), 1)
-        sync_annexes_data(self.item, self.institution, annexes_json)
-        self.assertEqual(len(self.item.listFolderContents()), 2)
+        annex2 = self.item.listFolderContents()[0]
+        self.assertNotEqual(annex.UID(), annex2.UID())
 
         file = self.item.listFolderContents()[-1]
         self.assertEqual(file.portal_type, "File")
         self.assertEqual(file.id, "annexe")
         self.assertEqual(file.title, "Annexe")
+        self.assertEqual(file.content_type(), "image/jpeg")
+
+        blobs = file.file
+        self.assertEqual(blobs.filename, "annexe.jpg")
+        self.assertEqual(blobs.contentType, "image/jpeg")
+        self.assertEqual(blobs.size, 50915)
+        # test update
+        self.assertEqual(len(self.item.listFolderContents()), 1)
+        sync_annexes_data(
+            self.item, self.institution, self.json_annexes_publishable_updated_mock
+        )
+        self.assertEqual(len(self.item.listFolderContents()), 1)
+        file = self.item.listFolderContents()[-1]
+        self.assertEqual(file.portal_type, "File")
+        self.assertEqual(file.id, "annexe")
+        self.assertEqual(file.title, "Updated")
         self.assertEqual(file.content_type(), "image/jpeg")
 
         blobs = file.file

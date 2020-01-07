@@ -22,7 +22,7 @@
     "UID": "f912a39c8785434eaac89fed9ba8ee55",
     "allow_discussion": false,
     "category_id": "annexe",
-    "category_title": "Test Annexe",
+    "category_title": "Updated",
     "category_uid": "004e3ef3d7914366a0613019df9139ec",
     "confidential": false,
     "confidentiality_activated": false,
@@ -43,7 +43,7 @@
     "id": "art-budg.jpeg",
     "is_folderish": false,
     "layout": "documentviewer",
-    "modified": "2019-11-28T08:13:55+00:00",
+    "modified": "2019-11-28T08:13:56+00:00",
     "pages_number": null,
     "parent": {
       "@id": "https://demo-pm.imio.be/Members/agentPers/mymeetings/meeting-config-college/demande-de-stage-secretaire-de-direction-la-roche",
