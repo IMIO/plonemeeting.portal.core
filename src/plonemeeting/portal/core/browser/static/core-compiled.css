@@ -101,6 +101,13 @@ html body .faceted-criteria-hide, html body .faceted-criteria-reset a {
     display: inline-block;
     transition: all .3s ease;
 }
+.meeting-actions{
+    display: inline-block;
+}
+html body .meeting-title .meeting-actions a{
+    background: transparent!important;
+    border: none!important;
+}
 html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset a:hover{
     color: #fff!important;
     background: #007BB1;
@@ -546,7 +553,7 @@ body #faceted-form #text_widget fieldset{
 
 /* COLOR */
 
- .site-liege .item-preview.in_project .item-metadata a:hover,.site-liege .annexes li a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
+ .site-liege #show-more-link, .site-liege .item-preview.in_project .item-metadata a:hover,.site-liege .annexes li a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
     color: #d7004e!important;
 }
 .site-liege a:hover{
