@@ -5,6 +5,12 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Add eye icon to redirct to meeting view
+  [odelaere]
+
+- Finalized annexes sync
+  [odelaere]
+
 - Add pencil & sync icons to manage meeting
   [laulaz]
 
