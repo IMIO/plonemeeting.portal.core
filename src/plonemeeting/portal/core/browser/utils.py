@@ -4,6 +4,7 @@ from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
+from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
@@ -80,3 +81,6 @@ class UtilsView(BrowserView):
             # filtered results
             return True
         return False
+
+    def protect_url(self, url):
+        return addTokenToUrl(url)
