@@ -271,6 +271,14 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
+#: ../faceted/preview_meeting.pt:59
+msgid "Show less &uarr;"
+msgstr "Voir moins &uarr;"
+
+#: ../faceted/preview_meeting.pt:54
+msgid "Show more &darr;"
+msgstr "Voir plus &darr;"
+
 #: ../content/item.py:33
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"

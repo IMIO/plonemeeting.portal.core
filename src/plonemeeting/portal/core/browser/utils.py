@@ -70,3 +70,13 @@ class UtilsView(BrowserView):
             return disclaimer
         elif isinstance(disclaimer, RichTextValue):
             return disclaimer.output
+
+    def hidden_info_toggle(self):
+        form = self.request.form
+        if form.get("b_start") != 0:
+            # not on the first page
+            return True
+        if len(form) > 2:
+            # filtered results
+            return True
+        return False

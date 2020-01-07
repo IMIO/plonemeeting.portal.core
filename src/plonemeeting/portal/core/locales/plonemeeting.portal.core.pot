@@ -273,6 +273,14 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
+#: ../faceted/preview_meeting.pt:59
+msgid "Show less &uarr;"
+msgstr ""
+
+#: ../faceted/preview_meeting.pt:54
+msgid "Show more &darr;"
+msgstr ""
+
 #: ../content/item.py:33
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"

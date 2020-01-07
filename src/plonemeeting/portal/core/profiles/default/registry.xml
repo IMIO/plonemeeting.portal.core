@@ -48,6 +48,7 @@
     <records prefix="plone.resources/plonemeeting.portal.core"
              interface='Products.CMFPlone.interfaces.IResourceRegistry'>
       <value key="css">++plone++plonemeeting.portal.core/core.css</value>
+      <value key="js">++plone++plonemeeting.portal.core/core.js</value>
     </records>
 
     <records prefix="plone.bundles/plonemeeting.portal.core"
@@ -59,6 +60,7 @@
       <value key="enabled">True</value>
       <value key="compile">True</value>
       <value key="csscompilation">++plone++plonemeeting.portal.core/core-compiled.css</value>
+      <value key="jscompilation">++plone++plonemeeting.portal.core/core.js</value>
       <value key="last_compilation">2019-11-15 16:30:00</value>
     </records>
 
