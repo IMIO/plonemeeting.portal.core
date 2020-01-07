@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a6 (unreleased)
+1.0b1 (2020-01-07)
 ------------------
 
 - Add eye icon to redirct to meeting view
