@@ -2,18 +2,16 @@
 
 body{
     overflow-x: hidden;
+    background: #fff;
 }
 #portal-logo img{
     max-width: 250px;
 }
 h1{
     font-weight: bold!important;
+    font-size: 26px;
 }
-#faceted-form fieldset {
-    margin: .5em;
-    padding: 1em .5em 1.5em .5em!important;
 
-}
 /* --- Filters --- */
 fieldset{
     border: none!important;
@@ -36,7 +34,7 @@ body.template-facetednavigation_view textarea,
 body.template-facetednavigation_view select {
     width: 100%;
     display: block;
-    height: 55px;
+    height: 45px;
     padding: 6px 12px;
     font-size: 15px;
     line-height: 1.42857143;
@@ -56,8 +54,9 @@ body.template-facetednavigation_view select {
 .template-facetednavigation_view #top-area{
     background:#f1f1f1!important;
     position: relative;
-    margin-bottom: 2.5em;
-    padding: 2em 0;
+}
+.meeting-state{
+    font-size: 20px;
 }
 .template-facetednavigation_view #top-area:after{
     content: "";
@@ -65,7 +64,7 @@ body.template-facetednavigation_view select {
     background: #f1f1f1;
     z-index: -1;
     width: 100vw;
-    top: 0;
+    top: -150px;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -83,7 +82,7 @@ body.template-facetednavigation_view .searchButton{
     border-left-color: currentcolor;
     border-left-style: none;
     border-left-width: medium;
-    border-left: 1px solid rgb(145, 145, 145);
+    border-left: 1px solid rgb(220, 220, 220);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
@@ -105,6 +104,12 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
     color: #fff!important;
     background: #007BB1;
 }
+.template-facetednavigation_view #top---default---widgets legend{
+font-size: 18px;
+margin-bottom: 0;
+line-height: .5;
+}
+
 @media screen and (min-width: 1000px){
 
     .template-facetednavigation_view #top---default---widgets{
@@ -112,12 +117,22 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
         flex-wrap: wrap;
         justify-content: flex-start;
     }
+    .template-facetednavigation_view #top---default---widgets fieldset{
+        max-width: 242px;
+    }
     .template-facetednavigation_view #top-area{
         background: #ffffff;
         padding: 3rem;
     }
     .template-facetednavigation_view #top-area{
         padding: 3rem 0;
+    }
+    .template-facetednavigation_view #top-area{
+        margin-bottom: 2.5em;
+        padding: 2em 0;
+    }
+    h1{
+        font-size: 36px;
     }
 }
 
@@ -128,16 +143,14 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 .meeting-title{
     font-weight: bold;
 }
+
 .meeting-custom-info{
-    opacity: .7;
-    font-size: 16px;
-}
-.meeting-custom-info{
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 10px;
 }
 .public-meeting{
     margin: 1rem 0;
+    width: 100%;
 }
 #faceted-results{
     margin: 2em 0;
@@ -184,7 +197,7 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 
     font-size: 18px;
 }
-.item-preview .item-number{
+.item-preview .item-number:first-child{
     font-size: 25px;
 }
 
@@ -197,7 +210,6 @@ html body .faceted-criteria-hide-show:hover a, html body .faceted-criteria-reset
 }
 .item-category{
     font-size: 16px;
-    margin-bottom: 10px;
     width: 100%;
 }
 body .item-metadata > a{
@@ -205,7 +217,7 @@ body .item-metadata > a{
     border-radius: 25px;
     padding: 11px 21px;
     display: inline-block;
-    margin: 15px 0;
+    margin: 0 0 15px 0;
     font-size: 16px;
     border: solid 1px #007bb1!important;
     transition: all .15s ease;
@@ -220,8 +232,11 @@ body .item-metadata > a{
 }
 .item-title{
     font-size: 25px;
+    margin-bottom: 10px;
 }
-
+#faceted-form fieldset {
+    padding: 1em .5em 1.5em .5em!important;
+}
 .meeting-state{
     opacity: .6;
 }
@@ -251,6 +266,33 @@ body .item-metadata > a{
 .meeting-metadata{
     margin: 10px 0;
 }
+
+.portalMessage.warning > strong{
+    font-size: 19px;
+    padding-bottom: 1rem;
+    display: block;
+}
+
+.portalMessage.warning{
+    margin-top: 2em;
+}
+.item-infos .public-meeting{
+    text-align: left;
+}
+
+.item-preview .meeting-title{
+    font-weight: bold;
+}
+.item-preview .item-number{
+    font-size: 20px;    
+}
+.item-preview .item-number span:first-child, .item-preview .item-category span:first-child, .item-preview .item-representative span:first-child   {
+    font-size: 17px;
+}
+
+.item-preview .item-number span:last-child, .item-preview .item-category span:last-child, .item-preview .item-representative span:last-child   {
+    font-weight: bold;
+}
 @media screen and (min-width: 1000px){
     #faceted-results{
         margin: 2em 0;
@@ -269,31 +311,46 @@ body .item-metadata > a{
     }
     .project-disclaimer{
         width: 100%;
-        margin-top: 3rem;
         font-style: italic;
+        position: relative;
     }
-    .item-preview .item-metadata{
-        flex-direction:column;
-        flex-direction: column;
-        max-width: 350px;
-        padding-left: 50px;
-        border-left: 1px solid rgb(201, 201, 201);
-        padding: 0 30px 0 70px;
+    .project-disclaimer span{
+        position: relative;
+        z-index: 1;
     }
-    .item-preview .meeting-title{
-        font-weight: bold;
+    .item-preview .project-disclaimer:after{
+        content: "";
+        position: absolute;
+        left: -27px;
+        right: -27px;
+        top: -27px;
+        bottom: -27px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top: solid 1px #d6d6d6;
+        background: #e6e6e6;
     }
-    .item-preview .item-number{
-        font-size: 25px;
+    .item-preview .project-disclaimer{
+        margin-top: 3rem;
+
     }
+
+
+
 
     .item-main{
         margin-left: 30px;
         max-width: 50%;
     }
     .item-representative,.item-category{
-        margin-top: 10px;
+        font-size: 20px;
+    }
+    .public-meeting{
         text-align: center;
+    }
+    #faceted-form fieldset {
+        margin: .5em;
+        padding: 1em .5em 1.5em .5em!important;
     }
 
 }
@@ -305,15 +362,25 @@ body .item-metadata > a{
 
     }
     .project-disclaimer{
-        max-width: 80%;
+        max-width: 100%;
+        line-height: 1.1;
+        
     }
     .item-main {
         margin-left: 0;
         max-width: 60%;
     }
     .meeting-state{
-        font-size: 50px;
+        font-size: 28px;
         transform: none;
+    }
+    .item-preview .item-metadata{
+        flex-direction:column;
+        flex-direction: column;
+        max-width: 350px;
+        padding-left: 50px;
+        border-left: 1px solid rgb(201, 201, 201);
+        padding: 0 30px 0 70px;
     }
 }
 /*point*/
@@ -336,8 +403,11 @@ body .item-metadata > a{
     color: #c21b1b;
 }
 .item-infos .item-number span:first-child, .item-infos .item-type span:first-child , .item-infos .representative span:first-child, .item-infos .category span:first-child, .item-infos .custom-info span:first-child {
-    font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
+}
+.item-infos .item-number span:last-child, .item-infos .item-type span:last-child , .item-infos .representative span:last-child, .item-infos .category span:last-child .selected-option, .item-infos .custom-info span:last-child {
+    font-weight: bold!important;
+    font-size: 20px!important   ;
 }
 body .item-infos .selected-option{
     font-size: 16px!important;
@@ -349,6 +419,9 @@ body .item-infos .selected-option{
 .item-infos .decision span:first-child{
     margin: 0 0 12px 0;
 }
+.item-last-pm-modified{
+    text-align: center;
+}
 .item-infos .meeting-state{
     position: relative;
     font-size: 25px;
@@ -356,7 +429,7 @@ body .item-infos .selected-option{
 }
 .annexes{
     font-size: 20px;
-    margin: 0 0 15px 0;
+    width: 100%;
 }
 .annexes ul{
     padding: 0;
@@ -368,33 +441,37 @@ body .item-infos .selected-option{
 }
 .annexes li{
     list-style: none;
+    display: inline;
 }
 .annexes li a{
-    background: #007BB1;
-border-radius: 25px;
-padding: 11px 21px;
-color: #fff;
-display: inline-block;
-margin: 15px 0 0 0;
-font-size: 16px;
-border: 1px solid #007BB1 !important;
-transition: all .15s ease;
+margin-right: 10px;
+
+
 }
-.annexes li a:hover{
-    background: transparent;
-border-radius: 25px;
-color: #007BB1;
-display: inline-block;
-margin: 15px 0 0 0;
-font-size: 16px;
-border: 1px solid #007BB1 !important;
-transition: all .15s ease;
-text-decoration: none;
+.annexes li a img{
+    margin-right: 8px;
 }
 
+.annexes li a:hover{
+
+}
+
+body #content-core a {
+    border-bottom: none;
+}
+
+#text_widget legend{
+    display: none;
+}
+body #faceted-form #text_widget fieldset{
+    padding-top: 0!important;
+}
+#content-core a:hover{
+    border-bottom: 1px solid #cccccc;
+}
 @media screen and (min-width: 1140px){
     .item-infos .meeting-state{
-        font-size: 35px;
+        font-size: 28px;
     }
 }
 
@@ -406,6 +483,14 @@ text-decoration: none;
     }
     .portalMessage, .decision{
         width: 100%;
+    }
+    #text_widget legend{
+        display: block;
+        visibility: hidden;
+    }
+
+    body #faceted-form #text_widget fieldset{
+        padding-top: 1em!important;
     }
 }
 
@@ -424,19 +509,30 @@ text-decoration: none;
 
 /* COLOR */
 
- .site-liege .item-preview.in_project .item-metadata a:hover, .site-liege .annexes li a:hover, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
+ .site-liege .item-preview.in_project .item-metadata a:hover,.site-liege .annexes li a, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
     color: #d7004e!important;
 }
 .site-liege a:hover{
     color: #d7004e;
     opacity: .7;
 }
-.site-liege .plone-navbar, .site-liege .plone-nav li a:focus, .site-liege .item-metadata > a, .site-liege .annexes li a{
+.site-liege .plone-navbar, .site-liege .plone-nav li a:focus, .site-liege .item-metadata > a{
     background-color: #d7004e;
 }
-.site-liege .item-metadata > a, .site-liege .annexes li a:hover, .site-liege .annexes li a{
+.site-liege .item-metadata > a{
     border: solid 1px #d7004e!important;
 }
 .site-liege .annexes li a:hover, .site-liege .item-metadata > a:hover{
     background-color: transparent;
+}
+
+.site-liege .documentAuthor a{
+    color: #d7004e!important;
+}
+
+
+.site-liege .plone-navbar-toggle:hover {
+    background-color:transparent;
+    border-color:#fff;
+
 }
