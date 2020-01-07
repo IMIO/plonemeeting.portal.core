@@ -73,7 +73,7 @@ class UtilsView(BrowserView):
 
     def hidden_info_toggle(self):
         form = self.request.form
-        if form.get("b_start") != 0:
+        if form.get("b_start") != "0":
             # not on the first page
             return True
         if len(form) > 2:
