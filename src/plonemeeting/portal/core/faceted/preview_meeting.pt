@@ -33,8 +33,8 @@
               <div class="meeting-title">
                 <span tal:content="meeting/title" />
                 <tal:else tal:condition='not: isAnon'>
-                  <a tal:condition="python: checkPermission('Modify Portal Content', meeting)"
-                     href=""
+                  <a href=""
+                     tal:condition="python: checkPermission('Modify Portal Content', meeting)"
                      tal:attributes="href string: ${meeting/absolute_url}/edit">
                     <img src=""
                          tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg">
