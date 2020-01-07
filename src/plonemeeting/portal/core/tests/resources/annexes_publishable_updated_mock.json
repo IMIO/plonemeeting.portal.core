@@ -119,7 +119,7 @@
     "id": "0s57.jpg",
     "is_folderish": false,
     "layout": "documentviewer",
-    "modified": "2019-11-26T16:29:43+00:00",
+    "modified": "2019-11-26T16:29:44+00:00",
     "pages_number": null,
     "parent": {
       "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-council/tracert-nouveaux-passages-pietons",
@@ -174,7 +174,7 @@
     "UID": "f792b561c9c647cc83378cf30ddec8e0",
     "allow_discussion": false,
     "category_id": "annexe",
-    "category_title": "Updated",
+    "category_title": "Annexe",
     "category_uid": "76c3a2c531a44cafa27e94712b00461c",
     "confidential": false,
     "confidentiality_activated": false,
@@ -195,7 +195,7 @@
     "id": "0s59.jpg",
     "is_folderish": false,
     "layout": "documentviewer",
-    "modified": "2019-11-26T16:24:57+00:00",
+    "modified": "2019-11-26T16:24:58+00:00",
     "pages_number": null,
     "parent": {
       "@id": "https://demo-pm.imio.be/Members/chefPers/mymeetings/meeting-config-council/tracert-nouveaux-passages-pietons",

@@ -45,7 +45,8 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.json_annexes_not_publishable_mock = json.load(json_file)
         with open(
             os.path.join(
-                os.path.dirname(__file__), "resources/annexes_not_publishable_updated_mock.json"
+                os.path.dirname(__file__),
+                "resources/annexes_not_publishable_updated_mock.json",
             )
         ) as json_file:
             self.json_annexes_not_publishable_updated_mock = json.load(json_file)
@@ -57,7 +58,8 @@ class TestMeetingSynchronization(unittest.TestCase):
             self.json_annexes_publishable_mock = json.load(json_file)
         with open(
             os.path.join(
-                os.path.dirname(__file__), "resources/annexes_publishable_updated_mock.json"
+                os.path.dirname(__file__),
+                "resources/annexes_publishable_updated_mock.json",
             )
         ) as json_file:
             self.json_annexes_publishable_updated_mock = json.load(json_file)
@@ -177,9 +179,7 @@ class TestMeetingSynchronization(unittest.TestCase):
         )
         annex = self.item.listFolderContents()[0]
         # delete existing annex and add the new one
-        sync_annexes_data(
-            self.item, self.institution, annexes_json
-        )
+        sync_annexes_data(self.item, self.institution, annexes_json)
         self.assertEqual(len(self.item.listFolderContents()), 1)
         annex2 = self.item.listFolderContents()[0]
         self.assertNotEqual(annex.UID(), annex2.UID())
