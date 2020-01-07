@@ -320,7 +320,7 @@ class ReimportMeetingView(BrowserView):
         meeting = self.context
         institution = meeting.aq_parent
         status, new_meeting_uid = sync_meeting(
-            institution, meeting.plonemeeting_uid, force=True
+            institution, meeting.plonemeeting_uid
         )
         _handle_sync_meeting_response(
             new_meeting_uid, self.request, institution, status
