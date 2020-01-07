@@ -32,7 +32,7 @@
 
               <div class="meeting-title">
                 <span tal:content="meeting/title" />
-                <tal:else tal:condition='not: isAnon'>
+                <tal:if tal:condition='not: isAnon'>
                   <a href=""
                      tal:condition="python: checkPermission('Modify Portal Content', meeting)"
                      tal:attributes="href string: ${meeting/absolute_url}/edit"
@@ -44,7 +44,7 @@
                      tal:attributes="href python: utils_view.protect_url(url)"
                    ><img src=""
                          tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
-                </tal:else>
+                </tal:if>
               </div>
 
               <div class="meeting-last-pm-modified"
