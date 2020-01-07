@@ -3,6 +3,7 @@
 body{
     overflow-x: hidden;
     background: #fff;
+    color: #292929!important;
 }
 #portal-logo img{
     max-width: 250px;
@@ -147,6 +148,11 @@ line-height: .5;
 .meeting-custom-info{
     font-size: 18px;
     margin-top: 10px;
+    padding: 15px;
+    background: #f1f1f1;
+}
+.meeting-last-pm-modified{
+    font-size: 16px;
 }
 .public-meeting{
     margin: 1rem 0;
@@ -212,7 +218,26 @@ line-height: .5;
     font-size: 16px;
     width: 100%;
 }
-body .item-metadata > a{
+body .item-metadata > a {
+    background:#007BB1;
+    border-radius: 25px;
+    padding: 11px 21px;
+    display: inline-block;
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    border: solid 1px #007bb1!important;
+    transition: all .15s ease;
+    width: 100%;
+    text-align: center;
+    max-width: 320px;
+}
+.item-metadata > a:hover, .item-metadata > a:focus{
+    background: transparent;
+    color:#fff;
+    text-decoration: none;
+}
+.item-infos .meeting-title a{
+    color: #fff;
     background:#007BB1;
     border-radius: 25px;
     padding: 11px 21px;
@@ -224,16 +249,16 @@ body .item-metadata > a{
     width: 100%;
     text-align: center;
 }
-.item-metadata > a:hover, .item-metadata > a:focus{
-    background: transparent;
-    color:#fff;
-    text-decoration: none;
-
-}
 .item-title{
     font-size: 25px;
     margin-bottom: 10px;
 }
+
+.item-infos .meeting-title a:hover{
+    color: rgb(37, 37, 37)!important;
+    background: transparent;
+}
+
 #faceted-form fieldset {
     padding: 1em .5em 1.5em .5em!important;
 }
@@ -242,6 +267,10 @@ body .item-metadata > a{
 }
 .in_project .meeting-state{
     color:#469721;
+}
+
+#seance_widget fieldset{
+    max-width: inherit!important;
 }
 .item-infos.in_project:after, .item-infos.private:after{
     content: "";
@@ -339,14 +368,10 @@ body .item-metadata > a{
 
 
     .item-main{
-        margin-left: 30px;
         max-width: 50%;
     }
     .item-representative,.item-category{
         font-size: 20px;
-    }
-    .public-meeting{
-        text-align: center;
     }
     #faceted-form fieldset {
         margin: .5em;
@@ -359,12 +384,10 @@ body .item-metadata > a{
         width: 335px;
         max-width: 350px;
         padding: 0 30px 0 62px;
-
     }
     .project-disclaimer{
         max-width: 100%;
         line-height: 1.1;
-        
     }
     .item-main {
         margin-left: 0;
@@ -382,6 +405,9 @@ body .item-metadata > a{
         border-left: 1px solid rgb(201, 201, 201);
         padding: 0 30px 0 70px;
     }
+    .public-meeting {
+        text-align: center;
+    }
 }
 /*point*/
 .item-infos{
@@ -394,13 +420,15 @@ body .item-metadata > a{
     margin: 10px 0 10px 0;
 }
 .item-infos.decision .meeting-title a{
-    color: #007BB1;
+    color: #fff;
 }
 .item-infos.in_project .meeting-title a{
-    color:  #469721;
+    /* color:  #469721; */
+    color: #fff;
 }
 .item-infos.private .meeting-title a{
-    color: #c21b1b;
+    /* color: #c21b1b; */
+    color: #fff;
 }
 .item-infos .item-number span:first-child, .item-infos .item-type span:first-child , .item-infos .representative span:first-child, .item-infos .category span:first-child, .item-infos .custom-info span:first-child {
     font-size: 17px;
@@ -421,6 +449,11 @@ body .item-infos .selected-option{
 }
 .item-last-pm-modified{
     text-align: center;
+}
+
+.item-metadata .item-last-pm-modified{
+    width: 100%;
+    text-align: left;
 }
 .item-infos .meeting-state{
     position: relative;
@@ -473,6 +506,10 @@ body #faceted-form #text_widget fieldset{
     .item-infos .meeting-state{
         font-size: 28px;
     }
+    .item-metadata .item-last-pm-modified{
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 1000px){
@@ -509,20 +546,20 @@ body #faceted-form #text_widget fieldset{
 
 /* COLOR */
 
- .site-liege .item-preview.in_project .item-metadata a:hover,.site-liege .annexes li a, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
+ .site-liege .item-preview.in_project .item-metadata a:hover,.site-liege .annexes li a, .site-liege .item-title, .site-liege .item-metadata > a:hover{
     color: #d7004e!important;
 }
 .site-liege a:hover{
     color: #d7004e;
     opacity: .7;
 }
-.site-liege .plone-navbar, .site-liege .plone-nav li a:focus, .site-liege .item-metadata > a{
+.site-liege .plone-navbar, .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a, .site-liege .plone-nav li a:focus, .site-liege .item-metadata > a{
     background-color: #d7004e;
 }
-.site-liege .item-metadata > a{
+.site-liege .item-metadata > a , .site-liege .item-infos .meeting-title a,  .site-liege .meeting-title a{
     border: solid 1px #d7004e!important;
-}
-.site-liege .annexes li a:hover, .site-liege .item-metadata > a:hover{
+}   
+.site-liege .annexes li a:hover, .site-liege .item-infos .meeting-title a:hover,  .site-liege .meeting-title a:hover, .site-liege .item-metadata > a:hover{
     background-color: transparent;
 }
 
