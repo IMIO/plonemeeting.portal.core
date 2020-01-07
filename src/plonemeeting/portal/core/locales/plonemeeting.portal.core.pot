@@ -274,11 +274,11 @@ msgid "Representatives mappings"
 msgstr ""
 
 #: ../faceted/preview_meeting.pt:59
-msgid "Show less &uarr;"
+msgid "Hide meeting infos &uarr;"
 msgstr ""
 
 #: ../faceted/preview_meeting.pt:54
-msgid "Show more &darr;"
+msgid "Show meeting infos &darr;"
 msgstr ""
 
 #: ../content/item.py:33

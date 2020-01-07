@@ -66,12 +66,12 @@
                      class="toggle-link"
                      href=""
                      tal:attributes="style python: hidden and ' ' or 'display: none'"
-                     i18n:translate="">Show more &darr;</a>
+                     i18n:translate="">Show meeting infos &darr;</a>
                   <a id="show-less-link"
                      class="toggle-link"
                      href=""
                      tal:attributes="style python: hidden and 'display: none' or ''"
-                     i18n:translate="">Show less &uarr;</a>
+                     i18n:translate="">Hide meeting infos &uarr;</a>
                 </div>
               </div>
 
