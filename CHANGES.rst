@@ -5,6 +5,12 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Move login viewlet to footer
+  [laulaz]
+
+- Add show / hide toggle on meeting custom info
+  [laulaz]
+
 - Add annexes on faceted, and handle icons
   [laulaz]
 
