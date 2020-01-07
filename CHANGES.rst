@@ -5,6 +5,9 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
+- Add pencil icon to edit meeting
+  [laulaz]
+
 - Move login viewlet to footer
   [laulaz]
 

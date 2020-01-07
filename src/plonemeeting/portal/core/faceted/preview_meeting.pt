@@ -10,11 +10,13 @@
     <metal:block define-macro="content-core">
       <div i18n:domain="plonemeeting.portal.core"
            tal:define="
+        portal_url context/@@plone_portal_state/portal_url;
         folderContents folderContents | python:context.getFolderContents();
         Batch python:modules['Products.CMFPlone'].Batch;
         b_start python:request.get('b_start', 0);
         batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
-        isAnon context/@@plone_portal_state/anonymous;">
+        isAnon context/@@plone_portal_state/anonymous;
+        checkPermission nocall: context/portal_membership/checkPermission">
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
 
@@ -29,12 +31,14 @@
                  tal:attributes="class string:meeting-infos ${review_state}">
 
               <div class="meeting-title">
-                <tal:if tal:condition="isAnon">
-                  <span tal:content="meeting/title" />
-                </tal:if>
+                <span tal:content="meeting/title" />
                 <tal:else tal:condition='not: isAnon'>
-                  <a tal:content="meeting/title"
-                     tal:attributes="href meeting/absolute_url"/>
+                  <a tal:condition="python: checkPermission('Modify Portal Content', meeting)"
+                     href=""
+                     tal:attributes="href string: ${meeting/absolute_url}/edit">
+                    <img src=""
+                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg">
+                  </a>
                 </tal:else>
               </div>
 
