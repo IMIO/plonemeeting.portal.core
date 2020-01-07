@@ -35,6 +35,12 @@ def _call_delib_rest_api(url, institution):
     return response
 
 
+def _json_date_to_datetime(datetime_json):
+    date_time = dateutil.parser.parse(datetime_json)
+    timezone = api.portal.get_registry_record("plone.portal_timezone")
+    return date_time.astimezone(pytz.timezone(timezone))
+
+
 def get_formatted_data_from_json(tal_expression, item, item_data):
     if not tal_expression:
         return None
@@ -46,26 +52,65 @@ def get_formatted_data_from_json(tal_expression, item, item_data):
 
 
 def sync_annexes_data(item, institution, annexes_json):
+    existing_annexes = item.listFolderContents(contentFilter={"portal_type": "File"})
+
+    def get_annex_if_exists(pm_uid):
+        for existing_annex_obj in existing_annexes:
+            if existing_annex_obj.plonemeeting_uid == pm_uid:
+                return existing_annex_obj
+        return None
+
+    def annex_should_be_updated(annex_obj, pm_last_modified):
+        import ipdb
+
+        ipdb.set_trace()
+        return (
+            not hasattr(annex_obj, "plonemeeting_last_modified")
+            or annex.plonemeeting_last_modified < pm_last_modified
+        )
+
     for annex_data in annexes_json:
+        annex_pm_uid = annex_data.get("UID")
         publishable_activated = annex_data.get("publishable_activated")
         publishable = annex_data.get("publishable")
+        annex = get_annex_if_exists(annex_pm_uid)
+
         # download all annexes except if annex publication is enabled in ia.Delib AND this annex not publishable
         if not publishable_activated or publishable:
-            file_json = annex_data.get("file")
-            file_title = annex_data.get("category_title")
-            dl_link = file_json.get("download")
-            file_content_type = file_json.get("content-type")
-            response = _call_delib_rest_api(dl_link, institution)
-            file_blob = response.content
+            # if it's a new annex or if it has been modified since last sync, then set all attributes
+            annex_pm_last_modified = _json_date_to_datetime(annex_data.get("modified"))
+            if (
+                annex and annex_should_be_updated(annex, annex_pm_last_modified)
+            ) or not annex:
+                file_title = annex_data.get("category_title")
+                if not annex:
+                    annex = api.content.create(
+                        container=item, type="File", title=file_title
+                    )
+                file_json = annex_data.get("file")
+                dl_link = file_json.get("download")
+                file_content_type = file_json.get("content-type")
 
-            annex = api.content.create(container=item, type="File", title=file_title)
-            file_name = u"{}.{}".format(
-                annex.id, file_json.get("filename").split(".")[-1]
-            )
-            annex.file = NamedBlobFile(
-                data=file_blob, contentType=file_content_type, filename=file_name
-            )
-            annex.reindexObject()
+                response = _call_delib_rest_api(dl_link, institution)
+                file_blob = response.content
+
+                file_name = u"{}.{}".format(
+                    annex.id, file_json.get("filename").split(".")[-1]
+                )
+                annex.file = NamedBlobFile(
+                    data=file_blob, contentType=file_content_type, filename=file_name
+                )
+                annex.plonemeeting_uid = annex_pm_uid
+                annex.plonemeeting_last_modified = annex_pm_last_modified
+                annex.reindexObject()
+
+            for existing_annex in existing_annexes:
+                if annex_pm_uid == existing_annex.plonemeeting_uid:
+                    existing_annexes.remove(existing_annex)
+                    break
+    # delete leftovers
+    for existing_annex in existing_annexes:
+        api.content.delete(existing_annex)
 
 
 def sync_annexes(item, institution, annexes_json):
@@ -76,7 +121,6 @@ def sync_annexes(item, institution, annexes_json):
 
 def sync_items_data(meeting, items_data, institution, force=False):
     nb_created = nb_modified = nb_deleted = 0
-    timezone = api.portal.get_registry_record("plone.portal_timezone")
     existing_items_brains = api.content.find(
         context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
     )
@@ -86,9 +130,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
     }
     synced_uids = [i.get("UID") for i in items_data.get("items")]
     for item_data in items_data.get("items"):
-        modification_date_str = item_data.get("modification_date")
-        modification_date = dateutil.parser.parse(modification_date_str)
-        modification_date.astimezone(pytz.timezone(timezone))
+        modification_date = _json_date_to_datetime(item_data.get("modification_date"))
         item_uid = item_data.get("UID")
         item_title = item_data.get("title")
         created = False
@@ -123,7 +165,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
             )
 
         item.number = item_data.get("formatted_itemNumber")
-        item.representatives_in_charge = item_data.get("groupsInCharge") or item_data.get("all_groupsInCharge")
+        item.representatives_in_charge = item_data.get(
+            "groupsInCharge"
+        ) or item_data.get("all_groupsInCharge")
 
         item.decision = RichTextValue(
             get_formatted_data_from_json(
@@ -163,9 +207,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
 
 def sync_meeting_data(institution, meeting_data):
     meeting_uid = meeting_data.get("UID")
-    meeting_date_str = meeting_data.get("date")
     meeting_title = meeting_data.get("title")
-    timezone = api.portal.get_registry_record("plone.portal_timezone")
     brains = api.content.find(
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
@@ -177,14 +219,11 @@ def sync_meeting_data(institution, meeting_data):
         meeting.plonemeeting_uid = meeting_uid
     else:
         meeting = brains[0].getObject()
-    modification_date_str = meeting_data.get("modification_date")
-    modification_date = dateutil.parser.parse(modification_date_str)
-    modification_date.astimezone(pytz.timezone(timezone))
-    meeting.plonemeeting_last_modified = modification_date
+    meeting.plonemeeting_last_modified = _json_date_to_datetime(
+        meeting_data.get("modification_date")
+    )
     meeting.title = meeting_title
-    date_time = dateutil.parser.parse(meeting_date_str)
-    date_time = date_time.astimezone(pytz.timezone(timezone))
-    meeting.date_time = date_time
+    meeting.date_time = _json_date_to_datetime(meeting_data.get("date"))
     meeting.reindexObject()
     return meeting
 
