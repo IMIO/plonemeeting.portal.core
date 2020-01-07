@@ -57,7 +57,8 @@
         </div>
       </div>
 
-      <div class="annexes">
+      <div class="annexes"
+           tal:condition='not: isAnon' >
         <ul>
           <li tal:repeat="annexe brain/annexes_infos">
             <a href=""
