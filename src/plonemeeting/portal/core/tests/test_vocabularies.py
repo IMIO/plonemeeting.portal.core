@@ -40,7 +40,7 @@ class TestMeetingWorkflow(unittest.TestCase):
             IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories"
         )
         values = vocab(self.meeting_item)
-        self.assertEqual(len(values), 13)
+        self.assertEqual(len(values), 29)
 
     def testRepresentativesVocabulary(self):
         vocab = queryUtility(
