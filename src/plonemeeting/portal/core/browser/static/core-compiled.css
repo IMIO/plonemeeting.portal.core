@@ -145,13 +145,15 @@ line-height: .5;
     }
 }
 
+
+
 /* --- Results --- */
 .meeting-infos{
     font-size: 25px;
 }
 .meeting-title{
     font-weight: bold;
-    max-width: 300px;
+  
 }
 
 .meeting-custom-info{
@@ -438,6 +440,7 @@ div.decision table{
     color: #007BB1;
     font-weight: bold;
     margin: 10px 0 10px 0;
+    max-width: 300px;
 }
 .item-infos.decision .meeting-title a{
     color: #fff;
@@ -602,7 +605,7 @@ body #faceted-form #text_widget fieldset{
     background-color: transparent;
 }
 
-.site-liege .documentAuthor a{
+.site-liege .documentAuthor a, .site-liege #content-core .decision a, .site-liege .show-less-link{
     color: #d7004e!important;
 }
 
@@ -612,3 +615,4 @@ body #faceted-form #text_widget fieldset{
     border-color:#fff;
 
 }
+
