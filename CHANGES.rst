@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-1.0b2 (unreleased)
-------------------
+1.0rc1 (2020-01-08)
+-------------------
 
-- Nothing changed yet.
+- Various fixes on the UX
 
 
 1.0b1 (2020-01-07)
