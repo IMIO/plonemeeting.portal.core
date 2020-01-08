@@ -325,9 +325,11 @@ body .item-metadata > a {
     font-size: 17px!important;
 }
 
-/* .item-preview .item-number span:last-child, .item-preview .item-category span:last-child, .item-preview .item-representative span:last-child   {
-    font-weight: bold;
-} */
+
+div.decision table{
+    margin-bottom: 1em;
+}
+
 .item-infos .selected-option {
     font-weight: bold !important;
     font-size: 20px !important;
@@ -459,7 +461,7 @@ body .item-metadata > a {
 }
 
 .item-infos .decision {
-    margin-top: 2.5em;
+    margin-top: 1.5em;
 }
 .item-infos .decision span:first-child{
     margin: 0 0 12px 0;
