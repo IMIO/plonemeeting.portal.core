@@ -605,7 +605,7 @@ body #faceted-form #text_widget fieldset{
     background-color: transparent;
 }
 
-.site-liege .documentAuthor a, .site-liege #content-core .decision a, .site-liege .show-less-link{
+.site-liege .documentAuthor a, .site-liege #content-core .decision a, .site-liege #show-less-link{
     color: #d7004e!important;
 }
 
