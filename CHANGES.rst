@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc2 (unreleased)
+1.0rc2 (2020-01-08)
 -------------------
 
 - Fixed check for meeting actions, permission is
