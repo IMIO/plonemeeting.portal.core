@@ -20,13 +20,13 @@
         </a>
 
         <div class="item-number">
-          <span i18n:translate="">Item number</span> : <span tal:content="brain/number" />
+          <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="brain/number" />
         </div>
         <div class="item-category">
-          <span i18n:translate="">Category</span> : <span tal:content="brain/pretty_category" />
+          <span class="item-label" i18n:translate="">Category</span> : <span class="selected-option" tal:content="brain/pretty_category" />
         </div>
         <div class="item-representative">
-          <span i18n:translate="">Representative</span> : <span tal:content="brain/pretty_representatives" />
+          <span class="item-label" i18n:translate="">Representative</span> : <span class="selected-option" tal:content="brain/pretty_representatives" />
         </div>
 
       </div>
