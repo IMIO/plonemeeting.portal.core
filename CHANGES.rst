@@ -5,8 +5,9 @@ Changelog
 1.0rc2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Fixed check for meeting actions, permission is
+  'Modify portal content', not 'Modify Portal Content'
+  [gbastien]
 
 1.0rc1 (2020-01-08)
 -------------------
