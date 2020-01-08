@@ -43,7 +43,6 @@
           </div>
           <div class="additional-data"
              tal:condition="context/additional_data">
-             <span i18n:translate="">Additional data</span>
              <span tal:content="structure context/additional_data/output" />
           </div>
         </div>
