@@ -277,7 +277,7 @@ msgstr "Masquer les informations de la séance &uarr;"
 
 #: ../faceted/preview_meeting.pt:54
 msgid "Show meeting infos &darr;"
-msgstr "Voir les informations de la séance &darr;"
+msgstr "Montrer les informations de la séance &darr;"
 
 #: ../content/item.py:33
 #: ../content/meeting.py:24
