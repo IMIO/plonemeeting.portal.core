@@ -2,16 +2,18 @@ Changelog
 =========
 
 
-1.0rc4 (unreleased)
+1.0rc4 (2020-01-09)
 -------------------
 
 - Fixed Flake8 config.
+  [odelaere]
 
 
 1.0rc3 (2020-01-09)
 -------------------
 
 - Updated status colors.
+  [thomlamb]
 
 
 1.0rc2 (2020-01-08)
