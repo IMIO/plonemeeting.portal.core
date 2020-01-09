@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc3 (unreleased)
+1.0rc3 (2020-01-09)
 -------------------
 
 - Nothing changed yet.
