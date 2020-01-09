@@ -5,13 +5,13 @@ Changelog
 1.0rc4 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed Flake8 config.
 
 
 1.0rc3 (2020-01-09)
 -------------------
 
-- Nothing changed yet.
+- Updated status colors.
 
 
 1.0rc2 (2020-01-08)
