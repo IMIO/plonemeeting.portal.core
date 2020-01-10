@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc5 (unreleased)
+1.0rc5 (2020-01-10)
 -------------------
 
 - Store storable value in index 'item_number', turn str item number
