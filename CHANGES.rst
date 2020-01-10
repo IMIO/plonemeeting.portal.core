@@ -7,6 +7,11 @@ Changelog
 
 - CSS: remove underline when hovering meeting date on item view
   [gbastien]
+- Faceted ItemsSortWidget, do only use double sorting
+  ('linkedMeetingDate', 'item_number') when not meeting (criterion 'seance')
+  is selected in the faceted.  This should fix the weird results on last page
+  of items of a meeting
+  [gbastien]
 
 1.0rc5 (2020-01-10)
 -------------------
