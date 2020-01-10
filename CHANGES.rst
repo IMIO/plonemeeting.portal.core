@@ -5,8 +5,8 @@ Changelog
 1.0rc5 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Store storable value in index 'item_number', turn str item number into a sortable integer
+  [gbastien]
 
 1.0rc4 (2020-01-09)
 -------------------
