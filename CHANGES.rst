@@ -5,7 +5,11 @@ Changelog
 1.0rc5 (unreleased)
 -------------------
 
-- Store storable value in index 'item_number', turn str item number into a sortable integer
+- Store storable value in index 'item_number', turn str item number
+  into a sortable integer
+  [gbastien]
+- Added 'sort_on=getItemNumber' to default URL returned
+  by utils.get_api_url_for_meeting_items
   [gbastien]
 
 1.0rc4 (2020-01-09)
