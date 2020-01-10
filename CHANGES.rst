@@ -11,6 +11,9 @@ Changelog
 - Added 'sort_on=getItemNumber' to default URL returned
   by utils.get_api_url_for_meeting_items
   [gbastien]
+- Set 'b_size=9999' for restapi URi returned by
+  utils.get_api_url_for_meeting_items and utils.get_api_url_for_meetings
+  [gbastien]
 
 1.0rc4 (2020-01-09)
 -------------------
@@ -18,13 +21,11 @@ Changelog
 - Fixed Flake8 config.
   [odelaere]
 
-
 1.0rc3 (2020-01-09)
 -------------------
 
 - Updated status colors.
   [thomlamb]
-
 
 1.0rc2 (2020-01-08)
 -------------------
@@ -37,7 +38,6 @@ Changelog
 -------------------
 
 - Various fixes on the UX
-
 
 1.0b1 (2020-01-07)
 ------------------
