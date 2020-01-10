@@ -49,7 +49,7 @@ class TestUtils(unittest.TestCase):
         url = utils.get_api_url_for_meetings(self.belleville, meeting_UID="foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search_meetings?getConfigId="
-            "meeting-config-college&UID=foo&fullobjects=True",
+            "meeting-config-college&UID=foo&fullobjects=True&b_size=9999",
             url,
         )
 
@@ -64,7 +64,7 @@ class TestUtils(unittest.TestCase):
     def test_get_api_url_for_meeting_items(self):
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search_items?privacy=public&privacy=public_heading"
+            "https://demo-pm.imio.be/@search_items?privacy=public&privacy=public_heading&b_size=9999"
             "&getConfigId=meeting-config-college&linkedMeetingUID=foo&fullobjects=True"
             "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
             url,

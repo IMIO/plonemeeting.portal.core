@@ -47,7 +47,9 @@ class TestMeetingWorkflow(unittest.TestCase):
     def testMeetingValues(self):
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
-        self.assertEqual(self.meeting_item.number, indexes.get("item_number"))
+        # indexed item number is a sortable integer
+        self.assertEqual(self.meeting_item.number, '1')
+        self.assertEqual(indexes.get("item_number"), 100)
         self.assertEqual(self.meeting.title, indexes.get("linkedMeetingTitle"))
         self.assertEqual(self.meeting.UID(), indexes.get("linkedMeetingUID"))
         self.assertEqual(
