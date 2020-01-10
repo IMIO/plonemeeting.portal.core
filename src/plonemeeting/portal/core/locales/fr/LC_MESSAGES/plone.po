@@ -49,7 +49,7 @@ msgstr "Publier"
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Publish decision"
-msgstr "Publier"
+msgstr "Mettre en décision"
 
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Published"

@@ -12,6 +12,8 @@ Changelog
   is selected in the faceted.  This should fix the weird results on last page
   of items of a meeting
   [gbastien]
+- Renamed 'Publish' french translation to 'Mettre en décision'
+  [gbastien]
 
 1.0rc5 (2020-01-10)
 -------------------
