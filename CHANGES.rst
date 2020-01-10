@@ -14,6 +14,8 @@ Changelog
 - Set 'b_size=9999' for restapi URi returned by
   utils.get_api_url_for_meeting_items and utils.get_api_url_for_meetings
   [gbastien]
+- Use default Plone CSS classes to manage review_state
+  [gbastien]
 
 1.0rc4 (2020-01-09)
 -------------------

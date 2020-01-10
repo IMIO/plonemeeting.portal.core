@@ -235,7 +235,7 @@ body .item-metadata>a {
 }
 
 .item-infos .meeting-title a {
-	color: #fff;
+	color: #fff !important;
 	background: #007bb1;
 	border-radius: 25px;
 	padding: 11px 21px;
@@ -266,16 +266,19 @@ body .item-metadata>a {
 	font-size: 20px
 }
 
-.in_project .meeting-state {
-	color: #ff7a05
+#content .state-in_project,
+#content .state-in_project:hover {
+	color: #ff7a05 !important;
 }
 
-.decision .meeting-state {
-	color: #469721
+#content .state-decision,
+#content .state-decision:hover {
+	color: #469721 !important;
 }
 
-.private .meeting-state {
-	color: #c21b1b
+#content .state-private,
+#content .state-private:hover {
+	color: #c21b1b !important;
 }
 
 #seance_widget fieldset {
@@ -335,15 +338,7 @@ div.decision table {
 	max-width: 300px
 }
 
-.item-infos.decision .meeting-title a {
-	color: #fff
-}
-
-.item-infos.in_project .meeting-title a {
-	color: #fff
-}
-
-.item-infos.private .meeting-title a {
+.item-infos .meeting-title a {
 	color: #fff
 }
 
@@ -629,7 +624,7 @@ body #faceted-form #text_widget fieldset {
 	color: #d7004e!important
 }
 
-.site-liege #content-core .decision a,
+.site-liege #content-core div.decision a,
 .site-liege .documentAuthor a,
 .site-liege a:hover {
 	color: #d7004e

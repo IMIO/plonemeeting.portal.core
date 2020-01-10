@@ -51,11 +51,14 @@
           <div class="meeting-state"
                i18n:domain="plone">
             <span tal:condition="python: review_state == 'private'"
-                  i18n:translate="">Private</span>
+                  i18n:translate=""
+                  tal:attributes="class string:state-${review_state}">Private</span>
             <span tal:condition="python: review_state == 'in_project'"
-                  i18n:translate="">In project</span>
+                  i18n:translate=""
+                  tal:attributes="class string:state-${review_state}">In project</span>
             <span tal:condition="python: review_state == 'decision'"
-                  i18n:translate="">Decision</span>
+                  i18n:translate=""
+                  tal:attributes="class string:state-${review_state}">Decision</span>
           </div>
           <div class="public-meeting"
                i18n:translate="">Public meeting
