@@ -16,6 +16,8 @@ Changelog
   [gbastien]
 - Use default Plone CSS classes to manage review_state
   [gbastien]
+- Create role 'Institution Manager'
+  [gbastien]
 
 1.0rc4 (2020-01-09)
 -------------------

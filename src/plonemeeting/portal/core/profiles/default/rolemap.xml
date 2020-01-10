@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <rolemap>
-  <permissions>
 
+  <roles>
+    <role name="Institution Manager"/>
+  </roles>
+
+  <permissions>
     <permission name="plonemeeting.portal.core: Add Item" acquire="True">
       <role name="Manager"/>
     </permission>
@@ -18,4 +22,5 @@
       <role name="Manager"/>
     </permission>
   </permissions>
+
 </rolemap>
