@@ -220,7 +220,6 @@ body .item-metadata>a {
 	display: inline-block;
 	margin: 0 0 15px 0;
 	font-size: 16px;
-	border: solid 1px #007bb1!important;
 	transition: all .15s ease;
 	width: 100%;
 	text-align: center;
@@ -245,7 +244,8 @@ body .item-metadata>a {
 	border: solid 1px #007bb1!important;
 	transition: all .15s ease;
 	width: 100%;
-	text-align: center
+	text-align: center;
+    text-decoration: none;
 }
 
 .item-infos .meeting-title a:hover {

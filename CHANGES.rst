@@ -5,8 +5,8 @@ Changelog
 1.0rc6 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- CSS: remove underline when hovering meeting date on item view
+  [gbastien]
 
 1.0rc5 (2020-01-10)
 -------------------
