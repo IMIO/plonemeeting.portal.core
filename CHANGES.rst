@@ -5,7 +5,8 @@ Changelog
 1.0rc7 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix display of formatted title in item preview.
+  [odelaere]
 
 
 1.0rc6 (2020-01-10)

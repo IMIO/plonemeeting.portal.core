@@ -33,7 +33,9 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.meeting_item = brains[0].getObject()
 
     def testSearchableText(self):
-        self.meeting_item.title = "test_title"
+        self.meeting_item.formatted_title = RichTextValue(
+            "<p>test_title</p>", "text/html", "text/html"
+        )
         self.meeting_item.decision = RichTextValue(
             "test_decision", "text/html", "text/html"
         )
@@ -48,7 +50,7 @@ class TestMeetingWorkflow(unittest.TestCase):
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
         # indexed item number is a sortable integer
-        self.assertEqual(self.meeting_item.number, '1')
+        self.assertEqual(self.meeting_item.number, "1")
         self.assertEqual(indexes.get("item_number"), 100)
         self.assertEqual(self.meeting.title, indexes.get("linkedMeetingTitle"))
         self.assertEqual(self.meeting.UID(), indexes.get("linkedMeetingUID"))

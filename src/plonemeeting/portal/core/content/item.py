@@ -5,6 +5,7 @@ from Products.CMFPlone import PloneMessageFactory as plone_
 from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
+from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel import model
@@ -14,16 +15,11 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.utils import get_text_from_richtext
 
 
 class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
-
-    dexteritytextindexer.searchable("base_title")
-    base_title = schema.TextLine(title=plone_(u"Title"), required=True, readonly=True)
-
     dexteritytextindexer.searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
@@ -67,17 +63,21 @@ class IItem(model.Schema):
 class Item(Container):
     """
     """
-
     def get_title(self):
-        title = get_text_from_richtext(self.formatted_title)
-        if not title:
-            title = self.base_title
-        return title
+        if not hasattr(self, "_formatted_title"):
+            pass
+        return self._formatted_title
 
     def set_title(self, value):
-        self.base_title = value
+        self._formatted_title = value
+        transformer = ITransformer(self)
+        if value:
+            _title = transformer(value, "text/plain").strip()
+            self.title = _title
+        else:
+            self.title = None
 
-    title = property(get_title, set_title)
+    formatted_title = property(get_title, set_title)
 
 
 def _format_stored_number(number):
@@ -90,11 +90,11 @@ def _format_stored_number(number):
        - 2.10 --> 210;
        - 2.22 --> 222;
        """
-    if '.' in number:
-        new_integer, new_decimal = number.split('.')
+    if "." in number:
+        new_integer, new_decimal = number.split(".")
         new_integer = new_integer
         new_decimal = new_decimal.zfill(2)
-        real_move_number = int('{0}{1}'.format(new_integer, new_decimal))
+        real_move_number = int("{0}{1}".format(new_integer, new_decimal))
     else:
         real_move_number = int(number) * 100
     return real_move_number

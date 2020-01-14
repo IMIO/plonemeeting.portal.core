@@ -158,7 +158,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         formatted_title = get_formatted_data_from_json(
             institution.item_title_formatting_tal, item, item_data
         )
-        if formatted_title is not None:
+        if formatted_title:
             item.formatted_title = RichTextValue(
                 formatted_title, "text/html", "text/html"
             )
