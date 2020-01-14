@@ -80,7 +80,7 @@ class Item(Container):
     title = property(get_title, set_title)
 
 
-def _itemNumber_to_storedItemNumber(number):
+def _format_stored_number(number):
     """XXX Taken from Products.PloneMeeting :
        This will transform a displayed item number to a sortable value (integer) :
        - 1 -> 100;
@@ -91,18 +91,18 @@ def _itemNumber_to_storedItemNumber(number):
        - 2.22 --> 222;
        """
     if '.' in number:
-        newInteger, newDecimal = number.split('.')
-        newInteger = newInteger
-        newDecimal = newDecimal.zfill(2)
-        realMoveNumber = int('{0}{1}'.format(newInteger, newDecimal))
+        new_integer, new_decimal = number.split('.')
+        new_integer = new_integer
+        new_decimal = new_decimal.zfill(2)
+        real_move_number = int('{0}{1}'.format(new_integer, new_decimal))
     else:
-        realMoveNumber = int(number) * 100
-    return realMoveNumber
+        real_move_number = int(number) * 100
+    return real_move_number
 
 
 @indexer(IItem)
 def get_item_number(object):
-    return _itemNumber_to_storedItemNumber(object.number)
+    return _format_stored_number(object.number)
 
 
 @indexer(IItem)
