@@ -4,7 +4,8 @@ body {
 	overflow-x: hidden;
 	background: #fff;
 	background-color: #fff!important;
-	color: #292929!important
+	color: #292929!important;
+	font-weight: 400!important;
 }
 
 #portal-logo img {
@@ -13,7 +14,7 @@ body {
 
 h1 {
 	font-weight: 700!important;
-	font-size: 29px!important
+	font-size: 26px!important
 }
 
 fieldset {
@@ -119,12 +120,17 @@ html body .faceted-criteria-reset a {
 	transition: all .3s ease
 }
 
+h2 {
+	font-size: 23px!important;
+	font-weight: 700;
+}
+
 .meeting-actions {
 	display: inline-block
 }
 
 .meeting-actions a {
-	margin-left: 5px;
+	margin-left: 5px
 }
 
 html body .meeting-title .meeting-actions a {
@@ -147,9 +153,9 @@ html body .faceted-criteria-reset a:hover {
 }
 
 .meeting-custom-info {
-	font-size: 18px;
+	font-size: 16px;
 	margin-top: 10px;
-	padding: 15px;
+	padding: 2em 2em;
 	background: #f1f1f1
 }
 
@@ -183,7 +189,7 @@ html body .faceted-criteria-reset a:hover {
 .item-preview.decision .item-metadata a:hover,
 .item-preview.in_project .item-metadata a:hover,
 .item-preview.private .item-metadata a:hover {
-	color: #484849!important;
+	color: #484849!important
 }
 
 .item-preview .item-metadata {
@@ -220,10 +226,12 @@ body .item-metadata>a {
 	display: inline-block;
 	margin: 0 0 15px 0;
 	font-size: 16px;
+	border: solid 1px #007bb1!important;
 	transition: all .15s ease;
-	width: 100%;
+	min-width: 200px;
 	text-align: center;
-	max-width: 320px
+	max-width: 320px;
+	text-decoration: none;
 }
 
 .item-metadata>a:focus,
@@ -234,7 +242,8 @@ body .item-metadata>a {
 }
 
 .item-infos .meeting-title a {
-	color: #fff !important;
+	color: #fff!important;
+	;
 	background: #007bb1;
 	border-radius: 25px;
 	padding: 11px 21px;
@@ -243,9 +252,9 @@ body .item-metadata>a {
 	font-size: 16px;
 	border: solid 1px #007bb1!important;
 	transition: all .15s ease;
-	width: 100%;
+	min-width: 200px;
 	text-align: center;
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .item-infos .meeting-title a:hover {
@@ -254,8 +263,9 @@ body .item-metadata>a {
 }
 
 .item-title {
-	font-size: 22px;
-	margin-bottom: 10px
+	font-size: 20px;
+	margin-bottom: 10px;
+	font-weight: 500;
 }
 
 #faceted-form fieldset {
@@ -268,17 +278,17 @@ body .item-metadata>a {
 
 .state-in_project,
 #content .state-in_project:hover {
-	color: #ff7a05 !important;
+	color: #ff7a05!important;
 }
 
 .state-decision,
 #content .state-decision:hover {
-	color: #469721 !important;
+	color: #469721!important;
 }
 
 .state-private,
 #content .state-private:hover {
-	color: #c21b1b !important;
+	color: #c21b1b!important;
 }
 
 #seance_widget fieldset {
@@ -297,7 +307,7 @@ body .item-metadata>a {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	opacity: .18;
+	opacity: .20;
 	background-size: 20%
 }
 
@@ -315,12 +325,12 @@ div.decision table {
 
 .item-infos .selected-option {
 	font-weight: 700!important;
-	font-size: 19px!important
+	font-size: 17px!important
 }
 
 .item-main .selected-option {
 	font-weight: 700!important;
-	font-size: 19px!important
+	font-size: 17px!important
 }
 
 .item-infos .item-metadata div {
@@ -348,7 +358,7 @@ div.decision table {
 .item-infos .item-type span:last-child,
 .item-infos .representative span:last-child {
 	font-weight: 700!important;
-	font-size: 19px!important
+	font-size: 17px!important
 }
 
 .item-infos .item-label {
@@ -372,6 +382,34 @@ div.decision table {
 	text-align: left
 }
 
+.item-preview .project-disclaimer {
+	position: relative;
+}
+
+.item-preview .project-disclaimer>span {
+	margin-left: 32px;
+	display: inline-block;
+}
+
+.item-preview .project-disclaimer:before {
+	content: "!";
+	font-size: 14px;
+	margin-right: 10px;
+	display: inline-block;
+	border-radius: 20px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.9);
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-shadow: 0 -1pxrgba(0, 0, 0, 0.5);
+	position: relative;
+	vertical-align: top;
+	background: #646464 !important;
+	font-weight: 700;
+	position: absolute;
+}
+
 .item-infos .meeting-state {
 	position: relative;
 	font-size: 25px;
@@ -390,7 +428,7 @@ div.decision table {
 
 .annexes h2 {
 	font-weight: 700;
-	font-size: 25px;
+	font-size: 23px;
 	margin: 0 0 15px 0
 }
 
@@ -452,7 +490,7 @@ body #faceted-form #text_widget fieldset {
 .portalMessage.alert-warning,
 .portalMessage.warning {
 	background-color: #ffefdf!important;
-	border: 1px solid #ffb97b!important;
+	border: 1px solid #ffb97b!important
 }
 
 .plone-navbar-nav .current>a,
@@ -472,8 +510,8 @@ body #faceted-form #text_widget fieldset {
 }
 
 .portalMessage.warning>strong:before {
-	background: #f44603 !important;
-	font-weight: bold!important;
+	background: #f44603!important;
+	font-weight: 700!important
 }
 
 .portalMessage.warning {
@@ -481,6 +519,9 @@ body #faceted-form #text_widget fieldset {
 }
 
 @media screen and (min-width:1000px) {
+	.item-title {
+		font-size: 22px;
+	}
 	#faceted-results {
 		margin: 2em 0
 	}
@@ -574,7 +615,9 @@ body #faceted-form #text_widget fieldset {
 	.item-preview .item-metadata {
 		width: 335px;
 		max-width: 350px;
-		padding: 0 30px 0 62px
+		padding: 0 10px 0 31px;
+		flex-direction: column;
+		border-left: 1px solid #c9c9c9;
 	}
 	.project-disclaimer {
 		max-width: 100%;
@@ -582,19 +625,11 @@ body #faceted-form #text_widget fieldset {
 	}
 	.item-main {
 		margin-left: 0;
-		max-width: 60%
+		max-width: 70%
 	}
 	.meeting-state {
 		font-size: 28px;
 		transform: none
-	}
-	.item-preview .item-metadata {
-		flex-direction: column;
-		flex-direction: column;
-		max-width: 350px;
-		padding-left: 50px;
-		border-left: 1px solid #c9c9c9;
-		padding: 0 30px 0 70px
 	}
 	.public-meeting {
 		text-align: center
@@ -614,29 +649,30 @@ body #faceted-form #text_widget fieldset {
 	}
 }
 
+.site-liege #faceted-results .pagination li>a,
 .site-liege #show-less-link,
 .site-liege #show-more-link,
 .site-liege .annexes li a,
 .site-liege .item-metadata>a:hover,
 .site-liege .item-preview.in_project .item-metadata a:hover,
-.site-liege .item-title,
-.site-liege #faceted-results .pagination li>a {
+.site-liege .item-title {
 	color: #d7004e!important
 }
 
 .site-liege #content-core div.decision a,
 .site-liege .documentAuthor a,
-.site-liege a:hover {
+.site-liege a:hover,
+.site-liege .meeting-custom-info a {
 	color: #d7004e
 }
 
 .site-liege .item-infos .meeting-title a,
 .site-liege .item-metadata>a,
 .site-liege .meeting-title a,
+.site-liege .pagination li.active>span,
 .site-liege .plone-nav li a:focus,
 .site-liege .plone-navbar,
-.site-liege .portalMessage.warning>strong::before,
-.site-liege .pagination li.active>span {
+.site-liege .portalMessage.warning>strong::before {
 	background-color: #d7004e
 }
 
