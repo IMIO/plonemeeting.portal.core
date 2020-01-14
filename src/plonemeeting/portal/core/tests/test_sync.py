@@ -108,6 +108,22 @@ class TestMeetingSynchronization(unittest.TestCase):
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)
 
+    def test_force_sync_item(self):
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        results = sync_items_data(
+            meeting, self.json_meeting_items, self.institution, force=True
+        )
+        decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
+        self.json_meeting_items.get("items")[0].get("decision").update(decision)
+        results = sync_items_data(
+            meeting, self.json_meeting_items, self.institution, force=True
+        )
+        self.assertEqual(results.get("created"), 0)
+        self.assertEqual(results.get("modified"), 28)
+        items = meeting.listFolderContents(contentFilter={"portal_type": "Item"})
+        first_item = items[0]
+        self.assertEqual(first_item.decision.raw, '<p>Nouvelle décision</p>')
+
     def test_get_formatted_data_from_json(self):
         item_jsons = self.json_meeting_items.get("items")
 

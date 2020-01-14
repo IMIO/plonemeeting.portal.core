@@ -154,6 +154,8 @@ def sync_items_data(meeting, items_data, institution, force=False):
 
         # Sync item fields values
         item.plonemeeting_last_modified = modification_date
+        # reinit formatted title in case the configuration changed in portal
+        item.formatted_title = None
         item.title = item_title
         formatted_title = get_formatted_data_from_json(
             institution.item_title_formatting_tal, item, item_data
@@ -319,8 +321,18 @@ class ReimportMeetingView(BrowserView):
     def __call__(self):
         meeting = self.context
         institution = meeting.aq_parent
+        status, new_meeting_uid = sync_meeting(institution, meeting.plonemeeting_uid)
+        _handle_sync_meeting_response(
+            new_meeting_uid, self.request, institution, status
+        )
+
+
+class ForceReimportMeetingView(BrowserView):
+    def __call__(self):
+        meeting = self.context
+        institution = meeting.aq_parent
         status, new_meeting_uid = sync_meeting(
-            institution, meeting.plonemeeting_uid
+            institution, meeting.plonemeeting_uid, force=True
         )
         _handle_sync_meeting_response(
             new_meeting_uid, self.request, institution, status

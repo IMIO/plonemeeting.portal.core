@@ -7,6 +7,8 @@ Changelog
 
 - Fix display of formatted title in item preview.
   [odelaere]
+- Added force reload on meeting preview.
+  [odelaere]
 
 
 1.0rc6 (2020-01-10)
