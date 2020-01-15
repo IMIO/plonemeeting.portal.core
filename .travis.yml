@@ -6,22 +6,24 @@ cache:
   directories:
   - eggs
 python:
-  - "3.7"
+  - "3.7.5"
 matrix:
   include:
-    - python: "3.7"
+    - python: "3.7.5"
       env: PLONE_VERSION=52
-  sudo: true
+    - python: "3.7.6"
+      env: PLONE_VERSION=52
   fast_finish: true
 before_install:
+  - rm -rf eggs
   - sudo apt-get install -y firefox-geckodriver
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
   - cp test_plone$PLONE_VERSION.cfg buildout.cfg
 
 install:
-  - bin/buildout -N -t 3 code-analysis:return-status-codes=True annotate
-  - bin/buildout -N -t 3 code-analysis:return-status-codes=True
+  - bin/buildout code-analysis:return-status-codes=True annotate
+  - bin/buildout code-analysis:return-status-codes=True
 
 before_script:
 - 'export DISPLAY=:99.0'
