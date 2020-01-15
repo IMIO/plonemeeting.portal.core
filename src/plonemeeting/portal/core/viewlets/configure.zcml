@@ -11,15 +11,4 @@
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
-  <configure package="plone.app.layout.viewlets">
-    <browser:viewlet
-        name="plone.anontools"
-        manager=".interfaces.IPortalFooter"
-        class=".common.PersonalBarViewlet"
-        permission="zope2.View"
-        template="anontools.pt"
-        layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-        />
-  </configure>
-
 </configure>

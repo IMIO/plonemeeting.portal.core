@@ -7,7 +7,4 @@
   <hidden manager="plone.abovecontent" skinname="Plone Default">
     <viewlet name="plone.path_bar" />
   </hidden>
-  <hidden manager="plone.portalfooter" skinname="Plone Default">
-    <viewlet name="plone.footer" />
-  </hidden>
 </object>

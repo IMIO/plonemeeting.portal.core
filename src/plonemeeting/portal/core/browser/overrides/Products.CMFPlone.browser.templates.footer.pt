@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      tal:omit-tag=""
+      i18n:domain="plone">
+
+  <aside class="portlet portletClassic" id="portal-footer-signature" metal:define-macro="portlet">
+    <div class="portletContent"
+         tal:define="isAnon context/@@plone_portal_state/anonymous;
+                     root_url context/@@plone_portal_state/navigation_root_url;">
+
+        <div id="portal-anontools" tal:condition="isAnon">
+          <a href=""
+             tal:attributes="href string:${root_url}/login"
+             i18n:translate="">Log in</a>
+        </div>
+
+    </div>
+  </aside>
+</html>

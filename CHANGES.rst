@@ -5,6 +5,10 @@ Changelog
 1.0rc7 (unreleased)
 -------------------
 
+- Customize footer to add Log In link in portal.footer
+  This is impossible with viewlet moving (because of Barceloneta rules)
+  [laulaz]
+
 - Added subscriber to delete institution manager group when an institution is deleted
   [odelaere]
 
