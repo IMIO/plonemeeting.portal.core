@@ -88,8 +88,7 @@
            tal:define="utils_view nocall:context/@@utils_view;"
            tal:condition="python: review_state != 'decision'">
           <span>
-             <span tal:omit-tag=""
-                   i18n:translate="">Attention</span>
+             <span i18n:translate="">Attention</span>
              <span tal:replace="structure utils_view/get_project_decision_disclaimer_output" />
           </span>
       </div>
