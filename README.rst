@@ -5,8 +5,8 @@
 .. image:: https://travis-ci.com/IMIO/plonemeeting.portal.core.svg?branch=master
     :target: https://travis-ci.com/IMIO/plonemeeting.portal.core
 
-.. image:: https://coveralls.io/repos/IMIO/plonemeeting.portal.core/badge.png?branch=master
-   :target: https://coveralls.io/r/IMIO/plonemeeting.portal.core?branch=master
+.. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg?branch=master
+    :target: https://coveralls.io/github/IMIO/plonemeeting.portal.core?branch=master
 
 ========================
 plonemeeting.portal.core
