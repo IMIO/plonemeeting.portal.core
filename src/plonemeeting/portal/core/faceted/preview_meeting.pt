@@ -77,6 +77,18 @@
                    <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
               </div>
 
+              <div class="meeting-state"
+                 i18n:domain="plone">
+                <span tal:condition="python: review_state == 'private'"
+                      i18n:translate=""
+                      tal:attributes="class string:state-${review_state}">Private</span>
+                <span tal:condition="python: review_state == 'in_project'"
+                      i18n:translate=""
+                      tal:attributes="class string:state-${review_state}">In project</span>
+                <span tal:condition="python: review_state == 'decision'"
+                      i18n:translate=""
+                      tal:attributes="class string:state-${review_state}">Decision</span>
+              </div>
               <div class="meeting-custom-info"
                    tal:condition="meeting/custom_info">
                 <div class="meeting-custom-info-content"
