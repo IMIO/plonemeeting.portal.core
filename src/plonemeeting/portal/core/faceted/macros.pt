@@ -6,13 +6,14 @@
 
   <metal:macro define-macro="preview_meeting_item">
 
-    <div tal:define="portal_url context/@@plone_portal_state/portal_url;
+    <div class="item-container"
+         tal:define="portal_url context/@@plone_portal_state/portal_url;
                      review_state brain/linkedMeetingReviewState;
                      meeting_utils_view nocall:brain/@@utils_view"
          i18n:domain="plonemeeting.portal.core">
 
-      <div class="item-container"
-         tal:attributes="class string:item-preview ${review_state}">
+      <div class=""
+           tal:attributes="class string:item-preview ${review_state}">
         <div class="item-main">
           <a href=""
              tal:attributes="href brain/getURL">
