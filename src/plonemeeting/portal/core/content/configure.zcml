@@ -49,6 +49,12 @@
         />
 
     <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+        handler=".subscriber.handle_institution_deletion"
+        />
+
+    <subscriber
         for="plonemeeting.portal.core.content.meeting.IMeeting
              Products.DCWorkflow.interfaces.IAfterTransitionEvent"
           handler=".subscriber.meeting_state_changed"

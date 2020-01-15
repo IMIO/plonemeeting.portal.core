@@ -5,6 +5,9 @@ Changelog
 1.0rc7 (unreleased)
 -------------------
 
+- Added subscriber to delete institution manager group when an institution is deleted
+  [odelaere]
+
 - Allow Institution Managers to add content
   [laulaz]
 - Add alt's on actions

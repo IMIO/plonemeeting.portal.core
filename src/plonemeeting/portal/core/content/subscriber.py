@@ -46,6 +46,12 @@ def handle_institution_creation(obj, event):
         request.response.redirect(obj.absolute_url())
 
 
+def handle_institution_deletion(obj, event):
+    # Configure manager group & local permissions
+    group_id = format_institution_managers_group_id(obj)
+    api.group.delete(group_id)
+
+
 def meeting_state_changed(obj, event):
     items = obj.listFolderContents(contentFilter={"portal_type": "Item"})
     for item in items:
