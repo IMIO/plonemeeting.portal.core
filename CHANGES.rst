@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc8 (unreleased)
+1.0rc8 (2020-01-15)
 -------------------
 
 - Improved disclaimer on item preview
