@@ -87,7 +87,11 @@
       <div class="project-disclaimer"
            tal:define="utils_view nocall:context/@@utils_view;"
            tal:condition="python: review_state != 'decision'">
-          <span tal:content="structure utils_view/get_project_decision_disclaimer_output" />
+          <span>
+             <span tal:omit-tag=""
+                   i18n:translate="">Attention</span>
+             <span tal:replace="structure utils_view/get_project_decision_disclaimer_output" />
+          </span>
       </div>
     </div>
 
