@@ -5,6 +5,8 @@ Changelog
 1.0rc7 (unreleased)
 -------------------
 
+- Allow Institution Managers to add content
+  [laulaz]
 - Add alt's on actions
   [laulaz]
 - Fix display of formatted title in item preview.
