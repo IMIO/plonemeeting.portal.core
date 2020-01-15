@@ -66,7 +66,7 @@
     </state>
     <transition transition_id="publish" title="Publish" new_state="published" trigger="USER" before_script="" after_script="" i18n:attributes="title">
         <description></description>
-        <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish decision</action>
+        <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
         <guard>
             <guard-permission>Review portal content</guard-permission>
         </guard>
