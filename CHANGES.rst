@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc7 (unreleased)
+1.0rc7 (2020-01-15)
 -------------------
 
 - Customize footer to add Log In link in portal.footer
