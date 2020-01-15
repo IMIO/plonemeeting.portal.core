@@ -14,10 +14,13 @@ Changelog
 
 - Allow Institution Managers to add content
   [laulaz]
+
 - Add alt's on actions
   [laulaz]
+
 - Fix display of formatted title in item preview.
   [odelaere]
+
 - Added force reload on meeting preview.
   [odelaere]
 
@@ -27,11 +30,13 @@ Changelog
 
 - CSS: remove underline when hovering meeting date on item view
   [gbastien]
+
 - Faceted ItemsSortWidget, do only use double sorting
   ('linkedMeetingDate', 'item_number') when not meeting (criterion 'seance')
   is selected in the faceted.  This should fix the weird results on last page
   of items of a meeting
   [gbastien]
+
 - Renamed 'Publish' french translation to 'Mettre en décision'
   [gbastien]
 
@@ -41,14 +46,18 @@ Changelog
 - Store storable value in index 'item_number', turn str item number
   into a sortable integer
   [gbastien]
+
 - Added 'sort_on=getItemNumber' to default URL returned
   by utils.get_api_url_for_meeting_items
   [gbastien]
+
 - Set 'b_size=9999' for restapi URi returned by
   utils.get_api_url_for_meeting_items and utils.get_api_url_for_meetings
   [gbastien]
+
 - Use default Plone CSS classes to manage review_state
   [gbastien]
+
 - Create role 'Institution Manager'
   [gbastien]
 
