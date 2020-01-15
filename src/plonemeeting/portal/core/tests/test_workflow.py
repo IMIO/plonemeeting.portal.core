@@ -9,6 +9,7 @@ from plonemeeting.portal.core.testing import (
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFCore.utils import _checkPermission as checkPerm
 from Products.CMFCore.permissions import AccessContentsInformation
+from Products.CMFCore.permissions import AddPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.permissions import ModifyPortalContent
 
@@ -35,12 +36,20 @@ class TestMeetingWorkflow(unittest.TestCase):
 
         applyProfile(self.portal, "plonemeeting.portal.core:demo")
         login(self.portal, "manager")
-        city1 = getattr(self.portal, "amityville")
+        self.city1 = getattr(self.portal, "amityville")
         self.meeting = api.content.create(
-            container=city1, title="My meeting", type="Meeting"
+            container=self.city1, title="My meeting", type="Meeting"
         )
         self.meeting_item = api.content.create(
             container=self.meeting, title="My item", type="Item"
+        )
+
+        self.portal.acl_users._doAddUser(
+            "institution_manager",
+            "secret",
+            [],
+            [],
+            groups=["amityville-institution_managers"],
         )
 
     def tearDown(self):
@@ -123,6 +132,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(View, self.meeting))
+        self.assertTrue(checkPerm(View, self.meeting_item))
 
     def testViewIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
@@ -159,6 +172,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(View, self.meeting))
+        self.assertTrue(checkPerm(View, self.meeting_item))
 
     def testViewPublishedMeeting(self):
         # transition requires Review portal content
@@ -186,6 +203,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertTrue(checkPerm(View, self.meeting_item))
         # Reader is allowed
         login(self.portal, "reader")
+        self.assertTrue(checkPerm(View, self.meeting))
+        self.assertTrue(checkPerm(View, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.meeting_item))
 
@@ -219,6 +240,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
         # Reader is allowed
         login(self.portal, "reader")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
 
@@ -261,6 +286,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
 
     def testAccessContentsInformationPublishedMeeting(self):
         # transition requires Review portal content
@@ -287,6 +316,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
         # Reader is allowed
         login(self.portal, "reader")
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
 
@@ -322,6 +355,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
 
     def testModifyPortalContentIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
@@ -359,6 +396,10 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
 
     def testModifyPublishedMeeting(self):
         # transition requires Review portal content
@@ -390,3 +431,14 @@ class TestMeetingWorkflow(unittest.TestCase):
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        # Institution Manager is allowed
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+
+    def testAddContent(self):
+        # Institution Manager can add content
+        login(self.portal, "institution_manager")
+        self.assertTrue(checkPerm(AddPortalContent, self.city1))
+        self.assertTrue(checkPerm(AddPortalContent, self.meeting))
+        self.assertTrue(checkPerm(AddPortalContent, self.meeting_item))
