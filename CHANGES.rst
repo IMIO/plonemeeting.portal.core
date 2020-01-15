@@ -5,6 +5,8 @@ Changelog
 1.0rc7 (unreleased)
 -------------------
 
+- Add alt's on actions
+  [laulaz]
 - Fix display of formatted title in item preview.
   [odelaere]
 - Added force reload on meeting preview.

@@ -96,6 +96,10 @@ msgstr "Profil de démo pour le module plonemeeting.portal.core."
 msgid "Edit"
 msgstr "Editer"
 
+#: ../faceted/preview_meeting.pt:45
+msgid "Edit meeting"
+msgstr "Modifier la séance"
+
 #: ../setuphandlers.py:58
 msgid "Faceted"
 msgstr "Facettes"
@@ -107,6 +111,10 @@ msgstr "Vue facettes Points (de Séances)"
 #: ../faceted/configure.zcml:31
 msgid "Faceted meeting preview"
 msgstr "Vue facettes Séance"
+
+#: ../faceted/preview_meeting.pt:62
+msgid "Force meeting reimport"
+msgstr "Forcer le réimport de la séance"
 
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
@@ -241,6 +249,10 @@ msgstr "Avertissement de projets de décisions"
 msgid "Public meeting"
 msgstr "Séance publique du Conseil communal"
 
+#: ../faceted/preview_meeting.pt:53
+msgid "Reimport meeting"
+msgstr "Synchroniser la séance"
+
 #: ../profiles/default/registry.xml
 msgid "Related meeting date"
 msgstr "Date de la séance"
@@ -302,6 +314,10 @@ msgstr "Nom d'utilisateur"
 #: ../profiles/default/types/Meeting.xml
 msgid "View"
 msgstr "Voir"
+
+#: ../faceted/preview_meeting.pt:37
+msgid "View meeting"
+msgstr "Voir la séance"
 
 #: ../browser/sync.py:33
 msgid "Webservice connection error !"

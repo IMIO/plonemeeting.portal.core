@@ -99,6 +99,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: ../faceted/preview_meeting.pt:45
+msgid "Edit meeting"
+msgstr ""
+
 #: ../setuphandlers.py:58
 msgid "Faceted"
 msgstr ""
@@ -109,6 +113,10 @@ msgstr ""
 
 #: ../faceted/configure.zcml:31
 msgid "Faceted meeting preview"
+msgstr ""
+
+#: ../faceted/preview_meeting.pt:62
+msgid "Force meeting reimport"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -243,6 +251,10 @@ msgstr ""
 msgid "Public meeting"
 msgstr ""
 
+#: ../faceted/preview_meeting.pt:53
+msgid "Reimport meeting"
+msgstr ""
+
 #: ../profiles/default/registry.xml
 msgid "Related meeting date"
 msgstr ""
@@ -303,6 +315,10 @@ msgstr ""
 #: ../profiles/default/types/Item.xml
 #: ../profiles/default/types/Meeting.xml
 msgid "View"
+msgstr ""
+
+#: ../faceted/preview_meeting.pt:37
+msgid "View meeting"
 msgstr ""
 
 #: ../browser/sync.py:33
