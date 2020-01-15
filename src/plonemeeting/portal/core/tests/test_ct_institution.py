@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.content.institution import IInstitution  # NOQA E501
+from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.testing import (
     PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
 )  # noqa
