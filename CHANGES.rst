@@ -5,7 +5,8 @@ Changelog
 1.0rc8 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Improved disclaimer on item preview
+  [odelaere]
 
 
 1.0rc7 (2020-01-15)
