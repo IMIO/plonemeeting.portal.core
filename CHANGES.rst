@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+1.0rc10 (unreleased)
+--------------------
+
+- Nothing changed yet.
+
+
 1.0rc9 (2020-01-16)
 -------------------
 
