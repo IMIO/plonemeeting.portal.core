@@ -155,7 +155,7 @@ html body .faceted-criteria-reset a:hover {
 .meeting-custom-info {
 	font-size: 16px;
 	margin-top: 10px;
-	padding: 2em 2em;
+	padding: 1em 2em;
 	background: #f1f1f1
 }
 
@@ -214,7 +214,8 @@ html body .faceted-criteria-reset a:hover {
 }
 
 .item-main {
-	font-size: 20px
+	font-size: 20px;
+	width: 100%;
 }
 
 .item-category,
@@ -431,7 +432,8 @@ div.decision table {
 	vertical-align: top;
 	background: #f44603 !important;
 	font-weight: 700;
-	position: absolute
+	position: absolute;
+	font-style: normal;
 }
 
 .item-infos .meeting-state {
@@ -546,7 +548,42 @@ body #portal-footer>.row {
 	margin: 0;
 	padding: 0;
 }
+/*width responsive*/
 
+table, 
+.item-infos img {
+    width: auto!important;
+    max-width: 100%!important;
+}
+iframe, img{
+	max-width: 100%!important;
+}
+
+/* Show more */
+
+#show-more-link:after, #show-less-link:after{
+	/* content: url("/++plone++plonemeeting#portal.core/assets/next.svg");	 */
+	content: url(++plone++plonemeeting.portal.core/assets/next2.svg);
+	width: 13px;
+	display: inline-block;
+	font-weight: bold;
+	margin-left: 10px;
+}
+#show-less-link:after{
+	transform: rotate(90deg);
+}
+#show-more-link:after{
+	transform: rotate(-90deg);
+}
+#show-less-link,
+#show-more-link{
+	font-weight: bold;
+}
+
+
+#meeting-custom-info-content-toggle{
+	margin-top: 1.5rem;
+}
 @media screen and (min-width:1000px) {
 	.item-title {
 		font-size: 22px
@@ -575,9 +612,6 @@ body #portal-footer>.row {
 	.project-disclaimer span {
 		position: relative;
 		z-index: 1
-	}
-	.item-main {
-		max-width: 50%
 	}
 	.item-category,
 	.item-representative {
@@ -641,7 +675,7 @@ body #portal-footer>.row {
 	}
 	.item-main {
 		margin-left: 0;
-		max-width: 70%
+		max-width: 50%
 	}
 	.meeting-state {
 		font-size: 28px;
@@ -664,6 +698,12 @@ body #portal-footer>.row {
 		margin-top: 0
 	}
 }
+
+ @media screen and (min-width: 1400px){
+	.item-main{
+		max-width: 63%;
+	}
+ }
 
 .site-liege #faceted-results .pagination li>a,
 .site-liege #show-less-link,
