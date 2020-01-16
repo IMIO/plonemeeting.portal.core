@@ -93,19 +93,19 @@
                    tal:condition="meeting/custom_info">
                 <div class="meeting-custom-info-content"
                      tal:define="hidden meeting_utils_view/hidden_info_toggle">
-                  <div id="meeting-custom-info-content-toggle"
-                       tal:attributes="style python: hidden and 'display: none' or ''"
-                       tal:content="structure meeting/custom_info/output" />
                   <a id="show-more-link"
                      class="toggle-link"
                      href=""
                      tal:attributes="style python: hidden and ' ' or 'display: none'"
-                     i18n:translate="">Show meeting infos &darr;</a>
+                     i18n:translate="">Show meeting infos</a>
                   <a id="show-less-link"
                      class="toggle-link"
                      href=""
                      tal:attributes="style python: hidden and 'display: none' or ''"
-                     i18n:translate="">Hide meeting infos &uarr;</a>
+                     i18n:translate="">Hide meeting infos</a>
+                  <div id="meeting-custom-info-content-toggle"
+                       tal:attributes="style python: hidden and 'display: none' or ''"
+                       tal:content="structure meeting/custom_info/output" />
                 </div>
               </div>
 
