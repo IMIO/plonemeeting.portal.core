@@ -284,12 +284,12 @@ msgid "Representatives mappings"
 msgstr "Equivalences de mandataires"
 
 #: ../faceted/preview_meeting.pt:59
-msgid "Hide meeting infos &uarr;"
-msgstr "Masquer les informations de la séance &uarr;"
+msgid "Hide meeting infos"
+msgstr "Masquer les informations de la séance"
 
 #: ../faceted/preview_meeting.pt:54
-msgid "Show meeting infos &darr;"
-msgstr "Montrer les informations de la séance &darr;"
+msgid "Show meeting infos"
+msgstr "Montrer les informations de la séance"
 
 #: ../content/item.py:33
 #: ../content/meeting.py:24
