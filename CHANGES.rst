@@ -5,13 +5,13 @@ Changelog
 1.0rc10 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Fixed portal logo
 
 
 1.0rc9 (2020-01-16)
 -------------------
 
-- Nothing changed yet.
+- Improved UX
 
 
 1.0rc8 (2020-01-15)
