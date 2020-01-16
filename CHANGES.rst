@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc10 (unreleased)
+1.0rc10 (2020-01-16)
 --------------------
 
 - Fixed portal logo
