@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.0.2 (2020-01-17)
 ------------------
 
 - Fixed styles.
