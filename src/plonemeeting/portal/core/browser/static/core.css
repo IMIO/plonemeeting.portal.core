@@ -584,6 +584,10 @@ iframe, img{
 #meeting-custom-info-content-toggle{
 	margin-top: 1.5rem;
 }
+
+.footer-disclaimer{
+	display: inline-block!important;
+}
 @media screen and (min-width:1000px) {
 	.item-title {
 		font-size: 22px
@@ -719,7 +723,8 @@ iframe, img{
 .site-liege #content-core div.decision a,
 .site-liege .documentAuthor a,
 .site-liege .meeting-custom-info a,
-.site-liege a:hover {
+.site-liege a:hover,
+.site-liege #login-form a {
 	color: #d7004e
 }
 
@@ -729,7 +734,8 @@ iframe, img{
 .site-liege .pagination li.active>span,
 .site-liege .plone-nav li a:focus,
 .site-liege .plone-navbar,
-.site-liege .portalMessage.warning>strong::before {
+.site-liege .portalMessage.warning>strong::before,
+.site-liege #login-form .formControls #buttons-login {
 	background-color: #d7004e
 }
 
@@ -756,4 +762,6 @@ iframe, img{
 	color: #fff;
 	background: #920337
 }
-
+.site-liege #login-form .formControls #buttons-login{
+	border-color: #d7004e;
+}
