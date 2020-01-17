@@ -131,6 +131,11 @@ class AddForm(add.DefaultAddForm):
         self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
         self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
 
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()
+        self.widgets["categories_mappings"].allow_reorder = True
+        self.widgets["categories_mappings"].allow_reorder = True
+
 
 class AddView(add.DefaultAddView):
     form = AddForm
@@ -143,3 +148,8 @@ class EditForm(edit.DefaultEditForm):
         super(EditForm, self).updateFields()
         self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
         self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
+
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()
+        self.widgets["categories_mappings"].allow_reorder = True
+        self.widgets["representatives_mappings"].allow_reorder = True
