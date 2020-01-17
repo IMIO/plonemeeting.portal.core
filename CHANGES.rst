@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.0rc11 (unreleased)
---------------------
+1.0 (2020-01-17)
+----------------
 
 - Allow reorder mapping fields of an institution.
   [odelaere]
