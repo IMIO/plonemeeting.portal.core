@@ -8,6 +8,9 @@ Changelog
 - Allow reorder mapping fields of an institution.
   [odelaere]
 
+- Force reload button should be red.
+  [odelaere]
+
 
 1.0rc10 (2020-01-16)
 --------------------
