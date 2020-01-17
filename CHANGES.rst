@@ -11,6 +11,8 @@ Changelog
 - Force reload button should be red.
   [odelaere]
 
+- Added disclaimer in footer (using CMS Plone and made with IMIO).
+  [gbastien]
 
 1.0rc10 (2020-01-16)
 --------------------
