@@ -132,7 +132,7 @@ class AddForm(add.DefaultAddForm):
         self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
 
     def updateWidgets(self):
-        super(EditForm, self).updateWidgets()
+        super(AddForm, self).updateWidgets()
         self.widgets["categories_mappings"].allow_reorder = True
         self.widgets["categories_mappings"].allow_reorder = True
 
