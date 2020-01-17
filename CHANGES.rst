@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.1 (2020-01-17)
 ------------------
 
 - Colorize entire footer links, not only #portal-anontools.
