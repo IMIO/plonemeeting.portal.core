@@ -9,12 +9,12 @@ body {
 }
 
 #portal-logo img {
-	max-width: 250px!important;
+	max-width: 250px!important
 }
 
 h1 {
-	font-weight: 700!important;
-	font-size: 26px!important
+	font-weight: 500!important;
+	font-size: 22px!important
 }
 
 fieldset {
@@ -181,7 +181,7 @@ html body .faceted-criteria-reset a:hover {
 
 .meeting-state--top {
 	font-weight: 400;
-	float: right;
+	float: right
 }
 
 .item-preview.decision .item-metadata a,
@@ -215,7 +215,7 @@ html body .faceted-criteria-reset a:hover {
 
 .item-main {
 	font-size: 20px;
-	width: 100%;
+	width: 100%
 }
 
 .item-category,
@@ -389,26 +389,26 @@ div.decision table {
 .item-container .project-disclaimer {
 	position: relative;
 	padding: 1rem 2rem;
-	background-color: #ffefdf !important;
-	border: 1px solid#ffd4a7 !important;
+	background-color: #ffefdf!important;
+	border: 1px solid#ffd4a7!important;
 	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
+	border-bottom-right-radius: 8px
 }
 
 .item-container .project-disclaimer p {
 	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 5px
 }
 
 .item-container .project-disclaimer>span p:nth-child(2) {
-	display: inline-block;
+	display: inline-block
 }
 
 .item-container .project-disclaimer>span>span {
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 16px;
 	margin-right: 5px;
-	font-style: normal;
+	font-style: normal
 }
 
 .item-container .project-disclaimer>span {
@@ -430,10 +430,10 @@ div.decision table {
 	text-shadow: 0 -1pxrgba(0, 0, 0, .5);
 	position: relative;
 	vertical-align: top;
-	background: #f44603 !important;
+	background: #f44603!important;
 	font-weight: 700;
 	position: absolute;
-	font-style: normal;
+	font-style: normal
 }
 
 .item-infos .meeting-state {
@@ -546,48 +546,50 @@ body #faceted-form #text_widget fieldset {
 
 body #portal-footer>.row {
 	margin: 0;
-	padding: 0;
-}
-/*width responsive*/
-
-table, 
-.item-infos img {
-    width: auto!important;
-    max-width: 100%!important;
-}
-iframe, img{
-	max-width: 100%!important;
+	padding: 0
 }
 
-/* Show more */
+.item-infos img,
+table {
+	width: auto!important;
+	max-width: 100%!important
+}
 
-#show-more-link:after, #show-less-link:after{
-	/* content: url("/++plone++plonemeeting#portal.core/assets/next.svg");	 */
+iframe,
+img {
+	max-width: 100%!important
+}
+
+#show-less-link:after,
+#show-more-link:after {
 	content: url(++plone++plonemeeting.portal.core/assets/next2.svg);
 	width: 13px;
 	display: inline-block;
-	font-weight: bold;
-	margin-left: 10px;
+	font-weight: 700;
+	margin-left: 10px
 }
-#show-less-link:after{
-	transform: rotate(90deg);
+
+#show-less-link:after {
+	transform: rotate(90deg)
 }
-#show-more-link:after{
-	transform: rotate(-90deg);
+
+#show-more-link:after {
+	transform: rotate(-90deg)
 }
+
 #show-less-link,
-#show-more-link{
-	font-weight: bold;
+#show-more-link {
+	font-weight: 700
 }
 
-
-#meeting-custom-info-content-toggle{
-	margin-top: 1.5rem;
+#meeting-custom-info-content-toggle {
+	margin-top: 1.5rem
 }
 
-.footer-disclaimer{
-	display: inline-block!important;
+.footer-disclaimer {
+	display: inline-block!important
 }
+
 @media screen and (min-width:1000px) {
 	.item-title {
 		font-size: 22px
@@ -700,14 +702,17 @@ iframe, img{
 	}
 	.item-infos .meeting-metadata {
 		margin-top: 0
-	}
+    }
+    h1 {
+        font-size: 25px!important
+    }
 }
 
- @media screen and (min-width: 1400px){
-	.item-main{
-		max-width: 63%;
+@media screen and (min-width:1400px) {
+	.item-main {
+		max-width: 63%
 	}
- }
+}
 
 .site-liege #faceted-results .pagination li>a,
 .site-liege #show-less-link,
@@ -721,21 +726,21 @@ iframe, img{
 }
 
 .site-liege #content-core div.decision a,
+.site-liege #login-form a,
 .site-liege .documentAuthor a,
 .site-liege .meeting-custom-info a,
-.site-liege a:hover,
-.site-liege #login-form a {
+.site-liege a:hover {
 	color: #d7004e
 }
 
+.site-liege #login-form .formControls #buttons-login,
 .site-liege .item-infos .meeting-title a,
 .site-liege .item-metadata>a,
 .site-liege .meeting-title a,
 .site-liege .pagination li.active>span,
 .site-liege .plone-nav li a:focus,
 .site-liege .plone-navbar,
-.site-liege .portalMessage.warning>strong::before,
-.site-liege #login-form .formControls #buttons-login {
+.site-liege .portalMessage.warning>strong::before {
 	background-color: #d7004e
 }
 
@@ -762,6 +767,8 @@ iframe, img{
 	color: #fff;
 	background: #920337
 }
-.site-liege #login-form .formControls #buttons-login{
-	border-color: #d7004e;
+
+.site-liege #login-form .formControls #buttons-login {
+	border-color: #d7004e
 }
+
