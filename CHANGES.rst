@@ -5,7 +5,7 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed styles.
 
 
 1.0.1 (2020-01-17)
@@ -13,6 +13,7 @@ Changelog
 
 - Colorize entire footer links, not only #portal-anontools.
   [gbastien]
+
 
 1.0 (2020-01-17)
 ----------------
@@ -25,6 +26,7 @@ Changelog
 
 - Added disclaimer in footer (using CMS Plone and made with IMIO).
   [gbastien]
+
 
 1.0rc10 (2020-01-16)
 --------------------
