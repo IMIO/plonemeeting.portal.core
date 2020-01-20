@@ -130,9 +130,10 @@ def get_pretty_representatives(object):
 
 @indexer(IItem)
 def get_pretty_category(object):
+    # use .copy() to make sure to return a copy of the record
     global_categories = api.portal.get_registry_record(
         name="plonemeeting.portal.core.global_categories"
-    )
+    ).copy()
     if not global_categories or object.category not in global_categories:
         raise AttributeError
 

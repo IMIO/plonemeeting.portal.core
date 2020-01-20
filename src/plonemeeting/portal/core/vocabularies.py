@@ -12,9 +12,10 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 class GlobalCategoryVocabularyFactory:
     def __call__(self, context):
+        # use .copy() to make sure to return a copy of the record
         global_categories = api.portal.get_registry_record(
             name="plonemeeting.portal.core.global_categories"
-        )
+        ).copy()
         if not global_categories:
             return SimpleVocabulary([])
         return SimpleVocabulary(

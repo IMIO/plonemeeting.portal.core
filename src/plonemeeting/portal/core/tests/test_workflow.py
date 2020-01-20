@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.app.testing import applyProfile
 from plone.app.testing import login
 from plone.app.testing import logout
 from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
+    PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
 )  # noqa
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFCore.utils import _checkPermission as checkPerm
@@ -21,7 +20,7 @@ WF = "meeting_workflow"
 
 class TestMeetingWorkflow(unittest.TestCase):
 
-    layer = PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING
+    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 
     def setUp(self):
         self.portal = self.layer["portal"]
@@ -34,7 +33,6 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.portal.acl_users._doAddUser("editor", " secret", ["Editor"], [])
         self.portal.acl_users._doAddUser("reader", "secret", ["Reader"], [])
 
-        applyProfile(self.portal, "plonemeeting.portal.core:demo")
         login(self.portal, "manager")
         self.city1 = getattr(self.portal, "amityville")
         self.meeting = api.content.create(

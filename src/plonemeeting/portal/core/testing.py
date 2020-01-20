@@ -38,6 +38,10 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
         transaction.commit()
 
+    def tearDownZope(self, app):
+        import transaction
+        transaction.abort()
+
 
 PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
 
@@ -66,6 +70,7 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
 
 class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
+        super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
         applyProfile(portal, "plonemeeting.portal.core:demo")
         import transaction
 
