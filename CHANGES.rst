@@ -7,6 +7,9 @@ Changelog
 
 - Require collective.cookiecuttr > 1.0 (Python3 compat).
   [gbastien]
+- Manager is able to edit field IMeeting.date_time, this is useful to add
+  old meetings not managed by the synchronization.
+  [gbastien]
 
 
 1.0.2 (2020-01-17)

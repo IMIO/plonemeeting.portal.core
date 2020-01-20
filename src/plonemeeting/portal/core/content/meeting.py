@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFCore.permissions import ManagePortal
 from Products.CMFPlone import PloneMessageFactory as plone_
 from plone.app.textfield import RichText
+from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope import schema
@@ -26,10 +28,11 @@ class IMeeting(model.Schema):
         readonly=True,
     )
 
+    form.write_permission(date_time=ManagePortal)
     date_time = schema.Datetime(
         title=plone_(u"Date"),
         required=True,
-        readonly=True,
+        readonly=False,
     )
 
     custom_info = RichText(title=_(u"Custom info"), required=False)
