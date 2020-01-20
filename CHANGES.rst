@@ -5,7 +5,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Require collective.cookiecuttr > 1.0 (Python3 compat).
+  [gbastien]
 
 
 1.0.2 (2020-01-17)
