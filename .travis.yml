@@ -12,6 +12,7 @@ python:
   - "3.7.5"
 
 jobs:
+  fast_finish: true
   include:
     - name : "Python 3.6"
       python: "3.6"
