@@ -20,6 +20,7 @@ from plonemeeting.portal.core import _
 class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
+
     dexteritytextindexer.searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
@@ -63,6 +64,7 @@ class IItem(model.Schema):
 class Item(Container):
     """
     """
+
     def get_title(self):
         if not hasattr(self, "_formatted_title"):
             pass
@@ -133,11 +135,12 @@ def get_pretty_category(object):
     # use .copy() to make sure to return a copy of the record
     global_categories = api.portal.get_registry_record(
         name="plonemeeting.portal.core.global_categories"
-    ).copy()
+    )
     if not global_categories or object.category not in global_categories:
         raise AttributeError
 
-    return global_categories[object.category]
+    copy_of_categories = global_categories.copy()
+    return copy_of_categories[object.category]
 
 
 @indexer(IItem)

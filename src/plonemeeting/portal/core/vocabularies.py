@@ -15,13 +15,15 @@ class GlobalCategoryVocabularyFactory:
         # use .copy() to make sure to return a copy of the record
         global_categories = api.portal.get_registry_record(
             name="plonemeeting.portal.core.global_categories"
-        ).copy()
+        )
         if not global_categories:
             return SimpleVocabulary([])
+
+        copy_of_categories = global_categories.copy()
         return SimpleVocabulary(
             [
                 SimpleTerm(value=category_id, title=category_title)
-                for category_id, category_title in global_categories.items()
+                for category_id, category_title in copy_of_categories.items()
             ]
         )
 
