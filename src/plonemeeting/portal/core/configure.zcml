@@ -10,6 +10,7 @@
   <include package="collective.dexteritytextindexer" />
   <include package="collective.pwexpiry" />
   <include package="collective.z3cform.datagridfield" />
+  <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
   <include package="eea.facetednavigation" />
 
