@@ -24,7 +24,7 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
 
 
-def _call_delib_rest_api(url, institution):
+def _call_delib_rest_api(url, institution):  # pragma: no cover
     response = requests.get(
         url, auth=(institution.username, institution.password), headers=API_HEADERS
     )
@@ -112,7 +112,7 @@ def sync_annexes_data(item, institution, annexes_json):
         api.content.delete(existing_annex)
 
 
-def sync_annexes(item, institution, annexes_json):
+def sync_annexes(item, institution, annexes_json):  # pragma: no cover
     if annexes_json:
         response = _call_delib_rest_api(annexes_json.get("@id"), institution)
         sync_annexes_data(item, institution, response.json())
@@ -242,18 +242,13 @@ def sync_meeting(institution, meeting_uid, force=False):
     url = get_api_url_for_meetings(institution, meeting_UID=meeting_uid)
     response = _call_delib_rest_api(url, institution)
 
-    if response.status_code != 200:
-        return _(u"Webservice connection error !"), None
-
     json_meeting = json.loads(response.text)
     if json_meeting.get("items_total") != 1:
-        return _(u"Unexpected meeting count in webservice response !"), None
+        raise ValueError(_(u"Unexpected meeting count in webservice response !"))
 
     meeting = sync_meeting_data(institution, json_meeting.get("items")[0])
     url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)
     response = _call_delib_rest_api(url, institution)
-    if response.status_code != 200:
-        return _(u"Webservice connection error !"), None
 
     json_items = json.loads(response.text)
     results = sync_items_data(meeting, json_items, institution, force)
@@ -305,10 +300,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
         institution = self.context
         meeting_uid = data.get("meeting")
-        self.status, new_meeting_uid = sync_meeting(institution, meeting_uid)
-        _handle_sync_meeting_response(
-            new_meeting_uid, self.request, self.context, self.status
-        )
+        _sync_meeting(institution, meeting_uid, self.request)
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
@@ -317,44 +309,37 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         self.request.response.redirect(self.context.absolute_url())
 
 
-class ReimportMeetingView(BrowserView):
-    def __call__(self):
+class ImportMeetingView(BrowserView):  # pragma: no cover
+    def import_meeting(self, force=False):
         meeting = self.context
         institution = meeting.aq_parent
-        status, new_meeting_uid = sync_meeting(institution, meeting.plonemeeting_uid)
-        _handle_sync_meeting_response(
-            new_meeting_uid, self.request, institution, status
-        )
+        _sync_meeting(institution, meeting.plonemeeting_uid, self.request, force)
 
 
-class ForceReimportMeetingView(BrowserView):
+class SyncMeetingView(ImportMeetingView):  # pragma: no cover
     def __call__(self):
-        meeting = self.context
-        institution = meeting.aq_parent
-        status, new_meeting_uid = sync_meeting(
-            institution, meeting.plonemeeting_uid, force=True
-        )
-        _handle_sync_meeting_response(
-            new_meeting_uid, self.request, institution, status
-        )
+        self.import_meeting()
 
 
-def _handle_sync_meeting_response(
-    new_meeting_uid, request, institution, status_message
-):
-    if new_meeting_uid:
-        _redirect_to_faceted(new_meeting_uid, request, institution, status_message)
-    else:
-        api.portal.show_message(message=status_message, request=request, type="error")
+class ForceReimportMeetingView(ImportMeetingView):  # pragma: no cover
+    def __call__(self):
+        self.import_meeting(force=True)
 
 
-def _redirect_to_faceted(uid, request, institution, status_message):
-    """Redirect to the faceted view"""
+def _sync_meeting(institution, meeting_uid, request, force=False):  # pragma: no cover
+    try:
+        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force)
+        if new_meeting_uid:
+            brains = api.content.find(
+                context=institution, object_provides=IMeetingsFolder.__identifier__
+            )
 
-    brains = api.content.find(
-        context=institution, object_provides=IMeetingsFolder.__identifier__
-    )
-
-    if brains:
-        request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), uid))
-        api.portal.show_message(message=status_message, request=request, type="info")
+            if brains:
+                request.response.redirect(
+                    "{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid)
+                )
+                api.portal.show_message(message=status, request=request, type="info")
+        else:
+            api.portal.show_message(message=status, request=request, type="error")
+    except ValueError as error:
+        api.portal.show_message(message=error.args[0], request=request, type="error")

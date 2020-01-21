@@ -46,7 +46,7 @@
     name="reimport_meeting"
     for="plonemeeting.portal.core.content.meeting.IMeeting"
     permission="cmf.ModifyPortalContent"
-    class=".sync.ReimportMeetingView"
+    class=".sync.SyncMeetingView"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
     />
 
