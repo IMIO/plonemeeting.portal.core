@@ -12,7 +12,7 @@
                      root_url context/@@plone_portal_state/navigation_root_url;">
 
         <div class="footer-disclaimer">
-          <span>Site réalisé ave le <a href='https://plone.org'>CMS Plone</a> en collaboration avec <a href='https://www.imio.be'>IMIO</a> sous licence libre - © 2020</span>
+          <span>Site réalisé avec le <a href='https://plone.org'>CMS Plone</a> en collaboration avec <a href='https://imio.be'>IMIO</a> sous licence libre - © 2020</span>
         </div>
 
         <div id="portal-anontools" tal:condition="isAnon">
