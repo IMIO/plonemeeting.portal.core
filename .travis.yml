@@ -24,8 +24,7 @@ jobs:
     - python: "3.8"
 
 before_install:
-  - sudo apt-get update --no-install-recommends -qy
-  - sudo apt-get install -qy firefox-geckodriver build-essential
+  - sudo apt-get install -qqy firefox-geckodriver
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
   - cp test_plone$PLONE_VERSION.cfg buildout.cfg
