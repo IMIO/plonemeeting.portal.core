@@ -108,8 +108,9 @@ def sync_annexes_data(item, institution, annexes_json):
                     existing_annexes.remove(existing_annex)
                     break
     # delete leftovers
-    for existing_annex in existing_annexes:
-        api.content.delete(existing_annex)
+    with api.env.adopt_roles(["Manager"]):
+        for existing_annex in existing_annexes:
+            api.content.delete(existing_annex)
 
 
 def sync_annexes(item, institution, annexes_json):  # pragma: no cover
@@ -197,11 +198,12 @@ def sync_items_data(meeting, items_data, institution, force=False):
             nb_modified += 1
 
     # Delete existing items that have been removed in PM
-    for uid, infos in existing_items.items():
-        if uid not in synced_uids:
-            obj = infos.get("brain").getObject()
-            api.content.delete(obj)
-            nb_deleted += 1
+    with api.env.adopt_roles(["Manager"]):
+        for uid, infos in existing_items.items():
+            if uid not in synced_uids:
+                obj = infos.get("brain").getObject()
+                api.content.delete(obj)
+                nb_deleted += 1
 
     return {"created": nb_created, "modified": nb_modified, "deleted": nb_deleted}
 
