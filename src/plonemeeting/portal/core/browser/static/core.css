@@ -702,10 +702,10 @@ img {
 	}
 	.item-infos .meeting-metadata {
 		margin-top: 0
-    }
-    h1 {
-        font-size: 25px!important
-    }
+	}
+	h1 {
+		font-size: 25px!important
+	}
 }
 
 @media screen and (min-width:1400px) {
@@ -713,6 +713,69 @@ img {
 		max-width: 63%
 	}
 }
+/* Cookie */
+
+.cc-cookies {
+    position: fixed !important;
+    margin: 0 auto;
+    max-width: 850px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.975);
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 -3px 27px -5px rgba(50, 50, 93, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+    text-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: hidden;
+    font-weight: 400;
+    color: #000;
+    padding: 1.5em 1.5rem;
+  }
+  .cc-cookies a {
+    display: inline-block;
+    order: 2;
+    color: #000000;
+  }
+  .cc-cookies a[href$='/cookies-page']:hover {
+    opacity: .8;
+    color: #000;
+  }
+  .cc-cookies p {
+    color: #000;
+  }
+  .cc-cookies span {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .cc-cookies .cc-cookie-accept {
+    display: block!important;
+    max-width: 250px ;
+    margin: 10rem auto 1rem auto!important;
+    order: 1!important;
+    background: #005880!important;
+    position: relative;
+  }
+  .cc-cookies .cc-cookie-accept:before {
+    content: "";
+    position: absolute;
+    font-family: fontello;
+    left: 50%;
+    transform: translate(-50%);
+    top: -72px;
+    width: 40px;
+    height: 40px;
+	background: url(++plone++plonemeeting.portal.core/assets/food.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #000;
+    font-size: 40px;
+  }
+  
 
 .site-liege #faceted-results .pagination li>a,
 .site-liege #show-less-link,
@@ -742,6 +805,14 @@ img {
 .site-liege .plone-navbar,
 .site-liege .portalMessage.warning>strong::before {
 	background-color: #d7004e
+}
+
+.site-liege .cc-cookies .cc-cookie-accept{
+    background-color: #d7004e!important;
+}
+
+.site-liege .cc-cookies .cc-cookie-accept:hover{
+    color: #fff!important;
 }
 
 .site-liege .item-infos .meeting-title a,
