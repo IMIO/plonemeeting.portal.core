@@ -1,29 +1,22 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.app.testing import login
-from plone.app.testing import logout
-from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
-)  # noqa
+from plone.app.testing import login, logout
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFCore.utils import _checkPermission as checkPerm
-from Products.CMFCore.permissions import AccessContentsInformation
+from Products.CMFCore.permissions import AccessContentsInformation, DeleteObjects
 from Products.CMFCore.permissions import AddPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.permissions import ModifyPortalContent
 
-import unittest
-
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 WF = "meeting_workflow"
 
 
-class TestMeetingWorkflow(unittest.TestCase):
-
-    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
 
     def setUp(self):
-        self.portal = self.layer["portal"]
+        super().setUp()
         self.catalog = self.portal.portal_catalog
         self.workflow = self.portal.portal_workflow
 
@@ -33,27 +26,18 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.portal.acl_users._doAddUser("editor", " secret", ["Editor"], [])
         self.portal.acl_users._doAddUser("reader", "secret", ["Reader"], [])
 
-        login(self.portal, "manager")
-        self.city1 = getattr(self.portal, "amityville")
+        self.login_as_manager()
         self.meeting = api.content.create(
-            container=self.city1, title="My meeting", type="Meeting"
+            container=self.institution, title="My meeting", type="Meeting"
         )
-        self.meeting_item = api.content.create(
+        self.item = api.content.create(
             container=self.meeting, title="My item", type="Item"
         )
 
-        self.portal.acl_users._doAddUser(
-            "institution_manager",
-            "secret",
-            [],
-            [],
-            groups=["amityville-institution_managers"],
-        )
-
     def tearDown(self):
-        login(self.portal, "manager")
+        self.login_as_manager()
         api.content.delete(obj=self.meeting)
-        logout()
+        super().tearDown()
 
     def _check_index(self, obj, index_name, expected_value):
         brain = api.content.find(UID=obj.UID())[0]
@@ -78,11 +62,11 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
 
     def testReviewStateIndexing(self):
-        self._check_index(self.meeting_item, "linkedMeetingReviewState", "private")
+        self._check_index(self.item, "linkedMeetingReviewState", "private")
         self.workflow.doActionFor(self.meeting, "send_to_project")
-        self._check_index(self.meeting_item, "linkedMeetingReviewState", "in_project")
+        self._check_index(self.item, "linkedMeetingReviewState", "in_project")
         self.workflow.doActionFor(self.meeting, "publish")
-        self._check_index(self.meeting_item, "linkedMeetingReviewState", "decision")
+        self._check_index(self.item, "linkedMeetingReviewState", "decision")
 
     def testOwnerSubmitAPrivateMeetingAndRetract(self):
         self._check_state(self.meeting, "private")
@@ -109,31 +93,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         # Owner is allowed
         login(self.portal, "manager")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Member is denied
         login(self.portal, "member")
         self.assertFalse(checkPerm(View, self.meeting))
-        self.assertFalse(checkPerm(View, self.meeting_item))
+        self.assertFalse(checkPerm(View, self.item))
         # Reviewer is denied
         login(self.portal, "reviewer")
         self.assertFalse(checkPerm(View, self.meeting))
-        self.assertFalse(checkPerm(View, self.meeting_item))
+        self.assertFalse(checkPerm(View, self.item))
         # Anonymous is denied
         logout()
         self.assertFalse(checkPerm(View, self.meeting))
-        self.assertFalse(checkPerm(View, self.meeting_item))
+        self.assertFalse(checkPerm(View, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
 
     def testViewIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
@@ -149,31 +133,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "send_to_project")
         # Owner is allowed
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Member is allowed
         login(self.portal, "member")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Reviewer is denied  but he acquires through Anonymous Role
         login(self.portal, "reviewer")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Anonymous is allowed
         logout()
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
 
     def testViewPublishedMeeting(self):
         # transition requires Review portal content
@@ -182,31 +166,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "publish")
         # Owner is allowed
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Member is allowed
         login(self.portal, "member")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Reviewer is denied  but he acquires through Anonymous Role
         login(self.portal, "reviewer")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Anonymous is allowed
         logout()
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(View, self.meeting))
-        self.assertTrue(checkPerm(View, self.meeting_item))
+        self.assertTrue(checkPerm(View, self.item))
 
     def testAccessContentsInformationIsNotAcquiredInPrivateState(self):
         self.assertEqual(
@@ -219,31 +203,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
         # Owner is allowed
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Member is denied
         login(self.portal, "member")
         self.assertFalse(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertFalse(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertFalse(checkPerm(AccessContentsInformation, self.item))
         # Reviewer is denied
         login(self.portal, "reviewer")
         self.assertFalse(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertFalse(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertFalse(checkPerm(AccessContentsInformation, self.item))
         # Anonymous is denied
         logout()
         self.assertFalse(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertFalse(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertFalse(checkPerm(AccessContentsInformation, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
     def testAccessContentsInformationIsNotAcquiredInPublishedState(self):
         # transition requires Review portal content
@@ -263,31 +247,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "send_to_project")
         # Owner is allowed
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Member is allowed
         login(self.portal, "member")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Reviewer is denied but he acquires through Anonymous Role
         login(self.portal, "reviewer")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Anonymous is allowed
         logout()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
     def testAccessContentsInformationPublishedMeeting(self):
         # transition requires Review portal content
@@ -295,31 +279,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "publish")
         # Owner is allowed
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Member is allowed
         login(self.portal, "member")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Reviewer is denied but he acquires through Anonymous Role
         login(self.portal, "reviewer")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Anonymous is allowed
         logout()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Reader is allowed
         login(self.portal, "reader")
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
-        self.assertTrue(checkPerm(AccessContentsInformation, self.meeting_item))
+        self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
     def testModifyPrivateMeetingIsNotAcquiredInPrivateState(self):
         self.assertEqual(
@@ -332,31 +316,31 @@ class TestMeetingWorkflow(unittest.TestCase):
         )
         # Owner is allowed
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Member is denied
         login(self.portal, "member")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Reviewer is denied
         login(self.portal, "reviewer")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Anonymous is denied
         logout()
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Reader is denied
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
     def testModifyPortalContentIsNotAcquiredInPublishedStates(self):
         # transition requires Review portal content
@@ -370,34 +354,34 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "send_to_project")
         # Manager is allowed
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Owner is allowed
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Member is denied
         login(self.portal, "member")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Reviewer is denied
         login(self.portal, "reviewer")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Anonymous is denied
         logout()
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Reader is denied
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
     def testModifyPublishedMeeting(self):
         # transition requires Review portal content
@@ -405,38 +389,45 @@ class TestMeetingWorkflow(unittest.TestCase):
         self.workflow.doActionFor(self.meeting, "publish")
         # Manager is allowed
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Owner is allowed
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Member is denied
         login(self.portal, "member")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Reviewer is denied
         login(self.portal, "reviewer")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Anonymous is denied
         logout()
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Editor is allowed
         login(self.portal, "editor")
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
         # Reader is denied
         login(self.portal, "reader")
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertFalse(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        login(self.portal, "institution_manager")
+        self.login_as_institution_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
-        self.assertTrue(checkPerm(ModifyPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
     def testAddContent(self):
         # Institution Manager can add content
-        login(self.portal, "institution_manager")
-        self.assertTrue(checkPerm(AddPortalContent, self.city1))
+        self.login_as_institution_manager()
+        self.assertTrue(checkPerm(AddPortalContent, self.institution))
         self.assertTrue(checkPerm(AddPortalContent, self.meeting))
-        self.assertTrue(checkPerm(AddPortalContent, self.meeting_item))
+        self.assertTrue(checkPerm(AddPortalContent, self.item))
+
+    def testRemoveContent(self):
+        # Institution Manager can add content
+        self.login_as_institution_manager()
+        self.assertFalse(checkPerm(DeleteObjects, self.institution))
+        self.assertFalse(checkPerm(DeleteObjects, self.meeting))
+        self.assertFalse(checkPerm(DeleteObjects, self.item))

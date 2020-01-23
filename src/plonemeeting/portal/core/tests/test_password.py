@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
-import unittest
-
 from plonemeeting.portal.core.passwords import PloneMeetingPasswordValidator
-from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 
 
-class TestPloneMeetingPasswordValidator(unittest.TestCase):
-
-    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+class TestPloneMeetingPasswordValidator(PmPortalTestCase):
 
     def test_validate(self):
         invalid_label = "Passwords must be at least 8 characters in length."

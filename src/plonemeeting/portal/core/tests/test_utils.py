@@ -3,28 +3,18 @@ from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from datetime import datetime
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import login
 from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
-)  # noqa
 from plonemeeting.portal.core import utils
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 
-import unittest
 
-
-class TestUtils(unittest.TestCase):
-    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def setUp(self):
-        self.portal = self.layer["portal"]
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        login(self.portal, TEST_USER_NAME)
+        super().setUp()
         self.belleville = self.portal["belleville"]
+        self.login_as_manager()
 
     def tearDown(self):
         if "test-faceted" in self.portal:

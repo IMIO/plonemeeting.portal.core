@@ -1,28 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
-from plone.app.testing import login
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from plone.app.textfield.value import RichTextValue
 
-import unittest
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
-class TestItemView(unittest.TestCase):
-    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+class TestItemView(PmPortalDemoFunctionalTestCase):
 
     def setUp(self):
-        self.portal = self.layer["portal"]
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        login(self.portal, TEST_USER_NAME)
+        super().setUp()
         self.meeting = self.portal["belleville"]["16-novembre-2018-08-30"]
         self.item = self.meeting["approbation-du-pv-du-xxx"]
-
-    def tearDown(self):
-        logout()
+        self.login_as_test()
 
     def test_get_files(self):
         files = self.item.restrictedTraverse("@@view").get_files()

@@ -1,31 +1,18 @@
 # -*- coding: utf-8 -*-
 from plonemeeting.portal.core.content.item import IItem  # NOQA E501
-from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
-)  # noqa
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from zope.component import createObject
 from zope.component import queryUtility
 
-import unittest
 
-
-class ItemIntegrationTest(unittest.TestCase):
-
-    layer = PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING
+class ItemIntegrationTest(PmPortalTestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer["portal"]
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        portal_types = self.portal.portal_types
-        parent_id = portal_types.constructContent(
-            "Meeting", self.portal, "parent_container", title="Parent container"
-        )
-        self.parent = self.portal[parent_id]
+        super().setUp()
+        self.parent = self.create_parent("Meeting")
 
     def test_ct_item_schema(self):
         fti = queryUtility(IDexterityFTI, name="Item")
@@ -46,7 +33,7 @@ class ItemIntegrationTest(unittest.TestCase):
         )
 
     def test_ct_item_adding(self):
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.login_as_manager()
         obj = api.content.create(container=self.parent, type="Item", id="item")
 
         self.assertTrue(
@@ -61,6 +48,6 @@ class ItemIntegrationTest(unittest.TestCase):
         self.assertNotIn("item", parent.objectIds())
 
     def test_ct_item_globally_not_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.login_as_manager()
         fti = queryUtility(IDexterityFTI, name="Item")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))

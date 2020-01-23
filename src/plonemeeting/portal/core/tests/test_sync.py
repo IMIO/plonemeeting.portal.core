@@ -2,12 +2,9 @@
 import json
 import os
 import pytz
-import unittest
 
 from datetime import datetime
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plonemeeting.portal.core.browser.sync import (
     sync_items_data,
     sync_annexes_data,
@@ -15,20 +12,13 @@ from plonemeeting.portal.core.browser.sync import (
 )
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
-from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
-class TestMeetingSynchronization(unittest.TestCase):
-    layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
     def setUp(self):
-        self.portal = self.layer["portal"]
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.institution = api.content.find(id="amityville")[0].getObject()
-        self.meeting = api.content.find(self.institution, portal_type="Meeting")[
-            0
-        ].getObject()
-        self.item = api.content.find(self.meeting, portal_type="Item")[0].getObject()
+        super().setUp()
         with open(
             os.path.join(os.path.dirname(__file__), "resources/meeting_mock.json")
         ) as json_file:
