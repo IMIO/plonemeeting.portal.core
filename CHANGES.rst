@@ -10,6 +10,8 @@ Changelog
 - Manager is able to edit field IMeeting.date_time, this is useful to add
   old meetings not managed by the synchronization.
   [gbastien]
+- Fix sync : object could not be deleted by institution manager
+  [odelaere]
 
 
 1.0.2 (2020-01-17)
