@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import pytz
-
 from datetime import datetime
+
+import pytz
 from plone import api
 from plonemeeting.portal.core.browser.sync import (
     sync_items_data,

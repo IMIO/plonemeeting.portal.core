@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.content.meeting import IMeeting  # NOQA E501
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.content.meeting import IMeeting  # NOQA E501
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from zope.component import createObject
 from zope.component import queryUtility
@@ -13,7 +13,7 @@ class MeetingIntegrationTest(PmPortalTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         super().setUp()
-        self.parent = self.create_parent("Institution")
+        self.parent = self.create_object("Institution")
 
     def test_ct_meeting_schema(self):
         fti = queryUtility(IDexterityFTI, name="Meeting")

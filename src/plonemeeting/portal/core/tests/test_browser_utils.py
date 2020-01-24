@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
 from plone.api.exc import InvalidParameterError
 
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
@@ -20,9 +19,17 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
 
     def test_get_linked_meeting(self):
         meeting = self.belleville["16-novembre-2018-08-30"]
-        batch = api.content.find(context=meeting, portal_type="Item")
+        request = {'seance[]': meeting.UID()}
         utils_view = meeting.restrictedTraverse("@@utils_view")
-        self.assertEqual(meeting, utils_view.get_linked_meeting(batch))
+        utils_view.request = request
+        self.assertEqual(meeting, utils_view.get_linked_meeting())
+        # Also works with empty meeting.
+        meeting = self.create_object('Meeting')
+        request = {'seance[]': meeting.UID()}
+        self.login_as_manager()
+        utils_view = meeting.restrictedTraverse("@@utils_view")
+        utils_view.request = request
+        self.assertEqual(meeting, utils_view.get_linked_meeting())
 
     def test_get_plonemeeting_last_modified_on_item(self):
         item = self.belleville["16-novembre-2018-08-30"]["approbation-du-pv-du-xxx"]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.content.item import IItem  # NOQA E501
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.content.item import IItem  # NOQA E501
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from zope.component import createObject
 from zope.component import queryUtility
@@ -12,7 +12,7 @@ class ItemIntegrationTest(PmPortalTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         super().setUp()
-        self.parent = self.create_parent("Meeting")
+        self.parent = self.create_object("Meeting")
 
     def test_ct_item_schema(self):
         fti = queryUtility(IDexterityFTI, name="Item")

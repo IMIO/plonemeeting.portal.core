@@ -5,7 +5,8 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed display of empty meetings.
+  [odelaere]
 
 
 1.0.3 (2020-01-23)

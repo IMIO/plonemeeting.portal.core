@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.content.institution import IInstitution
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
+from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from zope.component import createObject
 from zope.component import queryUtility
 

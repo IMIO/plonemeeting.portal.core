@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from plone.app.testing import login, logout
 from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import login, logout
 
 from plone import api
 from plonemeeting.portal.core.testing import (
@@ -28,11 +28,14 @@ class PmPortalTestCase(unittest.TestCase):
     def login_as_test(self):
         login(self.portal, TEST_USER_NAME)
 
-    def create_parent(self, type):
+    def create_object(self, portal_type, container=None):
+        if not container:
+            container = self.portal
+
         self.login_as_manager()
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            type, self.portal, "parent_container", title="Parent container"
+            portal_type, container, "test_object", title="My {}".format(portal_type)
         )
         self.login_as_test()
         return self.portal[parent_id]

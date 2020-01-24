@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
 from datetime import datetime
+
+from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
 from plone import api
 from plone.app.textfield.value import RichTextValue
-
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 

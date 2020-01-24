@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from plone import api
 from plone.app.testing import login, logout
+
 from Products.CMFCore.WorkflowCore import WorkflowException
-from Products.CMFCore.utils import _checkPermission as checkPerm
 from Products.CMFCore.permissions import AccessContentsInformation, DeleteObjects
 from Products.CMFCore.permissions import AddPortalContent
-from Products.CMFCore.permissions import View
 from Products.CMFCore.permissions import ModifyPortalContent
-
+from Products.CMFCore.permissions import View
+from Products.CMFCore.utils import _checkPermission as checkPerm
+from plone import api
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 WF = "meeting_workflow"

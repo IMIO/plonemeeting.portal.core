@@ -25,10 +25,9 @@ class UtilsView(BrowserView):
     def is_meeting(self):
         return IMeeting.providedBy(self.context)
 
-    def get_linked_meeting(self, batch):
-        brain = batch[0]
-        meeting_UID = brain.linkedMeetingUID
-        meeting = api.content.get(UID=meeting_UID)
+    def get_linked_meeting(self):
+        uid = self.request.get('seance[]')
+        meeting = api.content.get(UID=uid)
         return meeting
 
     def get_plonemeeting_last_modified(self):
