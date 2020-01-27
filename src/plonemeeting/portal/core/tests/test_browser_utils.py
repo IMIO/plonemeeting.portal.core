@@ -18,17 +18,18 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         self.assertFalse(meetings_utils.is_institution())
 
     def test_get_linked_meeting(self):
+        request = self.portal.REQUEST
+        utils_view = self.portal.restrictedTraverse("@@utils_view")
+        # do not crash when no meeting
+        self.assertEqual(None, utils_view.get_linked_meeting())
         meeting = self.belleville["16-novembre-2018-08-30"]
-        request = {'seance[]': meeting.UID()}
-        utils_view = meeting.restrictedTraverse("@@utils_view")
-        utils_view.request = request
+        request.set('seance[]', meeting.UID())
         self.assertEqual(meeting, utils_view.get_linked_meeting())
         # Also works with empty meeting.
         meeting = self.create_object('Meeting')
-        request = {'seance[]': meeting.UID()}
+        request.set('seance[]', meeting.UID())
         self.login_as_manager()
-        utils_view = meeting.restrictedTraverse("@@utils_view")
-        utils_view.request = request
+        utils_view = self.portal.restrictedTraverse("@@utils_view")
         self.assertEqual(meeting, utils_view.get_linked_meeting())
 
     def test_get_plonemeeting_last_modified_on_item(self):

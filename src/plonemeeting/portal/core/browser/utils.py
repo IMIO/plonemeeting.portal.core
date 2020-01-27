@@ -27,7 +27,9 @@ class UtilsView(BrowserView):
 
     def get_linked_meeting(self):
         uid = self.request.get('seance[]')
-        meeting = api.content.get(UID=uid)
+        meeting = None
+        if uid:
+            meeting = api.content.get(UID=uid)
         return meeting
 
     def get_plonemeeting_last_modified(self):

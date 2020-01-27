@@ -5,7 +5,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not break faceted view when no meeting to display.
+  [gbastien]
 
 
 1.0.4 (2020-01-24)
