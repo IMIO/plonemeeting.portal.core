@@ -7,6 +7,12 @@ Changelog
 
 - Do not break faceted view when no meeting to display.
   [gbastien]
+- Added parameter force=False to sync.sync_annexes_data so when forcing
+  reimport, the annexes are reimported as well.
+  [gbastien]
+- Take into account the institution.info_annex_formatting_tal while importing
+  annexes, by default annex title is the original annex title.
+  [gbastien]
 
 
 1.0.4 (2020-01-24)

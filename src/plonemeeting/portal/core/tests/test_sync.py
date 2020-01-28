@@ -139,6 +139,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         )
 
     def test_sync_annexes_publishable_disabled(self):
+        self.institution.info_annex_formatting_tal = "python: json['category_title']"
         self.assertEqual(len(self.item.listFolderContents()), 1)
         annex = self.item.listFolderContents()[0]
         # delete existing annex and add the new one
@@ -177,6 +178,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(blobs.size, 103911)
 
     def test_sync_annexes_publishable_enabled(self):
+        self.institution.info_annex_formatting_tal = "python: json['category_title']"
         annexes_json = self.json_annexes_publishable_mock
         self.assertGreater(
             len(annexes_json),
@@ -216,3 +218,17 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(blobs.filename, "annexe.jpg")
         self.assertEqual(blobs.contentType, "image/jpeg")
         self.assertEqual(blobs.size, 50915)
+
+    def test_sync_annex_title_tal_expr(self):
+        annexes_json = self.json_annexes_publishable_mock
+        sync_annexes_data(self.item, self.institution, annexes_json)
+        annex = self.item.listFolderContents()[0]
+        # by default annex.title is the annex title...
+        self.assertEqual(annex.title, "0s57")
+        # use a tal expr
+        self.institution.info_annex_formatting_tal = "python: json['category_title']"
+        # without force=True, nothing changed
+        sync_annexes_data(self.item, self.institution, annexes_json)
+        self.assertEqual(annex.title, "0s57")
+        sync_annexes_data(self.item, self.institution, annexes_json, force=True)
+        self.assertEqual(annex.title, "Annexe")

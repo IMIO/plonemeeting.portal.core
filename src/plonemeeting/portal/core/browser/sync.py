@@ -51,7 +51,7 @@ def get_formatted_data_from_json(tal_expression, item, item_data):
     return expression_result
 
 
-def sync_annexes_data(item, institution, annexes_json):
+def sync_annexes_data(item, institution, annexes_json, force=False):
     existing_annexes = item.listFolderContents(contentFilter={"portal_type": "File"})
 
     def get_annex_if_exists(pm_uid):
@@ -62,7 +62,8 @@ def sync_annexes_data(item, institution, annexes_json):
 
     def annex_should_be_updated(annex_obj, pm_last_modified):
         return (
-            not hasattr(annex_obj, "plonemeeting_last_modified")
+            force
+            or not hasattr(annex_obj, "plonemeeting_last_modified")
             or annex.plonemeeting_last_modified < pm_last_modified
         )
 
@@ -79,7 +80,8 @@ def sync_annexes_data(item, institution, annexes_json):
             if (
                 annex and annex_should_be_updated(annex, annex_pm_last_modified)
             ) or not annex:
-                file_title = annex_data.get("category_title")
+                file_title = get_formatted_data_from_json(
+                    institution.info_annex_formatting_tal, item, annex_data) or annex_data.get("title")
                 if annex:
                     annex.title = file_title
                 else:
@@ -113,10 +115,10 @@ def sync_annexes_data(item, institution, annexes_json):
             api.content.delete(existing_annex)
 
 
-def sync_annexes(item, institution, annexes_json):  # pragma: no cover
+def sync_annexes(item, institution, annexes_json, force=False):  # pragma: no cover
     if annexes_json:
         response = _call_delib_rest_api(annexes_json.get("@id"), institution)
-        sync_annexes_data(item, institution, response.json())
+        sync_annexes_data(item, institution, response.json(), force)
 
 
 def sync_items_data(meeting, items_data, institution, force=False):
@@ -191,7 +193,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
             meeting.aq_parent, item_data.get("category")
         )
         item.reindexObject()
-        sync_annexes(item, institution, item_data.get("@components").get("annexes"))
+        sync_annexes(item, institution, item_data.get("@components").get("annexes"), force)
         if created:
             nb_created += 1
         else:
