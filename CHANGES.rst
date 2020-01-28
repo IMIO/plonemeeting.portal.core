@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.5 (unreleased)
+1.0.5 (2020-01-28)
 ------------------
 
 - Do not break faceted view when no meeting to display.
