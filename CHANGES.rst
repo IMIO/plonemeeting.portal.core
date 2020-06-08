@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.6 (unreleased)
+1.0.6 (2020-06-08)
 ------------------
 
 - Update dependencies. Use eea.facetednavigation >= 13.8 to fix pagination with restapi.
