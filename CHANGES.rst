@@ -5,7 +5,8 @@ Changelog
 1.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update dependencies. Use eea.facetednavigation >= 13.8 to fix pagination with restapi.
+  [odelaere]
 
 
 1.0.5 (2020-01-28)
