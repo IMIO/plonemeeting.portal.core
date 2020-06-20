@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
@@ -23,11 +24,26 @@ class InvalidUrlParameters(ValidationError):
     __doc__ = _(u"Invalid url parameters, the value should start with '&'")
 
 
+class InvalidColorParameters(ValidationError):
+    """Exception for invalid url parameters"""
+
+    __doc__ = _(u"Invalid color parameter, the value should be a correct hexadecimal color")
+
+
 def validate_url_parameters(value):
     """Validate if the url parameters"""
     if value and value[0] != "&":
         raise InvalidUrlParameters(value)
     return True
+
+
+def validate_color_parameters(value):
+    """Validate if the value is a correct hex color parameter"""
+    is_hexadecimal_color = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', value)
+    if not is_hexadecimal_color:
+        raise InvalidColorParameters()
+    else:
+        return True
 
 
 class ICategoryMappingRowSchema(Interface):
@@ -79,6 +95,20 @@ class IInstitution(model.Schema):
     )
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
+
+    nav_color = schema.TextLine(
+        title=_("Navigation bar color"),
+        required=True,
+        default="#007bb1",  # Plone blue
+        constraint=validate_color_parameters
+    )
+
+    nav_text_color = schema.TextLine(
+        title=_("Navigation bar text color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters
+    )
 
     item_title_formatting_tal = schema.TextLine(
         title=_(

@@ -5,7 +5,7 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added parameters on institution to choose navigation bar colors [aduchene]
 
 
 1.0.6 (2020-06-08)
