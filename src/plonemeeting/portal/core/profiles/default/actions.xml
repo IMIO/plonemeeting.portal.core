@@ -27,8 +27,8 @@
    <object name="object_buttons" meta_type="CMF Action Category">
     <object name="import_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
      <property name="title" i18n:translate="">Import meeting</property>
-     <property name="url_expr">python: getattr(object, "portal_type", "") == "Institution" and object_url+"/@@import_meeting" or "@@import_meeting"</property>
-     <property name="available_expr">python: getattr(object, "portal_type", "") == "Institution" or folder.id == "seances"</property>
+     <property name="url_expr">context/@@utils_view/get_current_institution_import_meeting_url</property>
+     <property name="available_expr">context/@@utils_view/is_in_institution</property>
      <property name="permissions">
       <element value="Modify portal content"/>
      </property>

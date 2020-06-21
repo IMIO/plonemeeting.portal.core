@@ -22,6 +22,12 @@ class UtilsView(BrowserView):
     def is_institution(self):
         return IInstitution.providedBy(self.context)
 
+    def is_in_institution(self):
+        return IInstitution.providedBy(self._get_current_institution())
+
+    def get_current_institution_import_meeting_url(self):
+        return self._get_current_institution().absolute_url() + "/@@import_meeting"
+
     def is_meeting(self):
         return IMeeting.providedBy(self.context)
 

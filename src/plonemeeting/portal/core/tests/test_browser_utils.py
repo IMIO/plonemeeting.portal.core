@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from plone.api.exc import InvalidParameterError
+from plone import api
 
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
@@ -16,6 +17,26 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         self.assertTrue(institution_utils.is_institution())
         meetings_utils = self.belleville["meetings"].restrictedTraverse("@@utils_view")
         self.assertFalse(meetings_utils.is_institution())
+
+    def test_is_in_institution(self):
+        institution_utils = self.belleville.restrictedTraverse("@@utils_view")
+        self.assertTrue(institution_utils.is_in_institution())
+
+        meetings_utils = self.belleville["meetings"].restrictedTraverse("@@utils_view")
+        self.assertTrue(meetings_utils.is_in_institution())
+
+        site_root = api.portal.get()
+        utils_view = site_root.restrictedTraverse("@@utils_view")
+        self.assertFalse(utils_view.is_in_institution())
+
+    def test_get_current_institution_import_meeting_url(self):
+        expected_url = "http://nohost/plone/belleville/@@import_meeting"
+
+        institution_utils = self.belleville.restrictedTraverse("@@utils_view")
+        self.assertEquals(expected_url, institution_utils.get_current_institution_import_meeting_url())
+
+        meetings_utils = self.belleville["meetings"].restrictedTraverse("@@utils_view")
+        self.assertEquals(expected_url, meetings_utils.get_current_institution_import_meeting_url())
 
     def test_get_linked_meeting(self):
         request = self.portal.REQUEST
