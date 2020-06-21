@@ -5,7 +5,7 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow manager to import a meeting when inside an institution [aduchene]
 
 
 1.0.6 (2020-06-08)
