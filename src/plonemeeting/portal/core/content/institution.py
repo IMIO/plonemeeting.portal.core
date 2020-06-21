@@ -94,22 +94,6 @@ class IInstitution(model.Schema):
         constraint=validate_url_parameters,
     )
 
-    logo = NamedBlobImage(title=_(u"Logo"), required=False)
-
-    nav_color = schema.TextLine(
-        title=_("Navigation bar color"),
-        required=True,
-        default="#007bb1",  # Plone blue
-        constraint=validate_color_parameters
-    )
-
-    nav_text_color = schema.TextLine(
-        title=_("Navigation bar text color"),
-        required=True,
-        default="#ffffff",
-        constraint=validate_color_parameters
-    )
-
     item_title_formatting_tal = schema.TextLine(
         title=_(
             u"Item title formatting tal expression. "
@@ -144,6 +128,30 @@ class IInstitution(model.Schema):
             title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
         ),
         required=False,
+    )
+
+    # Styling fieldsets
+
+    model.fieldset(
+        'style',
+        label=_(u"Styling"),
+        fields=['logo', 'nav_color', 'nav_text_color']
+    )
+
+    logo = NamedBlobImage(title=_(u"Logo"), required=False)
+
+    nav_color = schema.TextLine(
+        title=_("Navigation bar color"),
+        required=True,
+        default="#007bb1",  # Plone blue
+        constraint=validate_color_parameters
+    )
+
+    nav_text_color = schema.TextLine(
+        title=_("Navigation bar text color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters
     )
 
 
