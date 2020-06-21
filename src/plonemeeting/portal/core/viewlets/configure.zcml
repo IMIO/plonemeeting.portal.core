@@ -10,10 +10,14 @@
       permission="zope2.View"
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
+
   <browser:viewlet
-       name="colors.viewlet"
+       name="custom_colors.viewlet"
        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
-       class=".colors.PMColorsViewlet"
-       permission="zope2.View" />
+       class="plone.app.layout.viewlets.common.ViewletBase"
+       template="templates/custom_colors.pt"
+       permission="zope2.View"
+       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+       />
 
 </configure>

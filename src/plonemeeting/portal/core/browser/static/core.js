@@ -10,14 +10,3 @@ jQuery(document).ready(function ($) {
     });
   }
 });
-
-function update_colors() {
-  // Update global css color variables based on what colorsViewlet
-  let root = document.documentElement;
-  root.style.setProperty('--main-nav-color', portalColors.mainNavColor);
-  root.style.setProperty('--main-nav-text-color', portalColors.mainNavTextColor);
-}
-
-update_colors();
-
-

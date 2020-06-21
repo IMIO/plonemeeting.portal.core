@@ -66,4 +66,12 @@
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
+  <browser:page
+    name="custom_colors.css"
+    for="*"
+    class=".colors.ColorsCSSView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    />
+
 </configure>
