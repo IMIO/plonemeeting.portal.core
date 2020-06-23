@@ -17,7 +17,10 @@ import os
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.utils import cleanup_contents, format_institution_managers_group_id
+from plonemeeting.portal.core.utils import (
+    cleanup_contents,
+    format_institution_managers_group_id,
+)
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
@@ -126,8 +129,8 @@ def create_demo_content(context):
 
             user = api.user.create(
                 username="{}-manager".format(institution_obj.id),
-                email='noob@plone.org',
-                password='supersecret',
+                email="noob@plone.org",
+                password="supersecret",
             )
 
             group = api.group.get(format_institution_managers_group_id(institution_obj))

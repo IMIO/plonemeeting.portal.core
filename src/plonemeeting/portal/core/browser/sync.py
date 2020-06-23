@@ -81,7 +81,8 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
                 annex and annex_should_be_updated(annex, annex_pm_last_modified)
             ) or not annex:
                 file_title = get_formatted_data_from_json(
-                    institution.info_annex_formatting_tal, item, annex_data) or annex_data.get("title")
+                    institution.info_annex_formatting_tal, item, annex_data
+                ) or annex_data.get("title")
                 if annex:
                     annex.title = file_title
                 else:
@@ -193,7 +194,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
             meeting.aq_parent, item_data.get("category")
         )
         item.reindexObject()
-        sync_annexes(item, institution, item_data.get("@components").get("annexes"), force)
+        sync_annexes(
+            item, institution, item_data.get("@components").get("annexes"), force
+        )
         if created:
             nb_created += 1
         else:

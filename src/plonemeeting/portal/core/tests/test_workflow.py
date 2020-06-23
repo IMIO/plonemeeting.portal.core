@@ -8,13 +8,14 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission as checkPerm
 from plone import api
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import (
+    PmPortalDemoFunctionalTestCase,
+)
 
 WF = "meeting_workflow"
 
 
 class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
-
     def setUp(self):
         super().setUp()
         self.catalog = self.portal.portal_catalog

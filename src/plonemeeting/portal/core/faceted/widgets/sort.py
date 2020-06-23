@@ -36,7 +36,7 @@ class ItemsSortWidget(Widget):
         """
         # XXX avoid double sort_on when we selected a meeting
         # this is not necessary and it some case, produce weird results
-        if 'seance' in form:
+        if "seance" in form:
             query = {
                 "sort_on": ["item_number"],
                 "sort_order": ["ascending"],

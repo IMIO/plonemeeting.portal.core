@@ -8,7 +8,6 @@ from zope.component import queryUtility
 
 
 class ItemIntegrationTest(PmPortalTestCase):
-
     def setUp(self):
         """Custom shared utility setup for tests."""
         super().setUp()

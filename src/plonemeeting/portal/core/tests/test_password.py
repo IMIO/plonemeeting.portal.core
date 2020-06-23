@@ -4,7 +4,6 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 
 
 class TestPloneMeetingPasswordValidator(PmPortalTestCase):
-
     def test_validate(self):
         invalid_label = "Passwords must be at least 8 characters in length."
         self.assertEqual(
