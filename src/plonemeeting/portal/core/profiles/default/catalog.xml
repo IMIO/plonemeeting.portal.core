@@ -24,8 +24,12 @@
         <indexed_attr value="linkedMeetingReviewState"/>
     </index>
 
-    <index name="item_number" meta_type="FieldIndex">
-        <indexed_attr value="item_number"/>
+    <index name="number" meta_type="FieldIndex">
+        <indexed_attr value="number"/>
+    </index>
+
+    <index name="sortable_number" meta_type="FieldIndex">
+        <indexed_attr value="sortable_number"/>
     </index>
 
     <index name="pretty_representatives" meta_type="FieldIndex">
@@ -56,6 +60,7 @@
 
     <column value="date_time" />
     <column value="number" />
+    <column value="sortable_number" />
     <column value="pretty_representatives" />
     <column value="pretty_category" />
     <column value="linkedMeetingUID" />

@@ -38,12 +38,12 @@ class ItemsSortWidget(Widget):
         # this is not necessary and it some case, produce weird results
         if "seance" in form:
             query = {
-                "sort_on": ["item_number"],
+                "sort_on": ["sortable_number"],
                 "sort_order": ["ascending"],
             }
         else:
             query = {
-                "sort_on": ["linkedMeetingDate", "item_number"],
+                "sort_on": ["linkedMeetingDate", "sortable_number"],
                 "sort_order": ["descending", "ascending"],
             }
         return query

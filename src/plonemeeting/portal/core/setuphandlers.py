@@ -156,6 +156,7 @@ def create_demo_content(context):
                         container=meeting_obj,
                         type="Item",
                         title=item["title"],
+                        stored_number=item["stored_number"],
                         number=item["number"],
                         representatives_in_charge=item["representatives_in_charge"],
                         decision=decision,

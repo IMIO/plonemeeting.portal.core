@@ -26,6 +26,8 @@ class IItem(model.Schema):
 
     number = schema.TextLine(title=_(u"Item number"), required=True, readonly=True)
 
+    sortable_number = schema.Int(title=_(u"Sortable Item number"), required=True, readonly=True)
+
     plonemeeting_uid = schema.TextLine(
         title=_(u"UID Plonemeeting"), required=True, readonly=True
     )
@@ -80,31 +82,6 @@ class Item(Container):
             self.title = None
 
     formatted_title = property(get_title, set_title)
-
-
-def _format_stored_number(number):
-    """XXX Taken from Products.PloneMeeting :
-       This will transform a displayed item number to a sortable value (integer) :
-       - 1 -> 100;
-       - 2 --> 200;
-       - 2.1 --> 201;
-       - 2.9 --> 209;
-       - 2.10 --> 210;
-       - 2.22 --> 222;
-       """
-    if "." in number:
-        new_integer, new_decimal = number.split(".")
-        new_integer = new_integer
-        new_decimal = new_decimal.zfill(2)
-        real_move_number = int("{0}{1}".format(new_integer, new_decimal))
-    else:
-        real_move_number = int(number) * 100
-    return real_move_number
-
-
-@indexer(IItem)
-def get_item_number(object):
-    return _format_stored_number(object.number)
 
 
 @indexer(IItem)

@@ -169,7 +169,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
                 formatted_title, "text/html", "text/html"
             )
 
+        item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
+
         item.representatives_in_charge = item_data.get(
             "groupsInCharge"
         ) or item_data.get("all_groupsInCharge")
