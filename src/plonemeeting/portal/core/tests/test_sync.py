@@ -72,10 +72,15 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
         self.assertEqual(len(meeting.items()), results.get("created"))
         self.assertEqual(meeting.values()[0].number, "1")
+        self.assertEqual(meeting.values()[0].sortable_number, 100)
         self.assertEqual(meeting.values()[1].number, "2")
+        self.assertEqual(meeting.values()[1].sortable_number, 200)
         self.assertEqual(meeting.values()[10].number, "11")
+        self.assertEqual(meeting.values()[10].sortable_number, 1100)
         self.assertEqual(meeting.values()[20].number, "21")
+        self.assertEqual(meeting.values()[20].sortable_number, 2100)
         self.assertEqual(meeting.values()[-1].number, "28")
+        self.assertEqual(meeting.values()[-1].sortable_number, 2800)
 
     def test_sync_with_updates_meeting_items(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
