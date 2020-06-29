@@ -54,6 +54,15 @@
       name="plonemeeting.portal.core-hiddenprofiles"
       />
 
+  <genericsetup:upgradeStep
+      title="Go to portal 1001"
+      description="Fix indexes after adding sortable_number for items"
+      source="*"
+      destination="1000"
+      sortkey="1"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"
+      profile="plonemeeting.portal.core:default" />
+
   <!-- Password policy -->
 
   <adapter
