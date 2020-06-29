@@ -68,10 +68,9 @@
 
   <browser:page
     name="custom_colors.css"
-    for="*"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".colors.ColorsCSSView"
     permission="zope2.View"
-    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
     />
 
 </configure>

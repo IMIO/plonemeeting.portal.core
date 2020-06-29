@@ -1,0 +1,455 @@
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    overflow-x: hidden;
+    background: #fff;
+    background-color: #fff !important;
+    color: #292929 !important;
+    font-weight: 400 !important
+}
+
+.outer-wrapper {
+    flex: 1; //make sure the footer is at the bottom even on small page
+}
+
+#portal-logo img {
+    max-width: 250px !important
+}
+
+h1 {
+    font-weight: 500 !important;
+    font-size: 22px !important;
+}
+
+fieldset {
+    border: none !important;
+}
+
+h2 {
+    font-size: 23px !important;
+    font-weight: 700;
+}
+
+iframe,
+img {
+    max-width: 100% !important;
+}
+
+table {
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+table tr,
+td {
+    padding: .7em !important;
+}
+
+body #content-core a {
+    border-bottom: none;
+}
+
+// Meeting
+
+.meeting-actions {
+    display: inline-block;
+}
+
+.meeting-actions a {
+    margin-left: 5px;
+}
+
+.meeting-infos {
+    font-size: 25px;
+}
+
+.meeting-title {
+    font-weight: 700;
+}
+
+.meeting-last-pm-modified {
+    font-size: 16px;
+}
+
+.public-meeting {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.meeting-state--top {
+    font-weight: 400;
+    float: right;
+}
+
+.meeting-metadata {
+    margin: 10px 0;
+}
+
+// Meeting custom infos
+
+.meeting-custom-info {
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 1em 2em;
+    background: #f1f1f1;
+    border-radius: 8px;
+
+    #show-less-link:after,
+    #show-more-link:after {
+        content: url(++plone++plonemeeting.portal.core/assets/next2.svg);
+        width: 13px;
+        display: inline-block;
+        font-weight: 700;
+        margin-left: 10px;
+    }
+
+    #show-less-link:after {
+        transform: rotate(90deg);
+    }
+
+    #show-more-link:after {
+        transform: rotate(-90deg);
+    }
+
+    #show-less-link,
+    #show-more-link {
+        font-weight: 700;
+    }
+
+    #meeting-custom-info-content-toggle {
+        margin-top: 1.5rem;
+    }
+}
+
+// Item
+
+.item-preview {
+    margin: 20px 0 0 0;
+    padding: 10px;
+    position: relative;
+    background: #f1f1f1;
+}
+
+.item-preview .item-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-bottom: none;
+}
+
+.item-preview .meeting-title {
+    font-size: 18px;
+}
+
+.item-preview .item-number:first-child {
+    font-size: 25px;
+}
+
+.item-main {
+    font-size: 20px;
+    width: 100%;
+}
+
+.item-category,
+.item-representative {
+    font-size: 16px;
+    width: 100%;
+}
+
+.meeting-title-link {
+    background: #007bb1;
+    border-radius: 25px;
+    padding: 11px 21px;
+    display: inline-block;
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    border: solid 1px #007bb1;
+    transition: all .15s ease;
+    min-width: 200px;
+    text-align: center;
+    max-width: 320px;
+    text-decoration: none;
+}
+
+.item-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.meeting-state {
+    font-size: 20px;
+}
+
+#content .state-in_project:hover,
+.state-in_project {
+    color: #ff7a05 !important;
+}
+
+#content .state-decision:hover,
+.state-decision {
+    color: #469721 !important;
+}
+
+#content .state-private:hover,
+.state-private {
+    color: #c21b1b !important;
+}
+
+#seance_widget fieldset {
+    max-width: inherit !important;
+}
+
+.item-infos.in_project:after,
+.item-infos.private:after {
+    content: "";
+    font-size: 100px;
+    position: absolute;
+    top: 0;
+    background: url(++plone++plonemeeting.portal.core/assets/project.jpg);
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .2;
+    background-size: 20%;
+}
+
+.item-infos .public-meeting {
+    text-align: left;
+}
+
+.item-label {
+    font-size: 17px !important;
+}
+
+div.decision table {
+    margin-bottom: 1em;
+}
+
+.item-infos .selected-option {
+    font-weight: 700 !important;
+    font-size: 17px !important;
+}
+
+.item-main .selected-option {
+    font-weight: 700 !important;
+    font-size: 17px !important;
+}
+
+.item-infos .item-metadata div {
+    margin: 5px 0;
+}
+
+.item-infos {
+    font-size: 16px;
+
+    img {
+        width: auto !important;
+        max-width: 100% !important;
+    }
+}
+
+.item-infos .meeting-title {
+    font-size: 25px;
+    color: #007bb1;
+    margin: 10px 0 10px 0;
+    max-width: 300px;
+}
+
+.item-infos .category span:last-child .selected-option,
+.item-infos .custom-info span:last-child,
+.item-infos .item-number span:last-child,
+.item-infos .item-type span:last-child,
+.item-infos .representative span:last-child {
+    font-weight: 700 !important;
+    font-size: 17px !important;
+}
+
+.item-infos .item-label {
+    font-size: 16px;
+}
+
+.item-infos .decision span:first-child {
+    margin: 0 0 12px 0;
+}
+
+.item-last-pm-modified {
+    text-align: center;
+}
+
+.item-infos .item-last-pm-modified {
+    text-align: left;
+}
+
+.item-metadata .item-last-pm-modified {
+    width: 100%;
+    text-align: left;
+}
+
+.item-container .project-disclaimer {
+    position: relative;
+    padding: 1rem 2rem;
+    background-color: #ffefdf !important;
+    border: 1px solid #ffd4a7 !important;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.item-container .project-disclaimer p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.item-container .project-disclaimer > span p:nth-child(2) {
+    display: inline-block;
+}
+
+.item-container .project-disclaimer > span > span {
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 5px;
+    font-style: normal;
+}
+
+.item-container .project-disclaimer > span {
+    margin-left: 32px;
+    display: inline-block;
+}
+
+.item-container .project-disclaimer:before {
+    content: "!";
+    font-size: 14px;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, .9);
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-shadow: 0 -1 pxrgba(0, 0, 0, .5);
+    position: relative;
+    vertical-align: top;
+    background: #f44603 !important;
+    font-weight: 700;
+    position: absolute;
+    font-style: normal;
+}
+
+.item-infos .meeting-state {
+    position: relative;
+    font-size: 25px;
+    right: 0;
+}
+
+.portaltype-folder.section-decisions .item-container:first-child .item-preview {
+    margin-top:0;
+}
+
+// Annexes
+
+.annexes {
+    font-size: 20px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.annexes ul {
+    padding: 0;
+}
+
+.annexes h2 {
+    font-weight: 700;
+    font-size: 23px;
+    margin: 0 0 15px 0;
+}
+
+.annexes li {
+    list-style: none;
+    display: inline;
+}
+
+.annexes li a {
+    margin-right: 10px;
+}
+
+.item-infos .annexes {
+    margin-top: 1.5em !important;
+}
+
+.annexes li a img {
+    margin-right: 8px;
+}
+
+.item-infos .meeting-metadata {
+    margin-top: 2rem;
+}
+
+// Portal Message
+
+.alert.status.alert-warning,
+.alert.status.warning,
+.portalMessage.alert-warning,
+.portalMessage.warning {
+    color: #000 !important;
+}
+
+.portalMessage.warning > strong {
+    color: #000 !important;
+}
+
+.alert.status.alert-warning,
+.alert.status.warning,
+.portalMessage.alert-warning,
+.portalMessage.warning {
+    background-color: #ffefdf !important;
+    border: 1px solid #ffb97b !important;
+}
+
+.portalMessage.warning > strong {
+    font-size: 19px;
+    padding-bottom: 1rem;
+    display: block;
+}
+
+.portalMessage.warning > strong:before {
+    background: #f44603 !important;
+    font-weight: 700 !important;
+}
+
+.portalMessage.warning {
+    margin-top: 2em;
+}
+
+// Navbar
+
+.plone-navbar-nav {
+    .current > a,
+    .current > a:focus,
+    .current > a:hover,
+    .selected > a,
+    .selected > a:focus,
+    .selected > a:hover {
+        color: #fff;
+        background-color: rgba(255, 255, 255, .3) !important;
+    }
+}
+
+// Footer
+
+body #portal-footer > .row {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-disclaimer {
+    display: inline-block !important;
+}

@@ -64,7 +64,7 @@
                i18n:translate="">Public meeting
           </div>
           <div class="meeting-title">
-            <a href=""
+            <a href="" class="meeting-title-link"
                tal:content="meeting/title"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
           </div>

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
+from collective.z3cform.colorpicker import Color
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
@@ -27,7 +28,9 @@ class InvalidUrlParameters(ValidationError):
 class InvalidColorParameters(ValidationError):
     """Exception for invalid url parameters"""
 
-    __doc__ = _(u"Invalid color parameter, the value should be a correct hexadecimal color")
+    __doc__ = _(
+        u"Invalid color parameter, the value should be a correct hexadecimal color"
+    )
 
 
 def validate_url_parameters(value):
@@ -39,7 +42,7 @@ def validate_url_parameters(value):
 
 def validate_color_parameters(value):
     """Validate if the value is a correct hex color parameter"""
-    is_hexadecimal_color = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', value)
+    is_hexadecimal_color = re.search(r"^#(?:[0-9a-fA-F]{3}){1,2}$", value)
     if not is_hexadecimal_color:
         raise InvalidColorParameters()
     else:
@@ -133,25 +136,39 @@ class IInstitution(model.Schema):
     # Styling fieldsets
 
     model.fieldset(
-        'style',
+        "style",
         label=_(u"Styling"),
-        fields=['logo', 'nav_color', 'nav_text_color']
+        fields=[
+            "logo",
+            "header_color",
+            "nav_color",
+            "nav_text_color",
+            "links_color",
+            "footer_color",
+            "footer_text_color",
+        ],
     )
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
-    nav_color = schema.TextLine(
-        title=_("Navigation bar color"),
-        required=True,
-        default="#007bb1",  # Plone blue
-        constraint=validate_color_parameters
+    header_color = Color(title=_("Header color"), required=True, default="#ffffff",)
+
+    nav_color = Color(
+        title=_("Navigation bar color"), required=True, default="#007bb1",  # Plone blue
     )
 
-    nav_text_color = schema.TextLine(
-        title=_("Navigation bar text color"),
-        required=True,
-        default="#ffffff",
-        constraint=validate_color_parameters
+    nav_text_color = Color(
+        title=_("Navigation bar text color"), required=True, default="#ffffff",
+    )
+
+    links_color = Color(
+        title=_("Links text color"), required=True, default="#cccccc",
+    )
+
+    footer_color = Color(title=_("Footer color"), required=True, default="#2e3133",)
+
+    footer_text_color = Color(
+        title=_("Footer text color"), required=True, default="#cccccc",
     )
 
 

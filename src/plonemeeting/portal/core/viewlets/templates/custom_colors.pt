@@ -1,1 +1,0 @@
-<link rel="stylesheet" tal:attributes="href string:${context/absolute_url}/@@custom_colors.css" />
