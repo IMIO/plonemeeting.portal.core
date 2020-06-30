@@ -33,7 +33,9 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
         # indexed item number is a sortable integer
         self.assertEqual(self.item.number, "1")
-        self.assertEqual(indexes.get("item_number"), 100)
+        self.assertEqual(self.item.sortable_number, 100)
+        self.assertEqual(indexes.get("sortable_number"), 100)
+        self.assertEqual(indexes.get("number"), "1")
         self.assertEqual(self.meeting.title, indexes.get("linkedMeetingTitle"))
         self.assertEqual(self.meeting.UID(), indexes.get("linkedMeetingUID"))
         self.assertEqual(

@@ -132,6 +132,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         for b in existing_items_brains
     }
     synced_uids = [i.get("UID") for i in items_data.get("items")]
+
     for item_data in items_data.get("items"):
         modification_date = _json_date_to_datetime(item_data.get("modification_date"))
         item_uid = item_data.get("UID")
@@ -139,7 +140,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         created = False
         if item_uid not in existing_items.keys():
             # Item must be created
-            with api.env.adopt_user("admin"):
+            with api.env.adopt_roles(["Manager"]):
                 item = api.content.create(
                     container=meeting, type="Item", title=item_title
                 )
@@ -169,7 +170,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
                 formatted_title, "text/html", "text/html"
             )
 
+        item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
+
         item.representatives_in_charge = item_data.get(
             "groupsInCharge"
         ) or item_data.get("all_groupsInCharge")
@@ -220,7 +223,7 @@ def sync_meeting_data(institution, meeting_data):
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
     if not brains:
-        with api.env.adopt_user("admin"):
+        with api.env.adopt_roles(["Manager"]):
             meeting = api.content.create(
                 container=institution, type="Meeting", title=meeting_title
             )

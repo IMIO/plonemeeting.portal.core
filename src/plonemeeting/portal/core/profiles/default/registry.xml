@@ -12,7 +12,7 @@
     </record>
 
     <records interface="plone.app.querystring.interfaces.IQueryField"
-             prefix="plone.app.querystring.field.item_number">
+             prefix="plone.app.querystring.field.number">
         <value key="title" i18n:translate="">Item number</value>
         <value key="description" i18n:translate=""></value>
         <value key="enabled">False</value>
@@ -63,5 +63,4 @@
       <value key="jscompilation">++plone++plonemeeting.portal.core/core.js</value>
       <value key="last_compilation">2019-11-15 16:30:00</value>
     </records>
-
 </registry>
