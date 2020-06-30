@@ -34,6 +34,7 @@ class MigrateTo1001(Migrator):
             item.sortable_number = self._get_sortable_number_from_number(item.number)
 
         logger.info("Cleaning up portal_catalog...")
+        self.ps.runImportStepFromProfile('profile-plonemeeting.portal.core:default', 'catalog')
         self.reindexIndexes(idxs=["number", "sortable_number"], update_metadata=True)
         self.removeUnusedColumns(columns=["item_number"])
         self.removeUnusedIndexes(indexes=["item_number"])
