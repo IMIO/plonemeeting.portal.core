@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag="">
+  <div class="input-group">
+    <input type="color" id="color" name="" class="" title="" disabled="" readonly=""
+           tal:attributes="id string:${view/id};
+                         name view/name;
+                         class string:${view/klass} form-control;
+                         style view/style;
+                         title view/title;
+                         value view/value;
+                         readonly view/readonly;
+                         disabled view/disabled;"/>
+  </div>
+</html>

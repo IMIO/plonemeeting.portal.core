@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 
-from collective.z3cform.colorpicker import Color
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
+from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from zope import schema
@@ -17,6 +17,7 @@ from zope.schema import ValidationError
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 
 
 class InvalidUrlParameters(ValidationError):
@@ -133,7 +134,7 @@ class IInstitution(model.Schema):
         required=False,
     )
 
-    # Styling fieldsets
+    # Styling fieldset
 
     model.fieldset(
         "style",
@@ -151,24 +152,52 @@ class IInstitution(model.Schema):
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
-    header_color = Color(title=_("Header color"), required=True, default="#ffffff",)
-
-    nav_color = Color(
-        title=_("Navigation bar color"), required=True, default="#007bb1",  # Plone blue
+    directives.widget(header_color=ColorSelectFieldWidget)
+    header_color = schema.TextLine(
+        title=_("Header color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters,
     )
 
-    nav_text_color = Color(
-        title=_("Navigation bar text color"), required=True, default="#ffffff",
+    directives.widget(nav_color=ColorSelectFieldWidget)
+    nav_color = schema.TextLine(
+        title=_("Navigation bar color"),
+        required=True,
+        default="#007bb1",  # Plone blue
+        constraint=validate_color_parameters,
     )
 
-    links_color = Color(
-        title=_("Links text color"), required=True, default="#cccccc",
+    directives.widget(nav_text_color=ColorSelectFieldWidget)
+    nav_text_color = schema.TextLine(
+        title=_("Navigation bar text color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters,
     )
 
-    footer_color = Color(title=_("Footer color"), required=True, default="#2e3133",)
+    directives.widget(links_color=ColorSelectFieldWidget)
+    links_color = schema.TextLine(
+        title=_("Links text color"),
+        required=True,
+        default="#cccccc",
+        constraint=validate_color_parameters,
+    )
 
-    footer_text_color = Color(
-        title=_("Footer text color"), required=True, default="#cccccc",
+    directives.widget(footer_color=ColorSelectFieldWidget)
+    footer_color = schema.TextLine(
+        title=_("Footer color"),
+        required=True,
+        default="#2e3133",
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(footer_text_color=ColorSelectFieldWidget)
+    footer_text_color = schema.TextLine(
+        title=_("Footer text color"),
+        required=True,
+        default="#cccccc",
+        constraint=validate_color_parameters,
     )
 
 

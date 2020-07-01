@@ -9,17 +9,17 @@ from plone import api
 from zope.component import getUtility
 
 
-def custom_css_needs_to_update(context, event):
+def update_custom_css(context, event):
     """
-    This will update the custom css in plone_resources directory and
-    in the registry when there is an event that create/modify an institution
+    This will update the custom_colors.css in plone_resources directory and will update the bundle
+    registry entry when there is an event that add or modify an institution.
     """
-
-    # First, save the compiled in the plone_resources directory where static files are stored
+    # First, save the compiled css in the plone_resources directory where static files are stored
     overrides = OverrideFolderManager(context)
     bundle_name = "plonemeeting.portal.core-custom"
-    filepath = "static/%s-compiled.css" % bundle_name
-    compiled_css = api.portal.get().unrestrictedTraverse("@@custom_colors.css").render()
+    filepath = "static/{0}-compiled.css".format(bundle_name)
+    portal = api.portal.get()
+    compiled_css = portal.unrestrictedTraverse("@@custom_colors.css").render()
     overrides.save_file(filepath, compiled_css)
 
     # Next, update the registry entry for the bundle
@@ -29,5 +29,7 @@ def custom_css_needs_to_update(context, event):
     )
     bundle = bundles.get(bundle_name)
     if bundle:
-        bundle.last_compilation = datetime.now()  # Used for cache busting
+        bundle.last_compilation = (  # Important : it's used for cache busting
+            datetime.now()
+        )
         bundle.csscompilation = "++plone++{}".format(filepath)

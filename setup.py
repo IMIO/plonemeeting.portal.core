@@ -55,7 +55,6 @@ setup(
         "collective.fingerpointing",
         "collective.pwexpiry",
         "collective.z3cform.datagridfield",
-        "collective.z3cform.colorpicker",
         "eea.facetednavigation",
         "plone.api>=1.8.4",
         "plone.app.dexterity",

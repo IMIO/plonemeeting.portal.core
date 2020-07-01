@@ -1,8 +1,6 @@
 from Products.Five.browser import BrowserView
 from plone import api
 
-from plonemeeting.portal.core.content.institution import IInstitution
-
 
 class ColorsCSSView(BrowserView):
     """
@@ -12,8 +10,8 @@ class ColorsCSSView(BrowserView):
     CSS_TEMPLATE = u"""
 .site-{institution_id} {{
     --header-color: {header_color} !important;
-    --main-nav-color: {main_nav_color} !important;
-    --main-nav-text-color: {main_nav_text_color} !important;
+    --nav-color: {main_nav_color} !important;
+    --nav-text-color: {main_nav_text_color} !important;
     --links-color: {links_color} !important;
     --footer-color: {footer_color} !important;
     --footer-text-color: {footer_text_color} !important;

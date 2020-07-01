@@ -81,19 +81,4 @@
       <value key="compile">True</value>
     </records>
 
-    <records prefix="plone.bundles/mockup-bundles-colorpicker"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="resources">
-      <element>mockup-bundles-colorpicker</element>
-    </value>
-    <value key="enabled">True</value>
-    <value key="compile">True</value>
-      <value key="expression">python:getattr(object, "portal_type", "") == "Institution"</value>
-    <value key="jscompilation">++plone++colorpicker.static/build/colorpicker.min.js</value>
-    <value key="csscompilation">++plone++colorpicker.static/build/colorpicker.min.css</value>
-    <value key="last_compilation">2015-05-02 00:00:00</value>
-    <value key="depends">plone-logged-in</value>
-  </records>
-
-
 </registry>
