@@ -12,11 +12,12 @@ from plonemeeting.portal.core.browser.sync import (
 )
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import (
+    PmPortalDemoFunctionalTestCase,
+)
 
 
 class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
-
     def setUp(self):
         super().setUp()
         with open(
@@ -71,10 +72,15 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
         self.assertEqual(len(meeting.items()), results.get("created"))
         self.assertEqual(meeting.values()[0].number, "1")
+        self.assertEqual(meeting.values()[0].sortable_number, 100)
         self.assertEqual(meeting.values()[1].number, "2")
+        self.assertEqual(meeting.values()[1].sortable_number, 200)
         self.assertEqual(meeting.values()[10].number, "11")
+        self.assertEqual(meeting.values()[10].sortable_number, 1100)
         self.assertEqual(meeting.values()[20].number, "21")
+        self.assertEqual(meeting.values()[20].sortable_number, 2100)
         self.assertEqual(meeting.values()[-1].number, "28")
+        self.assertEqual(meeting.values()[-1].sortable_number, 2800)
 
     def test_sync_with_updates_meeting_items(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
@@ -112,7 +118,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(results.get("modified"), 28)
         items = meeting.listFolderContents(contentFilter={"portal_type": "Item"})
         first_item = items[0]
-        self.assertEqual(first_item.decision.raw, '<p>Nouvelle décision</p>')
+        self.assertEqual(first_item.decision.raw, "<p>Nouvelle décision</p>")
 
     def test_get_formatted_data_from_json(self):
         item_jsons = self.json_meeting_items.get("items")

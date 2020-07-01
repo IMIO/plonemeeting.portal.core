@@ -2,11 +2,12 @@
 
 from plone.app.textfield.value import RichTextValue
 
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import (
+    PmPortalDemoFunctionalTestCase,
+)
 
 
 class TestItemView(PmPortalDemoFunctionalTestCase):
-
     def setUp(self):
         super().setUp()
         self.meeting = self.portal["belleville"]["16-novembre-2018-08-30"]

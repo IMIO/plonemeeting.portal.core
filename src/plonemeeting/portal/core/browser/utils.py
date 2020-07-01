@@ -26,7 +26,7 @@ class UtilsView(BrowserView):
         return IMeeting.providedBy(self.context)
 
     def get_linked_meeting(self):
-        uid = self.request.get('seance[]')
+        uid = self.request.get("seance[]")
         meeting = None
         if uid:
             meeting = api.content.get(UID=uid)

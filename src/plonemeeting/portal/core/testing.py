@@ -40,6 +40,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
     def tearDownZope(self, app):
         import transaction
+
         transaction.abort()
 
 

@@ -2,11 +2,12 @@
 
 from plone.api.exc import InvalidParameterError
 
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import (
+    PmPortalDemoFunctionalTestCase,
+)
 
 
 class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
-
     @property
     def belleville(self):
         return self.portal["belleville"]
@@ -23,11 +24,11 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         # do not crash when no meeting
         self.assertEqual(None, utils_view.get_linked_meeting())
         meeting = self.belleville["16-novembre-2018-08-30"]
-        request.set('seance[]', meeting.UID())
+        request.set("seance[]", meeting.UID())
         self.assertEqual(meeting, utils_view.get_linked_meeting())
         # Also works with empty meeting.
-        meeting = self.create_object('Meeting')
-        request.set('seance[]', meeting.UID())
+        meeting = self.create_object("Meeting")
+        request.set("seance[]", meeting.UID())
         self.login_as_manager()
         utils_view = self.portal.restrictedTraverse("@@utils_view")
         self.assertEqual(meeting, utils_view.get_linked_meeting())

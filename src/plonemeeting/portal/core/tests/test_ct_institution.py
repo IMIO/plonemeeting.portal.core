@@ -10,7 +10,6 @@ from zope.component import queryUtility
 
 
 class InstitutionIntegrationTest(PmPortalTestCase):
-
     def test_ct_institution_schema(self):
         fti = queryUtility(IDexterityFTI, name="Institution")
         schema = fti.lookupSchema()
@@ -73,6 +72,4 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         )
         parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
-            api.content.create(
-                container=parent, type="Document", title="My Content"
-            )
+            api.content.create(container=parent, type="Document", title="My Content")

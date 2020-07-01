@@ -81,7 +81,8 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
                 annex and annex_should_be_updated(annex, annex_pm_last_modified)
             ) or not annex:
                 file_title = get_formatted_data_from_json(
-                    institution.info_annex_formatting_tal, item, annex_data) or annex_data.get("title")
+                    institution.info_annex_formatting_tal, item, annex_data
+                ) or annex_data.get("title")
                 if annex:
                     annex.title = file_title
                 else:
@@ -131,6 +132,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         for b in existing_items_brains
     }
     synced_uids = [i.get("UID") for i in items_data.get("items")]
+
     for item_data in items_data.get("items"):
         modification_date = _json_date_to_datetime(item_data.get("modification_date"))
         item_uid = item_data.get("UID")
@@ -138,7 +140,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         created = False
         if item_uid not in existing_items.keys():
             # Item must be created
-            with api.env.adopt_user("admin"):
+            with api.env.adopt_roles(["Manager"]):
                 item = api.content.create(
                     container=meeting, type="Item", title=item_title
                 )
@@ -168,7 +170,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
                 formatted_title, "text/html", "text/html"
             )
 
+        item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
+
         item.representatives_in_charge = item_data.get(
             "groupsInCharge"
         ) or item_data.get("all_groupsInCharge")
@@ -193,7 +197,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
             meeting.aq_parent, item_data.get("category")
         )
         item.reindexObject()
-        sync_annexes(item, institution, item_data.get("@components").get("annexes"), force)
+        sync_annexes(
+            item, institution, item_data.get("@components").get("annexes"), force
+        )
         if created:
             nb_created += 1
         else:
@@ -217,7 +223,7 @@ def sync_meeting_data(institution, meeting_data):
         context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
     if not brains:
-        with api.env.adopt_user("admin"):
+        with api.env.adopt_roles(["Manager"]):
             meeting = api.content.create(
                 container=institution, type="Meeting", title=meeting_title
             )

@@ -8,7 +8,6 @@ from plonemeeting.portal.core import _
 
 @implementer(ICustomPasswordValidator)
 class PloneMeetingPasswordValidator(object):
-
     def __init__(self, context):  # pragma: no cover
         self.context = context
 
