@@ -32,9 +32,8 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
 
     def test_render_custom_css(self):
         """ Test if the custom colors CSS generation view render the correct color values"""
-        view_content = (
-            api.portal.get().unrestrictedTraverse("@@custom_colors.css").render()
-        )
+        view_content = api.portal.get().unrestrictedTraverse("@@custom_colors.css")
+
         self.assertIn("--header-color: #FFFFFF", view_content)
         self.assertIn("--nav-color: #EEEEEEE", view_content)
         self.assertIn("--nav-text-color: #DDDDDD", view_content)

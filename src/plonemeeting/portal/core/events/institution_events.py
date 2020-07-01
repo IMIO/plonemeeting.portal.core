@@ -19,7 +19,7 @@ def update_custom_css(context, event):
     bundle_name = "plonemeeting.portal.core-custom"
     filepath = "static/{0}-compiled.css".format(bundle_name)
     portal = api.portal.get()
-    compiled_css = portal.unrestrictedTraverse("@@custom_colors.css").render()
+    compiled_css = portal.unrestrictedTraverse("@@custom_colors.css")
     overrides.save_file(filepath, compiled_css)
 
     # Next, update the registry entry for the bundle
