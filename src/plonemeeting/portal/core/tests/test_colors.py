@@ -31,6 +31,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.institution.footer_text_color = "#AAAAAA"
 
     def test_render_custom_css(self):
+        """ Test if the custom colors CSS generation view render the correct color values"""
         view_content = (
             api.portal.get().unrestrictedTraverse("@@custom_colors.css").render()
         )
@@ -42,6 +43,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.assertIn("--footer-text-color: #AAAAAA", view_content)
 
     def test_custom_css_bundle_registry_entry_updated_after_institution_modified(self):
+        """ Test if the bundle registry entry is correctly updated"""
         old_compilation_time = self._get_bundle().last_compilation
 
         self._fire_event(self.institution, "modified")
@@ -49,6 +51,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.assertLess(old_compilation_time, self._get_bundle().last_compilation)
 
     def test_custom_css_bundle_content_updated_after_institution_modified(self):
+        """ Test if the css bundle content (located in plone_resources) is correctly updated"""
         old_custom_colors_css = self._get_bundle_content()
 
         self.institution.header_color = "#123456"
@@ -60,6 +63,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.assertIn('#123456', new_custom_colors_css)
 
     def test_custom_css_is_served_correctly_to_the_browser(self):
+        """ Test all of custom colors css """
         app = self.layer["app"]
         browser = Browser(app)
         browser.open(self._get_css_absolute_url())
@@ -78,6 +82,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.assertIn("--header-color: #ABABAB", new_custom_colors_css)
 
     def test_color_select_widget_render(self):
+        """ Test if the color select widget render a correct input type """
         header_color_field = getFields(IInstitution)["header_color"]
         color_select_render = ColorSelectFieldWidget(
             header_color_field, self.portal.REQUEST

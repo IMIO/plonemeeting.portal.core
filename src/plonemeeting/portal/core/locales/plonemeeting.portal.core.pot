@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-21 11:59+0000\n"
+"POT-Creation-Date: 2020-07-01 07:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 msgid "(Disabled)"
 msgstr ""
 
-#: ../content/institution.py:62
+#: ../content/institution.py:66
 msgid "Active"
 msgstr ""
 
 #: ../browser/templates/institution.pt:28
-#: ../content/institution.py:86
+#: ../content/institution.py:90
 msgid "Additional Meeting query string for list"
 msgstr ""
 
 #: ../browser/templates/institution.pt:32
-#: ../content/institution.py:92
+#: ../content/institution.py:96
 msgid "Additional Published Items query string"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgid "Annexes"
 msgstr ""
 
 #: ../browser/templates/item.pt:80
-#: ../faceted/macros.pt:91
+#: ../faceted/macros.pt:92
 msgid "Attention"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgid "Cancel"
 msgstr ""
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:120
+#: ../content/institution.py:124
 msgid "Categories mappings"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Decisions"
 msgstr ""
 
-#: ../configure.zcml:41
+#: ../configure.zcml:43
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -115,6 +115,14 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
+#: ../content/institution.py:189
+msgid "Footer color"
+msgstr ""
+
+#: ../content/institution.py:197
+msgid "Footer text color"
+msgstr ""
+
 #: ../faceted/preview_meeting.pt:61
 msgid "Force meeting reimport"
 msgstr ""
@@ -127,7 +135,7 @@ msgstr ""
 msgid "Global categories"
 msgstr ""
 
-#: ../content/institution.py:52
+#: ../content/institution.py:56
 msgid "Global category"
 msgstr ""
 
@@ -137,6 +145,10 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Global category title"
+msgstr ""
+
+#: ../content/institution.py:157
+msgid "Header color"
 msgstr ""
 
 #: ../faceted/preview_meeting.pt:100
@@ -152,11 +164,11 @@ msgid "Import meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:116
+#: ../content/institution.py:120
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:32
+#: ../configure.zcml:34
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -164,11 +176,11 @@ msgstr ""
 msgid "Institution"
 msgstr ""
 
-#: ../content/institution.py:30
+#: ../content/institution.py:32
 msgid "Invalid color parameter, the value should be a correct hexadecimal color"
 msgstr ""
 
-#: ../content/institution.py:24
+#: ../content/institution.py:26
 msgid "Invalid url parameters, the value should start with '&'"
 msgstr ""
 
@@ -176,12 +188,12 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../content/institution.py:112
+#: ../content/institution.py:116
 msgid "Item additional data formatting tal expression"
 msgstr ""
 
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:106
+#: ../content/institution.py:110
 msgid "Item decision formatting tal expression"
 msgstr ""
 
@@ -192,7 +204,7 @@ msgid "Item number"
 msgstr ""
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:98
+#: ../content/institution.py:102
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -206,11 +218,15 @@ msgstr ""
 msgid "Last modification in ia.Delib"
 msgstr ""
 
-#: ../content/institution.py:50
+#: ../content/institution.py:181
+msgid "Links text color"
+msgstr ""
+
+#: ../content/institution.py:54
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:141
+#: ../content/institution.py:153
 msgid "Logo"
 msgstr ""
 
@@ -220,7 +236,7 @@ msgid "Meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:24
-#: ../content/institution.py:75
+#: ../content/institution.py:79
 msgid "Meeting config ID"
 msgstr ""
 
@@ -232,11 +248,11 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
-#: ../content/institution.py:144
+#: ../content/institution.py:165
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:151
+#: ../content/institution.py:173
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -244,7 +260,7 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../content/institution.py:73
+#: ../content/institution.py:77
 msgid "Password"
 msgstr ""
 
@@ -253,12 +269,12 @@ msgid "Passwords must be at least 8 characters in length."
 msgstr ""
 
 #: ../browser/templates/institution.pt:16
-#: ../content/institution.py:69
+#: ../content/institution.py:73
 msgid "Plonemeeting URL"
 msgstr ""
 
 #: ../browser/templates/institution.pt:36
-#: ../content/institution.py:78
+#: ../content/institution.py:82
 msgid "Project decision disclaimer"
 msgstr ""
 
@@ -284,20 +300,20 @@ msgstr ""
 msgid "Representative group in charge"
 msgstr ""
 
-#: ../content/institution.py:59
+#: ../content/institution.py:63
 msgid "Representative key"
 msgstr ""
 
-#: ../content/institution.py:61
+#: ../content/institution.py:65
 msgid "Representative long values"
 msgstr ""
 
-#: ../content/institution.py:60
+#: ../content/institution.py:64
 msgid "Representative value"
 msgstr ""
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:126
+#: ../content/institution.py:130
 msgid "Representatives mappings"
 msgstr ""
 
@@ -305,7 +321,7 @@ msgstr ""
 msgid "Show meeting infos"
 msgstr ""
 
-#: ../content/institution.py:137
+#: ../content/institution.py:141
 msgid "Styling"
 msgstr ""
 
@@ -318,12 +334,12 @@ msgstr ""
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
-#: ../configure.zcml:50
+#: ../configure.zcml:52
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../browser/templates/institution.pt:20
-#: ../content/institution.py:71
+#: ../content/institution.py:75
 msgid "Username"
 msgstr ""
 
@@ -349,7 +365,7 @@ msgstr ""
 msgid "decision"
 msgstr ""
 
-#: ../content/institution.py:81
+#: ../content/institution.py:85
 msgid "default_in_project_disclaimer"
 msgstr ""
 
@@ -362,15 +378,15 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:32
+#: ../configure.zcml:34
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:41
+#: ../configure.zcml:43
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:50
+#: ../configure.zcml:52
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

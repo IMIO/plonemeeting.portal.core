@@ -180,7 +180,7 @@ class IInstitution(model.Schema):
     links_color = schema.TextLine(
         title=_("Links text color"),
         required=True,
-        default="#cccccc",
+        default="#007bb1",
         constraint=validate_color_parameters,
     )
 
