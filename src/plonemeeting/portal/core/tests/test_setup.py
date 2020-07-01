@@ -34,7 +34,6 @@ class TestSetup(PmPortalTestCase):
 
 
 class TestUninstall(PmPortalTestCase):
-
     def setUp(self):
         super().setUp()
         if get_installer:

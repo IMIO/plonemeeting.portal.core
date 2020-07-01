@@ -63,7 +63,8 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
 def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
-    url = "{0}/{1}?sort_on=getItemNumber&privacy=public&privacy=public_heading&b_size=9999" \
+    url = (
+        "{0}/{1}?sort_on=getItemNumber&privacy=public&privacy=public_heading&b_size=9999"
         "&getConfigId={2}&linkedMeetingUID={3}&fullobjects=True{4}".format(
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_MEETING_ITEMS_VIEW,
@@ -71,6 +72,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
             meeting_UID,
             institution.additional_published_items_query_string,
         )
+    )
     return url
 
 
