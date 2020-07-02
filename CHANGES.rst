@@ -5,7 +5,8 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added sortable number on Item.
+  [odelaere]
 
 
 1.0.6 (2020-06-08)
