@@ -26,7 +26,7 @@ class ColorsCSSView(BrowserView):
         """
         Render the css with the institution colors
         """
-        brains = api.content.find(portal_type='Institution')
+        brains = api.content.find(portal_type="Institution")
         css = " "
         for brain in brains:
             institution = brain.getObject()
@@ -37,6 +37,6 @@ class ColorsCSSView(BrowserView):
                 main_nav_text_color=institution.nav_text_color,
                 links_color=institution.links_color,
                 footer_color=institution.footer_color,
-                footer_text_color=institution.footer_text_color
+                footer_text_color=institution.footer_text_color,
             )
         return css
