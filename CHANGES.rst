@@ -17,6 +17,8 @@ Changelog
 - Tweaked the theme : faceted widget are now correctly aligned on desktop (no useless margin-left),
   first item-preview didn't need a margin-top on decisions page, rounded corners on meeting-info,...
   [aduchene]
+- Added sortable number on Item.
+  [odelaere]
 
 
 1.0.6 (2020-06-08)
