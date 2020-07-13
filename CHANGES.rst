@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.7 (unreleased)
+1.0.7 (2020-07-13)
 ------------------
 
 - Added sortable number on Item.
