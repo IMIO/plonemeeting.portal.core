@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.7.2 (unreleased)
+1.0.7.2 (2020-07-15)
 --------------------
 
 - Upgrade libs for debugging tools.
