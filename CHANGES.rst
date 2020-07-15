@@ -5,7 +5,7 @@ Changelog
 1.0.7.2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Upgrade libs for debugging tools.
 
 
 1.0.7.1 (2020-07-13)
