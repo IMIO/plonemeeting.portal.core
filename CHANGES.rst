@@ -5,13 +5,15 @@ Changelog
 1.0.7.3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- updated source of upgrade step.
+  [odelaere]
 
 
 1.0.7.2 (2020-07-15)
 --------------------
 
 - Upgrade libs for debugging tools.
+  [odelaere]
 
 
 1.0.7.1 (2020-07-13)
