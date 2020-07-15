@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.7.3 (unreleased)
+1.0.7.3 (2020-07-15)
 --------------------
 
 - updated source of upgrade step.
