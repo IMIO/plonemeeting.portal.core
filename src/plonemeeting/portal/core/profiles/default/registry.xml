@@ -33,7 +33,8 @@
                            i18n:translate="">Metadata</value>
     </records>
 
-    <record name="plonemeeting.portal.core.global_categories">
+    <record name="plonemeeting.portal.core.global_categories"
+            purge="False">
       <field type="plone.registry.field.Dict">
         <title i18n:translate="">Global categories</title>
         <key_type type="plone.registry.field.TextLine">
@@ -62,7 +63,7 @@
       <value key="compile">True</value>
       <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
       <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-      <value key="last_compilation">2019-11-15 16:30:00</value>
+      <value key="last_compilation">2020-09-04 12:30:00</value>
     </records>
 
     <records prefix="plone.resources/plonemeeting.portal.core-custom"

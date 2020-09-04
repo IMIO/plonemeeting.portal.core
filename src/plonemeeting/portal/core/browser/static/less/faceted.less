@@ -29,6 +29,15 @@ body.template-facetednavigation_view textarea {
     border: solid 1px #dcdbdb
 }
 
+body.template-facetednavigation_view input[type=text] {
+    min-width: 250px; // To have space to type...
+}
+
+#faceted-form .faceted-widgets > .faceted-widget > fieldset.widget-fieldset{
+    padding-left:0;
+    margin-left:0;
+}
+
 body.template-facetednavigation_view input:hover,
 input:focus,
 select:focus,
@@ -99,7 +108,17 @@ html body .faceted-criteria-reset a {
 }
 
 #faceted-results {
-    margin: 2em 0
+    margin: 2em 0;
+
+    .faceted_loading{
+        background: url('../../++plone++plonemeeting.portal.core/assets/ajax-spinner.svg') no-repeat;
+        background-position: center;
+        background-size: contain;
+        height: 150px;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 #faceted-form fieldset {
@@ -110,11 +129,6 @@ html body .faceted-criteria-hide-show:hover a,
 html body .faceted-criteria-reset a:hover {
     color: #fff !important;
     background: #007bb1
-}
-
-.faceted_loading{
-    background: url('../../++plone++plonemeeting.portal.core/assets/ajax-loader.gif') no-repeat 50% 1.5em !important;
-    height: 200px !important;
 }
 
 .faceted-widget-loading{
