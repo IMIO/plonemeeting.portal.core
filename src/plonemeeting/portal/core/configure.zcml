@@ -59,7 +59,7 @@
   <genericsetup:upgradeStep
       title="Go to portal 1001"
       description="Fix indexes after adding sortable_number for items"
-      source="*"
+      source="1000"
       destination="1001"
       sortkey="1"
       handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"

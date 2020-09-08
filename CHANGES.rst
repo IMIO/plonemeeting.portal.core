@@ -2,8 +2,28 @@ Changelog
 =========
 
 
-1.0.7 (unreleased)
-------------------
+1.0.7.4 (unreleased)
+--------------------
+
+- Nothing changed yet.
+
+
+1.0.7.3 (2020-07-15)
+--------------------
+
+- updated source of upgrade step.
+  [odelaere]
+
+
+1.0.7.2 (2020-07-15)
+--------------------
+
+- Upgrade libs for debugging tools.
+  [odelaere]
+
+
+1.0.7.1 (2020-07-13)
+--------------------
 
 - Added properties on institution to choose navigation bar colors. [aduchene]
 - Grouped styling properties on institution under "Styling" tab. [aduchene]
