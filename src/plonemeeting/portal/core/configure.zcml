@@ -65,6 +65,15 @@
       handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"
       profile="plonemeeting.portal.core:default" />
 
+    <genericsetup:upgradeStep
+      title="Go to portal 1002"
+      description="Add new bundles and resources to the registry"
+      source="*"
+      destination="1002"
+      sortkey="2"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
+      profile="plonemeeting.portal.core:default" />
+
   <!-- Password policy -->
 
   <adapter
