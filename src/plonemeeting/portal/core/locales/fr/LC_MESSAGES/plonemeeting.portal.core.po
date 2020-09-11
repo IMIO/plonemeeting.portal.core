@@ -321,7 +321,7 @@ msgstr "Montrer les informations de la séance"
 
 #: ../content/institution.py:141
 msgid "Styling"
-msgstr "Style"
+msgstr "Styles"
 
 #: ../content/item.py:30
 #: ../content/meeting.py:26
