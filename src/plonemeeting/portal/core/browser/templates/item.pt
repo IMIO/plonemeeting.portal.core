@@ -38,7 +38,7 @@
           <div class="category">
             <span class="item-label" i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
           </div>
-          <div class="representative">
+          <div class="representative" tal:condition="context/representatives_in_charge">
             <span class="item-label" i18n:translate="">Representative</span> : <span tal:content="structure view/w/representatives_in_charge/render" />
           </div>
           <div class="additional-data"
@@ -64,7 +64,7 @@
                i18n:translate="">Public meeting
           </div>
           <div class="meeting-title">
-            <a href=""
+            <a href="" class="meeting-title-link"
                tal:content="meeting/title"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
           </div>

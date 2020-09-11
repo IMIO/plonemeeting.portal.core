@@ -1,0 +1,17 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:z3c="http://namespaces.zope.org/z3c"
+>
+  <class class=".colorselect.ColorSelectWidget">
+    <require
+      permission="zope.Public"
+      interface="plonemeeting.portal.core.widgets.colorselect.IColorSelectWidget"/>
+  </class>
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget="plonemeeting.portal.core.widgets.colorselect.ColorSelectWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="colorselect_input.pt"/>
+
+</configure>

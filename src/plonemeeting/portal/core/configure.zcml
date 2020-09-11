@@ -17,8 +17,10 @@
   <include file="permissions.zcml" />
   <include package=".browser" />
   <include package=".content" />
+  <include package=".events" />
   <include package=".faceted" />
   <include package=".viewlets" />
+  <include package=".widgets" />
 
   <!-- Profiles -->
 
@@ -61,6 +63,15 @@
       destination="1001"
       sortkey="1"
       handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"
+      profile="plonemeeting.portal.core:default" />
+
+    <genericsetup:upgradeStep
+      title="Go to portal 1002"
+      description="Add new bundles and resources to the registry"
+      source="*"
+      destination="1002"
+      sortkey="2"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
       profile="plonemeeting.portal.core:default" />
 
   <!-- Password policy -->

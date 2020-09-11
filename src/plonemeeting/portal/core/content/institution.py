@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
@@ -6,6 +7,7 @@ from plone.app.textfield import RichText
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
+from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from zope import schema
@@ -15,6 +17,7 @@ from zope.schema import ValidationError
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 
 
 class InvalidUrlParameters(ValidationError):
@@ -23,11 +26,28 @@ class InvalidUrlParameters(ValidationError):
     __doc__ = _(u"Invalid url parameters, the value should start with '&'")
 
 
+class InvalidColorParameters(ValidationError):
+    """Exception for invalid url parameters"""
+
+    __doc__ = _(
+        u"Invalid color parameter, the value should be a correct hexadecimal color"
+    )
+
+
 def validate_url_parameters(value):
     """Validate if the url parameters"""
     if value and value[0] != "&":
         raise InvalidUrlParameters(value)
     return True
+
+
+def validate_color_parameters(value):
+    """Validate if the value is a correct hex color parameter"""
+    is_hexadecimal_color = re.search(r"^#(?:[0-9a-fA-F]{3}){1,2}$", value)
+    if not is_hexadecimal_color:
+        raise InvalidColorParameters()
+    else:
+        return True
 
 
 class ICategoryMappingRowSchema(Interface):
@@ -78,8 +98,6 @@ class IInstitution(model.Schema):
         constraint=validate_url_parameters,
     )
 
-    logo = NamedBlobImage(title=_(u"Logo"), required=False)
-
     item_title_formatting_tal = schema.TextLine(
         title=_(
             u"Item title formatting tal expression. "
@@ -114,6 +132,72 @@ class IInstitution(model.Schema):
             title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
         ),
         required=False,
+    )
+
+    # Styling fieldset
+
+    model.fieldset(
+        "style",
+        label=_(u"Styling"),
+        fields=[
+            "logo",
+            "header_color",
+            "nav_color",
+            "nav_text_color",
+            "links_color",
+            "footer_color",
+            "footer_text_color",
+        ],
+    )
+
+    logo = NamedBlobImage(title=_(u"Logo"), required=False)
+
+    directives.widget(header_color=ColorSelectFieldWidget)
+    header_color = schema.TextLine(
+        title=_("Header color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(nav_color=ColorSelectFieldWidget)
+    nav_color = schema.TextLine(
+        title=_("Navigation bar color"),
+        required=True,
+        default="#007bb1",  # Plone blue
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(nav_text_color=ColorSelectFieldWidget)
+    nav_text_color = schema.TextLine(
+        title=_("Navigation bar text color"),
+        required=True,
+        default="#ffffff",
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(links_color=ColorSelectFieldWidget)
+    links_color = schema.TextLine(
+        title=_("Links text color"),
+        required=True,
+        default="#007bb1",
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(footer_color=ColorSelectFieldWidget)
+    footer_color = schema.TextLine(
+        title=_("Footer color"),
+        required=True,
+        default="#2e3133",
+        constraint=validate_color_parameters,
+    )
+
+    directives.widget(footer_text_color=ColorSelectFieldWidget)
+    footer_text_color = schema.TextLine(
+        title=_("Footer text color"),
+        required=True,
+        default="#cccccc",
+        constraint=validate_color_parameters,
     )
 
 

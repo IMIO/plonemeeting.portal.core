@@ -53,12 +53,13 @@
           <div class="public-meeting"
                i18n:translate="">Public meeting
           </div>
-          <a href=""
-             tal:define="utils_view nocall:context/@@utils_view;"
-             tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)">
-            <div class="meeting-title" tal:content="brain/linkedMeetingTitle" />
-          </a>
-
+          <div class="meeting-title">
+            <a class="meeting-title-link" href=""
+               tal:define="utils_view nocall:context/@@utils_view;"
+               tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)"
+               tal:content="brain/linkedMeetingTitle">
+            </a>
+          </div>
           <div class="item-last-pm-modified"
                tal:condition='not: isAnon' >
                <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span>

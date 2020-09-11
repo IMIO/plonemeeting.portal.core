@@ -2,10 +2,28 @@ Changelog
 =========
 
 
-1.0.7.4 (unreleased)
---------------------
+1.0.8 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Added properties on institution to choose navigation bar colors.
+  [aduchene]
+- Grouped styling properties on institution under "Styling" tab.
+  [aduchene]
+- Added a dynamic css generation view ('@@custom_colors.css')
+  to generate a custom css with institutions colors
+  [aduchene]
+- Added one event handler for institution, so it call the 'custom_colors.css' view to recompile
+  the css on institution change (added and modified events) and then store it in the registry
+  [aduchene]
+- Refactored CSS theme to LESS to ease maintenance, readability and futur developments.
+  [aduchene]
+- Theme can now be recompiled TTW with the resourceregistry-controlpanel.
+  [aduchene]
+- Changed the default loading animation of eea.facetednavigation to use one more neutral.
+  [aduchene]
+- Tweaked the theme : faceted widget are now correctly aligned on desktop (no useless margin-left),
+  first item-preview didn't need a margin-top on decisions page, rounded corners on meeting-info,...
+  [aduchene]
 
 
 1.0.7.3 (2020-07-15)

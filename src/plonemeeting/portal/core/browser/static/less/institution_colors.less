@@ -1,0 +1,90 @@
+/* Custom theme settings */
+
+[class*='site-']{
+
+    // Global styling
+    a {
+        color: var(--links-color);
+        &:hover {
+            color: var(--links-color);
+        }
+    }
+
+    // Header
+    header#content-header {
+        background-color: var(--header-color);
+
+        #portal-header {
+            margin: 0;
+            padding: 15px 0;
+        }
+    }
+
+    // Navbar
+    .plone-navbar {
+        background-color: var(--nav-color);
+    }
+
+    .plone-nav li a:focus,
+    .plone-nav li a:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .plone-nav li a {
+        color: var(--nav-text-color);
+    }
+
+    .plone-navbar-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-color: var(--nav-text-color);
+        color: var(--nav-text-color);
+    }
+
+    // Footer
+    footer#portal-footer-wrapper {
+        background-color: var(--footer-color);
+        color: var(--footer-text-color);
+        clear: both;
+
+        a {
+            color: var(--links-color);
+        }
+    }
+
+    // Content
+    .meeting-title-link {
+        background-color: var(--links-color);
+        border: solid 1px var(--links-color) !important;
+        color: #fff;
+
+        &:hover, &:focus{
+        background: 0 0;
+        color: var(--links-color);
+        text-decoration: none;
+        }
+    }
+
+    // Faceted
+    #faceted-results .pagination {
+        li.active > span {
+            background-color: var(--links-color) !important;
+            color: #fff;
+            border: solid 1px var(--links-color) !important;
+        }
+
+        li > a {
+            color: var(--links-color)!important;
+        }
+    }
+
+    // Cookies
+
+    .cc-cookies .cc-cookie-accept{
+        background-color: var(--links-color) !important;
+    }
+
+    .cc-cookies .cc-cookie-accept:hover{
+        font-weight: bold;
+        color: #FFFFFF !important;
+    }
+}
