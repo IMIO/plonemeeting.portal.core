@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.8 (unreleased)
+1.0.8 (2020-09-11)
 ------------------
 
 - Added properties on institution to choose navigation bar colors.
