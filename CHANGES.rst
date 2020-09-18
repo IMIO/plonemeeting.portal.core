@@ -5,7 +5,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Hide representatives_in_charge on faceted view if it's not used.
+  [aduchene]
 
 
 1.0.8 (2020-09-11)

@@ -31,7 +31,7 @@
           <div class="item-category">
             <span class="item-label" i18n:translate="">Category</span> : <span class="selected-option" tal:content="brain/pretty_category" />
           </div>
-          <div class="item-representative">
+          <div class="item-representative" tal:condition="brain/representatives_in_charge">
             <span class="item-label" i18n:translate="">Representative</span> : <span class="selected-option" tal:content="brain/pretty_representatives" />
           </div>
 
