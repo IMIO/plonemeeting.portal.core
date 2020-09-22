@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.9 (unreleased)
+1.0.9 (2020-09-22)
 ------------------
 
 - Hide representatives_in_charge on faceted view if it's not used.
