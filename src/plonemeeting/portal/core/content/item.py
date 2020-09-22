@@ -165,3 +165,8 @@ def get_annexes_infos(object):
         # Unfortunately, we can't store dicts
         index.append((annexe.title, annexe.absolute_url(), icon))
     return index
+
+
+@indexer(IItem)
+def get_formatted_title_output(object):
+    return object.formatted_title.output
