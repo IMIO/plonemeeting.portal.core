@@ -69,7 +69,7 @@
     <column value="plonemeeting_last_modified" />
     <column value="plonemeeting_uid" />
     <column value="annexes_infos" />
-    <column value="icon" />
     <column value="formatted_title" />
+    <column value="icon" />
 
 </object>

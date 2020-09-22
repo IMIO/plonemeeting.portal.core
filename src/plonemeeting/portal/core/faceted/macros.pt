@@ -17,12 +17,12 @@
         <div class="item-main">
           <a href=""
              tal:attributes="href brain/getURL">
-             <tal:if tal:condition='brain/formatted_title'>
-                <div class="item-title" tal:content="structure brain/formatted_title/output" />
-             </tal:if>
-             <tal:else tal:condition="not: brain/formatted_title">
-                <div class="item-title" tal:content="brain/Title" />
-             </tal:else>
+            <tal:if tal:condition='brain/formatted_title'>
+              <div class="item-title" tal:content="structure brain/formatted_title" />
+            </tal:if>
+            <tal:else tal:condition="not: brain/formatted_title">
+              <div class="item-title" tal:content="brain/Title" />
+            </tal:else>
           </a>
 
           <div class="item-number">
@@ -31,7 +31,7 @@
           <div class="item-category">
             <span class="item-label" i18n:translate="">Category</span> : <span class="selected-option" tal:content="brain/pretty_category" />
           </div>
-          <div class="item-representative" tal:condition="brain/representatives_in_charge">
+          <div class="item-representative" tal:condition="brain/pretty_representatives">
             <span class="item-label" i18n:translate="">Representative</span> : <span class="selected-option" tal:content="brain/pretty_representatives" />
           </div>
 

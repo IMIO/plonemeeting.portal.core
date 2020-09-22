@@ -7,6 +7,9 @@ Changelog
 
 - Hide representatives_in_charge on faceted view if it's not used.
   [aduchene]
+- Fixed ValueError: Circular reference detected on Item/folder_contents view
+  by adding an indexer on formatted_title Item field.
+  [aduchene]
 
 
 1.0.8 (2020-09-11)
