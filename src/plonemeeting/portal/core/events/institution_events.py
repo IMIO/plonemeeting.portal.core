@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from Products.CMFPlone.controlpanel.browser.resourceregistry import OverrideFolderManager
+from Products.CMFPlone.controlpanel.browser.resourceregistry import (
+    OverrideFolderManager,
+)
 from Products.CMFPlone.interfaces import IBundleRegistry
 from plone.registry.interfaces import IRegistry
 from plone import api
@@ -24,8 +26,12 @@ def update_custom_css(context, event):
 
     # Next, update the registry entry for the bundle
     registry = getUtility(IRegistry)
-    bundles = registry.collectionOfInterface(IBundleRegistry, prefix="plone.bundles", check=False)
+    bundles = registry.collectionOfInterface(
+        IBundleRegistry, prefix="plone.bundles", check=False
+    )
     bundle = bundles.get(bundle_name)
     if bundle:
-        bundle.last_compilation = datetime.now()  # Important : it's used for cache busting
+        bundle.last_compilation = (
+            datetime.now()
+        )  # Important : it's used for cache busting
         bundle.csscompilation = "++plone++{}".format(filepath)

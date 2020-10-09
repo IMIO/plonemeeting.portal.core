@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone.controlpanel.browser.resourceregistry import OverrideFolderManager
+from Products.CMFPlone.controlpanel.browser.resourceregistry import (
+    OverrideFolderManager,
+)
 from Products.CMFPlone.interfaces import IBundleRegistry
 from plone import api
 from plone.registry.interfaces import IRegistry
@@ -12,7 +14,9 @@ from zope.schema import getFields
 
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import (
+    PmPortalDemoFunctionalTestCase,
+)
 
 
 class TestColorCSSView(PmPortalDemoFunctionalTestCase):
@@ -96,14 +100,18 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
     def _get_bundle_content(self) -> str:
         """Get the custom colors css directly from plone_resources"""
         overrides = OverrideFolderManager(self.institution)
-        css_file_name = self._get_bundle().csscompilation.replace("++plone++static/", "")
+        css_file_name = self._get_bundle().csscompilation.replace(
+            "++plone++static/", ""
+        )
         with overrides.container["static"].openFile(css_file_name) as file:
             content = str(file.read(), "utf-8")
         return content
 
     def _get_css_absolute_url(self) -> str:
         """Get the custom colors css path"""
-        return "{0}/{1}".format(self.portal.absolute_url(), self._get_bundle().csscompilation)
+        return "{0}/{1}".format(
+            self.portal.absolute_url(), self._get_bundle().csscompilation
+        )
 
     def _fire_event(self, context, event):
         if event == "modified":

@@ -26,7 +26,9 @@ class IItem(model.Schema):
 
     number = schema.TextLine(title=_(u"Item number"), required=True, readonly=True)
 
-    sortable_number = schema.Int(title=_(u"Sortable Item number"), required=True, readonly=True)
+    sortable_number = schema.Int(
+        title=_(u"Sortable Item number"), required=True, readonly=True
+    )
 
     plonemeeting_uid = schema.TextLine(
         title=_(u"UID Plonemeeting"), required=True, readonly=True

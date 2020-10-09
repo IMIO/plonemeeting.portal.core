@@ -19,6 +19,7 @@ class ColorSelectWidget(TextWidget):
     """
     Color selector widget which use the native color selector from the browser
     """
+
     implementer_only(IColorSelectWidget)
     klass = "color-select-widget"
 
