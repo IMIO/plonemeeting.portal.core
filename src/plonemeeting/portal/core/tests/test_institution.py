@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
-
-
-
 from plonemeeting.portal.core.content.institution import validate_color_parameters
 from plonemeeting.portal.core.content.institution import InvalidColorParameters
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )
-
 
 
 class TestInstitutionView(PmPortalDemoFunctionalTestCase):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import IFieldWidget
 
