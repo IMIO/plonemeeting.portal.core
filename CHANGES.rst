@@ -5,8 +5,8 @@ Changelog
 1.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Refactored LESS theme to be more mobile-friendly.
+  [aduchene]
 
 1.0.9 (2020-09-22)
 ------------------

@@ -64,6 +64,7 @@
   <criterion name="text">
    <property name="widget">text</property>
    <property name="title">Recherche</property>
+   <property name="placeholder">Rechercher</property>
    <property name="index">SearchableText</property>
    <property name="onlyallelements">True</property>
    <property name="wildcard">False</property>
