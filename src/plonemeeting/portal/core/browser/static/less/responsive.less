@@ -3,10 +3,6 @@
         font-size: 22px;
     }
 
-    #faceted-results {
-        margin: 2em 0;
-    }
-
     .meeting-metadata {
         margin: 0;
     }
@@ -54,13 +50,13 @@
         width: 100%;
     }
 
-    #text_widget legend {
-        display: block;
-        visibility: hidden;
-    }
-
-    body #faceted-form #text_widget fieldset {
-        padding-top: 1em !important;
+    body #faceted-form  {
+        fieldset {
+            padding: 1.5em .5em 1.5em .5em;
+        }
+        #text_widget fieldset {
+            min-width: 500px;
+        }
     }
 
     .item-infos .meeting-title {
