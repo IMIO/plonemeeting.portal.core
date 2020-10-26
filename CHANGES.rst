@@ -61,6 +61,8 @@ Changelog
 
 - Added sortable number on Item.
   [odelaere]
+- Updated iA.Delib API calls using @search method
+  [odelaere]
 
 
 1.0.6 (2020-06-08)

@@ -14,8 +14,8 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
-from plonemeeting.portal.core.config import PLONEMEETING_API_MEETINGS_VIEW
-from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_ITEMS_VIEW
+from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
+from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 
 
 def format_institution_managers_group_id(institution):
@@ -48,10 +48,14 @@ def default_translator(msgstring, **replacements):
 def get_api_url_for_meetings(institution, meeting_UID=None):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
-    url = "{0}/{1}?getConfigId={2}".format(
-        institution.plonemeeting_url.rstrip("/"),
-        PLONEMEETING_API_MEETINGS_VIEW,
-        institution.meeting_config_id,
+    url = (
+        "{0}/@search?"
+        "type={1}"
+        "&config_id={2}".format(
+            institution.plonemeeting_url.rstrip("/"),
+            PLONEMEETING_API_MEETING_TYPE,
+            institution.meeting_config_id,
+        )
     )
     if meeting_UID:
         url = "{0}&UID={1}&fullobjects=True&b_size=9999".format(url, meeting_UID)
@@ -64,10 +68,18 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     url = (
-        "{0}/{1}?sort_on=getItemNumber&privacy=public&privacy=public_heading&b_size=9999"
-        "&getConfigId={2}&linkedMeetingUID={3}&fullobjects=True{4}".format(
+        "{0}/@search?"
+        "type={1}"
+        "&sort_on=getItemNumber"
+        "&privacy=public"
+        "&privacy=public_heading"
+        "&b_size=9999"
+        "&config_id={2}"
+        "&linkedMeetingUID={3}"
+        "&fullobjects=True"
+        "{4}".format(
             institution.plonemeeting_url.rstrip("/"),
-            PLONEMEETING_API_MEETING_ITEMS_VIEW,
+            PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
             meeting_UID,
             institution.additional_published_items_query_string,
