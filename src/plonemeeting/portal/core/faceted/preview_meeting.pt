@@ -29,8 +29,8 @@
                              review_state python: utils_view.get_state(meeting)"
                  tal:attributes="class string:meeting-infos ${review_state}">
 
-              <div class="meeting-title">
-                <span tal:content="meeting/title" />
+              <div class="meeting-title-row">
+                <span class="meeting-title" tal:content="meeting/title" />
                 <tal:if tal:condition='not: isAnon'>
                   <div class="meeting-actions">
                     <a href=""
@@ -80,13 +80,11 @@
                           i18n:translate=""
                           tal:attributes="class string:state-${review_state}">Decision</span>
               </div>
-
+              </div>
               <div class="meeting-last-pm-modified"
                    tal:condition='not: isAnon'>
-                   <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span> :
+                   <span i18n:translate="Last modification in ia.Delib">Last modification in iA.Delib</span> :
                    <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
-              </div>
-
               </div>
               <div class="meeting-custom-info"
                    tal:condition="meeting/custom_info">

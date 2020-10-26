@@ -25,17 +25,8 @@ body.template-facetednavigation_view textarea {
     background-image: none;
     border: none;
     border-radius: 4px;
-    box-shadow: 0 2px 45px -25px rgba(0, 0, 0, .58);
+    box-shadow: none !important;
     border: solid 1px #dcdbdb;
-}
-
-body.template-facetednavigation_view input[type=text] {
-    min-width: 250px; // To have space to type...
-}
-
-#faceted-form .faceted-widgets > .faceted-widget > fieldset.widget-fieldset{
-    padding-left:0;
-    margin-left:0;
 }
 
 body.template-facetednavigation_view input:hover,
@@ -49,6 +40,7 @@ select:hover {
 body.template-facetednavigation_view #top-area {
     background: #f1f1f1 !important;
     position: relative;
+    padding-bottom: 15px;
 }
 
 body.template-facetednavigation_view #top-area:after {
@@ -61,40 +53,20 @@ body.template-facetednavigation_view #top-area:after {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-
 }
 
 body.template-facetednavigation_view #top-area legend {
     border: none;
 }
 
-body.template-facetednavigation_view .searchButton {
-    background: #fff;
-    z-index: 1;
-    position: relative;
-    margin-right: 0;
-    transform: translateX(-2px);
-    border: none;
-    border-left-color: currentcolor;
-    border-left-style: none;
-    border-left-width: medium;
-    border-left: 1px solid #dcdcdc;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
 body.template-facetednavigation_view .searchButton:hover {
-    background: rgba(189, 189, 189, .438);
+    background-color: rgba(189, 189, 189, .438);
 }
 
 body.template-facetednavigation_view #top---default---widgets legend {
     font-size: 18px;
     margin-bottom: 0;
     line-height: .5;
-}
-
-.section-texte form {
-    display: flex;
 }
 
 html body .faceted-criteria-hide,
@@ -108,7 +80,24 @@ html body .faceted-criteria-reset a {
 }
 
 #faceted-results {
-    margin: 2em 0;
+    margin: 0;
+
+    .pagination {
+        margin-left: 0;
+        margin-right: 0;
+        ul {
+            padding: 0;
+        }
+    }
+
+    .pagination{
+        margin-top: 35px;
+        margin-bottom: 20px;
+    }
+
+    .pagination:last-child {
+        margin-top: 20px;
+    }
 
     .faceted_loading{
         background: url('../../++plone++plonemeeting.portal.core/assets/ajax-spinner.svg') no-repeat;
@@ -121,8 +110,22 @@ html body .faceted-criteria-reset a {
     }
 }
 
-#faceted-form fieldset {
-    padding: 1em .5em 1.5em .5em;
+body #faceted-form  {
+    fieldset {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+
+    #text_widget fieldset {
+        min-width: 0;
+        legend {
+            visibility: hidden;
+        }
+        input[type=text] {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+    }
 }
 
 html body .faceted-criteria-hide-show:hover a,
@@ -135,10 +138,36 @@ html body .faceted-criteria-reset a:hover {
     display: none;
 }
 
-#text_widget legend {
-    display: none;
+// Search widget
+
+#text_widget form {
+    display: flex;
+    input[type=text] {
+        min-width: 0; // important, without it FF doesn't size it correctly
+    }
 }
 
-body #faceted-form #text_widget fieldset {
-    padding-top: 0 !important;
+body.template-facetednavigation_view .searchButton {
+    z-index: 1;
+    margin-right: 0;
+    border: none;
+    border-left-color: currentcolor;
+    border-left-style: none;
+    border-left-width: medium;
+    border-left: 1px solid #dcdcdc;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    background-image: url('../../++plone++plonemeeting.portal.core/assets/magnify.svg');
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    color: transparent;
+    text-shadow: none;
+    font-size: 15px;
+    padding-right: 15px;
+    width: 50px;
+    margin-right: 2px;
+    border: solid 1px #dcdbdb;
 }

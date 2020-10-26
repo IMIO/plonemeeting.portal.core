@@ -66,6 +66,8 @@ body #content-core a {
 
 .meeting-actions {
     display: inline-block;
+    min-width: 200px;
+    flex: 1;
 }
 
 .meeting-actions a {
@@ -76,12 +78,23 @@ body #content-core a {
     font-size: 25px;
 }
 
+.meeting-title-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .meeting-title {
     font-weight: 700;
+    margin-right: 15px;
 }
 
 .meeting-last-pm-modified {
     font-size: 16px;
+    font-weight: 300;
 }
 
 .public-meeting {
@@ -91,7 +104,6 @@ body #content-core a {
 
 .meeting-state--top {
     font-weight: 400;
-    float: right;
 }
 
 .meeting-metadata {
@@ -460,6 +472,13 @@ div.decision table {
     .selected > a:hover {
         color: #fff;
         background-color: rgba(255, 255, 255, .3) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #portal-globalnav {
+        padding: 15px 0;
+        margin: 0 -30px 0;
     }
 }
 
