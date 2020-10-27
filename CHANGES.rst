@@ -7,6 +7,8 @@ Changelog
 
 - Refactored LESS theme to be more mobile-friendly.
   [aduchene]
+- Updated iA.Delib API calls using @search method
+  [odelaere]
 
 1.0.9 (2020-09-22)
 ------------------
@@ -60,8 +62,6 @@ Changelog
 --------------------
 
 - Added sortable number on Item.
-  [odelaere]
-- Updated iA.Delib API calls using @search method
   [odelaere]
 
 
