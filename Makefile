@@ -26,8 +26,8 @@ buildout:  ## Runs bootstrap if needed and builds the buildout
 	echo "Finished on $(shell date)"
 
 .PHONY: run
-run: buildout  ## Runs buildout if needed and starts instance1 in foregroud
-	bin/python bin/instance1 fg
+run: buildout  ## Runs buildout if needed and starts instance in foregroud
+	bin/python bin/instance fg
 
 .PHONY: cleanall
 cleanall:  ## Clears build artefacts and virtualenv
