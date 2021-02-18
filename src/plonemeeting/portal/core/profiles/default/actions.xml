@@ -1,93 +1,93 @@
 <?xml version="1.0"?>
 <object name="portal_actions" meta_type="Plone Actions Tool"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
-   <object name="portal_tabs" meta_type="CMF Action Category">
+  <object name="portal_tabs" meta_type="CMF Action Category">
     <object name="index_html" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
-   </object>
+  </object>
 
-   <object name="object" meta_type="CMF Action Category">
+  <object name="object" meta_type="CMF Action Category">
     <object name="history" meta_type="CMF Action">
-     <property name="permissions">
-       <element value="Modify portal content"/>
-     </property>
+      <property name="permissions">
+        <element value="Modify portal content"/>
+      </property>
     </object>
     <object name="local_roles" meta_type="CMF Action">
-     <property name="permissions">
-       <element value="Manage portal"/>
-     </property>
+      <property name="permissions">
+        <element value="Manage portal"/>
+      </property>
     </object>
     <object name="ical_import_settings" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
-   </object>
+  </object>
 
-   <object name="object_buttons" meta_type="CMF Action Category">
+  <object name="object_buttons" meta_type="CMF Action Category">
     <object name="import_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
-     <property name="title" i18n:translate="">Import meeting</property>
-     <property name="url_expr">string:$object_url/@@import_meeting</property>
-     <property name="available_expr">context/@@utils_view/is_institution</property>
-     <property name="permissions">
-      <element value="Modify portal content"/>
-     </property>
-     <property name="visible">True</property>
+      <property name="title" i18n:translate="">Import meeting</property>
+      <property name="url_expr">string:$object_url/@@import_meeting</property>
+      <property name="available_expr">context/@@utils_view/is_institution</property>
+      <property name="permissions">
+        <element value="Modify portal content"/>
+      </property>
+      <property name="visible">True</property>
     </object>
     <object name="reimport_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
-     <property name="title" i18n:translate="">Force reimport this meeting</property>
-     <property name="url_expr">string:$object_url/@@reimport_meeting</property>
-     <property name="available_expr">context/@@utils_view/is_meeting</property>
-     <property name="permissions">
-      <element value="Modify portal content"/>
-     </property>
-     <property name="visible">True</property>
+      <property name="title" i18n:translate="">Force reimport this meeting</property>
+      <property name="url_expr">string:$object_url/@@reimport_meeting</property>
+      <property name="available_expr">context/@@utils_view/is_meeting</property>
+      <property name="permissions">
+        <element value="Modify portal content"/>
+      </property>
+      <property name="visible">True</property>
     </object>
     <object name="copy" meta_type="CMF Action">
-     <property name="permissions">
-      <element value="Manage Portal"/>
-     </property>
+      <property name="permissions">
+        <element value="Manage Portal"/>
+      </property>
     </object>
     <object name="paste" meta_type="CMF Action">
-     <property name="permissions">
-      <element value="Manage Portal"/>
-     </property>
+      <property name="permissions">
+        <element value="Manage Portal"/>
+      </property>
     </object>
     <object name="redirection" meta_type="CMF Action">
-     <property name="permissions">
-      <element value="Manage Portal"/>
-     </property>
+      <property name="permissions">
+        <element value="Manage Portal"/>
+      </property>
     </object>
-   </object>
+  </object>
 
-   <object name="document_actions" meta_type="CMF Action Category">
+  <object name="document_actions" meta_type="CMF Action Category">
     <object name="rss" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
     <object name="print" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
     <object name="extedit" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
-   </object>
+  </object>
 
-   <object name="site_actions" meta_type="CMF Action Category">
+  <object name="site_actions" meta_type="CMF Action Category">
     <object name="sitemap" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
     <object name="accessibility" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
     <object name="contact" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
-   </object>
+  </object>
 
-   <object name="user" meta_type="CMF Action Category">
+  <object name="user" meta_type="CMF Action Category">
     <object name="dashboard" meta_type="CMF Action">
-     <property name="visible">False</property>
+      <property name="visible">False</property>
     </object>
-   </object>
+  </object>
 
- </object>
+</object>
