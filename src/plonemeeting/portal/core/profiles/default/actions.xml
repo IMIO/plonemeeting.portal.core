@@ -58,6 +58,29 @@
         <element value="Manage Portal"/>
       </property>
     </object>
+    <!--  HIDE FACETED ACTIONS  -->
+    <object name="faceted.sync" meta_type="CMF Action" i18n:domain="eea">
+      <property name="visible">False</property>
+    </object>
+    <object name="faceted.disable" meta_type="CMF Action" i18n:domain="eea">
+      <property name="visible">False</property>
+    </object>
+    <object name="faceted.enable" meta_type="CMF Action" i18n:domain="eea">
+      <property name="visible">False</property>
+    </object>
+    <object name="faceted.search.disable" meta_type="CMF Action" i18n:domain="eea">
+      <property name="visible">False</property>
+    </object>
+    <object name="faceted.search.enable" meta_type="CMF Action" i18n:domain="eea">
+      <property name="visible">False</property>
+    </object>
+    <!--  HIDE ICAL ACTIONS  -->
+    <object name="ical_import_enable" meta_type="CMF Action" i18n:domain="plone">
+      <property name="visible">False</property>
+    </object>
+    <object name="ical_import_disable" meta_type="CMF Action" i18n:domain="plone">
+      <property name="visible">False</property>
+    </object>
   </object>
 
   <object name="document_actions" meta_type="CMF Action Category">

@@ -5,7 +5,8 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Hidden faceted and ical actions.
+  [odelaere]
 
 
 1.1.0 (2020-10-27)
