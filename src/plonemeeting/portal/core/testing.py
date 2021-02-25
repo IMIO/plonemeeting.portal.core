@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
@@ -33,7 +34,8 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, "plonemeeting.portal.core:default")
+        with api.env.adopt_roles(['Manager']):
+            applyProfile(portal, "plonemeeting.portal.core:default")
         import transaction
 
         transaction.commit()
@@ -71,8 +73,9 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
 
 class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
-        super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
-        applyProfile(portal, "plonemeeting.portal.core:demo")
+        with api.env.adopt_roles(['Manager']):
+            super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
+            applyProfile(portal, "plonemeeting.portal.core:demo")
         import transaction
 
         transaction.commit()
