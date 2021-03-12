@@ -34,7 +34,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             applyProfile(portal, "plonemeeting.portal.core:default")
         import transaction
 
@@ -73,7 +73,7 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
 
 class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
             applyProfile(portal, "plonemeeting.portal.core:demo")
         import transaction
