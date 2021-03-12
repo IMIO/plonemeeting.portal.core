@@ -14,6 +14,8 @@ Changelog
 - When calling the `annexes endpoint` to get annexes for an item, call it with
   `?publishable=true` so only publishable annexes are serialized and returned by
   PloneMeeting which speed things a lot.
+  We do no more manage the case when `publishable_activated=false`, we consider
+  that `publishable` is always activated.
   [gbastien]
 
 
