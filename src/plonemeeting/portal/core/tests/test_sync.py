@@ -144,53 +144,9 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
             ),
         )
 
-    def test_sync_annexes_publishable_disabled(self):
-        self.institution.info_annex_formatting_tal = "python: json['category_title']"
-        self.assertEqual(len(self.item.listFolderContents()), 1)
-        annex = self.item.listFolderContents()[0]
-        # delete existing annex and add the new one
-        sync_annexes_data(
-            self.item, self.institution, self.json_annexes_not_publishable_mock
-        )
-        self.assertEqual(len(self.item.listFolderContents()), 1)
-        annex2 = self.item.listFolderContents()[0]
-        self.assertNotEqual(annex.UID(), annex2.UID())
-
-        file = self.item.listFolderContents()[-1]
-        self.assertEqual(file.portal_type, "File")
-        self.assertEqual(file.id, "test-annexe")
-        self.assertEqual(file.title, "Test Annexe")
-        self.assertEqual(file.content_type(), "image/jpeg")
-
-        blobs = file.file
-        self.assertEqual(blobs.filename, "test-annexe.jpeg")
-        self.assertEqual(blobs.contentType, "image/jpeg")
-        self.assertEqual(blobs.size, 103911)
-        # test update
-        self.assertEqual(len(self.item.listFolderContents()), 1)
-        sync_annexes_data(
-            self.item, self.institution, self.json_annexes_not_publishable_updated_mock
-        )
-        self.assertEqual(len(self.item.listFolderContents()), 1)
-        file = self.item.listFolderContents()[-1]
-        self.assertEqual(file.portal_type, "File")
-        self.assertEqual(file.id, "test-annexe")
-        self.assertEqual(file.title, "Updated")
-        self.assertEqual(file.content_type(), "image/jpeg")
-
-        blobs = file.file
-        self.assertEqual(blobs.filename, "test-annexe.jpeg")
-        self.assertEqual(blobs.contentType, "image/jpeg")
-        self.assertEqual(blobs.size, 103911)
-
     def test_sync_annexes_publishable_enabled(self):
         self.institution.info_annex_formatting_tal = "python: json['category_title']"
         annexes_json = self.json_annexes_publishable_mock
-        self.assertGreater(
-            len(annexes_json),
-            1,
-            "If there are les than 2 annexes in the json, the tes is irrelevant",
-        )
         annex = self.item.listFolderContents()[0]
         # delete existing annex and add the new one
         sync_annexes_data(self.item, self.institution, annexes_json)

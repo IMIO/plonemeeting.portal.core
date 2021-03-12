@@ -5,7 +5,16 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Adapted code the be compatible with PloneMeeting 4.1 and 4.2 (in which Meeting
+  was migrated to DX, some indexes and methods name changed when moving to
+  camelCase to snake_case, ...).
+  [gbastien]
+- Do not break when importing an annex if annex `filename` is `None`.
+  [gbastien]
+- When calling the `annexes endpoint` to get annexes for an item, call it with
+  `?publishable=true` so only publishable annexes are serialized and returned by
+  PloneMeeting which speed things a lot.
+  [gbastien]
 
 
 1.1.1 (2021-02-25)
@@ -22,6 +31,7 @@ Changelog
   [aduchene]
 - Updated iA.Delib API calls using @search method
   [odelaere]
+
 
 1.0.9 (2020-09-22)
 ------------------
