@@ -143,7 +143,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
     synced_uids = [i.get("UID") for i in items_data.get("items")]
 
     for item_data in items_data.get("items"):
-        # compatibility, with DX there is no more "modification_date"
+        # XXX compatibility, with DX there is no more "modification_date"
         # so depending MeetingItem is AT or DX, try to get modification_date or modified
         modification_date = _json_date_to_datetime(
             item_data.get("modification_date", item_data.get("modified"))
@@ -243,7 +243,7 @@ def sync_meeting_data(institution, meeting_data):
         meeting.plonemeeting_uid = meeting_uid
     else:
         meeting = brains[0].getObject()
-    # compatibility, with DX there is no more "modification_date"
+    # XXX compatibility, with DX there is no more "modification_date"
     # so depending Meeting is AT or DX, try to get modification_date or modified
     meeting.plonemeeting_last_modified = _json_date_to_datetime(
         meeting_data.get("modification_date", meeting_data.get("modified"))

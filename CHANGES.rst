@@ -16,6 +16,8 @@ Changelog
   PloneMeeting which speed things a lot.
   We do no more manage the case when `publishable_activated=false`, we consider
   that `publishable` is always activated.
+- Adapted code to be compatible with version `4.1.x` and `4.2.x`
+  of `Products.PloneMeeting`.
   [gbastien]
 
 
