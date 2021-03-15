@@ -67,7 +67,7 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
 def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
-    # linkedMeetingUID/meeting_uid compatibility, indexed was renamed to meeting_uid
+    # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     url = (
         "{0}/@search?"
         "type={1}"

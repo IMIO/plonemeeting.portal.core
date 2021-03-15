@@ -5,7 +5,9 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Adapted code to be compatible with version `4.1.x` and `4.2.x`
+  of `Products.PloneMeeting`.
+  [gbastien]
 
 
 1.1.1 (2021-02-25)
