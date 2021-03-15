@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from imio.migrator.utils import end_time
 from Products.Five import BrowserView
 from plone import api
 from plone.app.textfield.value import RichTextValue
@@ -15,8 +17,10 @@ import dateutil.parser
 import json
 import pytz
 import requests
+import time
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
@@ -25,12 +29,19 @@ from plonemeeting.portal.core.utils import get_global_category
 
 
 def _call_delib_rest_api(url, institution):  # pragma: no cover
+    start_time = time.time()
+    logger.info("REST API CALL TO {0}".format(url))
     response = requests.get(
         url, auth=(institution.username, institution.password), headers=API_HEADERS
     )
 
     if response.status_code != 200:
         raise ValueError(_(u"Webservice connection error !"))
+    msg, seconds = end_time(start_time, "REST API CALL MADE IN ", True)
+    if seconds > 1:
+        logger.warning(msg)
+    else:
+        logger.info(msg)
 
     return response
 
@@ -134,7 +145,11 @@ def sync_items_data(meeting, items_data, institution, force=False):
     synced_uids = [i.get("UID") for i in items_data.get("items")]
 
     for item_data in items_data.get("items"):
-        modification_date = _json_date_to_datetime(item_data.get("modification_date"))
+        # XXX compatibility, with DX there is no more "modification_date"
+        # so depending MeetingItem is AT or DX, try to get modification_date or modified
+        modification_date = _json_date_to_datetime(
+            item_data.get("modification_date", item_data.get("modified"))
+        )
         item_uid = item_data.get("UID")
         item_title = item_data.get("title")
         created = False
@@ -230,8 +245,10 @@ def sync_meeting_data(institution, meeting_data):
         meeting.plonemeeting_uid = meeting_uid
     else:
         meeting = brains[0].getObject()
+    # XXX compatibility, with DX there is no more "modification_date"
+    # so depending Meeting is AT or DX, try to get modification_date or modified
     meeting.plonemeeting_last_modified = _json_date_to_datetime(
-        meeting_data.get("modification_date")
+        meeting_data.get("modification_date", meeting_data.get("modified"))
     )
     meeting.title = meeting_title
     meeting.date_time = _json_date_to_datetime(meeting_data.get("date"))
@@ -338,6 +355,8 @@ class ForceReimportMeetingView(ImportMeetingView):  # pragma: no cover
 
 def _sync_meeting(institution, meeting_uid, request, force=False):  # pragma: no cover
     try:
+        start_time = time.time()
+        logger.info("SYNC starting...")
         status, new_meeting_uid = sync_meeting(institution, meeting_uid, force)
         if new_meeting_uid:
             brains = api.content.find(
@@ -351,5 +370,6 @@ def _sync_meeting(institution, meeting_uid, request, force=False):  # pragma: no
                 api.portal.show_message(message=status, request=request, type="info")
         else:
             api.portal.show_message(message=status, request=request, type="error")
+        logger.info(end_time(start_time, "SYNC MADE IN "))
     except ValueError as error:
         api.portal.show_message(message=error.args[0], request=request, type="error")
