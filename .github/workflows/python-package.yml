@@ -28,9 +28,17 @@ jobs:
         pip install -U "coveralls>=3.0.0" coverage
         pip install -r requirements.txt -c constraints_plone52.txt
         buildout -c test_plone52.cfg
+    - name: Cache eggs
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-eggs
+      with:
+        path: ./buildout-cache/eggs ./eggs
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: Test
       run: |
-        coverage run bin/test --all
+        coverage run bin/test
     - name: Publish to Coveralls
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
