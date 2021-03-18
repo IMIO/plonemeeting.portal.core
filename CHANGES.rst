@@ -5,10 +5,6 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Adapted code the be compatible with PloneMeeting 4.1 and 4.2 (in which Meeting
-  was migrated to DX, some indexes and methods name changed when moving to
-  camelCase to snake_case, ...).
-  [gbastien]
 - Do not break when importing an annex if annex `filename` is `None`.
   [gbastien]
 - When calling the `annexes endpoint` to get annexes for an item, call it with
