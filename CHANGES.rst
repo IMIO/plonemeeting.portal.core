@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2 (unreleased)
+1.2 (2021-03-24)
 ----------------
 
 - Do not break when importing an annex if annex `filename` is `None`.
