@@ -5,7 +5,7 @@
 .. image:: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/python-package.yml/badge.svg?branch=master
     :target: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/python-package.yml
 
-.. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/IMIO/plonemeeting.portal.core?branch=master
 
 ========================
