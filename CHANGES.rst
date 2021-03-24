@@ -5,6 +5,13 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
+- Do not break when importing an annex if annex `filename` is `None`.
+  [gbastien]
+- When calling the `annexes endpoint` to get annexes for an item, call it with
+  `?publishable=true` so only publishable annexes are serialized and returned by
+  PloneMeeting which speed things a lot.
+  We do no more manage the case when `publishable_activated=false`, we consider
+  that `publishable` is always activated.
 - Adapted code to be compatible with version `4.1.x` and `4.2.x`
   of `Products.PloneMeeting`.
   [gbastien]
@@ -24,6 +31,7 @@ Changelog
   [aduchene]
 - Updated iA.Delib API calls using @search method
   [odelaere]
+
 
 1.0.9 (2020-09-22)
 ------------------

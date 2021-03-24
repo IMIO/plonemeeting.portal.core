@@ -67,8 +67,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&sort_on=getItemNumber"
             "&privacy=public"
             "&privacy=public_heading&b_size=9999"
-            "&config_id=meeting-config-college&linkedMeetingUID=foo&fullobjects=True"
-            "&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified",
+            "&config_id=meeting-config-college&linkedMeetingUID=foo"
+            "&meeting_uid=foo&fullobjects=True&review_state=itemfrozen"
+            "&review_state=accepted&review_state=accepted_but_modified",
             url,
         )
 

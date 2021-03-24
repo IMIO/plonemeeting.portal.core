@@ -78,49 +78,46 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
             or annex.plonemeeting_last_modified < pm_last_modified
         )
 
+    # we receive only publishable annexes
     for annex_data in annexes_json:
         annex_pm_uid = annex_data.get("UID")
-        publishable_activated = annex_data.get("publishable_activated")
-        publishable = annex_data.get("publishable")
         annex = get_annex_if_exists(annex_pm_uid)
 
-        # download all annexes except if annex publication is enabled in ia.Delib AND this annex not publishable
-        if not publishable_activated or publishable:
-            # if it's a new annex or if it has been modified since last sync, then set all attributes
-            annex_pm_last_modified = _json_date_to_datetime(annex_data.get("modified"))
-            if (
-                annex and annex_should_be_updated(annex, annex_pm_last_modified)
-            ) or not annex:
-                file_title = get_formatted_data_from_json(
-                    institution.info_annex_formatting_tal, item, annex_data
-                ) or annex_data.get("title")
-                if annex:
-                    annex.title = file_title
-                else:
-                    annex = api.content.create(
-                        container=item, type="File", title=file_title
-                    )
-                file_json = annex_data.get("file")
-                dl_link = file_json.get("download")
-                file_content_type = file_json.get("content-type")
-
-                response = _call_delib_rest_api(dl_link, institution)
-                file_blob = response.content
-
-                file_name = u"{}.{}".format(
-                    annex.id, file_json.get("filename").split(".")[-1]
+        # if it's a new annex or if it has been modified since last sync, then set all attributes
+        annex_pm_last_modified = _json_date_to_datetime(annex_data.get("modified"))
+        if (
+            annex and annex_should_be_updated(annex, annex_pm_last_modified)
+        ) or not annex:
+            file_title = get_formatted_data_from_json(
+                institution.info_annex_formatting_tal, item, annex_data
+            ) or annex_data.get("title")
+            if annex:
+                annex.title = file_title
+            else:
+                annex = api.content.create(
+                    container=item, type="File", title=file_title
                 )
-                annex.file = NamedBlobFile(
-                    data=file_blob, contentType=file_content_type, filename=file_name
-                )
-                annex.plonemeeting_uid = annex_pm_uid
-                annex.plonemeeting_last_modified = annex_pm_last_modified
-                annex.reindexObject()
+            file_json = annex_data.get("file")
+            dl_link = file_json.get("download")
+            file_content_type = file_json.get("content-type")
 
-            for existing_annex in existing_annexes:
-                if annex_pm_uid == existing_annex.plonemeeting_uid:
-                    existing_annexes.remove(existing_annex)
-                    break
+            response = _call_delib_rest_api(dl_link, institution)
+            file_blob = response.content
+
+            # in some rare cases, filename can be None
+            json_filename = file_json.get("filename") or "default_filename.pdf"
+            file_name = u"{}.{}".format(annex.id, json_filename.split(".")[-1])
+            annex.file = NamedBlobFile(
+                data=file_blob, contentType=file_content_type, filename=file_name
+            )
+            annex.plonemeeting_uid = annex_pm_uid
+            annex.plonemeeting_last_modified = annex_pm_last_modified
+            annex.reindexObject()
+
+        for existing_annex in existing_annexes:
+            if annex_pm_uid == existing_annex.plonemeeting_uid:
+                existing_annexes.remove(existing_annex)
+                break
     # delete leftovers
     with api.env.adopt_roles(["Manager"]):
         for existing_annex in existing_annexes:
@@ -129,7 +126,8 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
 
 def sync_annexes(item, institution, annexes_json, force=False):  # pragma: no cover
     if annexes_json:
-        response = _call_delib_rest_api(annexes_json.get("@id"), institution)
+        url = "{0}?publishable=true".format(annexes_json.get("@id"))
+        response = _call_delib_rest_api(url, institution)
         sync_annexes_data(item, institution, response.json(), force)
 
 
