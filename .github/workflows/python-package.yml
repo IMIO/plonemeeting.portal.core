@@ -27,18 +27,17 @@ jobs:
         pip install -U pip setuptools --no-cache-dir
         pip install -U "coveralls>=3.0.0" coverage --no-cache-dir
         pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
-        mkdir -p buildout-cache/{eggs,downloads}
     - name: Cache eggs
       uses: actions/cache@v2
       env:
         cache-name: cache-eggs
       with:
-        path: ./buildout-cache/eggs ./eggs
+        path: ./buildout-cache/eggs
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: buildout
       run: |
-        buildout -c test_plone52.cfg buildout:download-cache=buildout-cache/downloads buildout:eggs-directory=buildout-cache/eggs
+        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
     - name: Test
       run: |
         coverage run bin/test
