@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.1.2 (unreleased)
-------------------
+1.2 (unreleased)
+----------------
 
 - Do not break when importing an annex if annex `filename` is `None`.
   [gbastien]
