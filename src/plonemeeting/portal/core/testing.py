@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from plone import api
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
@@ -10,6 +9,7 @@ from plone.testing import z2
 from plone.testing.zope import makeTestRequest
 
 import plonemeeting.portal.core
+import transaction
 
 
 class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
@@ -34,16 +34,8 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
-        with api.env.adopt_roles(["Manager"]):
-            applyProfile(portal, "plonemeeting.portal.core:default")
-        import transaction
-
+        applyProfile(portal, "plonemeeting.portal.core:default")
         transaction.commit()
-
-    def tearDownZope(self, app):
-        import transaction
-
-        transaction.abort()
 
 
 PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
@@ -73,11 +65,8 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
 
 class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
-        with api.env.adopt_roles(["Manager"]):
-            super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
-            applyProfile(portal, "plonemeeting.portal.core:demo")
-        import transaction
-
+        super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
+        applyProfile(portal, "plonemeeting.portal.core:demo")
         transaction.commit()
 
 
