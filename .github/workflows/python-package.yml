@@ -33,7 +33,7 @@ jobs:
         cache-name: cache-eggs
       with:
         path: ./buildout-cache/eggs
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: buildout
       run: |
