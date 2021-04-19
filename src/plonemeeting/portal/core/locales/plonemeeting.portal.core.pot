@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-07-01 07:27+0000\n"
+"POT-Creation-Date: 2021-04-19 10:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Additional Published Items query string"
 msgstr ""
 
-#: ../content/item.py:43
+#: ../content/item.py:47
 msgid "Additional data"
 msgstr ""
 
@@ -52,36 +52,36 @@ msgstr ""
 msgid "Can manage institution"
 msgstr ""
 
-#: ../browser/sync.py:309
+#: ../browser/sync.py:330
 msgid "Cancel"
 msgstr ""
 
 #: ../browser/templates/institution.pt:52
-#: ../content/institution.py:124
+#: ../content/institution.py:146
 msgid "Categories mappings"
 msgstr ""
 
 #: ../browser/templates/item.pt:39
-#: ../content/item.py:51
+#: ../content/item.py:55
 #: ../faceted/macros.pt:32
 msgid "Category"
 msgstr ""
 
-#: ../browser/sync.py:296
+#: ../browser/sync.py:317
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
-#: ../setuphandlers.py:50
+#: ../setuphandlers.py:53
 msgid "Configuration folder"
 msgstr ""
 
 #: ../browser/templates/item.pt:86
-#: ../content/item.py:56
-#: ../content/meeting.py:38
+#: ../content/item.py:60
+#: ../content/meeting.py:28
 msgid "Custom info"
 msgstr ""
 
-#: ../content/item.py:47
+#: ../content/item.py:51
 msgid "Decision"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Edit meeting"
 msgstr ""
 
-#: ../setuphandlers.py:58
+#: ../setuphandlers.py:61
 msgid "Faceted"
 msgstr ""
 
@@ -115,11 +115,11 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../content/institution.py:189
+#: ../content/institution.py:212
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:197
+#: ../content/institution.py:220
 msgid "Footer text color"
 msgstr ""
 
@@ -129,6 +129,10 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
+msgstr ""
+
+#: ../content/institution.py:103
+msgid "Formatting"
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -147,15 +151,11 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
-#: ../content/institution.py:157
+#: ../content/institution.py:180
 msgid "Header color"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:100
-msgid "Hide meeting infos"
-msgstr ""
-
-#: ../browser/sync.py:298
+#: ../browser/sync.py:319
 msgid "Import"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgid "Import meeting"
 msgstr ""
 
 #: ../browser/templates/institution.pt:48
-#: ../content/institution.py:120
+#: ../content/institution.py:131
 msgid "Info annex formatting tal expression"
 msgstr ""
 
@@ -188,12 +188,12 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../content/institution.py:116
+#: ../content/institution.py:127
 msgid "Item additional data formatting tal expression"
 msgstr ""
 
 #: ../browser/templates/institution.pt:44
-#: ../content/institution.py:110
+#: ../content/institution.py:121
 msgid "Item decision formatting tal expression"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgid "Item number"
 msgstr ""
 
 #: ../browser/templates/institution.pt:40
-#: ../content/institution.py:102
+#: ../content/institution.py:113
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -213,12 +213,12 @@ msgid "Items sort order"
 msgstr ""
 
 #: ../browser/templates/item.pt:73
-#: ../content/item.py:59
-#: ../content/meeting.py:41
+#: ../content/item.py:63
+#: ../content/meeting.py:31
 msgid "Last modification in ia.Delib"
 msgstr ""
 
-#: ../content/institution.py:181
+#: ../content/institution.py:204
 msgid "Links text color"
 msgstr ""
 
@@ -226,11 +226,15 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:153
+#: ../content/institution.py:176
 msgid "Logo"
 msgstr ""
 
-#: ../browser/sync.py:282
+#: ../content/institution.py:137
+msgid "Mapping"
+msgstr ""
+
+#: ../browser/sync.py:303
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
@@ -240,7 +244,7 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:295
+#: ../browser/sync.py:316
 msgid "Meeting import form"
 msgstr ""
 
@@ -248,11 +252,11 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
-#: ../content/institution.py:165
+#: ../content/institution.py:188
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:173
+#: ../content/institution.py:196
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -264,7 +268,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: ../passwords.py:18
+#: ../passwords.py:17
 msgid "Passwords must be at least 8 characters in length."
 msgstr ""
 
@@ -296,7 +300,7 @@ msgstr ""
 msgid "Representative"
 msgstr ""
 
-#: ../content/item.py:37
+#: ../content/item.py:41
 msgid "Representative group in charge"
 msgstr ""
 
@@ -313,24 +317,24 @@ msgid "Representative value"
 msgstr ""
 
 #: ../browser/templates/institution.pt:63
-#: ../content/institution.py:130
+#: ../content/institution.py:153
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:95
-msgid "Show meeting infos"
+#: ../content/item.py:30
+msgid "Sortable Item number"
 msgstr ""
 
-#: ../content/institution.py:141
+#: ../content/institution.py:164
 msgid "Styling"
 msgstr ""
 
-#: ../content/item.py:30
-#: ../content/meeting.py:26
+#: ../content/item.py:34
+#: ../content/meeting.py:22
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:251
+#: ../browser/sync.py:272
 msgid "Unexpected meeting count in webservice response !"
 msgstr ""
 
@@ -353,7 +357,7 @@ msgstr ""
 msgid "View meeting"
 msgstr ""
 
-#: ../browser/sync.py:33
+#: ../browser/sync.py:39
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -374,7 +378,7 @@ msgid "in_project"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../browser/sync.py:260
+#: ../browser/sync.py:281
 msgid "meeting_imported"
 msgstr ""
 

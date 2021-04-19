@@ -1,15 +1,24 @@
 # -*- coding: utf-8 -*-
+import os
+import plone
 
-from Products.Five.browser import BrowserView
 from plone import api
+from plone.dexterity.browser.view import DefaultView
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from zope.browserpage import ViewPageTemplateFile
 
 
-class InstitutionView(BrowserView):
+class InstitutionView(DefaultView):
     """
     """
+
+    def _path_to_dx_default_template():
+        dx_path = os.path.dirname(plone.app.dexterity.browser.__file__)
+        return dx_path + "/item.pt"
+
+    index = ViewPageTemplateFile(_path_to_dx_default_template())
 
     def __call__(self):
         # Don't redirect if user can edit institution
@@ -35,3 +44,7 @@ class InstitutionView(BrowserView):
         url = meeting_folder_brains[0].getURL()
         self.request.response.redirect(url)
         return ""
+
+    def updateWidgets(self, prefix=None):
+        super(InstitutionView, self).updateWidgets(prefix)
+        self.widgets['password'].value = self.context.password and '********************' or '-'
