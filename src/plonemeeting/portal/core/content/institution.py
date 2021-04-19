@@ -4,8 +4,6 @@ import re
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
-from plone.dexterity.browser import add
-from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
 from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
@@ -228,36 +226,3 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
-
-
-class AddForm(add.DefaultAddForm):
-    portal_type = "Institution"
-
-    def updateFields(self):
-        super(AddForm, self).updateFields()
-        # self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
-        # self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
-
-    def updateWidgets(self):
-        super(AddForm, self).updateWidgets()
-        # self.widgets["categories_mappings"].allow_reorder = True
-        # self.widgets["categories_mappings"].allow_reorder = True
-
-
-class AddView(add.DefaultAddView):
-    form = AddForm
-
-
-class EditForm(edit.DefaultEditForm):
-    portal_type = "Institution"
-
-    def updateFields(self):
-        super(EditForm, self).updateFields()
-        # self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
-        # self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
-
-    def updateWidgets(self):
-        super(EditForm, self).updateWidgets()
-        # self.widgets["password"].visible = True
-        # self.widgets["categories_mappings"].allow_reorder = True
-        # self.widgets["categories_mappings"].allow_reorder = True

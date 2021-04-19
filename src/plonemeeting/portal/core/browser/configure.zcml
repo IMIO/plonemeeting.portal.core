@@ -72,4 +72,27 @@
     permission="zope2.View"
     />
 
+  <!-- Institution add / edit form -->
+
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".institution.AddView"
+      name="Institution"
+      />
+  <class class=".institution.AddView">
+      <require
+          permission="plonemeeting.portal.core.AddInstitution"
+          interface="zope.publisher.interfaces.browser.IBrowserPage"
+          />
+  </class>
+
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="edit"
+    class=".institution.EditForm"
+    permission="cmf.ModifyPortalContent"
+    />
 </configure>

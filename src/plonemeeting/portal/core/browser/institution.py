@@ -3,6 +3,8 @@ import os
 import plone
 
 from plone import api
+from plone.dexterity.browser import add
+from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
 
 from plonemeeting.portal.core import _
@@ -48,3 +50,27 @@ class InstitutionView(DefaultView):
     def updateWidgets(self, prefix=None):
         super(InstitutionView, self).updateWidgets(prefix)
         self.widgets['password'].value = self.context.password and '********************' or '-'
+
+
+class AddForm(add.DefaultAddForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(AddForm, self).updateFields()
+
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
+
+
+class AddView(add.DefaultAddView):
+    form = AddForm
+
+
+class EditForm(edit.DefaultEditForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(EditForm, self).updateFields()
+
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()
