@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
+from plone import api
 
 
 class ColorsCSSView(BrowserView):
@@ -26,7 +27,8 @@ class ColorsCSSView(BrowserView):
         """
         Render the css with the institution colors
         """
-        institutions = [obj for obj in self.portal.objectValues() if obj.portal_type == "Institution"]
+        portal = api.portal.get()
+        institutions = [obj for obj in portal.objectValues() if obj.portal_type == "Institution"]
         css = " "
         for institution in institutions:
             css += self.CSS_TEMPLATE.format(

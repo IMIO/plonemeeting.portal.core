@@ -11,6 +11,9 @@ Changelog
   [odelaere]
 - Fix custom CSS colors not updating when an institution was not published.
   [aduchene]
+- Revamped Intitution views using default plone.dexterity template.
+  [odelaere].
+
 
 1.2 (2021-03-24)
 ----------------
