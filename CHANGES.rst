@@ -9,7 +9,8 @@ Changelog
   [odelaere]
 - Fix Institution icon minimum size when uploading svg.
   [odelaere]
-
+- Fix custom CSS colors not updating when an institution was not published.
+  [aduchene]
 
 1.2 (2021-03-24)
 ----------------
