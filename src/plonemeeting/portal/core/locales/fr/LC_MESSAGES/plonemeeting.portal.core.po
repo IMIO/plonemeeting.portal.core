@@ -56,7 +56,7 @@ msgstr "Annuler"
 #: ../browser/templates/institution.pt:52
 #: ../content/institution.py:146
 msgid "Categories mappings"
-msgstr "Equivalences de matières"
+msgstr "Correspondances des matières"
 
 #: ../browser/templates/item.pt:39
 #: ../content/item.py:55
@@ -229,8 +229,8 @@ msgid "Logo"
 msgstr "Logo"
 
 #: ../content/institution.py:137
-msgid "Data Binding"
-msgstr "Liaisons de données"
+msgid "Mapping"
+msgstr "Correspondances"
 
 #: ../browser/sync.py:303
 #: ../profiles/default/types/Meeting.xml
@@ -317,7 +317,7 @@ msgstr "Valeur de mandataire"
 #: ../browser/templates/institution.pt:63
 #: ../content/institution.py:153
 msgid "Representatives mappings"
-msgstr "Equivalences de mandataires"
+msgstr "Correspondances des mandataires"
 
 #: ../content/item.py:30
 msgid "Sortable Item number"

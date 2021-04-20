@@ -231,7 +231,7 @@ msgid "Logo"
 msgstr ""
 
 #: ../content/institution.py:137
-msgid "Data Binding"
+msgid "Mapping"
 msgstr ""
 
 #: ../browser/sync.py:303

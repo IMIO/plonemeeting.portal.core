@@ -129,10 +129,10 @@ class IInstitution(model.Schema):
         title=_(u"Info annex formatting tal expression"), required=False
     )
 
-    # Data Binding fieldset
+    # Mapping fieldset
     model.fieldset(
-        "binding",
-        label=_(u"Data Binding"),
+        "mapping",
+        label=_(u"Mapping"),
         fields=[
             "categories_mappings",
             "representatives_mappings",
