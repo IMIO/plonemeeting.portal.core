@@ -5,7 +5,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 import json
 import requests
 
-from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import API_HEADERS, CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
@@ -90,3 +90,16 @@ class RemoteMeetingsVocabularyFactory:
 
 
 RemoteMeetingsVocabulary = RemoteMeetingsVocabularyFactory()
+
+
+class DelibCatogoryMappingFieldsVocabularyFactory:
+    def __call__(self, context):
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=field_id, title=field_name)
+                for field_id, field_name in CATEGORY_IA_DELIB_FIELDS
+            ]
+        )
+
+
+DelibCatogoryMappingFieldsVocabulary = DelibCatogoryMappingFieldsVocabularyFactory()

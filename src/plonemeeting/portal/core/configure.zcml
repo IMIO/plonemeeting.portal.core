@@ -65,13 +65,22 @@
       handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"
       profile="plonemeeting.portal.core:default" />
 
-    <genericsetup:upgradeStep
-      title="Go to portal 1002"
-      description="Add new bundles and resources to the registry"
+  <genericsetup:upgradeStep
+    title="Go to portal 1002"
+    description="Add new bundles and resources to the registry"
+    source="*"
+    destination="1002"
+    sortkey="2"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
+    profile="plonemeeting.portal.core:default" />
+
+  <genericsetup:upgradeStep
+      title="Go to portal 1003"
+      description="Add an option to chose between category or classifier from iA.Delib"
       source="*"
-      destination="1002"
-      sortkey="2"
-      handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
+      destination="1003"
+      sortkey="1"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate"
       profile="plonemeeting.portal.core:default" />
 
   <!-- Password policy -->
@@ -106,6 +115,12 @@
   <utility
     component=".vocabularies.RemoteMeetingsVocabulary"
     name="plonemeeting.portal.vocabularies.remote_meetings"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.DelibCatogoryMappingFieldsVocabulary"
+    name="plonemeeting.portal.vocabularies.delib_catogory_fields"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 
