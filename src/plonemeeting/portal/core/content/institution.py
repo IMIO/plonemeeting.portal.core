@@ -4,8 +4,6 @@ import re
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
-from plone.dexterity.browser import add
-from plone.dexterity.browser import edit
 from plone.dexterity.content import Container
 from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
@@ -97,6 +95,17 @@ class IInstitution(model.Schema):
         required=False,
         constraint=validate_url_parameters,
     )
+    # Formatting fieldset
+    model.fieldset(
+        "formatting",
+        label=_(u"Formatting"),
+        fields=[
+            "item_title_formatting_tal",
+            "item_decision_formatting_tal",
+            "item_additional_data_formatting_tal",
+            "info_annex_formatting_tal",
+        ],
+    )
 
     item_title_formatting_tal = schema.TextLine(
         title=_(
@@ -120,12 +129,24 @@ class IInstitution(model.Schema):
         title=_(u"Info annex formatting tal expression"), required=False
     )
 
+    # Data Binding fieldset
+    model.fieldset(
+        "binding",
+        label=_(u"Data Binding"),
+        fields=[
+            "categories_mappings",
+            "representatives_mappings",
+        ],
+    )
+
+    directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
         value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
         required=False,
     )
 
+    directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True)
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
         value_type=DictRow(
@@ -152,7 +173,7 @@ class IInstitution(model.Schema):
 
     logo = NamedBlobImage(title=_(u"Logo"), required=False)
 
-    directives.widget(header_color=ColorSelectFieldWidget)
+    directives.widget("header_color", ColorSelectFieldWidget)
     header_color = schema.TextLine(
         title=_("Header color"),
         required=True,
@@ -160,7 +181,7 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    directives.widget(nav_color=ColorSelectFieldWidget)
+    directives.widget("nav_color", ColorSelectFieldWidget)
     nav_color = schema.TextLine(
         title=_("Navigation bar color"),
         required=True,
@@ -168,7 +189,7 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    directives.widget(nav_text_color=ColorSelectFieldWidget)
+    directives.widget("nav_text_color", ColorSelectFieldWidget)
     nav_text_color = schema.TextLine(
         title=_("Navigation bar text color"),
         required=True,
@@ -176,7 +197,7 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    directives.widget(links_color=ColorSelectFieldWidget)
+    directives.widget("links_color", ColorSelectFieldWidget)
     links_color = schema.TextLine(
         title=_("Links text color"),
         required=True,
@@ -184,7 +205,7 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    directives.widget(footer_color=ColorSelectFieldWidget)
+    directives.widget("footer_color", ColorSelectFieldWidget)
     footer_color = schema.TextLine(
         title=_("Footer color"),
         required=True,
@@ -192,7 +213,7 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    directives.widget(footer_text_color=ColorSelectFieldWidget)
+    directives.widget("footer_text_color", ColorSelectFieldWidget)
     footer_text_color = schema.TextLine(
         title=_("Footer text color"),
         required=True,
@@ -205,35 +226,3 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
-
-
-class AddForm(add.DefaultAddForm):
-    portal_type = "Institution"
-
-    def updateFields(self):
-        super(AddForm, self).updateFields()
-        self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
-        self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
-
-    def updateWidgets(self):
-        super(AddForm, self).updateWidgets()
-        self.widgets["categories_mappings"].allow_reorder = True
-        self.widgets["categories_mappings"].allow_reorder = True
-
-
-class AddView(add.DefaultAddView):
-    form = AddForm
-
-
-class EditForm(edit.DefaultEditForm):
-    portal_type = "Institution"
-
-    def updateFields(self):
-        super(EditForm, self).updateFields()
-        self.fields["categories_mappings"].widgetFactory = DataGridFieldFactory
-        self.fields["representatives_mappings"].widgetFactory = DataGridFieldFactory
-
-    def updateWidgets(self):
-        super(EditForm, self).updateWidgets()
-        self.widgets["categories_mappings"].allow_reorder = True
-        self.widgets["representatives_mappings"].allow_reorder = True

@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
+import os
+import plone
 
-from Products.Five.browser import BrowserView
 from plone import api
+from plone.dexterity.browser import add
+from plone.dexterity.browser import edit
+from plone.dexterity.browser.view import DefaultView
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from zope.browserpage import ViewPageTemplateFile
 
 
-class InstitutionView(BrowserView):
+def _path_to_dx_default_template():
+    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
+    return os.path.join(dx_path, "item.pt")
+
+
+class InstitutionView(DefaultView):
     """
     """
+    index = ViewPageTemplateFile(_path_to_dx_default_template())
 
     def __call__(self):
         # Don't redirect if user can edit institution
@@ -35,3 +46,31 @@ class InstitutionView(BrowserView):
         url = meeting_folder_brains[0].getURL()
         self.request.response.redirect(url)
         return ""
+
+    def updateWidgets(self, prefix=None):
+        super(InstitutionView, self).updateWidgets(prefix)
+        self.widgets['password'].value = self.context.password and '********************' or '-'
+
+
+class AddForm(add.DefaultAddForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(AddForm, self).updateFields()
+
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
+
+
+class AddView(add.DefaultAddView):
+    form = AddForm
+
+
+class EditForm(edit.DefaultEditForm):
+    portal_type = "Institution"
+
+    def updateFields(self):
+        super(EditForm, self).updateFields()
+
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()
