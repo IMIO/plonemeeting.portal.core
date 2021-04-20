@@ -9,6 +9,8 @@ Changelog
   [odelaere]
 - Fix Institution icon minimum size when uploading svg.
   [odelaere]
+- Revamped Intitution views using default plone.dexterity template.
+  [odelaere].
 
 
 1.2 (2021-03-24)
