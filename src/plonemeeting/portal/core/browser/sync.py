@@ -207,7 +207,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         )
 
         item.category = get_global_category(
-            meeting.aq_parent, item_data.get(institution.delib_catogory_field)
+            meeting.aq_parent, item_data.get(institution.delib_category_field)
         )
         item.reindexObject()
         sync_annexes(

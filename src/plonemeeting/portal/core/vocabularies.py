@@ -92,7 +92,7 @@ class RemoteMeetingsVocabularyFactory:
 RemoteMeetingsVocabulary = RemoteMeetingsVocabularyFactory()
 
 
-class DelibCatogoryMappingFieldsVocabularyFactory:
+class DelibCategoryMappingFieldsVocabularyFactory:
     def __call__(self, context):
         return SimpleVocabulary(
             [
@@ -102,4 +102,4 @@ class DelibCatogoryMappingFieldsVocabularyFactory:
         )
 
 
-DelibCatogoryMappingFieldsVocabulary = DelibCatogoryMappingFieldsVocabularyFactory()
+DelibCategoryMappingFieldsVocabulary = DelibCategoryMappingFieldsVocabularyFactory()

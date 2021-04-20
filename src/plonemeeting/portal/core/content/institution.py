@@ -135,14 +135,14 @@ class IInstitution(model.Schema):
         "mapping",
         label=_(u"Mapping"),
         fields=[
-            "delib_catogory_field",
+            "delib_category_field",
             "categories_mappings",
             "representatives_mappings",
         ],
     )
-    delib_catogory_field = schema.Choice(
+    delib_category_field = schema.Choice(
         title=_(u"iA.Delib field to use for category mapping"),
-        vocabulary="plonemeeting.portal.vocabularies.delib_catogory_fields",
+        vocabulary="plonemeeting.portal.vocabularies.delib_category_fields",
         required=True,
         default=DEFAULT_CATEGORY_IA_DELIB_FIELD
     )

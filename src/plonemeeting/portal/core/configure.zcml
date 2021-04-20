@@ -119,8 +119,8 @@
     />
 
   <utility
-    component=".vocabularies.DelibCatogoryMappingFieldsVocabulary"
-    name="plonemeeting.portal.vocabularies.delib_catogory_fields"
+    component=".vocabularies.DelibCategoryMappingFieldsVocabulary"
+    name="plonemeeting.portal.vocabularies.delib_category_fields"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

@@ -10,11 +10,11 @@ logger = logging.getLogger("plonemeeting.portal.core")
 class MigrateTo1003(Migrator):
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
-        logger.info("Initialize delib_catogory_field field on all Institution...")
+        logger.info("Initialize delib_category_field field on all Institution...")
 
         for brain in self.catalog(portal_type="Institution"):
             institution = brain.getObject()
-            institution.delib_catogory_field = DEFAULT_CATEGORY_IA_DELIB_FIELD
+            institution.delib_category_field = DEFAULT_CATEGORY_IA_DELIB_FIELD
 
         logger.info("Done.")
 
