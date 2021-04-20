@@ -40,3 +40,6 @@ reports/
 !.gitkeep
 !.travis.yml
 !src/plonemeeting
+/Gruntfile.js
+/package.json
+/package-lock.json

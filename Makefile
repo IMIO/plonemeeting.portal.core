@@ -37,3 +37,7 @@ cleanall:  ## Clears build artefacts and virtualenv
 .PHONY: test
 test:
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
+
+.PHONY: css
+css:  ## Compile css
+	bin/plone-compile-resources --bundle=plonemeeting.portal.core

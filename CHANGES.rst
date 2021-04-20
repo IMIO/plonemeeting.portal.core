@@ -7,6 +7,8 @@ Changelog
 
 - Fix open annexe files in new tab.
   [odelaere]
+- Fix Institution icon minimum size when uploading svg.
+  [odelaere]
 
 
 1.2 (2021-03-24)
