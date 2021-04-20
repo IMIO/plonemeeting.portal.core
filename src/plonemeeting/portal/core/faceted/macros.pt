@@ -72,6 +72,7 @@
           <ul>
             <li tal:repeat="annexe brain/annexes_infos">
               <a href=""
+                 target="_blank"
                  tal:define="title python: annexe[0];
                              url python: annexe[1];
                              icon python: annexe[2]"

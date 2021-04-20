@@ -5,7 +5,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix open annexe files in new tab.
+  [odelaere]
 
 
 1.2 (2021-03-24)
