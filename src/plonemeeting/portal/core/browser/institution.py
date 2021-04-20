@@ -12,14 +12,14 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.browserpage import ViewPageTemplateFile
 
 
+def _path_to_dx_default_template():
+    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
+    return os.path.join(dx_path, "item.pt")
+
+
 class InstitutionView(DefaultView):
     """
     """
-
-    def _path_to_dx_default_template():
-        dx_path = os.path.dirname(plone.app.dexterity.browser.__file__)
-        return dx_path + "/item.pt"
-
     index = ViewPageTemplateFile(_path_to_dx_default_template())
 
     def __call__(self):

@@ -229,8 +229,8 @@ msgid "Logo"
 msgstr "Logo"
 
 #: ../content/institution.py:137
-msgid "Mapping"
-msgstr "Mapping"
+msgid "Data Binding"
+msgstr "Liaisons de données"
 
 #: ../browser/sync.py:303
 #: ../profiles/default/types/Meeting.xml
