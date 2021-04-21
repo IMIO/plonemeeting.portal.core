@@ -8,6 +8,7 @@ from plone.dexterity.content import Container
 from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
+from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
@@ -134,9 +135,16 @@ class IInstitution(model.Schema):
         "mapping",
         label=_(u"Mapping"),
         fields=[
+            "delib_category_field",
             "categories_mappings",
             "representatives_mappings",
         ],
+    )
+    delib_category_field = schema.Choice(
+        title=_(u"iA.Delib field to use for category mapping"),
+        vocabulary="plonemeeting.portal.vocabularies.delib_category_fields",
+        required=True,
+        default=DEFAULT_CATEGORY_IA_DELIB_FIELD
     )
 
     directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)

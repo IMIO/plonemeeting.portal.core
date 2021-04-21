@@ -13,6 +13,8 @@ Changelog
   [aduchene]
 - Revamped Intitution views using default plone.dexterity template.
   [odelaere].
+- Allow using classifier field from json instead of category.
+  [odelaere]
 
 
 1.2 (2021-03-24)
