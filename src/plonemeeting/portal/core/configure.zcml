@@ -77,7 +77,7 @@
   <genericsetup:upgradeStep
       title="Go to portal 1003"
       description="Add an option to chose between category or classifier from iA.Delib"
-      source="*"
+      source="1002"
       destination="1003"
       sortkey="1"
       handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate"
