@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mimetypes
 
 from Products.CMFPlone.interfaces import INonInstallable
 from plone import api
@@ -78,11 +79,12 @@ def create_file(container, filename):
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/demo/data/", filename)
     if os.path.isfile(file_path):
+        contentType = mimetypes.guess_type(file_path)[0]
+        title = os.path.basename(file_path)
         with open(file_path, "rb") as fd:
-            title = file_path.split(u"/")[-1]
             file_obj = content.create(container=container, type="File", title=title)
             file_obj.file = NamedFile(
-                data=fd, filename=title, contentType="application/pdf"
+                data=fd, filename=title, contentType=contentType
             )
 
 
