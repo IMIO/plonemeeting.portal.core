@@ -92,6 +92,12 @@
     />
 
   <utility
+    component=".vocabularies.LocalCategoryVocabulary"
+    name="plonemeeting.portal.vocabularies.local_categories"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
     component=".vocabularies.MeetingDateVocabulary"
     name="plonemeeting.portal.vocabularies.meeting_dates"
     provides="zope.schema.interfaces.IVocabularyFactory"
@@ -114,6 +120,5 @@
     name="plonemeeting.portal.vocabularies.delib_category_fields"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
-
 
 </configure>

@@ -36,6 +36,7 @@ Changelog
 - Allow using classifier field from json instead of category.
   [odelaere]
 - Transition events on Institution Folder also apply on its children.
+- Query categories from iA.Delib to populate vocabularies.
   [odelaere]
 - Only managers can add folders.
   [odelaere]

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
+import requests
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
@@ -8,7 +9,8 @@ from plone.dexterity.content import Container
 from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD, API_HEADERS, \
+    CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
@@ -50,7 +52,11 @@ def validate_color_parameters(value):
 
 
 class ICategoryMappingRowSchema(Interface):
-    local_category_id = schema.TextLine(title=_(u"Local category id"))
+    local_category_id = schema.Choice(
+        title=_(u"Local category id"),
+        vocabulary="plonemeeting.portal.vocabularies.local_categories",
+        required=True,
+    )
     global_category_id = schema.Choice(
         title=_(u"Global category"),
         vocabulary="plonemeeting.portal.vocabularies.global_categories",
@@ -234,3 +240,22 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
+    def get_delib_categories(self):
+        categories = []
+        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
+            delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+            url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(
+                plonemeeting_url=self.plonemeeting_url,
+                meeting_config_id=self.meeting_config_id,
+                delib_category_field=delib_config_category_field
+            )
+            response = requests.get(
+                url, auth=(self.username, self.password), headers=API_HEADERS
+            )
+            json = response.json()
+            cat_json = json["extra_include_{categories}".format(categories=delib_config_category_field)]
+
+            for cat in cat_json:
+                categories.append((cat['id'], cat['title']))
+
+        return categories

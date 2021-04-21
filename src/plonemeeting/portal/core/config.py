@@ -19,3 +19,7 @@ CATEGORY_IA_DELIB_FIELDS = (
     ("category", _("category")),
     ("classifier", _("classifier")),
 )
+CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE = {
+    "category": "categories",
+    "classifier": "classifiers",
+}
