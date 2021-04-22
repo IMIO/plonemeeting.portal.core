@@ -2,6 +2,7 @@
 import copy
 
 from plone import api
+from plonemeeting.portal.core.content.institution import Institution
 from z3c.form.interfaces import NO_VALUE
 from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
@@ -38,17 +39,23 @@ GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 class LocalCategoryVocabularyFactory:
     def __call__(self, context):
         req = getRequest()
-        local_categories = []
         if context == NO_VALUE or isinstance(context, dict):
             institution = req.get('PUBLISHED').context
-            local_categories = copy.deepcopy(institution.get_delib_categories())
-
-        return SimpleVocabulary(
-            [
-                SimpleTerm(value=category_id, title=category_title)
-                for category_id, category_title in local_categories
-            ]
-        )
+            if isinstance(institution, Institution):
+                local_categories = copy.deepcopy(institution.get_delib_categories())
+                if local_categories:
+                    return SimpleVocabulary(
+                        [
+                            SimpleTerm(value=category_id, title=category_title)
+                            for category_id, category_title in local_categories
+                        ]
+                    )
+                else:
+                    return GlobalCategoryVocabularyFactory()(context)
+            else:
+                return GlobalCategoryVocabularyFactory()(context)
+        else:
+            return GlobalCategoryVocabularyFactory()(context)
 
 
 LocalCategoryVocabulary = LocalCategoryVocabularyFactory()
