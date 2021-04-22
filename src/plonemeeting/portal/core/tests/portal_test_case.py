@@ -17,6 +17,7 @@ class PmPortalTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         self.portal.acl_users._doAddUser("manager", "secretmaster", ["Manager"], [])
+        self.login_as_manager()
         self.workflow = self.portal.portal_workflow
 
     def tearDown(self):

@@ -17,6 +17,10 @@ Changelog
   [odelaere]
 - Transition events on Institution Folder also apply on its children.
   [odelaere]
+- Query categories from iA.Delib to populate vocabularies.
+  [odelaere]
+- Only managers can add folders.
+  [odelaere]
 
 
 1.2 (2021-03-24)

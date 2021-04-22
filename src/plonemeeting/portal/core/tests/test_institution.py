@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plonemeeting.portal.core.content.institution import validate_color_parameters
 from plonemeeting.portal.core.content.institution import InvalidColorParameters
 from plonemeeting.portal.core.tests.portal_test_case import (
@@ -26,3 +27,12 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         with self.assertRaises(InvalidColorParameters):
             validate_color_parameters("4200FF")
             validate_color_parameters("#XXXXXXXXX")
+
+    def test_available_allowed_types(self):
+        constraints = ISelectableConstrainTypes(self.institution)
+        self.login_as_manager()
+        self.assertListEqual(["Folder", "Meeting"], constraints.getLocallyAllowedTypes())
+        self.login_as_test()
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+        self.login_as_institution_manager()
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())

@@ -11,7 +11,6 @@ from plonemeeting.portal.core.interfaces import IItemsFolder
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
-from plonemeeting.portal.core.utils import set_constrain_types
 
 
 def handle_institution_creation(obj, event):
@@ -37,9 +36,6 @@ def handle_institution_creation(obj, event):
     )
     alsoProvides(items, IItemsFolder)
     IFacetedLayout(items).update_layout("faceted-preview-meeting-items")
-
-    # Unauthorize Folder creation in Institution now
-    set_constrain_types(obj, ["Meeting"])
 
     request = getRequest()
     if request:  # Request can be `None` during test setup

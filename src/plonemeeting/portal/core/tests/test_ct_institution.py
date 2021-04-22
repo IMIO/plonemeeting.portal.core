@@ -5,7 +5,7 @@ from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
-from plonemeeting.portal.core.utils import format_institution_managers_group_id, set_constrain_types
+from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -77,7 +77,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
 
     def test_ct_institution_transition_apply_to_children(self):
         obj = api.content.create(
-            container=self.portal, type="Institution", id="institution"
+            container=self.portal, type="Institution", id="test"
         )
 
         self.assertEqual(get_state(obj), 'private')
@@ -101,7 +101,6 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(decisions_folder),
                          get_state(obj))
 
-        set_constrain_types(obj, ['Folder', 'Meeting'])
         agenda_folder = api.content.create(type="Folder", title="Agenda", container=obj)
         api.content.transition(obj, to_state='published')
         self.assertEqual(get_state(obj), 'published')
