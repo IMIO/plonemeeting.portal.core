@@ -46,6 +46,11 @@ def handle_institution_creation(obj, event):
         request.response.redirect(obj.absolute_url())
 
 
+def institution_state_changed(obj, event):
+    for child in obj.listFolderContents():
+        api.content.transition(child, to_state=event.new_state.id)
+
+
 def handle_institution_deletion(obj, event):
     # Configure manager group & local permissions
     group_id = format_institution_managers_group_id(obj)

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import format_institution_managers_group_id, set_constrain_types
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -48,10 +49,10 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             u"IInstitution not provided by {0}!".format(obj.id),
         )
 
+        # check that deleting the object works too
         parent = obj.__parent__
         self.assertIn("institution", parent.objectIds())
 
-        # check that deleting the object works too
         api.content.delete(obj=obj)
         self.assertNotIn("institution", parent.objectIds())
         self.assertIsNone(api.group.get(group_id))
@@ -73,3 +74,49 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
             api.content.create(container=parent, type="Document", title="My Content")
+
+    def test_ct_institution_transition_apply_to_children(self):
+        obj = api.content.create(
+            container=self.portal, type="Institution", id="institution"
+        )
+
+        self.assertEqual(get_state(obj), 'private')
+        meetings_folder, decisions_folder = obj.listFolderContents()
+        self.assertEqual(get_state(meetings_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(decisions_folder),
+                         get_state(obj))
+
+        api.content.transition(obj, to_state='published')
+        self.assertEqual(get_state(obj), 'published')
+        self.assertEqual(get_state(meetings_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(decisions_folder),
+                         get_state(obj))
+
+        api.content.transition(obj, to_state='private')
+        self.assertEqual(get_state(obj), 'private')
+        self.assertEqual(get_state(meetings_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(decisions_folder),
+                         get_state(obj))
+
+        set_constrain_types(obj, ['Folder', 'Meeting'])
+        agenda_folder = api.content.create(type="Folder", title="Agenda", container=obj)
+        api.content.transition(obj, to_state='published')
+        self.assertEqual(get_state(obj), 'published')
+        self.assertEqual(get_state(meetings_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(decisions_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(agenda_folder),
+                         get_state(obj))
+
+        api.content.transition(obj, to_state='private')
+        self.assertEqual(get_state(obj), 'private')
+        self.assertEqual(get_state(meetings_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(decisions_folder),
+                         get_state(obj))
+        self.assertEqual(get_state(agenda_folder),
+                         get_state(obj))

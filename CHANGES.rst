@@ -15,6 +15,8 @@ Changelog
   [odelaere].
 - Allow using classifier field from json instead of category.
   [odelaere]
+- Transition events on Institution Folder also apply on its children.
+  [odelaere]
 
 
 1.2 (2021-03-24)
