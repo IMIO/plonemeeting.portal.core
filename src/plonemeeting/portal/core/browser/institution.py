@@ -69,6 +69,12 @@ class AddView(add.DefaultAddView):
 class EditForm(edit.DefaultEditForm):
     portal_type = "Institution"
 
+    def update(self):
+        self.updateActions()
+        if not self.actions.executedActions and '@@z3cform_validate_field' not in self.action:
+            self.context.fetch_delib_categories()
+        super(EditForm, self).update()
+
     def updateFields(self):
         super(EditForm, self).updateFields()
 

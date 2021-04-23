@@ -41,8 +41,8 @@ class LocalCategoryVocabularyFactory:
         req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
             institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution):
-                local_categories = copy.deepcopy(institution.get_delib_categories())
+            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
+                local_categories = copy.deepcopy(institution.delib_categories)
                 if local_categories:
                     return SimpleVocabulary(
                         [

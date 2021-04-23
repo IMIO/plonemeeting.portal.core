@@ -40,6 +40,8 @@ Changelog
   [odelaere]
 - Only managers can add folders.
   [odelaere]
+- Query delib for categories only when loading the edit form.
+  [odelaere]
 
 
 1.2 (2021-03-24)
