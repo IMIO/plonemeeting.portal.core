@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+1.4 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
 1.3 (2021-04-27)
 ----------------
 
