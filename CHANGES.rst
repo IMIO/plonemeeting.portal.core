@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3 (unreleased)
+1.3 (2021-04-27)
 ----------------
 
 - Fix open annexe files in new tab.
