@@ -62,7 +62,7 @@
           </div>
           <div class="item-last-pm-modified"
                tal:condition='not: isAnon' >
-               <span i18n:translate="Last modification in ia.Delib">Last modification in ia.Delib</span>
+               <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>
                <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
           </div>
         </div>

@@ -14,128 +14,125 @@ body.template-facetednavigation_view input[type=url],
 body.template-facetednavigation_view input[type=week],
 body.template-facetednavigation_view select,
 body.template-facetednavigation_view textarea {
-    width: 100%;
-    display: block;
-    height: 45px;
-    padding: 6px 12px;
-    font-size: 15px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #fff;
-    background-image: none;
-    border: none;
-    border-radius: 4px;
-    box-shadow: none !important;
-    border: solid 1px #dcdbdb;
+  width: 100%;
+  display: block;
+  height: 45px;
+  padding: 6px 12px;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none !important;
+  border: solid 1px #dcdbdb;
 }
 
 body.template-facetednavigation_view input:hover,
 input:focus,
 select:focus,
 select:hover {
-    opacity: 1;
-    box-shadow: none !important;
+  opacity: 1;
+  box-shadow: none !important;
 }
 
 body.template-facetednavigation_view #top-area {
-    background: #f1f1f1 !important;
-    position: relative;
-    padding-bottom: 15px;
+  background: #f1f1f1 !important;
+  position: relative;
+  padding-bottom: 15px;
 }
 
 body.template-facetednavigation_view #top-area:after {
-    content: "";
-    position: absolute;
-    background: #f1f1f1;
-    z-index: -1;
-    width: 100vw;
-    top: -136px;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  content: "";
+  position: absolute;
+  background: #f1f1f1;
+  z-index: -1;
+  width: 100vw;
+  top: -136px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 body.template-facetednavigation_view #top-area legend {
-    border: none;
+  border: none;
 }
 
 body.template-facetednavigation_view .searchButton:hover {
-    background-color: rgba(189, 189, 189, .438);
+  background-color: rgba(189, 189, 189, .438);
 }
 
 body.template-facetednavigation_view #top---default---widgets legend {
-    font-size: 18px;
-    margin-bottom: 0;
-    line-height: .5;
+  font-size: 18px;
+  margin-bottom: 0;
+  line-height: .5;
 }
 
 html body .faceted-criteria-hide,
 html body .faceted-criteria-reset a {
-    padding: 10px;
-    border: 1px solid #007bb1 !important;
-    border-radius: 25px;
-    float: none;
-    display: inline-block;
-    transition: all .3s ease
+  padding: 10px;
+  border: 1px solid #007bb1 !important;
+  border-radius: 25px;
+  float: none;
+  display: inline-block;
+  transition: all .3s ease
 }
 
 #faceted-results {
-    margin: 0;
+  margin: 0;
 
-    .pagination {
-        margin-left: 0;
-        margin-right: 0;
-        ul {
-            padding: 0;
-        }
-    }
+  .pagination ul {
+    padding: 0;
+  }
 
-    .pagination{
-        margin-top: 35px;
-        margin-bottom: 20px;
-    }
+  .pagination {
+    margin: 20px 0px 20px 1px;
+  }
 
-    .pagination:last-child {
-        margin-top: 20px;
-    }
-
-    .faceted_loading{
-        background: url('../../++plone++plonemeeting.portal.core/assets/ajax-spinner.svg') no-repeat;
-        background-position: center;
-        background-size: contain;
-        height: 150px;
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .faceted_loading {
+    background: url('../../++plone++plonemeeting.portal.core/assets/ajax-spinner.svg') no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-body #faceted-form  {
-    fieldset {
-        margin: 10px 0;
-        padding: 10px 0;
+body #faceted-form {
+  fieldset {
+    margin: 10px 0;
+    padding: 10px 0;
+  }
+
+  #text_widget fieldset {
+    min-width: 0;
+
+    legend {
+      visibility: hidden;
     }
 
-    #text_widget fieldset {
-        min-width: 0;
-        legend {
-            visibility: hidden;
-        }
-        input[type=text] {
-            border-radius: 4px 0 0 4px;
-            border-right: none;
-        }
+    input[type=text] {
+      border-radius: 4px 0 0 4px;
+      border-right: none;
     }
+  }
 }
 
 html body .faceted-criteria-hide-show:hover a,
 html body .faceted-criteria-reset a:hover {
-    color: #fff !important;
-    background: #007bb1;
+  color: #fff !important;
+  background: #007bb1;
 }
 
-.faceted-widget-loading{
-    display: none;
+.faceted-widget-loading {
+  display: none;
+}
+
+.faceted-area.center-area {
+  margin: 20px 0;
 }
 
 // Search widget
@@ -148,26 +145,20 @@ html body .faceted-criteria-reset a:hover {
 }
 
 body.template-facetednavigation_view .searchButton {
-    z-index: 1;
-    margin-right: 0;
-    border: none;
-    border-left-color: currentcolor;
-    border-left-style: none;
-    border-left-width: medium;
-    border-left: 1px solid #dcdcdc;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+  z-index: 1;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 
-    background-image: url('../../++plone++plonemeeting.portal.core/assets/magnify.svg');
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-position: center;
+  background-image: url('../../++plone++plonemeeting.portal.core/assets/magnify.svg');
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
 
-    color: transparent;
-    text-shadow: none;
-    font-size: 15px;
-    padding-right: 15px;
-    width: 50px;
-    margin-right: 2px;
-    border: solid 1px #dcdbdb;
+  color: transparent;
+  text-shadow: none;
+  font-size: 15px;
+  padding-right: 15px;
+  width: 50px;
+  margin-right: 2px;
+  border: solid 1px #dcdbdb;
 }

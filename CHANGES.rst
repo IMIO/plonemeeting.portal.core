@@ -2,10 +2,13 @@ Changelog
 =========
 
 
-1.4 (unreleased)
+1.3.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fixed locale issues.
+  [aduchene]
+- Updated LESS theme to add more padding around faceted view.
+  [aduchene]
 
 
 1.3 (2021-04-27)

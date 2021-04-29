@@ -28,7 +28,7 @@ class IMeeting(model.Schema):
     custom_info = RichText(title=_(u"Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
-        title=_(u"Last modification in ia.Delib"), required=True, readonly=True
+        title=_(u"Last modification in iA.Delib"), required=True, readonly=True
     )
 
 
