@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.3.1 (unreleased)
-----------------
+1.3.1 (2021-04-29)
+------------------
 
 - Fixed locale issues.
   [aduchene]
