@@ -5,7 +5,8 @@ Changelog
 1.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated LESS to manage images width/height correctly on mobile.
+  [gbastien]
 
 
 1.3.1 (2021-04-29)
