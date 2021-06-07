@@ -86,6 +86,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         return
     category_filter = _get_category_filter_url(institution)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
+    category_filter = _get_category_filter_url(institution)
     url = (
         "{0}/@search?"
         "type={1}"
