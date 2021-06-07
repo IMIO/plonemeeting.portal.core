@@ -7,6 +7,8 @@ Changelog
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
+- Do not import items if category not mapped #PM-3436.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)
