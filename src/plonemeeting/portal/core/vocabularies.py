@@ -50,12 +50,7 @@ class LocalCategoryVocabularyFactory:
                             for category_id, category_title in local_categories
                         ]
                     )
-                else:
-                    return GlobalCategoryVocabularyFactory()(context)
-            else:
-                return GlobalCategoryVocabularyFactory()(context)
-        else:
-            return GlobalCategoryVocabularyFactory()(context)
+        return GlobalCategoryVocabularyFactory()(context)
 
 
 LocalCategoryVocabulary = LocalCategoryVocabularyFactory()
