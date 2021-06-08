@@ -11,6 +11,8 @@ Changelog
   [odelaere]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
+- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)
@@ -37,11 +39,7 @@ Changelog
   [odelaere]
 - Transition events on Institution Folder also apply on its children.
   [odelaere]
-- Query categories from iA.Delib to populate vocabularies.
-  [odelaere]
 - Only managers can add folders.
-  [odelaere]
-- Query delib for categories only when loading the edit form.
   [odelaere]
 
 
