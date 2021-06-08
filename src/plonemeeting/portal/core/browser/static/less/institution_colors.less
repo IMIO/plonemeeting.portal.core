@@ -81,6 +81,12 @@
         }
     }
 
+  // Do not display navbar links in red when institution is still in private
+  [class*='site-'] .plone-nav.plone-navbar-nav a.state-private {
+    color: var(--nav-text-color) !important;
+  }
+
+
     // Cookies
 
     .cc-cookies .cc-cookie-accept{

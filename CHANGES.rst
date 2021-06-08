@@ -7,6 +7,10 @@ Changelog
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
+- Updated LESS and JS to add an environment label when necessary.
+  [aduchene]
+- Updated theme : fixed meeting-metadata on Item view to be more readable
+  [aduchene]
 
 
 1.3.1 (2021-04-29)
