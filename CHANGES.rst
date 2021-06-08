@@ -9,6 +9,8 @@ Changelog
   [gbastien]
 - Do not import items if category not mapped #PM-3436.
   [odelaere]
+- Fixed formatted_title not set when syncing.
+  [aduchene]
 
 
 1.3.1 (2021-04-29)
