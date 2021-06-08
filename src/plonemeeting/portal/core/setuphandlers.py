@@ -18,6 +18,7 @@ import os
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_XML_PATH
 from plonemeeting.portal.core.utils import (
     cleanup_contents,
     format_institution_managers_group_id,
@@ -38,7 +39,6 @@ def post_install(context):
     """Post install script"""
     portal = api.portal.get()
     current_lang = api.portal.get_default_language()[:2]
-    faceted_config = "/faceted/config/items.xml"
 
     if "config" in portal.objectIds():
         return
@@ -64,7 +64,8 @@ def post_install(context):
     )
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
-    with open(os.path.dirname(__file__) + faceted_config, "rb") as faceted_config:
+    faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
+    with open(faceted_config_path, "rb") as faceted_config:
         faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
             import_file=faceted_config
         )

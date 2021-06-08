@@ -7,7 +7,6 @@ from zope.interface import alsoProvides
 from zope.i18n import translate
 
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.interfaces import IItemsFolder
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
@@ -29,13 +28,6 @@ def handle_institution_creation(obj, event):
     )
     alsoProvides(meetings, IMeetingsFolder)
     IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
-
-    # Create items faceted folder
-    items = create_faceted_folder(
-        obj, translate(_(u"Decisions"), target_language=current_lang)
-    )
-    alsoProvides(items, IItemsFolder)
-    IFacetedLayout(items).update_layout("faceted-preview-meeting-items")
 
     request = getRequest()
     if request:  # Request can be `None` during test setup

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 from eea.facetednavigation.interfaces import ICriteria
 
@@ -10,47 +12,19 @@ class TestFacetedCriteria(unittest.TestCase):
     layer = PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 
     @property
+    def amityville(self):
+        return self.layer["portal"]["amityville"]
+
+    @property
     def belleville(self):
         return self.layer["portal"]["belleville"]
 
     def test_compute_criteria(self):
-        criteria = ICriteria(self.belleville["meetings"])
-        self.assertListEqual(
-            sorted(
-                [
-                    sorted(c.__dict__.items())
-                    for c in criteria._criteria()
-                    if c.getId() != "annee"
-                ]
-            ),
-            sorted(
-                [
-                    sorted(c.__dict__.items())
-                    for c in criteria.criteria
-                    if c.getId() != "annee"
-                ]
-            ),
-        )
-
-    def test_items_criteria(self):
-        criteria = ICriteria(self.belleville["decisions"])
-        self.assertListEqual(
-            sorted(
-                [
-                    sorted(c.__dict__.items())
-                    for c in criteria._criteria()
-                    if c.getId() != "seance"
-                ]
-            ),
-            sorted(
-                [
-                    sorted(c.__dict__.items())
-                    for c in criteria.criteria
-                    if c.getId() != "seance"
-                ]
-            ),
-        )
-        old_criterion = [c for c in criteria._criteria() if c.getId() == "seance"][0]
-        new_criterion = [c for c in criteria.criteria if c.getId() == "seance"][0]
-        self.assertTrue(getattr(old_criterion, "hidealloption", True))
-        self.assertFalse(new_criterion.hidealloption)
+        """Global defined criteria are used for every institutions."""
+        global_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_FOLDER_ID])
+        for faceted_folder in (self.amityville["meetings"], self.belleville["meetings"]):
+            criteria = ICriteria(faceted_folder)
+            self.assertEqual(
+                global_criteria._criteria(),
+                criteria._criteria(),
+            )

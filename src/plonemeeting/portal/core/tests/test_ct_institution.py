@@ -80,25 +80,21 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             container=self.portal, type="Institution", id="test"
         )
 
+        self.assertEqual(obj.listFolderContents(),
+                         [obj.get("meetings")])
+        meetings_folder = obj.listFolderContents()[0]
         self.assertEqual(get_state(obj), 'private')
-        meetings_folder, decisions_folder = obj.listFolderContents()
         self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
                          get_state(obj))
 
         api.content.transition(obj, to_state='published')
         self.assertEqual(get_state(obj), 'published')
         self.assertEqual(get_state(meetings_folder),
                          get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
 
         api.content.transition(obj, to_state='private')
         self.assertEqual(get_state(obj), 'private')
         self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
                          get_state(obj))
 
         agenda_folder = api.content.create(type="Folder", title="Agenda", container=obj)
@@ -106,16 +102,12 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(obj), 'published')
         self.assertEqual(get_state(meetings_folder),
                          get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
         self.assertEqual(get_state(agenda_folder),
                          get_state(obj))
 
         api.content.transition(obj, to_state='private')
         self.assertEqual(get_state(obj), 'private')
         self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
                          get_state(obj))
         self.assertEqual(get_state(agenda_folder),
                          get_state(obj))

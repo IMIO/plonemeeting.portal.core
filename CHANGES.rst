@@ -9,6 +9,9 @@ Changelog
   [gbastien]
 - Do not import items if category not mapped #PM-3436.
   [odelaere]
+- Merged faceted folders in `Institution , `meetings` and `decisions` were
+  merged and only `meetings` and behavior is a mix of old behaviors.
+  [gbastien]
 
 
 1.3.1 (2021-04-29)

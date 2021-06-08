@@ -12,4 +12,9 @@
     schema=".sort.IItemsSortSchema"
     />
 
+  <faceted:widget
+    factory=".select.SelectMeetingWidget"
+    schema=".select.ISelectMeetingSchema"
+    />
+
 </configure>
