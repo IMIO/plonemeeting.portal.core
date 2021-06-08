@@ -5,6 +5,8 @@ from plonemeeting.portal.core.content.institution import InvalidColorParameters
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )
+from mockito import when, mock, unstub
+import requests
 
 
 class TestInstitutionView(PmPortalDemoFunctionalTestCase):
@@ -36,3 +38,56 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertListEqual([], constraints.getLocallyAllowedTypes())
         self.login_as_institution_manager()
         self.assertListEqual([], constraints.getLocallyAllowedTypes())
+
+    def test_load_category_from_delib(self):
+        belleville = self.portal["belleville"]
+        json_categories = {"extra_include_categories": [
+            {"id": "admin", "title": "Administrative"},
+            {"id": "political", "title": "Political"},
+        ]}
+        json_classifiers = {"extra_include_classifiers": [
+            {"id": "economy", "title": "Economy"},
+            {"id": "env", "title": "Environment"},
+        ]}
+        when(requests).get(...).thenReturn(mock({'status_code': 200,
+                                                 'json': lambda: json_categories}))
+
+        tmp_var = belleville.plonemeeting_url
+        belleville.plonemeeting_url = None
+        belleville.fetch_delib_categories()
+        self.assertFalse(hasattr(belleville, "delib_categories"))
+
+        belleville.plonemeeting_url = tmp_var
+        tmp_var = belleville.meeting_config_id
+        belleville.meeting_config_id = None
+        belleville.fetch_delib_categories()
+        self.assertFalse(hasattr(belleville, "delib_categories"))
+
+        belleville.meeting_config_id = tmp_var
+        tmp_var = belleville.username
+        belleville.username = None
+        belleville.fetch_delib_categories()
+        self.assertFalse(hasattr(belleville, "delib_categories"))
+
+        belleville.username = tmp_var
+        tmp_var = belleville.password
+        belleville.password = None
+        belleville.fetch_delib_categories()
+        self.assertFalse(hasattr(belleville, "delib_categories"))
+
+        belleville.password = tmp_var
+        belleville.fetch_delib_categories()
+
+        self.assertListEqual([('admin', 'Administrative'),
+                              ('political', 'Political')],
+                             belleville.delib_categories)
+
+        when(requests).get(...).thenReturn(mock({'status_code': 200,
+                                                 'json': lambda: json_classifiers}))
+        belleville.delib_category_field = "classifier"
+
+        belleville.fetch_delib_categories()
+        self.assertListEqual([('economy', 'Economy'),
+                              ('env', 'Environment')],
+                             belleville.delib_categories)
+        unstub()
