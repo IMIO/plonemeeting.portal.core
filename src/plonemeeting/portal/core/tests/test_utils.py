@@ -88,7 +88,10 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&getRawClassifier=VOID",
             url,
         )
-        self.belleville.categories_mappings = [{'local_category_id': 'administration', 'global_category_id': 'administration'}, {'local_category_id': 'immo', 'global_category_id': 'immo'}]
+        self.belleville.categories_mappings = [{'local_category_id': 'administration',
+                                                'global_category_id': 'administration'},
+                                               {'local_category_id': 'immo',
+                                                'global_category_id': 'immo'}]
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search?"
