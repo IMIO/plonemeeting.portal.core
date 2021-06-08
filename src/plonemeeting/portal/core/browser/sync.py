@@ -182,6 +182,10 @@ def sync_items_data(meeting, items_data, institution, force=False):
             item.formatted_title = RichTextValue(
                 formatted_title, "text/html", "text/html"
             )
+        else:
+            item.formatted_title = RichTextValue(
+                "<p>" + item_title + "</p>", "text/html", "text/html"
+            )
 
         item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")

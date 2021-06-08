@@ -74,6 +74,15 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
     profile="plonemeeting.portal.core:default" />
 
+  <genericsetup:upgradeStep
+    title="Go to portal 1003"
+    description="Fixed formatted title so it's not empty"
+    source="1002"
+    destination="1003"
+    sortkey="3"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
   <!-- Password policy -->
 
   <adapter
