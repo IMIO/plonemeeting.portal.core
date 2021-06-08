@@ -9,6 +9,8 @@ Changelog
   [gbastien]
 - Do not import items if category not mapped #PM-3436.
   [odelaere]
+- Ignore not mapped representatives_in_charge.
+  [aduchene]
 
 
 1.3.1 (2021-04-29)
