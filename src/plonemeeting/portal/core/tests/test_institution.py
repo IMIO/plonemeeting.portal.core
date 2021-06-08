@@ -5,7 +5,7 @@ from plonemeeting.portal.core.content.institution import InvalidColorParameters
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )
-from mockito import when, mock, unstub
+from mockito import when, mock, verify, unstub
 import requests
 
 
@@ -49,8 +49,13 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
             {"id": "economy", "title": "Economy"},
             {"id": "env", "title": "Environment"},
         ]}
-        when(requests).get(...).thenReturn(mock({'status_code': 200,
-                                                 'json': lambda: json_categories}))
+
+        url = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=categories'
+        auth = ('dgen', 'meeting')
+        headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+
+        when(requests).get(url, auth=auth, headers=headers)\
+            .thenReturn(mock({'status_code': 200, 'json': lambda: json_categories}))
 
         tmp_var = belleville.plonemeeting_url
         belleville.plonemeeting_url = None
@@ -81,9 +86,14 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertListEqual([('admin', 'Administrative'),
                               ('political', 'Political')],
                              belleville.delib_categories)
+        verify(requests, times=1).get(...)
+        unstub()
 
-        when(requests).get(...).thenReturn(mock({'status_code': 200,
-                                                 'json': lambda: json_classifiers}))
+        url = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=classifiers'
+
+        when(requests).get(url, auth=auth, headers=headers).thenReturn(
+            mock({'status_code': 200, 'json': lambda: json_classifiers}))
+
         belleville.delib_category_field = "classifier"
 
         belleville.fetch_delib_categories()
