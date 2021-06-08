@@ -208,3 +208,23 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(annex.title, "0s57")
         sync_annexes_data(self.item, self.institution, annexes_json, force=True)
         self.assertEqual(annex.title, "Annexe")
+
+    def test_sync_not_mapped_groups_in_charge_are_ignored(self):
+        self.institution.representatives_mappings = [{
+            'representative_key': 'dummy_mapped_uid_1',
+            'representative_value': 'Mr. Mapped One',
+            'representative_long_value': 'Mister Mapped One',
+            'active': True
+        }, {
+            'representative_key': 'dummy_mapped_uid_2',
+            'representative_value': 'Mr Mapped Two',
+            'representative_long_value': 'Mister Mapped Two',
+            'active': True
+        }]
+
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.institution)
+
+        self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"], meeting.values()[0].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[1].representatives_in_charge)
+        self.assertEqual([], meeting.values()[2].representatives_in_charge)
