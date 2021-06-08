@@ -436,7 +436,7 @@
       "externalIdentifier": "",
       "formatted_itemAssembly": "<p>Charles Exemple- Gouverneur,\r<br /><strike>Pol Lejeune - 1er Echevin,</strike>\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>",
       "formatted_itemNumber": "4",
-      "groupsInCharge": [],
+      "groupsInCharge": ["dummy_mapped_uid_2", "dummy_mapped_uid_1"],
       "id": "copy71_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "inAndOutMoves": {
         "content-type": "text/plain",

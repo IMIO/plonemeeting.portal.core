@@ -59,10 +59,12 @@ def _get_mapped_representatives_in_charge(item_data, institution):
     groups_in_charge = item_data.get(
         "groupsInCharge"
     ) or item_data.get("all_groupsInCharge")
+
+    res = []
     if groups_in_charge:
         mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
-        return list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
-    return []
+        res = list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
+    return res
 
 
 def get_formatted_data_from_json(tal_expression, item, item_data):
