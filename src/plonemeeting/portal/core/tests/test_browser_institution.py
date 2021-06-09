@@ -16,3 +16,27 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
         institution_view.update()
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
+
+    def test_fetch_category_only_once_on_edit(self):
+        self.login_as_manager()
+        institution_edit_form = self.belleville.restrictedTraverse("@@edit")
+        # context is overridden while traversing
+        request = self.portal.REQUEST
+        request.set('PUBLISHED', institution_edit_form)
+        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        institution_edit_form.update()
+        self.assertListEqual([('travaux', 'Travaux'),
+                              ('urbanisme', 'Urbanisme'),
+                              ('comptabilite', 'Comptabilité'),
+                              ('personnel', 'Personnel'),
+                              ('population', 'Population / État-civil'),
+                              ('locations', 'Locations'),
+                              ('divers', 'Divers')],
+                             self.belleville.delib_categories)
+
+        delattr(self.belleville, "delib_categories")
+        institution_edit_form.handleApply(institution_edit_form, None)
+        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+
+        # todo : find a way to test that delib_category are not fetched on field validation
+        #        nor when any action are executed after the first load.
