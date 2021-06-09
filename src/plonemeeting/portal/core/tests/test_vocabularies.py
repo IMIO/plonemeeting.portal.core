@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone import api
 
 from plonemeeting.portal.core.tests.portal_test_case import (
@@ -20,6 +19,27 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         self.meeting2 = brains[0].getObject()
         brains = api.content.find(context=self.meeting2, portal_type="Item")
         self.item2 = brains[0].getObject()
+
+    def testLocalCategoryVocabulary(self):
+        belleville = self.portal["belleville"]
+        vocab = queryUtility(
+            IVocabularyFactory, "plonemeeting.portal.vocabularies.local_categories"
+        )
+        self.portal.REQUEST.set('PUBLISHED', belleville.restrictedTraverse("@@edit"))
+        values = vocab(belleville)
+        self.assertEqual(len(values), 29)
+
+        values = vocab({"test": 'yolo'})
+        self.assertEqual(len(values), 29)
+
+        belleville.delib_categories = [("admin", "Administrative"),
+                                       ("political", "Political")]
+        values = vocab({"test": 'yolo'})
+        self.assertEqual(len(values), 2)
+
+        self.portal.REQUEST.set('PUBLISHED', self.item.restrictedTraverse("@@edit"))
+        values = vocab({"test": 'yolo'})
+        self.assertEqual(len(values), 29)
 
     def testGlobalCategoryVocabulary(self):
         vocab = queryUtility(
