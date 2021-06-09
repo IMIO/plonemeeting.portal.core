@@ -70,14 +70,26 @@ def _get_category_filter_url(institution):
     else:
         url_param = "&getRawClassifier="
 
-    if not institution.categories_mappings:
+    return _get_url_filter(url_param,
+                           institution.categories_mappings,
+                           'local_category_id')
+
+
+def _get_representatives_filter_url(institution):
+    return _get_url_filter("&getGroupsInCharge=",
+                           institution.representatives_mappings,
+                           'representative_key')
+
+
+def _get_url_filter(url_param, value_dict_list, dict_key):
+    if not value_dict_list:
         return "{}VOID".format(url_param)
 
-    categories = []
-    for mapping in institution.categories_mappings:
-        categories.append(mapping['local_category_id'])
+    values = []
+    for mapping in value_dict_list:
+        values.append(mapping[dict_key])
 
-    res = url_param + url_param.join(categories)
+    res = url_param + url_param.join(values)
     return res
 
 
@@ -86,6 +98,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         return
     category_filter = _get_category_filter_url(institution)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
+    representatives_filter = _get_representatives_filter_url(institution)
     url = (
         "{0}/@search?"
         "type={1}"
@@ -98,13 +111,15 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         "&meeting_uid={3}"
         "&fullobjects=True"
         "{4}"
-        "{5}".format(
+        "{5}"
+        "{6}".format(
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
             meeting_UID,
             institution.additional_published_items_query_string,
-            category_filter
+            category_filter,
+            representatives_filter
         )
     )
     return url
