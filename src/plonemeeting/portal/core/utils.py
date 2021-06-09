@@ -84,7 +84,6 @@ def _get_category_filter_url(institution):
 def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
-    category_filter = _get_category_filter_url(institution)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     category_filter = _get_category_filter_url(institution)
     url = (
