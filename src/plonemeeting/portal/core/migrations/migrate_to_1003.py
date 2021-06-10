@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import logging
+
+from imio.helpers.content import richtextval
 from imio.migrator.migrator import Migrator
-from plone.app.textfield import RichTextValue
 
 logger = logging.getLogger("plonemeeting.portal.core")
 
 
 class MigrateTo1003(Migrator):
-    def fix_formatted_title(self):
+    def _fix_formatted_title(self):
         """
         Fix formatted_title on existing items where formatted_title is null
         """
@@ -17,16 +18,15 @@ class MigrateTo1003(Migrator):
         for brain in brains:
             item = brain.getObject()
             if not item.formatted_title:
-                item.formatted_title = RichTextValue(
-                    "<p>" + item.title + "</p>", "text/html", "text/html"
-                )
+                item.formatted_title = richtextval("<p>" + item.title + "</p>")
         logger.info("Reindexing SearchableText")
         self.reindexIndexes(idxs=["SearchableText"], update_metadata=True)
+        logger.info("Fixed formatted_title")
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
-        self.fix_formatted_title()
-        logger.info("Fixed formatted_title")
+        self._fix_formatted_title()
+        logger.info("Done.")
 
 
 def migrate(context):

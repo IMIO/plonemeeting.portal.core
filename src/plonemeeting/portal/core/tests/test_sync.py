@@ -87,13 +87,6 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(meeting.values()[-1].sortable_number, 2800)
         self.assertEqual(meeting.values()[-1].category, 'locations')
 
-        # formatted_title should not be empty
-        self.assertIsNotNone(meeting.values()[0].formatted_title)
-        self.assertEqual(
-            meeting.values()[0].formatted_title.raw,
-            "<p>" + meeting.values()[0].title + "</p>"
-        )
-
         self.institution.delib_category_field = "classifier"
         results = sync_items_data(meeting, self.json_meeting_items, self.institution, True)
         self.assertEqual(len(meeting.items()), results.get("modified"))
@@ -237,3 +230,21 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual([], meeting.values()[2].representatives_in_charge)
         #  Check if order from PM is preserved
         self.assertEqual(["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[3].representatives_in_charge)
+
+    def test_item_title_formatting_tal(self):
+        self.institution.item_title_formatting_tal = "python: '<h2>' + json['title'] + '</h2>'"
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        self.assertEqual(
+            meeting.values()[0].formatted_title.raw,
+            "<h2>" + meeting.values()[0].title + "</h2>"
+        )
+
+    def test_empty_item_title_formatting_tal(self):
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        self.assertIsNotNone(meeting.values()[0].formatted_title)
+        self.assertEqual(
+            meeting.values()[0].formatted_title.raw,
+            "<p>" + meeting.values()[0].title + "</p>"
+        )

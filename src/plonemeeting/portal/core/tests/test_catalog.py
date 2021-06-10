@@ -3,8 +3,9 @@
 from datetime import datetime
 
 from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
+from imio.helpers.content import richtextval
 from plone import api
-from plone.app.textfield.value import RichTextValue
+
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )
@@ -17,10 +18,8 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.login_as_manager()
 
     def testSearchableText(self):
-        self.item.formatted_title = RichTextValue(
-            "<p>test_title</p>", "text/html", "text/html"
-        )
-        self.item.decision = RichTextValue("test_decision", "text/html", "text/html")
+        self.item.formatted_title = richtextval("<p>test_title</p>")
+        self.item.decision = richtextval("test_decision")
         self.item.reindexObject()
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
