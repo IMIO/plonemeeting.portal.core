@@ -11,7 +11,7 @@ Changelog
   [odelaere]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
-- Filter imported items based on mapped representatives #PM-3437.
+- Filter imported items based on mapped representatives if a mapping exists #PM-3437.
   [odelaere]
 
 
