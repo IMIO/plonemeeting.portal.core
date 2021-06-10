@@ -95,14 +95,15 @@ def get_pretty_representatives(object):
     res = []
     institution = api.portal.get_navigation_root(object)
     mapping = institution.representatives_mappings
+    representatives_mapping = {}
     for infos in mapping:
-        representative_key = infos["representative_key"]
-        if representative_key in representative_keys:
-            representative_keys.remove(representative_key)
-            res.append(infos["representative_value"])
+        representatives_mapping[infos["representative_key"]] = infos["representative_value"]
 
-    for missing_keys in representative_keys:
-        res.append(missing_keys)
+    for representative_key in representative_keys:
+        if representative_key in representatives_mapping:
+            value = representatives_mapping[representative_key]
+            if value not in res:
+                res.append(value)
 
     if res:
         return ", ".join(res)

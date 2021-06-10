@@ -21,6 +21,8 @@ Changelog
   [aduchene]
 - Use `imio.helpers.content.richtextval` to set a `RichTextValue`.
   [aduchene]
+- Keep representative order defined on item in item preview.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)
