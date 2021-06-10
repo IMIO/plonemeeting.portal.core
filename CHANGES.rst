@@ -7,7 +7,7 @@ Changelog
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
-- Filter imported items based on mapped categories #PM-3436.
+- Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
