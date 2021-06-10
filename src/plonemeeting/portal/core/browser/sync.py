@@ -52,6 +52,21 @@ def _json_date_to_datetime(datetime_json):
     return date_time.astimezone(pytz.timezone(timezone))
 
 
+def _get_mapped_representatives_in_charge(item_data, institution):
+    """
+    Ensure that only mapped representatives in charge are kept when syncing
+    """
+    groups_in_charge = item_data.get(
+        "groupsInCharge"
+    ) or item_data.get("all_groupsInCharge")
+
+    res = []
+    if groups_in_charge:
+        mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
+        res = list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
+    return res
+
+
 def get_formatted_data_from_json(tal_expression, item, item_data):
     if not tal_expression:
         return None
@@ -190,9 +205,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
 
-        item.representatives_in_charge = item_data.get(
-            "groupsInCharge"
-        ) or item_data.get("all_groupsInCharge")
+        item.representatives_in_charge = _get_mapped_representatives_in_charge(item_data, institution)
 
         item.decision = RichTextValue(
             get_formatted_data_from_json(

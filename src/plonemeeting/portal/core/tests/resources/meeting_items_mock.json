@@ -40,7 +40,7 @@
       "externalIdentifier": "a486512d4a1a472ea5ce05767cc5cea5",
       "formatted_itemAssembly": "<p>Charles Exemple- Gouverneur,\r<br /><strike>Pol Lejeune - 1er Echevin,</strike>\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>",
       "formatted_itemNumber": "1",
-      "groupsInCharge": [],
+      "groupsInCharge": ["dummy_mapped_uid_1", "dummy_mapped_uid_2"],
       "id": "permis-durbanisme-ndeg-pu-2019-6-introduit-par-monsieur-dutest-jean-visant-a-test-lien-delib-benoit-a-ladresse-rue-de-leglise-1-a-4620-fleron",
       "inAndOutMoves": {
         "content-type": "text/plain",
@@ -172,7 +172,7 @@
       "externalIdentifier": "",
       "formatted_itemAssembly": "<p>Charles Exemple- Gouverneur,\r<br /><strike>Pol Lejeune - 1er Echevin,</strike>\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>",
       "formatted_itemNumber": "2",
-      "groupsInCharge": [],
+      "groupsInCharge": ["dummy_mapped_uid_1", "dummy_not_mapped_uid"],
       "id": "copy78_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "inAndOutMoves": {
         "content-type": "text/plain",
@@ -304,7 +304,7 @@
       "externalIdentifier": "",
       "formatted_itemAssembly": "<p>Charles Exemple- Gouverneur,\r<br /><strike>Pol Lejeune - 1er Echevin,</strike>\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>",
       "formatted_itemNumber": "3",
-      "groupsInCharge": [],
+      "groupsInCharge": ["dummy_not_mapped_uid"],
       "id": "copy58_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "inAndOutMoves": {
         "content-type": "text/plain",
@@ -436,7 +436,7 @@
       "externalIdentifier": "",
       "formatted_itemAssembly": "<p>Charles Exemple- Gouverneur,\r<br /><strike>Pol Lejeune - 1er Echevin,</strike>\r<br />Echevin Un, Echevin Deux, Echevin Trois - Echevins,\r<br />Jacqueline Exemple, Responsable du CPAS\r<br />Pierre Dupont - Secrétaire communal</p>",
       "formatted_itemNumber": "4",
-      "groupsInCharge": [],
+      "groupsInCharge": ["dummy_mapped_uid_2", "dummy_mapped_uid_1"],
       "id": "copy71_of_approuve-le-proces-verbal-de-la-seance-anterieure",
       "inAndOutMoves": {
         "content-type": "text/plain",
