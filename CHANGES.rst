@@ -9,15 +9,15 @@ Changelog
   [gbastien]
 - Updated LESS and JS to add an environment label when necessary.
   [aduchene]
-- Updated theme : fixed meeting-metadata on Item view to be more readable
-  [aduchene]
-- Do not import items if category not mapped #PM-3436.
 - Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
 - Filter imported items based on mapped representatives if a mapping exists #PM-3437.
   [odelaere]
+- Updated theme : fixed meeting-metadata on Item view to be more readable
+  [aduchene]
+- Do not import items if category not mapped #PM-3436.
 
 
 1.3.1 (2021-04-29)
