@@ -10,12 +10,7 @@
 <metal:text fill-slot="content-title">
     <tal:text-macro metal:define-macro="content-title">
       <h1>
-        <tal:if tal:condition="context/formatted_title">
           <span tal:content="structure context/formatted_title/output" />
-        </tal:if>
-        <tal:else tal:condition="not: context/formatted_title">
-          <span tal:content="context/title" />
-        </tal:else>
       </h1>
     </tal:text-macro>
 </metal:text>
