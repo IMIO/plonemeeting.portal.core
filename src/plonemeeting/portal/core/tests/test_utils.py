@@ -140,6 +140,20 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         )
 
         self.belleville.representatives_mappings = None
+        url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
+        self.assertEqual(
+            "https://demo-pm.imio.be/@search?"
+            "type=item"
+            "&sort_on=getItemNumber"
+            "&privacy=public"
+            "&privacy=public_heading&b_size=9999"
+            "&config_id=meeting-config-college&linkedMeetingUID=foo"
+            "&meeting_uid=foo&fullobjects=True&review_state=itemfrozen"
+            "&review_state=accepted&review_state=accepted_but_modified"
+            "&getCategory=administration"
+            "&getCategory=immo",
+            url,
+        )
         self.belleville.categories_mappings = None
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
@@ -152,8 +166,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&config_id=meeting-config-college&linkedMeetingUID=foo"
             "&meeting_uid=foo&fullobjects=True&review_state=itemfrozen"
             "&review_state=accepted&review_state=accepted_but_modified"
-            "&getCategory=VOID"
-            "&getGroupsInCharge=VOID",
+            "&getCategory=VOID",
             url,
         )
 

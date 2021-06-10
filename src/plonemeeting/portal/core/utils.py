@@ -72,7 +72,8 @@ def _get_category_filter_url(institution):
 
     return _get_url_filter(url_param,
                            institution.categories_mappings,
-                           'local_category_id')
+                           'local_category_id',
+                           use_void_value=True)
 
 
 def _get_representatives_filter_url(institution):
@@ -81,9 +82,12 @@ def _get_representatives_filter_url(institution):
                            'representative_key')
 
 
-def _get_url_filter(url_param, value_dict_list, dict_key):
+def _get_url_filter(url_param, value_dict_list, dict_key, use_void_value=False):
     if not value_dict_list:
-        return "{}VOID".format(url_param)
+        if use_void_value:
+            return "{}VOID".format(url_param)
+        else:
+            return ""
 
     values = []
     for mapping in value_dict_list:
