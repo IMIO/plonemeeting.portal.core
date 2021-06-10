@@ -7,12 +7,14 @@ Changelog
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
-- Do not import items if category not mapped #PM-3436.
+- Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
 - Fixed formatted_title not set when syncing.
   [aduchene]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
+- Filter imported items based on mapped representatives if a mapping exists #PM-3437.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)
