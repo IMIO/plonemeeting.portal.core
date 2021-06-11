@@ -91,7 +91,6 @@ body #content-core a {
 
 .meeting-title {
     font-weight: 700;
-    margin-right: 15px;
 }
 
 .meeting-last-pm-modified {
@@ -100,8 +99,7 @@ body #content-core a {
 }
 
 .public-meeting {
-    margin: 1rem 0;
-    width: 100%;
+    margin: 1.25em 0;
 }
 
 .meeting-state--top {
@@ -110,16 +108,21 @@ body #content-core a {
 
 .meeting-metadata {
     margin: 10px 0;
+    padding: 1.25em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: @delib-lightgrey;
+    border-radius: @delib-border-radius;
 }
 
-// Meeting custom infos
 
 .meeting-custom-info {
     font-size: 16px;
     margin-top: 10px;
     padding: 1em 2em;
-    background: #f1f1f1;
-    border-radius: 8px;
+    background: @delib-lightgrey;
+    border-radius: @delib-border-radius;
 
     #show-less-link:after,
     #show-more-link:after {
@@ -160,13 +163,13 @@ body #content-core a {
     border-top-right-radius: 8px;
     padding: 10px;
     position: relative;
-    background: #f1f1f1;
+    background: @delib-lightgrey;
 }
 
 .item-preview .item-metadata {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-top: 20px;
     border-bottom: none;
@@ -196,7 +199,6 @@ body #content-core a {
     border-radius: 25px;
     padding: 11px 21px;
     display: inline-block;
-    margin: 0 0 15px 0;
     font-size: 16px;
     border: solid 1px #007bb1;
     transition: all .15s ease;
@@ -247,10 +249,6 @@ body #content-core a {
     background-size: 20%;
 }
 
-.item-infos .public-meeting {
-    text-align: left;
-}
-
 .custom-info
 .item-label {
     font-size: 17px !important;
@@ -287,7 +285,6 @@ div.decision table {
 .item-infos .meeting-title {
     font-size: 25px;
     color: #007bb1;
-    margin: 10px 0 10px 0;
     max-width: 300px;
 }
 
@@ -310,15 +307,11 @@ div.decision table {
 
 .item-last-pm-modified {
     text-align: center;
-}
-
-.item-infos .item-last-pm-modified {
-    text-align: left;
-}
-
-.item-metadata .item-last-pm-modified {
-    width: 100%;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    font-weight: 300;
+    margin-top: 1.25em;
 }
 
 .item-container .project-disclaimer {
@@ -386,7 +379,7 @@ div.decision table {
 }
 
 .item-preview.decision {
-    border-radius: 8px;
+    border-radius: @delib-border-radius;
 }
 
 // Annexes
@@ -483,6 +476,43 @@ div.decision table {
         padding: 15px 0;
         margin: 0 -30px 0;
     }
+}
+
+// Environment label
+
+.environment-label {
+    position: fixed;
+    font-weight: 700;
+    letter-spacing: 0.66em;
+    color: white;
+    top: 3em;
+    right: -9em;
+    font-size:1.33em;
+    width: 25em;
+    z-index: 1000;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
+    -o-transform-origin: center center;
+    transform-origin: center center;
+    text-align: center;
+    white-space: pre;
+    opacity: 0.9;
+    pointer-events: none;
+
+  &.environment-dev {
+    background: rgb(255, 118, 0);
+    border: 2px solid rgb(213, 96, 0);
+  }
+  &.environment-test {
+    background: rgb(238, 3, 13);
+    border: 2px solid rgb(208, 1, 9);
+  }
 }
 
 // Footer

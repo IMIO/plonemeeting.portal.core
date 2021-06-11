@@ -2,9 +2,9 @@
 import mimetypes
 
 from Products.CMFPlone.interfaces import INonInstallable
+from imio.helpers.content import richtextval
 from plone import api
 from plone.api import content
-from plone.app.textfield.value import RichTextValue
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
 from zope.component import getUtility
@@ -154,7 +154,7 @@ def create_demo_content(context):
                 content.transition(obj=meeting_obj, transition="publish")
 
                 for item in meeting["items"]:
-                    decision = RichTextValue(item["decision"], "text/html", "text/html")
+                    decision = richtextval(item["decision"])
                     item_obj = content.create(
                         container=meeting_obj,
                         type="Item",

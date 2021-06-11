@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from imio.helpers.content import richtextval
 from imio.migrator.migrator import Migrator
 from plone import api
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
@@ -36,8 +37,23 @@ class MigrateTo1003(Migrator):
             )
         logger.info("Done.")
 
+    def _fix_formatted_title(self):
+        """
+        Fix formatted_title on existing items where formatted_title is null
+        """
+        logger.info("Fixing empty formatted_title to have a value")
+        brains = self.catalog(portal_type="Item")
+        for brain in brains:
+            item = brain.getObject()
+            if not item.formatted_title:
+                item.formatted_title = richtextval("<p>" + item.title + "</p>")
+        logger.info("Reindexing SearchableText")
+        self.reindexIndexes(idxs=["SearchableText"], update_metadata=True)
+        logger.info("Done.")
+
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
+        self._fix_formatted_title()
         self._merge_faceted()
 
 
@@ -45,7 +61,8 @@ def migrate(context):
     """
     This migration function will:
 
-       1) Merge faceted folders;
+       1) Update the registry to add new bundles;
+       2) Merge faceted folders.
     """
     migrator = MigrateTo1003(context)
     migrator.run()

@@ -7,8 +7,20 @@ Changelog
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
-- Do not import items if category not mapped #PM-3436.
+- Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
+- Ignore not mapped representatives_in_charge.
+  [aduchene]
+- Filter imported items based on mapped representatives if a mapping exists #PM-3437.
+  [odelaere]
+- Updated LESS and JS to add an environment label when necessary.
+  [aduchene]
+- Updated theme : fixed meeting-metadata on Item view to be more readable
+  [aduchene]
+- Fixed formatted_title not set when syncing.
+  [aduchene]
+- Use `imio.helpers.content.richtextval` to set a `RichTextValue`.
+  [aduchene]
 - Merged faceted folders in `Institution , `meetings` and `decisions` were
   merged and only `meetings` and behavior is a mix of old behaviors.
   [gbastien]

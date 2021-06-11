@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from imio.migrator.utils import end_time
+from imio.helpers.content import richtextval
 from Products.Five import BrowserView
 from plone import api
-from plone.app.textfield.value import RichTextValue
 from plone.autoform.form import AutoExtensibleForm
 from Products.CMFCore.Expression import Expression, getExprContext
 from plone.namedfile.file import NamedBlobFile
@@ -50,6 +50,21 @@ def _json_date_to_datetime(datetime_json):
     date_time = dateutil.parser.parse(datetime_json)
     timezone = api.portal.get_registry_record("plone.portal_timezone")
     return date_time.astimezone(pytz.timezone(timezone))
+
+
+def _get_mapped_representatives_in_charge(item_data, institution):
+    """
+    Ensure that only mapped representatives in charge are kept when syncing
+    """
+    groups_in_charge = item_data.get(
+        "groupsInCharge"
+    ) or item_data.get("all_groupsInCharge")
+
+    res = []
+    if groups_in_charge:
+        mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
+        res = list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
+    return res
 
 
 def get_formatted_data_from_json(tal_expression, item, item_data):
@@ -179,31 +194,25 @@ def sync_items_data(meeting, items_data, institution, force=False):
             institution.item_title_formatting_tal, item, item_data
         )
         if formatted_title:
-            item.formatted_title = RichTextValue(
-                formatted_title, "text/html", "text/html"
-            )
+            item.formatted_title = richtextval(formatted_title)
+        else:
+            item.formatted_title = richtextval("<p>" + item_title + "</p>")
 
         item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
 
-        item.representatives_in_charge = item_data.get(
-            "groupsInCharge"
-        ) or item_data.get("all_groupsInCharge")
+        item.representatives_in_charge = _get_mapped_representatives_in_charge(item_data, institution)
 
-        item.decision = RichTextValue(
+        item.decision = richtextval(
             get_formatted_data_from_json(
                 institution.item_decision_formatting_tal, item, item_data
-            ),
-            "text/html",
-            "text/html",
+            )
         )
 
-        item.additional_data = RichTextValue(
+        item.additional_data = richtextval(
             get_formatted_data_from_json(
                 institution.item_additional_data_formatting_tal, item, item_data
             ),
-            "text/html",
-            "text/html",
         )
 
         item.category = get_global_category(
