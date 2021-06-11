@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Setup tests for this package."""
-from plone import api
 
+from plone import api
+from plone.app.testing import logout
+from plone.restapi.permissions import UseRESTAPI
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 
 try:
@@ -31,6 +32,17 @@ class TestSetup(PmPortalTestCase):
         from plone.browserlayer import utils
 
         self.assertIn(IPlonemeetingPortalCoreLayer, utils.registered_layers())
+
+    def test_plone_restapi_use_api_permission(self):
+        """The "plone.restapi: Use REST API" is no more given to "Anonymous"."""
+        mtool = api.portal.get_tool("portal_membership")
+        current_member = api.user.get_current()
+        self.assertFalse(mtool.isAnonymousUser())
+        self.assertTrue(current_member.has_permission(UseRESTAPI, self.portal))
+        logout()
+        current_member = api.user.get_current()
+        self.assertTrue(mtool.isAnonymousUser())
+        self.assertFalse(current_member.has_permission(UseRESTAPI, self.portal))
 
 
 class TestUninstall(PmPortalTestCase):
