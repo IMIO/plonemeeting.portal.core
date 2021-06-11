@@ -19,8 +19,8 @@ class MigrateTo1003(Migrator):
             item = brain.getObject()
             if not item.formatted_title:
                 item.formatted_title = richtextval("<p>" + item.title + "</p>")
-        logger.info("Reindexing SearchableText")
-        self.reindexIndexes(idxs=["SearchableText"], update_metadata=True)
+        logger.info("Reindexing SearchableText and pretty_representatives")
+        self.reindexIndexes(idxs=["SearchableText", "pretty_representatives"], update_metadata=True)
         logger.info("Done.")
 
     def run(self):
