@@ -26,6 +26,8 @@ Changelog
 - Install `plone.restapi` but give the `UseRESTAPI` permission to role `Member`
   instead `Anonymous` by default.
   [gbastien]
+- Fix institution automatic transition fails on Meeting # PM-3441.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)

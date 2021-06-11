@@ -76,46 +76,48 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             api.content.create(container=parent, type="Document", title="My Content")
 
     def test_ct_institution_transition_apply_to_children(self):
-        obj = api.content.create(
+        institution = api.content.create(
             container=self.portal, type="Institution", id="test"
         )
+        self.assertEqual(get_state(institution), 'private')
+        meeting = api.content.create(
+            container=institution, type="Meeting", id="test-meeting"
+        )
+        self.assertEqual(get_state(meeting), 'private')
 
-        self.assertEqual(get_state(obj), 'private')
-        meetings_folder, decisions_folder = obj.listFolderContents()
-        self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
+        meetings_folder, decisions_folder = institution.listFolderContents()[0:2]
+        self.assertEqual(get_state(meetings_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), 'private')
 
-        api.content.transition(obj, to_state='published')
-        self.assertEqual(get_state(obj), 'published')
-        self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
+        api.content.transition(institution, to_state='published')
+        self.assertEqual(get_state(institution), 'published')
+        self.assertEqual(get_state(meetings_folder), 'published')
+        self.assertEqual(get_state(decisions_folder), 'published')
+        self.assertEqual(get_state(meeting), 'private')
 
-        api.content.transition(obj, to_state='private')
-        self.assertEqual(get_state(obj), 'private')
-        self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
+        api.content.transition(institution, to_state='private')
+        self.assertEqual(get_state(institution), 'private')
+        self.assertEqual(get_state(meetings_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), 'private')
+        self.assertEqual(get_state(meeting), 'private')
 
-        agenda_folder = api.content.create(type="Folder", title="Agenda", container=obj)
-        api.content.transition(obj, to_state='published')
-        self.assertEqual(get_state(obj), 'published')
-        self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(agenda_folder),
-                         get_state(obj))
+        agenda_folder = api.content.create(type="Folder",
+                                           title="Agenda",
+                                           container=institution)
+        # meeting are ignored when publishing the institution
+        # but put back to private if the institution goes back in private
+        api.content.transition(institution, to_state='published')
+        self.assertEqual(get_state(institution), 'published')
+        self.assertEqual(get_state(meetings_folder), 'published')
+        self.assertEqual(get_state(decisions_folder), 'published')
+        self.assertEqual(get_state(agenda_folder), 'published')
+        self.assertEqual(get_state(meeting), 'private')
 
-        api.content.transition(obj, to_state='private')
-        self.assertEqual(get_state(obj), 'private')
-        self.assertEqual(get_state(meetings_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(decisions_folder),
-                         get_state(obj))
-        self.assertEqual(get_state(agenda_folder),
-                         get_state(obj))
+        api.content.transition(meeting, to_state='decision')
+
+        api.content.transition(institution, to_state='private')
+        self.assertEqual(get_state(institution), 'private')
+        self.assertEqual(get_state(meetings_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), 'private')
+        self.assertEqual(get_state(agenda_folder), 'private')
+        self.assertEqual(get_state(meeting), 'private')
