@@ -21,12 +21,11 @@ class MigrateTo1003(Migrator):
                 item.formatted_title = richtextval("<p>" + item.title + "</p>")
         logger.info("Reindexing SearchableText")
         self.reindexIndexes(idxs=["SearchableText"], update_metadata=True)
-        logger.info("Fixed formatted_title")
+        logger.info("Done.")
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
         self._fix_formatted_title()
-        logger.info("Done.")
 
 
 def migrate(context):
