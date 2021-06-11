@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-from plone.app.textfield.value import RichTextValue
+from imio.helpers.content import richtextval
 
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
@@ -22,7 +21,5 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
     def test_title(self):
         self.assertEqual(self.item.formatted_title, None)
         self.assertEqual(self.item.title, "Approbation du PV du XXX")
-        self.item.formatted_title = RichTextValue(
-            "<p>test formatted title</p>", "text/html", "text/html"
-        )
+        self.item.formatted_title = richtextval("<p>test formatted title</p>")
         self.assertEqual(self.item.title, "test formatted title")

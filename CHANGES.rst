@@ -8,6 +8,8 @@ Changelog
   [gbastien]
 - Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
+- Fixed formatted_title not set when syncing.
+  [aduchene]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
 - Filter imported items based on mapped representatives if a mapping exists #PM-3437.
