@@ -23,6 +23,8 @@ Changelog
   [aduchene]
 - Keep representative order defined on item in item preview.
   [odelaere]
+- Fix institution automatic transition fails on Meeting # PM-3441.
+  [odelaere]
 
 
 1.3.1 (2021-04-29)
