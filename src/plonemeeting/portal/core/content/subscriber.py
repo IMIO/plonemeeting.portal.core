@@ -43,7 +43,10 @@ def handle_institution_creation(obj, event):
 
 
 def institution_state_changed(obj, event):
-    for child in obj.listFolderContents():
+    content_filter = {'portal_type': 'Folder'}
+    if event.new_state.id == 'private':
+        content_filter = {}
+    for child in obj.listFolderContents(contentFilter=content_filter):
         api.content.transition(child, to_state=event.new_state.id)
 
 
