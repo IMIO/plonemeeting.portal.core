@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.content.item import get_pretty_representatives
 from imio.helpers.content import richtextval
-
+from plonemeeting.portal.core.content.item import get_pretty_representatives
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )

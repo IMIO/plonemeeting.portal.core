@@ -19,13 +19,14 @@ class MigrateTo1003(Migrator):
             item = brain.getObject()
             if not item.formatted_title:
                 item.formatted_title = richtextval("<p>" + item.title + "</p>")
-        logger.info("Reindexing SearchableText and pretty_representatives")
-        self.reindexIndexes(idxs=["SearchableText", "pretty_representatives"], update_metadata=True)
         logger.info("Done.")
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
         self._fix_formatted_title()
+        logger.info("Reindexing SearchableText and pretty_representatives")
+        self.reindexIndexes(idxs=["SearchableText", "pretty_representatives"], update_metadata=True)
+        logger.info("Done.")
 
 
 def migrate(context):
