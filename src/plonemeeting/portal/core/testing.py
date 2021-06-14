@@ -65,7 +65,6 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
 
 class PlonemeetingPortalDemoLayer(PlonemeetingPortalCoreLayer):
     def setUpPloneSite(self, portal):
-        super(PlonemeetingPortalDemoLayer, self).setUpPloneSite(portal)
         applyProfile(portal, "plonemeeting.portal.core:demo")
         transaction.commit()
 

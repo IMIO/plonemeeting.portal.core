@@ -74,14 +74,27 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
     profile="plonemeeting.portal.core:default" />
 
-  <genericsetup:upgradeStep
-    title="Go to portal 1003"
-    description="Fixed formatted title so it's not empty"
-    source="1002"
-    destination="1003"
-    sortkey="3"
-    handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate"
-    profile="plonemeeting.portal.core:default"/>
+  <genericsetup:upgradeSteps
+      source="1002"
+      destination="1003"
+      sortkey="3"
+      profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeStep
+      title="Go to portal 1003 (handler)"
+      description=""
+      handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate" />
+    <genericsetup:upgradeDepends
+      title="Install plone.restapi"
+      description=""
+      import_profile="plone.restapi:default"
+      run_deps="True" />
+    <genericsetup:upgradeDepends
+      title="Re-apply rolemap.xml of plonemeeting.portal.core after plone.restapi install"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="rolemap"
+      run_deps="True" />
+  </genericsetup:upgradeSteps>
 
   <!-- Password policy -->
 

@@ -23,6 +23,9 @@ Changelog
   [aduchene]
 - Keep representative order defined on item in item preview.
   [odelaere]
+- Install `plone.restapi` but give the `UseRESTAPI` permission to role `Member`
+  instead `Anonymous` by default.
+  [gbastien]
 - Fix institution automatic transition fails on Meeting # PM-3441.
   [odelaere]
 

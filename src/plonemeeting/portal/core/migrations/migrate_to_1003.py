@@ -23,10 +23,9 @@ class MigrateTo1003(Migrator):
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1003...")
+
         self._fix_formatted_title()
-        logger.info("Reindexing SearchableText and pretty_representatives")
         self.reindexIndexes(idxs=["SearchableText", "pretty_representatives"], update_metadata=True)
-        logger.info("Done.")
 
 
 def migrate(context):
@@ -34,6 +33,8 @@ def migrate(context):
     This migration function will:
 
        1) Update the registry to add new bundles;
+       2) Reindex indexes "SearchableText" (related to "_fix_formatted_title" step)
+          and "pretty_representatives" now that indexed order was fixed.
     """
     migrator = MigrateTo1003(context)
     migrator.run()
