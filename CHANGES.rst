@@ -28,6 +28,11 @@ Changelog
   [gbastien]
 - Fix institution automatic transition fails on Meeting # PM-3441.
   [odelaere]
+- Now that we use `text/x-html-safe` as `outputMimeType` for stored
+  `RichTextValue` for item `decision` field, needed to monkey patch
+  `Products.PortalTransforms.safe_html.hasScript` function to accept
+  `data:image` base64 value.
+  [gbastien]
 
 
 1.3.1 (2021-04-29)
