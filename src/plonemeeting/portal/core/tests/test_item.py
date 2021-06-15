@@ -2,7 +2,7 @@
 from imio.helpers.content import richtextval
 from plonemeeting.portal.core.content.item import get_pretty_representatives
 from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
+    IMG_BASE64_DATA, PmPortalDemoFunctionalTestCase,
 )
 
 
@@ -46,3 +46,13 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
                                                '39d90590-a112-436a-80ff-d96c2082a553']
         self.assertEqual(get_pretty_representatives(self.item)(),
                          'Mr Wara, Mme LOREM, Mme Ipsum, Mr Bara')
+
+    def test_decision_with_images(self):
+        pattern = '<p>Text with image <img src="{0}"/> and more text.</p>'
+        text = pattern.format(IMG_BASE64_DATA)
+        self.item.decision = richtextval(text)
+        self.assertEqual(self.item.decision.output, text)
+        # a part from data:image, other elements are still removed
+        text = '<p>Text.</p><script>nasty();</script>'
+        self.item.decision = richtextval(text)
+        self.assertEqual(self.item.decision.output, '<p>Text.</p>')
