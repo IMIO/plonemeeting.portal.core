@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3.2 (unreleased)
+1.3.2 (2021-06-15)
 ------------------
 
 - Updated LESS to manage images width/height correctly on mobile.
