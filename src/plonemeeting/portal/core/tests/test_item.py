@@ -52,3 +52,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         text = pattern.format(IMG_BASE64_DATA)
         self.item.decision = richtextval(text)
         self.assertEqual(self.item.decision.output, text)
+        # a part from data:image, other elements are still removed
+        text = '<p>Text.</p><script>nasty();</script>'
+        self.item.decision = richtextval(text)
+        self.assertEqual(self.item.decision.output, '<p>Text.</p>')
