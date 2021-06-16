@@ -25,6 +25,12 @@
     <permission name="plone.app.contenttypes: Add Folder" acquire="False">
       <role name="Manager"/>
     </permission>
+
+    <permission name="plone.restapi: Use REST API" acquire="True">
+      <!-- was given to "Anonymous" by default by plone.restapi -->
+      <role name="Member"/>
+    </permission>
+
   </permissions>
 
 </rolemap>

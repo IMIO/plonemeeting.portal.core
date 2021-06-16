@@ -2,17 +2,45 @@ Changelog
 =========
 
 
-1.3.2 (unreleased)
+1.3.3 (unreleased)
+------------------
+
+- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
+
+
+1.3.2 (2021-06-15)
 ------------------
 
 - Updated LESS to manage images width/height correctly on mobile.
   [gbastien]
-- Do not import items if category not mapped #PM-3436.
+- Filter imported items based on mapped categories or VOID if no mapping #PM-3436.
   [odelaere]
 - Ignore not mapped representatives_in_charge.
   [aduchene]
-- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
+- Filter imported items based on mapped representatives if a mapping exists #PM-3437.
   [odelaere]
+- Updated LESS and JS to add an environment label when necessary.
+  [aduchene]
+- Updated theme : fixed meeting-metadata on Item view to be more readable
+  [aduchene]
+- Fixed formatted_title not set when syncing.
+  [aduchene]
+- Use `imio.helpers.content.richtextval` to set a `RichTextValue`.
+  [aduchene]
+- Keep representative order defined on item in item preview.
+  [odelaere]
+- Install `plone.restapi` but give the `UseRESTAPI` permission to role `Member`
+  instead `Anonymous` by default.
+  [gbastien]
+- Fix institution automatic transition fails on Meeting # PM-3441.
+  [odelaere]
+- Now that we use `text/x-html-safe` as `outputMimeType` for stored
+  `RichTextValue` for item `decision` field, needed to monkey patch
+  `Products.PortalTransforms.safe_html.hasScript` function to accept
+  `data:image` base64 value.
+  [gbastien]
+
 
 
 1.3.1 (2021-04-29)
