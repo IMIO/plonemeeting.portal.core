@@ -5,7 +5,8 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed long representative value ws not used.
+  [odelaere]
 
 
 1.3.2 (2021-06-15)
