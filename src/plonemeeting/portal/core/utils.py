@@ -58,7 +58,11 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
         )
     )
     if meeting_UID:
-        url = "{0}&UID={1}&fullobjects=True&b_size=9999".format(url, meeting_UID)
+        url = "{0}&UID={1}" \
+            "&fullobjects=True" \
+            "&include_all=false" \
+            "&metadata_fields=date" \
+            "&b_size=9999".format(url, meeting_UID)
     else:
         url = "{0}{1}".format(url, institution.additional_meeting_query_string_for_list)
     return url
