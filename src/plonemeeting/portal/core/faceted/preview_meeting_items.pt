@@ -13,7 +13,7 @@
         Batch python:modules['Products.CMFPlone'].Batch;
         b_start python:request.get('b_start', 0);
         batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
-        isAnon context/@@plone_portal_state/anonymous;">
+        isAnon context/@@plone_portal_state/anonymous;">1
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
 

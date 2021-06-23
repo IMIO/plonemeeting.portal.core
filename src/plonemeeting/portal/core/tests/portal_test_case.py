@@ -35,6 +35,8 @@ class PmPortalTestCase(unittest.TestCase):
         self.portal.acl_users._doAddUser("manager", "secretmaster", ["Manager"], [])
         self.login_as_manager()
         self.workflow = self.portal.portal_workflow
+        # show entire diff when a test fails
+        self.maxDiff = None
 
     def tearDown(self):
         logout()

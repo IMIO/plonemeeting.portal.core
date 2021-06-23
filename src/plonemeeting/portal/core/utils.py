@@ -114,13 +114,23 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         "&linkedMeetingUID={3}"
         "&meeting_uid={3}"
         "&fullobjects=True"
-        "{4}"
+        # by default fullobjects return everything, here we include nothing
+        # so by default only base data (id, title, UID, ...) are returned
+        "&include_all=false"
+        # field required by application
+        "&metadata_fields=itemNumber"
+        # field required by application
+        "&metadata_fields=groupsInCharge"
+        # field required by application, will be "category" or "classifier"
+        "&metadata_fields={4}"
         "{5}"
-        "{6}".format(
+        "{6}"
+        "{7}".format(
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
             meeting_UID,
+            institution.delib_category_field,
             institution.additional_published_items_query_string,
             category_filter,
             representatives_filter

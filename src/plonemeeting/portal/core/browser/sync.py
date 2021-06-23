@@ -62,8 +62,9 @@ def _get_mapped_representatives_in_charge(item_data, institution):
 
     res = []
     if groups_in_charge:
+        gic_tokens = [gic["token"] for gic in groups_in_charge]
         mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
-        res = list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
+        res = list(filter(lambda uid: uid in mapped_uids, gic_tokens))
     return res
 
 
@@ -139,9 +140,9 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
             api.content.delete(existing_annex)
 
 
-def sync_annexes(item, institution, annexes_json, force=False):  # pragma: no cover
-    if annexes_json:
-        url = "{0}?publishable=true".format(annexes_json.get("@id"))
+def sync_annexes(item, institution, annexes_json_url, force=False):  # pragma: no cover
+    if annexes_json_url:
+        url = "{0}?publishable=true".format(annexes_json_url)
         response = _call_delib_rest_api(url, institution)
         sync_annexes_data(item, institution, response.json(), force)
 
@@ -216,11 +217,11 @@ def sync_items_data(meeting, items_data, institution, force=False):
         )
 
         item.category = get_global_category(
-            institution, item_data.get(institution.delib_category_field)
+            institution, item_data.get(institution.delib_category_field)["token"]
         )
         item.reindexObject()
         sync_annexes(
-            item, institution, item_data.get("@components").get("annexes"), force
+            item, institution, "{0}/@annexes".format(item_data.get("@id")), force
         )
         if created:
             nb_created += 1

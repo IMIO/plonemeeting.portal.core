@@ -5,7 +5,9 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Adapted code to receive the smallest JSON possible by using
+  include parameters in the json query.
+  [gbastien]
 
 
 1.3.2 (2021-06-15)
