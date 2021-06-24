@@ -7,6 +7,8 @@ Changelog
 
 - Fixed long representative value ws not used.
   [odelaere]
+- Fix type constraints on Folder content type and faceted folders.
+  [odelaere]
 
 
 1.3.2 (2021-06-15)
