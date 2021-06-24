@@ -33,13 +33,8 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
         utils.getRequest = patched_getRequest
 
-        # Run the startup hook
-        from plone.app.theming.plugins.hooks import onStartup
-        onStartup(None)
-
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plonemeeting.portal.core:default")
-        applyProfile(portal, 'plone.app.theming:default')
         transaction.commit()
 
 
