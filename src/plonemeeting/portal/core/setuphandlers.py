@@ -158,7 +158,6 @@ def create_demo_content(context):
                         container=meeting_obj,
                         type="Item",
                         title=item["title"],
-                        formatted_title=richtextval("<p>" + item["title"] + "</p>"),
                         sortable_number=item["sortable_number"],
                         number=item["number"],
                         representatives_in_charge=item["representatives_in_charge"],
