@@ -226,10 +226,16 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         sync_items_data(meeting, self.json_meeting_items, self.institution)
 
         self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"], meeting.values()[0].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"],
+                         meeting.values()[0].long_representatives_in_charge)
         self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[1].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[1].long_representatives_in_charge)
         self.assertEqual([], meeting.values()[2].representatives_in_charge)
+        self.assertEqual([], meeting.values()[2].long_representatives_in_charge)
         #  Check if order from PM is preserved
         self.assertEqual(["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[3].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_2", "dummy_mapped_uid_1"],
+                         meeting.values()[3].long_representatives_in_charge)
 
     def test_item_title_formatting_tal(self):
         self.institution.item_title_formatting_tal = "python: '<h2>' + json['title'] + '</h2>'"
