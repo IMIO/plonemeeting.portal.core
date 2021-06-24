@@ -62,6 +62,18 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             url,
         )
 
+    def test_get_api_url_for_annexes(self):
+        url = utils.get_api_url_for_annexes(
+            self.belleville, "https://demo-pm.imio.be/foo")
+        self.assertEqual(
+            "https://demo-pm.imio.be/foo/@annexes?"
+            "publishable=true"
+            "&fullobjects"
+            "&include_all=false"
+            "&metadata_fields=file",
+            url,
+        )
+
     def test_get_api_url_for_meeting_items(self):
         # test empty category_mappings
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")

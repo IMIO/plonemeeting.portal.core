@@ -101,11 +101,11 @@ def _get_url_filter(url_param, value_dict_list, dict_key, use_void_value=False):
     return res
 
 
-def get_api_url_for_annexes(institution, annexes_json_url):
-    url = "{0}?publishable=true" \
+def get_api_url_for_annexes(institution, item_json_id):
+    url = "{0}/@annexes?publishable=true" \
         "&fullobjects" \
         "&include_all=false" \
-        "&metadata_fields=file".format(annexes_json_url)
+        "&metadata_fields=file".format(item_json_id)
     return url
 
 

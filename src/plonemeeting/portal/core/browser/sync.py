@@ -141,9 +141,10 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
             api.content.delete(existing_annex)
 
 
-def sync_annexes(item, institution, annexes_json_url, force=False):  # pragma: no cover
-    if annexes_json_url:
-        url = get_api_url_for_annexes(institution, annexes_json_url)
+def sync_annexes(item, institution, item_json_id, force=False):  # pragma: no cover
+    # item_json_id is the "@id" value
+    if item_json_id:
+        url = get_api_url_for_annexes(institution, item_json_id)
         response = _call_delib_rest_api(url, institution)
         sync_annexes_data(item, institution, response.json(), force)
 
@@ -222,7 +223,7 @@ def sync_items_data(meeting, items_data, institution, force=False):
         )
         item.reindexObject()
         sync_annexes(
-            item, institution, "{0}/@annexes".format(item_data.get("@id")), force
+            item, institution, item_data.get("@id"), force
         )
         if created:
             nb_created += 1
