@@ -101,6 +101,14 @@ def _get_url_filter(url_param, value_dict_list, dict_key, use_void_value=False):
     return res
 
 
+def get_api_url_for_annexes(institution, annexes_json_url):
+    url = "{0}?publishable=true" \
+        "&fullobjects" \
+        "&include_all=false" \
+        "&metadata_fields=file".format(annexes_json_url)
+    return url
+
+
 def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return

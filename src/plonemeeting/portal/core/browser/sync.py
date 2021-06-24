@@ -23,6 +23,7 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.utils import get_api_url_for_annexes
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
@@ -142,7 +143,7 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
 
 def sync_annexes(item, institution, annexes_json_url, force=False):  # pragma: no cover
     if annexes_json_url:
-        url = "{0}?publishable=true".format(annexes_json_url)
+        url = get_api_url_for_annexes(institution, annexes_json_url)
         response = _call_delib_rest_api(url, institution)
         sync_annexes_data(item, institution, response.json(), force)
 

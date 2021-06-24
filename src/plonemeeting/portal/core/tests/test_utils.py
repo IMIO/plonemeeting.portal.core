@@ -46,6 +46,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&config_id=meeting-config-college"
             "&UID=foo"
             "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=date"
             "&b_size=9999",
             url,
         )
