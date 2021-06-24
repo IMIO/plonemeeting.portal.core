@@ -7,6 +7,8 @@ Changelog
 
 - Fixed long representative value ws not used.
   [odelaere]
+- Fixed error while compiling rules.xml by institution manager.
+  [gbastien]
 
 
 1.3.2 (2021-06-15)

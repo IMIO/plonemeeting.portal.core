@@ -23,6 +23,9 @@ class MigrateTo1004(Migrator):
     def run(self):
         logger.info("Migrating to plonemeeting.portal 1004...")
         self._init_long_representatives_in_charge()
+        self.refreshDatabase(catalogs=False,
+                             workflows=True,
+                             workflowsToUpdate=["institution_workflow"])
 
 
 def migrate(context):
