@@ -96,6 +96,15 @@
       run_deps="True" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+    title="Go to portal 1004"
+    description="Add new long_representatives_in_charge to display on item view"
+    source="1003"
+    destination="1004"
+    sortkey="4"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1004.migrate"
+    profile="plonemeeting.portal.core:default" />
+
   <!-- Password policy -->
 
   <adapter
@@ -142,6 +151,5 @@
     name="plonemeeting.portal.vocabularies.delib_category_fields"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
-
 
 </configure>
