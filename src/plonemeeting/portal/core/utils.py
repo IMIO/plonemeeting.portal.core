@@ -141,11 +141,11 @@ def create_faceted_folder(container, title, id=None):
     return folder
 
 
-def set_constrain_types(obj, list_contraint):
+def set_constrain_types(obj, portal_type_ids):
     behavior = ISelectableConstrainTypes(obj)
     behavior.setConstrainTypesMode(1)
-    behavior.setImmediatelyAddableTypes(list_contraint)
-    behavior.setLocallyAllowedTypes(list_contraint)
+    behavior.setImmediatelyAddableTypes(portal_type_ids)
+    behavior.setLocallyAllowedTypes(portal_type_ids)
 
 
 def cleanup_contents():

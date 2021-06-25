@@ -9,6 +9,8 @@ Changelog
   [odelaere]
 - Fixed error while compiling rules.xml by institution manager.
   [gbastien]
+- Fix type constraints on Folder content type and faceted folders.
+  [odelaere]
 
 
 1.3.2 (2021-06-15)
