@@ -20,6 +20,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(self.item["document.pdf"], files[0].getObject())
 
     def test_title(self):
+        delattr(self.item, "_formatted_title")
         self.assertEqual(self.item.formatted_title, None)
         self.assertEqual(self.item.title, "Approbation du PV du XXX")
         self.item.formatted_title = richtextval("<p>test formatted title</p>")
