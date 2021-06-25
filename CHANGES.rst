@@ -30,6 +30,8 @@ Changelog
   merged and only `meetings` folder is kept, new faceted behavior
   is a mix of old behaviors.
   [gbastien]
+- Rename actions available on meeting.
+  [odelaere]
 
 
 1.3.2 (2021-06-15)
