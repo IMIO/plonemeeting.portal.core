@@ -15,9 +15,6 @@ class MigrateTo1004(Migrator):
         """
         Apply contraints on Folders.
         """
-        logger.info("Reapply typeinfo from plonemeeting.portal.core:default")
-        self.ps.runImportStepFromProfile('profile-plonemeeting.portal.core:default', 'content')
-        logger.info("Done.")
         logger.info("Apply contraints on Faceted Folders")
         brains = self.catalog(portal_type="Institution")
         for brain in brains:
