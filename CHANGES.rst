@@ -7,6 +7,8 @@ Changelog
 
 - Fixed long representative value ws not used.
   [odelaere]
+- Fixed error while compiling rules.xml by institution manager.
+  [gbastien]
 - Fix type constraints on Folder content type and faceted folders.
   [odelaere]
 
