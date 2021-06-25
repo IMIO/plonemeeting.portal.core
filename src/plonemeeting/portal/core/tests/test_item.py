@@ -32,19 +32,19 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.item.representatives_in_charge = ['Yololololo-lolo-lolololo']
         self.assertRaises(AttributeError, get_pretty_representatives(self.item))
 
-        self.item.representatives_in_charge = ['12c8f011-e164-40c8-914b-f4f11b440ae8',
-                                               '381864c8-dc18-4a52-962c-8d0c677d3d3d',
-                                               '8388cf29-6f4b-4910-b8fd-7be5e14f5175',
-                                               '39d90590-a112-436a-80ff-d96c2082a553']
+        self.item.representatives_in_charge = ['a2396143f11f4e2292f12ee3b3447739',
+                                               '7a82fee367a0416f8d7e8f4a382db0d1',
+                                               'f3f9e7808ddb4e56946b2dba6370eb9b',
+                                               'bf5fccd9bc9048e9957680c7ab5576b4']
         self.assertEqual(get_pretty_representatives(self.item)(),
                          'Mme Ipsum, Mme LOREM, Mr Bara, Mr Wara')
 
-        self.item.representatives_in_charge = ['39d90590-a112-436a-80ff-d96c2082a553',
-                                               '381864c8-dc18-4a52-962c-8d0c677d3d3d',
-                                               '12c8f011-e164-40c8-914b-f4f11b440ae8',
-                                               '381864c8-dc18-4a52-962c-8d0c677d3d3d',
-                                               '8388cf29-6f4b-4910-b8fd-7be5e14f5175',
-                                               '39d90590-a112-436a-80ff-d96c2082a553']
+        self.item.representatives_in_charge = ['bf5fccd9bc9048e9957680c7ab5576b4',
+                                               '7a82fee367a0416f8d7e8f4a382db0d1',
+                                               'a2396143f11f4e2292f12ee3b3447739',
+                                               '7a82fee367a0416f8d7e8f4a382db0d1',
+                                               'f3f9e7808ddb4e56946b2dba6370eb9b',
+                                               'bf5fccd9bc9048e9957680c7ab5576b4']
         self.assertEqual(get_pretty_representatives(self.item)(),
                          'Mr Wara, Mme LOREM, Mme Ipsum, Mr Bara')
 
