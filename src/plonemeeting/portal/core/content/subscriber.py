@@ -8,7 +8,7 @@ from zope.i18n import translate
 
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
-from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import create_faceted_folder, set_constrain_types
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
 
 
@@ -28,6 +28,7 @@ def handle_institution_creation(obj, event):
     )
     alsoProvides(meetings, IMeetingsFolder)
     IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
+    set_constrain_types(meetings, [])
 
     request = getRequest()
     if request:  # Request can be `None` during test setup
@@ -35,7 +36,10 @@ def handle_institution_creation(obj, event):
 
 
 def institution_state_changed(obj, event):
-    for child in obj.listFolderContents():
+    content_filter = {'portal_type': 'Folder'}
+    if event.new_state.id == 'private':
+        content_filter = {}
+    for child in obj.listFolderContents(contentFilter=content_filter):
         api.content.transition(child, to_state=event.new_state.id)
 
 

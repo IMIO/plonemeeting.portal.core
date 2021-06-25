@@ -43,6 +43,15 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    long_representatives_in_charge = schema.List(
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.vocabularies.long_representatives"
+        ),
+        title=_(u"Representative group in charge"),
+        required=False,
+        readonly=True,
+    )
+
     additional_data = RichText(
         title=_(u"Additional data"), required=False, readonly=True
     )
@@ -95,14 +104,12 @@ def get_pretty_representatives(object):
     res = []
     institution = api.portal.get_navigation_root(object)
     mapping = institution.representatives_mappings
-    for infos in mapping:
-        representative_key = infos["representative_key"]
-        if representative_key in representative_keys:
-            representative_keys.remove(representative_key)
-            res.append(infos["representative_value"])
-
-    for missing_keys in representative_keys:
-        res.append(missing_keys)
+    representatives_mapping = {infos["representative_key"]: infos["representative_value"]
+                               for infos in mapping}
+    for representative_key in representative_keys:
+        value = representatives_mapping.get(representative_key)
+        if value and value not in res:
+            res.append(value)
 
     if res:
         return ", ".join(res)

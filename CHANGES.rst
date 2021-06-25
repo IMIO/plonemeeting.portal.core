@@ -2,7 +2,21 @@ Changelog
 =========
 
 
-1.3.2 (unreleased)
+1.3.3 (unreleased)
+------------------
+
+- Fixed long representative value ws not used.
+  [odelaere]
+- Fixed error while compiling rules.xml by institution manager.
+  [gbastien]
+- Fix type constraints on Folder content type and faceted folders.
+  [odelaere]
+- Merged faceted folders in `Institution , `meetings` and `decisions` were
+  merged and only `meetings` and behavior is a mix of old behaviors.
+  [gbastien]
+
+
+1.3.2 (2021-06-15)
 ------------------
 
 - Updated LESS to manage images width/height correctly on mobile.
@@ -21,8 +35,17 @@ Changelog
   [aduchene]
 - Use `imio.helpers.content.richtextval` to set a `RichTextValue`.
   [aduchene]
-- Merged faceted folders in `Institution , `meetings` and `decisions` were
-  merged and only `meetings` and behavior is a mix of old behaviors.
+- Keep representative order defined on item in item preview.
+  [odelaere]
+- Install `plone.restapi` but give the `UseRESTAPI` permission to role `Member`
+  instead `Anonymous` by default.
+  [gbastien]
+- Fix institution automatic transition fails on Meeting # PM-3441.
+  [odelaere]
+- Now that we use `text/x-html-safe` as `outputMimeType` for stored
+  `RichTextValue` for item `decision` field, needed to monkey patch
+  `Products.PortalTransforms.safe_html.hasScript` function to accept
+  `data:image` base64 value.
   [gbastien]
 
 
