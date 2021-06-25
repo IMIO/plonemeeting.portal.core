@@ -35,7 +35,7 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         voc = vocab(self.item)
         values_city1 = [term.title for term in voc._terms]
         self.assertListEqual(values_city1,
-                             ['Mr DUPONT', 'Mr Dupuis', 'Mr Oniz'])
+                             ['Mr DUPONT', 'Mr Dupuis', 'Mr Oniz', 'Mr Baka', 'Mr Kuro'])
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
         self.assertListEqual(values_city2,
@@ -50,7 +50,9 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         self.assertListEqual(values_city1,
                              ['Mr DUPONT Bourgmestre F.F.',
                               'Mr Dupuis 1ère Échevin',
-                              "Mr Oniz, Échevin de l'éducation"])
+                              "Mr Oniz, Échevin de l'éducation",
+                              "Mr Baka, Échevin de des sports",
+                              "Mr Kuro, Échevin de la culture"])
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
         self.assertListEqual(values_city2,
