@@ -69,6 +69,7 @@ class MigrateTo1004(Migrator):
         logger.info("Migrating to plonemeeting.portal 1004...")
         self._init_long_representatives_in_charge()
         self._apply_folder_constraints()
+        self._merge_faceted()
         self.refreshDatabase(catalogs=False,
                              workflows=True,
                              workflowsToUpdate=["institution_workflow"])
@@ -79,7 +80,8 @@ def migrate(context):
     This migration function will:
        1) Initialize the new attribute long_representatives_in_charge;
        2) Apply contraints on Folders;
-       3) Update security for elements using institution_workflow.
+       3) Merge faceted folder, keep "meetings", delete "decisions";
+       4) Update security for elements using institution_workflow.
     """
     migrator = MigrateTo1004(context)
     migrator.run()
