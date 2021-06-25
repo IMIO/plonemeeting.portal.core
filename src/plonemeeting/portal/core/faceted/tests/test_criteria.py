@@ -7,6 +7,7 @@ from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.faceted.widgets.select import SelectMeetingWidget
+from plonemeeting.portal.core.faceted.widgets.sort import ItemsSortWidget
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
@@ -59,3 +60,22 @@ class TestFacetedCriteria(PmPortalTestCase):
         self.assertEqual(seance_widget.vocabulary(), [])
         self.assertEqual(matiere_widget.default, "")
         self.assertEqual(seance_widget.default, "")
+
+    def test_sort_widget(self):
+        # setup, reuse "sort" criterion
+        request = self.layer["request"]
+        faceted_folder = self.belleville[APP_FOLDER_ID]
+        criteria = ICriteria(faceted_folder)
+        sort_data = criteria.get("tri")
+        self.assertIsNone(sort_data.default)
+        sort_widget = ItemsSortWidget(faceted_folder, request, data=sort_data)
+        # when no meeting selected in "seance"
+        self.assertFalse("seance" in request.form)
+        self.assertEqual(sort_widget.query(request.form),
+                         {'sort_on': ['linkedMeetingDate', 'sortable_number'],
+                          'sort_order': ['descending', 'ascending']})
+        meetings = self.belleville.getFolderContents({"portal_type": "Meeting"})
+        request.form["seance"] = meetings[0].UID
+        self.assertEqual(sort_widget.query(request.form),
+                         {'sort_on': ['sortable_number'],
+                          'sort_order': ['ascending']})
