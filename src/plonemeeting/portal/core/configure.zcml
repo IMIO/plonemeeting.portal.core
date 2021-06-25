@@ -96,6 +96,29 @@
       run_deps="True" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      source="1003"
+      destination="1004"
+      sortkey="3"
+      profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply workflow to update institution_workflow"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="workflow"
+      run_deps="True" />
+    <genericsetup:upgradeDepends
+      title="Re-apply content to update Folder constraints"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="content"
+      run_deps="True" />
+    <genericsetup:upgradeStep
+      title="Go to portal 1004 (handler)"
+      description=""
+      handler="plonemeeting.portal.core.migrations.migrate_to_1004.migrate" />
+  </genericsetup:upgradeSteps>
+
   <!-- Password policy -->
 
   <adapter
@@ -128,6 +151,12 @@
   <utility
     component=".vocabularies.RepresentativeVocabulary"
     name="plonemeeting.portal.vocabularies.representatives"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.LongRepresentativeVocabulary"
+    name="plonemeeting.portal.vocabularies.long_representatives"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

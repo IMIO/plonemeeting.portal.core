@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+from AccessControl.PermissionRole import rolesForPermissionOn
+from plone import api
+from plone.app.theming.utils import compileThemeTransform
+from Products.CMFCore.permissions import AccessContentsInformation as ACI
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plonemeeting.portal.core.content.institution import validate_color_parameters
 from plonemeeting.portal.core.content.institution import InvalidColorParameters
@@ -101,3 +106,22 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
                               ('env', 'Environment')],
                              belleville.delib_categories)
         unstub()
+
+    def test_rules_xml_compilation(self):
+        """Make sure the "/++theme++barceloneta/rules.xml" entity does compile.
+           "Anonymous" must have the "AccessContentsInformation" permission
+           so rules.xml is correctly compiled..."""
+        rules = "/++theme++barceloneta/rules.xml"
+        inst = self.institution
+        self.layer['request']['PUBLISHED'] = inst.meetings
+        # when institution "published"
+        self.assertEqual(api.content.get_state(inst), "published")
+        self.assertTrue(compileThemeTransform(rules=rules))
+        self.assertTrue("Anonymous" in rolesForPermissionOn(ACI, inst))
+        self.login_as_manager()
+        api.content.transition(inst, to_state="private")
+        self.logout()
+        # when institution "private"
+        self.assertEqual(api.content.get_state(inst), "private")
+        self.assertTrue(compileThemeTransform(rules=rules))
+        self.assertTrue("Anonymous" in rolesForPermissionOn(ACI, inst))

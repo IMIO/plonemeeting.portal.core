@@ -43,6 +43,15 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    long_representatives_in_charge = schema.List(
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.vocabularies.long_representatives"
+        ),
+        title=_(u"Representative group in charge"),
+        required=False,
+        readonly=True,
+    )
+
     additional_data = RichText(
         title=_(u"Additional data"), required=False, readonly=True
     )

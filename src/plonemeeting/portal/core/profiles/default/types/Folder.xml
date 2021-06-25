@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object
+    i18n:domain="plone"
+    meta_type="Dexterity FTI"
+    name="Folder"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+    <element value="File" />
+    <element value="Image" />
+    <element value="Folder" />
+    <element value="Document" />
+  </property>
+
+</object>

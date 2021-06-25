@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone import api
 from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
@@ -48,6 +49,19 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             IInstitution.providedBy(obj),
             u"IInstitution not provided by {0}!".format(obj.id),
         )
+
+        faceted_folders = obj.listFolderContents()
+        self.assertEqual(len(faceted_folders), 2)
+        constraints = ISelectableConstrainTypes(faceted_folders[0])
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+
+        constraints = ISelectableConstrainTypes(faceted_folders[1])
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+
+        agenda = api.content.create(obj, "Folder", "agenda")
+        constraints = ISelectableConstrainTypes(agenda)
+        self.assertListEqual(['Document', 'Folder', 'File', 'Image'],
+                             constraints.getLocallyAllowedTypes())
 
         # check that deleting the object works too
         parent = obj.__parent__

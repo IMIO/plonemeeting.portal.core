@@ -111,6 +111,7 @@ def create_demo_content(context):
                 type="Institution",
                 id=institution_id,
                 title=institution["title"],
+                categories_mappings=institution["categories_mappings"],
                 representatives_mappings=institution["representatives_mappings"],
                 plonemeeting_url=institution["plonemeeting_url"],
                 username=institution["username"],
@@ -167,7 +168,7 @@ def create_demo_content(context):
                             meeting["plonemeeting_last_modified"]
                         ),
                     )
-
+                    item_obj.formatted_title = richtextval("<p>" + item_obj.title + "</p>")
                     if "files" in item:
                         for file in item["files"]:
                             create_file(item_obj, file)
