@@ -7,6 +7,7 @@ from zope.interface import alsoProvides
 from zope.i18n import translate
 
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder, set_constrain_types
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
@@ -24,7 +25,10 @@ def handle_institution_creation(obj, event):
 
     # Create meetings faceted folder
     meetings = create_faceted_folder(
-        obj, translate(_(u"Meetings"), target_language=current_lang)
+        obj,
+        translate(_(u"Meetings"),
+                  target_language=current_lang),
+        id=APP_FOLDER_ID
     )
     alsoProvides(meetings, IMeetingsFolder)
     IFacetedLayout(meetings).update_layout("faceted-preview-meeting")

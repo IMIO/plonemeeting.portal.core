@@ -2,6 +2,7 @@
 
 from plone.api.exc import InvalidParameterError
 
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.tests.portal_test_case import (
     PmPortalDemoFunctionalTestCase,
 )
@@ -15,7 +16,7 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
     def test_is_institution(self):
         institution_utils = self.belleville.restrictedTraverse("@@utils_view")
         self.assertTrue(institution_utils.is_institution())
-        meetings_utils = self.belleville["meetings"].restrictedTraverse("@@utils_view")
+        meetings_utils = self.belleville[APP_FOLDER_ID].restrictedTraverse("@@utils_view")
         self.assertFalse(meetings_utils.is_institution())
 
     def test_get_linked_meeting(self):
@@ -50,16 +51,16 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
     def test_get_meeting_url_by_meeting(self):
         meeting = self.belleville["16-novembre-2018-08-30"]
         utils_view = meeting.restrictedTraverse("@@utils_view")
-        expected_url = "http://nohost/plone/belleville/meetings#seance={0}".format(
-            meeting.UID()
+        expected_url = "http://nohost/plone/belleville/{0}#seance={1}".format(
+            APP_FOLDER_ID, meeting.UID()
         )
         self.assertEqual(expected_url, utils_view.get_meeting_url(meeting=meeting))
 
     def test_get_meeting_url_by_UID(self):
         meeting = self.belleville["16-novembre-2018-08-30"]
         utils_view = meeting.restrictedTraverse("@@utils_view")
-        expected_url = "http://nohost/plone/belleville/meetings#seance={0}".format(
-            meeting.UID()
+        expected_url = "http://nohost/plone/belleville/{0}#seance={1}".format(
+            APP_FOLDER_ID, meeting.UID()
         )
         self.assertEqual(expected_url, utils_view.get_meeting_url(UID=meeting.UID()))
 

@@ -4,6 +4,7 @@ from plone import api
 from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
@@ -99,7 +100,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(meeting), 'private')
 
         self.assertEqual(institution.listFolderContents({"portal_type": "Folder"}),
-                         [institution.get("meetings")])
+                         [institution.get(APP_FOLDER_ID)])
         meetings_folder = institution.listFolderContents()[0]
         self.assertEqual(get_state(meetings_folder), 'private')
 
