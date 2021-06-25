@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import logging
 from copy import deepcopy
-
 from imio.migrator.migrator import Migrator
 from plonemeeting.portal.core.utils import set_constrain_types
+
+import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 
