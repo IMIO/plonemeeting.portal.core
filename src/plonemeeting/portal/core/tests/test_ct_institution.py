@@ -51,11 +51,9 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         )
 
         faceted_folders = obj.listFolderContents()
-        self.assertEqual(len(faceted_folders), 2)
-        constraints = ISelectableConstrainTypes(faceted_folders[0])
-        self.assertListEqual([], constraints.getLocallyAllowedTypes())
-
-        constraints = ISelectableConstrainTypes(faceted_folders[1])
+        self.assertEqual(len(faceted_folders), 1)
+        meetings = faceted_folders[0]
+        constraints = ISelectableConstrainTypes(meetings)
         self.assertListEqual([], constraints.getLocallyAllowedTypes())
 
         agenda = api.content.create(obj, "Folder", "agenda")
@@ -100,7 +98,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         )
         self.assertEqual(get_state(meeting), 'private')
 
-        self.assertEqual(institution.listFolderContents(),
+        self.assertEqual(institution.listFolderContents({"portal_type": "Folder"}),
                          [institution.get("meetings")])
         meetings_folder = institution.listFolderContents()[0]
         self.assertEqual(get_state(meetings_folder), 'private')
