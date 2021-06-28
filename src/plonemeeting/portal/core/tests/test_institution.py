@@ -18,7 +18,10 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
     def test_call_manager(self):
         institution = self.portal["belleville"]
         self.login_as_manager()
-        view_content = institution.restrictedTraverse("@@view")()
+        request = self.portal.REQUEST
+        view = institution.restrictedTraverse("@@view")
+        request.set('PUBLISHED', view)
+        view_content = view()
         self.assertTrue("Meeting config ID" in view_content)
 
     def test_call_anonymous(self):

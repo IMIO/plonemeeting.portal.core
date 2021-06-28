@@ -14,6 +14,8 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         institution_view = self.belleville.restrictedTraverse("@@view")
         # context is overridden while traversing
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        request = self.portal.REQUEST
+        request.set('PUBLISHED', institution_view)
         institution_view.update()
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
