@@ -186,15 +186,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(utils.get_api_url_for_meeting_items(institution, "foo"))
 
     def test_create_faceted_folder(self):
-        faceted = utils.create_faceted_folder(self.portal, "Test Faceted")
-        self.assertEqual("Test Faceted", faceted.title)
-        self.assertEqual("test-faceted", faceted.id)
-        IFacetedNavigable.providedBy(faceted)
-
-    def test_create_faceted_folder_with_id(self):
         faceted = utils.create_faceted_folder(
-            self.portal, "Test Faceted", id="test-faceted"
-        )
+            self.portal, "Test Faceted", id="test-faceted")
         self.assertEqual("Test Faceted", faceted.title)
         self.assertEqual("test-faceted", faceted.id)
         IFacetedNavigable.providedBy(faceted)

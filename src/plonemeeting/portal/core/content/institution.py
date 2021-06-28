@@ -93,14 +93,16 @@ class IInstitution(model.Schema):
 
     additional_meeting_query_string_for_list = schema.TextLine(
         title=_(u"Additional Meeting query string for list"),
-        required=False,
+        required=True,
         constraint=validate_url_parameters,
+        default="&review_state=frozen&review_state=decided"
     )
 
     additional_published_items_query_string = schema.TextLine(
         title=_(u"Additional Published Items query string"),
-        required=False,
+        required=True,
         constraint=validate_url_parameters,
+        default="&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified"
     )
     # Formatting fieldset
     model.fieldset(
