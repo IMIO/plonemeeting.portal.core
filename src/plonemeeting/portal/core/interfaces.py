@@ -13,4 +13,4 @@ class IMeetingsFolder(IFacetedNavigable):
 
 
 class IItemsFolder(IFacetedNavigable):
-    """Marker interface for Items folder"""
+    """Kept while migrating to 1003, to be removed after"""

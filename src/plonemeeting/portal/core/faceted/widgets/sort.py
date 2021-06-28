@@ -35,7 +35,7 @@ class ItemsSortWidget(Widget):
         """ Sort items by meeting date (desc) and by item number (asc)
         """
         # XXX avoid double sort_on when we selected a meeting
-        # this is not necessary and it some case, produce weird results
+        # this is not necessary and in some cases, produces weird results
         if "seance" in form:
             query = {
                 "sort_on": ["sortable_number"],

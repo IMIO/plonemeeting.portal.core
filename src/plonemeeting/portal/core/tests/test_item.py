@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from imio.helpers.content import richtextval
+from plone import api
 from plonemeeting.portal.core.content.item import get_pretty_representatives
 from plonemeeting.portal.core.tests.portal_test_case import (
     IMG_BASE64_DATA, PmPortalDemoFunctionalTestCase,
@@ -11,8 +12,21 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         super().setUp()
         self.institution = self.portal["belleville"]
         self.meeting = self.institution["16-novembre-2018-08-30"]
+        self.project_meeting = self.institution["16-novembre-2018-08-30"]
         self.item = self.meeting["approbation-du-pv-du-xxx"]
         self.login_as_test()
+
+    def test_item_view(self):
+        # when meeting is in decision
+        self.assertEqual(api.content.get_state(self.meeting), "decision")
+        view = self.item.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        # when meeting is in decision
+        self.login_as_manager()
+        api.content.transition(self.meeting, to_state="in_project")
+        self.assertEqual(api.content.get_state(self.meeting), "in_project")
+        view = self.item.restrictedTraverse("@@view")
+        self.assertTrue(view())
 
     def test_get_files(self):
         files = self.item.restrictedTraverse("@@view").get_files()

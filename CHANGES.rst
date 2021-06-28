@@ -11,6 +11,10 @@ Changelog
   [gbastien]
 - Fix type constraints on Folder content type and faceted folders.
   [odelaere]
+- Merged faceted folders in `Institution , `meetings` and `decisions` were
+  merged and only `meetings` folder is kept, new faceted behavior
+  is a mix of old behaviors.
+  [gbastien]
 
 
 1.3.2 (2021-06-15)
