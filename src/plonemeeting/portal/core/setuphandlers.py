@@ -1,32 +1,28 @@
 # -*- coding: utf-8 -*-
-import mimetypes
-
-from Products.CMFPlone.interfaces import INonInstallable
 from imio.helpers.content import richtextval
 from plone import api
 from plone.api import content
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.utils import cleanup_contents
+from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import remove_left_portlets
+from plonemeeting.portal.core.utils import remove_right_portlets
+from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
 
 import dateutil.parser
 import json
+import mimetypes
 import os
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import APP_FOLDER_ID
-from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_XML_PATH
-from plonemeeting.portal.core.utils import (
-    cleanup_contents,
-    format_institution_managers_group_id,
-)
-from plonemeeting.portal.core.utils import create_faceted_folder
-from plonemeeting.portal.core.utils import remove_left_portlets
-from plonemeeting.portal.core.utils import remove_right_portlets
 
 
 @implementer(INonInstallable)
