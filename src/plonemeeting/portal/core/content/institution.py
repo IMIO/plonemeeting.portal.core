@@ -74,7 +74,6 @@ class IRepresentativeMappingRowSchema(Interface):
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
-
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)

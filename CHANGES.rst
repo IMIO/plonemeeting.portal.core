@@ -5,20 +5,22 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
+- Added automatic initialization of categories mapping.
+  [odelaere]
 
 
 1.3.3 (2021-06-28)
 ------------------
 
-- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
 - Fixed long representative value ws not used.
   [odelaere]
 - Fixed error while compiling rules.xml by institution manager.
   [gbastien]
 - Fix type constraints on Folder content type and faceted folders.
   [odelaere]
-- Merged faceted folders in `Institution , `meetings` and `decisions` were
+- Merged faceted folders in `Institution` , `meetings` and `decisions` were
   merged and only `meetings` folder is kept, new faceted behavior
   is a mix of old behaviors.
   [gbastien]
