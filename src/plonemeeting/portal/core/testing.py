@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from collective.fingerpointing import utils as fp_utils
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
@@ -10,6 +12,9 @@ from plone.testing.zope import makeTestRequest
 
 import plonemeeting.portal.core
 import transaction
+
+
+__old__getRequest = fp_utils.getRequest
 
 
 class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
@@ -26,12 +31,11 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         self.loadZCML(package=plonemeeting.portal.core)
 
         # Patch collective.fingerpointing
-        from collective.fingerpointing import utils
 
         def patched_getRequest():
             return makeTestRequest(environ={})
 
-        utils.getRequest = patched_getRequest
+        fp_utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plonemeeting.portal.core:default")
