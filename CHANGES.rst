@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3.3 (unreleased)
+1.3.3 (2021-06-28)
 ------------------
 
 - Fixed long representative value ws not used.
