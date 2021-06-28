@@ -119,7 +119,7 @@ msgstr "Forcer le réimport de la séance"
 
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
-msgstr "Réimporter cette séance (lent)"
+msgstr "Réimporter toute cette séance (plus lent)"
 
 #: ../content/institution.py:102
 msgid "Formatting"
