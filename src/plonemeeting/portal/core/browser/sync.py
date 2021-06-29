@@ -204,7 +204,9 @@ def sync_items_data(meeting, items_data, institution, force=False):
         item.sortable_number = item_data.get("itemNumber")
         item.number = item_data.get("formatted_itemNumber")
 
-        item.representatives_in_charge = _get_mapped_representatives_in_charge(item_data, institution)
+        representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
+        item.representatives_in_charge = representative_uid
+        item.long_representatives_in_charge = representative_uid
 
         item.decision = richtextval(
             get_formatted_data_from_json(

@@ -52,13 +52,13 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 
 
 class RepresentativeVocabularyFactory:
-    def __call__(self, context):
+    def __call__(self, context, representative_value_key='representative_value'):
         institution = api.portal.get_navigation_root(context)
         mapping = getattr(institution, "representatives_mappings", [])
         return SimpleVocabulary(
             [
                 SimpleTerm(
-                    value=elem["representative_key"], title=elem["representative_value"]
+                    value=elem["representative_key"], title=elem[representative_value_key]
                 )
                 for elem in mapping
             ]
@@ -66,6 +66,14 @@ class RepresentativeVocabularyFactory:
 
 
 RepresentativeVocabulary = RepresentativeVocabularyFactory()
+
+
+class LongRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
+    def __call__(self, context):
+        return super(LongRepresentativeVocabularyFactory, self).__call__(context, 'representative_long_value')
+
+
+LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 
 
 class RemoteMeetingsVocabularyFactory:

@@ -42,23 +42,153 @@
       "item_decision_formatting_tal": "python: json['decision']['data']",
       "info_annex_formatting_tal": "",
       "item_title_formatting_tal": "",
+      "categories_mappings": [
+        {
+          "local_category_id": "administration",
+          "global_category_id": "administration"
+        },
+        {
+          "local_category_id": "immo",
+          "global_category_id": "immo"
+        },
+        {
+          "local_category_id": "espaces-publics",
+          "global_category_id": "espaces-publics"
+        },
+        {
+          "local_category_id": "batiments-communaux",
+          "global_category_id": "batiments-communaux"
+        },
+        {
+          "local_category_id": "animaux",
+          "global_category_id": "animaux"
+        },
+        {
+          "local_category_id": "communication",
+          "global_category_id": "communication"
+        },
+        {
+          "local_category_id": "cultes",
+          "global_category_id": "cultes"
+        },
+        {
+          "local_category_id": "culture",
+          "global_category_id": "culture"
+        },
+        {
+          "local_category_id": "economie",
+          "global_category_id": "economie"
+        },
+        {
+          "local_category_id": "enseignement",
+          "global_category_id": "enseignement"
+        },
+        {
+          "local_category_id": "population",
+          "global_category_id": "population"
+        },
+        {
+          "local_category_id": "finances",
+          "global_category_id": "finances"
+        },
+        {
+          "local_category_id": "informatique",
+          "global_category_id": "informatique"
+        },
+        {
+          "local_category_id": "interculturalite",
+          "global_category_id": "interculturalite"
+        },
+        {
+          "local_category_id": "jeunesse",
+          "global_category_id": "jeunesse"
+        },
+        {
+          "local_category_id": "logement",
+          "global_category_id": "logement"
+        },
+        {
+          "local_category_id": "mobilite",
+          "global_category_id": "mobilite"
+        },
+        {
+          "local_category_id": "quartier",
+          "global_category_id": "quartier"
+        },
+        {
+          "local_category_id": "patrimoine",
+          "global_category_id": "patrimoine"
+        },
+        {
+          "local_category_id": "enfance",
+          "global_category_id": "enfance"
+        },
+        {
+          "local_category_id": "politique",
+          "global_category_id": "politique"
+        },
+        {
+          "local_category_id": "environnement",
+          "global_category_id": "environnement"
+        },
+        {
+          "local_category_id": "sante",
+          "global_category_id": "sante"
+        },
+        {
+          "local_category_id": "securité",
+          "global_category_id": "securité"
+        },
+        {
+          "local_category_id": "social",
+          "global_category_id": "social"
+        },
+        {
+          "local_category_id": "sport",
+          "global_category_id": "sport"
+        },
+        {
+          "local_category_id": "tourisme",
+          "global_category_id": "tourisme"
+        },
+        {
+          "local_category_id": "urbanisme",
+          "global_category_id": "urbanisme"
+        },
+        {
+          "local_category_id": "police",
+          "global_category_id": "police"
+        }
+      ],
       "representatives_mappings": [
         {
-          "representative_key": "c162fa47-55c4-4d86-ba32-ca50c99fbc07",
+          "representative_key": "7a82fee367a0416f8d7e8f4a382db0d1",
           "representative_value": "Mr DUPONT",
           "representative_long_value": "Mr DUPONT Bourgmestre F.F.",
           "active": true
         },
         {
-          "representative_key": "d6565ab9-88b7-4a70-9a91-398cba1fd09b",
+          "representative_key": "a2396143f11f4e2292f12ee3b3447739",
           "representative_value": "Mr Dupuis",
           "representative_long_value": "Mr Dupuis 1ère Échevin",
           "active": true
         },
         {
-          "representative_key": "8c4e1a3d-6e45-4bd0-a52e-4084f52cf524",
+          "representative_key": "bf5fccd9bc9048e9957680c7ab5576b4",
           "representative_value": "Mr Oniz",
           "representative_long_value": "Mr Oniz, Échevin de l'éducation",
+          "active": true
+        },
+        {
+          "representative_key": "f3f9e7808ddb4e56946b2dba6370eb9b",
+          "representative_value": "Mr Baka",
+          "representative_long_value": "Mr Baka, Échevin de des sports",
+          "active": true
+        },
+        {
+          "representative_key": "5335715758dd4b07880d1b769c0501d8",
+          "representative_value": "Mr Kuro",
+          "representative_long_value": "Mr Kuro, Échevin de la culture",
           "active": true
         }
       ],
@@ -75,7 +205,7 @@
               "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -89,7 +219,7 @@
               "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "jeunesse",
@@ -103,7 +233,7 @@
               "plonemeeting_last_modified": "2018-12-20T18:25:43.511",
               "number": "2.1",
               "sortable_number": 210,
-              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "late",
               "category": "enseignement",
@@ -126,7 +256,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -140,7 +270,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -154,7 +284,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "3",
               "sortable_number": 300,
-              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "enseignement",
@@ -174,7 +304,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["c162fa47-55c4-4d86-ba32-ca50c99fbc07"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -188,7 +318,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["d6565ab9-88b7-4a70-9a91-398cba1fd09b"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -199,7 +329,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "3",
               "sortable_number": 300,
-              "representatives_in_charge": ["8c4e1a3d-6e45-4bd0-a52e-4084f52cf524"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "jeunesse",
@@ -223,27 +353,145 @@
       "item_decision_formatting_tal": "python: '{motivation}<p><b><u>DECIDE</u> :</b></p>{decision}'.format(motivation=json['motivation']['data'], decision=json['decision']['data'])",
       "info_annex_formatting_tal": "",
       "item_title_formatting_tal": "python: '{description}'.format(description=json['description']['data'])",
+      "categories_mappings": [
+        {
+          "local_category_id": "administration",
+          "global_category_id": "administration"
+        },
+        {
+          "local_category_id": "immo",
+          "global_category_id": "immo"
+        },
+        {
+          "local_category_id": "espaces-publics",
+          "global_category_id": "espaces-publics"
+        },
+        {
+          "local_category_id": "batiments-communaux",
+          "global_category_id": "batiments-communaux"
+        },
+        {
+          "local_category_id": "animaux",
+          "global_category_id": "animaux"
+        },
+        {
+          "local_category_id": "communication",
+          "global_category_id": "communication"
+        },
+        {
+          "local_category_id": "cultes",
+          "global_category_id": "cultes"
+        },
+        {
+          "local_category_id": "culture",
+          "global_category_id": "culture"
+        },
+        {
+          "local_category_id": "economie",
+          "global_category_id": "economie"
+        },
+        {
+          "local_category_id": "enseignement",
+          "global_category_id": "enseignement"
+        },
+        {
+          "local_category_id": "population",
+          "global_category_id": "population"
+        },
+        {
+          "local_category_id": "finances",
+          "global_category_id": "finances"
+        },
+        {
+          "local_category_id": "informatique",
+          "global_category_id": "informatique"
+        },
+        {
+          "local_category_id": "interculturalite",
+          "global_category_id": "interculturalite"
+        },
+        {
+          "local_category_id": "jeunesse",
+          "global_category_id": "jeunesse"
+        },
+        {
+          "local_category_id": "logement",
+          "global_category_id": "logement"
+        },
+        {
+          "local_category_id": "mobilite",
+          "global_category_id": "mobilite"
+        },
+        {
+          "local_category_id": "quartier",
+          "global_category_id": "quartier"
+        },
+        {
+          "local_category_id": "patrimoine",
+          "global_category_id": "patrimoine"
+        },
+        {
+          "local_category_id": "enfance",
+          "global_category_id": "enfance"
+        },
+        {
+          "local_category_id": "politique",
+          "global_category_id": "politique"
+        },
+        {
+          "local_category_id": "environnement",
+          "global_category_id": "environnement"
+        },
+        {
+          "local_category_id": "sante",
+          "global_category_id": "sante"
+        },
+        {
+          "local_category_id": "securité",
+          "global_category_id": "securité"
+        },
+        {
+          "local_category_id": "social",
+          "global_category_id": "social"
+        },
+        {
+          "local_category_id": "sport",
+          "global_category_id": "sport"
+        },
+        {
+          "local_category_id": "tourisme",
+          "global_category_id": "tourisme"
+        },
+        {
+          "local_category_id": "urbanisme",
+          "global_category_id": "urbanisme"
+        },
+        {
+          "local_category_id": "police",
+          "global_category_id": "police"
+        }
+      ],
       "representatives_mappings": [
         {
-          "representative_key": "381864c8-dc18-4a52-962c-8d0c677d3d3d",
+          "representative_key": "7a82fee367a0416f8d7e8f4a382db0d1",
           "representative_value": "Mme LOREM",
           "representative_long_value": "Mme LOREM Bourgmestre",
           "active": true
         },
         {
-          "representative_key": "12c8f011-e164-40c8-914b-f4f11b440ae8",
+          "representative_key": "a2396143f11f4e2292f12ee3b3447739",
           "representative_value": "Mme Ipsum",
           "representative_long_value": "Mme Ipsum 1ère Échevine",
           "active": true
         },
         {
-          "representative_key": "39d90590-a112-436a-80ff-d96c2082a553",
+          "representative_key": "bf5fccd9bc9048e9957680c7ab5576b4",
           "representative_value": "Mr Wara",
           "representative_long_value": "Mr Wara, Échevin du tourisme",
           "active": true
         },
         {
-          "representative_key": "8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+          "representative_key": "f3f9e7808ddb4e56946b2dba6370eb9b",
           "representative_value": "Mr Bara",
           "representative_long_value": "Mr Bara, Échevin du Développement économique",
           "active": true
@@ -263,7 +511,7 @@
               "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -277,7 +525,7 @@
               "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",
@@ -288,7 +536,7 @@
               "plonemeeting_last_modified": "2018-11-16T08:30:00.511",
               "number": "2.1",
               "sortable_number": 210,
-              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "late",
               "category": "tourisme",
@@ -311,7 +559,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -325,7 +573,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -336,7 +584,7 @@
               "plonemeeting_last_modified": "2019-03-13T18:00:00.000",
               "number": "3",
               "sortable_number": 300,
-              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",
@@ -356,7 +604,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "1",
               "sortable_number": 100,
-              "representatives_in_charge": ["381864c8-dc18-4a52-962c-8d0c677d3d3d"],
+              "representatives_in_charge": ["7a82fee367a0416f8d7e8f4a382db0d1"],
               "decision": "<p>Le Conseil Communal <u><strong> approuve à l'unanimité </strong></ul>  le procès-verbal de la séance du <em>XXX</em>.</p>",
               "item_type": "normal",
               "category": "administration",
@@ -371,7 +619,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "2",
               "sortable_number": 200,
-              "representatives_in_charge": ["12c8f011-e164-40c8-914b-f4f11b440ae8"],
+              "representatives_in_charge": ["a2396143f11f4e2292f12ee3b3447739"],
               "decision": "<p>Considérant XXXXXXXXXX;</p><p>Vu XXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "urbanisme",
@@ -385,7 +633,7 @@
               "plonemeeting_last_modified": "2020-03-13T18:00:00.000",
               "number": "3",
               "sortable_number": 300,
-              "representatives_in_charge": ["39d90590-a112-436a-80ff-d96c2082a553"],
+              "representatives_in_charge": ["bf5fccd9bc9048e9957680c7ab5576b4"],
               "decision": "<p>Considérant qu’il y a lieu de XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la circulaire N° XXXXXXXXXXXXXXXXXXXXX;</p><p>Vu la proposition du directeur concerné de XXXXXXXXXXXXXXXXXXXX;</p><p>Vu le décret de XXXXXXXXXXXXXXXXXXXX en datetime du XX/XX/XXX;</p><p>Vu la loi du XX mai 1959 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;</p><p>Vu l’avis favorable de l’Échevin de la matière; </p><p>Le Conseil Communal <u><strong> DÉCIDE </strong></ul> <strong>: </strong></p><p><em><strong>Article 1er </strong></em><strong> : </strong></p><p>Au scrutin secret et à l’unanimité, de XXXXXXXXXXXXXXXXXX.</p><p><em><strong>Article 2 </strong></em><strong> : </strong></p><p>XXXXXXXXXXXXXXXXXXXXXXXXX.</p><p><strong><em>Article 3</em> :</strong></p><p>La présente délibération sera soumise à la ratification du Conseil Communal. Elle sera transmise à la direction concernée.</p>",
               "item_type": "normal",
               "category": "tourisme",

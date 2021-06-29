@@ -47,6 +47,9 @@ class PmPortalTestCase(unittest.TestCase):
     def login_as_test(self):
         login(self.portal, TEST_USER_NAME)
 
+    def logout(self):
+        logout()
+
     def create_object(self, portal_type, container=None):
         if not container:
             container = self.portal

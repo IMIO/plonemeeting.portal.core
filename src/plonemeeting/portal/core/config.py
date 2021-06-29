@@ -3,6 +3,8 @@ from plonemeeting.portal.core import _
 
 CONFIG_FOLDER_ID = "config"
 FACETED_FOLDER_ID = "faceted"
+FACETED_XML_PATH = "faceted/config/items.xml"
+APP_FOLDER_ID = "meetings"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]
 

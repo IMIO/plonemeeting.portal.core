@@ -76,6 +76,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def test_get_api_url_for_meeting_items(self):
         # test empty category_mappings
+        self.belleville.categories_mappings = None
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search?"
@@ -96,10 +97,10 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
             "&getCategory=VOID"
-            "&getGroupsInCharge=381864c8-dc18-4a52-962c-8d0c677d3d3d"
-            "&getGroupsInCharge=12c8f011-e164-40c8-914b-f4f11b440ae8"
-            "&getGroupsInCharge=39d90590-a112-436a-80ff-d96c2082a553"
-            "&getGroupsInCharge=8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+            "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
+            "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
+            "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
             url,
         )
         self.belleville.delib_category_field = "classifier"
@@ -123,10 +124,10 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
             "&getRawClassifier=VOID"
-            "&getGroupsInCharge=381864c8-dc18-4a52-962c-8d0c677d3d3d"
-            "&getGroupsInCharge=12c8f011-e164-40c8-914b-f4f11b440ae8"
-            "&getGroupsInCharge=39d90590-a112-436a-80ff-d96c2082a553"
-            "&getGroupsInCharge=8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+            "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
+            "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
+            "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
             url,
         )
         self.belleville.categories_mappings = [{'local_category_id': 'administration',
@@ -154,10 +155,10 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted_but_modified"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
-            "&getGroupsInCharge=381864c8-dc18-4a52-962c-8d0c677d3d3d"
-            "&getGroupsInCharge=12c8f011-e164-40c8-914b-f4f11b440ae8"
-            "&getGroupsInCharge=39d90590-a112-436a-80ff-d96c2082a553"
-            "&getGroupsInCharge=8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+            "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
+            "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
+            "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
             url,
         )
         self.belleville.delib_category_field = "category"
@@ -182,10 +183,10 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted_but_modified"
             "&getCategory=administration"
             "&getCategory=immo"
-            "&getGroupsInCharge=381864c8-dc18-4a52-962c-8d0c677d3d3d"
-            "&getGroupsInCharge=12c8f011-e164-40c8-914b-f4f11b440ae8"
-            "&getGroupsInCharge=39d90590-a112-436a-80ff-d96c2082a553"
-            "&getGroupsInCharge=8388cf29-6f4b-4910-b8fd-7be5e14f5175",
+            "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
+            "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
+            "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
             url,
         )
 
@@ -252,15 +253,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(utils.get_api_url_for_meeting_items(institution, "foo"))
 
     def test_create_faceted_folder(self):
-        faceted = utils.create_faceted_folder(self.portal, "Test Faceted")
-        self.assertEqual("Test Faceted", faceted.title)
-        self.assertEqual("test-faceted", faceted.id)
-        IFacetedNavigable.providedBy(faceted)
-
-    def test_create_faceted_folder_with_id(self):
         faceted = utils.create_faceted_folder(
-            self.portal, "Test Faceted", id="test-faceted"
-        )
+            self.portal, "Test Faceted", id="test-faceted")
         self.assertEqual("Test Faceted", faceted.title)
         self.assertEqual("test-faceted", faceted.id)
         IFacetedNavigable.providedBy(faceted)

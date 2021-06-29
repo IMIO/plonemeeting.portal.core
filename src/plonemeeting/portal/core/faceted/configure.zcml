@@ -7,11 +7,6 @@
   <include package=".widgets" />
 
   <adapter
-    for="plonemeeting.portal.core.interfaces.IItemsFolder"
-    provides="eea.facetednavigation.interfaces.ICriteria"
-    factory=".criteria.ItemsCriteria" />
-
-  <adapter
     for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
     provides="eea.facetednavigation.interfaces.ICriteria"
     factory=".criteria.MeetingsCriteria" />

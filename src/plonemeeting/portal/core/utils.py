@@ -113,8 +113,8 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
-    # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     representatives_filter = _get_representatives_filter_url(institution)
+    # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     url = (
         "{0}/@search?"
         "type={1}"
@@ -151,23 +151,20 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
     return url
 
 
-def create_faceted_folder(container, title, id=None):
-    if id:
-        folder = api.content.create(
-            type="Folder", title=title, container=container, id=id
-        )
-    else:
-        folder = api.content.create(type="Folder", title=title, container=container)
+def create_faceted_folder(container, title, id):
+    folder = api.content.create(
+        type="Folder", title=title, container=container, id=id
+    )
     subtyper = folder.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
     return folder
 
 
-def set_constrain_types(obj, list_contraint):
+def set_constrain_types(obj, portal_type_ids):
     behavior = ISelectableConstrainTypes(obj)
     behavior.setConstrainTypesMode(1)
-    behavior.setImmediatelyAddableTypes(list_contraint)
-    behavior.setLocallyAllowedTypes(list_contraint)
+    behavior.setImmediatelyAddableTypes(portal_type_ids)
+    behavior.setLocallyAllowedTypes(portal_type_ids)
 
 
 def cleanup_contents():

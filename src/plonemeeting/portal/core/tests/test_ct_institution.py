@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone import api
 from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
 from plone.dexterity.interfaces import IDexterityFTI
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
@@ -49,6 +51,17 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             u"IInstitution not provided by {0}!".format(obj.id),
         )
 
+        faceted_folders = obj.listFolderContents()
+        self.assertEqual(len(faceted_folders), 1)
+        meetings = faceted_folders[0]
+        constraints = ISelectableConstrainTypes(meetings)
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+
+        agenda = api.content.create(obj, "Folder", "agenda")
+        constraints = ISelectableConstrainTypes(agenda)
+        self.assertListEqual(['Document', 'Folder', 'File', 'Image'],
+                             constraints.getLocallyAllowedTypes())
+
         # check that deleting the object works too
         parent = obj.__parent__
         self.assertIn("institution", parent.objectIds())
@@ -79,26 +92,26 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         institution = api.content.create(
             container=self.portal, type="Institution", id="test"
         )
+
         self.assertEqual(get_state(institution), 'private')
         meeting = api.content.create(
             container=institution, type="Meeting", id="test-meeting"
         )
         self.assertEqual(get_state(meeting), 'private')
 
-        meetings_folder, decisions_folder = institution.listFolderContents()[0:2]
+        self.assertEqual(institution.listFolderContents({"portal_type": "Folder"}),
+                         [institution.get(APP_FOLDER_ID)])
+        meetings_folder = institution.listFolderContents()[0]
         self.assertEqual(get_state(meetings_folder), 'private')
-        self.assertEqual(get_state(decisions_folder), 'private')
 
         api.content.transition(institution, to_state='published')
         self.assertEqual(get_state(institution), 'published')
         self.assertEqual(get_state(meetings_folder), 'published')
-        self.assertEqual(get_state(decisions_folder), 'published')
         self.assertEqual(get_state(meeting), 'private')
 
         api.content.transition(institution, to_state='private')
         self.assertEqual(get_state(institution), 'private')
         self.assertEqual(get_state(meetings_folder), 'private')
-        self.assertEqual(get_state(decisions_folder), 'private')
         self.assertEqual(get_state(meeting), 'private')
 
         agenda_folder = api.content.create(type="Folder",
@@ -109,7 +122,6 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         api.content.transition(institution, to_state='published')
         self.assertEqual(get_state(institution), 'published')
         self.assertEqual(get_state(meetings_folder), 'published')
-        self.assertEqual(get_state(decisions_folder), 'published')
         self.assertEqual(get_state(agenda_folder), 'published')
         self.assertEqual(get_state(meeting), 'private')
 
@@ -118,6 +130,5 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         api.content.transition(institution, to_state='private')
         self.assertEqual(get_state(institution), 'private')
         self.assertEqual(get_state(meetings_folder), 'private')
-        self.assertEqual(get_state(decisions_folder), 'private')
         self.assertEqual(get_state(agenda_folder), 'private')
         self.assertEqual(get_state(meeting), 'private')

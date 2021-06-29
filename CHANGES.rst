@@ -2,11 +2,29 @@ Changelog
 =========
 
 
-1.3.3 (unreleased)
+1.3.4 (unreleased)
 ------------------
 
 - Adapted code to receive the smallest JSON possible by using
   include parameters in the json query.
+- Fixed applying the demo profile at new Plone Site creation time.
+  This was due to BrowserLayers still not initialized, in this case we mark the
+  `REQUEST` with registred `BrowserLayers` ourselves.
+  [gbastien]
+
+
+1.3.3 (2021-06-28)
+------------------
+
+- Fixed long representative value ws not used.
+  [odelaere]
+- Fixed error while compiling rules.xml by institution manager.
+  [gbastien]
+- Fix type constraints on Folder content type and faceted folders.
+  [odelaere]
+- Merged faceted folders in `Institution , `meetings` and `decisions` were
+  merged and only `meetings` folder is kept, new faceted behavior
+  is a mix of old behaviors.
   [gbastien]
 
 
