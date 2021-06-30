@@ -9,6 +9,10 @@ Changelog
   [odelaere]
 - Added automatic initialization of categories mapping.
   [odelaere]
+- Fixed applying the demo profile at new Plone Site creation time.
+  This was due to BrowserLayers still not initialized, in this case we mark the
+  `REQUEST` with registred `BrowserLayers` ourselves.
+  [gbastien]
 
 
 1.3.3 (2021-06-28)

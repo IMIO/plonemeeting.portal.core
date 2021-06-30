@@ -1,32 +1,32 @@
 # -*- coding: utf-8 -*-
-import mimetypes
-
-from Products.CMFPlone.interfaces import INonInstallable
 from imio.helpers.content import richtextval
 from plone import api
 from plone.api import content
+from plone.app.contenttypes.interfaces import IPloneAppContenttypesLayer
+from plone.browserlayer.layer import mark_layer
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
-from zope.component import getUtility
-from zope.i18n import translate
-from zope.interface import implementer
-
-import dateutil.parser
-import json
-import os
-
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_XML_PATH
-from plonemeeting.portal.core.utils import (
-    cleanup_contents,
-    format_institution_managers_group_id,
-)
+from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
+from Products.CMFPlone.interfaces import INonInstallable
+from zope.component import getUtility
+from zope.i18n import translate
+from zope.interface import implementer
+from zope.traversing.interfaces import BeforeTraverseEvent
+
+import dateutil.parser
+import json
+import mimetypes
+import os
 
 
 @implementer(INonInstallable)
@@ -96,6 +96,18 @@ def create_demo_content(context):
     :param context:
     """
     portal = api.portal.get()
+    request = portal.REQUEST
+    # make sure the plone.app.contenttypes BrowserLayer is enabled
+    # because it is needed to create demo content (to get @@file_view)
+    # when demo content added at Plone Site creation time
+    # the plone.app.contenttypes BrowserLayer is not enabled
+    if not IPloneAppContenttypesLayer.providedBy(request):
+        logger.warn("IPloneAppContenttypesLayer not enable on REQUEST, enabling it.")
+        event = BeforeTraverseEvent(portal, request)
+        mark_layer(portal, event)
+    else:
+        logger.info("IPloneAppContenttypesLayer already enabled on REQUEST.")
+
     current_dir = os.path.abspath(os.path.dirname(__file__))
     json_path = os.path.join(current_dir, "profiles/demo/data/data.json")
 
