@@ -26,7 +26,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         request = self.portal.REQUEST
         request.set('PUBLISHED', institution_edit_form)
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
-        institution_edit_form.update()
+        institution_edit_form()
         self.assertListEqual([('travaux', 'Travaux'),
                               ('urbanisme', 'Urbanisme'),
                               ('comptabilite', 'Comptabilité'),
@@ -40,5 +40,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         institution_edit_form.handleApply(institution_edit_form, None)
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
+        institution_edit_form.update()
+        self.assertFalse(hasattr(self.belleville, "delib_categories"))
         # todo : find a way to test that delib_category are not fetched on field validation
         #        nor when any action are executed after the first load.
