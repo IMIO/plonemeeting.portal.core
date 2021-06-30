@@ -243,7 +243,6 @@ class Institution(Container):
     """
     def fetch_delib_categories(self):
         categories = []
-        logger.info("Fetch request delib categories for {}".format(self.title))
         if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
             delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
             url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(
@@ -251,7 +250,7 @@ class Institution(Container):
                 meeting_config_id=self.meeting_config_id,
                 delib_category_field=delib_config_category_field
             )
-            logger.info("Fetching delib categories for {}".format(self.title))
+            logger.info("Fetching delib categories for {} [Start]".format(self.title))
             response = requests.get(
                 url, auth=(self.username, self.password), headers=API_HEADERS
             )
@@ -261,4 +260,5 @@ class Institution(Container):
             for cat in cat_json:
                 categories.append((cat['id'], cat['title']))
             self.delib_categories = categories
+            logger.info("Fetching delib categories for {} [End]".format(self.title))
         return categories

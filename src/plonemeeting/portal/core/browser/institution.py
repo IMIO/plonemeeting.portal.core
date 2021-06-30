@@ -69,11 +69,13 @@ class AddView(add.DefaultAddView):
 class EditForm(edit.DefaultEditForm):
     portal_type = "Institution"
 
-    def update(self):
-        self.updateActions()
-        if not self.actions.executedActions and '@@z3cform_validate_field' not in self.action:
+    def __call__(self):
+        """ """
+        # initializing form, we only have the _authenticator in request.form
+        form_keys = tuple(self.request.form.keys())
+        if not form_keys or form_keys == ('_authenticator',):
             self.context.fetch_delib_categories()
-        super(EditForm, self).update()
+        return super(EditForm, self).__call__()
 
     def updateFields(self):
         super(EditForm, self).updateFields()

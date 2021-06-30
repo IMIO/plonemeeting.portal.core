@@ -94,7 +94,22 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertListEqual([('admin', 'Administrative'),
                               ('political', 'Political')],
                              belleville.delib_categories)
-        verify(requests, times=1).get(...)
+        verify(requests, times=1).get(url, auth=auth, headers=headers)
+
+        # edit the institution, only fetched one time
+        self.login_as_manager()
+        institution_edit_form = belleville.restrictedTraverse("@@edit")
+        request = self.portal.REQUEST
+        request.set('PUBLISHED', institution_edit_form)
+        institution_edit_form()
+        # was fetch a second time
+        verify(requests, times=2).get(url, auth=auth, headers=headers)
+        # if any kind of data submitted, categories are no more fetched
+        request.form["form.widgets.IBasic.title"] = "New Belleville title"
+        institution_edit_form()
+        verify(requests, times=2).get(url, auth=auth, headers=headers)
+        # submit
+
         unstub()
 
         url = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=classifiers'
