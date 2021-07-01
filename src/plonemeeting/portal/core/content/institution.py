@@ -17,7 +17,7 @@ from zope.interface import implementer
 from zope.schema import ValidationError
 
 from plonemeeting.portal.core import _, logger
-from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.utils import default_translator, get_api_url_for_categories
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 
 
@@ -245,20 +245,18 @@ class Institution(Container):
         categories = []
         if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
             delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
-            url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(
-                plonemeeting_url=self.plonemeeting_url,
-                meeting_config_id=self.meeting_config_id,
-                delib_category_field=delib_config_category_field
-            )
-            logger.info("Fetching delib categories for {} [Start]".format(self.title))
-            response = requests.get(
-                url, auth=(self.username, self.password), headers=API_HEADERS
-            )
-            json = response.json()
-            cat_json = json["extra_include_{categories}".format(categories=delib_config_category_field)]
+            url = get_api_url_for_categories(self, delib_config_category_field)
+            if url:
+                logger.info("Fetching delib categories for {} [Start]".format(self.title))
+                response = requests.get(
+                    url, auth=(self.username, self.password), headers=API_HEADERS
+                )
+                delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+                json = response.json()
+                cat_json = json["extra_include_{categories}".format(categories=delib_config_category_field)]
 
-            for cat in cat_json:
-                categories.append((cat['id'], cat['title']))
-            self.delib_categories = categories
-            logger.info("Fetching delib categories for {} [End]".format(self.title))
+                for cat in cat_json:
+                    categories.append((cat['id'], cat['title']))
+                self.delib_categories = categories
+                logger.info("Fetching delib categories for {} [End]".format(self.title))
         return categories
