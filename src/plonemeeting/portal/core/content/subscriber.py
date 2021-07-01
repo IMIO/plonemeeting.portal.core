@@ -49,10 +49,10 @@ def handle_institution_modified(institution, event):
         global_categories = [cat for cat in get_registry_record(name="plonemeeting.portal.core.global_categories")]
         local_categories = [cat[0] for cat in institution.delib_categories]
         categories_mappings = []
-        for local_categorie in local_categories:
-            if local_categorie in global_categories:
-                categories_mappings.append({"local_category_id": local_categorie,
-                                            "global_category_id": local_categorie})
+        for local_category in local_categories:
+            if local_category in global_categories:
+                categories_mappings.append({"local_category_id": local_category,
+                                            "global_category_id": local_category})
         institution.categories_mappings = categories_mappings
         logger.info("{} fetched iA.Delib categories matched.".format(len(categories_mappings)))
 

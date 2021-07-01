@@ -108,12 +108,9 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         request.form["form.widgets.IBasic.title"] = "New Belleville title"
         institution_edit_form()
         verify(requests, times=2).get(url, auth=auth, headers=headers)
-        # submit
-
         unstub()
 
         url = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=classifiers'
-
         when(requests).get(url, auth=auth, headers=headers).thenReturn(
             mock({'status_code': 200, 'json': lambda: json_classifiers}))
 
