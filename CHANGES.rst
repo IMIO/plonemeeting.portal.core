@@ -5,6 +5,10 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
+- Query categories from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
+- Added automatic initialization of categories mapping.
+  [odelaere]
 - Fixed applying the demo profile at new Plone Site creation time.
   This was due to BrowserLayers still not initialized, in this case we mark the
   `REQUEST` with registred `BrowserLayers` ourselves.
@@ -20,7 +24,7 @@ Changelog
   [gbastien]
 - Fix type constraints on Folder content type and faceted folders.
   [odelaere]
-- Merged faceted folders in `Institution , `meetings` and `decisions` were
+- Merged faceted folders in `Institution` , `meetings` and `decisions` were
   merged and only `meetings` folder is kept, new faceted behavior
   is a mix of old behaviors.
   [gbastien]
@@ -57,6 +61,7 @@ Changelog
   `Products.PortalTransforms.safe_html.hasScript` function to accept
   `data:image` base64 value.
   [gbastien]
+
 
 
 1.3.1 (2021-04-29)

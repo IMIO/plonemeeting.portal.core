@@ -22,7 +22,11 @@
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
         handler=".subscriber.handle_institution_creation"
         />
-
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".subscriber.handle_institution_modified"
+        />
     <subscriber
         for="plonemeeting.portal.core.content.institution.IInstitution
              Products.DCWorkflow.interfaces.IAfterTransitionEvent"
