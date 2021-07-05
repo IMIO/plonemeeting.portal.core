@@ -13,6 +13,8 @@ Changelog
   This was due to BrowserLayers still not initialized, in this case we mark the
   `REQUEST` with registred `BrowserLayers` ourselves.
   [gbastien]
+- Added default value for `Institution.meeting_config_id`
+  [odelaere]
 
 
 1.3.3 (2021-06-28)

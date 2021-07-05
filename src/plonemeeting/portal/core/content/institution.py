@@ -80,7 +80,7 @@ class IInstitution(model.Schema):
 
     password = schema.TextLine(title=_(u"Password"), required=False)
 
-    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
+    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
