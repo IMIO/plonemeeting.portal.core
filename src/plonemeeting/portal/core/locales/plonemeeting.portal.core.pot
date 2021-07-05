@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-07-05 09:45+0000\n"
+"POT-Creation-Date: 2021-07-05 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../content/institution.py:71
+#: ../content/institution.py:74
 msgid "Active"
 msgstr ""
 
-#: ../content/institution.py:94
+#: ../content/institution.py:97
 msgid "Additional Meeting query string for list"
 msgstr ""
 
-#: ../content/institution.py:101
+#: ../content/institution.py:105
 msgid "Additional Published Items query string"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../content/institution.py:159
+#: ../content/institution.py:164
 msgid "Categories mappings"
 msgstr ""
 
@@ -104,11 +104,11 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../content/institution.py:225
+#: ../content/institution.py:232
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:233
+#: ../content/institution.py:240
 msgid "Footer text color"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Force reimport this meeting"
 msgstr ""
 
-#: ../content/institution.py:109
+#: ../content/institution.py:114
 msgid "Formatting"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
-#: ../content/institution.py:193
+#: ../content/institution.py:200
 msgid "Header color"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Import meeting"
 msgstr ""
 
-#: ../content/institution.py:137
+#: ../content/institution.py:142
 msgid "Info annex formatting tal expression"
 msgstr ""
 
@@ -177,11 +177,11 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../content/institution.py:133
+#: ../content/institution.py:138
 msgid "Item additional data formatting tal expression"
 msgstr ""
 
-#: ../content/institution.py:127
+#: ../content/institution.py:132
 msgid "Item decision formatting tal expression"
 msgstr ""
 
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Item number"
 msgstr ""
 
-#: ../content/institution.py:119
+#: ../content/institution.py:124
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Last modification in iA.Delib"
 msgstr ""
 
-#: ../content/institution.py:217
+#: ../content/institution.py:224
 msgid "Links text color"
 msgstr ""
 
@@ -213,11 +213,11 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:189
+#: ../content/institution.py:196
 msgid "Logo"
 msgstr ""
 
-#: ../content/institution.py:143
+#: ../content/institution.py:148
 msgid "Mapping"
 msgstr ""
 
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Meeting"
 msgstr ""
 
-#: ../content/institution.py:83
+#: ../content/institution.py:86
 msgid "Meeting config ID"
 msgstr ""
 
@@ -238,11 +238,11 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
-#: ../content/institution.py:201
+#: ../content/institution.py:208
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:209
+#: ../content/institution.py:216
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../content/institution.py:81
+#: ../content/institution.py:84
 msgid "Password"
 msgstr ""
 
@@ -258,11 +258,11 @@ msgstr ""
 msgid "Passwords must be at least 8 characters in length."
 msgstr ""
 
-#: ../content/institution.py:77
+#: ../content/institution.py:80
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../content/institution.py:86
+#: ../content/institution.py:89
 msgid "Project decision disclaimer"
 msgstr ""
 
@@ -288,15 +288,15 @@ msgstr ""
 msgid "Representative key"
 msgstr ""
 
-#: ../content/institution.py:70
+#: ../content/institution.py:72
 msgid "Representative long values"
 msgstr ""
 
-#: ../content/institution.py:69
+#: ../content/institution.py:70
 msgid "Representative value"
 msgstr ""
 
-#: ../content/institution.py:166
+#: ../content/institution.py:172
 msgid "Representatives mappings"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgstr ""
 msgid "Sortable Item number"
 msgstr ""
 
-#: ../content/institution.py:177
+#: ../content/institution.py:184
 msgid "Styling"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Update meeting"
 msgstr ""
 
-#: ../content/institution.py:79
+#: ../content/institution.py:82
 msgid "Username"
 msgstr ""
 
@@ -352,6 +352,18 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
+#: ../content/institution.py:98
+msgid "additional_meeting_query_string_for_list_description"
+msgstr ""
+
+#: ../content/institution.py:106
+msgid "additional_published_items_query_string_description"
+msgstr ""
+
+#: ../content/institution.py:165
+msgid "categories_mappings_description"
+msgstr ""
+
 #: ../config.py:21
 msgid "category"
 msgstr ""
@@ -364,11 +376,11 @@ msgstr ""
 msgid "decision"
 msgstr ""
 
-#: ../content/institution.py:89
+#: ../content/institution.py:92
 msgid "default_in_project_disclaimer"
 msgstr ""
 
-#: ../content/institution.py:151
+#: ../content/institution.py:156
 msgid "iA.Delib field to use for category mapping"
 msgstr ""
 
@@ -395,4 +407,20 @@ msgstr ""
 
 #: ../config.py:17
 msgid "private"
+msgstr ""
+
+#: ../content/institution.py:69
+msgid "representative_key_description"
+msgstr ""
+
+#: ../content/institution.py:73
+msgid "representative_long_value_description"
+msgstr ""
+
+#: ../content/institution.py:71
+msgid "representative_value_description"
+msgstr ""
+
+#: ../content/institution.py:173
+msgid "representatives_mappings_description"
 msgstr ""

@@ -65,9 +65,12 @@ class ICategoryMappingRowSchema(Interface):
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.TextLine(title=_(u"Representative key"))
-    representative_value = schema.TextLine(title=_(u"Representative value"))
-    representative_long_value = schema.TextLine(title=_(u"Representative long values"))
+    representative_key = schema.TextLine(title=_(u"Representative key"),
+                                         description=_(u"representative_key_description"))
+    representative_value = schema.TextLine(title=_(u"Representative value"),
+                                           description=_(u"representative_value_description"))
+    representative_long_value = schema.TextLine(title=_(u"Representative long values"),
+                                                description=_(u"representative_long_value_description"))
     active = schema.Bool(title=_(u"Active"), default=True)
 
 
@@ -92,6 +95,7 @@ class IInstitution(model.Schema):
 
     additional_meeting_query_string_for_list = schema.TextLine(
         title=_(u"Additional Meeting query string for list"),
+        description=_(u"additional_meeting_query_string_for_list_description"),
         required=True,
         constraint=validate_url_parameters,
         default="&review_state=frozen&review_state=decided"
@@ -99,6 +103,7 @@ class IInstitution(model.Schema):
 
     additional_published_items_query_string = schema.TextLine(
         title=_(u"Additional Published Items query string"),
+        description=_(u"additional_published_items_query_string_description"),
         required=True,
         constraint=validate_url_parameters,
         default="&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified"
@@ -157,6 +162,7 @@ class IInstitution(model.Schema):
     directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
+        description=_(u"categories_mappings_description"),
         value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
         required=False,
     )
@@ -164,6 +170,7 @@ class IInstitution(model.Schema):
     directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True)
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
+        description=_(u"representatives_mappings_description"),
         value_type=DictRow(
             title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
         ),

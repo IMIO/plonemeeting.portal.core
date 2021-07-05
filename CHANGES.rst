@@ -15,6 +15,8 @@ Changelog
   [gbastien]
 - Added default value for `Institution.meeting_config_id`
   [odelaere]
+- Improved translations in Institution edit form.
+  [odelaere]
 
 
 1.3.3 (2021-06-28)
