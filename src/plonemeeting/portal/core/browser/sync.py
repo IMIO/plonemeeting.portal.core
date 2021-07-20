@@ -201,8 +201,10 @@ def sync_items_data(meeting, items_data, institution, force=False):
         else:
             item.formatted_title = richtextval("<p>" + item_title + "</p>")
 
-        item.sortable_number = item_data.get("itemNumber")
-        item.number = item_data.get("formatted_itemNumber")
+        # do not use get to get itemNumber/formatted_itemNumber as these are
+        # required data, we must make sure it is present in item_data
+        item.sortable_number = item_data["itemNumber"]
+        item.number = item_data["formatted_itemNumber"]
 
         representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
         item.representatives_in_charge = representative_uid
