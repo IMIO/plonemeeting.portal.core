@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
+import requests
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.textfield import RichText
@@ -8,14 +9,15 @@ from plone.dexterity.content import Container
 from plone.autoform import directives
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD, API_HEADERS, \
+    CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
 from zope.schema import ValidationError
 
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core import _, logger
+from plonemeeting.portal.core.utils import default_translator, get_api_url_for_categories
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 
 
@@ -50,7 +52,11 @@ def validate_color_parameters(value):
 
 
 class ICategoryMappingRowSchema(Interface):
-    local_category_id = schema.TextLine(title=_(u"Local category id"))
+    local_category_id = schema.Choice(
+        title=_(u"Local category id"),
+        vocabulary="plonemeeting.portal.vocabularies.local_categories",
+        required=True,
+    )
     global_category_id = schema.Choice(
         title=_(u"Global category"),
         vocabulary="plonemeeting.portal.vocabularies.global_categories",
@@ -68,14 +74,13 @@ class IRepresentativeMappingRowSchema(Interface):
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
-
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)
 
     password = schema.TextLine(title=_(u"Password"), required=False)
 
-    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=False)
+    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
@@ -236,3 +241,22 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
+    def fetch_delib_categories(self):
+        categories = []
+        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
+            delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+            url = get_api_url_for_categories(self, delib_config_category_field)
+            if url:
+                logger.info("Fetching delib categories for {} [Start]".format(self.title))
+                response = requests.get(
+                    url, auth=(self.username, self.password), headers=API_HEADERS
+                )
+                delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+                json = response.json()
+                cat_json = json["extra_include_{categories}".format(categories=delib_config_category_field)]
+
+                for cat in cat_json:
+                    categories.append((cat['id'], cat['title']))
+                self.delib_categories = categories
+                logger.info("Fetching delib categories for {} [End]".format(self.title))
+        return categories

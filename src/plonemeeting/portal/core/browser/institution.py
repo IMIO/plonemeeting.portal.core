@@ -69,6 +69,14 @@ class AddView(add.DefaultAddView):
 class EditForm(edit.DefaultEditForm):
     portal_type = "Institution"
 
+    def __call__(self):
+        """ """
+        # initializing form, we only have the _authenticator in request.form
+        form_keys = tuple(self.request.form.keys())
+        if not form_keys or form_keys == ('_authenticator',):
+            self.context.fetch_delib_categories()
+        return super(EditForm, self).__call__()
+
     def updateFields(self):
         super(EditForm, self).updateFields()
 

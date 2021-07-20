@@ -3,6 +3,7 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone import api
 from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
+from plone.api.portal import get_registry_record
 from plone.dexterity.interfaces import IDexterityFTI
 from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.content.institution import IInstitution
@@ -10,6 +11,8 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from zope.component import createObject
 from zope.component import queryUtility
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 
 class InstitutionIntegrationTest(PmPortalTestCase):
@@ -132,3 +135,51 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(meetings_folder), 'private')
         self.assertEqual(get_state(agenda_folder), 'private')
         self.assertEqual(get_state(meeting), 'private')
+
+    def test_ct_institution_modified(self):
+        self.login_as_manager()
+
+        self.portal.portal_setup.runAllImportStepsFromProfile("profile-plonemeeting.portal.core:demo")
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution"
+        )
+        self.assertFalse(hasattr(institution, "delib_categories"))
+        self.assertIsNone(institution.categories_mappings)
+
+        global_categories = get_registry_record(name="plonemeeting.portal.core.global_categories")
+        institution.delib_categories = [(cat_id, global_categories[cat_id]) for cat_id in global_categories]
+        notify(ObjectModifiedEvent(institution))
+        self.assertEqual(len(institution.categories_mappings), len(institution.delib_categories))
+        self.assertListEqual(institution.categories_mappings,
+                             [{"local_category_id": cat, "global_category_id": cat}
+                              for cat in global_categories])
+        # if categories_mappings is already initialized it is not overridden
+        institution.delib_categories = [("administration", "Cat1"),
+                                        ("animaux", "Cat2"),
+                                        ("cultes", "Cat3"),
+                                        ("finances", "Cat4")]
+        notify(ObjectModifiedEvent(institution))
+        self.assertListEqual(institution.categories_mappings,
+                             [{"local_category_id": cat, "global_category_id": cat}
+                              for cat in global_categories])
+        # now categories_mappings will be initialized with the new value
+        institution.categories_mappings = []
+        notify(ObjectModifiedEvent(institution))
+        self.assertListEqual(institution.categories_mappings,
+                             [{"local_category_id": "administration", "global_category_id": "administration"},
+                              {"local_category_id": "animaux", "global_category_id": "animaux"},
+                              {"local_category_id": "cultes", "global_category_id": "cultes"},
+                              {"local_category_id": "finances", "global_category_id": "finances"}])
+        # only matching ids are kept
+        institution.delib_categories = [("massa", "quis"),
+                                        ("vitae", "vel"),
+                                        ("animaux", "Cat2"),
+                                        ("tortor", "eros"),
+                                        ("condimentum", "donec"),
+                                        ("cultes", "Cat3"),
+                                        ("lacinia", "ac")]
+        institution.categories_mappings = []
+        notify(ObjectModifiedEvent(institution))
+        self.assertListEqual(institution.categories_mappings,
+                             [{"local_category_id": "animaux", "global_category_id": "animaux"},
+                              {"local_category_id": "cultes", "global_category_id": "cultes"}])

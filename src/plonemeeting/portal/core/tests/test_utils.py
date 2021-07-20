@@ -322,3 +322,16 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertEqual(
             french_custom_formated_meeting_date, u"Mardi 31 Décembre 2019 — Privé"
         )
+
+    def test_get_api_url_for_categories(self):
+        url = utils.get_api_url_for_categories(self.belleville, "foo")
+        self.assertEqual(
+            "https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=foo",
+            url,
+        )
+        self.belleville.plonemeeting_url = None
+        self.assertIsNone(utils.get_api_url_for_categories(self.belleville, "foo"))
+
+        self.belleville.plonemeeting_url = "https://demo-pm.imio.be"
+        self.belleville.meeting_config_id = None
+        self.assertIsNone(utils.get_api_url_for_categories(self.belleville, "foo"))

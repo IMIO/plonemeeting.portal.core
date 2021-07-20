@@ -151,6 +151,18 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
     return url
 
 
+def get_api_url_for_categories(institution, delib_config_category_field):
+    if institution.plonemeeting_url and institution.meeting_config_id:
+        url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(
+            plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
+            meeting_config_id=institution.meeting_config_id,
+            delib_category_field=delib_config_category_field
+        )
+        return url
+    else:
+        return
+
+
 def create_faceted_folder(container, title, id):
     folder = api.content.create(
         type="Folder", title=title, container=container, id=id

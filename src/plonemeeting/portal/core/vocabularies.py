@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
+import copy
+
 from plone import api
+from plonemeeting.portal.core.content.institution import Institution
+from z3c.form.interfaces import NO_VALUE
+from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 import json
@@ -29,6 +34,26 @@ class GlobalCategoryVocabularyFactory:
 
 
 GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
+
+
+class LocalCategoryVocabularyFactory:
+    def __call__(self, context):
+        req = getRequest()
+        if context == NO_VALUE or isinstance(context, dict):
+            institution = req.get('PUBLISHED').context
+            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
+                local_categories = copy.deepcopy(institution.delib_categories)
+                if local_categories:
+                    return SimpleVocabulary(
+                        [
+                            SimpleTerm(value=category_id, title=category_title)
+                            for category_id, category_title in local_categories
+                        ]
+                    )
+        return GlobalCategoryVocabularyFactory()(context)
+
+
+LocalCategoryVocabulary = LocalCategoryVocabularyFactory()
 
 
 class MeetingDateVocabularyFactory:
@@ -102,10 +127,11 @@ RemoteMeetingsVocabulary = RemoteMeetingsVocabularyFactory()
 
 class DelibCategoryMappingFieldsVocabularyFactory:
     def __call__(self, context):
+        mapping_field = copy.deepcopy(CATEGORY_IA_DELIB_FIELDS)
         return SimpleVocabulary(
             [
                 SimpleTerm(value=field_id, title=field_name)
-                for field_id, field_name in CATEGORY_IA_DELIB_FIELDS
+                for field_id, field_name in mapping_field
             ]
         )
 
