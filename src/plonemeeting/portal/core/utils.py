@@ -122,6 +122,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         "&privacy=public"
         "&privacy=public_heading"
         "&b_size=9999"
+        "&additional_values=formatted_itemNumber"
         "&config_id={2}"
         "&linkedMeetingUID={3}"
         "&meeting_uid={3}"
