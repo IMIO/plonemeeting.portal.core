@@ -105,7 +105,8 @@ def get_api_url_for_annexes(institution, item_json_id):
     url = "{0}/@annexes?publishable=true" \
         "&fullobjects" \
         "&include_all=false" \
-        "&metadata_fields=file".format(item_json_id)
+        "&metadata_fields=file" \
+        "&metadata_fields=content_category".format(item_json_id)
     return url
 
 
