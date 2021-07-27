@@ -70,7 +70,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "publishable=true"
             "&fullobjects"
             "&include_all=false"
-            "&metadata_fields=file",
+            "&metadata_fields=file"
+            "&metadata_fields=content_category",
             url,
         )
 
