@@ -71,7 +71,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&fullobjects"
             "&include_all=false"
             "&metadata_fields=file"
-            "&metadata_fields=content_category",
+            "&metadata_fields=content_category"
+            "&additional_values=category_title"
+            "&additional_values=subcategory_title",
             url,
         )
 
