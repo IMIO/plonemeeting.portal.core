@@ -119,6 +119,18 @@
       handler="plonemeeting.portal.core.migrations.migrate_to_1004.migrate" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      source="1004"
+      destination="1005"
+      sortkey="4"
+      profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply actions for Meeting sync and reimport actions"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="actions"
+      run_deps="True" />
+  </genericsetup:upgradeSteps>
   <!-- Password policy -->
 
   <adapter

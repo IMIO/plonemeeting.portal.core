@@ -18,6 +18,10 @@ Changelog
 - Adapted code to receive the smallest JSON possible by using
   include parameters in the json query.
   [gbastien]
+- Rename actions available on meeting.
+  [odelaere]
+- Improved translations in Institution edit form.
+  [odelaere]
 
 
 1.3.3 (2021-06-28)

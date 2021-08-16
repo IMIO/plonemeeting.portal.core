@@ -50,10 +50,10 @@
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg"></a>
 
                     <a href=""
-                       tal:define="url string:${meeting/absolute_url}/@@reimport_meeting"
+                       tal:define="url string:${meeting/absolute_url}/@@update_meeting"
                        tal:condition="python: checkPermission('Modify portal content', meeting)"
                        tal:attributes="href python: utils_view.protect_url(url)"
-                       title="Reimport meeting"
+                       title="Update meeting"
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
@@ -62,7 +62,7 @@
                        tal:define="url string:${meeting/absolute_url}/@@force_reimport_meeting"
                        tal:condition="python: checkPermission('Modify portal content', meeting)"
                        tal:attributes="href python: utils_view.protect_url(url)"
-                       title="Force meeting reimport"
+                       title="Force reimport this meeting"
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/reload-alert.svg"></a>
