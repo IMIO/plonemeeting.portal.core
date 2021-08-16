@@ -23,6 +23,7 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.utils import get_api_url_for_annexes
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
@@ -62,8 +63,9 @@ def _get_mapped_representatives_in_charge(item_data, institution):
 
     res = []
     if groups_in_charge:
+        gic_tokens = [gic["token"] for gic in groups_in_charge]
         mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
-        res = list(filter(lambda uid: uid in mapped_uids, groups_in_charge))
+        res = list(filter(lambda uid: uid in mapped_uids, gic_tokens))
     return res
 
 
@@ -139,9 +141,10 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
             api.content.delete(existing_annex)
 
 
-def sync_annexes(item, institution, annexes_json, force=False):  # pragma: no cover
-    if annexes_json:
-        url = "{0}?publishable=true".format(annexes_json.get("@id"))
+def sync_annexes(item, institution, item_json_id, force=False):  # pragma: no cover
+    # item_json_id is the "@id" value
+    if item_json_id:
+        url = get_api_url_for_annexes(institution, item_json_id)
         response = _call_delib_rest_api(url, institution)
         sync_annexes_data(item, institution, response.json(), force)
 
@@ -198,8 +201,10 @@ def sync_items_data(meeting, items_data, institution, force=False):
         else:
             item.formatted_title = richtextval("<p>" + item_title + "</p>")
 
-        item.sortable_number = item_data.get("itemNumber")
-        item.number = item_data.get("formatted_itemNumber")
+        # do not use get to get itemNumber/formatted_itemNumber as these are
+        # required data, we must make sure it is present in item_data
+        item.sortable_number = item_data["itemNumber"]
+        item.number = item_data["formatted_itemNumber"]
 
         representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
         item.representatives_in_charge = representative_uid
@@ -218,11 +223,11 @@ def sync_items_data(meeting, items_data, institution, force=False):
         )
 
         item.category = get_global_category(
-            institution, item_data.get(institution.delib_category_field)
+            institution, item_data.get(institution.delib_category_field)["token"]
         )
         item.reindexObject()
         sync_annexes(
-            item, institution, item_data.get("@components").get("annexes"), force
+            item, institution, item_data.get("@id"), force
         )
         if created:
             nb_created += 1
