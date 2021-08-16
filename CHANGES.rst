@@ -17,6 +17,8 @@ Changelog
   [odelaere]
 - Improved translations in Institution edit form.
   [odelaere]
+- Added prometheus metrics.
+  [odelaere]
 
 
 1.3.3 (2021-06-28)
