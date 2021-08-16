@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
-import json
-import os
 from datetime import datetime
-
-import pytz
+from imio.helpers.content import object_values
 from plone import api
-from plonemeeting.portal.core.browser.sync import (
-    sync_items_data,
-    sync_annexes_data,
-    get_formatted_data_from_json,
-)
+from plonemeeting.portal.core.browser.sync import get_formatted_data_from_json
+from plonemeeting.portal.core.browser.sync import sync_annexes_data
+from plonemeeting.portal.core.browser.sync import sync_items_data
 from plonemeeting.portal.core.browser.sync import sync_meeting_data
 from plonemeeting.portal.core.content.meeting import IMeeting
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+
+import json
+import os
+import pytz
 
 
 class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
@@ -254,3 +251,10 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
             meeting.values()[0].formatted_title.raw,
             "<p>" + meeting.values()[0].title + "</p>"
         )
+
+    def test_item_view(self):
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        item = object_values(meeting, "Item")[0]
+        item_view = item.restrictedTraverse("@@view")
+        self.assertTrue(item_view())

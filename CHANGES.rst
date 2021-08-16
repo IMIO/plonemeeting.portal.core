@@ -15,6 +15,9 @@ Changelog
   [gbastien]
 - Added default value for `Institution.meeting_config_id`
   [odelaere]
+- Adapted code to receive the smallest JSON possible by using
+  include parameters in the json query.
+  [gbastien]
 - Improved translations in Institution edit form.
   [odelaere]
 
