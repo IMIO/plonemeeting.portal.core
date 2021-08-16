@@ -18,6 +18,8 @@ Changelog
 - Adapted code to receive the smallest JSON possible by using
   include parameters in the json query.
   [gbastien]
+- Rename actions available on meeting.
+  [odelaere]
 - Improved translations in Institution edit form.
   [odelaere]
 
@@ -35,8 +37,6 @@ Changelog
   merged and only `meetings` folder is kept, new faceted behavior
   is a mix of old behaviors.
   [gbastien]
-- Rename actions available on meeting.
-  [odelaere]
 
 
 1.3.2 (2021-06-15)
