@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3.4 (unreleased)
+1.3.4 (2021-08-16)
 ------------------
 
 - Query categories from iA.Delib to populate vocabularies only when loading the edit form.
