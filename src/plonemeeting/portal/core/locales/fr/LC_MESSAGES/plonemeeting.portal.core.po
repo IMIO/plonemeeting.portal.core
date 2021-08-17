@@ -20,11 +20,11 @@ msgstr "Actif"
 
 #: ../content/institution.py:97
 msgid "Additional Meeting query string for list"
-msgstr "Filtres additionnels pour obtenir la liste des Séances à importer"
+msgstr "Paramètres additionnels pour obtenir la liste des Séances à importer"
 
 #: ../content/institution.py:105
 msgid "Additional Published Items query string"
-msgstr "Filtres additionnels pour obtenir la liste des Points Publiés"
+msgstr "Paramètres additionnels pour obtenir la liste des Points à importer"
 
 #: ../content/item.py:56
 msgid "Additional data"
@@ -152,7 +152,7 @@ msgstr "Importer une séance"
 
 #: ../content/institution.py:142
 msgid "Info annex formatting tal expression"
-msgstr "Expression TAL pour le formatage des infos annexes"
+msgstr "Expression TAL pour le formatage des informations des annexes"
 
 #: ../configure.zcml:34
 msgid "Installs the plonemeeting.portal.core add-on."
@@ -176,11 +176,11 @@ msgstr "Point"
 
 #: ../content/institution.py:138
 msgid "Item additional data formatting tal expression"
-msgstr "Expression TAL pour le formatage du contenu additionnel"
+msgstr "Expression TAL pour le formatage du contenu additionnel des points"
 
 #: ../content/institution.py:132
 msgid "Item decision formatting tal expression"
-msgstr "Expression TAL pour le formatage des infos points"
+msgstr "Expression TAL pour le formatage des informations des points"
 
 #: ../browser/templates/item.pt:31
 #: ../content/item.py:27
@@ -190,7 +190,7 @@ msgstr "Numéro du point"
 
 #: ../content/institution.py:124
 msgid "Item title formatting tal expression. If empty the default title will be used"
-msgstr "Expression TAL pour le formatage du titre. Si laissé vide, le titre par défaut sera utilisé."
+msgstr "Expression TAL pour le formatage du titre du point. Si laissé vide, le titre du point dans iA.Délib sera utilisé"
 
 #: ../faceted/widgets/sort.py:29
 msgid "Items sort order"
@@ -200,7 +200,7 @@ msgstr "Ordre de tri des points"
 #: ../content/item.py:72
 #: ../content/meeting.py:31
 msgid "Last modification in iA.Delib"
-msgstr "Dernière modification dans iA.Delib"
+msgstr "Dernière modification dans iA.Délib"
 
 #: ../content/institution.py:224
 msgid "Links text color"
@@ -208,7 +208,7 @@ msgstr "Couleur des liens"
 
 #: ../content/institution.py:56
 msgid "Local category id"
-msgstr "Identifiant de matière iA.Delib"
+msgstr "Matière dans iA.Délib"
 
 #: ../content/institution.py:196
 msgid "Logo"
@@ -225,7 +225,7 @@ msgstr "Séance"
 
 #: ../content/institution.py:86
 msgid "Meeting config ID"
-msgstr "Identifiant de configuration de Séance"
+msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
 #: ../browser/sync.py:327
 msgid "Meeting import form"
@@ -257,11 +257,11 @@ msgstr "Les mots de passe doivent être d'au minimum 8 caractères."
 
 #: ../content/institution.py:80
 msgid "Plonemeeting URL"
-msgstr "URL iA.Delib"
+msgstr "URL iA.Délib"
 
 #: ../content/institution.py:89
 msgid "Project decision disclaimer"
-msgstr "Avertissement de projets de décisions"
+msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 
 #: ../browser/templates/item.pt:58
 #: ../faceted/macros.pt:48
@@ -283,7 +283,7 @@ msgstr "Mandataire"
 
 #: ../content/institution.py:68
 msgid "Representative key"
-msgstr "Clé de mandataire"
+msgstr "UID mandataire dans iA.Délib"
 
 #: ../content/institution.py:72
 msgid "Representative long values"
@@ -312,7 +312,7 @@ msgstr "Styles"
 #: ../content/item.py:34
 #: ../content/meeting.py:22
 msgid "UID Plonemeeting"
-msgstr "UID iA.Delib"
+msgstr "UID iA.Délib"
 
 #: ../browser/sync.py:283
 msgid "Unexpected meeting count in webservice response !"
@@ -379,7 +379,7 @@ msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document
 
 #: ../content/institution.py:156
 msgid "iA.Delib field to use for category mapping"
-msgstr "Champ iA.Delib a utiliser pour la correspondance des matières"
+msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 
 #: ../config.py:17
 msgid "in_project"
@@ -408,7 +408,7 @@ msgstr "Privé"
 
 #: ../content/institution.py:69
 msgid "representative_key_description"
-msgstr "Identifiant unique du groupe en charge dans iA.Delib"
+msgstr "Identifiant unique (UID) du groupe en charge dans iA.Délib"
 
 #: ../content/institution.py:73
 msgid "representative_long_value_description"
