@@ -22,7 +22,7 @@ def format_institution_managers_group_id(institution):
     return "{0}-institution_managers".format(institution.id)
 
 
-def get_text_from_richtext(field):
+def get_text_from_richtext(field):  # pragma: no cover
     if IRichTextValue.providedBy(field):
         transforms = api.portal.get_tool("portal_transforms")
         raw = safe_unicode(field.raw)
@@ -34,7 +34,7 @@ def get_text_from_richtext(field):
         return safe_unicode(text)
 
 
-def default_translator(msgstring, **replacements):
+def default_translator(msgstring, **replacements):  # pragma: no cover
     @provider(IContextAwareDefaultFactory)
     def context_provider(context):
         value = translate(msgstring, context=getRequest())

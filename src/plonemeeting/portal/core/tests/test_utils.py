@@ -80,6 +80,14 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_get_api_url_for_meeting_items(self):
         # test empty category_mappings
         self.belleville.categories_mappings = None
+        tmp = self.belleville.plonemeeting_url
+        self.belleville.plonemeeting_url = None
+        self.assertIsNone(utils.get_api_url_for_meeting_items(self.belleville, "foo"))
+        self.belleville.plonemeeting_url = tmp
+        tmp = self.belleville.meeting_config_id
+        self.belleville.meeting_config_id = None
+        self.assertIsNone(utils.get_api_url_for_meeting_items(self.belleville, "foo"))
+        self.belleville.meeting_config_id = tmp
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search?"
