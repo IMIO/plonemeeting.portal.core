@@ -58,6 +58,15 @@
     />
 
   <browser:page
+    name="sync_meeting_report"
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    permission="cmf.ModifyPortalContent"
+    class=".report.SyncReportView"
+    template="templates/report.pt"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
       name="utils_view"
       for="*"
       class=".utils.UtilsView"
