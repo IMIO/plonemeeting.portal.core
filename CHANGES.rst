@@ -5,7 +5,8 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
 
 
 1.3.3.1 (2021-08-16)

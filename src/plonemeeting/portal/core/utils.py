@@ -45,7 +45,7 @@ def default_translator(msgstring, **replacements):
     return context_provider
 
 
-def get_api_url_for_meetings(institution, meeting_UID=None):
+def get_api_url_for_meetings(institution, meeting_external_uid=None):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     url = (
@@ -57,12 +57,13 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
             institution.meeting_config_id,
         )
     )
-    if meeting_UID:
-        url = "{0}&UID={1}" \
-            "&fullobjects=True" \
-            "&include_all=false" \
-            "&metadata_fields=date" \
-            "&b_size=9999".format(url, meeting_UID)
+    if meeting_external_uid:
+        url = "{0}" \
+              "{1}" \
+              "&fullobjects=True" \
+              "&include_all=false" \
+              "&metadata_fields=date" \
+              "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
     else:
         url = "{0}{1}".format(url, institution.additional_meeting_query_string_for_list)
     return url
@@ -101,23 +102,77 @@ def _get_url_filter(url_param, value_dict_list, dict_key, use_void_value=False):
     return res
 
 
-def get_api_url_for_annexes(institution, item_json_id):
-    url = "{0}/@annexes?publishable=true" \
-        "&fullobjects" \
-        "&include_all=false" \
-        "&metadata_fields=file" \
-        "&metadata_fields=content_category" \
-        "&additional_values=category_title" \
-        "&additional_values=subcategory_title".format(item_json_id)
+def _get_uids_filter_url(uids):
+    if uids:
+        url_param = "&UID="
+        return url_param + url_param.join(uids)
+    else:
+        return ""
+
+
+def get_api_url_for_annexes(item_json_id):
+    url = "{0}/@annexes?" \
+          "publishable=true" \
+          "&fullobjects" \
+          "&include_all=false" \
+          "&metadata_fields=file" \
+          "&metadata_fields=content_category" \
+          "&additional_values=category_title" \
+          "&additional_values=subcategory_title".format(item_json_id)
     return url
 
 
-def get_api_url_for_meeting_items(institution, meeting_UID):
+def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
+    item_uids_filter = _get_uids_filter_url(item_external_uids)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
+    url = (
+        "{plonemeeting_url}/@search?"
+        "type={type}"
+        "&sort_on=getItemNumber"
+        "&privacy=public"
+        "&privacy=public_heading"
+        "&b_size=9999"
+        "&additional_values=formatted_itemNumber"
+        "&config_id={meeting_config_id}"
+        "&linkedMeetingUID={meeting_external_uid}"
+        "&meeting_uid={meeting_external_uid}"
+        "&fullobjects=True"
+        # by default fullobjects return everything, here we include nothing
+        # so by default only base data (id, title, UID, ...) are returned
+        "&include_all=false"
+        # field required by application
+        "&metadata_fields=itemNumber"
+        # field required by application
+        "&metadata_fields=groupsInCharge"
+        # field required by application, will be "category" or "classifier"
+        "&metadata_fields={delib_category_field}"
+        "{additional_published_items_query_string}"
+        "{category_filter}"
+        "{representatives_filter}"
+        "{item_uids_filter}".format(
+            plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
+            type=PLONEMEETING_API_ITEM_TYPE,
+            meeting_config_id=institution.meeting_config_id,
+            meeting_external_uid=meeting_external_uid,
+            delib_category_field=institution.delib_category_field,
+            additional_published_items_query_string=institution.additional_published_items_query_string,
+            category_filter=category_filter,
+            representatives_filter=representatives_filter,
+            item_uids_filter=item_uids_filter
+        )
+    )
+    return url
+
+
+def get_api_url_for_meeting_item(institution, meeting_item_uids):
+    if not institution.plonemeeting_url or not institution.meeting_config_id:
+        return
+    category_filter = _get_category_filter_url(institution)
+    representatives_filter = _get_representatives_filter_url(institution)
     url = (
         "{0}/@search?"
         "type={1}"
@@ -127,7 +182,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         "&b_size=9999"
         "&additional_values=formatted_itemNumber"
         "&config_id={2}"
-        "&linkedMeetingUID={3}"
+        "&uid={3}"
         "&meeting_uid={3}"
         "&fullobjects=True"
         # by default fullobjects return everything, here we include nothing
@@ -145,7 +200,7 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
-            meeting_UID,
+            "&uid={3}".join(meeting_item_uids),
             institution.delib_category_field,
             institution.additional_published_items_query_string,
             category_filter,
