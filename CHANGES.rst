@@ -5,7 +5,8 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not fail to edit `Institution` if service to fetch categories is broken.
+  [gbastien]
 
 
 1.3.3.1 (2021-08-16)
