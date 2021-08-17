@@ -65,9 +65,12 @@ class ICategoryMappingRowSchema(Interface):
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.TextLine(title=_(u"Representative key"))
-    representative_value = schema.TextLine(title=_(u"Representative value"))
-    representative_long_value = schema.TextLine(title=_(u"Representative long values"))
+    representative_key = schema.TextLine(title=_(u"Representative key"),
+                                         description=_(u"representative_key_description"))
+    representative_value = schema.TextLine(title=_(u"Representative value"),
+                                           description=_(u"representative_value_description"))
+    representative_long_value = schema.TextLine(title=_(u"Representative long values"),
+                                                description=_(u"representative_long_value_description"))
     active = schema.Bool(title=_(u"Active"), default=True)
 
 
@@ -92,6 +95,7 @@ class IInstitution(model.Schema):
 
     additional_meeting_query_string_for_list = schema.TextLine(
         title=_(u"Additional Meeting query string for list"),
+        description=_(u"additional_meeting_query_string_for_list_description"),
         required=True,
         constraint=validate_url_parameters,
         default="&review_state=frozen&review_state=decided"
@@ -99,6 +103,7 @@ class IInstitution(model.Schema):
 
     additional_published_items_query_string = schema.TextLine(
         title=_(u"Additional Published Items query string"),
+        description=_(u"additional_published_items_query_string_description"),
         required=True,
         constraint=validate_url_parameters,
         default="&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified"
@@ -157,6 +162,7 @@ class IInstitution(model.Schema):
     directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
+        description=_(u"categories_mappings_description"),
         value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
         required=False,
     )
@@ -164,6 +170,7 @@ class IInstitution(model.Schema):
     directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True)
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
+        description=_(u"representatives_mappings_description"),
         value_type=DictRow(
             title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
         ),
@@ -244,19 +251,26 @@ class Institution(Container):
     def fetch_delib_categories(self):
         categories = []
         if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
-            delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+            delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
+                self.delib_category_field]
             url = get_api_url_for_categories(self, delib_config_category_field)
             if url:
                 logger.info("Fetching delib categories for {} [Start]".format(self.title))
                 response = requests.get(
                     url, auth=(self.username, self.password), headers=API_HEADERS
                 )
-                delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
-                json = response.json()
-                cat_json = json["extra_include_{categories}".format(categories=delib_config_category_field)]
+                if response.status_code in (200, 201):
+                    delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
+                        self.delib_category_field]
+                    json = response.json()
+                    cat_json = json["extra_include_{categories}".format(
+                        categories=delib_config_category_field)]
 
-                for cat in cat_json:
-                    categories.append((cat['id'], cat['title']))
-                self.delib_categories = categories
-                logger.info("Fetching delib categories for {} [End]".format(self.title))
+                    for cat in cat_json:
+                        categories.append((cat['id'], cat['title']))
+                    self.delib_categories = categories
+                    logger.info("Fetching delib categories for {} [End]".format(self.title))
+                else:
+                    logger.error("Unable to fetch categories, error is {} [End]".format(
+                        response.content))
         return categories

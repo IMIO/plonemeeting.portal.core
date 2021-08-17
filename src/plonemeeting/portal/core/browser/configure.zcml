@@ -42,7 +42,7 @@
       />
 
   <browser:page
-    name="reimport_meeting"
+    name="update_meeting"
     for="plonemeeting.portal.core.content.meeting.IMeeting"
     permission="cmf.ModifyPortalContent"
     class=".sync.SyncMeetingView"

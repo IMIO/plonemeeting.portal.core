@@ -39,7 +39,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(utils.get_api_url_for_meetings(institution))
 
     def test_get_api_url_for_meetings_by_UID(self):
-        url = utils.get_api_url_for_meetings(self.belleville, meeting_UID="foo")
+        url = utils.get_api_url_for_meetings(self.belleville, meeting_external_uid="foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search?"
             "type=meeting"
@@ -64,7 +64,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def test_get_api_url_for_annexes(self):
         url = utils.get_api_url_for_annexes(
-            self.belleville, "https://demo-pm.imio.be/foo")
+            "https://demo-pm.imio.be/foo")
         self.assertEqual(
             "https://demo-pm.imio.be/foo/@annexes?"
             "publishable=true"

@@ -5,6 +5,15 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
+- Do not fail to edit `Institution` if service to fetch categories is broken.
+  [gbastien]
+
+
+1.3.3.1 (2021-08-16)
+--------------------
+
 - Query categories from iA.Delib to populate vocabularies only when loading the edit form.
   [odelaere]
 - Added automatic initialization of categories mapping.
@@ -18,6 +27,10 @@ Changelog
 - Adapted code to receive the smallest JSON possible by using
   include parameters in the json query.
   [gbastien]
+- Rename actions available on meeting.
+  [odelaere]
+- Improved translations in Institution edit form.
+  [odelaere]
 
 
 1.3.3 (2021-06-28)
