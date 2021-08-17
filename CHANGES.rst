@@ -7,6 +7,8 @@ Changelog
 
 - Reworked sync + allow partial sync of arbitrary items.
   [odelaere]
+- Do not fail to edit `Institution` if service to fetch categories is broken.
+  [gbastien]
 
 
 1.3.3.1 (2021-08-16)
