@@ -7,6 +7,8 @@ Changelog
 
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
+- Fail institution edit form validation if an iA.Delib category is mapped multiple times.
+  [odelaere]
 
 
 1.3.3.1 (2021-08-16)
