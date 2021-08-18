@@ -2,8 +2,8 @@
 import re
 
 import requests
-from collective.z3cform.datagridfield import DataGridFieldFactory
-from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield.row import DictRow
 from plone.app.textfield import RichText
 from plone.dexterity.content import Container
 from plone.autoform import directives
