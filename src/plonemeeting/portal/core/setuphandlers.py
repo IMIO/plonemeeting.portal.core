@@ -102,7 +102,7 @@ def create_demo_content(context):
     # when demo content added at Plone Site creation time
     # the plone.app.contenttypes BrowserLayer is not enabled
     if not IPloneAppContenttypesLayer.providedBy(request):
-        logger.warn("IPloneAppContenttypesLayer not enabled on REQUEST, enabling it.")
+        logger.warning("IPloneAppContenttypesLayer not enabled on REQUEST, enabling it.")
         event = BeforeTraverseEvent(portal, request)
         mark_layer(portal, event)
     else:
