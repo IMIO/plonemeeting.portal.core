@@ -38,6 +38,9 @@ jobs:
     - name: buildout
       run: |
         buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+    - name: code-analysis
+      run: |
+        bin/code-analysis
     - name: Test
       run: |
         coverage run bin/test
