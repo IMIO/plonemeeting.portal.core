@@ -10,7 +10,6 @@ from plonemeeting.portal.core.sync_utils import sync_meeting, _call_delib_rest_a
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from z3c.form import button
 from z3c.form.contentprovider import ContentProviders
-from z3c.form.field import Fields
 from z3c.form.form import Form
 from z3c.form.interfaces import IFieldsAndContentProvidersForm
 from zope import schema
