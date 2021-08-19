@@ -258,6 +258,7 @@ class IInstitution(model.Schema):
             local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
             for cat_id in local_category_id_errors:
                 local_category_errors.append(local_categories.by_value[cat_id].title)
+            local_category_errors = sorted(local_category_errors)
             raise Invalid("{}: {}".format(_(u'iA.Delib category mapped more than once'),
                                           ', '.join(local_category_errors)))
 
