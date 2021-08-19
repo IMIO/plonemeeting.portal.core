@@ -2,7 +2,7 @@
 from datetime import datetime
 from imio.helpers.content import object_values
 from plone import api
-from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json
+from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json, sync_items_number
 from plonemeeting.portal.core.sync_utils import sync_annexes_data
 from plonemeeting.portal.core.sync_utils import sync_items_data
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
@@ -181,6 +181,12 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
+        self.assertEqual(results.get("deleted"), 0)
+        self.json_meeting_items.get("items")[0]['itemNumber'] = 110
+        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        self.assertEqual(results.get("created"), 0)
+        self.assertEqual(results.get("modified"), 1)
+        self.assertEqual(results.get("deleted"), 0)
 
     def test_sync_no_modif_date_no_update(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
@@ -190,6 +196,12 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)
+        self.assertEqual(results.get("deleted"), 0)
+        self.json_meeting_items.get("items")[0]['formatted_itemNumber'] = '1.1'
+        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        self.assertEqual(results.get("created"), 0)
+        self.assertEqual(results.get("modified"), 0)
+        self.assertEqual(results.get("deleted"), 0)
 
     def test_force_sync_item(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
@@ -334,3 +346,41 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         item = object_values(meeting, "Item")[0]
         item_view = item.restrictedTraverse("@@view")
         self.assertTrue(item_view())
+
+    def test_sync_items_number(self):
+        changes = {}
+        for item in self.meeting.listFolderContents():
+            changes[item.UID()] = {'sortable_number': item.sortable_number, 'number': item.number}
+
+        self.assertEqual(0, sync_items_number({}))
+        self.assertEqual(0, sync_items_number(changes))
+
+        for item in self.meeting.listFolderContents():
+            changes[item.UID()] = {'sortable_number': item.sortable_number, 'number': 'random fake news'}
+        self.assertEqual(0, sync_items_number(changes))
+
+        counter = 500
+        for item in self.meeting.listFolderContents():
+            changes[item.UID()] = {'sortable_number': counter, 'number': 'random fake news'}
+            counter += 5000
+        self.assertEqual(3, sync_items_number(changes))
+
+        changes[list(changes.keys())[0]]['sortable_number'] = 100
+        self.assertEqual(1, sync_items_number(changes))
+
+        items = self.meeting.listFolderContents()
+        items_brains = api.content.find(
+            context=self.meeting, portal_type="Item", linkedMeetingUID=self.meeting.UID()
+        )
+        self.assertEqual(100, items[0].sortable_number)
+        self.assertEqual(100, items_brains[0].sortable_number)
+        self.assertEqual('random fake news', items[0].number)
+        self.assertEqual('random fake news', items_brains[0].number)
+        self.assertEqual(5500, items[1].sortable_number)
+        self.assertEqual(5500, items_brains[1].sortable_number)
+        self.assertEqual('random fake news', items[0].number)
+        self.assertEqual('random fake news', items_brains[0].number)
+        self.assertEqual(10500, items[2].sortable_number)
+        self.assertEqual(10500, items_brains[2].sortable_number)
+        self.assertEqual('random fake news', items[0].number)
+        self.assertEqual('random fake news', items_brains[0].number)

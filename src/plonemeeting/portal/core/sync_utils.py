@@ -4,6 +4,7 @@ from imio.migrator.utils import end_time
 from imio.helpers.content import richtextval
 from plone import api
 from Products.CMFCore.Expression import Expression, getExprContext
+from plone.app.uuid.utils import uuidToObject
 from plone.namedfile.file import NamedBlobFile
 from zope.i18n import translate
 
@@ -142,6 +143,32 @@ def sync_annexes(item, institution, item_json_id, force=False):  # pragma: no co
         sync_annexes_data(item, institution, response.json(), force)
 
 
+def sync_items_number(item_dict):
+    """
+    :param item_dict: a dict of dict with the following structure :
+        {'item_uid': {'sortable_number': 100, 'number': '1'}, ...}
+    :return: the number of updated items.
+    """
+    modified = 0
+    for item_uid in item_dict.keys():
+        item = uuidToObject(item_uid)
+        new_item_sortable_number = item_dict[item_uid]['sortable_number']
+        new_item_number = item_dict[item_uid]['number']
+        was_modified = _sync_item_number(item, new_item_sortable_number, new_item_number)
+        if was_modified:
+            modified += 1
+    return modified
+
+
+def _sync_item_number(item, new_item_sortable_number, new_item_number):
+    if new_item_sortable_number != item.sortable_number:
+        item.sortable_number = new_item_sortable_number
+        item.number = new_item_number
+        item.reindexObject(idxs=['number', 'sortable_number'])
+        return True
+    return False
+
+
 def sync_items_data(meeting, items_data, institution, force=False, item_external_uids=[]):
     nb_created = nb_modified = nb_deleted = 0
     if item_external_uids:
@@ -153,17 +180,21 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
             context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
         )
     existing_items = {
-        b.plonemeeting_uid: {"last_modified": b.plonemeeting_last_modified, "brain": b}
+        b.plonemeeting_uid: {"last_modified": b.plonemeeting_last_modified,
+                             "brain": b,
+                             "sortable_number": b.sortable_number}
         for b in existing_items_brains
     }
     synced_uids = [i.get("UID") for i in items_data.get("items")]
 
     for item_data in items_data.get("items"):
-        # XXX compatibility, with DX there is no more "modification_date"
+        # XXX compatibility, with DX there is no "modification_date" anymore
         # so depending MeetingItem is AT or DX, try to get modification_date or modified
         modification_date = _json_date_to_datetime(
             item_data.get("modification_date", item_data.get("modified"))
         )
+        sortable_number = item_data["itemNumber"]
+
         item_uid = item_data.get("UID")
         item_title = item_data.get("title")
         created = False
@@ -177,56 +208,57 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
             created = True
         else:
             existing_last_modified = existing_items.get(item_uid).get("last_modified")
+            existing_sortable_number = existing_items.get(item_uid).get("sortable_number")
             if (
                 not force
                 and existing_last_modified
                 and existing_last_modified >= modification_date
+                and sortable_number
+                and sortable_number == existing_sortable_number
             ):
                 # Item must NOT be synced
                 continue
             item = existing_items.get(item_uid).get("brain").getObject()
 
-        # Sync item fields values
-        item.plonemeeting_last_modified = modification_date
-        # reinit formatted title in case the configuration changed in portal
-        item.formatted_title = None
-        item.title = item_title
-        formatted_title = get_formatted_data_from_json(
-            institution.item_title_formatting_tal, item, item_data
-        )
-        if formatted_title:
-            item.formatted_title = richtextval(formatted_title)
-        else:
-            item.formatted_title = richtextval("<p>" + item_title + "</p>")
+        _sync_item_number(item, item_data["itemNumber"], item_data["formatted_itemNumber"])
 
-        # do not use get to get itemNumber/formatted_itemNumber as these are
-        # required data, we must make sure it is present in item_data
-        item.sortable_number = item_data["itemNumber"]
-        item.number = item_data["formatted_itemNumber"]
-
-        representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
-        item.representatives_in_charge = representative_uid
-        item.long_representatives_in_charge = representative_uid
-
-        item.decision = richtextval(
-            get_formatted_data_from_json(
-                institution.item_decision_formatting_tal, item, item_data
+        if force or item.plonemeeting_last_modified is None or item.plonemeeting_last_modified < modification_date:
+            # Sync item fields values
+            item.plonemeeting_last_modified = modification_date
+            # reinit formatted title in case the configuration changed in portal
+            item.formatted_title = None
+            item.title = item_title
+            formatted_title = get_formatted_data_from_json(
+                institution.item_title_formatting_tal, item, item_data
             )
-        )
+            if formatted_title:
+                item.formatted_title = richtextval(formatted_title)
+            else:
+                item.formatted_title = richtextval("<p>" + item_title + "</p>")
 
-        item.additional_data = richtextval(
-            get_formatted_data_from_json(
-                institution.item_additional_data_formatting_tal, item, item_data
-            ),
-        )
+            representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
+            item.representatives_in_charge = representative_uid
+            item.long_representatives_in_charge = representative_uid
 
-        item.category = get_global_category(
-            institution, item_data.get(institution.delib_category_field)["token"]
-        )
-        item.reindexObject()
-        sync_annexes(
-            item, institution, item_data.get("@id"), force
-        )
+            item.decision = richtextval(
+                get_formatted_data_from_json(
+                    institution.item_decision_formatting_tal, item, item_data
+                )
+            )
+
+            item.additional_data = richtextval(
+                get_formatted_data_from_json(
+                    institution.item_additional_data_formatting_tal, item, item_data
+                ),
+            )
+
+            item.category = get_global_category(
+                institution, item_data.get(institution.delib_category_field)["token"]
+            )
+            item.reindexObject()
+            sync_annexes(
+                item, institution, item_data.get("@id"), force
+            )
         if created:
             nb_created += 1
         else:

@@ -9,6 +9,8 @@ Changelog
   [odelaere]
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
+- Added item number handling in sync process.
+  [odelaere]
 
 
 1.3.3.1 (2021-08-16)
