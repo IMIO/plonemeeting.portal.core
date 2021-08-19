@@ -22,3 +22,15 @@ class SelectMeetingWidget(Widget):
             if meetings:
                 default = meetings[0][0]
         return default
+
+    def count(self, brains, sequence=None):
+        """For the "seance" criterion, change the count result,
+           as count of "0" are disabled by view.js, change "0" to "-"
+           so elements are still selectable in select box.
+           Some meetings do not hold items but just some PDF files (old imported meetings).
+        """
+        res = super(SelectMeetingWidget, self).count(brains, sequence)
+        # turn "0" count into "-" so it is ignored by view.js and not disabled
+        if self.data.__name__ == 'seance':
+            res = {k: v or '-' for k, v in res.items()}
+        return res
