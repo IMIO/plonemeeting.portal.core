@@ -1,0 +1,36 @@
+<div tal:define="items view/get_items">
+
+
+
+<p tal:content="items">
+
+</p>
+
+<table class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
+       tal:attributes="data-pat-datatables view/get_datatables_config"
+       tal:condition="python: view.__parent__.form.json_items"
+>
+  <thead>
+  <tr>
+    <th class="selection sorting_disabled"></th>
+    <th>N°</th>
+    <th>Title</th>
+    <th>Last modified delib</th>
+    <th>Local last modified</th>
+    <th>Category</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="item items">
+      <td><input type="checkbox" checked/></td>
+      <td tal:content="item/formatted_itemNumber">itemNumber</td>
+      <td tal:content="item/title">title</td>
+      <td tal:content="item/modified">Last modified delib</td>
+      <td tal:content="item/category/title">category</td>
+      <td tal:content="item/title">title</td>
+      <td tal:content="item/title">title</td>
+    </tr>
+  </tbody>
+</table>
+</div>

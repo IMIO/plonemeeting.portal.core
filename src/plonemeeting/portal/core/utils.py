@@ -122,7 +122,10 @@ def get_api_url_for_annexes(item_json_id):
     return url
 
 
-def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
+def get_api_url_for_meeting_items(institution,
+                                  meeting_external_uid,
+                                  item_external_uids=[],
+                                  with_additional_published_items_query_string=True):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
@@ -150,7 +153,6 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
         "&metadata_fields=groupsInCharge"
         # field required by application, will be "category" or "classifier"
         "&metadata_fields={delib_category_field}"
-        "{additional_published_items_query_string}"
         "{category_filter}"
         "{representatives_filter}"
         "{item_uids_filter}".format(
@@ -159,12 +161,14 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
             meeting_config_id=institution.meeting_config_id,
             meeting_external_uid=meeting_external_uid,
             delib_category_field=institution.delib_category_field,
-            additional_published_items_query_string=institution.additional_published_items_query_string,
             category_filter=category_filter,
             representatives_filter=representatives_filter,
             item_uids_filter=item_uids_filter
         )
     )
+
+    if with_additional_published_items_query_string:
+        url += institution.additional_published_items_query_string
     return url
 
 

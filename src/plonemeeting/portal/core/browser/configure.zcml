@@ -58,11 +58,10 @@
     />
 
   <browser:page
-    name="sync_meeting_report"
+    name="presync_report_form"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     permission="cmf.ModifyPortalContent"
-    class=".report.SyncReportView"
-    template="templates/report.pt"
+    class=".sync.PreSyncReportForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
