@@ -1,36 +1,54 @@
-<div tal:define="items view/get_items">
+<tal:defines
+  i18n:domain="plonemeeting.portal.core"
+  define="items view/get_items;
+          is_syncing not:view/parent/is_importing;
+          institution nocall:view/parent/institution
+">
+  <h2 tal:content="view/parent/api_response_data">
 
+  </h2>
 
+  <p tal:content="items">
 
-<p tal:content="items">
+  </p>
+  <table class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
+     tal:attributes="data-pat-datatables view/get_datatables_config"
+  >
+    <thead>
+    <tr>
+      <th class="selection sorting_disabled"></th>
+      <th>N°</th>
+      <th i18n:translate="">Title</th>
+      <th i18n:translate="">Last modification in iA.Delib</th>
+      <th tal:condition="is_syncing">Local last modified</th>
 
-</p>
-
-<table class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
-       tal:attributes="data-pat-datatables view/get_datatables_config"
-       tal:condition="python: view.__parent__.form.json_items"
->
-  <thead>
-  <tr>
-    <th class="selection sorting_disabled"></th>
-    <th>N°</th>
-    <th>Title</th>
-    <th>Last modified delib</th>
-    <th>Local last modified</th>
-    <th>Category</th>
-    <th>Status</th>
-  </tr>
-  </thead>
-  <tbody>
+      <th tal:content="institution/delib_category_field"
+          i18n:translate="">
+        Category or Classifier
+      </th>
+      <th tal:content="institution/delib_category_field"
+         i18n:translate="">
+        Gro
+      </th>
+      <th tal:condition="is_syncing">Status</th>
+    </tr>
+    </thead>
+    <tbody>
     <tr tal:repeat="item items">
-      <td><input type="checkbox" checked/></td>
+      <td><input type="checkbox" checked /></td>
       <td tal:content="item/formatted_itemNumber">itemNumber</td>
       <td tal:content="item/title">title</td>
-      <td tal:content="item/modified">Last modified delib</td>
-      <td tal:content="item/category/title">category</td>
-      <td tal:content="item/title">title</td>
-      <td tal:content="item/title">title</td>
+      <td tal:content="item/modified">Last modification in iA.Delib</td>
+      <td tal:condition="is_syncing">title</td>
+      <td tal:content="python: item.get(institution.delib_category_field)['title']">
+        Category/Classifier
+      </td>
+      <td tal:condition="is_syncing">title</td>
     </tr>
-  </tbody>
-</table>
-</div>
+    </tbody>
+  </table>
+
+  <input type="hidden" name="external_meeting_uid"
+     tal:define="external_meeting_uid view/parent/external_meeting_uid"
+     tal:attributes="value external_meeting_uid">
+</tal:defines>

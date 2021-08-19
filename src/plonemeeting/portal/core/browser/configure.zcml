@@ -66,6 +66,14 @@
   />
 
   <browser:page
+    name="presync_report_form"
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    permission="cmf.ModifyPortalContent"
+    class=".sync.PreSyncReportForm"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
       name="utils_view"
       for="*"
       class=".utils.UtilsView"

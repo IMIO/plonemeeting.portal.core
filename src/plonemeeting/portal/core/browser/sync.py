@@ -6,8 +6,9 @@ from Products.Five import BrowserView
 from plone import api
 from plone.app.content.utils import json_dumps
 from plone.autoform.form import AutoExtensibleForm
+from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.sync_utils import sync_meeting, _call_delib_rest_api
-from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
+from plonemeeting.portal.core.utils import get_api_url_for_meeting_items, redirect, redirect_back
 from z3c.form import button
 from z3c.form.contentprovider import ContentProviders
 from z3c.form.form import Form
@@ -51,17 +52,16 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             self.status = self.formErrorsMessage
             return
         external_meeting_uid = data.get("meeting")
-        self.request.response.redirect(
+        next_form_url = (
             self.context.absolute_url() + "/@@presync_report_form?external_meeting_uid=" + external_meeting_uid
         )
+        redirect(self.request, next_form_url)
 
     # _sync_meeting(institution, meeting_uid, self.request)
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
-        """
-        """
-        self.request.response.redirect(self.request.get("HTTP_REFERER"))
+        redirect_back(self.request)
 
 
 class ImportMeetingView(BrowserView):  # pragma: no cover
@@ -86,7 +86,7 @@ class ItemsContentProvider(ContentProviderBase):
 
     def __init__(self, context, request, view):
         super(ItemsContentProvider, self).__init__(context, request, view)
-        self.__parent__ = view
+        self.parent = view
         self.meeting_uid = None
 
     def get_datatables_config(self):
@@ -120,10 +120,10 @@ class ItemsContentProvider(ContentProviderBase):
         )
 
     def get_items(self):
-        return self.__parent__.form.json_items
+        if hasattr(self.parent, "api_response_data"):
+            return self.parent.api_response_data["items"]
 
     def render(self, *args, **kwargs):
-        # self.contentProviders['items'].factory.meeting_uid = data.get("meeting")
         return self.template()
 
 
@@ -141,9 +141,18 @@ class PreSyncReportForm(Form):
     contentProviders["items"].position = 0
 
     def __call__(self):
-        if "external_meeting_uid" in self.request.form:
-            external_meeting_uid = self.request.form["external_meeting_uid"]
-        self._fetch_preview_items(external_meeting_uid)
+        if IMeeting.providedBy(self.context):
+            utils_view = self.context.restrictedTraverse("@@utils_view")
+            self.external_meeting_uid = self.context.plonemeeting_uid
+            self.is_importing = False
+            self.institution = utils_view.get_current_institution()
+        else:
+            self.external_meeting_uid = self.request.form["external_meeting_uid"]
+            self.is_importing = True
+            self.institution = self.context
+
+        self._fetch_preview_items(self.external_meeting_uid)
+
         return super(PreSyncReportForm, self).__call__()
 
     @button.buttonAndHandler(_(u"Import"))
@@ -157,12 +166,16 @@ class PreSyncReportForm(Form):
     def handle_cancel(self, action):
         """
         """
-        self.request.response.redirect(self.request.get("HTTP_REFERER"))
+        if IMeeting.providedBy(self.context):
+            meeting_faceted_url = self.get_institution().absolute_url() + "/meetings#seance=" + self.context.UID()
+            redirect(self.request, meeting_faceted_url)
+        else:
+            redirect(self.request, self.context.absolute_url() + "/@@import_meeting")
 
     def _fetch_preview_items(self, meeting_external_uid):
         url = get_api_url_for_meeting_items(self.context, meeting_external_uid=meeting_external_uid)
         response = _call_delib_rest_api(url, self.context)
-        self.json_items = json.loads(response.text)["items"]
+        self.api_response_data = json.loads(response.text)
 
 
 def _sync_meeting(institution, meeting_uid, request, force=False):  # pragma: no cover

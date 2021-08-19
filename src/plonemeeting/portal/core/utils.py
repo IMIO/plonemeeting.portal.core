@@ -329,3 +329,13 @@ def get_global_category(institution, item_local_category):
             return mapping["global_category_id"]
     if not global_category:
         return item_local_category
+
+
+def redirect(request, to):
+    """Redirect the given p_request to p_to which is an URL str"""
+    request.response.redirect(to)
+
+
+def redirect_back(request):
+    """Redirect back"""
+    redirect(request, request.get("HTTP_REFERER"))

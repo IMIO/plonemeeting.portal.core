@@ -50,7 +50,7 @@
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg"></a>
 
                     <a href=""
-                       tal:define="url string:${meeting/absolute_url}/@@update_meeting"
+                       tal:define="url string:${meeting/absolute_url}/@@presync_report_form"
                        tal:condition="python: checkPermission('Modify portal content', meeting)"
                        tal:attributes="href python: utils_view.protect_url(url)"
                        title="Update meeting"
