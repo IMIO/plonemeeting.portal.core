@@ -11,6 +11,9 @@ Changelog
   [gbastien]
 - Added item number handling in sync process.
   [odelaere]
+- Adapted `SelectMeetingWidget` used for the `seances` criterion to make
+  zero count values shown and selectable.
+  [gbastien]
 
 
 1.3.3.1 (2021-08-16)
