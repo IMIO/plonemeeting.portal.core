@@ -8,10 +8,6 @@ from plonemeeting.portal.core.tests.portal_test_case import (
 from z3c.form import validator
 
 
-class MockForm(object):
-    pass
-
-
 class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
     @property
     def belleville(self):
