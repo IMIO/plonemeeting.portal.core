@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.3.4 (unreleased)
-------------------
+1.3.3.2 (2021-08-20)
+--------------------
 
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
