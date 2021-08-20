@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
-
 from plonemeeting.portal.core.content.institution import IInstitution
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from z3c.form import validator
 
 

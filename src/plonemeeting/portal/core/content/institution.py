@@ -1,25 +1,29 @@
 # -*- coding: utf-8 -*-
-import re
-
-import requests
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from imio.helpers.content import get_vocab
 from plone.app.textfield import RichText
-from plone.dexterity.content import Container
 from plone.autoform import directives
+from plone.dexterity.content import Container
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD, API_HEADERS, \
-    CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
+from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.utils import get_api_url_for_categories
+from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from zope import schema
-from zope.interface import Interface, invariant, Invalid
 from zope.interface import implementer
+from zope.interface import Interface
+from zope.interface import Invalid
+from zope.interface import invariant
 from zope.schema import ValidationError
 
-from plonemeeting.portal.core import _, logger
-from plonemeeting.portal.core.utils import default_translator, get_api_url_for_categories
-from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
+import re
+import requests
 
 
 class InvalidUrlParameters(ValidationError):
