@@ -1,24 +1,29 @@
 # -*- coding: utf-8 -*-
-import re
-
-import requests
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
+from imio.helpers.content import get_vocab
 from plone.app.textfield import RichText
-from plone.dexterity.content import Container
 from plone.autoform import directives
+from plone.dexterity.content import Container
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD, API_HEADERS, \
-    CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
+from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.utils import get_api_url_for_categories
+from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from zope import schema
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
+from zope.interface import Invalid
+from zope.interface import invariant
 from zope.schema import ValidationError
 
-from plonemeeting.portal.core import _, logger
-from plonemeeting.portal.core.utils import default_translator, get_api_url_for_categories
-from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
+import re
+import requests
 
 
 class InvalidUrlParameters(ValidationError):
@@ -242,6 +247,24 @@ class IInstitution(model.Schema):
         default="#cccccc",
         constraint=validate_color_parameters,
     )
+
+    @invariant
+    def categories_mappings_invariant(data):
+        mapped_local_category_id = []
+        local_category_id_errors = set()
+        for row in data.categories_mappings:
+            if row['local_category_id'] in mapped_local_category_id:
+                local_category_id_errors.add(row['local_category_id'])
+            else:
+                mapped_local_category_id.append(row['local_category_id'])
+        if local_category_id_errors:
+            local_category_errors = []
+            local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
+            for cat_id in local_category_id_errors:
+                local_category_errors.append(local_categories.by_value[cat_id].title)
+            local_category_errors = sorted(local_category_errors)
+            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
+                            mapping={'categories_title': ', '.join(local_category_errors)}))
 
 
 @implementer(IInstitution)
