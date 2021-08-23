@@ -300,5 +300,5 @@ class Institution(Container):
                             response.content))
                 except requests.exceptions.ConnectionError as err:
                     logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-                    api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="error")
+                    api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="warning")
         return categories
