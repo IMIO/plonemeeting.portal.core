@@ -20,6 +20,8 @@ Changelog
 - Adapted `SelectMeetingWidget` used for the `seances` criterion to make
   zero count values shown and selectable.
   [gbastien]
+- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
+  [odelaere]
 
 
 1.3.3.1 (2021-08-16)

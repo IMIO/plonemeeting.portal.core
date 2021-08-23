@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
+import requests
 from imio.migrator.utils import end_time
 from Products.Five import BrowserView
 from plone import api
@@ -58,6 +59,17 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         redirect(self.request, next_form_url)
 
     # _sync_meeting(institution, meeting_uid, self.request)
+
+    def update(self):
+        try:
+            super(ImportMeetingForm, self).update()
+        except requests.exceptions.ConnectionError as err:
+            self._notify_error_and_cancel(err)
+
+    def _notify_error_and_cancel(self, err=None):
+        logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
+        api.portal.show_message(_("Webservice connection error !"), request=self.request, type="error")
+        self.handle_cancel(self, None)
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
