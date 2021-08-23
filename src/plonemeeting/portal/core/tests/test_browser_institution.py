@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from copy import deepcopy
+from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from z3c.form import validator
+from zope.i18n import translate
 
 
 class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
@@ -45,3 +47,30 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
 
         institution_edit_form.render()
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
+
+    def test_categories_mappings_invariant(self):
+        def exc_msg(invalid):
+            return translate(invalid.args[0], context=self.portal.REQUEST)
+
+        data = {'categories_mappings': deepcopy(self.belleville.categories_mappings)}
+        invariants = validator.InvariantsValidator(None, None, None, IInstitution, None)
+        self.assertTupleEqual((), invariants.validate(data))
+        data['categories_mappings'].append({'global_category_id': 'administration',
+                                            'local_category_id': 'administration'})
+        validation = invariants.validate(data)
+        self.assertEqual(1, len(validation))
+        self.assertEqual(translate(exc_msg(validation[0])),
+                         'Categories mappings - iA.Delib category mapped more than once : Administration générale')
+        data['categories_mappings'].append({'global_category_id': 'police',
+                                            'local_category_id': 'police'})
+        validation = invariants.validate(data)
+        self.assertEqual(1, len(validation))
+        self.assertEqual(translate(exc_msg(validation[0])),
+                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
+        # multiple time the same value returns only once in the message
+        data['categories_mappings'].append({'global_category_id': 'administration',
+                                            'local_category_id': 'administration'})
+        validation = invariants.validate(data)
+        self.assertEqual(1, len(validation))
+        self.assertEqual(translate(exc_msg(validation[0])),
+                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')

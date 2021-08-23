@@ -2,15 +2,21 @@ Changelog
 =========
 
 
-1.3.4 (unreleased)
-------------------
+1.3.3.3 (unreleased)
+--------------------
+
+- Added item number handling in sync process.
+  [odelaere]
+- Fail institution edit form validation if an iA.Delib category is mapped multiple times.
+  [odelaere]
+
+1.3.3.2 (2021-08-20)
+--------------------
 
 - Reworked sync + allow partial sync of arbitrary items.
   [odelaere]
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
-- Added item number handling in sync process.
-  [odelaere]
 - Adapted `SelectMeetingWidget` used for the `seances` criterion to make
   zero count values shown and selectable.
   [gbastien]
