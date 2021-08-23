@@ -378,8 +378,8 @@ msgid "default_in_project_disclaimer"
 msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adopté</span> par l'autorité communale.</strong></p>"
 
 #: ../content/institution.py:261
-msgid "iA.Delib category mapped more than once : ${categories_title}"
-msgstr "Catégorie iA.Delib renseignée plusieurs fois : ${categories_title}"
+msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
+msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
 #: ../content/institution.py:157
 msgid "iA.Delib field to use for category mapping"

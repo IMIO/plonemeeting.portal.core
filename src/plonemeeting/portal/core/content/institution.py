@@ -265,7 +265,7 @@ class IInstitution(model.Schema):
             for cat_id in local_category_id_errors:
                 local_category_errors.append(local_categories.by_value[cat_id].title)
             local_category_errors = sorted(local_category_errors)
-            raise Invalid(translate(u'iA.Delib category mapped more than once : ${categories_title}',
+            raise Invalid(translate(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
                                     target_language=api.portal.get_default_language()[:2],
                                     domain="plonemeeting.portal.core",
                                     mapping={'categories_title': ', '.join(local_category_errors)}))

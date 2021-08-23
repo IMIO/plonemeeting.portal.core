@@ -381,7 +381,7 @@ msgid "default_in_project_disclaimer"
 msgstr ""
 
 #: ../content/institution.py:261
-msgid "iA.Delib category mapped more than once : ${categories_title}"
+msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
 #: ../content/institution.py:157
