@@ -2,7 +2,6 @@
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from imio.helpers.content import get_vocab
-from plone import api
 from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
@@ -17,7 +16,6 @@ from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from zope import schema
-from zope.i18n import translate
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface import Invalid
@@ -265,10 +263,8 @@ class IInstitution(model.Schema):
             for cat_id in local_category_id_errors:
                 local_category_errors.append(local_categories.by_value[cat_id].title)
             local_category_errors = sorted(local_category_errors)
-            raise Invalid(translate(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                                    target_language=api.portal.get_default_language()[:2],
-                                    domain="plonemeeting.portal.core",
-                                    mapping={'categories_title': ', '.join(local_category_errors)}))
+            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
+                            mapping={'categories_title': ', '.join(local_category_errors)}))
 
 
 @implementer(IInstitution)

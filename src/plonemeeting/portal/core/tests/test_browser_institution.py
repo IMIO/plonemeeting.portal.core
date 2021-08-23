@@ -49,6 +49,9 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
     def test_categories_mappings_invariant(self):
+        def exc_msg(invalid):
+            return translate(invalid.args[0], context=self.portal.REQUEST)
+
         data = {'categories_mappings': deepcopy(self.belleville.categories_mappings)}
         invariants = validator.InvariantsValidator(None, None, None, IInstitution, None)
         self.assertTupleEqual((), invariants.validate(data))
@@ -56,18 +59,18 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                                             'local_category_id': 'administration'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(str(validation[0])),
+        self.assertEqual(translate(exc_msg(validation[0])),
                          'Categories mappings - iA.Delib category mapped more than once : Administration générale')
         data['categories_mappings'].append({'global_category_id': 'police',
                                             'local_category_id': 'police'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(str(validation[0])),
+        self.assertEqual(translate(exc_msg(validation[0])),
                          'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
         # multiple time the same value returns only once in the message
         data['categories_mappings'].append({'global_category_id': 'administration',
                                             'local_category_id': 'administration'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(str(validation[0])),
+        self.assertEqual(translate(exc_msg(validation[0])),
                          'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
