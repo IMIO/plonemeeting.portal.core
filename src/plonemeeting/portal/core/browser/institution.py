@@ -75,6 +75,7 @@ class EditForm(edit.DefaultEditForm):
         form_keys = tuple(self.request.form.keys())
         if not form_keys or form_keys == ('_authenticator',):
             self.context.fetch_delib_categories()
+            self.context.fetch_delib_representatives()
         return super(EditForm, self).__call__()
 
     def updateFields(self):

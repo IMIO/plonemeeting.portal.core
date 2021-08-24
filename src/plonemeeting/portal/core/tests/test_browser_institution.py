@@ -11,6 +11,10 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
     def belleville(self):
         return self.portal["belleville"]
 
+    @property
+    def amityville(self):
+        return self.portal["amityville"]
+
     def test_not_fetch_category_on_view(self):
         self.login_as_manager()
         institution_view = self.belleville.restrictedTraverse("@@view")
@@ -52,7 +56,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         def exc_msg(invalid):
             return translate(invalid.args[0], context=self.portal.REQUEST)
 
-        data = {'categories_mappings': deepcopy(self.belleville.categories_mappings)}
+        data = {'categories_mappings': deepcopy(self.amityville.categories_mappings)}
         invariants = validator.InvariantsValidator(None, None, None, IInstitution, None)
         self.assertTupleEqual((), invariants.validate(data))
         data['categories_mappings'].append({'global_category_id': 'administration',

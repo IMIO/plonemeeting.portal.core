@@ -10,10 +10,12 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
+from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from zope import schema
 from zope.interface import implementer
@@ -70,13 +72,17 @@ class ICategoryMappingRowSchema(Interface):
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.TextLine(title=_(u"Representative key"),
-                                         description=_(u"representative_key_description"))
+    representative_key = schema.Choice(title=_(u"Representative key"),
+                                       description=_(u"representative_key_description"),
+                                       vocabulary="plonemeeting.portal.vocabularies.editable_representative",
+                                       required=True)
     representative_value = schema.TextLine(title=_(u"Representative value"),
-                                           description=_(u"representative_value_description"))
+                                           description=_(u"representative_value_description"),
+                                           required=True)
     representative_long_value = schema.TextLine(title=_(u"Representative long values"),
-                                                description=_(u"representative_long_value_description"))
-    active = schema.Bool(title=_(u"Active"), default=True)
+                                                description=_(u"representative_long_value_description"),
+                                                required=True)
+    active = schema.Bool(title=_(u"Active"), default=True, required=True)
 
 
 class IInstitution(model.Schema):
@@ -252,19 +258,20 @@ class IInstitution(model.Schema):
     def categories_mappings_invariant(data):
         mapped_local_category_id = []
         local_category_id_errors = set()
-        for row in data.categories_mappings:
-            if row['local_category_id'] in mapped_local_category_id:
-                local_category_id_errors.add(row['local_category_id'])
-            else:
-                mapped_local_category_id.append(row['local_category_id'])
-        if local_category_id_errors:
-            local_category_errors = []
-            local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
-            for cat_id in local_category_id_errors:
-                local_category_errors.append(local_categories.by_value[cat_id].title)
-            local_category_errors = sorted(local_category_errors)
-            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                            mapping={'categories_title': ', '.join(local_category_errors)}))
+        if data.categories_mappings:
+            for row in data.categories_mappings:
+                if row['local_category_id'] in mapped_local_category_id:
+                    local_category_id_errors.add(row['local_category_id'])
+                else:
+                    mapped_local_category_id.append(row['local_category_id'])
+            if local_category_id_errors:
+                local_category_errors = []
+                local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
+                for cat_id in local_category_id_errors:
+                    local_category_errors.append(local_categories.by_value[cat_id].title)
+                local_category_errors = sorted(local_category_errors)
+                raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
+                                mapping={'categories_title': ', '.join(local_category_errors)}))
 
 
 @implementer(IInstitution)
@@ -297,3 +304,25 @@ class Institution(Container):
                     logger.error("Unable to fetch categories, error is {} [End]".format(
                         response.content))
         return categories
+
+    def fetch_delib_representatives(self):
+        representatives = []
+        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
+            url = get_api_url_for_representatives(self)
+            if url:
+                logger.info("Fetching delib representatives for {} [Start]".format(self.title))
+                response = requests.get(
+                    url, auth=(self.username, self.password), headers=API_HEADERS
+                )
+                if response.status_code in (200, 201):
+                    json = response.json()
+                    representative_json = json["extra_include_{representatives}".format(representatives=REPRESENTATIVE_IA_DELIB_FIELD)]
+
+                    for representative in representative_json:
+                        representatives.append((representative['UID'], representative['title']))
+                    self.delib_representatives = representatives
+                    logger.info("Fetching delib representatives for {} [End]".format(self.title))
+                else:
+                    logger.error("Unable to fetch representatives, error is {} [End]".format(
+                        response.content))
+        return representatives

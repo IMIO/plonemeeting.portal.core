@@ -101,6 +101,27 @@ class LongRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 
 
+class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
+
+    def __call__(self, context):
+        req = getRequest()
+        if context == NO_VALUE or isinstance(context, dict):
+            institution = req.get('PUBLISHED').context
+            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
+                local_representatives = copy.deepcopy(institution.delib_representatives)
+                if local_representatives:
+                    return SimpleVocabulary(
+                        [
+                            SimpleTerm(value=representative_id, title=representative_title)
+                            for representative_id, representative_title in local_representatives
+                        ]
+                    )
+        return SimpleVocabulary([])
+
+
+EditableRepresentativeVocabulary = EditableRepresentativeVocabularyFactory()
+
+
 class RemoteMeetingsVocabularyFactory:
     def __call__(self, context):
         institution = context

@@ -37,6 +37,7 @@ cleanall:  ## Clears build artefacts and virtualenv
 
 .PHONY: test
 test:
+	bin/pip install -U mockito # for dev ide env
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
 
 .PHONY: css

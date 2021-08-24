@@ -181,6 +181,12 @@
     />
 
   <utility
+    component=".vocabularies.EditableRepresentativeVocabulary"
+    name="plonemeeting.portal.vocabularies.editable_representative"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
     component=".vocabularies.RemoteMeetingsVocabulary"
     name="plonemeeting.portal.vocabularies.remote_meetings"
     provides="zope.schema.interfaces.IVocabularyFactory"
