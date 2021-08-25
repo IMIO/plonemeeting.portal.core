@@ -5,7 +5,8 @@ Changelog
 1.3.3.3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Upgraded datagridfield version.
+  [odelaere]
 
 
 1.3.3.2 (2021-08-20)
