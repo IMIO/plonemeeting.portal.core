@@ -136,8 +136,16 @@
       import_profile="collective.z3cform.datagridfield:default"
       run_deps="True" />
   </genericsetup:upgradeSteps>
-  <!-- Password policy -->
 
+  <genericsetup:upgradeStep
+    title="Go to portal 1005"
+    description="Re-apply faceted configuration"
+    source="1004"
+    destination="1005"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1005.migrate"
+    profile="plonemeeting.portal.core:default" />
+
+  <!-- Password policy -->
   <adapter
     name="plonemeeting_password_policy"
     factory=".passwords.PloneMeetingPasswordValidator"
