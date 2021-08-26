@@ -50,7 +50,7 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "collective.cookiecuttr>1.0",
+        "collective.cookiecuttr>=1.0.2",
         "collective.dexteritytextindexer",
         "collective.fingerpointing",
         "collective.pwexpiry",

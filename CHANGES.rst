@@ -7,6 +7,8 @@ Changelog
 
 - Added item number handling in sync process.
   [odelaere]
+- Upgraded datagridfield version.
+  [odelaere]
 - Fail institution edit form validation if an iA.Delib category is mapped multiple times.
   [odelaere]
 
