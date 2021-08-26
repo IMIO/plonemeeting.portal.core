@@ -1,54 +1,12 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python package
+name: Coverage
 
 on:
   push:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [3.8, 3.9]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install -U pip setuptools --no-cache-dir
-        pip install -U "coveralls>=3.0.0" --no-cache-dir
-        pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
-    - name: Cache eggs
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-eggs
-      with:
-        path: ./buildout-cache/eggs
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-    - name: buildout
-      run: |
-        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
-    - name: code-analysis
-      run: |
-        bin/code-analysis
-    - name: Test
-      run: |
-        bin/test
-    - name: Publish to Coveralls
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        coveralls --service=github
-
   coverage:
     runs-on: ubuntu-latest
     strategy:
