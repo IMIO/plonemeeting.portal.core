@@ -43,6 +43,9 @@ jobs:
       - name: Test
         run: |
           bin/coverage run bin/test
+      - name: Report
+        run: |
+          bin/coverage report
       - name: Publish to Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
