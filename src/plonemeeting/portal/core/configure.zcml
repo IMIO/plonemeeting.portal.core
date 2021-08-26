@@ -130,6 +130,11 @@
       import_profile="plonemeeting.portal.core:default"
       import_steps="actions"
       run_deps="True" />
+    <genericsetup:upgradeDepends
+      title="Upgrade collective.z3cform.datagridfield"
+      description=""
+      import_profile="collective.z3cform.datagridfield:default"
+      run_deps="True" />
   </genericsetup:upgradeSteps>
 
   <genericsetup:upgradeStep

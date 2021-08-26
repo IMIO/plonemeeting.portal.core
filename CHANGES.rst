@@ -5,17 +5,19 @@ Changelog
 1.3.3.3 (unreleased)
 --------------------
 
+- Upgraded datagridfield version.
+  [odelaere]
+- Fail institution edit form validation if an iA.Delib category is mapped multiple times.
+  [odelaere]
 - Query representatives from iA.Delib to populate vocabularies only when loading the edit form.
   [odelaere]
-
+  
 
 1.3.3.2 (2021-08-20)
 --------------------
 
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
-- Fail institution edit form validation if an iA.Delib category is mapped multiple times.
-  [odelaere]
 - Adapted `SelectMeetingWidget` used for the `seances` criterion to make
   zero count values shown and selectable.
   [gbastien]
