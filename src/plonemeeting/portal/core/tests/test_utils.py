@@ -90,8 +90,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.meeting_config_id = tmp
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
-            "type=item"
+            "https://demo-pm.imio.be/@search?type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
             "&privacy=public_heading"
@@ -105,14 +104,14 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=category"
-            "&review_state=itemfrozen"
-            "&review_state=accepted"
-            "&review_state=accepted_but_modified"
             "&getCategory=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&review_state=itemfrozen"
+            "&review_state=accepted"
+            "&review_state=accepted_but_modified",
             url,
         )
         self.belleville.delib_category_field = "classifier"
@@ -133,14 +132,14 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=classifier"
-            "&review_state=itemfrozen"
-            "&review_state=accepted"
-            "&review_state=accepted_but_modified"
             "&getRawClassifier=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&review_state=itemfrozen"
+            "&review_state=accepted"
+            "&review_state=accepted_but_modified",
             url,
         )
         self.belleville.categories_mappings = [{'local_category_id': 'administration',
@@ -164,15 +163,15 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=classifier"
-            "&review_state=itemfrozen"
-            "&review_state=accepted"
-            "&review_state=accepted_but_modified"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&review_state=itemfrozen"
+            "&review_state=accepted"
+            "&review_state=accepted_but_modified",
             url,
         )
         self.belleville.delib_category_field = "category"
@@ -193,15 +192,15 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=category"
-            "&review_state=itemfrozen"
-            "&review_state=accepted"
-            "&review_state=accepted_but_modified"
             "&getCategory=administration"
             "&getCategory=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&review_state=itemfrozen"
+            "&review_state=accepted"
+            "&review_state=accepted_but_modified",
             url,
         )
 
@@ -223,11 +222,11 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=category"
+            "&getCategory=administration"
+            "&getCategory=immo"
             "&review_state=itemfrozen"
             "&review_state=accepted"
-            "&review_state=accepted_but_modified"
-            "&getCategory=administration"
-            "&getCategory=immo",
+            "&review_state=accepted_but_modified",
             url,
         )
         self.belleville.categories_mappings = None
@@ -248,10 +247,77 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&metadata_fields=itemNumber"
             "&metadata_fields=groupsInCharge"
             "&metadata_fields=category"
+            "&getCategory=VOID"
             "&review_state=itemfrozen"
             "&review_state=accepted"
-            "&review_state=accepted_but_modified"
+            "&review_state=accepted_but_modified",
+            url,
+        )
+
+        url = utils.get_api_url_for_meeting_items(self.belleville, "foo",
+                                                  with_additional_published_items_query_string=False)
+        self.assertEqual(
+            "https://demo-pm.imio.be/@search?"
+            "type=item"
+            "&sort_on=getItemNumber"
+            "&privacy=public"
+            "&privacy=public_heading"
+            "&b_size=9999"
+            "&additional_values=formatted_itemNumber"
+            "&config_id=meeting-config-college"
+            "&linkedMeetingUID=foo"
+            "&meeting_uid=foo"
+            "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=itemNumber"
+            "&metadata_fields=groupsInCharge"
+            "&metadata_fields=category"
             "&getCategory=VOID",
+            url,
+        )
+        url = utils.get_api_url_for_meeting_items(self.belleville, "foo", item_external_uids=['gnark'],
+                                                  with_additional_published_items_query_string=False)
+        self.assertEqual(
+            "https://demo-pm.imio.be/@search?"
+            "type=item"
+            "&sort_on=getItemNumber"
+            "&privacy=public"
+            "&privacy=public_heading"
+            "&b_size=9999"
+            "&additional_values=formatted_itemNumber"
+            "&config_id=meeting-config-college"
+            "&linkedMeetingUID=foo"
+            "&meeting_uid=foo"
+            "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=itemNumber"
+            "&metadata_fields=groupsInCharge"
+            "&metadata_fields=category"
+            "&getCategory=VOID"
+            "&UID=gnark",
+            url,
+        )
+        url = utils.get_api_url_for_meeting_items(self.belleville, "foo", item_external_uids=['gnark', 'lorem'],
+                                                  with_additional_published_items_query_string=False)
+        self.assertEqual(
+            "https://demo-pm.imio.be/@search?"
+            "type=item"
+            "&sort_on=getItemNumber"
+            "&privacy=public"
+            "&privacy=public_heading"
+            "&b_size=9999"
+            "&additional_values=formatted_itemNumber"
+            "&config_id=meeting-config-college"
+            "&linkedMeetingUID=foo"
+            "&meeting_uid=foo"
+            "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=itemNumber"
+            "&metadata_fields=groupsInCharge"
+            "&metadata_fields=category"
+            "&getCategory=VOID"
+            "&UID=gnark"
+            "&UID=lorem",
             url,
         )
 
