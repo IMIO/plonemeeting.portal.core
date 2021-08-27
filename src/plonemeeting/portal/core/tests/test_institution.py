@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl.PermissionRole import rolesForPermissionOn
+from mockito import mock
+from mockito import unstub
+from mockito import verify
+from mockito import when
 from plone import api
 from plone.app.theming.utils import compileThemeTransform
+from plonemeeting.portal.core.content.institution import InvalidColorParameters
+from plonemeeting.portal.core.content.institution import validate_color_parameters
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from Products.CMFCore.permissions import AccessContentsInformation as ACI
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-from plonemeeting.portal.core.content.institution import validate_color_parameters
-from plonemeeting.portal.core.content.institution import InvalidColorParameters
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
-from mockito import when, mock, verify, unstub
+
 import requests
 
 
@@ -120,6 +122,21 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertListEqual([('economy', 'Economy'),
                               ('env', 'Environment')],
                              belleville.delib_categories)
+        unstub()
+        # when requests.exceptions.ConnectionError is raised we gracefully fall back on last saved delib_categories
+        when(requests).get(url, auth=auth, headers=headers).thenRaise(
+            requests.exceptions.ConnectionError("mocked error"))
+        belleville.delib_categories = [('admin', 'Administrative'), ('political', 'Political')]
+        belleville.fetch_delib_categories()
+        self.assertListEqual([('admin', 'Administrative'), ('political', 'Political')],
+                             belleville.delib_categories)
+        belleville.delib_categories = None
+        belleville.fetch_delib_categories()
+        self.assertIsNone(belleville.delib_categories)
+
+        delattr(belleville, "delib_categories")
+        belleville.fetch_delib_categories()
+        self.assertFalse(hasattr(belleville, "delib_categories"))
         unstub()
 
     def test_rules_xml_compilation(self):
