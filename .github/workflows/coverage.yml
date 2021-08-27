@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip setuptools --no-cache-dir
-          pip install -U "coveralls>=3.0.0" --no-cache-dir
-          pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
+          pip install --force-reinstall -U coveralls
+          pip install -r requirements.txt -c constraints_plone52.txt
       - name: Cache eggs
         uses: actions/cache@v2
         env:
