@@ -11,6 +11,8 @@ Changelog
   [odelaere]
 - Fail institution edit form validation if an iA.Delib category is mapped multiple times.
   [odelaere]
+- Handle connection failure properly in institution edit form.
+  [odelaere]
 
 1.3.3.2 (2021-08-20)
 --------------------

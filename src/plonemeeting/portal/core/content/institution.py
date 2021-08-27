@@ -2,6 +2,7 @@
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from imio.helpers.content import get_vocab
+from plone import api
 from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
@@ -279,21 +280,25 @@ class Institution(Container):
             url = get_api_url_for_categories(self, delib_config_category_field)
             if url:
                 logger.info("Fetching delib categories for {} [Start]".format(self.title))
-                response = requests.get(
-                    url, auth=(self.username, self.password), headers=API_HEADERS
-                )
-                if response.status_code in (200, 201):
-                    delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
-                        self.delib_category_field]
-                    json = response.json()
-                    cat_json = json["extra_include_{categories}".format(
-                        categories=delib_config_category_field)]
+                try:
+                    response = requests.get(
+                        url, auth=(self.username, self.password), headers=API_HEADERS
+                    )
+                    if response.status_code in (200, 201):
+                        delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
+                            self.delib_category_field]
+                        json = response.json()
+                        cat_json = json["extra_include_{categories}".format(
+                            categories=delib_config_category_field)]
 
-                    for cat in cat_json:
-                        categories.append((cat['id'], cat['title']))
-                    self.delib_categories = categories
-                    logger.info("Fetching delib categories for {} [End]".format(self.title))
-                else:
-                    logger.error("Unable to fetch categories, error is {} [End]".format(
-                        response.content))
+                        for cat in cat_json:
+                            categories.append((cat['id'], cat['title']))
+                        self.delib_categories = categories
+                        logger.info("Fetching delib categories for {} [End]".format(self.title))
+                    else:
+                        logger.error("Unable to fetch categories, error is {} [End]".format(
+                            response.content))
+                except requests.exceptions.ConnectionError as err:
+                    logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
+                    api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="warning")
         return categories
