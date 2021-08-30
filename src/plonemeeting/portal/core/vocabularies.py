@@ -107,7 +107,7 @@ class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
         req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
             institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
+            if isinstance(institution, Institution) and hasattr(institution, "delib_representatives"):
                 local_representatives = copy.deepcopy(institution.delib_representatives)
                 if local_representatives:
                     return SimpleVocabulary(
