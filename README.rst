@@ -2,8 +2,8 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
    This text does not appear on pypi or github. It is a comment.
 
-.. image:: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/python-package.yml/badge.svg?branch=master
-    :target: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/python-package.yml
+.. image:: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/tests.yml/badge.svg?branch=master
+    :target: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/tests.yml
 
 .. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/IMIO/plonemeeting.portal.core?branch=master
