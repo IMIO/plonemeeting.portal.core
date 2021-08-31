@@ -6,7 +6,7 @@
     :target: https://github.com/IMIO/plonemeeting.portal.core/actions/workflows/tests.yml
 
 .. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg
-:target: https://coveralls.io/github/IMIO/plonemeeting.portal.core
+    :target: https://coveralls.io/github/IMIO/plonemeeting.portal.core
 
 
 ========================
