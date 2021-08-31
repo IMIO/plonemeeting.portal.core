@@ -41,11 +41,11 @@ jobs:
           buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
       - name: Test
         run: |
-          bin/coverage run bin/test
+          coverage run bin/test
         continue-on-error: true
       - name: Report
         run: |
-          bin/coverage report
+          coverage report
       - name: Publish to Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
