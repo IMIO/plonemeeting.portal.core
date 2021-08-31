@@ -19,7 +19,7 @@ import pytz
 import requests
 import time
 
-from plonemeeting.portal.core import _
+from plonemeeting.portal.core import _, plone_
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
@@ -343,7 +343,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         meeting_uid = data.get("meeting")
         _sync_meeting(institution, meeting_uid, self.request)
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(plone_(u"Cancel"))
     def handle_cancel(self, action):
         """
         """

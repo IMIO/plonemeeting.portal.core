@@ -10,3 +10,4 @@ from plonemeeting.portal.core import patches  # NOQA
 assert patches  # workaround for pyflakes issue #13, NOQA
 
 _ = MessageFactory("plonemeeting.portal.core")
+plone_ = MessageFactory("plone")
