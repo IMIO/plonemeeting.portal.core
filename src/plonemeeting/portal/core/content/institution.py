@@ -99,7 +99,7 @@ class IInstitution(model.Schema):
     # Webservice fieldset
     model.fieldset(
         "webservice",
-        label=_(u"Webservice"),
+        label=_(u"Web Service"),
         fields=[
             "plonemeeting_url",
             "username",
@@ -340,5 +340,5 @@ class Institution(Container):
                             response.content))
                 except requests.exceptions.ConnectionError as err:
                     logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-                    api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="warning")
+                    api.portal.show_message(_("Web service connection error !"), request=self.REQUEST, type="warning")
         return categories
