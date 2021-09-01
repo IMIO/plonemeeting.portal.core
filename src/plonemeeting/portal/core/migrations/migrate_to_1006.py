@@ -14,10 +14,11 @@ class MigrateTo1006(Migrator):
         def url_to_dict(url, include=None, exclude=[]):
             res = []
             for splitted in url.split('&'):
-                sub = splitted.split('=')
-                parameter = sub[0].strip()
-                if (not include or parameter in include) and parameter not in exclude:
-                    res.append({'parameter': parameter, 'value': sub[1].strip()})
+                if splitted:
+                    sub = splitted.split('=')
+                    parameter = sub[0].strip()
+                    if (not include or parameter in include) and parameter not in exclude:
+                        res.append({'parameter': parameter, 'value': sub[1].strip()})
             return res
 
         logger.info("Transforming TextLine query parameter to datagridfields...")

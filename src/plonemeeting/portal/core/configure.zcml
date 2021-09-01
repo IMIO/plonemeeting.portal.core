@@ -145,6 +145,21 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_1005.migrate"
     profile="plonemeeting.portal.core:default" />
 
+  <genericsetup:upgradeSteps
+    source="1005"
+    destination="1006"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Apply upgrade steps for datagridfield"
+      description=""
+      import_profile="collective.z3cform.datagridfield:default"
+      run_deps="True" />
+    <genericsetup:upgradeStep
+      title="Go to portal 1006"
+      description="URL parameters are now in a datagridfiel widget"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1006.migrate" />
+  </genericsetup:upgradeSteps>
+
   <!-- Password policy -->
   <adapter
     name="plonemeeting_password_policy"
