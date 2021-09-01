@@ -1,6 +1,6 @@
 [report]
 include =
-    src/plonemeeting/core/*
+    src/plonemeeting/portal/core/*
 omit =
     */migrations/*
     */test*
