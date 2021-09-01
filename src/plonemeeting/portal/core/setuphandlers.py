@@ -131,11 +131,11 @@ def create_demo_content(context):
                 username=institution["username"],
                 password=institution["password"],
                 meeting_config_id=institution["meeting_config_id"],
-                additional_meeting_query_string_for_list=institution[
-                    "additional_meeting_query_string_for_list"
+                meeting_filter_query=institution[
+                    "meeting_filter_query"
                 ],
-                additional_published_items_query_string=institution[
-                    "additional_published_items_query_string"
+                item_filter_query=institution[
+                    "item_filter_query"
                 ],
                 item_decision_formatting_tal=institution[
                     "item_decision_formatting_tal"

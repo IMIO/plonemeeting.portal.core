@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import safe_unicode
 from plone import api
 from plone.app.textfield.value import IRichTextValue
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
+from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
+from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
-from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
-from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 
 
 def format_institution_managers_group_id(institution):
@@ -64,7 +63,7 @@ def get_api_url_for_meetings(institution, meeting_UID=None):
             "&metadata_fields=date" \
             "&b_size=9999".format(url, meeting_UID)
     else:
-        url = "{0}{1}".format(url, institution.additional_meeting_query_string_for_list)
+        url += _datagrid_to_url_param(institution.meeting_filter_query)
     return url
 
 
@@ -112,11 +111,21 @@ def get_api_url_for_annexes(institution, item_json_id):
     return url
 
 
+def _datagrid_to_url_param(values):
+    res = ''
+    for dict_value in values:
+        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
+    return res
+
+
 def get_api_url_for_meeting_items(institution, meeting_UID):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
+
+    item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
+    item_content_query = _datagrid_to_url_param(institution.item_content_query)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     url = (
         "{0}/@search?"
@@ -141,13 +150,15 @@ def get_api_url_for_meeting_items(institution, meeting_UID):
         "&metadata_fields={4}"
         "{5}"
         "{6}"
-        "{7}".format(
+        "{7}"
+        "{8}".format(
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
             meeting_UID,
             institution.delib_category_field,
-            institution.additional_published_items_query_string,
+            item_filter_query,
+            item_content_query,
             category_filter,
             representatives_filter
         )

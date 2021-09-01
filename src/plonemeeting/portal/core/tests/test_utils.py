@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-
-from plone.app.testing import logout
-
-from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
+from plone.app.testing import logout
 from plonemeeting.portal.core import utils
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 
 
 class TestUtils(PmPortalDemoFunctionalTestCase):
@@ -100,6 +96,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
@@ -128,6 +125,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getRawClassifier=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
@@ -159,6 +157,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
@@ -188,6 +187,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=administration"
             "&getCategory=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
@@ -218,6 +218,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=administration"
             "&getCategory=immo",
             url,
@@ -243,6 +244,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=VOID",
             url,
         )

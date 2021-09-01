@@ -11,6 +11,8 @@ Changelog
   [odelaere]
 - Handle connection failure properly in institution edit form.
   [odelaere]
+- Added DataGridField to manage url parameters.
+  [odelaere]
 
 1.3.3.2 (2021-08-20)
 --------------------

@@ -10,6 +10,7 @@ from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
+from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
@@ -70,6 +71,18 @@ class ICategoryMappingRowSchema(Interface):
     )
 
 
+class IUrlParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=plone_(u"Parameter"),
+        required=True,
+        default='extra_include'
+    )
+    value = schema.TextLine(
+        title=plone_(u"Value"),
+        required=True,
+    )
+
+
 class IRepresentativeMappingRowSchema(Interface):
     representative_key = schema.TextLine(title=_(u"Representative key"),
                                          description=_(u"representative_key_description"))
@@ -83,6 +96,20 @@ class IRepresentativeMappingRowSchema(Interface):
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
+    # Webservice fieldset
+    model.fieldset(
+        "webservice",
+        label=_(u"Webservice"),
+        fields=[
+            "plonemeeting_url",
+            "username",
+            "password",
+            "meeting_config_id",
+            "meeting_filter_query",
+            "item_filter_query",
+            "item_content_query",
+        ],
+    )
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)
@@ -91,39 +118,53 @@ class IInstitution(model.Schema):
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
-    project_decision_disclaimer = RichText(
-        title=_(u"Project decision disclaimer"),
-        required=False,
-        defaultFactory=default_translator(
-            _(u"default_in_project_disclaimer", default="")
-        ),
-    )
-
-    additional_meeting_query_string_for_list = schema.TextLine(
-        title=_(u"Additional Meeting query string for list"),
+    directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True)
+    meeting_filter_query = schema.List(
+        title=_(u"Meeting query filter for list"),
         description=_(u"additional_meeting_query_string_for_list_description"),
         required=True,
-        constraint=validate_url_parameters,
-        default="&review_state=frozen&review_state=decided"
+        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        default=[{'parameter': 'review_state', 'value': 'frozen'},
+                 {'parameter': 'review_state', 'value': 'decided'}]
     )
 
-    additional_published_items_query_string = schema.TextLine(
-        title=_(u"Additional Published Items query string"),
+    directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True)
+    item_filter_query = schema.List(
+        title=_(u"Published Items query filter"),
         description=_(u"additional_published_items_query_string_description"),
         required=True,
-        constraint=validate_url_parameters,
-        default="&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified"
+        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        default=[{'parameter': 'listType', 'value': 'normal'},
+                 {'parameter': 'listType', 'value': 'late'}]
+    )
+
+    directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True)
+    item_content_query = schema.List(
+        title=_(u"Published Items content query"),
+        description=_(u"additional_published_items_query_string_description"),
+        required=True,
+        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        default=[{'parameter': 'extra_include', 'value': 'public_deliberation'}]
     )
     # Formatting fieldset
     model.fieldset(
         "formatting",
         label=_(u"Formatting"),
         fields=[
+            "project_decision_disclaimer",
             "item_title_formatting_tal",
             "item_decision_formatting_tal",
             "item_additional_data_formatting_tal",
             "info_annex_formatting_tal",
         ],
+    )
+
+    project_decision_disclaimer = RichText(
+        title=_(u"Project decision disclaimer"),
+        required=False,
+        defaultFactory=default_translator(
+            _(u"default_in_project_disclaimer", default="")
+        ),
     )
 
     item_title_formatting_tal = schema.TextLine(
@@ -137,7 +178,7 @@ class IInstitution(model.Schema):
     item_decision_formatting_tal = schema.TextLine(
         title=_(u"Item decision formatting tal expression"),
         required=True,
-        default="python: json['decision']['data']",
+        default="python: json['extra_include_deliberation']['public_deliberation']",
     )
 
     item_additional_data_formatting_tal = schema.TextLine(
@@ -184,7 +225,6 @@ class IInstitution(model.Schema):
     )
 
     # Styling fieldset
-
     model.fieldset(
         "style",
         label=_(u"Styling"),
