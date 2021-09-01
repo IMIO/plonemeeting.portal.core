@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:omit-tag="">
-  <div class="input-group">
+  <div class="input-group color-select-widget-wrapper">
     <input type="color" id="color" name="" class="" title="" disabled="" readonly=""
            tal:attributes="id string:${view/id};
                          name view/name;
@@ -10,6 +10,7 @@
                          title view/title;
                          value view/value;
                          readonly view/readonly;
-                         disabled view/disabled;"/>
+                         disabled python: True if view.mode == 'display' else False"/>
+    <span tal:condition="python: view.mode == 'display'" tal:content="view/value"/>
   </div>
 </html>

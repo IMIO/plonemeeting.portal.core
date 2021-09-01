@@ -14,4 +14,10 @@
     layer="z3c.form.interfaces.IFormLayer"
     template="colorselect_input.pt"/>
 
+  <z3c:widgetTemplate
+    mode="display"
+    widget="plonemeeting.portal.core.widgets.colorselect.ColorSelectWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="colorselect_input.pt"/>
+
 </configure>
