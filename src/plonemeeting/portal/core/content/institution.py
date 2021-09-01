@@ -10,7 +10,6 @@ from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
@@ -73,12 +72,12 @@ class ICategoryMappingRowSchema(Interface):
 
 class IUrlParameterRowSchema(Interface):
     parameter = schema.TextLine(
-        title=plone_(u"Parameter"),
+        title=_(u"Parameter"),
         required=True,
         default='extra_include'
     )
     value = schema.TextLine(
-        title=plone_(u"Value"),
+        title=_(u"Value"),
         required=True,
     )
 
@@ -96,20 +95,6 @@ class IRepresentativeMappingRowSchema(Interface):
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
-    # Webservice fieldset
-    model.fieldset(
-        "webservice",
-        label=_(u"Web Service"),
-        fields=[
-            "plonemeeting_url",
-            "username",
-            "password",
-            "meeting_config_id",
-            "meeting_filter_query",
-            "item_filter_query",
-            "item_content_query",
-        ],
-    )
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)
@@ -121,7 +106,7 @@ class IInstitution(model.Schema):
     directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True)
     meeting_filter_query = schema.List(
         title=_(u"Meeting query filter for list"),
-        description=_(u"additional_meeting_query_string_for_list_description"),
+        description=_(u"meeting_filter_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
         default=[{'parameter': 'review_state', 'value': 'frozen'},
@@ -131,7 +116,7 @@ class IInstitution(model.Schema):
     directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True)
     item_filter_query = schema.List(
         title=_(u"Published Items query filter"),
-        description=_(u"additional_published_items_query_string_description"),
+        description=_(u"item_filter_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
         default=[{'parameter': 'listType', 'value': 'normal'},
@@ -141,7 +126,7 @@ class IInstitution(model.Schema):
     directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True)
     item_content_query = schema.List(
         title=_(u"Published Items content query"),
-        description=_(u"additional_published_items_query_string_description"),
+        description=_(u"item_content_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
         default=[{'parameter': 'extra_include', 'value': 'public_deliberation'}]
