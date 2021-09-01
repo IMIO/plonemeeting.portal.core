@@ -8,7 +8,8 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing.zope import makeTestRequest
-from plone.testing.zope import WSGI_SERVER_FIXTURE
+from plone.testing.zope import INTEGRATION_TESTING
+from plone.testing.zope import WSGI_SERVER
 
 import plonemeeting.portal.core
 import transaction
@@ -46,13 +47,15 @@ PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
 
 
 PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,),
+    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,
+           INTEGRATION_TESTING),
     name="PlonemeetingPortalCoreLayer:IntegrationTesting",
 )
 
 
 PLONEMEETING_PORTAL_CORE_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,),
+    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,
+           WSGI_SERVER),
     name="PlonemeetingPortalCoreLayer:FunctionalTesting",
 )
 
@@ -61,7 +64,7 @@ PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         PLONEMEETING_PORTAL_CORE_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        WSGI_SERVER_FIXTURE,
+        WSGI_SERVER,
     ),
     name="PlonemeetingPortalCoreLayer:AcceptanceTesting",
 )
