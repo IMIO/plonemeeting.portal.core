@@ -229,7 +229,7 @@ msgstr "Importation de Séance"
 
 #: ../content/institution.py:123
 msgid "Meeting query filter for list"
-msgstr "msgstr "Paramètres pour obtenir la liste des Séances à importer"
+msgstr "Paramètres pour obtenir la liste des Séances à importer"
 
 #: ../content/subscriber.py:30
 msgid "Meetings"
