@@ -15,12 +15,12 @@ class MigrateTo1006(Migrator):
         brains = self.catalog(portal_type="Institution")
         for brain in brains:
             institution = brain.getObject()
+            cat_dict = {}
             if hasattr(institution, "delib_categories") and institution.delib_categories:
                 cat_dict = {}
                 for category_id, category_title in institution.delib_categories:
                     cat_dict[category_id] = category_title
-                setattr(institution, institution.get_delib_categories_attr_name(), cat_dict)
-                delattr(institution, "delib_categories")
+            institution.delib_categories = cat_dict
 
         logger.info("Done.")
 

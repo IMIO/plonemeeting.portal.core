@@ -44,7 +44,7 @@ def handle_institution_modified(institution, event):
     """
     Initializes categories_mappings by trying to match global categories with fetched categories from iA.Delib.
     """
-    local_categories = getattr(institution, institution.get_delib_categories_attr_name(), {})
+    local_categories = getattr(institution, 'delib_categories', {})
     if local_categories and not institution.categories_mappings:
         logger.info("Initializing default categories mappings by matching with those fetched from iA.Delib.")
         global_categories = [cat for cat in get_registry_record(name="plonemeeting.portal.core.global_categories")]

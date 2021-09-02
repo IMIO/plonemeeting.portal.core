@@ -84,31 +84,31 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         tmp_var = belleville.plonemeeting_url
         belleville.plonemeeting_url = None
         belleville.fetch_delib_categories()
-        self.assertFalse(hasattr(belleville, "delib_categories_category"))
+        self.assertDictEqual(belleville.delib_categories, {})
 
         belleville.plonemeeting_url = tmp_var
         tmp_var = belleville.meeting_config_id
         belleville.meeting_config_id = None
         belleville.fetch_delib_categories()
-        self.assertFalse(hasattr(belleville, "delib_categories_category"))
+        self.assertDictEqual(belleville.delib_categories, {})
 
         belleville.meeting_config_id = tmp_var
         tmp_var = belleville.username
         belleville.username = None
         belleville.fetch_delib_categories()
-        self.assertFalse(hasattr(belleville, "delib_categories_category"))
+        self.assertDictEqual(belleville.delib_categories, {})
 
         belleville.username = tmp_var
         tmp_var = belleville.password
         belleville.password = None
         belleville.fetch_delib_categories()
-        self.assertFalse(hasattr(belleville, "delib_categories_category"))
+        self.assertDictEqual(belleville.delib_categories, {})
 
         belleville.password = tmp_var
         belleville.fetch_delib_categories()
 
         self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'},
-                             belleville.delib_categories_category)
+                             belleville.delib_categories)
         verify(requests, times=1).get(url_cat, auth=auth, headers=headers)
 
         # edit the institution, only fetched one time
@@ -131,24 +131,22 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
         belleville.delib_category_field = "classifier"
         belleville.fetch_delib_categories()
-        self.assertDictEqual({'economy': 'Economy', 'env': 'Environment'}, belleville.delib_categories_classifier)
+        self.assertDictEqual({'economy': 'Economy', 'env': 'Environment'}, belleville.delib_categories)
         unstub()
         # when requests.exceptions.ConnectionError is raised we gracefully fall back on last saved delib_categories
         when(requests).get(url, auth=auth, headers=headers).thenRaise(
             requests.exceptions.ConnectionError("mocked error"))
-        setattr(belleville, 'delib_categories_classifier', {'admin': 'Administrative', 'political': 'Political'})
+        setattr(belleville, 'delib_categories', {'admin': 'Administrative', 'political': 'Political'})
         belleville.fetch_delib_categories()
-        self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'}, belleville.delib_categories_classifier)
-        belleville.delib_categories_classifier = None
+        self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'}, belleville.delib_categories)
+        belleville.delib_categories = None
         belleville.fetch_delib_categories()
-        self.assertIsNone(belleville.delib_categories_classifier)
+        self.assertDictEqual(belleville.delib_categories, {})
 
-        delattr(belleville, "delib_categories_classifier")
+        delattr(belleville, "delib_categories")
         belleville.fetch_delib_categories()
-        self.assertFalse(hasattr(belleville, "delib_categories_classifier"))
+        self.assertDictEqual(belleville.delib_categories, {})
         unstub()
-        self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'},
-                             belleville.delib_categories_category)
 
     def test_load_representatives_from_delib(self):
         belleville = self.portal["belleville"]
@@ -175,25 +173,25 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         tmp_var = belleville.plonemeeting_url
         belleville.plonemeeting_url = None
         belleville.fetch_delib_representatives()
-        self.assertFalse(hasattr(belleville, "delib_representatives"))
+        self.assertDictEqual(belleville.delib_representatives, {})
 
         belleville.plonemeeting_url = tmp_var
         tmp_var = belleville.meeting_config_id
         belleville.meeting_config_id = None
         belleville.fetch_delib_representatives()
-        self.assertFalse(hasattr(belleville, "delib_representatives"))
+        self.assertDictEqual(belleville.delib_representatives, {})
 
         belleville.meeting_config_id = tmp_var
         tmp_var = belleville.username
         belleville.username = None
         belleville.fetch_delib_representatives()
-        self.assertFalse(hasattr(belleville, "delib_representatives"))
+        self.assertDictEqual(belleville.delib_representatives, {})
 
         belleville.username = tmp_var
         tmp_var = belleville.password
         belleville.password = None
         belleville.fetch_delib_representatives()
-        self.assertFalse(hasattr(belleville, "delib_representatives"))
+        self.assertDictEqual(belleville.delib_representatives, {})
 
         belleville.password = tmp_var
         belleville.fetch_delib_representatives()
@@ -213,6 +211,19 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         request.form["form.widgets.IBasic.title"] = "New Belleville title"
         institution_edit_form()
         verify(requests, times=2).get(url_rpz, auth=auth, headers=headers)
+        # ensure history is kept but not unused values
+        belleville.delib_representatives = {'trololo': 'Mr Trololo'}
+        belleville.fetch_delib_representatives()
+        self.assertDictEqual({'fake': 'Wolverine', 'fake++': 'Cyclop'},
+                             belleville.delib_representatives)
+        belleville.representatives_mappings.append({'representative_key': 'trololo',
+                                                 'representative_value': 'Mr Trololo',
+                                                 'representative_long_value': 'Mr Trololo Bourgmestre F.F.',
+                                                 'active': True})
+        belleville.delib_representatives = {'trololo': 'Mr Trololo'}
+        belleville.fetch_delib_representatives()
+        self.assertDictEqual({'trololo': 'Mr Trololo', 'fake': 'Wolverine', 'fake++': 'Cyclop'},
+                             belleville.delib_representatives)
 
     def test_rules_xml_compilation(self):
         """Make sure the "/++theme++barceloneta/rules.xml" entity does compile.
@@ -232,34 +243,3 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(api.content.get_state(inst), "private")
         self.assertTrue(compileThemeTransform(rules=rules))
         self.assertTrue("Anonymous" in rolesForPermissionOn(ACI, inst))
-
-    def test__fetch_external_data_for_vocabulary_cleanse_properly(self):
-        belleville = self.portal["belleville"]
-        url = 'https://bidon.com'
-        auth = ('dgen', 'meeting')
-        headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-
-        json = {"extra_include_categories": [
-            {"id": "admin", "title": "Administrative"},
-            {"id": "political", "title": "Political"},
-        ]}
-        when(requests).get(url, auth=auth, headers=headers) \
-            .thenReturn(mock({'status_code': 200, 'json': lambda: json}))
-        res = belleville._fetch_external_data_for_vocabulary('bidon', url, 'categories', 'id', 'title',
-                                                             belleville.categories_mappings, 'local_category_id')
-        self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'}, res)
-        self.assertDictEqual(belleville.bidon, res)
-        # values in datagrid are kept if not returned from ws
-        categories_mappings = [{'local_category_id': 'test', 'global_category_id': 'test'}]
-        belleville.bidon['test'] = 'test'
-        res = belleville._fetch_external_data_for_vocabulary('bidon', url, 'categories', 'id', 'title',
-                                                             categories_mappings, 'local_category_id')
-        self.assertDictEqual({'test': 'test', 'admin': 'Administrative', 'political': 'Political'}, res)
-        self.assertDictEqual(belleville.bidon, res)
-        # values missing datagrid are removed if not returned from ws
-        categories_mappings = [{'local_category_id': 'admin', 'global_category_id': 'admin'}]
-        res = belleville._fetch_external_data_for_vocabulary('bidon', url, 'categories', 'id', 'title',
-                                                             categories_mappings, 'local_category_id')
-        self.assertDictEqual({'admin': 'Administrative', 'political': 'Political'}, res)
-        self.assertDictEqual(belleville.bidon, res)
-

@@ -76,7 +76,6 @@ class ICategoryMappingRowSchema(Interface):
 
 class IRepresentativeMappingRowSchema(Interface):
     representative_key = schema.Choice(title=_(u"Representative key"),
-                                       description=_(u"representative_key_description"),
                                        vocabulary="plonemeeting.portal.vocabularies.editable_representative",
                                        required=True)
     representative_value = schema.TextLine(title=_(u"Representative value"),
@@ -281,49 +280,47 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
-    def get_delib_categories_attr_name(self):
-        return 'delib_categories_' + self.delib_category_field
-
     def fetch_delib_categories(self):
         delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
         url = get_api_url_for_categories(self, delib_config_category_field)
-        self._fetch_external_data_for_vocabulary(self.get_delib_categories_attr_name(),
-                                                 url,
-                                                 delib_config_category_field,
-                                                 'id',
-                                                 'title',
-                                                 self.categories_mappings,
-                                                 'local_category_id')
+        categories = self._fetch_external_data_for_vocabulary('delib_categories',
+                                                              url,
+                                                              delib_config_category_field,
+                                                              'id',
+                                                              'title')
+        self.delib_categories = categories
 
     def fetch_delib_representatives(self):
-        self._fetch_external_data_for_vocabulary('delib_representatives',
-                                                 get_api_url_for_representatives(self),
-                                                 REPRESENTATIVE_IA_DELIB_FIELD,
-                                                 'UID',
-                                                 'title',
-                                                 self.representatives_mappings,
-                                                 'representative_key')
+        representatives = self._fetch_external_data_for_vocabulary('delib_representatives',
+                                                                   get_api_url_for_representatives(self),
+                                                                   REPRESENTATIVE_IA_DELIB_FIELD,
+                                                                   'UID',
+                                                                   'title')
+        if hasattr(self, 'delib_representatives') and self.delib_representatives:
+            # keep history
+            used_keys = [row['representative_key'] for row in self.representatives_mappings]
+            to_delete = [key for key in self.delib_representatives if key not in used_keys]
+            for key in to_delete:
+                del self.delib_representatives[key]
 
-    def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title,
-                                            datagrid_field, datagrid_schema_key):
+            self.delib_representatives.update(representatives)
+        else:
+            self.delib_representatives = representatives
+
+    def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title):
         # ensure empty dict if None or attr doesn't exist
         res = deepcopy(getattr(self, attr_name, {})) or {}
-        used_ids = [row[datagrid_schema_key] for row in datagrid_field if row[datagrid_schema_key] in res]
-        to_delete = [key for key in res.keys() if key not in used_ids]
-        for key in to_delete:
-            del res[key]
-
         if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
             if url:
                 logger.info("Fetching {} for {} [Start]".format(attr_name, self.title))
                 try:
                     response = requests.get(url, auth=(self.username, self.password), headers=API_HEADERS)
                     if response.status_code in (200, 201):
+                        res = {}
                         json = response.json()
                         values_json = json["extra_include_{}".format(url_extra_include)]
                         for value in values_json:
                             res[value[json_voc_value]] = value[json_voc_title]
-                        setattr(self, attr_name, res)
                         logger.info("Fetching {} for {} [End]".format(attr_name, self.title))
                     else:
                         logger.error("Unable to fetch {}, error is {} [End]".format(attr_name, response.content))

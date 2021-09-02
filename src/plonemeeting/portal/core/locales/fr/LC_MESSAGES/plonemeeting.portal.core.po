@@ -410,10 +410,6 @@ msgstr ""
 msgid "private"
 msgstr "Privé"
 
-#: ../content/institution.py:70
-msgid "representative_key_description"
-msgstr "Identifiant unique (UID) du groupe en charge dans iA.Délib"
-
 #: ../content/institution.py:74
 msgid "representative_long_value_description"
 msgstr "Affichée sur les pages des points"

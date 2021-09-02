@@ -13,7 +13,7 @@ Changelog
   [odelaere]
 - Query representatives from iA.Delib to populate vocabularies only when loading the edit form.
   [odelaere]
-- Fetched data from delib are kept if used.
+- Fetched representatives from delib are kept if used.
   [odelaere]
 
 

@@ -42,7 +42,7 @@ class LocalCategoryVocabularyFactory:
             req = getRequest()
             institution = req.get('PUBLISHED').context
             if isinstance(institution, Institution):
-                local_categories = copy.deepcopy(getattr(institution, institution.get_delib_categories_attr_name(), {}))
+                local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
                 if local_categories:
                     return SimpleVocabulary(
                         [

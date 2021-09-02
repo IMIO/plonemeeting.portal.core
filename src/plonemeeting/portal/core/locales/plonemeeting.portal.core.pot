@@ -413,10 +413,6 @@ msgstr ""
 msgid "private"
 msgstr ""
 
-#: ../content/institution.py:70
-msgid "representative_key_description"
-msgstr ""
-
 #: ../content/institution.py:74
 msgid "representative_long_value_description"
 msgstr ""
