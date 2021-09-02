@@ -38,8 +38,8 @@ GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 class LocalCategoryVocabularyFactory:
     def __call__(self, context):
-        req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
+            req = getRequest()
             institution = req.get('PUBLISHED').context
             if isinstance(institution, Institution):
                 local_categories = copy.deepcopy(getattr(institution, institution.get_delib_categories_attr_name(), {}))
@@ -104,8 +104,8 @@ LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 
     def __call__(self, context):
-        req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
+            req = getRequest()
             institution = req.get('PUBLISHED').context
             if isinstance(institution, Institution):
                 local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
