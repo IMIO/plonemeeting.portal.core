@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
+
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from imio.helpers.content import get_vocab
@@ -279,55 +281,53 @@ class IInstitution(model.Schema):
 class Institution(Container):
     """
     """
-    def fetch_delib_categories(self):
-        categories = []
-        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
-            delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
-                self.delib_category_field]
-            url = get_api_url_for_categories(self, delib_config_category_field)
-            if url:
-                logger.info("Fetching delib categories for {} [Start]".format(self.title))
-                try:
-                    response = requests.get(
-                        url, auth=(self.username, self.password), headers=API_HEADERS
-                    )
-                    if response.status_code in (200, 201):
-                        delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
-                            self.delib_category_field]
-                        json = response.json()
-                        cat_json = json["extra_include_{categories}".format(
-                            categories=delib_config_category_field)]
+    def get_delib_categories_attr_name(self):
+        return 'delib_categories_' + self.delib_category_field
 
-                        for cat in cat_json:
-                            categories.append((cat['id'], cat['title']))
-                        self.delib_categories = categories
-                        logger.info("Fetching delib categories for {} [End]".format(self.title))
+    def fetch_delib_categories(self):
+        delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+        url = get_api_url_for_categories(self, delib_config_category_field)
+        self._fetch_external_data_for_vocabulary(self.get_delib_categories_attr_name(),
+                                                 url,
+                                                 delib_config_category_field,
+                                                 'id',
+                                                 'title',
+                                                 self.categories_mappings,
+                                                 'local_category_id')
+
+    def fetch_delib_representatives(self):
+        self._fetch_external_data_for_vocabulary('delib_representatives',
+                                                 get_api_url_for_representatives(self),
+                                                 REPRESENTATIVE_IA_DELIB_FIELD,
+                                                 'UID',
+                                                 'title',
+                                                 self.representatives_mappings,
+                                                 'representative_key')
+
+    def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title,
+                                            datagrid_field, datagrid_schema_key):
+        # ensure empty dict if None or attr doesn't exist
+        res = deepcopy(getattr(self, attr_name, {})) or {}
+        used_ids = [row[datagrid_schema_key] for row in datagrid_field if row[datagrid_schema_key] in res]
+        to_delete = [key for key in res.keys() if key not in used_ids]
+        for key in to_delete:
+            del res[key]
+
+        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
+            if url:
+                logger.info("Fetching {} for {} [Start]".format(attr_name, self.title))
+                try:
+                    response = requests.get(url, auth=(self.username, self.password), headers=API_HEADERS)
+                    if response.status_code in (200, 201):
+                        json = response.json()
+                        values_json = json["extra_include_{}".format(url_extra_include)]
+                        for value in values_json:
+                            res[value[json_voc_value]] = value[json_voc_title]
+                        setattr(self, attr_name, res)
+                        logger.info("Fetching {} for {} [End]".format(attr_name, self.title))
                     else:
-                        logger.error("Unable to fetch categories, error is {} [End]".format(
-                            response.content))
+                        logger.error("Unable to fetch {}, error is {} [End]".format(attr_name, response.content))
                 except requests.exceptions.ConnectionError as err:
                     logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
                     api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="warning")
-        return categories
-
-    def fetch_delib_representatives(self):
-        representatives = []
-        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
-            url = get_api_url_for_representatives(self)
-            if url:
-                logger.info("Fetching delib representatives for {} [Start]".format(self.title))
-                response = requests.get(
-                    url, auth=(self.username, self.password), headers=API_HEADERS
-                )
-                if response.status_code in (200, 201):
-                    json = response.json()
-                    representative_json = json["extra_include_{representatives}".format(representatives=REPRESENTATIVE_IA_DELIB_FIELD)]
-
-                    for representative in representative_json:
-                        representatives.append((representative['UID'], representative['title']))
-                    self.delib_representatives = representatives
-                    logger.info("Fetching delib representatives for {} [End]".format(self.title))
-                else:
-                    logger.error("Unable to fetch representatives, error is {} [End]".format(
-                        response.content))
-        return representatives
+        return res

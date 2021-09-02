@@ -41,13 +41,13 @@ class LocalCategoryVocabularyFactory:
         req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
             institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
-                local_categories = copy.deepcopy(institution.delib_categories)
+            if isinstance(institution, Institution):
+                local_categories = copy.deepcopy(getattr(institution, institution.get_delib_categories_attr_name(), {}))
                 if local_categories:
                     return SimpleVocabulary(
                         [
-                            SimpleTerm(value=category_id, title=category_title)
-                            for category_id, category_title in local_categories
+                            SimpleTerm(value=category_id, title=local_categories[category_id])
+                            for category_id in local_categories.keys()
                         ]
                     )
         return GlobalCategoryVocabularyFactory()(context)
@@ -107,13 +107,13 @@ class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
         req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
             institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution) and hasattr(institution, "delib_representatives"):
-                local_representatives = copy.deepcopy(institution.delib_representatives)
+            if isinstance(institution, Institution):
+                local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
                 if local_representatives:
                     return SimpleVocabulary(
                         [
-                            SimpleTerm(value=representative_id, title=representative_title)
-                            for representative_id, representative_title in local_representatives
+                            SimpleTerm(value=representative_uid, title=local_representatives[representative_uid])
+                            for representative_uid in local_representatives.keys()
                         ]
                     )
         return SimpleVocabulary([])

@@ -19,11 +19,13 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.login_as_manager()
         institution_view = self.belleville.restrictedTraverse("@@view")
         # context is overridden while traversing
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_classifier"))
         request = self.portal.REQUEST
         request.set('PUBLISHED', institution_view)
         institution_view.update()
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_classifier"))
 
     def test_fetch_category_only_once_on_edit(self):
         self.login_as_manager()
@@ -31,26 +33,27 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         # context is overridden while traversing
         request = self.portal.REQUEST
         request.set('PUBLISHED', institution_edit_form)
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_classifier"))
         institution_edit_form()
-        self.assertListEqual([('travaux', 'Travaux'),
-                              ('urbanisme', 'Urbanisme'),
-                              ('comptabilite', 'Comptabilité'),
-                              ('personnel', 'Personnel'),
-                              ('population', 'Population / État-civil'),
-                              ('locations', 'Locations'),
-                              ('divers', 'Divers')],
-                             self.belleville.delib_categories)
+        self.assertDictEqual({'travaux': 'Travaux',
+                              'urbanisme': 'Urbanisme',
+                              'comptabilite': 'Comptabilité',
+                              'personnel': 'Personnel',
+                              'population': 'Population / État-civil',
+                              'locations': 'Locations',
+                              'divers': 'Divers'},
+                             self.belleville.delib_categories_category)
 
-        delattr(self.belleville, "delib_categories")
+        delattr(self.belleville, "delib_categories_category")
         institution_edit_form.handleApply(institution_edit_form, None)
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
 
         institution_edit_form.update()
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
 
         institution_edit_form.render()
-        self.assertFalse(hasattr(self.belleville, "delib_categories"))
+        self.assertFalse(hasattr(self.belleville, "delib_categories_category"))
 
     def test_categories_mappings_invariant(self):
         def exc_msg(invalid):

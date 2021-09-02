@@ -143,21 +143,21 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         institution = api.content.create(
             container=self.portal, type="Institution", id="institution"
         )
-        self.assertFalse(hasattr(institution, "delib_categories"))
+        self.assertFalse(hasattr(institution, "delib_categories_category"))
         self.assertIsNone(institution.categories_mappings)
 
         global_categories = get_registry_record(name="plonemeeting.portal.core.global_categories")
-        institution.delib_categories = [(cat_id, global_categories[cat_id]) for cat_id in global_categories]
+        institution.delib_categories_category = {}
+        for cat_id in global_categories:
+            institution.delib_categories_category[cat_id] = global_categories[cat_id]
         notify(ObjectModifiedEvent(institution))
-        self.assertEqual(len(institution.categories_mappings), len(institution.delib_categories))
+        self.assertEqual(len(institution.categories_mappings), len(institution.delib_categories_category))
         self.assertListEqual(institution.categories_mappings,
                              [{"local_category_id": cat, "global_category_id": cat}
                               for cat in global_categories])
         # if categories_mappings is already initialized it is not overridden
-        institution.delib_categories = [("administration", "Cat1"),
-                                        ("animaux", "Cat2"),
-                                        ("cultes", "Cat3"),
-                                        ("finances", "Cat4")]
+        institution.delib_categories_category = {"administration": "Cat1", "animaux": "Cat2",
+                                                 "cultes": "Cat3", "finances": "Cat4"}
         notify(ObjectModifiedEvent(institution))
         self.assertListEqual(institution.categories_mappings,
                              [{"local_category_id": cat, "global_category_id": cat}
@@ -171,13 +171,9 @@ class InstitutionIntegrationTest(PmPortalTestCase):
                               {"local_category_id": "cultes", "global_category_id": "cultes"},
                               {"local_category_id": "finances", "global_category_id": "finances"}])
         # only matching ids are kept
-        institution.delib_categories = [("massa", "quis"),
-                                        ("vitae", "vel"),
-                                        ("animaux", "Cat2"),
-                                        ("tortor", "eros"),
-                                        ("condimentum", "donec"),
-                                        ("cultes", "Cat3"),
-                                        ("lacinia", "ac")]
+        institution.delib_categories_category = {"massa": "quis", "vitae": "vel", "animaux": "Cat2",
+                                                 "tortor": "eros", "condimentum": "donec",
+                                                 "cultes": "Cat3", "lacinia": "ac"}
         institution.categories_mappings = []
         notify(ObjectModifiedEvent(institution))
         self.assertListEqual(institution.categories_mappings,
