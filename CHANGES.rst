@@ -11,19 +11,19 @@ Changelog
   [odelaere]
 - Handle connection failure properly in institution edit form.
   [odelaere]
+- Removed faceted-preview-meeting-items.
+  [odelaere]
 - Added item number handling in sync process.
   [odelaere]
 - Reworked sync + allow partial sync of arbitrary items.
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
-- Removed faceted-preview-meeting-items.
   [odelaere]
+
 
 1.3.3.2 (2021-08-20)
 --------------------
 
-- Reworked sync + allow partial sync of arbitrary items.
-  [odelaere]
 - Do not fail to edit `Institution` if service to fetch categories is broken.
   [gbastien]
 - Adapted `SelectMeetingWidget` used for the `seances` criterion to make
