@@ -82,6 +82,30 @@ class IUrlParameterRowSchema(Interface):
     )
 
 
+class IUrlMeetingFilterParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=_(u"Parameter"),
+        required=True,
+        default='review_state'
+    )
+    value = schema.TextLine(
+        title=_(u"Value"),
+        required=True,
+    )
+
+
+class IUrlItemFilterParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=_(u"Parameter"),
+        required=True,
+        default='listType'
+    )
+    value = schema.TextLine(
+        title=_(u"Value"),
+        required=True,
+    )
+
+
 class IRepresentativeMappingRowSchema(Interface):
     representative_key = schema.TextLine(title=_(u"Representative key"),
                                          description=_(u"representative_key_description"))
@@ -108,7 +132,7 @@ class IInstitution(model.Schema):
         title=_(u"Meeting query filter for list"),
         description=_(u"meeting_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
         default=[{'parameter': 'review_state', 'value': 'frozen'},
                  {'parameter': 'review_state', 'value': 'decided'}]
     )
@@ -118,7 +142,7 @@ class IInstitution(model.Schema):
         title=_(u"Published Items query filter"),
         description=_(u"item_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        value_type=DictRow(title=u"Parameter name", schema=IUrlItemFilterParameterRowSchema),
         default=[{'parameter': 'listType', 'value': 'normal'},
                  {'parameter': 'listType', 'value': 'late'}]
     )
