@@ -12,13 +12,6 @@
     factory=".criteria.MeetingsCriteria" />
 
   <faceted:view
-    name="faceted-preview-meeting-items"
-    template="preview_meeting_items.pt"
-    title="Faceted meeting items preview"
-    permission="zope2.View"
-    />
-
-  <faceted:view
     name="faceted-preview-meeting"
     template="preview_meeting.pt"
     title="Faceted meeting preview"

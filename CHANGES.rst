@@ -11,6 +11,8 @@ Changelog
   [odelaere]
 - Handle connection failure properly in institution edit form.
   [odelaere]
+- Removed faceted-preview-meeting-items.
+  [odelaere]
 - Added DataGridField to manage url parameters.
   [odelaere]
 
