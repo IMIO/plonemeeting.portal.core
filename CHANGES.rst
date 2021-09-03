@@ -5,13 +5,17 @@ Changelog
 1.3.3.3 (unreleased)
 --------------------
 
-- Added item number handling in sync process.
-  [odelaere]
 - Upgraded datagridfield version.
   [odelaere]
 - Fail institution edit form validation if an iA.Delib category is mapped multiple times.
   [odelaere]
 - Handle connection failure properly in institution edit form.
+  [odelaere]
+- Added item number handling in sync process.
+  [odelaere]
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
+- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
   [odelaere]
 
 1.3.3.2 (2021-08-20)
@@ -24,8 +28,6 @@ Changelog
 - Adapted `SelectMeetingWidget` used for the `seances` criterion to make
   zero count values shown and selectable.
   [gbastien]
-- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
-  [odelaere]
 
 
 1.3.3.1 (2021-08-16)
