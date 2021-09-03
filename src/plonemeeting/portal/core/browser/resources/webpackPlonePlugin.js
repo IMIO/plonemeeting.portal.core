@@ -30,7 +30,9 @@ class PlonePlugin {
             recordIndex = i;
           }
         });
-        xml.registry.records[recordIndex].value[lastCompilationIndex]._ = new Date().toISOString();
+        xml.registry.records[recordIndex].value[lastCompilationIndex]._ = new Date()
+          .toISOString()
+          .replace("T", " ");
         const builder = new xml2js.Builder();
         xml = builder.buildObject(xml);
         fs.writeFile(registryXmlPath, xml, function(err, data) {
