@@ -1,6 +1,7 @@
 #!/usr/bin/make
 #
 args = $(filter-out $@,$(MAKECMDGOALS))
+RESOURCES_PATH = src/plonemeeting/portal/core/browser/resources
 
 all: run
 
@@ -39,6 +40,18 @@ cleanall:  ## Clears build artefacts and virtualenv
 test:
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
 
-.PHONY: css
-css:  ## Compile css
-	bin/plone-compile-resources --bundle=plonemeeting.portal.core
+.PHONY: resources
+resources:  ## Compile resources
+	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
+	$(MAKE) -C $(RESOURCES_PATH) build
+
+.PHONY: resources-install
+resources-install:  ## Install resources dependencies
+	$(MAKE) -C $(RESOURCES_PATH) install
+
+.PHONY: resources-watch
+resources-watch:  ## Start a Webpack dev server and watch for resources changes
+	# You can pass your Plone site path with = --env PLONE_SITE_PATH=/conseil
+	# Default Plone site path is "/Plone"
+	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
+	$(MAKE) -C $(RESOURCES_PATH) watch $(args)

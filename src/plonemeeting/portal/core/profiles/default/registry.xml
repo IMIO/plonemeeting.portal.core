@@ -1,85 +1,65 @@
-<?xml version="1.0"?>
-<registry
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="plonemeeting.portal.core">
-
-    <record name="plone.custom_attributes"
-            interface="Products.CMFPlone.interfaces.controlpanel.IFilterSchema"
-            field="custom_attributes">
-      <value purge="true">
-        <element>style</element>
-      </value>
-    </record>
-
-    <records interface="plone.app.querystring.interfaces.IQueryField"
-             prefix="plone.app.querystring.field.number">
-        <value key="title" i18n:translate="">Item number</value>
-        <value key="description" i18n:translate=""></value>
-        <value key="enabled">False</value>
-        <value key="sortable">True</value>
-        <value key="operations" />
-        <value key="group" i18n:domain="plone"
-                           i18n:translate="">Metadata</value>
-    </records>
-
-    <records interface="plone.app.querystring.interfaces.IQueryField"
-             prefix="plone.app.querystring.field.linkedMeetingDate">
-        <value key="title" i18n:translate="">Related meeting date</value>
-        <value key="description" i18n:translate=""></value>
-        <value key="enabled">False</value>
-        <value key="sortable">True</value>
-        <value key="operations" />
-        <value key="group" i18n:domain="plone"
-                           i18n:translate="">Metadata</value>
-    </records>
-
-    <record name="plonemeeting.portal.core.global_categories">
-      <field type="plone.registry.field.Dict">
-        <title i18n:translate="">Global categories</title>
-        <key_type type="plone.registry.field.TextLine">
-          <title i18n:translate="">Global category id</title>
-        </key_type>
-        <value_type type="plone.registry.field.TextLine">
-          <title i18n:translate="">Global category title</title>
-        </value_type>
-      </field>
-    </record>
-
-    <records prefix="plone.resources/plonemeeting.portal.core"
-             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-      <value key="css">
-        <element>++plone++plonemeeting.portal.core/less/main.less</element>
-      </value>
-    </records>
-
-    <records prefix="plone.bundles/plonemeeting.portal.core"
-             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-      <value key="resources">
-        <element>plonemeeting.portal.core</element>
-      </value>
-      <value key="depends">plone</value>
-      <value key="enabled">True</value>
-      <value key="compile">True</value>
-      <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
-      <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-      <value key="last_compilation">2021-06-25 16:00:00</value>
-    </records>
-
-    <records prefix="plone.resources/plonemeeting.portal.core-custom"
-             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-      <value key="css">
-        <element>@@custom_colors.css</element>
-      </value>
-    </records>
-
-    <records prefix="plone.bundles/plonemeeting.portal.core-custom"
-             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-      <value key="resources">
-        <element>plonemeeting.portal.core-custom</element>
-      </value>
-      <value key="enabled">True</value>
-      <value key="compile">True</value>
-      <value key="last_compilation">2020-09-04 12:30:00</value>
-      <value key="csscompilation">++plone++static/plonemeeting.portal.core-custom-compiled.css</value>
-    </records>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plonemeeting.portal.core">
+  <record name="plone.custom_attributes" interface="Products.CMFPlone.interfaces.controlpanel.IFilterSchema" field="custom_attributes">
+    <value purge="true">
+      <element>style</element>
+    </value>
+  </record>
+  <record name="plonemeeting.portal.core.global_categories">
+    <field type="plone.registry.field.Dict">
+      <title i18n:translate="">Global categories</title>
+      <key_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Global category id</title>
+      </key_type>
+      <value_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Global category title</title>
+      </value_type>
+    </field>
+  </record>
+  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
+    <value key="title" i18n:translate="">Item number</value>
+    <value key="description" i18n:translate=""/>
+    <value key="enabled">False</value>
+    <value key="sortable">True</value>
+    <value key="operations"/>
+    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
+  </records>
+  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.linkedMeetingDate">
+    <value key="title" i18n:translate="">Related meeting date</value>
+    <value key="description" i18n:translate=""/>
+    <value key="enabled">False</value>
+    <value key="sortable">True</value>
+    <value key="operations"/>
+    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
+  </records>
+  <records prefix="plone.resources/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IResourceRegistry">
+    <value key="css">
+      <element>++plone++plonemeeting.portal.core/less/main.less</element>
+    </value>
+  </records>
+  <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="resources">
+      <element>plonemeeting.portal.core</element>
+    </value>
+    <value key="depends">plone</value>
+    <value key="enabled">True</value>
+    <value key="compile">True</value>
+    <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
+    <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
+    <value key="last_compilation">2021-09-03T11:08:57.459Z</value>
+  </records>
+  <records prefix="plone.resources/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IResourceRegistry">
+    <value key="css">
+      <element>@@custom_colors.css</element>
+    </value>
+  </records>
+  <records prefix="plone.bundles/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="resources">
+      <element>plonemeeting.portal.core-custom</element>
+    </value>
+    <value key="enabled">True</value>
+    <value key="compile">True</value>
+    <value key="last_compilation">2020-09-04 12:30:00</value>
+    <value key="csscompilation">++plone++static/plonemeeting.portal.core-custom-compiled.css</value>
+  </records>
 </registry>
