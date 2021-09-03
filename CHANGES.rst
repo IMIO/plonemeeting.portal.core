@@ -16,6 +16,7 @@ Changelog
 - Reworked sync + allow partial sync of arbitrary items.
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
+- Removed faceted-preview-meeting-items.
   [odelaere]
 
 1.3.3.2 (2021-08-20)
