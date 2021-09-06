@@ -537,3 +537,9 @@ body #portal-footer > .row {
         border-radius: 5px !important;
     }
 }
+
+.datagridwidget-cell {
+    select{
+        max-width: 350px;
+    }
+}

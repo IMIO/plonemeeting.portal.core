@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
+from plone import api
+from plone.app.testing import login
+from plone.app.testing import logout
+from plone.app.testing import TEST_USER_NAME
+from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING
+from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
+
 import unittest
 
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import login, logout
-
-from plone import api
-from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING,
-    PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING,
-)
 
 IMG_BASE64_DATA = "data:image/gif;base64,R0lGODlhCgAKAPcAAP////79/f36+/3z8/zy8/rq7Prm6Pnq7P" \
     "je4vTx8vPg5O6gqe2gqOq4v+igqt9tetxSYNs7Tdo5TNc5TNUbMdUbMNQRKNIKIdIJINIGHdEGHtEDGtACFdAA" \

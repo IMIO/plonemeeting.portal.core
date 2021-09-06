@@ -4,9 +4,8 @@ from eea.facetednavigation.widgets import ViewPageTemplateFile
 from eea.facetednavigation.widgets.interfaces import DefaultSchemata as DS
 from eea.facetednavigation.widgets.interfaces import ISchema
 from eea.facetednavigation.widgets.widget import Widget
-from z3c.form import field
-
 from plonemeeting.portal.core import _
+from z3c.form import field
 
 
 class IItemsSortSchema(ISchema):

@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-import copy
-
 from plone import api
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.content.institution import Institution
+from plonemeeting.portal.core.utils import format_meeting_date_and_state
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from z3c.form.interfaces import NO_VALUE
 from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+import copy
 import json
 import requests
-
-from plonemeeting.portal.core.config import API_HEADERS, CATEGORY_IA_DELIB_FIELDS
-from plonemeeting.portal.core.utils import format_meeting_date_and_state
-from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 class GlobalCategoryVocabularyFactory:
@@ -38,16 +38,16 @@ GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 class LocalCategoryVocabularyFactory:
     def __call__(self, context):
-        req = getRequest()
         if context == NO_VALUE or isinstance(context, dict):
+            req = getRequest()
             institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution) and hasattr(institution, "delib_categories"):
-                local_categories = copy.deepcopy(institution.delib_categories)
+            if isinstance(institution, Institution):
+                local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
                 if local_categories:
                     return SimpleVocabulary(
                         [
-                            SimpleTerm(value=category_id, title=category_title)
-                            for category_id, category_title in local_categories
+                            SimpleTerm(value=category_id, title=local_categories[category_id])
+                            for category_id in local_categories.keys()
                         ]
                     )
         return GlobalCategoryVocabularyFactory()(context)
@@ -99,6 +99,27 @@ class LongRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 
 
 LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
+
+
+class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
+
+    def __call__(self, context):
+        if context == NO_VALUE or isinstance(context, dict):
+            req = getRequest()
+            institution = req.get('PUBLISHED').context
+            if isinstance(institution, Institution):
+                local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
+                if local_representatives:
+                    return SimpleVocabulary(
+                        [
+                            SimpleTerm(value=representative_uid, title=local_representatives[representative_uid])
+                            for representative_uid in local_representatives.keys()
+                        ]
+                    )
+        return SimpleVocabulary([])
+
+
+EditableRepresentativeVocabulary = EditableRepresentativeVocabularyFactory()
 
 
 class RemoteMeetingsVocabularyFactory:

@@ -5,6 +5,7 @@ from plone.app.testing import logout
 from plone.restapi.permissions import UseRESTAPI
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 
+
 try:
     from Products.CMFPlone.utils import get_installer
 except ImportError:
@@ -28,8 +29,8 @@ class TestSetup(PmPortalTestCase):
 
     def test_browserlayer(self):
         """Test that IPlonemeetingPortalCoreLayer is registered."""
-        from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
         from plone.browserlayer import utils
+        from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
 
         self.assertIn(IPlonemeetingPortalCoreLayer, utils.registered_layers())
 
@@ -63,7 +64,7 @@ class TestUninstall(PmPortalTestCase):
 
     def test_browserlayer_removed(self):
         """Test that IPlonemeetingPortalCoreLayer is removed."""
-        from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
         from plone.browserlayer import utils
+        from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
 
         self.assertNotIn(IPlonemeetingPortalCoreLayer, utils.registered_layers())

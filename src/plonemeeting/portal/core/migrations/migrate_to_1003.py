@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from imio.helpers.content import richtextval
 from imio.migrator.migrator import Migrator
+
+import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

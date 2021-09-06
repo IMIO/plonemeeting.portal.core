@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective.pwexpiry.interfaces import ICustomPasswordValidator
-from zope.interface import implementer
-
 from plonemeeting.portal.core import _
+from zope.interface import implementer
 
 
 @implementer(ICustomPasswordValidator)

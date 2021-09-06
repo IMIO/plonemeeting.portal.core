@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
 
-from imio.migrator.utils import end_time
 from imio.helpers.content import richtextval
-from Products.Five import BrowserView
+from imio.migrator.utils import end_time
 from plone import api
 from plone.autoform.form import AutoExtensibleForm
-from Products.CMFCore.Expression import Expression, getExprContext
 from plone.namedfile.file import NamedBlobFile
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
+from plonemeeting.portal.core import plone_
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.utils import get_api_url_for_annexes
+from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import get_global_category
+from Products.CMFCore.Expression import Expression
+from Products.CMFCore.Expression import getExprContext
+from Products.Five import BrowserView
 from z3c.form import button
 from z3c.form.form import Form
 from zope import schema
@@ -18,15 +28,6 @@ import json
 import pytz
 import requests
 import time
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.interfaces import IMeetingsFolder
-from plonemeeting.portal.core.utils import get_api_url_for_annexes
-from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
-from plonemeeting.portal.core.utils import get_api_url_for_meetings
-from plonemeeting.portal.core.utils import get_global_category
 
 
 def _call_delib_rest_api(url, institution):  # pragma: no cover
@@ -343,7 +344,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         meeting_uid = data.get("meeting")
         _sync_meeting(institution, meeting_uid, self.request)
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(plone_(u"Cancel"))
     def handle_cancel(self, action):
         """
         """

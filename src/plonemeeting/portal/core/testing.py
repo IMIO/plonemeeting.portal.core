@@ -7,8 +7,8 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.testing.zope import makeTestRequest
 from plone.testing.zope import INTEGRATION_TESTING
+from plone.testing.zope import makeTestRequest
 from plone.testing.zope import WSGI_SERVER
 
 import plonemeeting.portal.core

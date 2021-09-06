@@ -3,15 +3,16 @@
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
 from plone.api.portal import get_registry_record
-from zope.globalrequest import getRequest
-from zope.interface import alsoProvides
-from zope.i18n import translate
-
-from plonemeeting.portal.core import _, logger
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
-from plonemeeting.portal.core.utils import create_faceted_folder, set_constrain_types
+from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import set_constrain_types
+from zope.globalrequest import getRequest
+from zope.i18n import translate
+from zope.interface import alsoProvides
 
 
 def handle_institution_creation(obj, event):
@@ -44,15 +45,15 @@ def handle_institution_modified(institution, event):
     """
     Initializes categories_mappings by trying to match global categories with fetched categories from iA.Delib.
     """
-    if hasattr(institution, "delib_categories") and not institution.categories_mappings:
+    local_categories = getattr(institution, 'delib_categories', {})
+    if local_categories and not institution.categories_mappings:
         logger.info("Initializing default categories mappings by matching with those fetched from iA.Delib.")
         global_categories = [cat for cat in get_registry_record(name="plonemeeting.portal.core.global_categories")]
-        local_categories = [cat[0] for cat in institution.delib_categories]
         categories_mappings = []
-        for local_category in local_categories:
-            if local_category in global_categories:
-                categories_mappings.append({"local_category_id": local_category,
-                                            "global_category_id": local_category})
+        for local_category_id in local_categories.keys():
+            if local_category_id in global_categories:
+                categories_mappings.append({"local_category_id": local_category_id,
+                                            "global_category_id": local_category_id})
         institution.categories_mappings = categories_mappings
         logger.info("{} fetched iA.Delib categories matched.".format(len(categories_mappings)))
 

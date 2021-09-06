@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from plone.api.exc import InvalidParameterError
-
 from plonemeeting.portal.core.config import APP_FOLDER_ID
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
 class TestBrowserUtils(PmPortalDemoFunctionalTestCase):

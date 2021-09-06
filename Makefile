@@ -17,12 +17,14 @@ bootstrap:  ## Creates virtualenv and installs requirements.txt
 
 install-requirements:
 	bin/python bin/pip install -r requirements.txt
+	bin/pre-commit install
 
 .PHONY: buildout
 buildout:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
 	echo "Starting Buildout on $(shell date)"
 	rm -f .installed.cfg
 	if ! test -f bin/buildout;then make bootstrap;else make install-requirements;fi
+	bin/pre-commit autoupdate
 	echo "[versions]" > versions.cfg
 	bin/python bin/buildout
 	echo "Finished on $(shell date)"
@@ -38,6 +40,7 @@ cleanall:  ## Clears build artefacts and virtualenv
 
 .PHONY: test
 test:
+	bin/pip install -U mockito # for dev ide env
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
 
 .PHONY: resources
