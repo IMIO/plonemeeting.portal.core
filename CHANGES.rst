@@ -11,6 +11,8 @@ Changelog
   [odelaere]
 - Handle connection failure properly in institution edit form.
   [odelaere]
+- Amper removing of representatives if they are linked to at least an item.
+  [odelaere]
 - Removed faceted-preview-meeting-items.
   [odelaere]
 - Query representatives from iA.Delib to populate vocabularies only when loading the edit form.

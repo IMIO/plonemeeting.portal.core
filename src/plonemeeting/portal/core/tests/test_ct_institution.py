@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone import api
 from plone.api.content import get_state
 from plone.api.exc import InvalidParameterError
@@ -9,6 +8,7 @@ from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import createObject
 from zope.component import queryUtility
 from zope.event import notify
