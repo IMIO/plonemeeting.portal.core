@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+from imio.migrator.migrator import Migrator
+from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import IBundleRegistry
 from Products.CMFPlone.interfaces import IResourceRegistry
 from Record import Record
-from imio.migrator.migrator import Migrator
-
 from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
 
-from datetime import datetime
 import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

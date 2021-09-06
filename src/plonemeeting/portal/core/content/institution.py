@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from copy import deepcopy
-
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
+from copy import deepcopy
 from imio.helpers.content import get_vocab
 from plone import api
 from plone.app.textfield import RichText
@@ -13,9 +12,9 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
 from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives

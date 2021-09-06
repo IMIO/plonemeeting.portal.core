@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import safe_unicode
 from plone import api
 from plone.app.textfield.value import IRichTextValue
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
+from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
+from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
+from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
-from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
-from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
-from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 
 
 def format_institution_managers_group_id(institution):

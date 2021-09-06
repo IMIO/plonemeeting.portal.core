@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
-import plone
-
 from plone import api
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
-
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.browserpage import ViewPageTemplateFile
+
+import os
+import plone
 
 
 def _path_to_dx_default_template():

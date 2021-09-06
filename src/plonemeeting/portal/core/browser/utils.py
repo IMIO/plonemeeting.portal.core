@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser import BrowserView
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -8,6 +7,7 @@ from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from Products.Five.browser import BrowserView
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 

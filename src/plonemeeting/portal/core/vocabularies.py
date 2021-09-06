@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-import copy
-
 from plone import api
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.content.institution import Institution
+from plonemeeting.portal.core.utils import format_meeting_date_and_state
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from z3c.form.interfaces import NO_VALUE
 from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+import copy
 import json
 import requests
-
-from plonemeeting.portal.core.config import API_HEADERS, CATEGORY_IA_DELIB_FIELDS
-from plonemeeting.portal.core.utils import format_meeting_date_and_state
-from plonemeeting.portal.core.utils import get_api_url_for_meetings
 
 
 class GlobalCategoryVocabularyFactory:
