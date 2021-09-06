@@ -217,9 +217,9 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertDictEqual({'fake': 'Wolverine', 'fake++': 'Cyclop'},
                              belleville.delib_representatives)
         belleville.representatives_mappings.append({'representative_key': 'trololo',
-                                                 'representative_value': 'Mr Trololo',
-                                                 'representative_long_value': 'Mr Trololo Bourgmestre F.F.',
-                                                 'active': True})
+                                                    'representative_value': 'Mr Trololo',
+                                                    'representative_long_value': 'Mr Trololo Bourgmestre F.F.',
+                                                    'active': True})
         belleville.delib_representatives = {'trololo': 'Mr Trololo'}
         belleville.fetch_delib_representatives()
         self.assertDictEqual({'trololo': 'Mr Trololo', 'fake': 'Wolverine', 'fake++': 'Cyclop'},

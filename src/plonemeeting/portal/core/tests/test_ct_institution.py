@@ -157,7 +157,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
                               for cat in global_categories])
         # if categories_mappings is already initialized it is not overridden
         institution.delib_categories = {"administration": "Cat1", "animaux": "Cat2",
-                                                 "cultes": "Cat3", "finances": "Cat4"}
+                                        "cultes": "Cat3", "finances": "Cat4"}
         notify(ObjectModifiedEvent(institution))
         self.assertListEqual(institution.categories_mappings,
                              [{"local_category_id": cat, "global_category_id": cat}
