@@ -16,7 +16,7 @@ bootstrap:  ## Creates virtualenv and installs requirements.txt
 
 install-requirements:
 	bin/python bin/pip install -r requirements.txt
-	bin/pip install pre-commit
+	bin/pre-commit install
 
 .PHONY: buildout
 buildout:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
