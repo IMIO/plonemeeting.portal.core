@@ -13,6 +13,10 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
     def belleville(self):
         return self.portal["belleville"]
 
+    @property
+    def amityville(self):
+        return self.portal["amityville"]
+
     def exc_msg(self, invalid):
         return translate(invalid.args[0], context=self.portal.REQUEST)
 
@@ -34,13 +38,13 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         request.set('PUBLISHED', institution_edit_form)
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
         institution_edit_form()
-        self.assertListEqual([('travaux', 'Travaux'),
-                              ('urbanisme', 'Urbanisme'),
-                              ('comptabilite', 'Comptabilité'),
-                              ('personnel', 'Personnel'),
-                              ('population', 'Population / État-civil'),
-                              ('locations', 'Locations'),
-                              ('divers', 'Divers')],
+        self.assertDictEqual({'travaux': 'Travaux',
+                              'urbanisme': 'Urbanisme',
+                              'comptabilite': 'Comptabilité',
+                              'personnel': 'Personnel',
+                              'population': 'Population / État-civil',
+                              'locations': 'Locations',
+                              'divers': 'Divers'},
                              self.belleville.delib_categories)
 
         delattr(self.belleville, "delib_categories")
@@ -54,7 +58,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
     def test_categories_mappings_invariant(self):
-        data = {'categories_mappings': deepcopy(self.belleville.categories_mappings)}
+        data = {'categories_mappings': deepcopy(self.amityville.categories_mappings)}
         invariants = validator.InvariantsValidator(None, None, None, IInstitution, None)
         self.assertTupleEqual((), invariants.validate(data))
         data['categories_mappings'].append({'global_category_id': 'administration',

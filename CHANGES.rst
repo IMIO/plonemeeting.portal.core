@@ -15,6 +15,11 @@ Changelog
   [odelaere]
 - Removed faceted-preview-meeting-items.
   [odelaere]
+- Query representatives from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
+- Fetched representatives from delib are kept if used.
+  [odelaere]
+
 
 1.3.3.2 (2021-08-20)
 --------------------

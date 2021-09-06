@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-
-from Products.CMFPlone.controlpanel.browser.resourceregistry import (
-    OverrideFolderManager,
-)
-from Products.CMFPlone.interfaces import IBundleRegistry
-from plone.registry.interfaces import IRegistry
 from plone import api
+from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.controlpanel.browser.resourceregistry import OverrideFolderManager
+from Products.CMFPlone.interfaces import IBundleRegistry
 from zope.component import getUtility
 
 

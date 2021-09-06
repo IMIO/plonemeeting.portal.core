@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plonemeeting.portal.core import _
 
+
 CONFIG_FOLDER_ID = "config"
 FACETED_FOLDER_ID = "faceted"
 FACETED_XML_PATH = "faceted/config/items.xml"
@@ -25,3 +26,5 @@ CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE = {
     "category": "categories",
     "classifier": "classifiers",
 }
+
+REPRESENTATIVE_IA_DELIB_FIELD = 'groups_in_charge'

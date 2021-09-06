@@ -283,7 +283,7 @@ msgstr "Mandataire"
 
 #: ../content/institution.py:74
 msgid "Representative key"
-msgstr "UID mandataire dans iA.Délib"
+msgstr "Mandataire dans iA.Délib"
 
 #: ../content/institution.py:78
 msgid "Representative long values"

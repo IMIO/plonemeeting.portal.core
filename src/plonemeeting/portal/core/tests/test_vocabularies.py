@@ -29,8 +29,7 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         values = vocab({"test": 'yolo'})
         self.assertEqual(len(values), 29)
 
-        belleville.delib_categories = [("admin", "Administrative"),
-                                       ("political", "Political")]
+        belleville.delib_categories = {"admin": "Administrative", "political": "Political"}
         values = vocab({"test": 'yolo'})
         self.assertEqual(len(values), 2)
 
