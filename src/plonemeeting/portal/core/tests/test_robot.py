@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-import os
-import unittest
-
-import robotsuite
 from plone.app.testing import ROBOT_TEST_LEVEL
 from plone.testing import layered
+from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING  # noqa: E501
 
-from plonemeeting.portal.core.testing import (
-    PLONEMEETING_PORTAL_CORE_ACCEPTANCE_TESTING,
-)  # noqa: E501
+import os
+import robotsuite
+import unittest
 
 
 def test_suite():
