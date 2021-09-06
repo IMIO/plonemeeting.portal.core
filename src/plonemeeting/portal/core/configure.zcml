@@ -145,7 +145,7 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_1005.migrate"
     profile="plonemeeting.portal.core:default" />
 
-  <genericsetup:upgradeSteps
+    <genericsetup:upgradeSteps
     source="1005"
     destination="1006"
     profile="plonemeeting.portal.core:default">
@@ -156,10 +156,9 @@
       run_deps="True" />
     <genericsetup:upgradeStep
       title="Go to portal 1006"
-      description="URL parameters are now in a datagridfiel widget"
+      description="Fetched data from delib are kept if used AND URL parameters are now in a datagridfiel widget"
       handler="plonemeeting.portal.core.migrations.migrate_to_1006.migrate" />
   </genericsetup:upgradeSteps>
-
   <!-- Password policy -->
   <adapter
     name="plonemeeting_password_policy"
@@ -197,6 +196,12 @@
   <utility
     component=".vocabularies.LongRepresentativeVocabulary"
     name="plonemeeting.portal.vocabularies.long_representatives"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.EditableRepresentativeVocabulary"
+    name="plonemeeting.portal.vocabularies.editable_representative"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

@@ -10,6 +10,18 @@ logger = logging.getLogger("plonemeeting.portal.core")
 
 class MigrateTo1006(Migrator):
 
+    def _transform_delib_categories_to_dict(self):
+        logger.info("Transforming delib_categories to proper dict...")
+        brains = self.catalog(portal_type="Institution")
+        for brain in brains:
+            institution = brain.getObject()
+            cat_dict = {}
+            if hasattr(institution, "delib_categories") and institution.delib_categories:
+                cat_dict = {}
+                for category_id, category_title in institution.delib_categories:
+                    cat_dict[category_id] = category_title
+            institution.delib_categories = cat_dict
+
     def _transform_text_url_param_to_datagrid(self):
         def url_to_dict(url, include=None, exclude=[]):
             res = []
@@ -40,13 +52,15 @@ class MigrateTo1006(Migrator):
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal.core 1006...")
+        self._transform_delib_categories_to_dict()
         self._transform_text_url_param_to_datagrid()
 
 
 def migrate(context):
     """
     This migration function will:
-       1) change TextLine query parameter to datagridfields :
+       1) migrate delib_categories to proper dict
+       2) change TextLine query parameter to datagridfields :
           - additional_meeting_query_string_for_list
           - additional_published_items_query_string
     """

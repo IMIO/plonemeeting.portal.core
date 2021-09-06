@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.permissions import ManagePortal
-from Products.CMFPlone import PloneMessageFactory as plone_
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
+from plonemeeting.portal.core import _
+from Products.CMFCore.permissions import ManagePortal
+from Products.CMFPlone import PloneMessageFactory as plone_
 from zope import schema
 from zope.interface import implementer
-
-from plonemeeting.portal.core import _
 
 
 class IMeeting(model.Schema):

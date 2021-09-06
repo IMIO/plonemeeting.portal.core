@@ -18,7 +18,7 @@ plonemeeting.portal.core
 Features
 --------
 
-- 
+-
 
 
 Documentation

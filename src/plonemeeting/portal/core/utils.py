@@ -7,6 +7,7 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
 from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
+from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import getMultiAdapter
@@ -172,6 +173,18 @@ def get_api_url_for_categories(institution, delib_config_category_field):
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
             meeting_config_id=institution.meeting_config_id,
             delib_category_field=delib_config_category_field
+        )
+        return url
+    else:
+        return
+
+
+def get_api_url_for_representatives(institution):
+    if institution.plonemeeting_url and institution.meeting_config_id:
+        url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={representative}".format(
+            plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
+            meeting_config_id=institution.meeting_config_id,
+            representative=REPRESENTATIVE_IA_DELIB_FIELD
         )
         return url
     else:

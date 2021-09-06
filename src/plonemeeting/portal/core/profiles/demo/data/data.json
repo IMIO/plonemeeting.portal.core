@@ -359,120 +359,32 @@
       "item_title_formatting_tal": "python: '{description}'.format(description=json['description']['data'])",
       "categories_mappings": [
         {
-          "local_category_id": "administration",
-          "global_category_id": "administration"
-        },
-        {
-          "local_category_id": "immo",
-          "global_category_id": "immo"
-        },
-        {
-          "local_category_id": "espaces-publics",
-          "global_category_id": "espaces-publics"
-        },
-        {
-          "local_category_id": "batiments-communaux",
-          "global_category_id": "batiments-communaux"
-        },
-        {
-          "local_category_id": "animaux",
-          "global_category_id": "animaux"
-        },
-        {
-          "local_category_id": "communication",
-          "global_category_id": "communication"
-        },
-        {
-          "local_category_id": "cultes",
-          "global_category_id": "cultes"
-        },
-        {
-          "local_category_id": "culture",
-          "global_category_id": "culture"
-        },
-        {
-          "local_category_id": "economie",
-          "global_category_id": "economie"
-        },
-        {
-          "local_category_id": "enseignement",
-          "global_category_id": "enseignement"
-        },
-        {
-          "local_category_id": "population",
-          "global_category_id": "population"
-        },
-        {
-          "local_category_id": "finances",
-          "global_category_id": "finances"
-        },
-        {
-          "local_category_id": "informatique",
-          "global_category_id": "informatique"
-        },
-        {
-          "local_category_id": "interculturalite",
-          "global_category_id": "interculturalite"
-        },
-        {
-          "local_category_id": "jeunesse",
-          "global_category_id": "jeunesse"
-        },
-        {
-          "local_category_id": "logement",
+          "local_category_id": "travaux",
           "global_category_id": "logement"
-        },
-        {
-          "local_category_id": "mobilite",
-          "global_category_id": "mobilite"
-        },
-        {
-          "local_category_id": "quartier",
-          "global_category_id": "quartier"
-        },
-        {
-          "local_category_id": "patrimoine",
-          "global_category_id": "patrimoine"
-        },
-        {
-          "local_category_id": "enfance",
-          "global_category_id": "enfance"
-        },
-        {
-          "local_category_id": "politique",
-          "global_category_id": "politique"
-        },
-        {
-          "local_category_id": "environnement",
-          "global_category_id": "environnement"
-        },
-        {
-          "local_category_id": "sante",
-          "global_category_id": "sante"
-        },
-        {
-          "local_category_id": "securité",
-          "global_category_id": "securité"
-        },
-        {
-          "local_category_id": "social",
-          "global_category_id": "social"
-        },
-        {
-          "local_category_id": "sport",
-          "global_category_id": "sport"
-        },
-        {
-          "local_category_id": "tourisme",
-          "global_category_id": "tourisme"
         },
         {
           "local_category_id": "urbanisme",
           "global_category_id": "urbanisme"
         },
         {
-          "local_category_id": "police",
-          "global_category_id": "police"
+          "local_category_id": "comptabilite",
+          "global_category_id": "finances"
+        },
+        {
+          "local_category_id": "personnel",
+          "global_category_id": "administration"
+        },
+        {
+          "local_category_id": "population",
+          "global_category_id": "animaux"
+        },
+        {
+          "local_category_id": "locations",
+          "global_category_id": "batiments-communaux"
+        },
+        {
+          "local_category_id": "divers",
+          "global_category_id": "cultes"
         }
       ],
       "representatives_mappings": [
