@@ -46,12 +46,12 @@ test:
 .PHONY: resources
 resources:  ## Compile resources
 	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
-	nvm use --lts
+	. ${NVM_DIR}/nvm.sh && nvm use --lts
 	$(MAKE) -C $(RESOURCES_PATH) build
 
 .PHONY: resources-install
 resources-install:  ## Install resources dependencies
-	nvm install --lts
+	. ${NVM_DIR}/nvm.sh && nvm install --lts
 	$(MAKE) -C $(RESOURCES_PATH) install
 
 .PHONY: resources-watch
