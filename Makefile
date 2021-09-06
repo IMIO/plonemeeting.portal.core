@@ -50,7 +50,7 @@ resources:  ## Compile resources
 
 .PHONY: resources-install
 resources-install:  ## Install resources dependencies
-	nvm install 14
+	nvm install --lts
 	$(MAKE) -C $(RESOURCES_PATH) install
 
 .PHONY: resources-watch
