@@ -45,7 +45,7 @@ class MigrateTo1006(Migrator):
                 institution.item_filter_query = url_to_dict(institution.additional_published_items_query_string,
                                                             include=['review_state', 'listType'])
                 institution.item_content_query = url_to_dict(institution.additional_published_items_query_string,
-                                                            exclude=['review_state', 'listType'])
+                                                             exclude=['review_state', 'listType'])
                 delattr(institution, "additional_published_items_query_string")
 
         logger.info("Done.")
