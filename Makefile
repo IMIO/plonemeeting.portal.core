@@ -46,6 +46,7 @@ test:
 .PHONY: resources
 resources:  ## Compile resources
 	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
+	nvm use --lts
 	$(MAKE) -C $(RESOURCES_PATH) build
 
 .PHONY: resources-install
