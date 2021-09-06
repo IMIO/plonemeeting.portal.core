@@ -115,7 +115,7 @@ module.exports = (env, argv) => {
           target: "http://localhost:8080",
         },
         {
-          context: [`${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`], // Don't proxy hot update
+          context: [`${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
           target: "http://localhost:3000",
           pathRewrite: function(path) {
             // We need to rewrite the path as Plone add some crap timestamp
