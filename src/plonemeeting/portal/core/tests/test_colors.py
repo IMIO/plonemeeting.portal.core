@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone.controlpanel.browser.resourceregistry import (
-    OverrideFolderManager,
-)
-from Products.CMFPlone.interfaces import IBundleRegistry
 from plone import api
 from plone.registry.interfaces import IRegistry
 from plone.testing.zope import Browser
+from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
+from Products.CMFPlone.controlpanel.browser.resourceregistry import OverrideFolderManager
+from Products.CMFPlone.interfaces import IBundleRegistry
 from zope.component import getUtility
-import zope.event
-from zope.lifecycleevent import ObjectModifiedEvent, ObjectAddedEvent
+from zope.lifecycleevent import ObjectAddedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema import getFields
 
-from plonemeeting.portal.core.content.institution import IInstitution
-from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+import zope.event
 
 
 class TestColorCSSView(PmPortalDemoFunctionalTestCase):

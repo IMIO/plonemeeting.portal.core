@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
-
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 

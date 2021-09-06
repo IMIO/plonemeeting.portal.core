@@ -250,22 +250,47 @@ class IInstitution(model.Schema):
     )
 
     @invariant
-    def categories_mappings_invariant(data):
-        mapped_local_category_id = []
-        local_category_id_errors = set()
-        for row in data.categories_mappings:
-            if row['local_category_id'] in mapped_local_category_id:
-                local_category_id_errors.add(row['local_category_id'])
-            else:
-                mapped_local_category_id.append(row['local_category_id'])
-        if local_category_id_errors:
-            local_category_errors = []
-            local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
-            for cat_id in local_category_id_errors:
-                local_category_errors.append(local_categories.by_value[cat_id].title)
-            local_category_errors = sorted(local_category_errors)
-            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                            mapping={'categories_title': ', '.join(local_category_errors)}))
+    def institution_invariant(data):
+        categories_mappings_invariant(data)
+        representatives_mappings_invariant(data)
+
+
+def categories_mappings_invariant(data):
+    mapped_local_category_id = []
+    local_category_id_errors = set()
+    for row in data.categories_mappings:
+        if row['local_category_id'] in mapped_local_category_id:
+            local_category_id_errors.add(row['local_category_id'])
+        else:
+            mapped_local_category_id.append(row['local_category_id'])
+    if local_category_id_errors:
+        local_category_errors = []
+        local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
+        for cat_id in local_category_id_errors:
+            local_category_errors.append(local_categories.by_value[cat_id].title)
+        local_category_errors = sorted(local_category_errors)
+        raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
+                        mapping={'categories_title': ', '.join(local_category_errors)}))
+
+
+def representatives_mappings_invariant(data):
+    new_representatives = data.representatives_mappings
+    if new_representatives is None:
+        new_representatives = []
+    missing_uids = {}
+    changes = {}
+    for rpz in new_representatives:
+        changes[rpz['representative_key']] = rpz['representative_value']
+    for rpz in data.__context__.representatives_mappings:
+        rpz_uid = rpz['representative_key']
+        if rpz_uid not in changes and rpz_uid not in missing_uids:
+            brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
+            if brains:
+                missing_uids[rpz_uid] = rpz['representative_value']
+    if missing_uids:
+        raise Invalid(_("Representatives mappings - Removing representatives linked to "
+                        "items is not allowed : ${representatives}",
+                        mapping={"representatives": ", ".join(missing_uids.values())}))
 
 
 @implementer(IInstitution)

@@ -2,9 +2,8 @@
 from imio.helpers.content import richtextval
 from plone import api
 from plonemeeting.portal.core.content.item import get_pretty_representatives
-from plonemeeting.portal.core.tests.portal_test_case import (
-    IMG_BASE64_DATA, PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import IMG_BASE64_DATA
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
 class TestItemView(PmPortalDemoFunctionalTestCase):
