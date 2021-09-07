@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import copy
 import json
+from datetime import datetime, timezone
 
 import requests
 from imio.migrator.utils import end_time
@@ -8,7 +10,7 @@ from plone import api
 from plone.app.content.utils import json_dumps
 from plone.autoform.form import AutoExtensibleForm
 from plonemeeting.portal.core.content.meeting import IMeeting
-from plonemeeting.portal.core.sync_utils import sync_meeting, _call_delib_rest_api
+from plonemeeting.portal.core.sync_utils import sync_meeting, _call_delib_rest_api, _json_date_to_datetime
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items, redirect, redirect_back
 from z3c.form import button
 from z3c.form.contentprovider import ContentProviders
@@ -27,18 +29,17 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
 
 class IImportMeetingForm(Interface):
-    """
-    """
+    """"""
 
     meeting = schema.Choice(
-        title=_(u"Meeting"), vocabulary="plonemeeting.portal.vocabularies.remote_meetings", required=True,
+        title=_(u"Meeting"),
+        vocabulary="plonemeeting.portal.vocabularies.remote_meetings",
+        required=True,
     )
 
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
-
-    """
-    """
+    """"""
 
     schema = IImportMeetingForm
     ignoreContext = True
@@ -54,7 +55,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url() + "/@@presync_report_form?external_meeting_uid=" + external_meeting_uid
+            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
         )
         redirect(self.request, next_form_url)
 
@@ -106,6 +107,17 @@ class ItemsContentProvider(ContentProviderBase):
         return json_dumps(
             {
                 "paging": True,
+                "dom": "Bfrtip",
+                "columnDefs": [
+                    {"orderable": False, "className": "select-checkbox", "targets": 0},
+                    {"targets": [1], "visible": False},
+                ],
+                "select": {"style": "mutli", "selector": "td:first-child"},
+                "order": [[2, "asc"]],
+                "buttons": [
+                    "selectAll",
+                    "selectNone",
+                ],
                 "language": {
                     "processing": "Traitement en cours...",
                     "search": "Rechercher&nbsp;:",
@@ -141,8 +153,7 @@ class ItemsContentProvider(ContentProviderBase):
 
 @implementer(IFieldsAndContentProvidersForm)
 class PreSyncReportForm(Form):
-    """
-    """
+    """"""
 
     label = _(u"Meeting pre sync form")
     description = _(u"Choose items you want to sync/import in the portal.")
@@ -153,22 +164,27 @@ class PreSyncReportForm(Form):
     contentProviders["items"].position = 0
 
     def __call__(self):
-        if IMeeting.providedBy(self.context):
-            utils_view = self.context.restrictedTraverse("@@utils_view")
-            self.external_meeting_uid = self.context.plonemeeting_uid
-            self.is_importing = False
-            self.institution = utils_view.get_current_institution()
-        else:
-            self.external_meeting_uid = self.request.form["external_meeting_uid"]
-            self.is_importing = True
-            self.institution = self.context
+        utils_view = self.context.restrictedTraverse("@@utils_view")
+        self.external_meeting_uid = self.context.plonemeeting_uid
+        self.is_importing = False
+        self.institution = utils_view.get_current_institution()
+        self.items = self.context.contentValues()
 
-        self._fetch_preview_items(self.external_meeting_uid)
+        self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
+
+        self.api_response_data = self.reconcile(self.api_response_data, self.items)
 
         return super(PreSyncReportForm, self).__call__()
 
-    @button.buttonAndHandler(_(u"Import"))
-    def handle_apply(self, action):
+    @button.buttonAndHandler(_(u"Sync"))
+    def handle_sync(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+    @button.buttonAndHandler(_(u"Force"))
+    def handle_force_sync(self, action):
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
@@ -176,13 +192,44 @@ class PreSyncReportForm(Form):
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
-        """
-        """
-        if IMeeting.providedBy(self.context):
-            meeting_faceted_url = self.get_institution().absolute_url() + "/meetings#seance=" + self.context.UID()
-            redirect(self.request, meeting_faceted_url)
-        else:
-            redirect(self.request, self.context.absolute_url() + "/@@import_meeting")
+        """"""
+        meeting_faceted_url = self.get_institution().absolute_url() + "/meetings#seance=" + self.context.UID()
+        redirect(self.request, meeting_faceted_url)
+
+    def reconcile(self, api_items, local_items):
+        reconciled = copy.deepcopy(api_items)
+        local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item in local_items}
+
+        for item in reconciled["items"]:
+            if item["UID"] in local_items_by_plonemeeting_uid.keys():
+                local_item = local_items_by_plonemeeting_uid[item["UID"]]
+                plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
+                item["local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
+                item["modified"] = plonemeeting_last_modified.isoformat()
+                if local_item.plonemeeting_last_modified == plonemeeting_last_modified:
+                    if local_item.number == item["formatted_itemNumber"]:
+                        item["status"] = "unchanged"
+                    else:
+                        item["status"] = "modified"
+                else:
+                    item["status"] = "modified"
+                local_items_by_plonemeeting_uid.pop(item["UID"])
+            else:
+                item["local_last_modified"] = "-"
+                item["status"] = "added"
+
+        for uid, item in local_items_by_plonemeeting_uid.items():
+            reconciled["items"].insert(int(item.number), {
+                "UID": item.plonemeeting_uid,
+                "title": item.title,
+                "formatted_itemNumber": item.number,
+                "modified": "-",
+                "local_last_modified": item.plonemeeting_last_modified.isoformat(),
+                "category": {"title": item.category},
+                "representatives_in_charge": item.representatives_in_charge,
+                "status": "removed"
+            })
+        return reconciled
 
     def _fetch_preview_items(self, meeting_external_uid):
         url = get_api_url_for_meeting_items(self.context, meeting_external_uid=meeting_external_uid)
@@ -190,11 +237,53 @@ class PreSyncReportForm(Form):
         self.api_response_data = json.loads(response.text)
 
 
-def _sync_meeting(institution, meeting_uid, request, force=False):  # pragma: no cover
+@implementer(IFieldsAndContentProvidersForm)
+class PreImportReportForm(Form):
+    """"""
+
+    label = _(u"Meeting pre import form")
+    description = _(u"Choose items you want to import in the portal.")
+
+    ignoreContext = True
+    contentProviders = ContentProviders()
+    contentProviders["items"] = ItemsContentProvider
+    contentProviders["items"].position = 0
+
+    def __call__(self):
+        self.external_meeting_uid = self.request.form["external_meeting_uid"]
+        self.is_importing = True
+        self.institution = self.context
+        self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
+
+        return super(PreImportReportForm, self).__call__()
+
+    @button.buttonAndHandler(_(u"Import"))
+    def handle_import(self, action):
+        form = self.request.form
+        checked_item_uids = []
+        for item, value in form.items():
+            if item.startswith("item_uid"):
+                checked_item_uids.append(value)
+        _sync_meeting(self.institution, self.external_meeting_uid, self.request, item_external_uids=checked_item_uids)
+
+    @button.buttonAndHandler(_(u"Cancel"))
+    def handle_cancel(self, action):
+        redirect(self.request, self.context.absolute_url() + "/@@import_meeting")
+
+
+def _fetch_preview_items(context, meeting_external_uid):
+    url = get_api_url_for_meeting_items(
+        context, meeting_external_uid=meeting_external_uid, with_additional_published_items_query_string=True
+    )
+    response = _call_delib_rest_api(url, context)
+    return json.loads(response.text)
+
+
+def _sync_meeting(institution, meeting_uid, request, force=False, item_external_uids=[]):  # pragma: no cover
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force)
+        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, item_external_uids)
         if new_meeting_uid:
             brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
 

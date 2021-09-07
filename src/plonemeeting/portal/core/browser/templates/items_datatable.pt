@@ -1,26 +1,27 @@
 <tal:defines
-  i18n:domain="plonemeeting.portal.core"
+   i18n:domain="plonemeeting.portal.core"
   define="items view/get_items;
           is_syncing not:view/parent/is_importing;
           institution nocall:view/parent/institution
 ">
-  <h2 tal:content="view/parent/api_response_data">
+  <!--?  <h5 tal:content="view/parent/api_response_data">-->
 
-  </h2>
+  <!--?  </h5>-->
 
-  <table class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
+  <table id="items-datatables" class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
      tal:attributes="data-pat-datatables view/get_datatables_config"
   >
     <thead>
     <tr>
-      <th class="selection sorting_disabled"></th>
+      <th></th>
+      <th>UID</th>
       <th>N°</th>
       <th i18n:translate="">Title</th>
       <th i18n:translate="">Last modification in iA.Delib</th>
       <th tal:condition="is_syncing">Local last modified</th>
 
       <th tal:content="institution/delib_category_field"
-          i18n:translate="">
+         i18n:translate="">
         Category or Classifier
       </th>
       <th i18n:translate="">
@@ -31,23 +32,37 @@
     </thead>
     <tbody>
     <tr tal:repeat="item items">
-      <td><input type="checkbox" checked /></td>
+      <td>
+      </td>
+      <td tal:content="item/UID"></td>
       <td tal:content="item/formatted_itemNumber">itemNumber</td>
       <td tal:content="item/title">title</td>
-      <td tal:content="item/modified">Last modification in iA.Delib</td>
-      <td tal:condition="is_syncing">title</td>
+      <td class="pat-moment" tal:content="item/modified">Last modification in iA.Delib</td>
+      <td class="pat-moment" tal:condition="is_syncing" tal:content="item/local_last_modified">local_last_modified</td>
       <td tal:content="python: item.get(institution.delib_category_field)['title']">
         Category/Classifier
       </td>
       <td tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''">
         Representative
       </td>
-      <td tal:condition="is_syncing">title</td>
+      <td tal:condition="is_syncing" tal:content="item/status">status</td>
     </tr>
     </tbody>
   </table>
 
-  <input type="hidden" name="external_meeting_uid"
-     tal:define="external_meeting_uid view/parent/external_meeting_uid"
-     tal:attributes="value external_meeting_uid">
+  <script>
+    jQuery(document).ready(function($) {
+      $("#form").submit(function(event) {
+        var table = $("#items-datatables").DataTable();
+        var data = table.rows( { selected: true } ).data();
+        for (var i = 0; i < data.length; i++) {
+         $("<input />").attr("type", "hidden")
+            .attr("name", "item_uid_" + data[i][1])
+            .attr("value", data[i][1])
+            .appendTo("#form");
+        }
+        return true;
+      });
+    });
+  </script>
 </tal:defines>

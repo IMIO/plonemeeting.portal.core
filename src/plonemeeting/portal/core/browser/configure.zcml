@@ -58,15 +58,15 @@
     />
 
   <browser:page
-    name="presync_report_form"
+    name="pre_import_report_form"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     permission="cmf.ModifyPortalContent"
-    class=".sync.PreSyncReportForm"
+    class=".sync.PreImportReportForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
   <browser:page
-    name="presync_report_form"
+    name="pre_sync_report_form"
     for="plonemeeting.portal.core.content.meeting.IMeeting"
     permission="cmf.ModifyPortalContent"
     class=".sync.PreSyncReportForm"

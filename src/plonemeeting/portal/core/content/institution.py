@@ -249,24 +249,6 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
-    @invariant
-    def categories_mappings_invariant(data):
-        mapped_local_category_id = []
-        local_category_id_errors = set()
-        for row in data.categories_mappings:
-            if row['local_category_id'] in mapped_local_category_id:
-                local_category_id_errors.add(row['local_category_id'])
-            else:
-                mapped_local_category_id.append(row['local_category_id'])
-        if local_category_id_errors:
-            local_category_errors = []
-            local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
-            for cat_id in local_category_id_errors:
-                local_category_errors.append(local_categories.by_value[cat_id].title)
-            local_category_errors = sorted(local_category_errors)
-            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                            mapping={'categories_title': ', '.join(local_category_errors)}))
-
 
 @implementer(IInstitution)
 class Institution(Container):
