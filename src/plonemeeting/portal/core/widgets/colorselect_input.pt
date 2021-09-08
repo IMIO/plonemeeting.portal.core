@@ -2,14 +2,14 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:omit-tag="">
   <div class="input-group">
-    <input type="color" id="color" name="" class="" title="" disabled="" readonly=""
+  <div class="input-group color-select-widget-wrapper">
+    <input type="color" id="color" name="" class="color-select-widget" title="" disabled="" readonly=""
            tal:attributes="id string:${view/id};
                          name view/name;
-                         class string:${view/klass} form-control;
-                         style view/style;
                          title view/title;
                          value view/value;
                          readonly view/readonly;
-                         disabled view/disabled;"/>
+                         disabled python: True if view.mode == 'display' else False"/>
+    <span tal:condition="python: view.mode == 'display'" tal:content="view/value"/>
   </div>
 </html>
