@@ -122,6 +122,12 @@ def get_api_url_for_annexes(item_json_id):
     return url
 
 
+def get_api_url_for_annexes_summary(item_json_id):
+    url = "{0}/@annexes?" \
+          "publishable=true".format(item_json_id)
+    return url
+
+
 def get_api_url_for_meeting_items(institution,
                                   meeting_external_uid,
                                   item_external_uids=[],

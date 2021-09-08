@@ -4,9 +4,8 @@
           is_syncing not:view/parent/is_importing;
           institution nocall:view/parent/institution
 ">
-  <!--?  <h5 tal:content="view/parent/api_response_data">-->
 
-  <!--?  </h5>-->
+  <h2 class="meeting-title" tal:content="nocall:view/parent/meeting_title"></h2>
 
   <table id="items-datatables" class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
      tal:attributes="data-pat-datatables view/get_datatables_config"
@@ -14,7 +13,6 @@
     <thead>
     <tr>
       <th></th>
-      <th>UID</th>
       <th>N°</th>
       <th i18n:translate="">Title</th>
       <th i18n:translate="">Last modification in iA.Delib</th>
@@ -28,13 +26,14 @@
         Representative
       </th>
       <th tal:condition="is_syncing">Status</th>
+      <th tal:condition="is_syncing">Annexes</th>
     </tr>
     </thead>
     <tbody>
     <tr tal:repeat="item items">
       <td>
+        <input type="checkbox" tal:attributes="name python: 'item_uid__' + item['UID']" checked />
       </td>
-      <td tal:content="item/UID"></td>
       <td tal:content="item/formatted_itemNumber">itemNumber</td>
       <td tal:content="item/title">title</td>
       <td class="pat-moment" tal:content="item/modified">Last modification in iA.Delib</td>
@@ -46,23 +45,28 @@
         Representative
       </td>
       <td tal:condition="is_syncing" tal:content="item/status">status</td>
+      <td tal:condition="is_syncing">
+        <div tal:condition="python: 'unchanged' in item['annexes_status']">
+          <p>unchanged</p>
+          <span  tal:content="item/annexes_status/unchanged/count"></span>
+        </div>
+        <div tal:condition="python: 'modified' in item['annexes_status']">
+          <p>modified</p>
+          <span  tal:content="item/annexes_status/modified/count"></span>
+        </div>
+        <div tal:condition="python: 'added' in item['annexes_status']">
+          <p>added</p>
+          <span tal:content="item/annexes_status/added/count"></span>
+        </div>
+        <div tal:condition="python: 'removed' in item['annexes_status']">
+          <p>removed</p>
+          <span tal:content="item/annexes_status/removed/count"></span>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
-
-  <script>
-    jQuery(document).ready(function($) {
-      $("#form").submit(function(event) {
-        var table = $("#items-datatables").DataTable();
-        var data = table.rows( { selected: true } ).data();
-        for (var i = 0; i < data.length; i++) {
-         $("<input />").attr("type", "hidden")
-            .attr("name", "item_uid_" + data[i][1])
-            .attr("value", data[i][1])
-            .appendTo("#form");
-        }
-        return true;
-      });
-    });
-  </script>
+  <input type="hidden" name="external_meeting_uid"
+     tal:define="external_meeting_uid view/parent/external_meeting_uid"
+     tal:attributes="value external_meeting_uid">
 </tal:defines>

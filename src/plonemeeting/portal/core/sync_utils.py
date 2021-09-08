@@ -256,6 +256,7 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
                 institution, item_data.get(institution.delib_category_field)["token"]
             )
             item.reindexObject()
+
             sync_annexes(
                 item, institution, item_data.get("@id"), force
             )
