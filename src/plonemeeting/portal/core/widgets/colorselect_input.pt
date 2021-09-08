@@ -3,7 +3,7 @@
       tal:omit-tag="">
   <div class="input-group">
   <div class="input-group color-select-widget-wrapper">
-    <input type="color" id="color" name="" class="" title="" disabled="" readonly=""
+    <input type="color" id="color" name="" class="color-select-widget" title="" disabled="" readonly=""
            tal:attributes="id string:${view/id};
                          name view/name;
                          title view/title;
