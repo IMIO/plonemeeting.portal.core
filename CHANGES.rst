@@ -21,6 +21,8 @@ Changelog
   [odelaere]
 - Fetched representatives from delib are kept if used.
   [odelaere]
+- Changed build system for frontend development (plone-compile-resources => webpack 5).
+  [aduchene]
 
 
 1.3.3.2 (2021-08-20)
