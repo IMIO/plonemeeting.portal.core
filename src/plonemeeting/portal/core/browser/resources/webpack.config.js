@@ -49,15 +49,31 @@ module.exports = (env, argv) => {
         {
           test: /\.s[ac]ss$/i,
           use: [
+            // In production, creates CSS files
+            // In development serve CSS through JS 'with style-loader'
             {
-              loader: MiniCssExtractPlugin.loader, // creates CSS files
+              loader: mode === "development" ? "style-loader" : MiniCssExtractPlugin.loader,
             },
             // Translates CSS into CommonJS
-            "css-loader",
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: mode === "development",
+              },
+            },
             // Use postcss to add vendor prefixes and various transforms to the css
-            "postcss-loader",
-            // Compiles Sass to CSS
-            "sass-loader",
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: mode === "development",
+              },
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: mode === "development",
+              },
+            },
           ],
         },
         {
@@ -101,6 +117,7 @@ module.exports = (env, argv) => {
           parallel: true,
         })],
     },
+    devtool: 'eval-cheap-source-map',
     devServer: {
       port: 3000,
       hot: true,
