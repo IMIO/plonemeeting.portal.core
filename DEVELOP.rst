@@ -17,6 +17,12 @@ If you need multiple node versions on your system, nvm is recommended :
 https://github.com/nvm-sh/nvm
 
 
+Fresh install :
+
+>>> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+>>> make resources
+
+
 Developing
 **********
 
@@ -30,7 +36,7 @@ You can pass your Plone site path by adding `--env PLONE_SITE_PATH=/conseil`
 
 Default Plone site path is "/Plone"::
 
-    $ make resource-watch
+    $ make resources-watch
 
 
 Access your Plone site via http://localhost:3000
@@ -45,7 +51,6 @@ The working directory for bundle development is now `browser/resources`
 While the Webpack dev server is running, you can edit files there and see the
 changes in real-time in the browser. If you add files in `browser/static` it will not
 persist at the next production build.
-
 
 
 Production
