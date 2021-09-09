@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="plonemeeting.portal"
+   tal:define="institutions view/get_json_institutions"
+>
+<body>
+<metal:title fill-slot="content-title" />
+
+<metal:content-core
+  fill-slot="content-core"
+>
+  <section class="hero-primary full-width">
+    <div class="hero-primary-bg"></div>
+        <img style="height: 800px; position: absolute; top:-200px; left: 25px; z-index: 10" src="./assets/delibe.svg" alt="">
+    <div class="container">
+      <div class="call-to-action">
+
+        <h1 class="call-to-action-header">
+          Je cherche les décisions
+        </h1>
+        <div class="call-to-action-subheader">
+          <h2 style="margin-left: 2em">
+            prises à...
+          </h2>
+          <x-institution-select
+            class="institution-select"
+             tal:attributes="data-institutions institutions"
+          >
+          </x-institution-select>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hero-secondary full-width">
+    <div class="hero-secondary-bg"></div>
+    <div class="container">
+      <h2 class="text-primary text-center">Villes et communes adhérantes au projet</h2>
+    </div>
+    <x-institution-carousel
+tal:attributes="data-institutions institutions"
+    ></x-institution-carousel>
+  </section>
+
+  <section class="faq-section">
+    <h2 class="text-primary">Foire aux questions</h2>
+    <x-collapsible-card></x-collapsible-card>
+    <x-collapsible-card></x-collapsible-card>
+    <x-collapsible-card></x-collapsible-card>
+  </section>
+
+</metal:content-core>
+</body>
+</html>
+
+
+

@@ -18,6 +18,7 @@
     "@babel/plugin-transform-react-jsx": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
     "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@svgr/webpack": "^5.5.0",
     "autoprefixer": "^10.3.3",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0",
@@ -43,5 +44,13 @@
     "webpack-dev-server": "^4.1.0",
     "xml2js": "^0.4.23"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "preact": "^10.5.14",
+    "preact-custom-element": "^4.2.1",
+    "react-select": "^4.3.1",
+    "react-slick": "^0.28.1",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^7.0.4"
+  }
 }

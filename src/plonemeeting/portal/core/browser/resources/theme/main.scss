@@ -5,3 +5,222 @@
 @import "./tinymce";
 @import "./responsive";
 @import "./institution_colors";
+@import "./utilities";
+
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+
+.hero-primary {
+  padding: 12em 0em 6em 0em;
+
+  h1 {
+    font-size: 4em;
+  }
+}
+
+.hero-primary-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background-color: #DE007B;
+  clip-path: ellipse(70% 50% at 50% 70%);
+}
+
+.hero-secondary {
+  padding: 6em 0 0 0;
+}
+
+.hero-secondary-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -25;
+  background-color: $delib-lightgrey;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px -5px 12px;
+}
+
+a.btn-primary {
+  background-color: #DE007B;
+  border-radius: $delib-border-radius;
+}
+
+a.btn-white {
+  background-color: #fff;
+  padding: 0 1em;
+  margin-left: 1em;
+  border-radius: $delib-border-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    color: #DE007B;
+    transition: all 0.1s ease-in-out;
+  }
+
+  transition: all 0.2s ease-in-out;
+}
+
+a.btn-white:hover {
+  background-color: lighten(#DE007B, 5%);
+  color: #fff;
+  padding: 0 1em;
+  margin-left: 1em;
+  border-radius: $delib-border-radius;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  svg {
+    fill: #fff;
+    color: #fff;
+  }
+}
+
+.call-to-action {
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+  position: relative;
+  z-index: 20;
+
+  h1, h2 {
+    color: #fff;
+  }
+}
+
+h1.call-to-action-header {
+  font-size: 3em;
+}
+
+.call-to-action-subheader {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  position: relative;
+  z-index: 50;
+
+  .institution-select {
+    display: flex
+  }
+
+  #react-select-2-input {
+    height: 16px;
+    flex: 1;
+  }
+
+  h2 {
+    display: inline;
+    font-size: 1.85em;
+    margin: 0 0.5em 0 0;
+  }
+
+  button {
+    background-color: lighten(#DE007B, 50%) !important;
+    border-radius: $delib-border-radius;
+    border: 0;
+    margin-left: 1em;
+  }
+}
+
+.institution-carousel {
+  position: relative;
+  z-index: 10;
+  padding: 2em 0;
+
+  .swiper-slide {
+    height: auto;
+  }
+}
+
+.institution-card {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  border-radius: $delib-border-radius;
+  height: 100px;
+}
+
+.institution-card-img {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0.25em;
+
+  img {
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    height: 64px !important;
+    width: 64px !important;
+    object-fit: contain;
+    clip-path: circle(100%);
+  }
+}
+
+
+.institution-card-label {
+  text-align: center;
+  margin: 0 0.25em;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.faq-item {
+  overflow: hidden;
+  margin: 2em 0;
+  max-width: 1200px;
+}
+
+.faq-item-header {
+  display: flex;
+}
+
+.faq-item-content {
+  background-color: $delib-lightgrey;
+  border-radius: $delib-border-radius;
+}
+
+.faq-item-content--collapsed {
+  height: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+.template-homepageview header#content-header {
+  background: transparent;
+  margin-bottom: 10em;
+}
+.template-homepageview header#content-header:before {
+  position: absolute;
+  top: -60px;
+  content: " ";
+  opacity: 0.2;
+  background: url("../assets/alex-vasey-3lxrM5yvkcI-unsplash.jpg") center center / cover no-repeat !important;
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+  z-index: -10;
+}
