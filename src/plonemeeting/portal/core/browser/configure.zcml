@@ -19,12 +19,20 @@
       />
 
   <browser:page
-    name="homepageview"
+    name="homepage_view"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".homepage.HomePageView"
+    class=".homepage.HomepageView"
     template="templates/homepage.pt"
     permission="zope2.View"
     />
+
+  <browser:page
+    name="institution_locations"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".homepage.InstitutionLocationsView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <browser:page
       name="view"

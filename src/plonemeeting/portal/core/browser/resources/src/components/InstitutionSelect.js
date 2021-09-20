@@ -1,10 +1,12 @@
 import { Fragment, h, render } from "preact";
 import { useState } from "preact/hooks";
-import Select from "react-select";
+import loadable from '@loadable/component'
 import RightArrowSVG from "../../assets/arrow-right.svg";
 
+const Select = loadable(() => import('react-select'))
+
 const InstitutionSelect = (props) => {
-    const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState({});
 
     const institutions = JSON.parse(props["data-institutions"]);
 
@@ -16,7 +18,7 @@ const InstitutionSelect = (props) => {
     });
     return (
         <Fragment>
-            <div style={{ width: "375px" }}>
+            <div className="institution-select-input">
                 <Select
                     isSearchable
                     options={options}
@@ -37,11 +39,10 @@ const InstitutionSelect = (props) => {
                 />
             </div>
             <a
-                className={`btn btn-white ${_.isEmpty(selected) && "v-hidden"}`}
+                className="btn btn-white"
                 href={selected.URL}
                 role="button"
-                aria-disabled={!_.isEmpty(selected)}
-                aria-hidden={_.isEmpty(selected)}
+                aria-disabled={_.isEmpty(selected)}
             >
                 <RightArrowSVG />
             </a>

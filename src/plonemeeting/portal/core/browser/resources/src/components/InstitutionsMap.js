@@ -1,0 +1,88 @@
+import { Fragment, h, render } from "preact";
+import { useEffect, useState, useCallback } from "preact/hooks";
+import loadable from '@loadable/component'
+import axios from "axios";
+
+
+import { MapContainer, TileLayer, ZoomControl, GeoJSON, Popup } from "react-leaflet";
+
+import "leaflet/dist/leaflet.css";
+import CircleChevronRight from "../../assets/circle-chevron-right.svg";
+
+const ReactLeaflet = loadable.lib(() => import("react-leaflet"));
+
+/**
+ * Display a Leaflet Map with institutions geoJSON locations
+ */
+const InstitutionsMap = (props) => {
+  const [institutionLocations, setInstitutionLocations] = useState();
+  const [selectedInstitutionId, setSelectedInstitutionId] = useState();
+
+  const defaultZoom = window.innerWidth < 900 ? 8 : 9;
+  const height = window.innerWidth < 900 ? "500px" : "750px";
+  const center = [50.15, 4.95];
+  const maxBounds = [
+    [54, 10],
+    [46, 0],
+  ];
+  const defaultPathOption = { weight: 1.5, color: "#DE007B", fillOpacity: 0.10 };
+  const selectedPathOption = { weight: 1.5, color: "#DE007B", fillOpacity: 0.80 };
+
+  useEffect(() => {
+    axios.get(window.location.pathname + "/@@institution_locations")
+      .then(response => setInstitutionLocations(response.data));
+  }, [setInstitutionLocations]);
+
+  const resetSelectedInstitutionId = useCallback((() => {
+    setSelectedInstitutionId(null);
+  }), []);
+
+  return (
+    <ReactLeaflet>
+      {({ MapContainer, TileLayer, ZoomControl, GeoJSON, Popup }) => {
+        return (
+          <MapContainer
+            center={center}
+            maxBounds={maxBounds}
+            zoom={defaultZoom}
+            minZoom={5}
+            maxZoom={13}
+            scrollWheelZoom={false}
+            zoomControl={false}
+            style={{ height: height }}>
+            <ZoomControl position={"bottomright"} />
+            <TileLayer
+              attribution='Carte &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> | Données &copy; <a href="https://www.ngi.be/website/fr/">NGI-IGN</a> '
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+            />
+            {institutionLocations && Object.keys(institutionLocations).map(
+              institutionId => {
+                const institution = institutionLocations[institutionId];
+                return (
+                  <GeoJSON key={institutionId}
+                           pathOptions={institutionId === selectedInstitutionId ? selectedPathOption : defaultPathOption}
+                           data={institution["data"]["fields"]["geo_shape"]}
+                           eventHandlers={{
+                             click: () => {
+                               setSelectedInstitutionId(institutionId);
+                             },
+                           }}
+                  >
+                    <Popup closeButton={false} onClose={resetSelectedInstitutionId}>
+                      <a className={"text-primary"}
+                         style={{ display: "flex", justifyContent: "center" }}
+                         href={institution["URL"]}
+                      >{institution["data"]["fields"]["mun_name_fr"]}
+                        <CircleChevronRight style={{ fill: "#DE007B" }} height={15}
+                                            viewBox="0 0 24 24" />
+                      </a>
+                    </Popup>
+                  </GeoJSON>);
+              },
+            )}
+          </MapContainer>)}}
+        </ReactLeaflet>
+        );
+      };
+
+      export default InstitutionsMap;

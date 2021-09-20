@@ -39,18 +39,20 @@
     "sass": "^1.36.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.0.0",
-    "webpack": "^5.51.2",
+    "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.1.0",
+    "webpack-dev-server": "^4.2.1",
     "xml2js": "^0.4.23"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.0",
+    "axios": "^0.21.4",
+    "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
+    "masonry-layout": "^4.2.2",
     "preact": "^10.5.14",
     "preact-custom-element": "^4.2.1",
-    "react-select": "^4.3.1",
-    "react-slick": "^0.28.1",
-    "slick-carousel": "^1.8.1",
-    "swiper": "^7.0.4"
+    "react-leaflet": "^3.2.1",
+    "react-select": "^4.3.1"
   }
 }

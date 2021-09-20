@@ -28,3 +28,9 @@ CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE = {
 }
 
 REPRESENTATIVE_IA_DELIB_FIELD = 'groups_in_charge'
+
+
+REGION_INS_CODE = "03000"
+LOCATIONS_API_URL = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=georef-belgium-municipality"
+
+DEMO_INSTITUTION_IDS = ["belle-ville"]

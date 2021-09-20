@@ -2,14 +2,14 @@ import $ from "jquery";
 import register from "preact-custom-element";
 
 import InstitutionSelect from "./components/InstitutionSelect";
-import CollapsibleCard from "./components/CollapsibleCard";
-import InstitutionsCarousel from "./components/InstitutionsCarousel";
+import InstitutionsMap from "./components/InstitutionsMap";
+import MasonryColumns from "./components/MasonryColumns";
 
 import "../theme/main.scss";
 
 register(InstitutionSelect, "x-institution-select", ["data-institutions"]);
-register(InstitutionsCarousel, "x-institution-carousel", ["data-institutions"]);
-register(CollapsibleCard, "x-collapsible-card", ["data-content"]);
+register(InstitutionsMap, "x-institution-map", []);
+register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
 
 
 function setUpEnvironmentLabel() {
