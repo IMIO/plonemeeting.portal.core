@@ -51,7 +51,7 @@ resources:  ## Compile resources
 
 .PHONY: resources-install
 resources-install:  ## Install resources dependencies
-	#. ${NVM_DIR}/nvm.sh && nvm install --lts
+	. ${NVM_DIR}/nvm.sh && nvm install --lts
 	$(MAKE) -C $(RESOURCES_PATH) install
 
 .PHONY: resources-watch
