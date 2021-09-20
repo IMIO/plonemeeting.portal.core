@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import json
-
-from Products.Five.browser import BrowserView
 from plone import api
 from plone.memoize import ram
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import REGION_INS_CODE
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
+from plonemeeting.portal.core.config import REGION_INS_CODE
+from Products.Five.browser import BrowserView
+
+import json
 import requests
 
 

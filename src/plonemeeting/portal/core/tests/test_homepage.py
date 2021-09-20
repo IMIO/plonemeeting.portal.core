@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import json
-
 from plone import api
 from plone.testing.zope import Browser
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+
+import json
 
 
 class TestHomepageView(PmPortalDemoFunctionalTestCase):
