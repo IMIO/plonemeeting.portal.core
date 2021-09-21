@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.memoize import ram
+from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
 from plonemeeting.portal.core.config import REGION_INS_CODE
 from Products.Five.browser import BrowserView
+from zope.interface import alsoProvides
 
 import json
 import requests
@@ -80,6 +82,9 @@ class InstitutionLocationsView(BrowserView):
                 LOCATIONS_API_URL + "&q=",
                 params=query,
             )
+            # We disable CSRFProtection as it's not necessary here
+            # It is not a form view and we deal with the data internally so it's OK to disable it
+            alsoProvides(self.request, IDisableCSRFProtection)
             self.context.api_institutions_locations = response.json()
         except requests.exceptions.RequestException as e:
             logger.error("Fetching locations data from remote API has failed! "
