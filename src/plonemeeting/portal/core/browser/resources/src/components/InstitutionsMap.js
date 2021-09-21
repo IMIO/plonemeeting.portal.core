@@ -1,18 +1,17 @@
 import { Fragment, h, render } from "preact";
 import { useEffect, useState, useCallback } from "preact/hooks";
-import loadable from '@loadable/component'
+import loadable from "@loadable/component";
 import axios from "axios";
-
-
-import { MapContainer, TileLayer, ZoomControl, GeoJSON, Popup } from "react-leaflet";
-
 import "leaflet/dist/leaflet.css";
+
 import CircleChevronRight from "../../assets/circle-chevron-right.svg";
+import { get_portal_url } from "../utils";
 
 const ReactLeaflet = loadable.lib(() => import("react-leaflet"));
 
 /**
  * Display a Leaflet Map with institutions geoJSON locations
+ * TODO: Split this in multiple sub-components
  */
 const InstitutionsMap = (props) => {
   const [institutionLocations, setInstitutionLocations] = useState();
@@ -29,7 +28,7 @@ const InstitutionsMap = (props) => {
   const selectedPathOption = { weight: 1.5, color: "#DE007B", fillOpacity: 0.80 };
 
   useEffect(() => {
-    axios.get(window.location.pathname + "/@@institution_locations")
+    axios.get(get_portal_url() + "/@@institution_locations")
       .then(response => setInstitutionLocations(response.data));
   }, [setInstitutionLocations]);
 
@@ -80,9 +79,10 @@ const InstitutionsMap = (props) => {
                   </GeoJSON>);
               },
             )}
-          </MapContainer>)}}
-        </ReactLeaflet>
-        );
-      };
+          </MapContainer>);
+      }}
+    </ReactLeaflet>
+  );
+};
 
-      export default InstitutionsMap;
+export default InstitutionsMap;

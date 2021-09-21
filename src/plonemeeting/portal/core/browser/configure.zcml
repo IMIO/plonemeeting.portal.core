@@ -24,6 +24,7 @@
     class=".homepage.HomepageView"
     template="templates/homepage.pt"
     permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
     />
 
   <browser:page

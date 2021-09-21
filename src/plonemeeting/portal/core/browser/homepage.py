@@ -14,7 +14,9 @@ def institutions_cachekey(method, self):
     """
     Institution cache key based on a list of ids and last modification date
     """
-    brains = api.content.find(portal_type="Institution", review_state="published")
+    brains = api.content.find(portal_type="Institution",
+                              review_state="published",
+                              sort_on='getId')
     return [brain.id + "_" + str(brain.modified) for brain in brains]
 
 
@@ -26,10 +28,11 @@ class HomepageView(BrowserView):
         """
         Get all institutions from this portal and return a summary in JSON
         """
-        brains = api.content.find(portal_type="Institution", review_state="published")
-        sorted_brains = sorted(brains, key=lambda x: x.id)
+        brains = api.content.find(portal_type="Institution",
+                                  review_state="published",
+                                  sort_on='getId')
         institutions = {}
-        for brain in sorted_brains:
+        for brain in brains:
             institution = brain.getObject()
             institutions[brain.id] = {
                 "title": institution.Title(),
@@ -40,12 +43,13 @@ class HomepageView(BrowserView):
     def get_json_faq_items(self):
         """
         Get all FAQ items from this portal and return it in JSON.
-        An FAQ item is a "Document" portal type stored in the 'faq' folder.
+        A FAQ item is a "Document" portal type stored in the 'faq' folder.
         """
-        if not hasattr(self.context, "faq"):
+        faq_folder = getattr(self.context, "faq", None)
+        if not faq_folder:
             return
         items = []
-        for faq_item in self.context.faq.objectValues():
+        for faq_item in faq_folder.objectValues():
             items.append({
                 "id": faq_item.getId(),
                 "title": faq_item.Title(),
