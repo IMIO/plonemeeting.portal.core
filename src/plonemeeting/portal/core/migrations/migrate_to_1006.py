@@ -38,14 +38,18 @@ class MigrateTo1006(Migrator):
         for brain in brains:
             institution = brain.getObject()
             if hasattr(institution, "additional_meeting_query_string_for_list"):
-                institution.meeting_filter_query = url_to_dict(institution.additional_meeting_query_string_for_list)
+                if institution.additional_meeting_query_string_for_list is not None:
+                    institution.meeting_filter_query = url_to_dict(institution.additional_meeting_query_string_for_list)
                 delattr(institution, "additional_meeting_query_string_for_list")
 
             if hasattr(institution, "additional_published_items_query_string"):
-                institution.item_filter_query = url_to_dict(institution.additional_published_items_query_string,
-                                                            include=['review_state', 'listType'])
-                institution.item_content_query = url_to_dict(institution.additional_published_items_query_string,
-                                                             exclude=['review_state', 'listType'])
+                if institution.additional_published_items_query_string is not None:
+                    institution.item_filter_query = url_to_dict(
+                        institution.additional_published_items_query_string,
+                        include=['review_state', 'listType'])
+                    institution.item_content_query = url_to_dict(
+                        institution.additional_published_items_query_string,
+                        exclude=['review_state', 'listType'])
                 delattr(institution, "additional_published_items_query_string")
 
         logger.info("Done.")
