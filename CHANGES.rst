@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.4.0 (unreleased)
---------------------
+1.4.0 (2021-09-21)
+------------------
 
 - Upgraded datagridfield version.
   [odelaere]
