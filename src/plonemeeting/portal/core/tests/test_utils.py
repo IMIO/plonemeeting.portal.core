@@ -96,6 +96,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
@@ -124,6 +125,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getRawClassifier=VOID"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
@@ -155,6 +157,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
@@ -184,6 +187,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=administration"
             "&getCategory=immo"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
@@ -214,6 +218,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=administration"
             "&getCategory=immo",
             url,
@@ -239,6 +244,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
+            "&extra_include=public_deliberation"
             "&getCategory=VOID",
             url,
         )

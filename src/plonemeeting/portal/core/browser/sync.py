@@ -38,7 +38,7 @@ def _call_delib_rest_api(url, institution):  # pragma: no cover
     )
 
     if response.status_code != 200:
-        raise ValueError(_(u"Webservice connection error !"))
+        raise ValueError(_(u"Web service connection error !"))
     msg, seconds = end_time(start_time, "REST API CALL MADE IN ", True)
     if seconds > 1:
         logger.warning(msg)
@@ -286,7 +286,7 @@ def sync_meeting(institution, meeting_uid, force=False):
 
     json_meeting = json.loads(response.text)
     if json_meeting.get("items_total") != 1:
-        raise ValueError(_(u"Unexpected meeting count in webservice response !"))
+        raise ValueError(_(u"Unexpected meeting count in web service response !"))
 
     meeting = sync_meeting_data(institution, json_meeting.get("items")[0])
     url = get_api_url_for_meeting_items(institution, meeting_UID=meeting_uid)

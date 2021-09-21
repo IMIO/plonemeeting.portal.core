@@ -21,6 +21,10 @@ body {
     font-weight: 400 !important
 }
 
+body #content-core a {
+    border-bottom: none;
+}
+
 .outer-wrapper {
     flex: 1; //make sure the footer is at the bottom even on small page
 }
@@ -43,20 +47,6 @@ fieldset {
 iframe,
 img {
     max-width: 100% !important;
-}
-
-table {
-    width: auto !important;
-    max-width: 100% !important;
-}
-
-table tr,
-td {
-    padding: .7em !important;
-}
-
-body #content-core a {
-    border-bottom: none;
 }
 
 // Meeting
@@ -272,6 +262,16 @@ div.decision table {
 .item-infos {
     font-size: 16px;
     padding-bottom: 30px;
+
+    table {
+      width: auto !important;
+      max-width: 100% !important;
+    }
+
+    table tr,
+    td {
+        padding: .7em !important;
+    }
 
     img {
         width: auto !important;

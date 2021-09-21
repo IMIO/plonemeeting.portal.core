@@ -46,9 +46,13 @@ class InstitutionView(DefaultView):
         self.request.response.redirect(url)
         return ""
 
+    def _update(self):
+        super(InstitutionView, self)._update()
+        if 'password' in self.w:
+            self.w['password'].value = self.context.password and '********************' or '-'
+
     def updateWidgets(self, prefix=None):
         super(InstitutionView, self).updateWidgets(prefix)
-        self.widgets['password'].value = self.context.password and '********************' or '-'
 
 
 class AddForm(add.DefaultAddForm):

@@ -73,6 +73,42 @@ class ICategoryMappingRowSchema(Interface):
     )
 
 
+class IUrlParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=_(u"Parameter"),
+        required=True,
+        default='extra_include'
+    )
+    value = schema.TextLine(
+        title=_(u"Value"),
+        required=True,
+    )
+
+
+class IUrlMeetingFilterParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=_(u"Parameter"),
+        required=True,
+        default='review_state'
+    )
+    value = schema.TextLine(
+        title=_(u"Value"),
+        required=True,
+    )
+
+
+class IUrlItemFilterParameterRowSchema(Interface):
+    parameter = schema.TextLine(
+        title=_(u"Parameter"),
+        required=True,
+        default='listType'
+    )
+    value = schema.TextLine(
+        title=_(u"Value"),
+        required=True,
+    )
+
+
 class IRepresentativeMappingRowSchema(Interface):
     representative_key = schema.Choice(title=_(u"Representative key"),
                                        vocabulary="plonemeeting.portal.vocabularies.editable_representative",
@@ -97,39 +133,53 @@ class IInstitution(model.Schema):
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
-    project_decision_disclaimer = RichText(
-        title=_(u"Project decision disclaimer"),
-        required=False,
-        defaultFactory=default_translator(
-            _(u"default_in_project_disclaimer", default="")
-        ),
+    directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True)
+    meeting_filter_query = schema.List(
+        title=_(u"Meeting query filter for list"),
+        description=_(u"meeting_filter_query_description"),
+        required=True,
+        value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
+        default=[{'parameter': 'review_state', 'value': 'frozen'},
+                 {'parameter': 'review_state', 'value': 'decided'}]
     )
 
-    additional_meeting_query_string_for_list = schema.TextLine(
-        title=_(u"Additional Meeting query string for list"),
-        description=_(u"additional_meeting_query_string_for_list_description"),
+    directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True)
+    item_filter_query = schema.List(
+        title=_(u"Published Items query filter"),
+        description=_(u"item_filter_query_description"),
         required=True,
-        constraint=validate_url_parameters,
-        default="&review_state=frozen&review_state=decided"
+        value_type=DictRow(title=u"Parameter name", schema=IUrlItemFilterParameterRowSchema),
+        default=[{'parameter': 'listType', 'value': 'normal'},
+                 {'parameter': 'listType', 'value': 'late'}]
     )
 
-    additional_published_items_query_string = schema.TextLine(
-        title=_(u"Additional Published Items query string"),
-        description=_(u"additional_published_items_query_string_description"),
+    directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True)
+    item_content_query = schema.List(
+        title=_(u"Published Items content query"),
+        description=_(u"item_content_query_description"),
         required=True,
-        constraint=validate_url_parameters,
-        default="&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified"
+        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
+        default=[{'parameter': 'extra_include', 'value': 'public_deliberation'}]
     )
     # Formatting fieldset
     model.fieldset(
         "formatting",
         label=_(u"Formatting"),
         fields=[
+            "project_decision_disclaimer",
             "item_title_formatting_tal",
             "item_decision_formatting_tal",
             "item_additional_data_formatting_tal",
             "info_annex_formatting_tal",
         ],
+    )
+
+    project_decision_disclaimer = RichText(
+        title=_(u"Project decision disclaimer"),
+        required=False,
+        defaultFactory=default_translator(
+            _(u"default_in_project_disclaimer", default="")
+        ),
     )
 
     item_title_formatting_tal = schema.TextLine(
@@ -143,7 +193,7 @@ class IInstitution(model.Schema):
     item_decision_formatting_tal = schema.TextLine(
         title=_(u"Item decision formatting tal expression"),
         required=True,
-        default="python: json['decision']['data']",
+        default="python: json['extra_include_deliberation']['public_deliberation']",
     )
 
     item_additional_data_formatting_tal = schema.TextLine(
@@ -190,7 +240,6 @@ class IInstitution(model.Schema):
     )
 
     # Styling fieldset
-
     model.fieldset(
         "style",
         label=_(u"Styling"),

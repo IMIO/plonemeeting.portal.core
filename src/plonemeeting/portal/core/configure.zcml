@@ -156,7 +156,7 @@
       run_deps="True" />
     <genericsetup:upgradeStep
       title="Go to portal 1006"
-      description="Fetched data from delib are kept if used"
+      description="Fetched data from delib are kept if used AND URL parameters are now in a datagridfiel widget"
       handler="plonemeeting.portal.core.migrations.migrate_to_1006.migrate" />
   </genericsetup:upgradeSteps>
   <!-- Password policy -->
