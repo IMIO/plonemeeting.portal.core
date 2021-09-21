@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3.3.3 (unreleased)
+1.4.0 (unreleased)
 --------------------
 
 - Upgraded datagridfield version.
