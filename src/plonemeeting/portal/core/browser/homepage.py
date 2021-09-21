@@ -3,7 +3,8 @@ from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import LOCATIONS_API_URL, DEMO_INSTITUTION_IDS
+from plonemeeting.portal.core.config import DEMO_INSTITUTION_IDS
+from plonemeeting.portal.core.config import LOCATIONS_API_URL
 from plonemeeting.portal.core.config import REGION_INS_CODE
 from Products.Five.browser import BrowserView
 from zope.interface import alsoProvides
