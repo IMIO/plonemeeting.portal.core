@@ -30,7 +30,14 @@ class MigrateTo1006(Migrator):
                     sub = splitted.split('=')
                     parameter = sub[0].strip()
                     if (not include or parameter in include) and parameter not in exclude:
-                        res.append({'parameter': parameter, 'value': sub[1].strip()})
+                        res.append(
+                            {
+                                'parameter': parameter,
+                                # special behavior for fullobjects parameter
+                                # that does not have a value
+                                'value': len(sub) > 1 and sub[1].strip() or "true"
+                            }
+                        )
             return res
 
         logger.info("Transforming TextLine query parameter to datagridfields...")
