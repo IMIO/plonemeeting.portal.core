@@ -14,6 +14,7 @@ const BUNDLE_PREFIX = "plone.bundles/plonemeeting.portal.core";
 module.exports = (env, argv) => {
   const mode = argv.mode ? argv.mode : "development";
   return {
+    mode: mode,
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "../static"),
@@ -22,9 +23,7 @@ module.exports = (env, argv) => {
     plugins: [
       mode === "production" && new CleanWebpackPlugin(),
       new CopyPlugin({
-        patterns: [
-          { from: "assets", to: "assets" },
-        ],
+        patterns: [{ from: "assets", to: "assets" }],
       }),
       new MiniCssExtractPlugin({
         filename: "css/[name]-compiled.css",
@@ -38,7 +37,6 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
-          exclude: /node_modules/,
           use: {
             loader: "babel-loader",
             options: {
@@ -52,7 +50,10 @@ module.exports = (env, argv) => {
             // In production, creates CSS files
             // In development serve CSS through JS 'with style-loader'
             {
-              loader: mode === "development" ? "style-loader" : MiniCssExtractPlugin.loader,
+              loader:
+                mode === "development"
+                  ? "style-loader"
+                  : MiniCssExtractPlugin.loader,
             },
             // Translates CSS into CommonJS
             {
@@ -70,6 +71,26 @@ module.exports = (env, argv) => {
             },
             {
               loader: "sass-loader",
+              options: {
+                sourceMap: mode === "development",
+              },
+            },
+          ],
+        },
+        {
+          test: /\.css$/i,
+          use: [
+            // In production, creates CSS files
+            // In development serve CSS through JS 'with style-loader'
+            {
+              loader:
+                mode === "development"
+                  ? "style-loader"
+                  : MiniCssExtractPlugin.loader,
+            },
+            // Translates CSS into CommonJS
+            {
+              loader: "css-loader",
               options: {
                 sourceMap: mode === "development",
               },
@@ -96,33 +117,43 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.(eot|woff|woff2|ttf)([?]?.*)$/,
-          use: ["file-loader"],
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "assets/fonts",
+          },
         },
       ],
     },
     resolve: {
       alias: {
-        react: "preact/compat",
+        "react": "preact/compat",
         "react-dom/test-utils": "preact/test-utils",
         "react-dom": "preact/compat",
+        leaflet$: "leaflet/dist/leaflet",
       },
     },
     externals: {
       jquery: "jQuery",
     },
     optimization: {
+      usedExports: true,
       minimizer: [
         new CssMinimizerPlugin(),
         new TerserPlugin({
           parallel: true,
-        })],
+        }),
+      ],
     },
-    devtool: 'eval-cheap-source-map',
+    performance: {
+      maxAssetSize: 750 * 1024,
+      maxEntrypointSize: 750 * 1024,
+    },
     devServer: {
       port: 3000,
       hot: true,
       watchFiles: {
-        paths: ["./../../**/*.pt"],  // Watch for .pt file change
+        paths: ["./../../**/*.pt"], // Watch for .pt file change
       },
       // Proxy everything to the Plone Backend EXCEPT our bundle as
       // Webpack Dev Server will serve it.

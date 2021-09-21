@@ -23,6 +23,10 @@ Changelog
   [odelaere]
 - Changed build system for frontend development (plone-compile-resources => webpack 5).
   [aduchene]
+- Added a new view for Plone site root (new homepage).
+  [aduchene]
+- Added some assets and JS resources to the bundle (new homepage).
+  [aduchene]
 
 
 1.3.3.2 (2021-08-20)
