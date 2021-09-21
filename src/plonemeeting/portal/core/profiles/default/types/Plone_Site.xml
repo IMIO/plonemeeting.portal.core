@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="Plone Site">
+  <property name="default_view" purge="True">homepage_view</property>
+  <property name="view_methods" purge="False">
+    <element value="homepage_view"/>
+  </property>
+</object>

@@ -19,6 +19,23 @@
       />
 
   <browser:page
+    name="homepage_view"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".homepage.HomepageView"
+    template="templates/homepage.pt"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    />
+
+  <browser:page
+    name="institution_locations"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".homepage.InstitutionLocationsView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
       name="view"
       for="plonemeeting.portal.core.content.institution.IInstitution"
       class=".institution.InstitutionView"

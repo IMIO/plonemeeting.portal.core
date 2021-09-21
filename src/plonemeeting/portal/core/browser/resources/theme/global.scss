@@ -1,10 +1,10 @@
 :root {
     --header-color: #ffffff;
-    --nav-color: #007bb1;
+    --nav-color: #{$delib-primary};
     --nav-text-color: #ffffff;
-    --links-color: #007bb1;
-    --footer-color: #2e3133;
-    --footer-text-color: #cccccc;
+    --links-color: #{$delib-primary};
+    --footer-color: transparent;
+    --footer-text-color: #{$grey-900};
 }
 
 html, body {
@@ -31,18 +31,13 @@ body {
     max-width: 250px !important
 }
 
-h1 {
+.section-seances h1 {
     font-weight: 500 !important;
     font-size: 22px !important;
 }
 
 fieldset {
     border: none !important;
-}
-
-h2 {
-    font-size: 23px !important;
-    font-weight: 700;
 }
 
 iframe,
