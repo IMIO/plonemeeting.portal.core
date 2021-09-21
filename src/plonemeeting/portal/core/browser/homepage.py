@@ -3,7 +3,7 @@ from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import LOCATIONS_API_URL
+from plonemeeting.portal.core.config import LOCATIONS_API_URL, DEMO_INSTITUTION_IDS
 from plonemeeting.portal.core.config import REGION_INS_CODE
 from Products.Five.browser import BrowserView
 from zope.interface import alsoProvides
@@ -35,11 +35,12 @@ class HomepageView(BrowserView):
                                   sort_on='getId')
         institutions = {}
         for brain in brains:
-            institution = brain.getObject()
-            institutions[brain.id] = {
-                "title": institution.Title(),
-                "URL": institution.absolute_url(),
-            }
+            if brain.id not in DEMO_INSTITUTION_IDS:
+                institution = brain.getObject()
+                institutions[brain.id] = {
+                    "title": institution.Title(),
+                    "URL": institution.absolute_url(),
+                }
         return json.dumps(institutions)
 
     def get_json_faq_items(self):
@@ -85,7 +86,7 @@ class InstitutionLocationsView(BrowserView):
             # We disable CSRFProtection as it's not necessary here
             # It is not a form view and we deal with the data internally so it's OK to disable it
             alsoProvides(self.request, IDisableCSRFProtection)
-            self.context.api_institutions_locations = response.json()
+            self.context.api_institution_locations = response.json()
         except requests.exceptions.RequestException as e:
             logger.error("Fetching locations data from remote API has failed! "
                          "Check remote API : " + LOCATIONS_API_URL)
@@ -98,7 +99,7 @@ class InstitutionLocationsView(BrowserView):
         """
         Get published institution locations in GeoJSON format
         """
-        if not hasattr(self.context, "api_institutions_locations"):
+        if not hasattr(self.context, "api_institution_locations"):
             self.fetch_and_store_locations_from_api()
 
         # Get all published institutions and put them in a dict with title as key
@@ -109,9 +110,9 @@ class InstitutionLocationsView(BrowserView):
             institutions_by_titles[institution.Title()] = institution
         institution_locations = {}
 
-        # Reconcile api_institutions_locations and institutions_by_titles based on
-        # institution title. TODO : Use something else to reconcile, e.g. 'ins code' for example
-        for record in self.context.api_institutions_locations["records"]:
+        # Reconcile api_institution_locations and institutions_by_titles based on
+        # institution title. TODO : Use something else to reconcile, e.g. 'INS code' for example
+        for record in self.context.api_institution_locations["records"]:
             if record["fields"]["mun_name_fr"] in institutions_by_titles.keys():
                 institution = institutions_by_titles[record["fields"]["mun_name_fr"]]
                 institution_locations[institution.getId()] = {

@@ -55,3 +55,6 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         self.assertIn("liege", json_response.keys())
         self.assertIn("data", json_response["namur"].keys())
         self.assertIn("geo_shape", json_response["namur"]["data"]["fields"].keys())
+
+        # Test if portal as saved locations from remote API for future use
+        self.assertTrue(hasattr(portal, "api_institutions_locations"))
