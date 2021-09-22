@@ -2,11 +2,12 @@
 from datetime import datetime
 from imio.helpers.content import object_values
 from plone import api
-from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json, sync_items_number
+from plonemeeting.portal.core.content.meeting import IMeeting
+from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json
 from plonemeeting.portal.core.sync_utils import sync_annexes_data
 from plonemeeting.portal.core.sync_utils import sync_items_data
+from plonemeeting.portal.core.sync_utils import sync_items_number
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
-from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 import json
