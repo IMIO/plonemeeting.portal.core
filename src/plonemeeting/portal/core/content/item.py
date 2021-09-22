@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
-from copy import deepcopy
-
-from Products.CMFPlone import PloneMessageFactory as plone_
 from collective import dexteritytextindexer
+from copy import deepcopy
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel import model
+from plonemeeting.portal.core import _
+from Products.CMFPlone import PloneMessageFactory as plone_
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
-
-from plonemeeting.portal.core import _
 
 
 class IItem(model.Schema):

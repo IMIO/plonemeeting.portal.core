@@ -1,10 +1,10 @@
 :root {
     --header-color: #ffffff;
-    --nav-color: #007bb1;
+    --nav-color: #{$delib-primary};
     --nav-text-color: #ffffff;
-    --links-color: #007bb1;
-    --footer-color: #2e3133;
-    --footer-text-color: #cccccc;
+    --links-color: #{$delib-primary};
+    --footer-color: transparent;
+    --footer-text-color: #{$grey-900};
 }
 
 html, body {
@@ -21,6 +21,10 @@ body {
     font-weight: 400 !important
 }
 
+body #content-core a {
+    border-bottom: none;
+}
+
 .outer-wrapper {
     flex: 1; //make sure the footer is at the bottom even on small page
 }
@@ -31,7 +35,7 @@ body {
     max-width: 250px !important
 }
 
-h1 {
+.section-seances h1 {
     font-weight: 500 !important;
     font-size: 22px !important;
 }
@@ -40,18 +44,9 @@ fieldset {
     border: none !important;
 }
 
-h2 {
-    font-size: 23px !important;
-    font-weight: 700;
-}
-
 iframe,
 img {
     max-width: 100% !important;
-}
-
-body #content-core a {
-    border-bottom: none;
 }
 
 // Meeting
@@ -102,8 +97,8 @@ body #content-core a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: @delib-lightgrey;
-    border-radius: @delib-border-radius;
+    background-color: $delib-lightgrey;
+    border-radius: $delib-border-radius;
 }
 
 
@@ -111,12 +106,12 @@ body #content-core a {
     font-size: 16px;
     margin-top: 10px;
     padding: 1em 2em;
-    background: @delib-lightgrey;
-    border-radius: @delib-border-radius;
+    background: $delib-lightgrey;
+    border-radius: $delib-border-radius;
 
     #show-less-link:after,
     #show-more-link:after {
-        content: url(++plone++plonemeeting.portal.core/assets/next2.svg);
+        content: url(../assets/next2.svg);
         width: 13px;
         display: inline-block;
         font-weight: 700;
@@ -153,16 +148,18 @@ body #content-core a {
     border-top-right-radius: 8px;
     padding: 10px;
     position: relative;
-    background: @delib-lightgrey;
+    background: $delib-lightgrey;
 }
 
 .item-preview .item-metadata {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     border-bottom: none;
+    border-top: 1px solid #c9c9c9;
+    padding: 1em 0;
 }
 
 .item-preview .meeting-title {
@@ -229,7 +226,7 @@ body #content-core a {
     font-size: 100px;
     position: absolute;
     top: 0;
-    background: url(++plone++plonemeeting.portal.core/assets/project.jpg);
+    background: url(../assets/project.jpg);
     z-index: -1;
     top: 0;
     bottom: 0;
@@ -265,6 +262,16 @@ div.decision table {
 .item-infos {
     font-size: 16px;
     padding-bottom: 30px;
+
+    table {
+      width: auto !important;
+      max-width: 100% !important;
+    }
+
+    table tr,
+    td {
+        padding: .7em !important;
+    }
 
     img {
         width: auto !important;
@@ -369,7 +376,7 @@ div.decision table {
 }
 
 .item-preview.decision {
-    border-radius: @delib-border-radius;
+    border-radius: $delib-border-radius;
 }
 
 // Annexes
@@ -518,10 +525,19 @@ body #portal-footer > .row {
 
 // Widgets
 
-.input-group {
-
+.input-group.color-select-widget-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     input.color-select-widget {
-        width: 200px;
+        width: 200px !important;
         border-radius: 5px !important;
+        margin-right: 10px;
+    }
+}
+
+.datagridwidget-cell {
+    select{
+        max-width: 350px;
     }
 }

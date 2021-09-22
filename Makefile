@@ -1,6 +1,7 @@
 #!/usr/bin/make
 #
 args = $(filter-out $@,$(MAKECMDGOALS))
+RESOURCES_PATH = src/plonemeeting/portal/core/browser/resources
 
 all: run
 
@@ -16,12 +17,14 @@ bootstrap:  ## Creates virtualenv and installs requirements.txt
 
 install-requirements:
 	bin/python bin/pip install -r requirements.txt
+	bin/pre-commit install
 
 .PHONY: buildout
 buildout:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
 	echo "Starting Buildout on $(shell date)"
 	rm -f .installed.cfg
 	if ! test -f bin/buildout;then make bootstrap;else make install-requirements;fi
+	bin/pre-commit autoupdate
 	echo "[versions]" > versions.cfg
 	bin/python bin/buildout
 	echo "Finished on $(shell date)"
@@ -37,8 +40,23 @@ cleanall:  ## Clears build artefacts and virtualenv
 
 .PHONY: test
 test:
+	bin/pip install -U mockito # for dev ide env
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
 
-.PHONY: css
-css:  ## Compile css
-	bin/plone-compile-resources --bundle=plonemeeting.portal.core
+.PHONY: resources
+resources:  ## Compile resources
+	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
+	. ${NVM_DIR}/nvm.sh && nvm use --lts
+	$(MAKE) -C $(RESOURCES_PATH) build
+
+.PHONY: resources-install
+resources-install:  ## Install resources dependencies
+	. ${NVM_DIR}/nvm.sh && nvm install --lts
+	$(MAKE) -C $(RESOURCES_PATH) install
+
+.PHONY: resources-watch
+resources-watch:  ## Start a Webpack dev server and watch for resources changes
+	# You can pass your Plone site path with = --env PLONE_SITE_PATH=/conseil
+	# Default Plone site path is "/Plone"
+	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
+	$(MAKE) -C $(RESOURCES_PATH) watch $(args)

@@ -38,7 +38,7 @@ select:hover {
 }
 
 body.template-facetednavigation_view #top-area {
-  background: @delib-lightgrey !important;
+  background: $delib-lightgrey !important;
   position: relative;
   padding-bottom: 15px;
 }
@@ -46,7 +46,7 @@ body.template-facetednavigation_view #top-area {
 body.template-facetednavigation_view #top-area:after {
   content: "";
   position: absolute;
-  background: @delib-lightgrey;
+  background: $delib-lightgrey;
   z-index: -1;
   width: 100vw;
   top: -136px;
@@ -91,7 +91,7 @@ html body .faceted-criteria-reset a {
   }
 
   .faceted_loading {
-    background: url('../../++plone++plonemeeting.portal.core/assets/ajax-spinner.svg') no-repeat;
+    background: url('../assets/ajax-spinner.svg') no-repeat;
     background-position: center;
     background-size: contain;
     height: 150px;
@@ -149,7 +149,7 @@ body.template-facetednavigation_view .searchButton {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
-  background-image: url('../../++plone++plonemeeting.portal.core/assets/magnify.svg');
+  background-image: url('../assets/magnify.svg');
   background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;

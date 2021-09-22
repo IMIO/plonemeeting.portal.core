@@ -2,14 +2,22 @@ Changelog
 =========
 
 
-1.3.3.3 (unreleased)
---------------------
+1.4.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.4.0 (2021-09-21)
+------------------
 
 - Upgraded datagridfield version.
   [odelaere]
 - Fail institution edit form validation if an iA.Delib category is mapped multiple times.
   [odelaere]
 - Handle connection failure properly in institution edit form.
+  [odelaere]
+- Amper removing of representatives if they are linked to at least an item.
   [odelaere]
 - Removed faceted-preview-meeting-items.
   [odelaere]
@@ -19,6 +27,18 @@ Changelog
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
   [odelaere]
+- Added DataGridField to manage url parameters.
+  [odelaere]
+- Query representatives from iA.Delib to populate vocabularies only when loading the edit form.
+  [odelaere]
+- Fetched representatives from delib are kept if used.
+  [odelaere]
+- Changed build system for frontend development (plone-compile-resources => webpack 5).
+  [aduchene]
+- Added a new view for Plone site root (new homepage).
+  [aduchene]
+- Added some assets and JS resources to the bundle (new homepage).
+  [aduchene]
 
 
 1.3.3.2 (2021-08-20)

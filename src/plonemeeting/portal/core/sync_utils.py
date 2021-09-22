@@ -1,19 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from imio.migrator.utils import end_time
 from imio.helpers.content import richtextval
+from imio.migrator.utils import end_time
 from plone import api
-from Products.CMFCore.Expression import Expression, getExprContext
 from plone.app.uuid.utils import uuidToObject
 from plone.namedfile.file import NamedBlobFile
-from zope.i18n import translate
-
-import dateutil.parser
-import json
-import pytz
-import requests
-import time
-
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
@@ -21,6 +12,15 @@ from plonemeeting.portal.core.utils import get_api_url_for_annexes
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
+from Products.CMFCore.Expression import Expression
+from Products.CMFCore.Expression import getExprContext
+from zope.i18n import translate
+
+import dateutil.parser
+import json
+import pytz
+import requests
+import time
 
 
 def _call_delib_rest_api(url, institution):  # pragma: no cover
@@ -31,7 +31,7 @@ def _call_delib_rest_api(url, institution):  # pragma: no cover
     )
 
     if response.status_code != 200:
-        raise ValueError(_(u"Webservice connection error !"))
+        raise ValueError(_(u"Web service connection error !"))
     msg, seconds = end_time(start_time, "REST API CALL MADE IN ", True)
     if seconds > 1:
         logger.warning(msg)
@@ -317,7 +317,7 @@ def sync_meeting(institution, meeting_external_uid, force=False, item_external_u
 
     json_meeting = json.loads(response.text)
     if json_meeting.get("items_total") != 1:
-        raise ValueError(_(u"Unexpected meeting count in webservice response !"))
+        raise ValueError(_(u"Unexpected meeting count in web service response !"))
 
     meeting = sync_meeting_data(institution, json_meeting.get("items")[0])
     url = get_api_url_for_meeting_items(institution,

@@ -1,4 +1,4 @@
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1140px) {
   .item-title {
     font-size: 22px;
   }
@@ -11,7 +11,7 @@
     margin: 1em 0 0 0;
     padding: 2em 2em;
     display: flex;
-    background: @delib-lightgrey;
+    background: $delib-lightgrey;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-wrap: wrap;
@@ -73,15 +73,18 @@
   .template-facetednavigation_view #top---default---widgets fieldset {
     max-width: 240px;
   }
-}
 
-@media screen and (min-width: 1140px) {
+  #seance_widget {
+    flex: 1 1 250px;
+  }
+
   .item-preview .item-metadata {
-    width: 335px;
     max-width: 350px;
-    padding: 0 10px 0 31px;
-    flex-direction: column;
+    padding: 0 10px 0 30px;
     border-left: 1px solid #c9c9c9;
+    margin-top: 20px;
+    border-top: none;
+    width: 100%;
   }
 
   .project-disclaimer {
@@ -120,13 +123,13 @@
     margin-top: 0;
   }
 
-  h1 {
+  .section-seances h1 {
     font-size: 25px !important;
   }
 }
 
 @media screen and (min-width: 1400px) {
-    .item-main {
-        max-width: 63%;
-    }
+  .item-main {
+    max-width: 63%;
+  }
 }

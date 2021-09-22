@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
-
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -32,8 +29,7 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         values = vocab({"test": 'yolo'})
         self.assertEqual(len(values), 29)
 
-        belleville.delib_categories = [("admin", "Administrative"),
-                                       ("political", "Political")]
+        belleville.delib_categories = {"admin": "Administrative", "political": "Political"}
         values = vocab({"test": 'yolo'})
         self.assertEqual(len(values), 2)
 

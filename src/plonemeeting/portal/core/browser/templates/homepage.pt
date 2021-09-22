@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="plonemeeting.portal"
+>
+<body>
+<metal:title fill-slot="content-title" />
+
+<metal:content-core
+  fill-slot="content-core"
+>
+  <tal:defines define="institutions view/get_json_institutions;
+                       faq_items view/get_json_faq_items;">
+    <section class="hero-primary full-width">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="hero-img-wrapper">
+            <img src="++plone++plonemeeting.portal.core/assets/delibe.svg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-content">
+            <h1>
+              Je cherche les décisions prises à...
+            </h1>
+
+            <x-institution-select
+              class="institution-select"
+               tal:attributes="data-institutions institutions"
+            >
+            </x-institution-select>
+          </div>
+
+        </div>
+
+        <div class="col-xl-3"></div>
+
+      </div>
+    </section>
+
+    <section class="institutions-map full-width">
+      <h2 class="text-primary">Couverture géographique
+        <img src="++plone++plonemeeting.portal.core/assets/marker-zone.svg" alt="Map icon">
+      </h2>
+      <x-institution-map></x-institution-map>
+    </section>
+
+
+    <section class="faq-section">
+      <h2 class="text-primary">Foire aux questions
+        <img src="++plone++plonemeeting.portal.core/assets/help-outline.svg" alt="Help icon">
+      </h2>
+      <hr />
+      <x-masonry-columns container-selector=".faq-grid" item-selector=".faq-item-wrapper" gutter="50" />
+      <div class="faq-grid">
+        <div tal:repeat="faq_item faq_items" class="faq-item-wrapper">
+          <h3 tal:content="structure faq_item/title"></h3>
+          <a tal:attributes="name faq_item/id"></a>
+          <div class="faq-item" tal:content="structure faq_item/text"></div>
+        </div>
+      </div>
+    </section>
+  </tal:defines>
+</metal:content-core>
+
+</body>
+</html>
+
+
+

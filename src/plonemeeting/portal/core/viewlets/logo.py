@@ -2,7 +2,6 @@
 
 from plone import api
 from plone.app.layout.viewlets.common import LogoViewlet
-
 from plonemeeting.portal.core.content.institution import IInstitution
 
 

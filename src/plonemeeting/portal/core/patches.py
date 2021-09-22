@@ -5,6 +5,7 @@ from Products.PortalTransforms.transforms import safe_html
 from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
 from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 
+
 original_hasScript = safe_html.hasScript
 
 

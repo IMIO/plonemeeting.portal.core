@@ -2,10 +2,10 @@
 
 from eea.facetednavigation.criteria.handler import Criteria
 from plone import api
-import copy
-
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+
+import copy
 
 
 class MeetingsCriteria(Criteria):

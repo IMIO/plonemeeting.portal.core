@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import safe_unicode
 from plone import api
 from plone.app.textfield.value import IRichTextValue
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
+from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
+from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
+from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
-from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
-from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 
 
 def format_institution_managers_group_id(institution):
@@ -65,7 +65,7 @@ def get_api_url_for_meetings(institution, meeting_external_uid=None):
               "&metadata_fields=date" \
               "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
     else:
-        url = "{0}{1}".format(url, institution.additional_meeting_query_string_for_list)
+        url += _datagrid_to_url_param(institution.meeting_filter_query)
     return url
 
 
@@ -122,20 +122,28 @@ def get_api_url_for_annexes(item_json_id):
     return url
 
 
+def _datagrid_to_url_param(values):
+    res = ''
+    for dict_value in values:
+        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
+    return res
+
+
 def get_api_url_for_annexes_summary(item_json_id):
     url = "{0}/@annexes?" \
           "publishable=true".format(item_json_id)
     return url
 
 
-def get_api_url_for_meeting_items(institution,
-                                  meeting_external_uid,
-                                  item_external_uids=[],
-                                  with_additional_published_items_query_string=True):
+def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
+
+    item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
+    item_content_query = _datagrid_to_url_param(institution.item_content_query)
+
     item_uids_filter = _get_uids_filter_url(item_external_uids)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
     url = (
@@ -159,7 +167,9 @@ def get_api_url_for_meeting_items(institution,
         "&metadata_fields=groupsInCharge"
         # field required by application, will be "category" or "classifier"
         "&metadata_fields={delib_category_field}"
+        "{item_filter_query}"
         "{category_filter}"
+        "{item_content_query}"
         "{representatives_filter}"
         "{item_uids_filter}".format(
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
@@ -167,14 +177,14 @@ def get_api_url_for_meeting_items(institution,
             meeting_config_id=institution.meeting_config_id,
             meeting_external_uid=meeting_external_uid,
             delib_category_field=institution.delib_category_field,
+            item_filter_query=item_filter_query,
+            item_content_query=item_content_query,
             category_filter=category_filter,
             representatives_filter=representatives_filter,
             item_uids_filter=item_uids_filter
         )
     )
 
-    if with_additional_published_items_query_string:
-        url += institution.additional_published_items_query_string
     return url
 
 
@@ -183,6 +193,8 @@ def get_api_url_for_meeting_item(institution, meeting_item_uids):
         return
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
+    item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
+    item_content_query = _datagrid_to_url_param(institution.item_content_query)
     url = (
         "{0}/@search?"
         "type={1}"
@@ -206,13 +218,15 @@ def get_api_url_for_meeting_item(institution, meeting_item_uids):
         "&metadata_fields={4}"
         "{5}"
         "{6}"
-        "{7}".format(
+        "{7}"
+        "{8}".format(
             institution.plonemeeting_url.rstrip("/"),
             PLONEMEETING_API_ITEM_TYPE,
             institution.meeting_config_id,
             "&uid={3}".join(meeting_item_uids),
             institution.delib_category_field,
-            institution.additional_published_items_query_string,
+            item_filter_query,
+            item_content_query,
             category_filter,
             representatives_filter
         )
@@ -226,6 +240,18 @@ def get_api_url_for_categories(institution, delib_config_category_field):
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
             meeting_config_id=institution.meeting_config_id,
             delib_category_field=delib_config_category_field
+        )
+        return url
+    else:
+        return
+
+
+def get_api_url_for_representatives(institution):
+    if institution.plonemeeting_url and institution.meeting_config_id:
+        url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={representative}".format(
+            plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
+            meeting_config_id=institution.meeting_config_id,
+            representative=REPRESENTATIVE_IA_DELIB_FIELD
         )
         return url
     else:

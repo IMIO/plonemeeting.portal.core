@@ -1,7 +1,8 @@
 [report]
 include =
-    src/plonemeeting/*
+    src/plonemeeting/portal/core/*
 omit =
     */migrations/*
     */test*
     */upgrades/*
+    */__init__.py

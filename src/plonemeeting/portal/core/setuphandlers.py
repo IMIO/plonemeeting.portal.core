@@ -117,3 +117,72 @@ def create_demo_content(context):
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
 
+        normalizer = getUtility(IIDNormalizer)
+        for institution in data["institutions"]:
+            institution_id = normalizer.normalize(institution["title"])
+            institution_obj = content.create(
+                container=portal,
+                type="Institution",
+                id=institution_id,
+                title=institution["title"],
+                categories_mappings=institution["categories_mappings"],
+                representatives_mappings=institution["representatives_mappings"],
+                plonemeeting_url=institution["plonemeeting_url"],
+                username=institution["username"],
+                password=institution["password"],
+                meeting_config_id=institution["meeting_config_id"],
+                meeting_filter_query=institution[
+                    "meeting_filter_query"
+                ],
+                item_filter_query=institution[
+                    "item_filter_query"
+                ],
+                item_decision_formatting_tal=institution[
+                    "item_decision_formatting_tal"
+                ],
+                info_annex_formatting_tal=institution["info_annex_formatting_tal"],
+            )
+            content.transition(obj=institution_obj, transition="publish")
+
+            user = api.user.create(
+                username="{}-manager".format(institution_obj.id),
+                email="noob@plone.org",
+                password="supersecret",
+            )
+
+            group = api.group.get(format_institution_managers_group_id(institution_obj))
+            group.addMember(user.id)
+
+            for meeting in institution[APP_FOLDER_ID]:
+                date_time = dateutil.parser.parse(meeting["datetime"])
+                meeting_obj = content.create(
+                    container=institution_obj,
+                    type="Meeting",
+                    title=meeting["title"],
+                    date_time=date_time,
+                    plonemeeting_last_modified=dateutil.parser.parse(
+                        meeting["plonemeeting_last_modified"]
+                    ),
+                )
+                content.transition(obj=meeting_obj, transition="send_to_project")
+                content.transition(obj=meeting_obj, transition="publish")
+
+                for item in meeting["items"]:
+                    decision = richtextval(item["decision"])
+                    item_obj = content.create(
+                        container=meeting_obj,
+                        type="Item",
+                        title=item["title"],
+                        sortable_number=item["sortable_number"],
+                        number=item["number"],
+                        representatives_in_charge=item["representatives_in_charge"],
+                        decision=decision,
+                        category=item["category"],
+                        plonemeeting_last_modified=dateutil.parser.parse(
+                            meeting["plonemeeting_last_modified"]
+                        ),
+                    )
+                    item_obj.formatted_title = richtextval("<p>" + item_obj.title + "</p>")
+                    if "files" in item:
+                        for file in item["files"]:
+                            create_file(item_obj, file)

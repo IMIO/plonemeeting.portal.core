@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
-import plone
-
 from plone import api
 from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
-
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from zope.browserpage import ViewPageTemplateFile
+
+import os
+import plone
 
 
 def _path_to_dx_default_template():
@@ -47,9 +46,13 @@ class InstitutionView(DefaultView):
         self.request.response.redirect(url)
         return ""
 
+    def _update(self):
+        super(InstitutionView, self)._update()
+        if 'password' in self.w:
+            self.w['password'].value = self.context.password and '********************' or '-'
+
     def updateWidgets(self, prefix=None):
         super(InstitutionView, self).updateWidgets(prefix)
-        self.widgets['password'].value = self.context.password and '********************' or '-'
 
 
 class AddForm(add.DefaultAddForm):
@@ -75,6 +78,7 @@ class EditForm(edit.DefaultEditForm):
         form_keys = tuple(self.request.form.keys())
         if not form_keys or form_keys == ('_authenticator',):
             self.context.fetch_delib_categories()
+            self.context.fetch_delib_representatives()
         return super(EditForm, self).__call__()
 
     def updateFields(self):

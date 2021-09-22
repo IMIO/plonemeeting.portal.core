@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
-import copy
-import json
-from datetime import datetime, timezone
-
-import requests
 from imio.migrator.utils import end_time
-from Products.Five import BrowserView
 from plone import api
 from plone.app.content.utils import json_dumps
 from plone.autoform.form import AutoExtensibleForm
-from plonemeeting.portal.core.content.meeting import IMeeting
-from plonemeeting.portal.core.sync_utils import sync_meeting, _call_delib_rest_api, _json_date_to_datetime
-from plonemeeting.portal.core.utils import get_api_url_for_meeting_items, redirect, redirect_back, \
-    get_api_url_for_meetings, get_api_url_for_annexes, get_api_url_for_annexes_summary
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
+from plonemeeting.portal.core import plone_
+from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
+from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
+from plonemeeting.portal.core.sync_utils import sync_meeting
+from plonemeeting.portal.core.utils import get_api_url_for_annexes_summary
+from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import redirect
+from plonemeeting.portal.core.utils import redirect_back
+from Products.Five import BrowserView
 from z3c.form import button
 from z3c.form.contentprovider import ContentProviders
 from z3c.form.form import Form
@@ -20,13 +23,13 @@ from z3c.form.interfaces import IFieldsAndContentProvidersForm
 from zope import schema
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.contentprovider.provider import ContentProviderBase
-from zope.interface import Interface, implementer
+from zope.interface import implementer
+from zope.interface import Interface
 
+import copy
+import json
+import requests
 import time
-
-from plonemeeting.portal.core import _
-from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.interfaces import IMeetingsFolder
 
 
 class IImportMeetingForm(Interface):
@@ -73,7 +76,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         api.portal.show_message(_("Webservice connection error !"), request=self.request, type="error")
         self.handle_cancel(self, None)
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(plone_(u"Cancel"))
     def handle_cancel(self, action):
         redirect_back(self.request)
 
@@ -282,7 +285,7 @@ class PreSyncReportForm(Form):
             annexes_status["removed"]["count"] += 1
             annexes_status["removed"]["titles"].append(local_annexe.Title())
 
-        statuses = list(annexes_status.keys()) # Avoid 'RuntimeError: dictionary changed size during iteration'
+        statuses = list(annexes_status.keys())  # Avoid 'RuntimeError: dictionary changed size during iteration'
         for status in statuses:
             if annexes_status[status]['count'] == 0:
                 annexes_status.pop(status)
