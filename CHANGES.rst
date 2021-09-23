@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.1 (unreleased)
+1.4.1 (2021-09-23)
 ------------------
 
 - Don't show unpublished faq on homepage.
