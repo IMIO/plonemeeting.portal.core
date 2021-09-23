@@ -186,3 +186,22 @@ def create_demo_content(context):
                     if "files" in item:
                         for file in item["files"]:
                             create_file(item_obj, file)
+        faqs = content.create(
+            container=portal,
+            type="Folder",
+            title="Foire aux questions",
+            id="faq"
+        )
+        for faq in data["faqs"]:
+            document = content.create(
+                container=faqs,
+                type="Document",
+                title=faq.get("title"),
+                id=faq.get("id"),
+                text=richtextval(faq["text"])
+            )
+            content.transition(obj=document, transition="publish")
+    brain = content.find(context=portal, id='front-page')
+    if brain:
+        default_front_page = content.get(UID=brain[0].UID)
+        content.delete(default_front_page)
