@@ -22,8 +22,10 @@
       width: auto;
       z-index: 10;
       position: relative;
-      margin: -175px 0;
+      top: 10px;
+      margin: -200px 0;
       @include media-breakpoint-down(xl) {
+        top: 0;
         margin: -200px 0 1em 0;
         height: 300px !important;
       }
