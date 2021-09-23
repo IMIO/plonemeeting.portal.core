@@ -60,7 +60,7 @@ class HomepageView(BrowserView):
         for brain in brains:
             faq_item = brain.getObject()
             faq_items.append(
-                {"id": faq_item.getId(), "title": faq_item.Title(), "text": faq_item.text.raw})
+                {"id": faq_item.getId(), "title": faq_item.Title(), "text": faq_item.text.output})
         return faq_items
 
 
