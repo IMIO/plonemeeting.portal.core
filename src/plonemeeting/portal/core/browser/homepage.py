@@ -44,22 +44,24 @@ class HomepageView(BrowserView):
                 }
         return json.dumps(institutions)
 
-    def get_json_faq_items(self):
+    def get_faq_items(self):
         """
-        Get all FAQ items from this portal and return it in JSON.
+        Get all FAQ items from this portal.
         A FAQ item is a "Document" portal type stored in the 'faq' folder.
         """
         faq_folder = getattr(self.context, "faq", None)
         if not faq_folder:
             return
-        items = []
-        for faq_item in faq_folder.objectValues():
-            items.append({
-                "id": faq_item.getId(),
-                "title": faq_item.Title(),
-                "text": faq_item.text.raw
-            })
-        return items
+        brains = api.content.find(context=faq_folder,
+                                  portal_type="Document",
+                                  review_state="published",
+                                  sort_on="getObjPositionInParent")
+        faq_items = []
+        for brain in brains:
+            faq_item = brain.getObject()
+            faq_items.append(
+                {"id": faq_item.getId(), "title": faq_item.Title(), "text": faq_item.text.output})
+        return faq_items
 
 
 class InstitutionLocationsView(BrowserView):

@@ -5,7 +5,12 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Don't show unpublished faq on homepage.
+  [aduchene]
+- Highlight region on Leaflet map.
+  [aduchene]
+- Use JsonMinimizerPlugin to minimize .json file
+  [aduchene]
 
 
 1.4.0 (2021-09-21)

@@ -9,7 +9,7 @@
   fill-slot="content-core"
 >
   <tal:defines define="institutions view/get_json_institutions;
-                       faq_items view/get_json_faq_items;">
+                       faq_items view/get_faq_items;">
     <section class="hero-primary full-width">
       <div class="row">
         <div class="col-lg-3">
