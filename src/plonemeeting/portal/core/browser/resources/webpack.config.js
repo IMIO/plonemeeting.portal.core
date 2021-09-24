@@ -126,6 +126,7 @@ module.exports = (env, argv) => {
             ],
         },
         resolve: {
+            extensions: ["", ".js", ".jsx"],
             alias: {
                 react: "preact/compat",
                 "react-dom/test-utils": "preact/test-utils",

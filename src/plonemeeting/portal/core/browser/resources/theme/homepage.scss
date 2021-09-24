@@ -40,6 +40,15 @@
     padding: 1em;
     border-radius: $delib-border-radius;
   }
+
+  &:target {
+    h3 {
+      color: $imio-pink-500;
+    }
+    .faq-item {
+      box-shadow: 0 0 0 2px $imio-pink-500;
+    }
+  }
 }
 
 .institution-select {

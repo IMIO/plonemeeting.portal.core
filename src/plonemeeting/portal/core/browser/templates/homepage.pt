@@ -37,11 +37,11 @@
       </div>
     </section>
 
-    <section class="institutions-map full-width">
+    <section class="institutions-map-section full-width">
       <h2 class="text-primary">Couverture géographique
         <img src="++plone++plonemeeting.portal.core/assets/marker-zone.svg" alt="Map icon">
       </h2>
-      <x-institution-map></x-institution-map>
+      <x-institutions-map class="institutions-map"/>
     </section>
 
 
@@ -52,9 +52,8 @@
       <hr />
       <x-masonry-columns container-selector=".faq-grid" item-selector=".faq-item-wrapper" gutter="50" />
       <div class="faq-grid">
-        <div tal:repeat="faq_item faq_items" class="faq-item-wrapper">
+        <div tal:repeat="faq_item faq_items" tal:attributes="id faq_item/id" class="faq-item-wrapper">
           <h3 tal:content="structure faq_item/title"></h3>
-          <a tal:attributes="name faq_item/id"></a>
           <div class="faq-item" tal:content="structure faq_item/text"></div>
         </div>
       </div>
