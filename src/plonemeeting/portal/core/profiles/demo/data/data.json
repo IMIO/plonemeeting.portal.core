@@ -580,6 +580,11 @@
       "id":  "quels-sont-les-objectifs-de-ce-site",
       "title": "Quels sont les objectifs de ce site ?",
       "text": "<ul>\n<li><strong>Faciliter l'accès aux décisions</strong> émanant du Conseil communal à tout un chacun.</li>\n<li>Permettre la consultation des <strong>projets de décisions</strong> (avant la tenue du Conseil communal) et des décisions (après la tenue du Conseil communal) inscrits à l'ordre du jour des séances publiques. </li>\n</ul>"
+    },
+    {
+      "id":  "rgpd",
+      "title": "Pourquoi certaines portions de texte sont-elles masquées ?",
+      "text": "<p>Les Pouvoirs locaux sont parfois amenés à masquer certaines portions de texte dans les décisions afin de respecter la vie privée des personnes concernées. Ceci entre dans le cadre du Règlement Général sur la Protection des Données (RGPD). Plus d'infos sur le RGPD et ses implications pour les Pouvoirs locaux ici : <a class=\"theme markdown__link\" href=\"https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux\" rel=\"noopener noreferrer\" target=\"_blank\" data-linktype=\"external\" data-val=\"https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux\"><span>https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux</span></a></p>"
     }
   ]
 }
