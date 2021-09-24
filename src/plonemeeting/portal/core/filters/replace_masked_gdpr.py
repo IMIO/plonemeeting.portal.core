@@ -3,11 +3,12 @@ from plone.api.portal import get_navigation_root
 from plone.api.portal import get_registry_record
 from plone.outputfilters.interfaces import IFilter
 from plonemeeting.portal.core.config import RGPD_MASKED_TEXT
-from zope.interface import implements
+from zope.interface import implementer
 
 
+@implementer(IFilter)
 class ReplaceMaskedGDPR(object):
-    implements(IFilter)
+    order = 1000
 
     def __init__(self, context, request):
         self.context = context
@@ -18,6 +19,8 @@ class ReplaceMaskedGDPR(object):
         return True
 
     def __call__(self, data):
+        import ipdb
+        ipdb.set_trace()
         to_replace = get_registry_record("plonemeeting.portal.core.delib_masked_gdpr", RGPD_MASKED_TEXT)
         if hasattr(self.institution, "url_rgpd") and self.institution.url_rgpd:
             replace_by = self.institution.url_rgpd

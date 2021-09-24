@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <adapter
+    provides="plone.outputfilters.interfaces.IFilter"
+    name="replace_masked_gdpr"
+    for="plonemeeting.portal.core.content.item.IItem
+         *"
+    factory=".replace_masked_gdpr.ReplaceMaskedGDPR"/>
+
+</configure>
