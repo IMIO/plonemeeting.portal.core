@@ -174,6 +174,12 @@ class IInstitution(model.Schema):
         ],
     )
 
+    url_rgpd = schema.TextLine(
+        title=_(u"Custom page for GDPR text"),
+        description=_(u"The url visitors should be redirected to when clicking a GDPR masked text"),
+        required=False
+    )
+
     project_decision_disclaimer = RichText(
         title=_(u"Project decision disclaimer"),
         required=False,

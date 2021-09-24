@@ -34,3 +34,5 @@ REGION_INS_CODE = "03000"
 LOCATIONS_API_URL = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=georef-belgium-municipality"
 
 DEMO_INSTITUTION_IDS = ["belle-ville"]
+
+RGPD_MASKED_TEXT = "[Texte masqué RGPD]"
