@@ -62,12 +62,4 @@
     <value key="last_compilation">2020-09-04 12:30:00</value>
     <value key="csscompilation">++plone++static/plonemeeting.portal.core-custom-compiled.css</value>
   </records>
-  <record name="plonemeeting.portal.core.delib_masked_gdpr">
-    <field type="plone.registry.field.TextLine">
-    </field>
-  </record>
-  <record name="plonemeeting.portal.core.rgpd_masked_text_redirect">
-    <field type="plone.registry.field.TextLine">
-    </field>
-  </record>
 </registry>
