@@ -36,3 +36,5 @@ LOCATIONS_API_URL = "https://public.opendatasoft.com/api/records/1.0/search/?dat
 DEMO_INSTITUTION_IDS = ["belle-ville"]
 
 RGPD_MASKED_TEXT = "[Texte masqué RGPD]"
+
+DELIB_ANONYMIZED_TEXT = '<span class="pm-anonymize"></span>'
