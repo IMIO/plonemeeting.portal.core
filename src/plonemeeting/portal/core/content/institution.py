@@ -337,12 +337,13 @@ def representatives_mappings_invariant(data):
     changes = {}
     for rpz in new_representatives:
         changes[rpz['representative_key']] = rpz['representative_value']
-    for rpz in data.__context__.representatives_mappings:
-        rpz_uid = rpz['representative_key']
-        if rpz_uid not in changes and rpz_uid not in missing_uids:
-            brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
-            if brains:
-                missing_uids[rpz_uid] = rpz['representative_value']
+    if data.__context__:
+        for rpz in data.__context__.representatives_mappings:
+            rpz_uid = rpz['representative_key']
+            if rpz_uid not in changes and rpz_uid not in missing_uids:
+                brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
+                if brains:
+                    missing_uids[rpz_uid] = rpz['representative_value']
     if missing_uids:
         raise Invalid(_("Representatives mappings - Removing representatives linked to "
                         "items is not allowed : ${representatives}",

@@ -5,7 +5,8 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix invariant while adding new Institution.
+  [odelaere]
 
 
 1.4.1 (2021-09-23)
