@@ -2,10 +2,17 @@ Changelog
 =========
 
 
-1.4.2 (unreleased)
+1.4.3 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.4.2 (2021-09-28)
+------------------
+
+- Fix invariant while adding new Institution.
+  [odelaere]
 
 
 1.4.1 (2021-09-23)
