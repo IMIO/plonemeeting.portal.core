@@ -16,6 +16,21 @@
       </value_type>
     </field>
   </record>
+  <record name="plonemeeting.portal.core.rgpd_masked_text_redirect_path">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Internal redirect path for GDPR masked text links from site root</title>
+    </field>
+  </record>
+  <record name="plonemeeting.portal.core.rgpd_masked_text_placeholder">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Placeholder for GDPR masked text links from site root</title>
+    </field>
+  </record>
+  <record name="plonemeeting.portal.core.delib_masked_gdpr">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Anonymised text tag from ia.Delib to be replaced</title>
+    </field>
+  </record>
   <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
     <value key="title" i18n:translate="">Item number</value>
     <value key="description" i18n:translate=""/>
