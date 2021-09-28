@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.2 (unreleased)
+1.4.2 (2021-09-28)
 ------------------
 
 - Fix invariant while adding new Institution.
