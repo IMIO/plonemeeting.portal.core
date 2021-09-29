@@ -7,8 +7,6 @@ from plonemeeting.portal.core.config import DELIB_ANONYMIZED_TEXT
 from plonemeeting.portal.core.config import RGPD_MASKED_TEXT
 from zope.interface import implementer
 
-import re
-
 
 @implementer(IFilter)
 class ReplaceMaskedGDPR(object):
@@ -27,7 +25,7 @@ class ReplaceMaskedGDPR(object):
         if not to_replace:  # get_registry_record may return None if record exists but empty
             to_replace = DELIB_ANONYMIZED_TEXT
 
-        if hasattr(self.institution, "url_rgpd") and self.institution.url_rgpd:
+        if self.institution.url_rgpd:
             redirect = self.institution.url_rgpd
         else:
             default = "#rgpd"
@@ -45,4 +43,4 @@ class ReplaceMaskedGDPR(object):
             redirect=redirect,
             placeholder=placeholder
         )
-        return re.sub(to_replace, replace_by, data)
+        return data.replace(to_replace, replace_by)

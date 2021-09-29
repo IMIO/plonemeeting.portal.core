@@ -166,7 +166,7 @@
       destination="1007"
       profile="plonemeeting.portal.core:default">
     <genericsetup:upgradeDepends
-      title="Re-apply actions for Meeting sync and reimport actions"
+      title="Re-apply registry to add GDPR masked text related attributes"
       description=""
       import_profile="plonemeeting.portal.core:default"
       import_steps="plone.app.registry"
