@@ -5,7 +5,8 @@ Changelog
 1.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added output filter for anonymized content.
+  [odelaere]
 
 
 1.4.2 (2021-09-28)
