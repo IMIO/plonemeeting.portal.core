@@ -27,7 +27,7 @@
     <field type="plone.registry.field.TextLine">
       <title i18n:translate="">Placeholder for GDPR masked text links from site root</title>
     </field>
-    <value purge="false">[Texte masqué RGPD]</value>
+    <value purge="false">TEXTE MASQUÉ | RGPD</value>
   </record>
   <record name="plonemeeting.portal.core.delib_masked_gdpr">
     <field type="plone.registry.field.TextLine">

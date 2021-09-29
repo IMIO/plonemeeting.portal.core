@@ -16,23 +16,23 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
     def test_replace_masked_gdpr(self):
         filter = ReplaceMaskedGDPR(self.institution, None)
         # search for '<span class="pm-anonymize"></span>' (delib_masked_gdpr)
-        # to replace with '[Texte masqué RGPD]' and link 'http://nohost/plone#rgpd'
+        # to replace with 'TEXTE MASQUÉ | RGPD' and link 'http://nohost/plone#rgpd'
         # (rgpd_masked_text_placeholder + rgpd_masked_text_redirect_path)
         self.assertEqual(filter(self.richtext),
                          u'<p><strong>Article 1er</strong> :</p>'
                          u'<p>Au scrutin secret et à l’unanimité, de désigner '
-                         u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>[Texte masqué RGPD]</span></a>'
+                         u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>TEXTE MASQUÉ | RGPD</span></a>'
                          u', en qualité d’instituteur maternel temporaire mi-temps en remplacement de '
-                         u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>[Texte masqué RGPD]</span></a>'
+                         u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>TEXTE MASQUÉ | RGPD</span></a>'
                          u' aux écoles communales fondamentales.</p>'
                          )
         set_registry_record("plonemeeting.portal.core.rgpd_masked_text_redirect_path", "/toto")
         self.assertEqual(filter(self.richtext),
                          u'<p><strong>Article 1er</strong> :</p>'
                          u'<p>Au scrutin secret et à l’unanimité, de désigner '
-                         u'<a class="pm-anonymize" href="http://nohost/plone/toto"><span>[Texte masqué RGPD]</span></a>'
+                         u'<a class="pm-anonymize" href="http://nohost/plone/toto"><span>TEXTE MASQUÉ | RGPD</span></a>'
                          u', en qualité d’instituteur maternel temporaire mi-temps en remplacement de '
-                         u'<a class="pm-anonymize" href="http://nohost/plone/toto"><span>[Texte masqué RGPD]</span></a>'
+                         u'<a class="pm-anonymize" href="http://nohost/plone/toto"><span>TEXTE MASQUÉ | RGPD</span></a>'
                          u' aux écoles communales fondamentales.</p>'
                          )
         self.institution.url_rgpd = "https://www.imio.be/imio-et-vous/rgpd"
@@ -40,10 +40,10 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
                          u'<p><strong>Article 1er</strong> :</p>'
                          u'<p>Au scrutin secret et à l’unanimité, de désigner '
                          u'<a class="pm-anonymize" href="https://www.imio.be/imio-et-vous/rgpd">'
-                         u'<span>[Texte masqué RGPD]</span></a>, '
+                         u'<span>TEXTE MASQUÉ | RGPD</span></a>, '
                          u'en qualité d’instituteur maternel temporaire mi-temps en remplacement de '
                          u'<a class="pm-anonymize" href="https://www.imio.be/imio-et-vous/rgpd">'
-                         u'<span>[Texte masqué RGPD]</span></a> aux écoles communales fondamentales.</p>'
+                         u'<span>TEXTE MASQUÉ | RGPD</span></a> aux écoles communales fondamentales.</p>'
                          )
         set_registry_record("plonemeeting.portal.core.rgpd_masked_text_placeholder", "XXXXXXX")
         self.assertEqual(filter(self.richtext),
@@ -71,9 +71,9 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
                                            outputMimeType=u"text/x-html-safe",
                                            encoding='utf-8')
         result = u'<p><strong>Article 1er</strong> :</p><p>Au scrutin secret et à l’unanimité, de désigner ' \
-                 u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>[Texte masqué RGPD]</span></a>, ' \
+                 u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>TEXTE MASQUÉ | RGPD</span></a>, ' \
                  u'en qualité d’instituteur maternel temporaire mi-temps en remplacement de ' \
-                 u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>[Texte masqué RGPD]</span></a> ' \
+                 u'<a class="pm-anonymize" href="http://nohost/plone#rgpd"><span>TEXTE MASQUÉ | RGPD</span></a> ' \
                  u'aux écoles communales fondamentales.</p>'
         self.assertEqual(self.item.decision.output_relative_to(self.item), result)
         self.assertTrue(result in self.item())
