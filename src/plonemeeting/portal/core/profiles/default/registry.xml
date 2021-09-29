@@ -21,7 +21,7 @@
     <field type="plone.registry.field.TextLine">
       <title i18n:translate="">Internal redirect path for GDPR masked text links from site root</title>
     </field>
-    <value purge="false">#rgpd</value>
+    <value purge="false">/faq/rgpd</value>
   </record>
   <record name="plonemeeting.portal.core.rgpd_masked_text_placeholder">
     <field type="plone.registry.field.TextLine">

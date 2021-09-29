@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+1.4.4 (unreleased)
+------------------
+
+- Update default rgpd_masked_text_redirect_path because anchor doesn't work as expected.
+  [odelaere]
+
+
 1.4.3 (2021-09-29)
 ------------------
 
