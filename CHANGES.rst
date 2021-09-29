@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.3 (unreleased)
+1.4.3 (2021-09-29)
 ------------------
 
 - Added output filter for anonymized content.
