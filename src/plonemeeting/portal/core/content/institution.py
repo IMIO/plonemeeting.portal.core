@@ -139,7 +139,8 @@ class IInstitution(model.Schema):
         description=_(u"meeting_filter_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
-        default=[{'parameter': 'review_state', 'value': 'frozen'},
+        default=[{'parameter': 'review_state', 'value': 'created'},
+                 {'parameter': 'review_state', 'value': 'frozen'},
                  {'parameter': 'review_state', 'value': 'decided'}]
     )
 
