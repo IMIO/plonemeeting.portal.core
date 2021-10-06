@@ -13,30 +13,22 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [ 3.8 ]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          pip install -U pip setuptools --no-cache-dir
-          pip install --force-reinstall -U coveralls
-          pip install -r requirements.txt -c constraints_plone52.txt
       - name: Cache eggs
         uses: actions/cache@v2
         env:
           cache-name: cache-eggs
         with:
           path: ./buildout-cache/eggs
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-      - name: buildout
+      - name: Builbout action
+        uses: IMIO/plonemeeting.portal.core/@vtest5
+      - name: install coverage
         run: |
-          buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+          pip install -U coverage coveralls
       - name: Test
         run: |
           coverage run bin/test

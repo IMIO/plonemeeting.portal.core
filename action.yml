@@ -18,8 +18,8 @@ runs:
         python-version: ${{ inputs.py-version }}
     - name: Install dependencies
       run: |
-        pip install -U pip setuptools --no-cache-dir
-        pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
+        pip install -U pip setuptools coveralls coverage
+        pip install -r requirements.txt -c constraints_plone52.txt
         pre-commit install
       shell: bash
     - name: buildout
