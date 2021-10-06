@@ -1,0 +1,34 @@
+name: 'Buildout'
+description: 'Buildout usin a given python version'
+inputs:
+  py-version:
+    description: 'python version'
+    required: true
+    default: 3.8
+#outputs:
+#  random-number:
+#    description: "Random number"
+#    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python ${{ inputs.py-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ inputs.py-version }}
+    - name: Install dependencies
+      run: |
+        pip install -U pip setuptools --no-cache-dir
+        pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
+        pre-commit install
+    - name: Cache eggs
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-eggs
+      with:
+        path: ./buildout-cache/eggs
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
+        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+    - name: buildout
+      run: |
+        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
