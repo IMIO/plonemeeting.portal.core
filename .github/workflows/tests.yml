@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Buibout action
-        uses: buildout@test_action
+      - name: Builbout action
+        uses: IMIO/plonemeeting.portal.core/@vtest1
         with:
           py-version: ${{ matrix.python-version }}
       - name: code analysis
