@@ -5,6 +5,7 @@ name: Test package
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -12,12 +13,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.8, 3.9, '3.10']
+        python-version: [3.8, 3.9]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Buibout action
-        uses: buildout@test_action
+      - name: Cache eggs
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-eggs
+        with:
+          path: ./buildout-cache/eggs
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+      - name: Builbout action
+        uses: IMIO/plonemeeting.portal.core/@vtest5
         with:
           py-version: ${{ matrix.python-version }}
       - name: code analysis
