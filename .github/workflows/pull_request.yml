@@ -25,7 +25,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: Buildout action
-      uses: IMIO/plonemeeting.portal.core/@vtest6
+      uses: IMIO/plonemeeting.portal.core/@master
       with:
         py-version: ${{ matrix.python-version }}
     - name: code analysis
@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/@vtest6
+        uses: IMIO/plonemeeting.portal.core/@master
         with:
           py-version: ${{ matrix.python-version }}
       - name: Test
