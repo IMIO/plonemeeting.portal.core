@@ -25,8 +25,8 @@ jobs:
           path: ./buildout-cache/eggs
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-      - name: Builbout action
-        uses: IMIO/plonemeeting.portal.core/@vtest5
+      - name: Buildout action
+        uses: IMIO/plonemeeting.portal.core/@vtest6
         with:
           py-version: ${{ matrix.python-version }}
       - name: code analysis
