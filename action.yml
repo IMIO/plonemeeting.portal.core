@@ -21,6 +21,7 @@ runs:
         pip install -U pip setuptools --no-cache-dir
         pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
         pre-commit install
+      shell: bash
     - name: Cache eggs
       uses: actions/cache@v2
       env:
@@ -32,3 +33,4 @@ runs:
     - name: buildout
       run: |
         buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+      shell: bash
