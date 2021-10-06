@@ -4,7 +4,7 @@ inputs:
   py-version:
     description: 'python version'
     required: true
-    default: 3.8
+    default: '3.8'
 #outputs:
 #  random-number:
 #    description: "Random number"
@@ -21,14 +21,8 @@ runs:
         pip install -U pip setuptools --no-cache-dir
         pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
         pre-commit install
-    - name: Cache eggs
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-eggs
-      with:
-        path: ./buildout-cache/eggs
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+      shell: bash
     - name: buildout
       run: |
         buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+      shell: bash
