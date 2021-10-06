@@ -25,18 +25,10 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/@master
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
         with:
           py-version: ${{ matrix.python-version }}
-      - name: Test
-        run: |
-          coverage run bin/test
-        continue-on-error: true
-      - name: Report
-        run: |
-          coverage report
-      - name: Publish to Coveralls
-        env:
+      - name: Coverage action
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          coveralls --service=github

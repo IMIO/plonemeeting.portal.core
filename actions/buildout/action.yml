@@ -1,14 +1,10 @@
 name: 'Buildout'
-description: 'Buildout usin a given python version'
+description: 'Buildout using a given python version'
 inputs:
   py-version:
     description: 'python version'
     required: true
     default: '3.8'
-#outputs:
-#  random-number:
-#    description: "Random number"
-#    value: ${{ steps.random-number-generator.outputs.random-id }}
 runs:
   using: "composite"
   steps:

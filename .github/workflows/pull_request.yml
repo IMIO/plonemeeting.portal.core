@@ -25,7 +25,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: Buildout action
-      uses: IMIO/plonemeeting.portal.core/@master
+      uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
       with:
         py-version: ${{ matrix.python-version }}
     - name: code analysis
@@ -53,25 +53,16 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/@master
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
         with:
           py-version: ${{ matrix.python-version }}
-      - name: Test
-        run: |
-          coverage run bin/test
-        continue-on-error: true
-      - name: Report
-        run: |
-          coverage report
-          coverage xml
+      - name: Coverage action
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cobertura
         uses: 5monkeys/cobertura-action@v9
         with:
           path: coverage.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           minimum_coverage: 90
-      - name: Publish to Coveralls
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          coveralls --service=github
