@@ -38,6 +38,7 @@ def _call_delib_rest_api(url, institution):  # pragma: no cover
     )
 
     if response.status_code != 200:
+        logger.error("Response status_code was not 200 : " + response.status_code)
         raise ValueError(_(u"Web service connection error !"))
     msg, seconds = end_time(start_time, "REST API CALL MADE IN ", True)
     if seconds > 1:
