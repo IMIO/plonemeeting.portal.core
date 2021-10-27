@@ -139,7 +139,8 @@ class IInstitution(model.Schema):
         description=_(u"meeting_filter_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
-        default=[{'parameter': 'review_state', 'value': 'frozen'},
+        default=[{'parameter': 'review_state', 'value': 'created'},
+                 {'parameter': 'review_state', 'value': 'frozen'},
                  {'parameter': 'review_state', 'value': 'decided'}]
     )
 
@@ -172,6 +173,12 @@ class IInstitution(model.Schema):
             "item_additional_data_formatting_tal",
             "info_annex_formatting_tal",
         ],
+    )
+
+    url_rgpd = schema.TextLine(
+        title=_(u"Custom page for GDPR text"),
+        description=_(u"The url visitors should be redirected to when clicking a GDPR masked text"),
+        required=False
     )
 
     project_decision_disclaimer = RichText(
@@ -337,12 +344,13 @@ def representatives_mappings_invariant(data):
     changes = {}
     for rpz in new_representatives:
         changes[rpz['representative_key']] = rpz['representative_value']
-    for rpz in data.__context__.representatives_mappings:
-        rpz_uid = rpz['representative_key']
-        if rpz_uid not in changes and rpz_uid not in missing_uids:
-            brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
-            if brains:
-                missing_uids[rpz_uid] = rpz['representative_value']
+    if data.__context__:
+        for rpz in data.__context__.representatives_mappings:
+            rpz_uid = rpz['representative_key']
+            if rpz_uid not in changes and rpz_uid not in missing_uids:
+                brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
+                if brains:
+                    missing_uids[rpz_uid] = rpz['representative_value']
     if missing_uids:
         raise Invalid(_("Representatives mappings - Removing representatives linked to "
                         "items is not allowed : ${representatives}",

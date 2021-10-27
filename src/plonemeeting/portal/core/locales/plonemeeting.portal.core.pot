@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-09-06 10:29+0000\n"
+"POT-Creation-Date: 2021-09-28 10:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,10 @@ msgstr ""
 msgid "Annexes"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Anonymised text tag from ia.Delib to be replaced"
+msgstr ""
+
 #: ../browser/templates/item.pt:75
 #: ../faceted/macros.pt:88
 msgid "Attention"
@@ -38,11 +42,11 @@ msgstr ""
 msgid "Can manage institution"
 msgstr ""
 
-#: ../content/institution.py:226
+#: ../content/institution.py:232
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:328
+#: ../content/institution.py:334
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -66,11 +70,15 @@ msgstr ""
 msgid "Custom info"
 msgstr ""
 
+#: ../content/institution.py:178
+msgid "Custom page for GDPR text"
+msgstr ""
+
 #: ../content/item.py:58
 msgid "Decision"
 msgstr ""
 
-#: ../configure.zcml:43
+#: ../configure.zcml:44
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -92,11 +100,11 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../content/institution.py:293
+#: ../content/institution.py:299
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:301
+#: ../content/institution.py:307
 msgid "Footer text color"
 msgstr ""
 
@@ -125,7 +133,7 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
-#: ../content/institution.py:261
+#: ../content/institution.py:267
 msgid "Header color"
 msgstr ""
 
@@ -141,16 +149,20 @@ msgstr ""
 msgid "Import meeting"
 msgstr ""
 
-#: ../content/institution.py:204
+#: ../content/institution.py:210
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:34
+#: ../configure.zcml:35
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../profiles/default/types/Institution.xml
 msgid "Institution"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Internal redirect path for GDPR masked text links from site root"
 msgstr ""
 
 #: ../content/institution.py:42
@@ -165,11 +177,11 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: ../content/institution.py:200
+#: ../content/institution.py:206
 msgid "Item additional data formatting tal expression"
 msgstr ""
 
-#: ../content/institution.py:194
+#: ../content/institution.py:200
 msgid "Item decision formatting tal expression"
 msgstr ""
 
@@ -179,7 +191,7 @@ msgstr ""
 msgid "Item number"
 msgstr ""
 
-#: ../content/institution.py:186
+#: ../content/institution.py:192
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
@@ -193,7 +205,7 @@ msgstr ""
 msgid "Last modification in iA.Delib"
 msgstr ""
 
-#: ../content/institution.py:285
+#: ../content/institution.py:291
 msgid "Links text color"
 msgstr ""
 
@@ -201,11 +213,11 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:257
+#: ../content/institution.py:263
 msgid "Logo"
 msgstr ""
 
-#: ../content/institution.py:210
+#: ../content/institution.py:216
 msgid "Mapping"
 msgstr ""
 
@@ -230,11 +242,11 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
-#: ../content/institution.py:269
+#: ../content/institution.py:275
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:277
+#: ../content/institution.py:283
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -254,11 +266,15 @@ msgstr ""
 msgid "Passwords must be at least 8 characters in length."
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Placeholder for GDPR masked text links from site root"
+msgstr ""
+
 #: ../content/institution.py:128
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../content/institution.py:178
+#: ../content/institution.py:184
 msgid "Project decision disclaimer"
 msgstr ""
 
@@ -300,11 +316,11 @@ msgstr ""
 msgid "Representative value"
 msgstr ""
 
-#: ../content/institution.py:234
+#: ../content/institution.py:240
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:347
+#: ../content/institution.py:354
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
@@ -316,8 +332,12 @@ msgstr ""
 msgid "Sortable Item number"
 msgstr ""
 
-#: ../content/institution.py:245
+#: ../content/institution.py:251
 msgid "Styling"
+msgstr ""
+
+#: ../content/institution.py:179
+msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
 #: ../content/item.py:32
@@ -329,7 +349,7 @@ msgstr ""
 msgid "Unexpected meeting count in web service response !"
 msgstr ""
 
-#: ../configure.zcml:52
+#: ../configure.zcml:53
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -360,7 +380,7 @@ msgstr ""
 msgid "Web service connection error !"
 msgstr ""
 
-#: ../content/institution.py:402
+#: ../content/institution.py:409
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -368,7 +388,7 @@ msgstr ""
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr ""
 
-#: ../content/institution.py:227
+#: ../content/institution.py:233
 msgid "categories_mappings_description"
 msgstr ""
 
@@ -384,11 +404,11 @@ msgstr ""
 msgid "decision"
 msgstr ""
 
-#: ../content/institution.py:181
+#: ../content/institution.py:187
 msgid "default_in_project_disclaimer"
 msgstr ""
 
-#: ../content/institution.py:218
+#: ../content/institution.py:224
 msgid "iA.Delib field to use for category mapping"
 msgstr ""
 
@@ -413,15 +433,15 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:34
+#: ../configure.zcml:35
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:43
+#: ../configure.zcml:44
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:52
+#: ../configure.zcml:53
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
@@ -437,6 +457,6 @@ msgstr ""
 msgid "representative_value_description"
 msgstr ""
 
-#: ../content/institution.py:235
+#: ../content/institution.py:241
 msgid "representatives_mappings_description"
 msgstr ""

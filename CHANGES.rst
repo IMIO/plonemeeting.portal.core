@@ -2,10 +2,42 @@ Changelog
 =========
 
 
-1.4.1 (unreleased)
+1.4.5 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.4.4 (2021-09-30)
+------------------
+
+- Update default rgpd_masked_text_redirect_path because anchor doesn't work as expected.
+  [odelaere]
+
+
+1.4.3 (2021-09-29)
+------------------
+
+- Added output filter for anonymized content.
+  [odelaere]
+
+
+1.4.2 (2021-09-28)
+------------------
+
+- Fix invariant while adding new Institution.
+  [odelaere]
+
+
+1.4.1 (2021-09-23)
+------------------
+
+- Don't show unpublished faq on homepage.
+  [aduchene]
+- Highlight region on Leaflet map.
+  [aduchene]
+- Use JsonMinimizerPlugin to minimize .json file
+  [aduchene]
 
 
 1.4.0 (2021-09-21)

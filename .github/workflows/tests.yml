@@ -5,6 +5,7 @@ name: Test package
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -13,33 +14,24 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [3.8, 3.9]
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install -U pip setuptools --no-cache-dir
-        pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
-        pre-commit install
-    - name: Cache eggs
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-eggs
-      with:
-        path: ./buildout-cache/eggs
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-    - name: buildout
-      run: |
-        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
-    - name: code analysis
-      run: |
-        pre-commit run --all-files
-    - name: Test
-      run: |
-        bin/test
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache eggs
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-eggs
+        with:
+          path: ./buildout-cache/eggs
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+      - name: Buildout action
+        uses: IMIO/plonemeeting.portal.core/actions/buildout@master
+        with:
+          py-version: ${{ matrix.python-version }}
+      - name: code analysis
+        run: |
+          pre-commit run --all-files
+      - name: Test
+        run: |
+          bin/test

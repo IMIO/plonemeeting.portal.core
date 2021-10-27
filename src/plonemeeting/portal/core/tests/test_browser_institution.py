@@ -87,7 +87,8 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                 self.__context__ = institution
                 self.categories_mappings = deepcopy(categories_mappings)
                 self.representatives_mappings = deepcopy(representatives_mappings)
-
+        data = mock(None, self.belleville.categories_mappings, self.belleville.representatives_mappings)
+        representatives_mappings_invariant(data)
         data = mock(self.belleville, self.belleville.categories_mappings, self.belleville.representatives_mappings)
         representatives_mappings_invariant(data)
         data.representatives_mappings[0]['active'] = False

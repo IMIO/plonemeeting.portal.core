@@ -102,7 +102,7 @@
                      i18n:translate="">Hide meeting infos</a>
                   <div id="meeting-custom-info-content-toggle"
                        tal:attributes="style python: hidden and 'display: none' or ''"
-                       tal:content="structure meeting/custom_info/output" />
+                       tal:content="structure python:meeting.custom_info.output_relative_to(meeting)" />
                 </div>
               </div>
             </div>

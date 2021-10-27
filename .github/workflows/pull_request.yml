@@ -13,19 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [3.8]
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install -U pip setuptools --no-cache-dir
-        pip install -r requirements.txt -c constraints_plone52.txt --no-cache-dir
-        pre-commit install
     - name: Cache eggs
       uses: actions/cache@v2
       env:
@@ -34,9 +24,10 @@ jobs:
         path: ./buildout-cache/eggs
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-    - name: buildout
-      run: |
-        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+    - name: Buildout action
+      uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
+      with:
+        py-version: ${{ matrix.python-version }}
     - name: code analysis
       run: |
         pre-commit run --all-files
@@ -50,46 +41,28 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [ 3.8 ]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          pip install -U pip setuptools --no-cache-dir
-          pip install --force-reinstall -U coveralls
-          pip install -r requirements.txt -c constraints_plone52.txt
       - name: Cache eggs
         uses: actions/cache@v2
         env:
           cache-name: cache-eggs
         with:
           path: ./buildout-cache/eggs
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-      - name: buildout
-        run: |
-          buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
-      - name: Test
-        run: |
-          coverage run bin/test
-        continue-on-error: true
-      - name: Report
-        run: |
-          coverage report
-          coverage xml
+      - name: Buildout action
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
+        with:
+          py-version: ${{ matrix.python-version }}
+      - name: Coverage action
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cobertura
         uses: 5monkeys/cobertura-action@v9
         with:
           path: coverage.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           minimum_coverage: 90
-      - name: Publish to Coveralls
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          coveralls -v --service=github

@@ -559,5 +559,32 @@
         }
       ]
     }
+  ],
+  "faqs": [
+    {
+      "id":  "quest-ce-quun-conseil-communal",
+      "title": "Qu'est ce qu'un Conseil communal ?",
+      "text": "<p>Le Conseil communal est l'<strong>organe législatif</strong> de la commune, il constitue, comme le Collège communal et le bourgmestre, un organe représentatif de toute la population de la commune.</p>\n<p>Sauf exceptions, le Conseil communal se réunit, sur convocation du Collège communal, chaque fois que les affaires comprises dans ses attributions le nécessitent, et au moins dix fois par an.</p>\n<p>Le conseil communal concentre les attributions les plus larges, il règle tout ce qui n’est pas spécifiquement attribué à un autre organe de la commune (par exemple : le vote du budget  et du compte ; des taxes et redevances, le vote des règlements ; la décision de participer à une intercommunale ; les décisions patrimoniales, ...).</p>\n<p><strong>Pour plus d'informations, nous vous proposons de consulter le site de l’UVCW (Voir Focus sur la commune <a href=\"https://www.uvcw.be/focus\" data-linktype=\"external\" data-val=\"https://www.uvcw.be/focus\">https://www.uvcw.be/focus</a> et la commune expliquée aux candidats et aux nouveaux élus <a href=\"https://www.uvcw.be/publications/63\" data-linktype=\"external\" data-val=\"https://www.uvcw.be/publications/63\">https://www.uvcw.be/publications/63</a>).</strong></p>"
+    },
+    {
+      "id":  "quelle-est-lorigine-de-la-plateforme",
+      "title": "Quelle est l'origine de la plateforme ?",
+      "text": "<p>La plateforme a été conçue par iMio à la demande des Pouvoirs locaux afin de publier en toute transparence les décisions de leurs Conseils communaux.</p>\n<p>L'intercommunale <a href=\"https://www.imio.be\" title=\"Présentation iMio\" rel=\"noopener\" target=\"_blank\" data-linktype=\"external\" data-val=\"https://www.imio.be\">iMio</a>, exclusivement constituée de Pouvoirs locaux wallons, les accompagne dans la digitalisation de leur administration à l’aide de <a href=\"https://www.gnu.org/philosophy/free-sw.fr.html\" rel=\"noopener\" target=\"_blank\" data-linktype=\"external\" data-val=\"https://www.gnu.org/philosophy/free-sw.fr.html\">logiciels libres</a> selon une dynamique de co-création.</p>\n<p>La <a href=\"https://github.com/IMIO\" title=\"Code source iMio\" rel=\"noopener\" target=\"_blank\">mutualisation de ce patrimoine</a> est basée sur les valeurs suivantes :</p>\n<ul>\n<li>Intégrité et éthique</li>\n<li>Ouverture et transparence</li>\n<li>Maîtrise et indépendance</li>\n<li>Innovation</li>\n<li>Efficacité et qualité.</li>\n</ul>\n<p>Un des objectifs des Pouvoirs locaux wallons par l’entremise d’iMio est d’améliorer leur fonctionnement interne et d’assurer une communication efficace et transparente vers le citoyen.  Afin de les aider dans cette démarche, iMio développe notamment un outil de gestion des délibérations, <a href=\"https://www.imio.be/nos-applications/ia-delib\" title=\"iA.Délib - la dématérialisation des processus délibérants\" rel=\"noopener\" target=\"_blank\" data-linktype=\"external\" data-val=\"https://www.imio.be/nos-applications/ia-delib\">iA.Délib</a>. Cette application digitalise le processus décisionnel des administrations publiques tout en préservant l’intégrité de la pyramide institutionnelle et la complétude du processus démocratique du collège et du conseil communal.</p>"
+    },
+    {
+      "id":  "comment-ca-marche",
+      "title": "Comment ça marche ?",
+      "text": "<p>Les décisions sont accessibles via l'onglet de navigation “<strong>Séances</strong>”.</p>\n<p>Cet onglet présente les séances disponibles et affiche par défaut la plus récente. Chaque séance comporte une série d'informations (vidéos,...) ainsi que la liste des points inscrits. </p>\n<p>Les séances peuvent avoir deux statuts:</p>\n<ul>\n<li><strong>\"En projet\"</strong> signifie que la séance n’a pas encore eu lieu. Le texte des décisions correspond à une proposition de décision.</li>\n<li><strong>\"Décision\" </strong>signifie que la séance a eu lieu. Le texte des décisions correspond à la décision finale.</li>\n</ul>\n<p>Le filtre \"<strong>Date de la séance</strong>\" permet de sélectionner une des séances publiées mais également de sélectionner une valeur \"<strong>Tous</strong>\" qui affichera toutes les décisions publiées et permettra également de faire des recherches sur tous les éléments disponibles.  Il est possible de filtrer le résultat par \"<strong>Matière</strong>\", \"<strong>Mandataire\"</strong> et \"<strong>Année\"</strong>.</p>"
+    },
+    {
+      "id":  "quels-sont-les-objectifs-de-ce-site",
+      "title": "Quels sont les objectifs de ce site ?",
+      "text": "<ul>\n<li><strong>Faciliter l'accès aux décisions</strong> émanant du Conseil communal à tout un chacun.</li>\n<li>Permettre la consultation des <strong>projets de décisions</strong> (avant la tenue du Conseil communal) et des décisions (après la tenue du Conseil communal) inscrits à l'ordre du jour des séances publiques. </li>\n</ul>"
+    },
+    {
+      "id":  "rgpd",
+      "title": "Pourquoi certaines portions de texte sont-elles masquées ?",
+      "text": "<p>Les Pouvoirs locaux sont parfois amenés à masquer certaines portions de texte dans les décisions afin de respecter la vie privée des personnes concernées. Ceci entre dans le cadre du Règlement Général sur la Protection des Données (RGPD). Plus d'infos sur le RGPD et ses implications pour les Pouvoirs locaux ici : <a class=\"theme markdown__link\" href=\"https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux\" rel=\"noopener noreferrer\" target=\"_blank\" data-linktype=\"external\" data-val=\"https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux\"><span>https://www.wallonie.be/fr/demarches/sinformer-sur-les-impacts-du-rgpd-au-niveau-des-pouvoirs-locaux</span></a></p>"
+    }
   ]
 }

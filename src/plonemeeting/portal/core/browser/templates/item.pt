@@ -10,7 +10,7 @@
 <metal:text fill-slot="content-title">
     <tal:text-macro metal:define-macro="content-title">
       <h1>
-          <span tal:content="structure context/formatted_title/output" />
+          <span tal:content="structure python:context.formatted_title.output_relative_to(context)" />
       </h1>
     </tal:text-macro>
 </metal:text>
@@ -37,7 +37,7 @@
           </div>
           <div class="additional-data"
              tal:condition="context/additional_data">
-             <span tal:content="structure context/additional_data/output" />
+             <span tal:content="structure python:context.additional_data.output_relative_to(context)" />
           </div>
         </div>
 
@@ -78,13 +78,13 @@
         <div class="custom-info"
              tal:condition="context/custom_info">
              <span i18n:translate="">Custom info</span>
-             <span tal:content="structure context/custom_info/output" />
+             <span tal:content="structure python:context.custom_info.output_relative_to(context)" />
         </div>
 
         <div class="decision"
              tal:condition="context/decision"
              i18n:domain="plone">
-            <span tal:content="structure context/decision/output" />
+            <span tal:content="structure python:context.decision.output_relative_to(context)" />
         </div>
 
         <div class="annexes"
