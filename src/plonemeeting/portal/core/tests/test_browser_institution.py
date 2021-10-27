@@ -44,7 +44,8 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                               'personnel': 'Personnel',
                               'population': 'Population / État-civil',
                               'locations': 'Locations',
-                              'divers': 'Divers'},
+                              'divers': 'Divers',
+                              'finances': 'Finances'},
                              self.belleville.delib_categories)
 
         delattr(self.belleville, "delib_categories")
