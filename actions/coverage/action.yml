@@ -14,6 +14,7 @@ runs:
     - name: Report
       run: |
         coverage report
+        coverage xml
       shell: bash
     - name: Publish to Coveralls
       run: |
