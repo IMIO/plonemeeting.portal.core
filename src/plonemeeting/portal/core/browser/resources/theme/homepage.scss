@@ -8,16 +8,16 @@
 .template-homepage_view header#content-header {
   background: transparent;
   margin-bottom: 10em;
+  position: relative;
 }
 
 .template-homepage_view header#content-header:before {
   position: absolute;
-  top: -60px;
   content: " ";
   opacity: 0.2;
-  background: url("../assets/homepage-background.jpg") center center / cover no-repeat !important;
+  background: url("../assets/homepage-background.jpg") center -250px / cover no-repeat !important;
   background-size: cover;
-  height: 500px;
+  height: 250px;
   width: 100%;
   z-index: -10;
 }

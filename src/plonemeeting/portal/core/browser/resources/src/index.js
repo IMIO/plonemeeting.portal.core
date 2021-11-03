@@ -1,8 +1,10 @@
+import "preact/debug";
+
 import $ from "jquery";
 import register from "preact-custom-element";
 
 import InstitutionSelect from "./components/InstitutionSelect";
-import Index from "./components/InstitutionsMap/InstitutionsMap";
+import Index from "./components/InstitutionsMap/Map";
 import MasonryColumns from "./components/MasonryColumns";
 
 import "../theme/main.scss";

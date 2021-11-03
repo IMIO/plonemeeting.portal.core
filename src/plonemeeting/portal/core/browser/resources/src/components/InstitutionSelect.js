@@ -1,12 +1,12 @@
-import { Fragment, h, render } from "preact";
+import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
-import loadable from '@loadable/component'
+import loadable from "@loadable/component";
 import RightArrowSVG from "../../assets/arrow-right.svg";
 
-const Select = loadable(() => import('react-select'))
+const Select = loadable(() => import("react-select"));
 
 const InstitutionSelect = (props) => {
-  const [selected, setSelected] = useState({});
+    const [selected, setSelected] = useState({});
 
     const institutions = JSON.parse(props["data-institutions"]);
 
@@ -16,22 +16,25 @@ const InstitutionSelect = (props) => {
     const options = Object.keys(institutions).map((key) => {
         return { value: key, label: institutions[key].title };
     });
+
+    const applyCustomTheme = (theme) => ({
+        ...theme,
+        colors: {
+            ...theme.colors,
+            primary75: "#f1f1f1",
+            primary50: "#DE007B21",
+            primary25: "#f1f1f1",
+            primary: "#DE007B",
+        },
+    });
+
     return (
         <Fragment>
             <div className="institution-select-input">
                 <Select
                     isSearchable
                     options={options}
-                    theme={(theme) => ({
-                        ...theme,
-                        colors: {
-                            ...theme.colors,
-                            primary75: "#f1f1f1",
-                            primary50: "#DE007B21",
-                            primary25: "#f1f1f1",
-                            primary: "#DE007B",
-                        },
-                    })}
+                    theme={applyCustomTheme}
                     onChange={handleChange}
                     placeholder={"Sélectionner une ville/commune"}
                     noOptionsMessage={() => <span>Aucun résulat</span>}

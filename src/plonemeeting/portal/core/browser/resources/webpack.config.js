@@ -38,10 +38,7 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(js|mjs|jsx|ts|tsx)$/,
                     use: {
-                        loader: "babel-loader",
-                        options: {
-                            presets: ["@babel/preset-env"],
-                        },
+                        loader: "swc-loader",
                     },
                 },
                 {

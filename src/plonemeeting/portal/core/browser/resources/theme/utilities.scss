@@ -1,10 +1,26 @@
+@include media-breakpoint-up(md) {
+  .plone-toolbar-left {
+    // Width of the toolbar is 60px
+    .full-width {
+      width: calc(100vw - 60px);
+      margin-left: calc(-50vw + 30px);
+    }
+  }
+
+  .plone-toolbar-left-expanded {
+    // Width of the toolbar is 120px
+    .full-width {
+      width: calc(100vw - 120px);
+      margin-left: calc(-50vw + 60px);
+    }
+  }
+}
+
 .full-width {
   width: 100vw;
   position: relative;
   left: 50%;
-  right: 50%;
   margin-left: -50vw;
-  margin-right: -50vw;
 }
 
 .v-hidden {

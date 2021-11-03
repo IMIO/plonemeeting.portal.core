@@ -15,7 +15,7 @@ const defaultOptions = {
  * Leaflet component that will mask around the geoJSON passed in data props
  * You can pass L.Polygon props (see defaultOptions above) to tweak the mask rendering
  */
-export function Mask(props) {
+const Mask = (props) => {
     const context = useLeafletContext();
     const { data, ...rest } = props;
     const options = {
@@ -45,4 +45,6 @@ export function Mask(props) {
         };
     });
     return null;
-}
+};
+
+export default Mask;
