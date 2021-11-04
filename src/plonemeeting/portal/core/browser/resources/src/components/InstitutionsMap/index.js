@@ -1,1 +1,2 @@
-export default
+import loadable from "@loadable/component";
+export default loadable(() => import("./Map"));

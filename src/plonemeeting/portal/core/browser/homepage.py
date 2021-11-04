@@ -39,6 +39,7 @@ class HomepageView(BrowserView):
             if brain.id not in DEMO_INSTITUTION_IDS:
                 institution = brain.getObject()
                 institutions[brain.id] = {
+                    "id": brain.id,
                     "title": institution.Title(),
                     "URL": institution.absolute_url(),
                 }
@@ -122,7 +123,8 @@ class InstitutionLocationsView(BrowserView):
             if record["fields"]["mun_name_fr"] in institutions_by_titles.keys():
                 institution = institutions_by_titles[record["fields"]["mun_name_fr"]]
                 institution_locations[institution.getId()] = {
-                    "id": record["fields"]["mun_name_fr"],
+                    "id": institution.getId(),
+                    "title": record["fields"]["mun_name_fr"],
                     "URL": institution.absolute_url(),
                     "state": api.content.get_state(institution),
                     "data": record

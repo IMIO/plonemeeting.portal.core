@@ -15,9 +15,9 @@
   position: absolute;
   content: " ";
   opacity: 0.2;
-  background: url("../assets/homepage-background.jpg") center -250px / cover no-repeat !important;
+  background: url("../assets/homepage-background.jpg") center center / cover no-repeat !important;
   background-size: cover;
-  height: 250px;
+  height: 300px;
   width: 100%;
   z-index: -10;
 }
@@ -57,12 +57,12 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-
+  max-width: 500px;
+  margin: auto;
   .institution-select-input {
     position: relative;
     z-index: 50;
     flex: 1;
-
     div {
       border-width: 0 !important;
     }

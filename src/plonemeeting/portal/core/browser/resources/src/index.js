@@ -3,14 +3,12 @@ import "preact/debug";
 import $ from "jquery";
 import register from "preact-custom-element";
 
-import InstitutionSelect from "./components/InstitutionSelect";
-import Index from "./components/InstitutionsMap/Map";
+import InstitutionsSections from "./components/InstitutionsSection";
 import MasonryColumns from "./components/MasonryColumns";
 
 import "../theme/main.scss";
 
-register(InstitutionSelect, "x-institution-select", ["data-institutions"]);
-register(Index, "x-institutions-map", []);
+register(InstitutionsSections, "x-institutions-sections", ["data-institutions"]);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
 
 function setUpEnvironmentLabel() {

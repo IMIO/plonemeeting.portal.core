@@ -3,19 +3,12 @@
   border: 1px solid $grey-100;
   box-shadow: $shadow;
   border-radius: $rounded-md;
-  padding: 0.5em 0.75em !important;
+  padding: 0.25em 0.75em !important;
   margin: 0.5em 0.75em !important;
-  left: 0.75em;
-  bottom: 0.75em;
+  left: 0.75em !important;
+  bottom: 0.5em !important;
 }
 
-
-.leaflet-legend {
- em {
-   font-size: 1.2em;
-   color: $delib-primary;
- }
-}
 
 .leaflet-legend-items {
   list-style: none;
@@ -25,6 +18,7 @@
     display: flex;
     align-items: center;
     margin: 0.5em 0;
+    color: $grey-700;
   }
 }
 
@@ -32,16 +26,16 @@
   width: 15px;
   height: 15px;
   display: block;
-  border-radius: 2px;
+  border-radius: 3px;
   margin: 0 1em 0 0em;
 
-  &.square-inprogress{
+  &.square-private{
     border: 2px solid #808080;
     background-color: lighten(#808080, 40);
   }
     &.square-published{
     border: 2px solid #DE007B;
-    background-color: lighten(#DE007B, 40);
+    background-color: lighten(#DE007B, 50);
   }
 }
 
@@ -71,6 +65,14 @@
       font-size: 1.25em;
     }
   }
+
+  .leaflet-container a {
+    color: $delib-primary;
+
+    &:hover {
+          color: $delib-primary;
+    }
+}
 
   .leaflet-touch .leaflet-bar {
     box-shadow: $shadow;

@@ -10,41 +10,8 @@
 >
   <tal:defines define="institutions view/get_json_institutions;
                        faq_items view/get_faq_items;">
-    <section class="hero-primary full-width">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="hero-img-wrapper">
-            <img src="++plone++plonemeeting.portal.core/assets/delibe.svg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="hero-content">
-            <h1>
-              Je cherche les décisions prises à...
-            </h1>
 
-            <x-institution-select
-              class="institution-select"
-               tal:attributes="data-institutions institutions"
-            >
-            </x-institution-select>
-          </div>
-
-        </div>
-
-        <div class="col-xl-3"></div>
-
-      </div>
-    </section>
-
-    <section class="institutions-map-section full-width">
-      <h2 class="text-primary">Couverture géographique
-        <img src="++plone++plonemeeting.portal.core/assets/marker-zone.svg" alt="Map icon">
-      </h2>
-      <x-institutions-map class="institutions-map"/>
-    </section>
-
-
+    <x-institutions-sections tal:attributes="data-institutions institutions"/>
     <section class="faq-section">
       <h2 class="text-primary">Foire aux questions
         <img src="++plone++plonemeeting.portal.core/assets/help-outline.svg" alt="Help icon">

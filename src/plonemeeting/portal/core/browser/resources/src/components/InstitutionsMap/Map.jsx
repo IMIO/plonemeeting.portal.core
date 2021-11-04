@@ -1,14 +1,15 @@
-import { createContext, h } from "preact";
-import { useEffect, useState, useCallback } from "preact/hooks";
+import { Fragment, h } from "preact";
+import { useMemo } from "preact/compat";
+import { useEffect, useState } from "preact/hooks";
 
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
 import { get_portal_url, get_bundle_url } from "../../utils";
+import InstitutionsLayer from "./InstitutionsLayer";
 import Legend from "./Legend";
 import Mask from "./Mask";
-import InstitutionLocation from "./InstitutionLocation";
-import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, LayerGroup, LayersControl } from "react-leaflet";
 
 /**
  * Display a Leaflet Map with institutions locations
@@ -17,9 +18,26 @@ const InstitutionsMap = () => {
     const [institutionLocations, setInstitutionLocations] = useState();
     const [regionBoundaries, setRegionBoundaries] = useState();
 
-    const defaultZoom = window.innerWidth < 900 ? 8 : 9;
-    const height = window.innerWidth < 900 ? "500px" : "750px";
-    const center = [50.15, 4.55];
+    const defaultZoom = useMemo(() => {
+        if (window.innerWidth < 600) {
+            return 7;
+        } else if (window.innerWidth < 900) {
+            return 8;
+        } else {
+            return 9;
+        }
+    }, []);
+    const height = useMemo(() => {
+        if (window.innerWidth < 600) {
+            return "375px";
+        } else if (window.innerWidth < 900) {
+            return "500px";
+        } else {
+            return "750px";
+        }
+    }, []);
+
+    const center = [50.15, 4.85];
     const maxBounds = [
         [54, 10],
         [46, 0],
@@ -52,10 +70,7 @@ const InstitutionsMap = () => {
                 url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             />
             {regionBoundaries && <Mask data={regionBoundaries} />}
-            {institutionLocations &&
-                Object.keys(institutionLocations).map((key) => (
-                    <InstitutionLocation key={key} institution={institutionLocations[key]} />
-                ))}
+            {institutionLocations && <InstitutionsLayer institutions={institutionLocations} />}
         </MapContainer>
     );
 };
