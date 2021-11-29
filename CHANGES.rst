@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.5 (unreleased)
+1.4.5 (2021-11-29)
 ------------------
 
 - Update to eea.facetednavigation 14.7.
