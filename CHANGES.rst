@@ -5,7 +5,8 @@ Changelog
 1.4.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update to eea.facetednavigation 14.7.
+  [odelaere]
 
 
 1.4.4 (2021-09-30)
