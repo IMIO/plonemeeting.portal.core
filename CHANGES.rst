@@ -5,7 +5,8 @@ Changelog
 1.4.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Properly redirect anonymous users when using meeting direct url.
+  [odelaere]
 
 
 1.4.5 (2021-11-29)

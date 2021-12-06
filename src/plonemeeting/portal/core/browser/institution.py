@@ -4,27 +4,20 @@ from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.browser.utils import path_to_dx_default_template
+from Products.CMFCore.permissions import ModifyPortalContent
 from zope.browserpage import ViewPageTemplateFile
-
-import os
-import plone
-
-
-def _path_to_dx_default_template():
-    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
-    return os.path.join(dx_path, "item.pt")
 
 
 class InstitutionView(DefaultView):
     """
     """
-    index = ViewPageTemplateFile(_path_to_dx_default_template())
+    index = ViewPageTemplateFile(path_to_dx_default_template())
 
     def __call__(self):
         # Don't redirect if user can edit institution
         # Don't use api.user.has_permission since the method breaks robot tests
-        if api.user.get_permissions(obj=self.context).get("Modify portal content"):
+        if api.user.get_permissions(obj=self.context).get(ModifyPortalContent):
             api.portal.show_message(
                 _(
                     "You see this page because you have permissions to edit it. "
@@ -36,14 +29,8 @@ class InstitutionView(DefaultView):
             )
             return super(InstitutionView, self).__call__()
 
-        institution = api.portal.get_navigation_root(self.context)
-        meeting_folder_brains = api.content.find(
-            context=institution, object_provides=IMeetingsFolder.__identifier__
-        )
-        if not meeting_folder_brains:
-            return super(InstitutionView, self).__call__()
-        url = meeting_folder_brains[0].getURL()
-        self.request.response.redirect(url)
+        utils_view = self.context.restrictedTraverse("@@utils_view")
+        self.request.response.redirect(utils_view.get_meeting_url())
         return ""
 
     def _update(self):

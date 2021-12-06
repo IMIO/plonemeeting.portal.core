@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -11,13 +10,16 @@ from Products.Five.browser import BrowserView
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
+import os
+import plone
+
 
 class UtilsView(BrowserView):
     """
     """
 
     def _get_current_institution(self):
-        return api.portal.get_navigation_root(self.context)
+        return self.is_institution() and self.context or api.portal.get_navigation_root(self.context)
 
     def is_institution(self):
         return IInstitution.providedBy(self.context)
@@ -50,8 +52,11 @@ class UtilsView(BrowserView):
         )
         if not meeting_folder_brains:
             return
-        UID = UID or meeting.UID()
-        url = "{0}#seance={1}".format(meeting_folder_brains[0].getURL(), UID)
+        meeting_uid = UID or (meeting and meeting.UID())
+        if meeting_uid is None:
+            url = meeting_folder_brains[0].getURL()
+        else:
+            url = "{0}#seance={1}".format(meeting_folder_brains[0].getURL(), meeting_uid)
         return url
 
     @staticmethod
@@ -85,3 +90,8 @@ class UtilsView(BrowserView):
 
     def protect_url(self, url):
         return addTokenToUrl(url)
+
+
+def path_to_dx_default_template():
+    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
+    return os.path.join(dx_path, "item.pt")
