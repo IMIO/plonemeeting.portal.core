@@ -7,6 +7,12 @@ Changelog
 
 - Properly redirect anonymous users when using meeting direct url.
   [odelaere]
+- Added item number handling in sync process.
+  [odelaere]
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
+- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
+  [odelaere]
 
 
 1.4.5 (2021-11-29)
@@ -60,12 +66,6 @@ Changelog
 - Amper removing of representatives if they are linked to at least an item.
   [odelaere]
 - Removed faceted-preview-meeting-items.
-  [odelaere]
-- Added item number handling in sync process.
-  [odelaere]
-- Reworked sync + allow partial sync of arbitrary items.
-  [odelaere]
-- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
   [odelaere]
 - Added DataGridField to manage url parameters.
   [odelaere]
