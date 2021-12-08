@@ -35,7 +35,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(utils.get_api_url_for_meetings(institution))
 
     def test_get_api_url_for_meetings_by_UID(self):
-        url = utils.get_api_url_for_meetings(self.belleville, meeting_UID="foo")
+        url = utils.get_api_url_for_meetings(self.belleville, meeting_external_uid="foo")
         self.assertEqual(
             "https://demo-pm.imio.be/@search?"
             "type=meeting"
@@ -60,7 +60,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def test_get_api_url_for_annexes(self):
         url = utils.get_api_url_for_annexes(
-            self.belleville, "https://demo-pm.imio.be/foo")
+            "https://demo-pm.imio.be/foo")
         self.assertEqual(
             "https://demo-pm.imio.be/foo/@annexes?"
             "publishable=true"
@@ -96,8 +96,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
             "&getCategory=VOID"
+            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
@@ -125,8 +125,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
             "&getRawClassifier=VOID"
+            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
@@ -157,9 +157,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
+            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
@@ -187,9 +187,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
             "&getCategory=administration"
             "&getCategory=immo"
+            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
@@ -218,9 +218,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
             "&getCategory=administration"
-            "&getCategory=immo",
+            "&getCategory=immo"
+            "&extra_include=public_deliberation",
             url,
         )
         self.belleville.categories_mappings = None
@@ -244,8 +244,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=itemfrozen"
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
-            "&extra_include=public_deliberation"
-            "&getCategory=VOID",
+            "&getCategory=VOID"
+            "&extra_include=public_deliberation",
             url,
         )
 

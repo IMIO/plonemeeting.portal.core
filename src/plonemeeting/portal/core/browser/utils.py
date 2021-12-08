@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -18,7 +19,7 @@ class UtilsView(BrowserView):
     """
     """
 
-    def _get_current_institution(self):
+    def get_current_institution(self):
         return self.is_institution() and self.context or api.portal.get_navigation_root(self.context)
 
     def is_institution(self):
@@ -46,7 +47,7 @@ class UtilsView(BrowserView):
 
     @mutually_exclusive_parameters("meeting", "UID")
     def get_meeting_url(self, meeting=None, UID=None):
-        institution = self._get_current_institution()
+        institution = self.get_current_institution()
         meeting_folder_brains = api.content.find(
             context=institution, object_provides=IMeetingsFolder.__identifier__
         )
@@ -71,7 +72,7 @@ class UtilsView(BrowserView):
         return vocab.getTerm(key).title
 
     def get_project_decision_disclaimer_output(self):
-        institution = self._get_current_institution()
+        institution = self.get_current_institution()
         disclaimer = institution.project_decision_disclaimer
         if isinstance(disclaimer, str):
             return disclaimer

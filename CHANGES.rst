@@ -7,6 +7,12 @@ Changelog
 
 - Properly redirect anonymous users when using meeting direct url.
   [odelaere]
+- Added item number handling in sync process.
+  [odelaere]
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
+- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
+  [odelaere]
 
 
 1.4.5 (2021-11-29)
