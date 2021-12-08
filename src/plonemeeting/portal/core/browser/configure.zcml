@@ -42,6 +42,13 @@
       permission="zope2.View"
       />
 
+    <browser:page
+      name="view"
+      for="plonemeeting.portal.core.content.meeting.IMeeting"
+      class=".meeting.MeetingView"
+      permission="zope2.View"
+      />
+
   <browser:page
       name="view"
       for="plonemeeting.portal.core.content.item.IItem"

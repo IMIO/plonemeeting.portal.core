@@ -33,7 +33,8 @@ import time
 
 
 class IImportMeetingForm(Interface):
-    """"""
+    """
+    """
 
     meeting = schema.Choice(
         title=_(u"Meeting"),
@@ -43,7 +44,8 @@ class IImportMeetingForm(Interface):
 
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
-    """"""
+    """
+    """
 
     schema = IImportMeetingForm
     ignoreContext = True
