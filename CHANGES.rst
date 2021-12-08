@@ -2,10 +2,24 @@ Changelog
 =========
 
 
-1.4.5 (unreleased)
+1.4.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Properly redirect anonymous users when using meeting direct url.
+  [odelaere]
+- Added item number handling in sync process.
+  [odelaere]
+- Reworked sync + allow partial sync of arbitrary items.
+  [odelaere]
+- Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
+  [odelaere]
+
+
+1.4.5 (2021-11-29)
+------------------
+
+- Update to eea.facetednavigation 14.7.
+  [odelaere]
 
 
 1.4.4 (2021-09-30)

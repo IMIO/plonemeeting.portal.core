@@ -23,20 +23,24 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         # avoid cascading failure because unstub wasn't called
         unstub()
 
-    def test_call_manager(self):
+    def test_call_institution_view_as_manager(self):
         institution = self.portal["belleville"]
         self.login_as_manager()
         request = self.portal.REQUEST
         view = institution.restrictedTraverse("@@view")
         request.set('PUBLISHED', view)
         view_content = view()
+        self.assertEqual(view.request.response.status, 200)
         self.assertTrue("Meeting config ID" in view_content)
 
-    def test_call_anonymous(self):
+    def test_call_institution_view_as_anonymous(self):
         institution = self.portal["belleville"]
         self.login_as_test()
-        view_content = institution.restrictedTraverse("@@view")()
+        view = institution.restrictedTraverse("@@view")
+        view_content = view()
         self.assertTrue("Meeting config ID" not in view_content)
+        self.assertEqual(view.request.response.status, 302)
+        self.assertDictEqual(view.request.response.headers, {'location': 'http://nohost/plone/belleville/meetings'})
 
     def test_validate_color_parameters(self):
         self.assertTrue(validate_color_parameters("#FFF"))
