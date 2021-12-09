@@ -15,6 +15,8 @@ Changelog
   [odelaere]
 - Handle deactivated representatives.
   [odelaere]
+- Reorder representatives by item count in faceted filters so the relevant ones stay on top.
+  [odelaere]
 
 1.4.5 (2021-11-29)
 ------------------

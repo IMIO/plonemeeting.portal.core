@@ -63,6 +63,12 @@ def post_install(context):
         translate(_(u"Faceted"), target_language=current_lang),
         id=FACETED_FOLDER_ID,
     )
+    apply_faceted_config(faceted)
+
+
+def apply_faceted_config(faceted=None):
+    if not faceted:
+        faceted = api.portal.get().get(CONFIG_FOLDER_ID).get(FACETED_FOLDER_ID)
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
     faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)

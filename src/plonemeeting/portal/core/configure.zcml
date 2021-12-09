@@ -172,7 +172,15 @@
       import_steps="plone.app.registry"
       run_deps="True" />
   </genericsetup:upgradeSteps>
-
+    <genericsetup:upgradeSteps
+      source="1007"
+      destination="1008"
+      profile="plonemeeting.portal.core:default">
+      <genericsetup:upgradeStep
+      title="Go to portal 1008"
+      description="Order representatives by number of item in faceted filters"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1008.migrate" />
+  </genericsetup:upgradeSteps>
   <!-- Password policy -->
   <adapter
     name="plonemeeting_password_policy"

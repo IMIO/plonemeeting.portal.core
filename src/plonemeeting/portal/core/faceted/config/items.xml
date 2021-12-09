@@ -43,7 +43,7 @@
    <property name="section">default</property>
    <property name="hidden">False</property>
    <property name="count">True</property>
-   <property name="sortcountable">False</property>
+   <property name="sortcountable">True</property>
    <property name="hidezerocount">False</property>
    <property name="sortreversed">False</property>
   </criterion>
