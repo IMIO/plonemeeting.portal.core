@@ -61,13 +61,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url()
-            + "/@@pre_import_report_form?external_meeting_uid="
-            + external_meeting_uid
+            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
         )
         redirect(self.request, next_form_url)
-
-    # _sync_meeting(institution, meeting_uid, self.request)
 
     def update(self):
         try:
@@ -117,7 +113,7 @@ class ItemsContentProvider(ContentProviderBase):
         return json_dumps(
             {
                 "paging": False,
-                "columnDefs": [{"orderable": False, "targets": 0},],
+                "columnDefs": [{"orderable": False, "targets": 0}],
                 "scrollY": "50vh",
                 "scrollCollapse": True,
                 "order": [[1, "asc"]],

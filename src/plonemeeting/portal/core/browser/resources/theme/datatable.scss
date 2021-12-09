@@ -1,0 +1,16 @@
+#items-datatables  .checkbox_header {
+  border-left: 8px solid $grey-100;
+}
+
+#items-datatables .unchanged > .checkbox_cell {
+  border-left: 8px solid $grey-500;
+}
+#items-datatables .added > .checkbox_cell {
+   border-left: 8px solid $green;
+}
+#items-datatables .removed >  .checkbox_cell {
+   border-left: 8px solid $red;
+}
+#items-datatables .modified >  .checkbox_cell {
+   border-left: 8px solid $orange;
+}

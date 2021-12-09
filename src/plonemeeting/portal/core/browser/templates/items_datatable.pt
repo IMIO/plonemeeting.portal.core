@@ -12,7 +12,7 @@
   >
     <thead>
     <tr>
-      <th></th>
+      <th class="checkbox_header"><x-checkbox-selector scope="items-datatables" checked /></th>
       <th>N°</th>
       <th i18n:translate="">Title</th>
       <th i18n:translate="">Last modification in iA.Delib</th>
@@ -30,8 +30,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr tal:repeat="item items">
-      <td>
+    <tr tal:repeat="item items" tal:attributes="class item/status">
+      <td class="checkbox_cell">
         <input type="checkbox" tal:attributes="name python: 'item_uid__' + item['UID']" checked />
       </td>
       <td tal:content="item/formatted_itemNumber">itemNumber</td>
