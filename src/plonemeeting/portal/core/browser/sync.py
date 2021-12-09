@@ -61,7 +61,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
+            self.context.absolute_url()
+            + "/@@pre_import_report_form?external_meeting_uid="
+            + external_meeting_uid
         )
         redirect(self.request, next_form_url)
 
@@ -75,7 +77,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
     def _notify_error_and_cancel(self, err=None):
         logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-        api.portal.show_message(_("Webservice connection error !"), request=self.request, type="error")
+        api.portal.show_message(
+            _("Webservice connection error !"), request=self.request, type="error"
+        )
         self.handle_cancel(self, None)
 
     @button.buttonAndHandler(plone_(u"Cancel"))
@@ -113,9 +117,7 @@ class ItemsContentProvider(ContentProviderBase):
         return json_dumps(
             {
                 "paging": False,
-                "columnDefs": [
-                    {"orderable": False, "targets": 0},
-                ],
+                "columnDefs": [{"orderable": False, "targets": 0},],
                 "scrollY": "50vh",
                 "scrollCollapse": True,
                 "order": [[1, "asc"]],
@@ -194,7 +196,9 @@ class PreSyncReportForm(Form):
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
         """"""
-        meeting_faceted_url = self.institution.absolute_url() + "/seances#seance=" + self.context.UID()
+        meeting_faceted_url = (
+            self.institution.absolute_url() + "/seances#seance=" + self.context.UID()
+        )
         redirect(self.request, meeting_faceted_url)
 
     def reconcile(self, api_items, local_items):
@@ -202,8 +206,9 @@ class PreSyncReportForm(Form):
         local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item in local_items}
 
         for item in reconciled["items"]:
-            api_annexes = _call_delib_rest_api(get_api_url_for_annexes_summary(item.get("@id")),
-                                               self.institution).json()
+            api_annexes = _call_delib_rest_api(
+                get_api_url_for_annexes_summary(item.get("@id")), self.institution
+            ).json()
             if item["UID"] in local_items_by_plonemeeting_uid.keys():
                 local_item = local_items_by_plonemeeting_uid[item["UID"]]
                 plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
@@ -216,86 +221,91 @@ class PreSyncReportForm(Form):
                         item["status"] = "modified"
                 else:
                     item["status"] = "modified"
-                item["annexes_status"] = self._reconcile_annexes(api_annexes, local_item.objectValues())
+                item["annexes_status"] = self._reconcile_annexes(
+                    api_annexes, local_item.objectValues()
+                )
                 local_items_by_plonemeeting_uid.pop(item["UID"])
             else:
                 item["local_last_modified"] = "-"
                 item["status"] = "added"
-                item["annexes_status"] = {
-                    "added": {
-                        "count": len(api_annexes),
-                        'titles': [annex['title'] for annex in api_annexes]
-                    },
+                item["annexes_status"] = {}
+                if api_annexes:
+                    item["annexes_status"] = {
+                        "added": {
+                            "count": len(api_annexes),
+                            "titles": [annex["title"] for annex in api_annexes],
+                        },
+                    }
+
+        for uid, local_item in local_items_by_plonemeeting_uid.items():
+            annexes_status = {}
+            annexes_count = local_item.objectCount()
+            if annexes_count:
+                annexes_status["removed"] = {
+                    "count": annexes_count,
+                    "titles": [annex.Title() for annex in local_item.objectValues()],
                 }
 
-        for uid, item in local_items_by_plonemeeting_uid.items():
-            reconciled["items"].insert(int(item.number), {
-                "UID": item.plonemeeting_uid,
-                "title": item.title,
-                "formatted_itemNumber": item.number,
-                "modified": "-",
-                "local_last_modified": item.plonemeeting_last_modified.isoformat(),
-                "category": {"title": item.category},
-                "representatives_in_charge": item.representatives_in_charge,
-                "status": "removed",
-                "annexes_status": {
-                    "removed": {
-                        "count": local_item.objectCount(),
-                        'titles': [annex.Title() for annex in local_item.objectValues()]
-                    },
-                }
-            })
+            reconciled["items"].insert(
+                int(local_item.number),
+                {
+                    "UID": local_item.plonemeeting_uid,
+                    "title": local_item.title,
+                    "formatted_itemNumber": local_item.number,
+                    "modified": "-",
+                    "local_last_modified": local_item.plonemeeting_last_modified.isoformat(),
+                    "category": {"title": local_item.category},
+                    "representatives_in_charge": local_item.representatives_in_charge,
+                    "status": "removed",
+                    "annexes_status": annexes_status
+                },
+            )
         return reconciled
 
     def _reconcile_annexes(self, api_annexes, local_annexes):
         annexes_status = {
-            "added": {
-                "count": 0,
-                'titles': []
-            },
-            "unchanged": {
-                "count": 0,
-                'titles': []
-            },
-            "modified": {
-                "count": 0,
-                'titles': []
-            },
-            "removed": {
-                "count": 0,
-                'titles': []
-            }}
-        local_annexes_by_plonemeeting_uid = {annexe.plonemeeting_uid: annexe for annexe in local_annexes}
+            "added": {"count": 0, "titles": []},
+            "unchanged": {"count": 0, "titles": []},
+            "modified": {"count": 0, "titles": []},
+            "removed": {"count": 0, "titles": []},
+        }
+        local_annexes_by_plonemeeting_uid = {
+            annexe.plonemeeting_uid: annexe for annexe in local_annexes
+        }
 
         for api_annexe in api_annexes:
             if api_annexe["UID"] not in local_annexes_by_plonemeeting_uid.keys():
                 annexes_status["added"]["count"] += 1
-                annexes_status["added"]["titles"].append(api_annexe['title'])
+                annexes_status["added"]["titles"].append(api_annexe["title"])
             else:
                 local_annexe = local_annexes_by_plonemeeting_uid[api_annexe["UID"]]
                 api_annexe_last_modified = _json_date_to_datetime(api_annexe["modified"])
 
                 if api_annexe_last_modified == local_annexe.plonemeeting_last_modified:
                     annexes_status["unchanged"]["count"] += 1
-                    annexes_status["unchanged"]["titles"].append(api_annexe['title'])
+                    annexes_status["unchanged"]["titles"].append(api_annexe["title"])
                 else:
                     annexes_status["modified"]["count"] += 1
-                    annexes_status["modified"]["titles"].append(api_annexe['title'])
+                    annexes_status["modified"]["titles"].append(api_annexe["title"])
                 local_annexes_by_plonemeeting_uid.pop(api_annexe["UID"])
 
         for local_annexe in local_annexes_by_plonemeeting_uid.values():
             annexes_status["removed"]["count"] += 1
             annexes_status["removed"]["titles"].append(local_annexe.Title())
 
-        statuses = list(annexes_status.keys())  # Avoid 'RuntimeError: dictionary changed size during iteration'
+        # Avoid 'RuntimeError: dictionary changed size during iteration'
+        statuses = list(annexes_status.keys())
+
         for status in statuses:
-            if annexes_status[status]['count'] == 0:
+            if annexes_status[status]["count"] == 0:
                 annexes_status.pop(status)
 
         return annexes_status
 
     def _fetch_preview_items(self, meeting_external_uid):
-        url = get_api_url_for_meeting_items(self.context, meeting_external_uid=meeting_external_uid)
+        url = get_api_url_for_meeting_items(
+            self.context, meeting_external_uid=meeting_external_uid
+        )
         response = _call_delib_rest_api(url, self.context)
         self.api_response_data = json.loads(response.text)
 
@@ -316,8 +326,10 @@ class PreImportReportForm(Form):
         self.external_meeting_uid = self.request.form["external_meeting_uid"]
         self.is_importing = True
         self.institution = self.context
-        self.meeting_title = _call_delib_rest_api(get_api_url_for_meetings(self.institution, self.external_meeting_uid),
-                                                  self.institution).json()["items"][0]["title"]
+        self.meeting_title = _call_delib_rest_api(
+            get_api_url_for_meetings(self.institution, self.external_meeting_uid),
+            self.institution,
+        ).json()["items"][0]["title"]
         self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
         return super(PreImportReportForm, self).__call__()
 
@@ -327,8 +339,13 @@ class PreImportReportForm(Form):
         checked_item_uids = []
         for inputs in form.keys():
             if inputs.startswith("item_uid"):
-                checked_item_uids.append(inputs.split('__')[1])
-        _sync_meeting(self.institution, self.external_meeting_uid, self.request, item_external_uids=checked_item_uids)
+                checked_item_uids.append(inputs.split("__")[1])
+        _sync_meeting(
+            self.institution,
+            self.external_meeting_uid,
+            self.request,
+            item_external_uids=checked_item_uids,
+        )
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
@@ -336,23 +353,29 @@ class PreImportReportForm(Form):
 
 
 def _fetch_preview_items(context, meeting_external_uid):
-    url = get_api_url_for_meeting_items(
-        context, meeting_external_uid=meeting_external_uid
-    )
+    url = get_api_url_for_meeting_items(context, meeting_external_uid=meeting_external_uid)
     response = _call_delib_rest_api(url, context)
     return json.loads(response.text)
 
 
-def _sync_meeting(institution, meeting_uid, request, force=False, item_external_uids=[]):  # pragma: no cover
+def _sync_meeting(
+    institution, meeting_uid, request, force=False, item_external_uids=[]
+):  # pragma: no cover
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, item_external_uids)
+        status, new_meeting_uid = sync_meeting(
+            institution, meeting_uid, force, item_external_uids
+        )
         if new_meeting_uid:
-            brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
+            brains = api.content.find(
+                context=institution, object_provides=IMeetingsFolder.__identifier__
+            )
 
             if brains:
-                request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
+                request.response.redirect(
+                    "{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid)
+                )
                 api.portal.show_message(message=status, request=request, type="info")
         else:
             api.portal.show_message(message=status, request=request, type="error")
