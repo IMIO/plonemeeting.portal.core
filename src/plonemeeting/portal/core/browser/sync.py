@@ -281,7 +281,7 @@ class PreSyncReportForm(Form):
                 else:
                     annexes_status["modified"]["count"] += 1
                     annexes_status["modified"]["titles"].append(api_annexe['title'])
-            local_annexes_by_plonemeeting_uid.pop(api_annexe["UID"])
+                local_annexes_by_plonemeeting_uid.pop(api_annexe["UID"])
 
         for local_annexe in local_annexes_by_plonemeeting_uid.values():
             annexes_status["removed"]["count"] += 1
@@ -337,7 +337,7 @@ class PreImportReportForm(Form):
 
 def _fetch_preview_items(context, meeting_external_uid):
     url = get_api_url_for_meeting_items(
-        context, meeting_external_uid=meeting_external_uid, with_additional_published_items_query_string=True
+        context, meeting_external_uid=meeting_external_uid
     )
     response = _call_delib_rest_api(url, context)
     return json.loads(response.text)
