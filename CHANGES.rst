@@ -13,6 +13,8 @@ Changelog
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
   [odelaere]
+- Fix bad status code would raise an unexpected error #PM-3805.
+  [odelaere]
 
 
 1.4.5 (2021-11-29)
