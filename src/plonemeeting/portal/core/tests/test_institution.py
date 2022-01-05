@@ -18,11 +18,6 @@ import requests
 
 class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
-    def tearDown(self):
-        super(TestInstitutionView, self).tearDown()
-        # avoid cascading failure because unstub wasn't called
-        unstub()
-
     def test_call_institution_view_as_manager(self):
         institution = self.portal["belleville"]
         self.login_as_manager()

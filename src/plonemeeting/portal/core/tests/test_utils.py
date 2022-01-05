@@ -2,7 +2,6 @@
 from datetime import datetime
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
-from plone.app.testing import logout
 from plonemeeting.portal.core import utils
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
@@ -18,7 +17,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def tearDown(self):
         if "test-faceted" in self.portal:
             api.content.delete(self.portal["test-faceted"])
-        logout()
+        super(TestUtils, self).tearDown()
 
     def test_get_api_url_for_meetings_missing_config(self):
         institution = type(
