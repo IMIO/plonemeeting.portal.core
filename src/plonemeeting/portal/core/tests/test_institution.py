@@ -149,6 +149,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
     def test_load_representatives_from_delib(self):
         belleville = self.portal["belleville"]
+        belleville.representatives_mappings = []
         json_categories = {"extra_include_categories": [
             {"id": "", "title": ""},
         ]}
@@ -221,7 +222,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
                                                     'active': True})
         belleville.delib_representatives = {'trololo': 'Mr Trololo'}
         belleville.fetch_delib_representatives()
-        self.assertDictEqual({'trololo': 'Mr Trololo', 'fake': 'Wolverine', 'fake++': 'Cyclop'},
+        self.assertDictEqual({'trololo': 'Unknown value: ${key}', 'fake': 'Wolverine', 'fake++': 'Cyclop'},
                              belleville.delib_representatives)
 
     def test_rules_xml_compilation(self):
