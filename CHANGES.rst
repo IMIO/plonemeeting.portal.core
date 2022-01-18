@@ -15,6 +15,11 @@ Changelog
   [odelaere]
 - Handle deactivated representatives.
   [odelaere]
+- Fix bad status code would raise an unexpected error #PM-3805.
+  [odelaere]
+- Fix history is lost in some case after resync representatives from delib #PM-3816.
+  [odelaere]
+
 
 1.4.5 (2021-11-29)
 ------------------

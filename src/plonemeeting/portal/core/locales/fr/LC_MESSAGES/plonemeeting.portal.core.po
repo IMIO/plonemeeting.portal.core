@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-12-08 14:01+0000\n"
+"POT-Creation-Date: 2022-01-18 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,6 +321,10 @@ msgstr "Correspondances des mandataires"
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
+#: ../browser/sync.py:43
+msgid "Select"
+msgstr "Sélectionner"
+
 #: ../faceted/preview_meeting.pt:93
 msgid "Show meeting infos"
 msgstr "Montrer les informations de la séance"
@@ -332,10 +336,6 @@ msgstr "Numéro triable du point"
 #: ../content/institution.py:252
 msgid "Styling"
 msgstr "Styles"
-
-#: ../browser/sync.py:43
-msgid "Sélectionner"
-msgstr ""
 
 #: ../content/institution.py:180
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
@@ -353,6 +353,10 @@ msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 #: ../configure.zcml:53
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
+
+#: ../content/institution.py:384
+msgid "Unknown value: ${key}"
+msgstr "Valeur inconnue: ${key}"
 
 #: ../faceted/preview_meeting.pt:52
 #: ../profiles/default/actions.xml
@@ -382,7 +386,7 @@ msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:65
-#: ../content/institution.py:410
+#: ../content/institution.py:406
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 

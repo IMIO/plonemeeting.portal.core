@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-12-08 14:01+0000\n"
+"POT-Creation-Date: 2022-01-18 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -324,6 +324,10 @@ msgstr ""
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
+#: ../browser/sync.py:43
+msgid "Select"
+msgstr ""
+
 #: ../faceted/preview_meeting.pt:93
 msgid "Show meeting infos"
 msgstr ""
@@ -334,10 +338,6 @@ msgstr ""
 
 #: ../content/institution.py:252
 msgid "Styling"
-msgstr ""
-
-#: ../browser/sync.py:43
-msgid "Sélectionner"
 msgstr ""
 
 #: ../content/institution.py:180
@@ -355,6 +355,10 @@ msgstr ""
 
 #: ../configure.zcml:53
 msgid "Uninstalls the plonemeeting.portal.core add-on."
+msgstr ""
+
+#: ../content/institution.py:384
+msgid "Unknown value: ${key}"
 msgstr ""
 
 #: ../faceted/preview_meeting.pt:52
@@ -385,7 +389,7 @@ msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:65
-#: ../content/institution.py:410
+#: ../content/institution.py:406
 msgid "Webservice connection error !"
 msgstr ""
 
