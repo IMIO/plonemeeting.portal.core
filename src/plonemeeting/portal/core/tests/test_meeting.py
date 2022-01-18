@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-from mockito import unstub
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
 class TestMeetingView(PmPortalDemoFunctionalTestCase):
-
-    def tearDown(self):
-        super(TestMeetingView, self).tearDown()
-        # avoid cascading failure because unstub wasn't called
-        unstub()
 
     def test_call_meeting_view_as_manager(self):
         meeting = self.portal["belleville"].listFolderContents({"portal_type": "Meeting"})[0]

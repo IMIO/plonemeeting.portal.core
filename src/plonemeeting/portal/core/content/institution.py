@@ -377,16 +377,12 @@ class Institution(Container):
                                                                    REPRESENTATIVE_IA_DELIB_FIELD,
                                                                    'UID',
                                                                    'title')
-        if hasattr(self, 'delib_representatives') and self.delib_representatives:
-            # keep history
-            used_keys = [row['representative_key'] for row in self.representatives_mappings]
-            to_delete = [key for key in self.delib_representatives if key not in used_keys]
-            for key in to_delete:
-                del self.delib_representatives[key]
-
-            self.delib_representatives.update(representatives)
-        else:
-            self.delib_representatives = representatives
+        # keep history
+        for row in self.representatives_mappings:
+            key = row['representative_key']
+            if key not in representatives:
+                representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
+        self.delib_representatives = representatives
 
     def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title):
         # ensure empty dict if None or attr doesn't exist

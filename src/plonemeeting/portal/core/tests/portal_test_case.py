@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from mockito import unstub
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -38,6 +39,8 @@ class PmPortalTestCase(unittest.TestCase):
         self.maxDiff = None
 
     def tearDown(self):
+        # avoid cascading failure because unstub wasn't called
+        unstub()
         logout()
 
     def login_as_manager(self):
