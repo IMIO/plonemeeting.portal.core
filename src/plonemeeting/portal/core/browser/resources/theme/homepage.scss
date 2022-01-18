@@ -8,16 +8,16 @@
 .template-homepage_view header#content-header {
   background: transparent;
   margin-bottom: 10em;
+  position: relative;
 }
 
 .template-homepage_view header#content-header:before {
   position: absolute;
-  top: -60px;
   content: " ";
   opacity: 0.2;
   background: url("../assets/homepage-background.jpg") center center / cover no-repeat !important;
   background-size: cover;
-  height: 500px;
+  height: 300px;
   width: 100%;
   z-index: -10;
 }
@@ -40,6 +40,15 @@
     padding: 1em;
     border-radius: $delib-border-radius;
   }
+
+  &:target {
+    h3 {
+      color: $imio-pink-500;
+    }
+    .faq-item {
+      box-shadow: 0 0 0 2px $imio-pink-500;
+    }
+  }
 }
 
 .institution-select {
@@ -48,12 +57,12 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-
+  max-width: 500px;
+  margin: auto;
   .institution-select-input {
     position: relative;
     z-index: 50;
     flex: 1;
-
     div {
       border-width: 0 !important;
     }

@@ -15,7 +15,7 @@
         <title i18n:translate="">Global category title</title>
       </value_type>
     </field>
-    <value purge="false"></value>
+    <value purge="false"/>
   </record>
   <record name="plonemeeting.portal.core.rgpd_masked_text_redirect_path">
     <field type="plone.registry.field.TextLine">
@@ -33,7 +33,7 @@
     <field type="plone.registry.field.TextLine">
       <title i18n:translate="">Anonymised text tag from ia.Delib to be replaced</title>
     </field>
-    <value purge="false">&lt;span class=&quot;pm-anonymize&quot;&gt;&lt;/span&gt;</value>
+    <value purge="false">&lt;span class="pm-anonymize"&gt;&lt;/span&gt;</value>
   </record>
   <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
     <value key="title" i18n:translate="">Item number</value>
@@ -65,7 +65,7 @@
     <value key="compile">True</value>
     <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-    <value key="last_compilation">2021-09-23 13:10:31.233Z</value>
+    <value key="last_compilation">2021-11-03 23:42:41.784Z</value>
   </records>
   <records prefix="plone.resources/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IResourceRegistry">
     <value key="css">

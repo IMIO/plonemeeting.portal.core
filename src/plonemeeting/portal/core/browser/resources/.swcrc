@@ -1,0 +1,19 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript",
+      "jsx": true,
+      "dynamicImport": true,
+      "exportDefaultFrom": true
+    },
+    "transform": {
+        "react": {
+            "pragma": "h",
+            "pragmaFrag": "Fragment",
+            "throwIfNamespace": true,
+            "development": false,
+            "useBuiltins": false
+        }
+     }
+  }
+}

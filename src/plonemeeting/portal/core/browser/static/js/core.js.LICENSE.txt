@@ -1,6 +1,9 @@
-/* @preserve
- * Leaflet 1.7.1, a JS library for interactive maps. http://leafletjs.com
- * (c) 2010-2019 Vladimir Agafonkin, (c) 2010-2011 CloudMade
+/*!
+ * Masonry v4.2.2
+ * Cascading grid layout library
+ * https://masonry.desandro.com
+ * MIT License
+ * by David DeSandro
  */
 
 /*!

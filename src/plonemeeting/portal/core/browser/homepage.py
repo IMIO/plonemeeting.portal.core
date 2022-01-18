@@ -39,6 +39,7 @@ class HomepageView(BrowserView):
             if brain.id not in DEMO_INSTITUTION_IDS:
                 institution = brain.getObject()
                 institutions[brain.id] = {
+                    "id": brain.id,
                     "title": institution.Title(),
                     "URL": institution.absolute_url(),
                 }
@@ -105,8 +106,11 @@ class InstitutionLocationsView(BrowserView):
         if not hasattr(self.context, "api_institution_locations"):
             self.fetch_and_store_locations_from_api()
 
-        # Get all published institutions and put them in a dict with title as key
-        brains = api.content.find(portal_type="Institution", review_state="published")
+        # Get all institutions and put them in a dict with title as key
+        brains = api.content.find(
+            portal_type="Institution",
+            review_state=["published", "private"]
+        )
         institutions_by_titles = {}
         for brain in brains:
             institution = brain.getObject()
@@ -119,8 +123,10 @@ class InstitutionLocationsView(BrowserView):
             if record["fields"]["mun_name_fr"] in institutions_by_titles.keys():
                 institution = institutions_by_titles[record["fields"]["mun_name_fr"]]
                 institution_locations[institution.getId()] = {
-                    "id": record["fields"]["mun_name_fr"],
+                    "id": institution.getId(),
+                    "title": record["fields"]["mun_name_fr"],
                     "URL": institution.absolute_url(),
+                    "state": api.content.get_state(institution),
                     "data": record
                 }
 

@@ -12,13 +12,8 @@
     margin-bottom: 25px;
     margin-top: 0;
   }
-  .hero-img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    img {
-      height: 500px !important;
+  .hero-img {
+      height: 400px !important;
       width: auto;
       z-index: 10;
       position: relative;
@@ -26,10 +21,10 @@
       margin: -200px 0;
       @include media-breakpoint-down(xl) {
         top: 0;
+        width: 100%;
         margin: -200px 0 1em 0;
         height: 300px !important;
       }
-    }
   }
 
   h1 {
@@ -46,7 +41,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    max-width: 600px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }

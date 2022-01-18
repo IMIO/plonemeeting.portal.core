@@ -38,10 +38,7 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(js|mjs|jsx|ts|tsx)$/,
                     use: {
-                        loader: "babel-loader",
-                        options: {
-                            presets: ["@babel/preset-env"],
-                        },
+                        loader: "swc-loader",
                     },
                 },
                 {
@@ -126,6 +123,7 @@ module.exports = (env, argv) => {
             ],
         },
         resolve: {
+            extensions: ["", ".js", ".jsx"],
             alias: {
                 react: "preact/compat",
                 "react-dom/test-utils": "preact/test-utils",
@@ -154,26 +152,24 @@ module.exports = (env, argv) => {
             port: 3000,
             hot: true,
             watchFiles: {
-                paths: ["./../../**/*.pt"], // Watch for .pt file change
+                paths: ["./../../**/*.pt"], // Also watch for .pt file change
             },
             // Proxy everything to the Plone Backend EXCEPT our bundle as
             // Webpack Dev Server will serve it.
             proxy: [
                 {
-                    context: ["/**", `!${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
+                    context: ["/**", `!**/${BUNDLE_NAME}/**`],
                     target: "http://localhost:8080",
                 },
                 {
-                    context: [`${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
+                    context: [`**/${BUNDLE_NAME}/**`],
                     target: "http://localhost:3000",
                     pathRewrite: function (path) {
-                        // We need to rewrite the path as Plone add some crap timestamp
-                        // to it and doesn't provide a way of disabling it.
                         if (path.includes("++unique++")) {
                             const reg = /\/\+\+unique\+\+[^/]+/; // Strip ++unique++ part
                             path = path.replace(reg, "");
                         }
-                        path = path.replace(`${PLONE_SITE_PATH}/${BUNDLE_NAME}/`, "");
+                        path = path.split(BUNDLE_NAME)[1]; // Keep only the path after our bundle name
                         return path;
                     },
                 },
