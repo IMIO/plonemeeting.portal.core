@@ -40,7 +40,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
     label = _(u"Meeting import form")
     description = _(u"Choose the meeting you want to import in the portal.")
 
-    @button.buttonAndHandler(_(u"Sélectionner"))
+    @button.buttonAndHandler(_(u"Select"))
     def handle_select(self, action):
         data, errors = self.extractData()
         if errors:

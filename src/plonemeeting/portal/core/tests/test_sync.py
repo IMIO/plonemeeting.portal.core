@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from imio.helpers.content import object_values
+from mockito import mock
+from mockito import when
 from plone import api
+from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.content.meeting import IMeeting
+from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json
 from plonemeeting.portal.core.sync_utils import sync_annexes_data
 from plonemeeting.portal.core.sync_utils import sync_items_data
@@ -13,6 +17,7 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunction
 import json
 import os
 import pytz
+import requests
 
 
 class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
@@ -385,3 +390,13 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(10500, items_brains[2].sortable_number)
         self.assertEqual('random fake news', items[0].number)
         self.assertEqual('random fake news', items_brains[0].number)
+
+    def test_response_is_not_200(self):
+        when(requests).get("fake_url",
+                           auth=(self.institution.username, self.institution.password),
+                           headers=API_HEADERS) \
+            .thenReturn(mock({'status_code': 500}))
+
+        with self.assertRaises(ValueError) as ws_err:
+            _call_delib_rest_api("fake_url", self.institution)
+        self.assertEqual(u"Web service connection error !", str(ws_err.exception))
