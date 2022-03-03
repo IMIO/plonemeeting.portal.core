@@ -71,9 +71,15 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
 
     def setUp(self):
         super().setUp()
-        self.institution = self.portal["amityville"]
+        self.amittyville = self.portal["amityville"]
+        self.amittyville.plonemeeting_url = "http://localhost:20081/demo"
+        self.amittyville.password = "Meeting_12"
 
-        self.meeting = api.content.find(self.institution, portal_type="Meeting")[
+        self.belleville = self.portal["belleville"]
+        self.belleville.plonemeeting_url = "http://localhost:20081/demo"
+        self.belleville.password = "Meeting_12"
+
+        self.meeting = api.content.find(self.amittyville, portal_type="Meeting")[
             0
         ].getObject()
         self.item = api.content.find(self.meeting, portal_type="Item")[0].getObject()

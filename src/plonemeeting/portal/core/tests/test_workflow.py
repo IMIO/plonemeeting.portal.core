@@ -29,7 +29,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
 
         self.login_as_manager()
         self.meeting = api.content.create(
-            container=self.institution, title="My meeting", type="Meeting"
+            container=self.amittyville, title="My meeting", type="Meeting"
         )
         self.item = api.content.create(
             container=self.meeting, title="My item", type="Item"
@@ -422,13 +422,13 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
     def testAddContent(self):
         # Institution Manager can add content
         self.login_as_institution_manager()
-        self.assertTrue(checkPerm(AddPortalContent, self.institution))
+        self.assertTrue(checkPerm(AddPortalContent, self.amittyville))
         self.assertTrue(checkPerm(AddPortalContent, self.meeting))
         self.assertTrue(checkPerm(AddPortalContent, self.item))
 
     def testRemoveContent(self):
         # Institution Manager can add content
         self.login_as_institution_manager()
-        self.assertFalse(checkPerm(DeleteObjects, self.institution))
+        self.assertFalse(checkPerm(DeleteObjects, self.amittyville))
         self.assertFalse(checkPerm(DeleteObjects, self.meeting))
         self.assertFalse(checkPerm(DeleteObjects, self.item))

@@ -9,13 +9,6 @@ from zope.interface import Invalid
 
 
 class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
-    @property
-    def belleville(self):
-        return self.portal["belleville"]
-
-    @property
-    def amityville(self):
-        return self.portal["amityville"]
 
     def exc_msg(self, invalid):
         return translate(invalid.args[0], context=self.portal.REQUEST)

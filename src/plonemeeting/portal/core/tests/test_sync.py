@@ -59,7 +59,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
             self.json_annexes_publishable_updated_mock = json.load(json_file)
 
     def test_sync_meeting_data(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
         self.assertTrue(
             IMeeting.providedBy(meeting),
             u"IMeeting not provided by {0}!".format(meeting),
@@ -71,7 +71,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(meeting.date_time, date_time)
 
     def test_sync_meeting_items(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
         # only a few picked items
         item_external_uids = ['ecd55a85b1ee4039bfe22c7c4988876d',
                               '12e7d68685074605a2750f0888b0bf52',
@@ -80,13 +80,13 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         json_items = {"items": [item for item in self.json_meeting_items.get('items')
                                 if item.get('UID') in item_external_uids]
                       }
-        results = sync_items_data(meeting, json_items, self.institution,
+        results = sync_items_data(meeting, json_items, self.amittyville,
                                   item_external_uids=item_external_uids + ['fake uid'])
         self.assertEqual(4, results.get("created"))
         self.assertListEqual(item_external_uids, [item.plonemeeting_uid for item in meeting.values()])
         api.content.delete(objects=meeting.values())
         # all items
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(28, results.get("created"))
         self.assertEqual(0, results.get("modified"))
         self.assertEqual(0, results.get("deleted"))
@@ -106,8 +106,8 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(meeting.values()[-1].sortable_number, 2800)
         self.assertEqual(meeting.values()[-1].category, 'locations')
         # force re import everything
-        self.institution.delib_category_field = "classifier"
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution, True)
+        self.amittyville.delib_category_field = "classifier"
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville, True)
         self.assertEqual(len(meeting.items()), results.get("modified"))
         self.assertEqual(meeting.values()[0].category, 'patrimoine')
         self.assertEqual(meeting.values()[1].category, 'finance')
@@ -116,7 +116,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(meeting.values()[-1].category, 'batiment')
 
     def test_sync_with_updates_meeting_items(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
         # only a few picked items
         item_external_uids = ['ecd55a85b1ee4039bfe22c7c4988876d',
                               '12e7d68685074605a2750f0888b0bf52',
@@ -125,7 +125,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         json_items = {"items": [item for item in self.json_meeting_items.get('items')
                                 if item.get('UID') in item_external_uids]
                       }
-        results = sync_items_data(meeting, json_items, self.institution,
+        results = sync_items_data(meeting, json_items, self.amittyville,
                                   item_external_uids=item_external_uids + ['fake uid'])
         self.assertEqual(4, results.get("created"))
         self.assertEqual(0, results.get("modified"))
@@ -142,7 +142,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         modification_date = {"modification_date": u"2019-11-26T14:42:40+00:00"}
         json_items.get("items")[0].get("decision").update(decision)
         json_items.get("items")[0].update(modification_date)
-        results = sync_items_data(meeting, json_items, self.institution,
+        results = sync_items_data(meeting, json_items, self.amittyville,
                                   item_external_uids=item_external_uids + ['fake uid'])
         self.assertEqual(1, results.get("created"))
         self.assertEqual(1, results.get("modified"))
@@ -162,7 +162,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
                               'e66269c9342f4e6c861eaff123b20bcb',
                               '765ec8ae7ec145b987ab9b21ec45ef14',
                               'aa79bc1b61884e289849999c014acc67']
-        results = sync_items_data(meeting, json_items, self.institution,
+        results = sync_items_data(meeting, json_items, self.amittyville,
                                   item_external_uids=item_external_uids + ['fake uid'])
         self.assertEqual(0, results.get("created"))
         self.assertEqual(0, results.get("modified"))
@@ -176,7 +176,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
                              [item.plonemeeting_uid for item in meeting.values()])
         # all items
         # results {'deleted': 0, 'modified': 0, 'created': 28}
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(24, results.get("created"))
         self.assertEqual(0, results.get("modified"))
         self.assertEqual(0, results.get("deleted"))
@@ -184,40 +184,40 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         modification_date = {"modification_date": u"2019-11-26T14:43:40+00:00"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         self.json_meeting_items.get("items")[0].update(modification_date)
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
         self.assertEqual(results.get("deleted"), 0)
         self.json_meeting_items.get("items")[0]['itemNumber'] = 110
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 1)
         self.assertEqual(results.get("deleted"), 0)
 
     def test_sync_no_modif_date_no_update(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)
         self.assertEqual(results.get("deleted"), 0)
         self.json_meeting_items.get("items")[0]['formatted_itemNumber'] = '1.1'
-        results = sync_items_data(meeting, self.json_meeting_items, self.institution)
+        results = sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 0)
         self.assertEqual(results.get("deleted"), 0)
 
     def test_force_sync_item(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
         results = sync_items_data(
-            meeting, self.json_meeting_items, self.institution, force=True
+            meeting, self.json_meeting_items, self.amittyville, force=True
         )
         decision = {"content-type": "text/html", "data": u"<p>Nouvelle décision</p>"}
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         results = sync_items_data(
-            meeting, self.json_meeting_items, self.institution, force=True
+            meeting, self.json_meeting_items, self.amittyville, force=True
         )
         self.assertEqual(results.get("created"), 0)
         self.assertEqual(results.get("modified"), 28)
@@ -250,11 +250,11 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         )
 
     def test_sync_annexes_publishable_enabled(self):
-        self.institution.info_annex_formatting_tal = "python: json['category_title']"
+        self.amittyville.info_annex_formatting_tal = "python: json['category_title']"
         annexes_json = self.json_annexes_publishable_mock
         annex = self.item.listFolderContents()[0]
         # delete existing annex and add the new one
-        sync_annexes_data(self.item, self.institution, annexes_json)
+        sync_annexes_data(self.item, self.amittyville, annexes_json)
         self.assertEqual(len(self.item.listFolderContents()), 1)
         annex2 = self.item.listFolderContents()[0]
         self.assertNotEqual(annex.UID(), annex2.UID())
@@ -272,7 +272,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         # test update
         self.assertEqual(len(self.item.listFolderContents()), 1)
         sync_annexes_data(
-            self.item, self.institution, self.json_annexes_publishable_updated_mock
+            self.item, self.amittyville, self.json_annexes_publishable_updated_mock
         )
         self.assertEqual(len(self.item.listFolderContents()), 1)
         file = self.item.listFolderContents()[-1]
@@ -288,20 +288,20 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
     def test_sync_annex_title_tal_expr(self):
         annexes_json = self.json_annexes_publishable_mock
-        sync_annexes_data(self.item, self.institution, annexes_json)
+        sync_annexes_data(self.item, self.amittyville, annexes_json)
         annex = self.item.listFolderContents()[0]
         # by default annex.title is the annex title...
         self.assertEqual(annex.title, "0s57")
         # use a tal expr
-        self.institution.info_annex_formatting_tal = "python: json['category_title']"
+        self.amittyville.info_annex_formatting_tal = "python: json['category_title']"
         # without force=True, nothing changed
-        sync_annexes_data(self.item, self.institution, annexes_json)
+        sync_annexes_data(self.item, self.amittyville, annexes_json)
         self.assertEqual(annex.title, "0s57")
-        sync_annexes_data(self.item, self.institution, annexes_json, force=True)
+        sync_annexes_data(self.item, self.amittyville, annexes_json, force=True)
         self.assertEqual(annex.title, "Annexe")
 
     def test_sync_not_mapped_groups_in_charge_are_ignored(self):
-        self.institution.representatives_mappings = [{
+        self.amittyville.representatives_mappings = [{
             'representative_key': 'dummy_mapped_uid_1',
             'representative_value': 'Mr. Mapped One',
             'representative_long_value': 'Mister Mapped One',
@@ -313,8 +313,8 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
             'active': True
         }]
 
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
-        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.amittyville)
 
         self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"], meeting.values()[0].representatives_in_charge)
         self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"],
@@ -329,17 +329,17 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
                          meeting.values()[3].long_representatives_in_charge)
 
     def test_item_title_formatting_tal(self):
-        self.institution.item_title_formatting_tal = "python: '<h2>' + json['title'] + '</h2>'"
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
-        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        self.amittyville.item_title_formatting_tal = "python: '<h2>' + json['title'] + '</h2>'"
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertEqual(
             meeting.values()[0].formatted_title.raw,
             "<h2>" + meeting.values()[0].title + "</h2>"
         )
 
     def test_empty_item_title_formatting_tal(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
-        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         self.assertIsNotNone(meeting.values()[0].formatted_title)
         self.assertEqual(
             meeting.values()[0].formatted_title.raw,
@@ -347,8 +347,8 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         )
 
     def test_item_view(self):
-        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
-        sync_items_data(meeting, self.json_meeting_items, self.institution)
+        meeting = sync_meeting_data(self.amittyville, self.json_meeting.get("items")[0])
+        sync_items_data(meeting, self.json_meeting_items, self.amittyville)
         item = object_values(meeting, "Item")[0]
         item_view = item.restrictedTraverse("@@view")
         self.assertTrue(item_view())
@@ -393,10 +393,10 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
     def test_response_is_not_200(self):
         when(requests).get("fake_url",
-                           auth=(self.institution.username, self.institution.password),
+                           auth=(self.amittyville.username, self.amittyville.password),
                            headers=API_HEADERS) \
             .thenReturn(mock({'status_code': 500}))
 
         with self.assertRaises(ValueError) as ws_err:
-            _call_delib_rest_api("fake_url", self.institution)
+            _call_delib_rest_api("fake_url", self.amittyville)
         self.assertEqual(u"Web service connection error !", str(ws_err.exception))

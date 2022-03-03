@@ -46,7 +46,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
             validate_color_parameters("#XXXXXXXXX")
 
     def test_available_allowed_types(self):
-        constraints = ISelectableConstrainTypes(self.institution)
+        constraints = ISelectableConstrainTypes(self.amittyville)
         self.login_as_manager()
         self.assertListEqual(["Folder", "Meeting"], constraints.getLocallyAllowedTypes())
         self.login_as_test()
@@ -56,10 +56,6 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
     def test_load_category_from_delib(self):
         belleville = self.portal["belleville"]
-        json_categories = {"extra_include_categories": [
-            {"id": "admin", "title": "Administrative"},
-            {"id": "political", "title": "Political"},
-        ]}
         json_classifiers = {"extra_include_classifiers": [
             {"id": "economy", "title": "Economy"},
             {"id": "env", "title": "Environment"},
@@ -69,14 +65,11 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
             {'UID': '', 'title': ''},
         ]}
 
-        url_cat = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=categories'
+        url_cat = 'http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=categories'
         auth = ('dgen', 'meeting')
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
 
-        when(requests).get(url_cat, auth=auth, headers=headers)\
-            .thenReturn(mock({'status_code': 200, 'json': lambda: json_categories}))
-
-        url_rpz = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=groups_in_charge'
+        url_rpz = 'http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=groups_in_charge'
         when(requests).get(url_rpz, auth=auth, headers=headers) \
             .thenReturn(mock({'status_code': 200, 'json': lambda: json_rpz}))
 
@@ -124,7 +117,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         verify(requests, times=2).get(url_cat, auth=auth, headers=headers)
         unstub()
 
-        url = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=classifiers'
+        url = 'http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=classifiers'
         when(requests).get(url, auth=auth, headers=headers).thenReturn(
             mock({'status_code': 200, 'json': lambda: json_classifiers}))
 
@@ -159,14 +152,14 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
             {'UID': 'fake++', 'title': 'Cyclop'},
         ]}
 
-        url_cat = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=categories'
+        url_cat = 'http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=categories'
         auth = ('dgen', 'meeting')
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
 
         when(requests).get(url_cat, auth=auth, headers=headers)\
             .thenReturn(mock({'status_code': 200, 'json': lambda: json_categories}))
 
-        url_rpz = 'https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=groups_in_charge'
+        url_rpz = 'http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=groups_in_charge'
         when(requests).get(url_rpz, auth=auth, headers=headers) \
             .thenReturn(mock({'status_code': 200, 'json': lambda: json_rpz}))
 
@@ -230,7 +223,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
            "Anonymous" must have the "AccessContentsInformation" permission
            so rules.xml is correctly compiled..."""
         rules = "/++theme++barceloneta/rules.xml"
-        inst = self.institution
+        inst = self.amittyville
         self.layer['request']['PUBLISHED'] = inst.meetings
         # when institution "published"
         self.assertEqual(api.content.get_state(inst), "published")
