@@ -36,7 +36,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_get_api_url_for_meetings_by_UID(self):
         url = utils.get_api_url_for_meetings(self.belleville, meeting_external_uid="foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=meeting"
             "&config_id=meeting-config-college"
             "&UID=foo"
@@ -50,7 +50,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_get_api_url_for_meetings_additional_query(self):
         url = utils.get_api_url_for_meetings(self.belleville)
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=meeting"
             "&config_id=meeting-config-college"
             "&review_state=frozen",
@@ -59,9 +59,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def test_get_api_url_for_annexes(self):
         url = utils.get_api_url_for_annexes(
-            "https://demo-pm.imio.be/foo")
+            "http://localhost:20081/demo/foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/foo/@annexes?"
+            "http://localhost:20081/demo/foo/@annexes?"
             "publishable=true"
             "&fullobjects"
             "&include_all=false"
@@ -77,7 +77,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.categories_mappings = None
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -106,7 +106,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.delib_category_field = "classifier"
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -138,7 +138,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
                                                 'global_category_id': 'immo'}]
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -168,7 +168,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.delib_category_field = "category"
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -199,7 +199,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.representatives_mappings = None
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -225,7 +225,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.categories_mappings = None
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@search?"
+            "http://localhost:20081/demo/@search?"
             "type=item"
             "&sort_on=getItemNumber"
             "&privacy=public"
@@ -336,12 +336,12 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_get_api_url_for_categories(self):
         url = utils.get_api_url_for_categories(self.belleville, "foo")
         self.assertEqual(
-            "https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=foo",
+            "http://localhost:20081/demo/@config?config_id=meeting-config-college&extra_include=foo",
             url,
         )
         self.belleville.plonemeeting_url = None
         self.assertIsNone(utils.get_api_url_for_categories(self.belleville, "foo"))
 
-        self.belleville.plonemeeting_url = "https://demo-pm.imio.be"
+        self.belleville.plonemeeting_url = "http://localhost:20081/demo"
         self.belleville.meeting_config_id = None
         self.assertIsNone(utils.get_api_url_for_categories(self.belleville, "foo"))
