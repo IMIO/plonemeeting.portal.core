@@ -20,7 +20,11 @@ class UtilsView(BrowserView):
     """
 
     def get_current_institution(self):
-        return self.is_institution() and self.context or api.portal.get_navigation_root(self.context)
+        return (
+            self.is_institution()
+            and self.context
+            or api.portal.get_navigation_root(self.context)
+        )
 
     def is_institution(self):
         return IInstitution.providedBy(self.context)
@@ -57,7 +61,9 @@ class UtilsView(BrowserView):
         if meeting_uid is None:
             url = meeting_folder_brains[0].getURL()
         else:
-            url = "{0}#seance={1}".format(meeting_folder_brains[0].getURL(), meeting_uid)
+            url = "{0}#seance={1}".format(
+                meeting_folder_brains[0].getURL(), meeting_uid
+            )
         return url
 
     @staticmethod

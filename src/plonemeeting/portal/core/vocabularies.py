@@ -40,13 +40,17 @@ class LocalCategoryVocabularyFactory:
     def __call__(self, context):
         if context == NO_VALUE or isinstance(context, dict):
             req = getRequest()
-            institution = req.get('PUBLISHED').context
+            institution = req.get("PUBLISHED").context
             if isinstance(institution, Institution):
-                local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
+                local_categories = copy.deepcopy(
+                    getattr(institution, "delib_categories", {})
+                )
                 if local_categories:
                     return SimpleVocabulary(
                         [
-                            SimpleTerm(value=category_id, title=local_categories[category_id])
+                            SimpleTerm(
+                                value=category_id, title=local_categories[category_id]
+                            )
                             for category_id in local_categories.keys()
                         ]
                     )
@@ -77,13 +81,14 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 
 
 class RepresentativeVocabularyFactory:
-    def __call__(self, context, representative_value_key='representative_value'):
+    def __call__(self, context, representative_value_key="representative_value"):
         institution = api.portal.get_navigation_root(context)
         mapping = getattr(institution, "representatives_mappings", [])
         return SimpleVocabulary(
             [
                 SimpleTerm(
-                    value=elem["representative_key"], title=elem[representative_value_key]
+                    value=elem["representative_key"],
+                    title=elem[representative_value_key],
                 )
                 for elem in mapping
             ]
@@ -95,24 +100,30 @@ RepresentativeVocabulary = RepresentativeVocabularyFactory()
 
 class LongRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
     def __call__(self, context):
-        return super(LongRepresentativeVocabularyFactory, self).__call__(context, 'representative_long_value')
+        return super(LongRepresentativeVocabularyFactory, self).__call__(
+            context, "representative_long_value"
+        )
 
 
 LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 
 
 class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
-
     def __call__(self, context):
         if context == NO_VALUE or isinstance(context, dict):
             req = getRequest()
-            institution = req.get('PUBLISHED').context
+            institution = req.get("PUBLISHED").context
             if isinstance(institution, Institution):
-                local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
+                local_representatives = copy.deepcopy(
+                    getattr(institution, "delib_representatives", {})
+                )
                 if local_representatives:
                     return SimpleVocabulary(
                         [
-                            SimpleTerm(value=representative_uid, title=local_representatives[representative_uid])
+                            SimpleTerm(
+                                value=representative_uid,
+                                title=local_representatives[representative_uid],
+                            )
                             for representative_uid in local_representatives.keys()
                         ]
                     )

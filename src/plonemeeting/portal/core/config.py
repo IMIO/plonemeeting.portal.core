@@ -27,7 +27,7 @@ CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE = {
     "classifier": "classifiers",
 }
 
-REPRESENTATIVE_IA_DELIB_FIELD = 'groups_in_charge'
+REPRESENTATIVE_IA_DELIB_FIELD = "groups_in_charge"
 
 
 REGION_INS_CODE = "03000"

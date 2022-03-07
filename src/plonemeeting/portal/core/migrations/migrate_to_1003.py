@@ -26,7 +26,9 @@ class MigrateTo1003(Migrator):
         logger.info("Migrating to plonemeeting.portal 1003...")
 
         self._fix_formatted_title()
-        self.reindexIndexes(idxs=["SearchableText", "pretty_representatives"], update_metadata=True)
+        self.reindexIndexes(
+            idxs=["SearchableText", "pretty_representatives"], update_metadata=True
+        )
 
 
 def migrate(context):

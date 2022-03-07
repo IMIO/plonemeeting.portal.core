@@ -12,6 +12,7 @@ from zope.browserpage import ViewPageTemplateFile
 class InstitutionView(DefaultView):
     """
     """
+
     index = ViewPageTemplateFile(path_to_dx_default_template())
 
     def __call__(self):
@@ -35,8 +36,10 @@ class InstitutionView(DefaultView):
 
     def _update(self):
         super(InstitutionView, self)._update()
-        if 'password' in self.w:
-            self.w['password'].value = self.context.password and '********************' or '-'
+        if "password" in self.w:
+            self.w["password"].value = (
+                self.context.password and "********************" or "-"
+            )
 
     def updateWidgets(self, prefix=None):
         super(InstitutionView, self).updateWidgets(prefix)
@@ -63,7 +66,7 @@ class EditForm(edit.DefaultEditForm):
         """ """
         # initializing form, we only have the _authenticator in request.form
         form_keys = tuple(self.request.form.keys())
-        if not form_keys or form_keys == ('_authenticator',):
+        if not form_keys or form_keys == ("_authenticator",):
             self.context.fetch_delib_categories()
             self.context.fetch_delib_representatives()
         return super(EditForm, self).__call__()

@@ -22,19 +22,22 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         vocab = queryUtility(
             IVocabularyFactory, "plonemeeting.portal.vocabularies.local_categories"
         )
-        self.portal.REQUEST.set('PUBLISHED', belleville.restrictedTraverse("@@edit"))
+        self.portal.REQUEST.set("PUBLISHED", belleville.restrictedTraverse("@@edit"))
         values = vocab(belleville)
         self.assertEqual(len(values), 29)
 
-        values = vocab({"test": 'yolo'})
+        values = vocab({"test": "yolo"})
         self.assertEqual(len(values), 29)
 
-        belleville.delib_categories = {"admin": "Administrative", "political": "Political"}
-        values = vocab({"test": 'yolo'})
+        belleville.delib_categories = {
+            "admin": "Administrative",
+            "political": "Political",
+        }
+        values = vocab({"test": "yolo"})
         self.assertEqual(len(values), 2)
 
-        self.portal.REQUEST.set('PUBLISHED', self.item.restrictedTraverse("@@edit"))
-        values = vocab({"test": 'yolo'})
+        self.portal.REQUEST.set("PUBLISHED", self.item.restrictedTraverse("@@edit"))
+        values = vocab({"test": "yolo"})
         self.assertEqual(len(values), 29)
 
     def testGlobalCategoryVocabulary(self):
@@ -50,12 +53,14 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         )
         voc = vocab(self.item)
         values_city1 = [term.title for term in voc._terms]
-        self.assertListEqual(values_city1,
-                             ['Mr DUPONT', 'Mr Dupuis', 'Mr Oniz', 'Mr Baka', 'Mr Kuro'])
+        self.assertListEqual(
+            values_city1, ["Mr DUPONT", "Mr Dupuis", "Mr Oniz", "Mr Baka", "Mr Kuro"]
+        )
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
-        self.assertListEqual(values_city2,
-                             ['Mme LOREM', 'Mme Ipsum', 'Mr Wara', 'Mr Bara'])
+        self.assertListEqual(
+            values_city2, ["Mme LOREM", "Mme Ipsum", "Mr Wara", "Mr Bara"]
+        )
 
     def testLongRepresentativesVocabulary(self):
         vocab = queryUtility(
@@ -63,19 +68,27 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         )
         voc = vocab(self.item)
         values_city1 = [term.title for term in voc._terms]
-        self.assertListEqual(values_city1,
-                             ['Mr DUPONT Bourgmestre F.F.',
-                              'Mr Dupuis 1ère Échevin',
-                              "Mr Oniz, Échevin de l'éducation",
-                              "Mr Baka, Échevin de des sports",
-                              "Mr Kuro, Échevin de la culture"])
+        self.assertListEqual(
+            values_city1,
+            [
+                "Mr DUPONT Bourgmestre F.F.",
+                "Mr Dupuis 1ère Échevin",
+                "Mr Oniz, Échevin de l'éducation",
+                "Mr Baka, Échevin de des sports",
+                "Mr Kuro, Échevin de la culture",
+            ],
+        )
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
-        self.assertListEqual(values_city2,
-                             ['Mme LOREM Bourgmestre',
-                              'Mme Ipsum 1ère Échevine',
-                              'Mr Wara, Échevin du tourisme',
-                              'Mr Bara, Échevin du Développement économique'])
+        self.assertListEqual(
+            values_city2,
+            [
+                "Mme LOREM Bourgmestre",
+                "Mme Ipsum 1ère Échevine",
+                "Mr Wara, Échevin du tourisme",
+                "Mr Bara, Échevin du Développement économique",
+            ],
+        )
 
     def testMeetingDatesVocabulary(self):
         vocab = queryUtility(

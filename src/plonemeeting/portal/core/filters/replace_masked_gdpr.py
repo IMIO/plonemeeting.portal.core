@@ -24,11 +24,14 @@ class ReplaceMaskedGDPR(object):
             redirect = self.institution.url_rgpd
         else:
             base = api.portal.getSite().absolute_url()
-            redirect = base + get_registry_record("plonemeeting.portal.core.rgpd_masked_text_redirect_path")
+            redirect = base + get_registry_record(
+                "plonemeeting.portal.core.rgpd_masked_text_redirect_path"
+            )
 
-        placeholder = get_registry_record("plonemeeting.portal.core.rgpd_masked_text_placeholder")
+        placeholder = get_registry_record(
+            "plonemeeting.portal.core.rgpd_masked_text_placeholder"
+        )
         replace_by = '<a class="pm-anonymize" href="{redirect}"><span>{placeholder}</span></a>'.format(
-            redirect=redirect,
-            placeholder=placeholder
+            redirect=redirect, placeholder=placeholder
         )
         return data.replace(to_replace, replace_by)

@@ -28,7 +28,9 @@ class ColorsCSSView(BrowserView):
         Render the css with the institution colors
         """
         portal = api.portal.get()
-        institutions = [obj for obj in portal.objectValues() if obj.portal_type == "Institution"]
+        institutions = [
+            obj for obj in portal.objectValues() if obj.portal_type == "Institution"
+        ]
         css = " "
         for institution in institutions:
             css += self.CSS_TEMPLATE.format(

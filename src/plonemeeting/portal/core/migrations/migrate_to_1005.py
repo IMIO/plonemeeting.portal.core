@@ -13,13 +13,14 @@ logger = logging.getLogger("plonemeeting.portal.core")
 
 
 class MigrateTo1005(Migrator):
-
     def _reapply_faceted_config(self):
         logger.info("Re-applying faceted configuuration...")
 
         faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_FOLDER_ID)
         # file is one level up, we are in migrations folder
-        faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_XML_PATH)
+        faceted_config_path = os.path.join(
+            os.path.dirname(__file__), "..", FACETED_XML_PATH
+        )
         with open(faceted_config_path, "rb") as faceted_config:
             faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
                 import_file=faceted_config

@@ -58,12 +58,14 @@ def get_api_url_for_meetings(institution, meeting_external_uid=None):
         )
     )
     if meeting_external_uid:
-        url = "{0}" \
-              "{1}" \
-              "&fullobjects=True" \
-              "&include_all=false" \
-              "&metadata_fields=date" \
-              "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
+        url = (
+            "{0}"
+            "{1}"
+            "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=date"
+            "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
+        )
     else:
         url += _datagrid_to_url_param(institution.meeting_filter_query)
     return url
@@ -75,16 +77,20 @@ def _get_category_filter_url(institution):
     else:
         url_param = "&getRawClassifier="
 
-    return _get_url_filter(url_param,
-                           institution.categories_mappings,
-                           'local_category_id',
-                           use_void_value=True)
+    return _get_url_filter(
+        url_param,
+        institution.categories_mappings,
+        "local_category_id",
+        use_void_value=True,
+    )
 
 
 def _get_representatives_filter_url(institution):
-    return _get_url_filter("&getGroupsInCharge=",
-                           institution.representatives_mappings,
-                           'representative_key')
+    return _get_url_filter(
+        "&getGroupsInCharge=",
+        institution.representatives_mappings,
+        "representative_key",
+    )
 
 
 def _get_url_filter(url_param, value_dict_list, dict_key, use_void_value=False):
@@ -111,31 +117,36 @@ def _get_uids_filter_url(uids):
 
 
 def get_api_url_for_annexes(item_json_id):
-    url = "{0}/@annexes?" \
-          "publishable=true" \
-          "&fullobjects" \
-          "&include_all=false" \
-          "&metadata_fields=file" \
-          "&metadata_fields=content_category" \
-          "&additional_values=category_title" \
-          "&additional_values=subcategory_title".format(item_json_id)
+    url = (
+        "{0}/@annexes?"
+        "publishable=true"
+        "&fullobjects"
+        "&include_all=false"
+        "&metadata_fields=file"
+        "&metadata_fields=content_category"
+        "&additional_values=category_title"
+        "&additional_values=subcategory_title".format(item_json_id)
+    )
     return url
 
 
 def _datagrid_to_url_param(values):
-    res = ''
+    res = ""
     for dict_value in values:
-        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
+        res += "&{parameter}={value}".format(
+            parameter=dict_value["parameter"], value=dict_value["value"]
+        )
     return res
 
 
 def get_api_url_for_annexes_summary(item_json_id):
-    url = "{0}/@annexes?" \
-          "publishable=true".format(item_json_id)
+    url = "{0}/@annexes?" "publishable=true".format(item_json_id)
     return url
 
 
-def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
+def get_api_url_for_meeting_items(
+    institution, meeting_external_uid, item_external_uids=[]
+):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     category_filter = _get_category_filter_url(institution)
@@ -181,7 +192,7 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
             item_content_query=item_content_query,
             category_filter=category_filter,
             representatives_filter=representatives_filter,
-            item_uids_filter=item_uids_filter
+            item_uids_filter=item_uids_filter,
         )
     )
 
@@ -228,7 +239,7 @@ def get_api_url_for_meeting_item(institution, meeting_item_uids):
             item_filter_query,
             item_content_query,
             category_filter,
-            representatives_filter
+            representatives_filter,
         )
     )
     return url
@@ -239,7 +250,7 @@ def get_api_url_for_categories(institution, delib_config_category_field):
         url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
             meeting_config_id=institution.meeting_config_id,
-            delib_category_field=delib_config_category_field
+            delib_category_field=delib_config_category_field,
         )
         return url
     else:
@@ -251,7 +262,7 @@ def get_api_url_for_representatives(institution):
         url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={representative}".format(
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
             meeting_config_id=institution.meeting_config_id,
-            representative=REPRESENTATIVE_IA_DELIB_FIELD
+            representative=REPRESENTATIVE_IA_DELIB_FIELD,
         )
         return url
     else:
@@ -259,9 +270,7 @@ def get_api_url_for_representatives(institution):
 
 
 def create_faceted_folder(container, title, id):
-    folder = api.content.create(
-        type="Folder", title=title, container=container, id=id
-    )
+    folder = api.content.create(type="Folder", title=title, container=container, id=id)
     subtyper = folder.restrictedTraverse("@@faceted_subtyper")
     subtyper.enable()
     return folder

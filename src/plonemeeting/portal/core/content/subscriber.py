@@ -27,10 +27,7 @@ def handle_institution_creation(obj, event):
 
     # Create meetings faceted folder
     meetings = create_faceted_folder(
-        obj,
-        translate(_(u"Meetings"),
-                  target_language=current_lang),
-        id=APP_FOLDER_ID
+        obj, translate(_(u"Meetings"), target_language=current_lang), id=APP_FOLDER_ID
     )
     alsoProvides(meetings, IMeetingsFolder)
     IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
@@ -45,22 +42,35 @@ def handle_institution_modified(institution, event):
     """
     Initializes categories_mappings by trying to match global categories with fetched categories from iA.Delib.
     """
-    local_categories = getattr(institution, 'delib_categories', {})
+    local_categories = getattr(institution, "delib_categories", {})
     if local_categories and not institution.categories_mappings:
-        logger.info("Initializing default categories mappings by matching with those fetched from iA.Delib.")
-        global_categories = [cat for cat in get_registry_record(name="plonemeeting.portal.core.global_categories")]
+        logger.info(
+            "Initializing default categories mappings by matching with those fetched from iA.Delib."
+        )
+        global_categories = [
+            cat
+            for cat in get_registry_record(
+                name="plonemeeting.portal.core.global_categories"
+            )
+        ]
         categories_mappings = []
         for local_category_id in local_categories.keys():
             if local_category_id in global_categories:
-                categories_mappings.append({"local_category_id": local_category_id,
-                                            "global_category_id": local_category_id})
+                categories_mappings.append(
+                    {
+                        "local_category_id": local_category_id,
+                        "global_category_id": local_category_id,
+                    }
+                )
         institution.categories_mappings = categories_mappings
-        logger.info("{} fetched iA.Delib categories matched.".format(len(categories_mappings)))
+        logger.info(
+            "{} fetched iA.Delib categories matched.".format(len(categories_mappings))
+        )
 
 
 def institution_state_changed(obj, event):
-    content_filter = {'portal_type': 'Folder'}
-    if event.new_state.id == 'private':
+    content_filter = {"portal_type": "Folder"}
+    if event.new_state.id == "private":
         content_filter = {}
     for child in obj.listFolderContents(contentFilter=content_filter):
         api.content.transition(child, to_state=event.new_state.id)

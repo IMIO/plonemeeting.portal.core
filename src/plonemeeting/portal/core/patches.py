@@ -13,10 +13,10 @@ def hasScript(s):
     """Override to keep data:image elements, turned 'data:' to 'data:text'
     """
     s = decode_htmlentities(s)
-    s = s.replace('\x00', '')
-    s = CSS_COMMENT.sub('', s)
-    s = ''.join(s.split()).lower()
-    for t in ('script:', 'expression:', 'expression(', 'data:text'):
+    s = s.replace("\x00", "")
+    s = CSS_COMMENT.sub("", s)
+    s = "".join(s.split()).lower()
+    for t in ("script:", "expression:", "expression(", "data:text"):
         if t in s:
             return True
     return False

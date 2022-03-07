@@ -9,7 +9,9 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
     def test_is_institution(self):
         institution_utils = self.belleville.restrictedTraverse("@@utils_view")
         self.assertTrue(institution_utils.is_institution())
-        meetings_utils = self.belleville[APP_FOLDER_ID].restrictedTraverse("@@utils_view")
+        meetings_utils = self.belleville[APP_FOLDER_ID].restrictedTraverse(
+            "@@utils_view"
+        )
         self.assertFalse(meetings_utils.is_institution())
 
     def test_get_linked_meeting(self):

@@ -85,9 +85,7 @@ def create_file(container, filename):
         title = os.path.basename(file_path)
         with open(file_path, "rb") as fd:
             file_obj = content.create(container=container, type="File", title=title)
-            file_obj.file = NamedFile(
-                data=fd, filename=title, contentType=contentType
-            )
+            file_obj.file = NamedFile(data=fd, filename=title, contentType=contentType)
 
 
 def create_demo_content(context):
@@ -102,7 +100,9 @@ def create_demo_content(context):
     # when demo content added at Plone Site creation time
     # the plone.app.contenttypes BrowserLayer is not enabled
     if not IPloneAppContenttypesLayer.providedBy(request):
-        logger.warning("IPloneAppContenttypesLayer not enabled on REQUEST, enabling it.")
+        logger.warning(
+            "IPloneAppContenttypesLayer not enabled on REQUEST, enabling it."
+        )
         event = BeforeTraverseEvent(portal, request)
         mark_layer(portal, event)
     else:
@@ -131,12 +131,8 @@ def create_demo_content(context):
                 username=institution["username"],
                 password=institution["password"],
                 meeting_config_id=institution["meeting_config_id"],
-                meeting_filter_query=institution[
-                    "meeting_filter_query"
-                ],
-                item_filter_query=institution[
-                    "item_filter_query"
-                ],
+                meeting_filter_query=institution["meeting_filter_query"],
+                item_filter_query=institution["item_filter_query"],
                 item_decision_formatting_tal=institution[
                     "item_decision_formatting_tal"
                 ],
@@ -182,15 +178,14 @@ def create_demo_content(context):
                             meeting["plonemeeting_last_modified"]
                         ),
                     )
-                    item_obj.formatted_title = richtextval("<p>" + item_obj.title + "</p>")
+                    item_obj.formatted_title = richtextval(
+                        "<p>" + item_obj.title + "</p>"
+                    )
                     if "files" in item:
                         for file in item["files"]:
                             create_file(item_obj, file)
         faqs = content.create(
-            container=portal,
-            type="Folder",
-            title="Foire aux questions",
-            id="faq"
+            container=portal, type="Folder", title="Foire aux questions", id="faq"
         )
         for faq in data["faqs"]:
             document = content.create(
@@ -198,10 +193,10 @@ def create_demo_content(context):
                 type="Document",
                 title=faq.get("title"),
                 id=faq.get("id"),
-                text=richtextval(faq["text"])
+                text=richtextval(faq["text"]),
             )
             content.transition(obj=document, transition="publish")
-    brain = content.find(context=portal, id='front-page')
+    brain = content.find(context=portal, id="front-page")
     if brain:
         default_front_page = content.get(UID=brain[0].UID)
         content.delete(default_front_page)

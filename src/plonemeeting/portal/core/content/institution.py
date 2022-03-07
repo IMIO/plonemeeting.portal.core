@@ -75,73 +75,71 @@ class ICategoryMappingRowSchema(Interface):
 
 class IUrlParameterRowSchema(Interface):
     parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='extra_include'
+        title=_(u"Parameter"), required=True, default="extra_include"
     )
-    value = schema.TextLine(
-        title=_(u"Value"),
-        required=True,
-    )
+    value = schema.TextLine(title=_(u"Value"), required=True,)
 
 
 class IUrlMeetingFilterParameterRowSchema(Interface):
     parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='review_state'
+        title=_(u"Parameter"), required=True, default="review_state"
     )
-    value = schema.TextLine(
-        title=_(u"Value"),
-        required=True,
-    )
+    value = schema.TextLine(title=_(u"Value"), required=True,)
 
 
 class IUrlItemFilterParameterRowSchema(Interface):
     parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='listType'
+        title=_(u"Parameter"), required=True, default="listType"
     )
-    value = schema.TextLine(
-        title=_(u"Value"),
-        required=True,
-    )
+    value = schema.TextLine(title=_(u"Value"), required=True,)
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.Choice(title=_(u"Representative key"),
-                                       vocabulary="plonemeeting.portal.vocabularies.editable_representative",
-                                       required=True)
-    representative_value = schema.TextLine(title=_(u"Representative value"),
-                                           description=_(u"representative_value_description"),
-                                           required=True)
-    representative_long_value = schema.TextLine(title=_(u"Representative long values"),
-                                                description=_(u"representative_long_value_description"),
-                                                required=True)
+    representative_key = schema.Choice(
+        title=_(u"Representative key"),
+        vocabulary="plonemeeting.portal.vocabularies.editable_representative",
+        required=True,
+    )
+    representative_value = schema.TextLine(
+        title=_(u"Representative value"),
+        description=_(u"representative_value_description"),
+        required=True,
+    )
+    representative_long_value = schema.TextLine(
+        title=_(u"Representative long values"),
+        description=_(u"representative_long_value_description"),
+        required=True,
+    )
     active = schema.Bool(title=_(u"Active"), default=True, required=True)
 
 
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
+
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)
 
     password = schema.TextLine(title=_(u"Password"), required=False)
 
-    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
+    meeting_config_id = schema.TextLine(
+        title=_(u"Meeting config ID"), required=True, default="meeting-config-council"
+    )
 
     directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True)
     meeting_filter_query = schema.List(
         title=_(u"Meeting query filter for list"),
         description=_(u"meeting_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
-        default=[{'parameter': 'review_state', 'value': 'created'},
-                 {'parameter': 'review_state', 'value': 'frozen'},
-                 {'parameter': 'review_state', 'value': 'decided'}]
+        value_type=DictRow(
+            title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema
+        ),
+        default=[
+            {"parameter": "review_state", "value": "created"},
+            {"parameter": "review_state", "value": "frozen"},
+            {"parameter": "review_state", "value": "decided"},
+        ],
     )
 
     directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True)
@@ -149,9 +147,13 @@ class IInstitution(model.Schema):
         title=_(u"Published Items query filter"),
         description=_(u"item_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlItemFilterParameterRowSchema),
-        default=[{'parameter': 'listType', 'value': 'normal'},
-                 {'parameter': 'listType', 'value': 'late'}]
+        value_type=DictRow(
+            title=u"Parameter name", schema=IUrlItemFilterParameterRowSchema
+        ),
+        default=[
+            {"parameter": "listType", "value": "normal"},
+            {"parameter": "listType", "value": "late"},
+        ],
     )
 
     directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True)
@@ -160,7 +162,7 @@ class IInstitution(model.Schema):
         description=_(u"item_content_query_description"),
         required=True,
         value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
-        default=[{'parameter': 'extra_include', 'value': 'public_deliberation'}]
+        default=[{"parameter": "extra_include", "value": "public_deliberation"}],
     )
     # Formatting fieldset
     model.fieldset(
@@ -177,8 +179,10 @@ class IInstitution(model.Schema):
 
     url_rgpd = schema.TextLine(
         title=_(u"Custom page for GDPR text"),
-        description=_(u"The url visitors should be redirected to when clicking a GDPR masked text"),
-        required=False
+        description=_(
+            u"The url visitors should be redirected to when clicking a GDPR masked text"
+        ),
+        required=False,
     )
 
     project_decision_disclaimer = RichText(
@@ -225,7 +229,7 @@ class IInstitution(model.Schema):
         title=_(u"iA.Delib field to use for category mapping"),
         vocabulary="plonemeeting.portal.vocabularies.delib_category_fields",
         required=True,
-        default=DEFAULT_CATEGORY_IA_DELIB_FIELD
+        default=DEFAULT_CATEGORY_IA_DELIB_FIELD,
     )
 
     directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)
@@ -236,7 +240,9 @@ class IInstitution(model.Schema):
         required=False,
     )
 
-    directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True)
+    directives.widget(
+        "representatives_mappings", DataGridFieldFactory, allow_reorder=True
+    )
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
         description=_(u"representatives_mappings_description"),
@@ -322,18 +328,24 @@ def categories_mappings_invariant(data):
     local_category_id_errors = set()
     if data.categories_mappings:
         for row in data.categories_mappings:
-            if row['local_category_id'] in mapped_local_category_id:
-                local_category_id_errors.add(row['local_category_id'])
+            if row["local_category_id"] in mapped_local_category_id:
+                local_category_id_errors.add(row["local_category_id"])
             else:
-                mapped_local_category_id.append(row['local_category_id'])
+                mapped_local_category_id.append(row["local_category_id"])
         if local_category_id_errors:
             local_category_errors = []
-            local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
+            local_categories = get_vocab(
+                data.__context__, "plonemeeting.portal.vocabularies.local_categories"
+            )
             for cat_id in local_category_id_errors:
                 local_category_errors.append(local_categories.by_value[cat_id].title)
             local_category_errors = sorted(local_category_errors)
-            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                            mapping={'categories_title': ', '.join(local_category_errors)}))
+            raise Invalid(
+                _(
+                    u"Categories mappings - iA.Delib category mapped more than once : ${categories_title}",
+                    mapping={"categories_title": ", ".join(local_category_errors)},
+                )
+            )
 
 
 def representatives_mappings_invariant(data):
@@ -343,65 +355,97 @@ def representatives_mappings_invariant(data):
     missing_uids = {}
     changes = {}
     for rpz in new_representatives:
-        changes[rpz['representative_key']] = rpz['representative_value']
+        changes[rpz["representative_key"]] = rpz["representative_value"]
     if data.__context__:
         for rpz in data.__context__.representatives_mappings:
-            rpz_uid = rpz['representative_key']
+            rpz_uid = rpz["representative_key"]
             if rpz_uid not in changes and rpz_uid not in missing_uids:
-                brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
+                brains = api.content.find(
+                    portal_type="Item",
+                    context=data.__context__,
+                    getGroupInCharge=rpz_uid,
+                )
                 if brains:
-                    missing_uids[rpz_uid] = rpz['representative_value']
+                    missing_uids[rpz_uid] = rpz["representative_value"]
     if missing_uids:
-        raise Invalid(_("Representatives mappings - Removing representatives linked to "
-                        "items is not allowed : ${representatives}",
-                        mapping={"representatives": ", ".join(missing_uids.values())}))
+        raise Invalid(
+            _(
+                "Representatives mappings - Removing representatives linked to "
+                "items is not allowed : ${representatives}",
+                mapping={"representatives": ", ".join(missing_uids.values())},
+            )
+        )
 
 
 @implementer(IInstitution)
 class Institution(Container):
     """
     """
+
     def fetch_delib_categories(self):
-        delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
+        delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[
+            self.delib_category_field
+        ]
         url = get_api_url_for_categories(self, delib_config_category_field)
-        categories = self._fetch_external_data_for_vocabulary('delib_categories',
-                                                              url,
-                                                              delib_config_category_field,
-                                                              'id',
-                                                              'title')
+        categories = self._fetch_external_data_for_vocabulary(
+            "delib_categories", url, delib_config_category_field, "id", "title"
+        )
         self.delib_categories = categories
 
     def fetch_delib_representatives(self):
-        representatives = self._fetch_external_data_for_vocabulary('delib_representatives',
-                                                                   get_api_url_for_representatives(self),
-                                                                   REPRESENTATIVE_IA_DELIB_FIELD,
-                                                                   'UID',
-                                                                   'title')
+        representatives = self._fetch_external_data_for_vocabulary(
+            "delib_representatives",
+            get_api_url_for_representatives(self),
+            REPRESENTATIVE_IA_DELIB_FIELD,
+            "UID",
+            "title",
+        )
         # keep history
         for row in self.representatives_mappings:
-            key = row['representative_key']
+            key = row["representative_key"]
             if key not in representatives:
-                representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
+                representatives[key] = _("Unknown value: ${key}", mapping={"key": key})
         self.delib_representatives = representatives
 
-    def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title):
+    def _fetch_external_data_for_vocabulary(
+        self, attr_name, url, url_extra_include, json_voc_value, json_voc_title
+    ):
         # ensure empty dict if None or attr doesn't exist
         res = deepcopy(getattr(self, attr_name, {})) or {}
-        if self.plonemeeting_url and self.meeting_config_id and self.username and self.password:
+        if (
+            self.plonemeeting_url
+            and self.meeting_config_id
+            and self.username
+            and self.password
+        ):
             if url:
                 logger.info("Fetching {} for {} [Start]".format(attr_name, self.title))
                 try:
-                    response = requests.get(url, auth=(self.username, self.password), headers=API_HEADERS)
+                    response = requests.get(
+                        url, auth=(self.username, self.password), headers=API_HEADERS
+                    )
                     if response.status_code in (200, 201):
                         res = {}
                         json = response.json()
                         values_json = json["extra_include_{}".format(url_extra_include)]
                         for value in values_json:
                             res[value[json_voc_value]] = value[json_voc_title]
-                        logger.info("Fetching {} for {} [End]".format(attr_name, self.title))
+                        logger.info(
+                            "Fetching {} for {} [End]".format(attr_name, self.title)
+                        )
                     else:
-                        logger.error("Unable to fetch {}, error is {} [End]".format(attr_name, response.content))
+                        logger.error(
+                            "Unable to fetch {}, error is {} [End]".format(
+                                attr_name, response.content
+                            )
+                        )
                 except requests.exceptions.ConnectionError as err:
-                    logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-                    api.portal.show_message(_("Webservice connection error !"), request=self.REQUEST, type="warning")
+                    logger.warning(
+                        "Error while trying to connect to iA.Delib", exc_info=err
+                    )
+                    api.portal.show_message(
+                        _("Webservice connection error !"),
+                        request=self.REQUEST,
+                        type="warning",
+                    )
         return res

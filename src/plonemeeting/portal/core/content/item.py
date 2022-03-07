@@ -102,8 +102,9 @@ def get_pretty_representatives(object):
     res = []
     institution = api.portal.get_navigation_root(object)
     mapping = institution.representatives_mappings
-    representatives_mapping = {infos["representative_key"]: infos["representative_value"]
-                               for infos in mapping}
+    representatives_mapping = {
+        infos["representative_key"]: infos["representative_value"] for infos in mapping
+    }
     for representative_key in representative_keys:
         value = representatives_mapping.get(representative_key)
         if value and value not in res:

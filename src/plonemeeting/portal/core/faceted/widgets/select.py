@@ -16,8 +16,8 @@ class SelectMeetingWidget(Widget):
         """ For the "seance" criterion, we will return last value of the vocabulary
             instead default selected on the widget (by default "All")
         """
-        default = super(SelectMeetingWidget, self).default or u''
-        if self.data.__name__ == 'seance':
+        default = super(SelectMeetingWidget, self).default or u""
+        if self.data.__name__ == "seance":
             meetings = self.vocabulary()
             if meetings:
                 default = meetings[0][0]
@@ -31,6 +31,6 @@ class SelectMeetingWidget(Widget):
         """
         res = super(SelectMeetingWidget, self).count(brains, sequence)
         # turn "0" count into "-" so it is ignored by view.js and not disabled
-        if self.data.__name__ == 'seance':
-            res = {k: v or '-' for k, v in res.items()}
+        if self.data.__name__ == "seance":
+            res = {k: v or "-" for k, v in res.items()}
         return res

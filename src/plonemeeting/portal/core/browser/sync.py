@@ -48,7 +48,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
+            self.context.absolute_url()
+            + "/@@pre_import_report_form?external_meeting_uid="
+            + external_meeting_uid
         )
         redirect(self.request, next_form_url)
 
@@ -62,7 +64,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
     def _notify_error_and_cancel(self, err=None):
         logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-        api.portal.show_message(_("Webservice connection error !"), request=self.request, type="error")
+        api.portal.show_message(
+            _("Webservice connection error !"), request=self.request, type="error"
+        )
         self.handle_cancel(self, None)
 
     @button.buttonAndHandler(plone_(u"Cancel"))
@@ -87,16 +91,24 @@ class ForceReimportMeetingView(ImportMeetingView):  # pragma: no cover
         self.import_meeting(force=True)
 
 
-def _sync_meeting(institution, meeting_uid, request, force=False, item_external_uids=[]):  # pragma: no cover
+def _sync_meeting(
+    institution, meeting_uid, request, force=False, item_external_uids=[]
+):  # pragma: no cover
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, item_external_uids)
+        status, new_meeting_uid = sync_meeting(
+            institution, meeting_uid, force, item_external_uids
+        )
         if new_meeting_uid:
-            brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
+            brains = api.content.find(
+                context=institution, object_provides=IMeetingsFolder.__identifier__
+            )
 
             if brains:
-                request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
+                request.response.redirect(
+                    "{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid)
+                )
                 api.portal.show_message(message=status, request=request, type="info")
         else:
             api.portal.show_message(message=status, request=request, type="error")

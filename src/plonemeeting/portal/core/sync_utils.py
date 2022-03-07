@@ -31,7 +31,9 @@ def _call_delib_rest_api(url, institution):  # pragma: no cover
     )
 
     if response.status_code != 200:
-        logger.error("Response status_code was not 200 : {}".format(response.status_code))
+        logger.error(
+            "Response status_code was not 200 : {}".format(response.status_code)
+        )
         raise ValueError(_(u"Web service connection error !"))
     msg, seconds = end_time(start_time, "REST API CALL MADE IN ", True)
     if seconds > 1:
@@ -52,14 +54,17 @@ def _get_mapped_representatives_in_charge(item_data, institution):
     """
     Ensure that only mapped representatives in charge are kept when syncing
     """
-    groups_in_charge = item_data.get(
-        "groupsInCharge"
-    ) or item_data.get("all_groupsInCharge")
+    groups_in_charge = item_data.get("groupsInCharge") or item_data.get(
+        "all_groupsInCharge"
+    )
 
     res = []
     if groups_in_charge:
         gic_tokens = [gic["token"] for gic in groups_in_charge]
-        mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
+        mapped_uids = [
+            mapping["representative_key"]
+            for mapping in institution.representatives_mappings
+        ]
         res = list(filter(lambda uid: uid in mapped_uids, gic_tokens))
     return res
 
@@ -153,9 +158,11 @@ def sync_items_number(item_dict):
     modified = 0
     for item_uid in item_dict.keys():
         item = uuidToObject(item_uid)
-        new_item_sortable_number = item_dict[item_uid]['sortable_number']
-        new_item_number = item_dict[item_uid]['number']
-        was_modified = _sync_item_number(item, new_item_sortable_number, new_item_number)
+        new_item_sortable_number = item_dict[item_uid]["sortable_number"]
+        new_item_number = item_dict[item_uid]["number"]
+        was_modified = _sync_item_number(
+            item, new_item_sortable_number, new_item_number
+        )
         if was_modified:
             modified += 1
     return modified
@@ -165,25 +172,32 @@ def _sync_item_number(item, new_item_sortable_number, new_item_number):
     if new_item_sortable_number != item.sortable_number:
         item.sortable_number = new_item_sortable_number
         item.number = new_item_number
-        item.reindexObject(idxs=['number', 'sortable_number'])
+        item.reindexObject(idxs=["number", "sortable_number"])
         return True
     return False
 
 
-def sync_items_data(meeting, items_data, institution, force=False, item_external_uids=[]):
+def sync_items_data(
+    meeting, items_data, institution, force=False, item_external_uids=[]
+):
     nb_created = nb_modified = nb_deleted = 0
     if item_external_uids:
         existing_items_brains = api.content.find(
-            context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID(), plonemeeting_uid=item_external_uids
+            context=meeting,
+            portal_type="Item",
+            linkedMeetingUID=meeting.UID(),
+            plonemeeting_uid=item_external_uids,
         )
     else:
         existing_items_brains = api.content.find(
             context=meeting, portal_type="Item", linkedMeetingUID=meeting.UID()
         )
     existing_items = {
-        b.plonemeeting_uid: {"last_modified": b.plonemeeting_last_modified,
-                             "brain": b,
-                             "sortable_number": b.sortable_number}
+        b.plonemeeting_uid: {
+            "last_modified": b.plonemeeting_last_modified,
+            "brain": b,
+            "sortable_number": b.sortable_number,
+        }
         for b in existing_items_brains
     }
     synced_uids = [i.get("UID") for i in items_data.get("items")]
@@ -209,7 +223,9 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
             created = True
         else:
             existing_last_modified = existing_items.get(item_uid).get("last_modified")
-            existing_sortable_number = existing_items.get(item_uid).get("sortable_number")
+            existing_sortable_number = existing_items.get(item_uid).get(
+                "sortable_number"
+            )
             if (
                 not force
                 and existing_last_modified
@@ -221,9 +237,15 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
                 continue
             item = existing_items.get(item_uid).get("brain").getObject()
 
-        _sync_item_number(item, item_data["itemNumber"], item_data["formatted_itemNumber"])
+        _sync_item_number(
+            item, item_data["itemNumber"], item_data["formatted_itemNumber"]
+        )
 
-        if force or item.plonemeeting_last_modified is None or item.plonemeeting_last_modified < modification_date:
+        if (
+            force
+            or item.plonemeeting_last_modified is None
+            or item.plonemeeting_last_modified < modification_date
+        ):
             # Sync item fields values
             item.plonemeeting_last_modified = modification_date
             # reinit formatted title in case the configuration changed in portal
@@ -237,7 +259,9 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
             else:
                 item.formatted_title = richtextval("<p>" + item_title + "</p>")
 
-            representative_uid = _get_mapped_representatives_in_charge(item_data, institution)
+            representative_uid = _get_mapped_representatives_in_charge(
+                item_data, institution
+            )
             item.representatives_in_charge = representative_uid
             item.long_representatives_in_charge = representative_uid
 
@@ -258,9 +282,7 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
             )
             item.reindexObject()
 
-            sync_annexes(
-                item, institution, item_data.get("@id"), force
-            )
+            sync_annexes(item, institution, item_data.get("@id"), force)
         if created:
             nb_created += 1
         else:
@@ -313,7 +335,9 @@ def sync_meeting(institution, meeting_external_uid, force=False, item_external_u
     status may be an error or a short summary of what happened.
     UID may be none in case of error from the web service
     """
-    url = get_api_url_for_meetings(institution, meeting_external_uid=meeting_external_uid)
+    url = get_api_url_for_meetings(
+        institution, meeting_external_uid=meeting_external_uid
+    )
     response = _call_delib_rest_api(url, institution)
 
     json_meeting = json.loads(response.text)
@@ -321,13 +345,17 @@ def sync_meeting(institution, meeting_external_uid, force=False, item_external_u
         raise ValueError(_(u"Unexpected meeting count in web service response !"))
 
     meeting = sync_meeting_data(institution, json_meeting.get("items")[0])
-    url = get_api_url_for_meeting_items(institution,
-                                        meeting_external_uid=meeting_external_uid,
-                                        item_external_uids=item_external_uids)
+    url = get_api_url_for_meeting_items(
+        institution,
+        meeting_external_uid=meeting_external_uid,
+        item_external_uids=item_external_uids,
+    )
     response = _call_delib_rest_api(url, institution)
 
     json_items = json.loads(response.text)
-    results = sync_items_data(meeting, json_items, institution, force, item_external_uids)
+    results = sync_items_data(
+        meeting, json_items, institution, force, item_external_uids
+    )
 
     status_msg = _(
         u"meeting_imported",

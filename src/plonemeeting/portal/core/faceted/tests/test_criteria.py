@@ -26,12 +26,16 @@ class TestFacetedCriteria(PmPortalTestCase):
 
     def test_compute_criteria(self):
         """Global defined criteria are used for every institutions."""
-        global_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_FOLDER_ID])
-        for faceted_folder in (self.amityville[APP_FOLDER_ID], self.belleville[APP_FOLDER_ID]):
+        global_criteria = ICriteria(
+            self.layer["portal"][CONFIG_FOLDER_ID][FACETED_FOLDER_ID]
+        )
+        for faceted_folder in (
+            self.amityville[APP_FOLDER_ID],
+            self.belleville[APP_FOLDER_ID],
+        ):
             criteria = ICriteria(faceted_folder)
             self.assertEqual(
-                global_criteria._criteria(),
-                criteria._criteria(),
+                global_criteria._criteria(), criteria._criteria(),
             )
 
     def test_select_widget(self):
@@ -71,11 +75,16 @@ class TestFacetedCriteria(PmPortalTestCase):
         sort_widget = ItemsSortWidget(faceted_folder, request, data=sort_data)
         # when no meeting selected in "seance"
         self.assertFalse("seance" in request.form)
-        self.assertEqual(sort_widget.query(request.form),
-                         {'sort_on': ['linkedMeetingDate', 'sortable_number'],
-                          'sort_order': ['descending', 'ascending']})
+        self.assertEqual(
+            sort_widget.query(request.form),
+            {
+                "sort_on": ["linkedMeetingDate", "sortable_number"],
+                "sort_order": ["descending", "ascending"],
+            },
+        )
         meetings = self.belleville.getFolderContents({"portal_type": "Meeting"})
         request.form["seance"] = meetings[0].UID
-        self.assertEqual(sort_widget.query(request.form),
-                         {'sort_on': ['sortable_number'],
-                          'sort_order': ['ascending']})
+        self.assertEqual(
+            sort_widget.query(request.form),
+            {"sort_on": ["sortable_number"], "sort_order": ["ascending"]},
+        )

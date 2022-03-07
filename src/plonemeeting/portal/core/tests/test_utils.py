@@ -34,7 +34,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(utils.get_api_url_for_meetings(institution))
 
     def test_get_api_url_for_meetings_by_UID(self):
-        url = utils.get_api_url_for_meetings(self.belleville, meeting_external_uid="foo")
+        url = utils.get_api_url_for_meetings(
+            self.belleville, meeting_external_uid="foo"
+        )
         self.assertEqual(
             "http://localhost:20081/demo/@search?"
             "type=meeting"
@@ -59,8 +61,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         )
 
     def test_get_api_url_for_annexes(self):
-        url = utils.get_api_url_for_annexes(
-            "http://localhost:20081/demo/foo")
+        url = utils.get_api_url_for_annexes("http://localhost:20081/demo/foo")
         self.assertEqual(
             "http://localhost:20081/demo/foo/@annexes?"
             "publishable=true"
@@ -133,10 +134,13 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
             url,
         )
-        self.belleville.categories_mappings = [{'local_category_id': 'administration',
-                                                'global_category_id': 'administration'},
-                                               {'local_category_id': 'immo',
-                                                'global_category_id': 'immo'}]
+        self.belleville.categories_mappings = [
+            {
+                "local_category_id": "administration",
+                "global_category_id": "administration",
+            },
+            {"local_category_id": "immo", "global_category_id": "immo"},
+        ]
         url = utils.get_api_url_for_meeting_items(self.belleville, "foo")
         self.assertEqual(
             "http://localhost:20081/demo/@search?"
@@ -265,7 +269,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
 
     def test_create_faceted_folder(self):
         faceted = utils.create_faceted_folder(
-            self.portal, "Test Faceted", id="test-faceted")
+            self.portal, "Test Faceted", id="test-faceted"
+        )
         self.assertEqual("Test Faceted", faceted.title)
         self.assertEqual("test-faceted", faceted.id)
         IFacetedNavigable.providedBy(faceted)
@@ -279,7 +284,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
 
         utils.set_constrain_types(self.belleville, ["Meeting", "Folder"])
-        self.assertListEqual(["Folder", "Meeting"], constraints.getLocallyAllowedTypes())
+        self.assertListEqual(
+            ["Folder", "Meeting"], constraints.getLocallyAllowedTypes()
+        )
 
     def test_cleanup_contents(self):
         api.content.create(container=self.portal, id="news", type="Folder")

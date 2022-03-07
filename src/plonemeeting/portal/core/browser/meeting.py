@@ -9,6 +9,7 @@ from zope.browserpage import ViewPageTemplateFile
 class MeetingView(DefaultView):
     """
     """
+
     index = ViewPageTemplateFile(path_to_dx_default_template())
 
     def __call__(self):

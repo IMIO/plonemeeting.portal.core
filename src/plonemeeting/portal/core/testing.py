@@ -47,15 +47,13 @@ PLONEMEETING_PORTAL_CORE_FIXTURE = PlonemeetingPortalCoreLayer()
 
 
 PLONEMEETING_PORTAL_CORE_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,
-           INTEGRATION_TESTING),
+    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE, INTEGRATION_TESTING),
     name="PlonemeetingPortalCoreLayer:IntegrationTesting",
 )
 
 
 PLONEMEETING_PORTAL_CORE_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE,
-           WSGI_SERVER),
+    bases=(PLONEMEETING_PORTAL_CORE_FIXTURE, WSGI_SERVER),
     name="PlonemeetingPortalCoreLayer:FunctionalTesting",
 )
 

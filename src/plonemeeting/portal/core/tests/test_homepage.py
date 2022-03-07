@@ -7,7 +7,6 @@ import json
 
 
 class TestHomepageView(PmPortalDemoFunctionalTestCase):
-
     def test_homepage_view(self):
         """ Test if the homepage is rendered correctly and if it doesn't fail"""
         portal = api.portal.get()
@@ -16,10 +15,7 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         browser.open(portal.absolute_url())
         html_content = browser.contents
 
-        self.assertEqual(
-            "200 OK",
-            browser.headers.get('status')
-        )
+        self.assertEqual("200 OK", browser.headers.get("status"))
 
         self.assertIn("x-institution-map", html_content)
         self.assertIn("x-institution-select", html_content)
@@ -45,8 +41,8 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         # Not published institutions are ignored too
         self.assertDictEqual({}, json.loads(render))
 
-        api.content.transition(obj=namur, transition='publish')
-        api.content.transition(obj=liege, transition='publish')
+        api.content.transition(obj=namur, transition="publish")
+        api.content.transition(obj=liege, transition="publish")
         # We should have some data now :
         view = portal.unrestrictedTraverse("@@institution_locations")
         render = view()

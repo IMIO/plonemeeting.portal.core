@@ -17,9 +17,9 @@ def institutions_cachekey(method, self):
     """
     Institution cache key based on a list of ids and last modification date
     """
-    brains = api.content.find(portal_type="Institution",
-                              review_state="published",
-                              sort_on='getId')
+    brains = api.content.find(
+        portal_type="Institution", review_state="published", sort_on="getId"
+    )
     return [brain.id + "_" + str(brain.modified) for brain in brains]
 
 
@@ -31,9 +31,9 @@ class HomepageView(BrowserView):
         """
         Get all institutions from this portal and return a summary in JSON
         """
-        brains = api.content.find(portal_type="Institution",
-                                  review_state="published",
-                                  sort_on='getId')
+        brains = api.content.find(
+            portal_type="Institution", review_state="published", sort_on="getId"
+        )
         institutions = {}
         for brain in brains:
             if brain.id not in DEMO_INSTITUTION_IDS:
@@ -52,15 +52,22 @@ class HomepageView(BrowserView):
         faq_folder = getattr(self.context, "faq", None)
         if not faq_folder:
             return
-        brains = api.content.find(context=faq_folder,
-                                  portal_type="Document",
-                                  review_state="published",
-                                  sort_on="getObjPositionInParent")
+        brains = api.content.find(
+            context=faq_folder,
+            portal_type="Document",
+            review_state="published",
+            sort_on="getObjPositionInParent",
+        )
         faq_items = []
         for brain in brains:
             faq_item = brain.getObject()
             faq_items.append(
-                {"id": faq_item.getId(), "title": faq_item.Title(), "text": faq_item.text.output})
+                {
+                    "id": faq_item.getId(),
+                    "title": faq_item.Title(),
+                    "text": faq_item.text.output,
+                }
+            )
         return faq_items
 
 
@@ -82,17 +89,16 @@ class InstitutionLocationsView(BrowserView):
             "refine.reg_code": REGION_INS_CODE,
         }
         try:
-            response = requests.get(
-                LOCATIONS_API_URL + "&q=",
-                params=query,
-            )
+            response = requests.get(LOCATIONS_API_URL + "&q=", params=query,)
             # We disable CSRFProtection as it's not necessary here
             # It is not a form view and we deal with the data internally so it's OK to disable it
             alsoProvides(self.request, IDisableCSRFProtection)
             self.context.api_institution_locations = response.json()
         except requests.exceptions.RequestException as e:
-            logger.error("Fetching locations data from remote API has failed! "
-                         "Check remote API : " + LOCATIONS_API_URL)
+            logger.error(
+                "Fetching locations data from remote API has failed! "
+                "Check remote API : " + LOCATIONS_API_URL
+            )
             logger.error(e)
 
         logger.info("Locations data fetched and stored successfully")
@@ -121,7 +127,7 @@ class InstitutionLocationsView(BrowserView):
                 institution_locations[institution.getId()] = {
                     "id": record["fields"]["mun_name_fr"],
                     "URL": institution.absolute_url(),
-                    "data": record
+                    "data": record,
                 }
 
         self.request.response.setHeader("Content-type", "application/json")

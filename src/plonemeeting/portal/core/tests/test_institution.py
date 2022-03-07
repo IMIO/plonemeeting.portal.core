@@ -143,18 +143,23 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
         # edit the institution, only fetched one time
         unstub()
-        actual_representatives = requests.get('http://localhost:20081/demo/@config?'
-                                              'config_id=meeting-config-college'
-                                              '&extra_include=groups_in_charge',
-                                              auth=auth,
-                                              headers=headers)
+        actual_representatives = requests.get(
+            "http://localhost:20081/demo/@config?"
+            "config_id=meeting-config-college"
+            "&extra_include=groups_in_charge",
+            auth=auth,
+            headers=headers,
+        )
         when(requests).get(url_cat, auth=auth, headers=headers).thenReturn(
             mock({"status_code": 200, "json": lambda: json_categories})
         )
 
-        when(requests).get('http://localhost:20081/demo/@config?config_id=meeting-config-college'
-                           '&extra_include=groups_in_charge',
-                           auth=auth, headers=headers).thenReturn(actual_representatives)
+        when(requests).get(
+            "http://localhost:20081/demo/@config?config_id=meeting-config-college"
+            "&extra_include=groups_in_charge",
+            auth=auth,
+            headers=headers,
+        ).thenReturn(actual_representatives)
         self.login_as_manager()
         institution_edit_form = self.belleville.restrictedTraverse("@@edit")
         request = self.portal.REQUEST
