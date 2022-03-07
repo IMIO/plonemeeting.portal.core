@@ -14,7 +14,7 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
                         u'de <span class="pm-anonymize"></span> aux écoles communales fondamentales.</p>'
 
     def test_replace_masked_gdpr(self):
-        filter = ReplaceMaskedGDPR(self.amittyville, None)
+        filter = ReplaceMaskedGDPR(self.amityville, None)
         # search for '<span class="pm-anonymize"></span>' (delib_masked_gdpr)
         # to replace with 'TEXTE MASQUÉ | RGPD' and link 'http://nohost/plone/faq/rgpd'
         # (rgpd_masked_text_placeholder + rgpd_masked_text_redirect_path)
@@ -35,7 +35,7 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
                          u'<a class="pm-anonymize" href="http://nohost/plone/toto"><span>TEXTE MASQUÉ | RGPD</span></a>'
                          u' aux écoles communales fondamentales.</p>'
                          )
-        self.amittyville.url_rgpd = "https://www.imio.be/imio-et-vous/rgpd"
+        self.amityville.url_rgpd = "https://www.imio.be/imio-et-vous/rgpd"
         self.assertEqual(filter(self.richtext),
                          u'<p><strong>Article 1er</strong> :</p>'
                          u'<p>Au scrutin secret et à l’unanimité, de désigner '
@@ -77,5 +77,5 @@ class TestOutputFilters(PmPortalDemoFunctionalTestCase):
                  u'aux écoles communales fondamentales.</p>'
         self.assertEqual(self.item.decision.output_relative_to(self.item), result)
         self.assertTrue(result in self.item())
-        self.assertNotEqual(self.item.decision.output_relative_to(self.amittyville), result)
+        self.assertNotEqual(self.item.decision.output_relative_to(self.amityville), result)
         self.assertNotEqual(self.item.decision.output_relative_to(self.meeting), result)

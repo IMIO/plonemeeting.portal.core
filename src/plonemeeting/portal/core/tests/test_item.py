@@ -9,9 +9,9 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunction
 class TestItemView(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.amittyville = self.portal["belleville"]
-        self.meeting = self.amittyville["16-novembre-2018-08-30"]
-        self.project_meeting = self.amittyville["16-novembre-2018-08-30"]
+        self.amityville = self.portal["belleville"]
+        self.meeting = self.amityville["16-novembre-2018-08-30"]
+        self.project_meeting = self.amityville["16-novembre-2018-08-30"]
         self.item = self.meeting["approbation-du-pv-du-xxx"]
         self.login_as_test()
 

@@ -40,6 +40,7 @@ test:
 	mkdir -p -m 777 delib/data/log delib/data/filestorage delib/data/blobstorage
 	wget https://raw.githubusercontent.com/IMIO/buildout.pm/master/docker/docker-compose-dev.yml -O delib/docker-compose.yml
 	docker-compose -f delib/docker-compose.yml down --remove-orphans
+	docker-compose -f delib/docker-compose.yml pull -q zeo libreoffice
 	docker-compose -f delib/docker-compose.yml pull
 	docker-compose -f delib/docker-compose.yml up -d
 	bash ./wait_for_delib.sh

@@ -19,13 +19,13 @@ import zope.event
 class TestColorCSSView(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.amittyville: IInstitution = self.portal["belleville"]
-        self.amittyville.header_color = "#FFFFFF"
-        self.amittyville.nav_color = "#EEEEEEE"
-        self.amittyville.nav_text_color = "#DDDDDD"
-        self.amittyville.links_color = "#CCCCCC"
-        self.amittyville.footer_color = "#BBBBBB"
-        self.amittyville.footer_text_color = "#AAAAAA"
+        self.amityville: IInstitution = self.portal["belleville"]
+        self.amityville.header_color = "#FFFFFF"
+        self.amityville.nav_color = "#EEEEEEE"
+        self.amityville.nav_text_color = "#DDDDDD"
+        self.amityville.links_color = "#CCCCCC"
+        self.amityville.footer_color = "#BBBBBB"
+        self.amityville.footer_text_color = "#AAAAAA"
 
     def test_render_custom_css(self):
         """ Test if the custom colors CSS generation view render the correct color values"""
@@ -42,7 +42,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         """ Test if the bundle registry entry is correctly updated"""
         old_compilation_time = self._get_bundle().last_compilation
 
-        self._fire_event(self.amittyville, "modified")
+        self._fire_event(self.amityville, "modified")
 
         self.assertLess(old_compilation_time, self._get_bundle().last_compilation)
 
@@ -50,8 +50,8 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         """ Test if the css bundle content (located in plone_resources) is correctly updated"""
         old_custom_colors_css = self._get_bundle_content()
 
-        self.amittyville.header_color = "#123456"
-        self._fire_event(self.amittyville, "modified")
+        self.amityville.header_color = "#123456"
+        self._fire_event(self.amityville, "modified")
 
         new_custom_colors_css = self._get_bundle_content()
 
@@ -65,8 +65,8 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         browser.open(self._get_css_absolute_url())
         old_custom_colors_css = browser.contents
 
-        self.amittyville.header_color = "#ABABAB"
-        self._fire_event(self.amittyville, "modified")
+        self.amityville.header_color = "#ABABAB"
+        self._fire_event(self.amityville, "modified")
 
         import transaction
 
@@ -96,7 +96,7 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
 
     def _get_bundle_content(self) -> str:
         """Get the custom colors css directly from plone_resources"""
-        overrides = OverrideFolderManager(self.amittyville)
+        overrides = OverrideFolderManager(self.amityville)
         css_file_name = self._get_bundle().csscompilation.replace(
             "++plone++static/", ""
         )

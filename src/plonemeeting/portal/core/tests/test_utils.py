@@ -53,7 +53,8 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "http://localhost:20081/demo/@search?"
             "type=meeting"
             "&config_id=meeting-config-college"
-            "&review_state=frozen",
+            "&review_state=frozen"
+            "&review_state=decided",
             url,
         )
 

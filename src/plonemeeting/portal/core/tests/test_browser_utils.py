@@ -6,10 +6,6 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunction
 
 
 class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
-    @property
-    def belleville(self):
-        return self.portal["belleville"]
-
     def test_is_institution(self):
         institution_utils = self.belleville.restrictedTraverse("@@utils_view")
         self.assertTrue(institution_utils.is_institution())

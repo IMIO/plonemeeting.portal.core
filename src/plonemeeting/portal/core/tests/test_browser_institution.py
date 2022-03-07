@@ -9,6 +9,8 @@ from zope.interface import Invalid
 
 
 class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
+    def setUp(self):
+        super(TestBrowserInstitution, self).setUp()
 
     def exc_msg(self, invalid):
         return translate(invalid.args[0], context=self.portal.REQUEST)
@@ -19,7 +21,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         # context is overridden while traversing
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
         request = self.portal.REQUEST
-        request.set('PUBLISHED', institution_view)
+        request.set("PUBLISHED", institution_view)
         institution_view.update()
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
@@ -28,18 +30,45 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         institution_edit_form = self.belleville.restrictedTraverse("@@edit")
         # context is overridden while traversing
         request = self.portal.REQUEST
-        request.set('PUBLISHED', institution_edit_form)
+        request.set("PUBLISHED", institution_edit_form)
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
         institution_edit_form()
-        self.assertDictEqual({'travaux': 'Travaux',
-                              'urbanisme': 'Urbanisme',
-                              'comptabilite': 'Comptabilité',
-                              'personnel': 'Personnel',
-                              'population': 'Population / État-civil',
-                              'locations': 'Locations',
-                              'divers': 'Divers',
-                              'finances': 'Finances'},
-                             self.belleville.delib_categories)
+        self.assertDictEqual(
+            {
+                "administration": "Administration générale",
+                "animaux": "Bien-être animal",
+                "batiments-communaux": "Bâtiments communaux",
+                "communication": "Communication & Relations extérieures",
+                "cultes": "Cultes",
+                "culture": "Culture & Folklore",
+                "divers": "Divers",
+                "economie": "Développement économique & commercial",
+                "enfance": "Petite enfance",
+                "enseignement": "Enseignement",
+                "environnement": "Propreté & Environnement",
+                "espaces-publics": "Aménagement des espaces publics",
+                "finances": "Finances",
+                "immo": "Affaires immobilières",
+                "informatique": "Informatique",
+                "interculturalite": "Interculturalité & Égalité",
+                "jeunesse": "Jeunesse",
+                "logement": "Logement & Énergie",
+                "mobilite": "Mobilité",
+                "patrimoine": "Patrimoine",
+                "police": "Zone de police",
+                "politique": "Politique générale",
+                "population": "État civil & Population",
+                "quartier": "Participation relation avec les quartiers",
+                "recurrents": "Récurrents",
+                "sante": "Santé",
+                "securite": "Sécurité & Prévention",
+                "social": "Services sociaux",
+                "sport": "Sport",
+                "tourisme": "Tourisme",
+                "urbanisme": "Urbanisme & Aménagement du territoire",
+            },
+            self.belleville.delib_categories,
+        )
 
         delattr(self.belleville, "delib_categories")
         institution_edit_form.handleApply(institution_edit_form, None)
@@ -52,56 +81,88 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
     def test_categories_mappings_invariant(self):
-        data = {'categories_mappings': deepcopy(self.amityville.categories_mappings)}
+        data = {"categories_mappings": deepcopy(self.amityville.categories_mappings)}
         invariants = validator.InvariantsValidator(None, None, None, IInstitution, None)
         self.assertTupleEqual((), invariants.validate(data))
-        data['categories_mappings'].append({'global_category_id': 'administration',
-                                            'local_category_id': 'administration'})
+        data["categories_mappings"].append(
+            {
+                "global_category_id": "administration",
+                "local_category_id": "administration",
+            }
+        )
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale')
-        data['categories_mappings'].append({'global_category_id': 'police',
-                                            'local_category_id': 'police'})
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            "Categories mappings - iA.Delib category mapped more than once : Administration générale",
+        )
+        data["categories_mappings"].append(
+            {"global_category_id": "police", "local_category_id": "police"}
+        )
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            "Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police",
+        )
         # multiple time the same value returns only once in the message
-        data['categories_mappings'].append({'global_category_id': 'administration',
-                                            'local_category_id': 'administration'})
+        data["categories_mappings"].append(
+            {
+                "global_category_id": "administration",
+                "local_category_id": "administration",
+            }
+        )
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            "Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police",
+        )
 
     def test_representatives_mappings_invariant(self):
         class mock(dict):
-            def __init__(self, institution, categories_mappings, representatives_mappings):
+            def __init__(
+                self, institution, categories_mappings, representatives_mappings
+            ):
                 self.__context__ = institution
                 self.categories_mappings = deepcopy(categories_mappings)
                 self.representatives_mappings = deepcopy(representatives_mappings)
-        data = mock(None, self.belleville.categories_mappings, self.belleville.representatives_mappings)
+
+        data = mock(
+            None,
+            self.belleville.categories_mappings,
+            self.belleville.representatives_mappings,
+        )
         representatives_mappings_invariant(data)
-        data = mock(self.belleville, self.belleville.categories_mappings, self.belleville.representatives_mappings)
+        data = mock(
+            self.belleville,
+            self.belleville.categories_mappings,
+            self.belleville.representatives_mappings,
+        )
         representatives_mappings_invariant(data)
-        data.representatives_mappings[0]['active'] = False
-        data.representatives_mappings[0]['representative_long_value'] = 'fake name long'
-        data.representatives_mappings[0]['representative_value'] = 'fake name'
+        data.representatives_mappings[0]["active"] = False
+        data.representatives_mappings[0]["representative_long_value"] = "fake name long"
+        data.representatives_mappings[0]["representative_value"] = "fake name"
         representatives_mappings_invariant(data)
-        uid = data.representatives_mappings[0]['representative_key']
-        data.representatives_mappings[0]['representative_key'] = 'fake uid'
+        uid = data.representatives_mappings[0]["representative_key"]
+        data.representatives_mappings[0]["representative_key"] = "fake uid"
         self.assertRaises(Invalid, representatives_mappings_invariant, data)
         try:
             representatives_mappings_invariant(data)
         except Invalid as error:
-            self.assertEqual(translate(self.exc_msg(error)),
-                             'Representatives mappings - Removing representatives '
-                             'linked to items is not allowed : Mme LOREM')
-        data.representatives_mappings[0]['representative_key'] = uid
+            self.assertEqual(
+                translate(self.exc_msg(error)),
+                "Representatives mappings - Removing representatives "
+                "linked to items is not allowed : Mme LOREM",
+            )
+        data.representatives_mappings[0]["representative_key"] = uid
         representatives_mappings_invariant(data)
-        data.representatives_mappings.append({'active': True,
-                                              'representative_key': 'fake uid',
-                                              'representative_long_value': 'fake name long',
-                                              'representative_value': 'fake name'}, )
+        data.representatives_mappings.append(
+            {
+                "active": True,
+                "representative_key": "fake uid",
+                "representative_long_value": "fake name long",
+                "representative_value": "fake name",
+            },
+        )
         representatives_mappings_invariant(data)
