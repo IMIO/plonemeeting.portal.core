@@ -45,9 +45,7 @@
                     i18n:translate=""
                     tal:attributes="class string:state-${review_state}">Decision</span>
           </div>
-          <div class="public-meeting"
-               i18n:translate="">Public meeting
-          </div>
+          <div class="public-meeting" tal:content="meeting_type">Meeting type</div>
           <div class="meeting-title">
             <a class="meeting-title-link" href=""
                tal:define="utils_view nocall:context/@@utils_view;"

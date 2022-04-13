@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-18 14:08+0000\n"
+"POT-Creation-Date: 2022-04-13 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,9 +53,17 @@ msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) pl
 msgid "Category"
 msgstr "Matière"
 
+#: ../profiles/default/registry.xml
+msgid "Centre public d'action sociale"
+msgstr ""
+
 #: ../browser/sync.py:41
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
+
+#: ../profiles/default/registry.xml
+msgid "Commune"
+msgstr ""
 
 #: ../setuphandlers.py:55
 msgid "Configuration folder"
@@ -75,7 +83,7 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../configure.zcml:44
+#: ../configure.zcml:46
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
@@ -146,13 +154,21 @@ msgstr "Importer une séance"
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des annexes"
 
-#: ../configure.zcml:35
+#: ../configure.zcml:37
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
 #: ../profiles/default/types/Institution.xml
 msgid "Institution"
 msgstr "Institution"
+
+#: ../profiles/default/registry.xml
+msgid "Institution types"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Intercommunale"
+msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Internal redirect path for GDPR masked text links from site root"
@@ -317,6 +333,10 @@ msgstr "Correspondances des mandataires"
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
+#: ../profiles/default/registry.xml
+msgid "Régie Communale Autonome"
+msgstr ""
+
 #: ../browser/sync.py:43
 msgid "Select"
 msgstr "Sélectionner"
@@ -346,7 +366,7 @@ msgstr "UID iA.Délib"
 msgid "Unexpected meeting count in web service response !"
 msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 
-#: ../configure.zcml:53
+#: ../configure.zcml:55
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -377,6 +397,10 @@ msgstr "Voir"
 msgid "View meeting"
 msgstr "Voir la séance"
 
+#: ../profiles/default/registry.xml
+msgid "Ville"
+msgstr ""
+
 #: ../sync_utils.py:35
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
@@ -389,6 +413,14 @@ msgstr "Erreur de connexion au web service !"
 #: ../browser/institution.py:22
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
+
+#: ../profiles/default/registry.xml
+msgid "Zone de Police"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Zone de Secours"
+msgstr ""
 
 #: ../content/institution.py:234
 msgid "categories_mappings_description"
@@ -418,6 +450,14 @@ msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 msgid "in_project"
 msgstr "Projet de décision"
 
+#: ../profiles/default/registry.xml
+msgid "institution title"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "institution type id"
+msgstr ""
+
 #: ../content/institution.py:160
 msgid "item_content_query_description"
 msgstr "Paramètres URL servant à obtenir le contenu des points à importer"
@@ -435,15 +475,15 @@ msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../configure.zcml:35
+#: ../configure.zcml:37
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:44
+#: ../configure.zcml:46
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:53
+#: ../configure.zcml:55
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-18 14:08+0000\n"
+"POT-Creation-Date: 2022-04-13 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,8 +56,16 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Centre public d'action sociale"
+msgstr ""
+
 #: ../browser/sync.py:41
 msgid "Choose the meeting you want to import in the portal."
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Commune"
 msgstr ""
 
 #: ../setuphandlers.py:55
@@ -78,7 +86,7 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../configure.zcml:44
+#: ../configure.zcml:46
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -149,12 +157,20 @@ msgstr ""
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:35
+#: ../configure.zcml:37
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../profiles/default/types/Institution.xml
 msgid "Institution"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Institution types"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Intercommunale"
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -320,6 +336,10 @@ msgstr ""
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Régie Communale Autonome"
+msgstr ""
+
 #: ../browser/sync.py:43
 msgid "Select"
 msgstr ""
@@ -349,7 +369,7 @@ msgstr ""
 msgid "Unexpected meeting count in web service response !"
 msgstr ""
 
-#: ../configure.zcml:53
+#: ../configure.zcml:55
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -380,6 +400,10 @@ msgstr ""
 msgid "View meeting"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Ville"
+msgstr ""
+
 #: ../sync_utils.py:35
 msgid "Web service connection error !"
 msgstr ""
@@ -391,6 +415,14 @@ msgstr ""
 
 #: ../browser/institution.py:22
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Zone de Police"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Zone de Secours"
 msgstr ""
 
 #: ../content/institution.py:234
@@ -421,6 +453,14 @@ msgstr ""
 msgid "in_project"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "institution title"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "institution type id"
+msgstr ""
+
 #: ../content/institution.py:160
 msgid "item_content_query_description"
 msgstr ""
@@ -438,15 +478,15 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:35
+#: ../configure.zcml:37
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:44
+#: ../configure.zcml:46
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:53
+#: ../configure.zcml:55
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
