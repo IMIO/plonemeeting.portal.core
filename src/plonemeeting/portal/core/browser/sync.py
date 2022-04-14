@@ -11,9 +11,9 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import sync_meeting
-from plonemeeting.portal.core.utils import get_api_url_for_presync_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
+from plonemeeting.portal.core.utils import get_api_url_for_presync_meeting_items
 from plonemeeting.portal.core.utils import redirect
 from plonemeeting.portal.core.utils import redirect_back
 from Products.Five import BrowserView
