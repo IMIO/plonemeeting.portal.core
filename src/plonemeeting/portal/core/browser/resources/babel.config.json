@@ -9,6 +9,7 @@
         "pragma": "h",
         "pragmaFrag": "Fragment"
       }
-    ]
+    ],
+    "macros"
   ]
 }

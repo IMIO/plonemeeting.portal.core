@@ -6,11 +6,12 @@ from plone.autoform.form import AutoExtensibleForm
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core import plone_
+from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import sync_meeting
-from plonemeeting.portal.core.utils import get_api_url_for_annexes_summary
+from plonemeeting.portal.core.utils import get_api_url_for_presync_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import redirect
@@ -115,6 +116,7 @@ class ItemsContentProvider(ContentProviderBase):
                 "paging": False,
                 "columnDefs": [{"orderable": False, "targets": 0}],
                 "scrollY": "50vh",
+                "autoWidth": True,
                 "scrollCollapse": True,
                 "order": [[1, "asc"]],
                 "language": {
@@ -146,6 +148,9 @@ class ItemsContentProvider(ContentProviderBase):
         if hasattr(self.parent, "api_response_data"):
             return self.parent.api_response_data["items"]
 
+    def to_json(self, value):
+        return json_dumps(value)
+
     def render(self, *args, **kwargs):
         return self.template()
 
@@ -157,7 +162,6 @@ class PreSyncReportForm(Form):
     label = _(u"Meeting pre sync form")
     description = _(u"Choose items you want to sync/import in the portal.")
 
-    ignoreContext = True
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsContentProvider
     contentProviders["items"].position = 0
@@ -170,24 +174,50 @@ class PreSyncReportForm(Form):
         self.items = self.context.contentValues()
         self.meeting_title = self.context.Title()
         self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
-
-        self.api_response_data = self.reconcile(self.api_response_data, self.items)
+        self.api_response_data = self._reconcile_items(self.api_response_data, self.items)
 
         return super(PreSyncReportForm, self).__call__()
 
     @button.buttonAndHandler(_(u"Sync"))
     def handle_sync(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
+        form = self.request.form
+        checked_item_uids = self._extract_checked_items(form)
+        _sync_meeting(
+            self.institution,
+            self.external_meeting_uid,
+            self.request,
+            item_external_uids=checked_item_uids,
+        )
 
     @button.buttonAndHandler(_(u"Force"))
     def handle_force_sync(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
+        form = self.request.form
+        checked_item_uids = self._extract_checked_items(form)
+        _sync_meeting(
+            self.institution,
+            self.external_meeting_uid,
+            self.request,
+            item_external_uids=checked_item_uids,
+            force=True
+        )
+
+    @button.buttonAndHandler(_(u"Delete"))
+    def handle_delete(self, action):
+        form = self.request.form
+        checked_item_uids = self._extract_checked_items(form)
+        deleted_ids = []
+        for item in self.context.objectValues():
+            if IItem.providedBy(item) and item.plonemeeting_uid in checked_item_uids:
+                deleted_ids.append(item.id)
+        if len(deleted_ids) > 0:
+            self.context.manage_delObjects(deleted_ids)
+
+    def updateActions(self):
+        super().updateActions()
+        self.actions["sync"].addClass("context")
+        self.actions["force"].addClass("destructive")
+        self.actions["delete"].addClass("destructive")
+        self.actions["cancel"].addClass("standalone")
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
@@ -197,14 +227,12 @@ class PreSyncReportForm(Form):
         )
         redirect(self.request, meeting_faceted_url)
 
-    def reconcile(self, api_items, local_items):
+    def _reconcile_items(self, api_items, local_items):
         reconciled = copy.deepcopy(api_items)
         local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item in local_items}
 
         for item in reconciled["items"]:
-            api_annexes = _call_delib_rest_api(
-                get_api_url_for_annexes_summary(item.get("@id")), self.institution
-            ).json()
+            api_annexes = item.get("extra_include_annexes", [])
             if item["UID"] in local_items_by_plonemeeting_uid.keys():
                 local_item = local_items_by_plonemeeting_uid[item["UID"]]
                 plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
@@ -258,7 +286,8 @@ class PreSyncReportForm(Form):
             )
         return reconciled
 
-    def _reconcile_annexes(self, api_annexes, local_annexes):
+    @staticmethod
+    def _reconcile_annexes(api_annexes, local_annexes):
         annexes_status = {
             "added": {"count": 0, "titles": []},
             "unchanged": {"count": 0, "titles": []},
@@ -305,6 +334,15 @@ class PreSyncReportForm(Form):
         response = _call_delib_rest_api(url, self.context)
         self.api_response_data = json.loads(response.text)
 
+    @staticmethod
+    def _extract_checked_items(form):
+        checked_item_uids = []
+        for inputs in form.keys():
+            if inputs.startswith("item_uid"):
+                checked_item_uids.append(inputs.split("__")[1])
+        return checked_item_uids
+
+
 
 @implementer(IFieldsAndContentProvidersForm)
 class PreImportReportForm(Form):
@@ -349,7 +387,7 @@ class PreImportReportForm(Form):
 
 
 def _fetch_preview_items(context, meeting_external_uid):
-    url = get_api_url_for_meeting_items(context, meeting_external_uid=meeting_external_uid)
+    url = get_api_url_for_presync_meeting_items(context, meeting_external_uid=meeting_external_uid)
     response = _call_delib_rest_api(url, context)
     return json.loads(response.text)
 

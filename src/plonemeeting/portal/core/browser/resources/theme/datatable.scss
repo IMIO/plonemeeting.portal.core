@@ -1,16 +1,99 @@
-#items-datatables  .checkbox_header {
-  border-left: 8px solid $grey-100;
+.items-datatables-container {
+  padding: 0em 2em 1em 2em;
+  margin-top: -2em;
+
+  #items-datatables_filter {
+    margin-right: 15px;
+  }
 }
 
-#items-datatables .unchanged > .checkbox_cell {
-  border-left: 8px solid $grey-500;
+.template-pre_sync_report_form {
+  #items-datatables_wrapper th.checkbox-header {
+    border-left: 8px solid $grey-200 !important;
+  }
+
+  #items-datatables_wrapper th {
+    background-color: $grey-100;
+  }
+
+  #items-datatables .unchanged > .checkbox-cell {
+    border-left: 8px solid $grey-500;
+  }
+
+  #items-datatables .added > .checkbox-cell {
+    border-left: 8px solid $green;
+  }
+
+  #items-datatables .removed > .checkbox-cell {
+    border-left: 8px solid $red;
+  }
+
+  #items-datatables .modified > .checkbox-cell {
+    border-left: 8px solid $orange;
+  }
 }
-#items-datatables .added > .checkbox_cell {
-   border-left: 8px solid $green;
+
+
+.annexes-status {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-#items-datatables .removed >  .checkbox_cell {
-   border-left: 8px solid $red;
+
+.annex-status {
+  border-radius: 2px;
+  padding: 0.1em 0.25em;
+  margin: 0.1em 0;
+  color: #FFF;
+  font-weight: bolder;
+  border: none;
+  width: 4em;
+  display: flex;
+  box-shadow: $shadow-md;
+  align-items: center;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+    margin-right: 0.5em;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0em;
+    list-style: none;
+  }
+
+  &.unchanged {
+    &:hover {
+      background-color: darken($grey-500, 10);
+    }
+    background-color: $grey-500;
+  }
+
+  &.added {
+    &:hover {
+      background-color: darken($green, 10);
+    }
+    background-color: $green;
+  }
+
+  &.removed {
+    &:hover {
+      background-color: darken($red, 10);
+    }
+    background-color: $red;
+  }
+
+  &.modified {
+    &:hover {
+      background-color: darken($orange, 10);
+    }
+    background-color: $orange;
+  }
+
 }
-#items-datatables .modified >  .checkbox_cell {
-   border-left: 8px solid $orange;
-}
+

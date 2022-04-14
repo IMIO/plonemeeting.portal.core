@@ -7,6 +7,16 @@
   margin-right: -50vw;
 }
 
+.plone-toolbar-left {
+  .full-width {
+    width: calc(100vw - 60px);
+    position: relative;
+    left: calc(50% - 30px);
+    margin-left: calc(-50vw + 60px);
+    margin-right: calc(-50vw - 0px);
+  }
+}
+
 .v-hidden {
   visibility: hidden;
 }
@@ -17,4 +27,15 @@
 
 .text-primary {
   color: $delib-primary;
+}
+
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  border-top-width: 1px;
+  border-bottom-width: 0px;
+  border-top-color: white;
+  border-top-style: solid;
+}
+.__react_component_tooltip {
+  padding: 0.5em 1em !important;
 }

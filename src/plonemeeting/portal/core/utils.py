@@ -128,21 +128,12 @@ def _datagrid_to_url_param(values):
         res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
     return res
 
+def get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
 
-def get_api_url_for_annexes_summary(item_json_id):
-    url = "{0}/@annexes?" \
-          "publishable=true".format(item_json_id)
-    return url
-
-
-def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
-    if not institution.plonemeeting_url or not institution.meeting_config_id:
-        return
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
 
     item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
-    item_content_query = _datagrid_to_url_param(institution.item_content_query)
 
     item_uids_filter = _get_uids_filter_url(item_external_uids)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
@@ -169,7 +160,6 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
         "&metadata_fields={delib_category_field}"
         "{item_filter_query}"
         "{category_filter}"
-        "{item_content_query}"
         "{representatives_filter}"
         "{item_uids_filter}".format(
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
@@ -178,13 +168,30 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
             meeting_external_uid=meeting_external_uid,
             delib_category_field=institution.delib_category_field,
             item_filter_query=item_filter_query,
-            item_content_query=item_content_query,
             category_filter=category_filter,
             representatives_filter=representatives_filter,
             item_uids_filter=item_uids_filter
         )
     )
 
+    return url
+
+
+def get_api_url_for_presync_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids)
+    url += "&extra_include=annexes" \
+           "&extra_include_annexes_fullobjects" \
+           "&extra_include_annexes_include_all=false" \
+           "&extra_include_annexes_publishable=true"
+    return url
+
+
+def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
+    if not institution.plonemeeting_url or not institution.meeting_config_id:
+        return
+    item_content_query = _datagrid_to_url_param(institution.item_content_query)
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids)
+    url += item_content_query
     return url
 
 

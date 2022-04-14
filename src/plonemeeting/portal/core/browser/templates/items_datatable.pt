@@ -4,68 +4,60 @@
           is_syncing not:view/parent/is_importing;
           institution nocall:view/parent/institution
 ">
+  <div class="full-width items-datatables-container">
+    <table id="items-datatables"
+           class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
+           style="width:100%" tal:attributes="data-pat-datatables view/get_datatables_config">
+      <thead>
+      <tr>
+        <th class="checkbox-header">
+          <x-checkbox-selector scope="items-datatables" checked/>
+        </th>
+        <th>N°</th>
+        <th i18n:translate="">Title</th>
+        <th i18n:translate="">Last modification (iA.Delib)</th>
+        <th i18n:translate="" tal:condition="is_syncing">Last modification (délibérations.be)</th>
 
-  <h2 class="meeting-title" tal:content="nocall:view/parent/meeting_title"></h2>
-
-  <table id="items-datatables" class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
-     tal:attributes="data-pat-datatables view/get_datatables_config"
-  >
-    <thead>
-    <tr>
-      <th class="checkbox_header"><x-checkbox-selector scope="items-datatables" checked /></th>
-      <th>N°</th>
-      <th i18n:translate="">Title</th>
-      <th i18n:translate="">Last modification in iA.Delib</th>
-      <th tal:condition="is_syncing">Local last modified</th>
-
-      <th tal:content="institution/delib_category_field"
-         i18n:translate="">
-        Category or Classifier
-      </th>
-      <th i18n:translate="">
-        Representative
-      </th>
-      <th tal:condition="is_syncing">Status</th>
-      <th tal:condition="is_syncing">Annexes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr tal:repeat="item items" tal:attributes="class item/status">
-      <td class="checkbox_cell">
-        <input type="checkbox" tal:attributes="name python: 'item_uid__' + item['UID']" checked />
-      </td>
-      <td tal:content="item/formatted_itemNumber">itemNumber</td>
-      <td tal:content="item/title">title</td>
-      <td class="pat-moment" tal:content="item/modified">Last modification in iA.Delib</td>
-      <td class="pat-moment" tal:condition="is_syncing" tal:content="item/local_last_modified">local_last_modified</td>
-      <td tal:content="python: item.get(institution.delib_category_field)['title']">
-        Category/Classifier
-      </td>
-      <td tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''">
-        Representative
-      </td>
-      <td tal:condition="is_syncing" tal:content="item/status">status</td>
-      <td tal:condition="is_syncing">
-        <div tal:condition="python: 'unchanged' in item['annexes_status']">
-          <p>unchanged</p>
-          <span  tal:content="item/annexes_status/unchanged/count"></span>
-        </div>
-        <div tal:condition="python: 'modified' in item['annexes_status']">
-          <p>modified</p>
-          <span  tal:content="item/annexes_status/modified/count"></span>
-        </div>
-        <div tal:condition="python: 'added' in item['annexes_status']">
-          <p>added</p>
-          <span tal:content="item/annexes_status/added/count"></span>
-        </div>
-        <div tal:condition="python: 'removed' in item['annexes_status']">
-          <p>removed</p>
-          <span tal:content="item/annexes_status/removed/count"></span>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <th tal:content="institution/delib_category_field"
+           i18n:translate="">
+          Category or Classifier
+        </th>
+        <th i18n:translate="">
+          Representative
+        </th>
+        <th tal:condition="is_syncing">Status</th>
+        <th tal:condition="is_syncing">Annexes</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr tal:repeat="item items" tal:attributes="class python:is_syncing and item['status'] or ''">
+        <td class="checkbox-cell">
+          <input type="checkbox" tal:attributes="name python: 'item_uid__' + item['UID']" checked/>
+        </td>
+        <td tal:content="item/formatted_itemNumber">itemNumber</td>
+        <td tal:content="item/title">title</td>
+        <td class="pat-moment"
+            data-pat-moment="format: Do/M/YYYY hh:mm:ss;" tal:content="item/modified">Last
+          modification in iA.Delib
+        </td>
+        <td class="pat-moment"
+            data-pat-moment="format: Do/M/YYYY, hh:mm:ss;" tal:condition="is_syncing" tal:content="item/local_last_modified">
+          local_last_modified
+        </td>
+        <td tal:content="python: item.get(institution.delib_category_field)['title']">
+          Category/Classifier
+        </td>
+        <td tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''">
+          Representative
+        </td>
+        <td tal:condition="is_syncing" tal:content="item/status">status</td>
+        <td tal:condition="is_syncing">
+          <x-annexes-status tal:attributes="data-annexes python:view.to_json(item['annexes_status'])" />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
   <input type="hidden" name="external_meeting_uid"
      tal:define="external_meeting_uid view/parent/external_meeting_uid"
      tal:attributes="value external_meeting_uid">

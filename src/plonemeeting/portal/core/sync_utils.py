@@ -5,6 +5,9 @@ from imio.migrator.utils import end_time
 from plone import api
 from plone.app.uuid.utils import uuidToObject
 from plone.namedfile.file import NamedBlobFile
+
+from urllib3 import Retry
+from requests.adapters import HTTPAdapter
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
