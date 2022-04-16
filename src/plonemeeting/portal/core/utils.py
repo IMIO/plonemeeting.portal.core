@@ -371,3 +371,20 @@ def redirect(request, to):
 def redirect_back(request):
     """Redirect back"""
     redirect(request, request.get("HTTP_REFERER"))
+
+
+def get_term_title(context, fieldname):
+    """Get the term title for the given context and fieldname."""
+    field = None
+    for schema in iterSchemata(context):
+        if fieldname in schema.names():
+            field = schema.get(fieldname)
+            break
+    if not field:
+        raise ValueError(f"No such field {field} in {context.portal_type} context")
+    if not hasattr(field, "vocabularyName"):
+        raise ValueError(f"Field {field} in {context.portal_type} context doesn't have a vocabulary")
+    vocabulary_name = field.vocabularyName
+    vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
+    vocabulary = vocabulary_factory(context)
+    return vocabulary.getTerm(getattr(context, field)).title

@@ -2,11 +2,14 @@
 from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import DEMO_INSTITUTION_IDS
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
 from plonemeeting.portal.core.config import REGION_INS_CODE
 from Products.Five.browser import BrowserView
+from plonemeeting.portal.core.interfaces import IInstitutionSerializeToJson
+from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
 
 import json
@@ -38,10 +41,8 @@ class HomepageView(BrowserView):
         for brain in brains:
             if brain.id not in DEMO_INSTITUTION_IDS:
                 institution = brain.getObject()
-                institutions[brain.id] = {
-                    "title": institution.Title(),
-                    "URL": institution.absolute_url(),
-                }
+                serializer = queryMultiAdapter((institution, self.request), IInstitutionSerializeToJson)
+                institutions[brain.id] = serializer(fieldnames=["title", "institution_type"])
         return json.dumps(institutions)
 
     def get_faq_items(self):

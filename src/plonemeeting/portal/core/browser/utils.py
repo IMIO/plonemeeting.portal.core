@@ -7,6 +7,7 @@ from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import getUtility
@@ -100,23 +101,11 @@ class UtilsView(BrowserView):
     def protect_url(self, url):
         return addTokenToUrl(url)
 
-    def vocab_title(self, context, field):
-        """ return title when given the vocabulary and the value key"""
-        schema = getUtility(IDexterityFTI, name=context.portal_type).lookupSchema()
-        if field not in schema:
-            raise ValueError(f"No such field {field} in {context.portal_type} context")
-
-        vocabulary_name = schema.get(field).vocabularyName
-        vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
-        vocabulary = vocabulary_factory(context)
-        return vocabulary.getTerm(getattr(context, field)).title
-
     def meeting_type(self):
-        print(self.get_current_institution())
-        return self.vocab_title(self.get_current_institution(), "meeting_type")
+        return get_term_title(self.get_current_institution(), "meeting_type")
 
     def institution_type(self):
-        return self.vocab_title(self.get_current_institution(), "institution_type")
+        return get_term_title(self.get_current_institution(), "institution_type")
 
 
 def path_to_dx_default_template():

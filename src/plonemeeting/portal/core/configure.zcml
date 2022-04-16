@@ -67,6 +67,9 @@
     for="zope.interface.Interface"
     />
 
+  <!-- Serializers -->
+  <adapter factory=".serializers.InstitutionSerializerToJson" />
+
   <!-- Vocabularies -->
 
   <utility
