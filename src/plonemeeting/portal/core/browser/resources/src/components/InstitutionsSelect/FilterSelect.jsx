@@ -48,7 +48,6 @@ const FilterContext = createContext(null);
 
 const FilterSelect = (props) => {
     const [filters, setFilters] = useState(props.filters);
-    console.log(props.filters);
     const toggleFilter = (key) => {
         setFilters({
             ...filters,

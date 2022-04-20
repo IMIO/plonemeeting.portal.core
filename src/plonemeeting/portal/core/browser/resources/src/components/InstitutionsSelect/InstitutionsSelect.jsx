@@ -7,34 +7,46 @@ import _ from "lodash";
 import FilterSelect from "./FilterSelect.jsx";
 
 const InstitutionsSelect = (props) => {
-    const institutions = JSON.parse(props["data-institutions"]);
-    const institution_type = JSON.parse(props["data-institution-type-vocabulary"]);
     const [selected, setSelected] = useState({});
+    const [institutions, setInstitutions] = useState();
     const [groupedOptions, setGroupedOptions] = useState([]);
     const [filters, setFilters] = useState({});
 
     useEffect(() => {
-        const filters = {};
-        const groupedOptions = [];
-
-        Object.entries(institutions).forEach(([key, institution]) => {
-            const type = institution.institution_type;
+        let filters = {};
+        let groupedOptions = [];
+        const institutions = JSON.parse(props["data-institutions"]);
+        const institution_type_vocabulary = JSON.parse(props["data-institution-type-vocabulary"]);
+        institution_type_vocabulary.items.forEach((type) => {
+            groupedOptions.push({
+                label: type.title,
+                id: type.token,
+                options: [],
+            });
             if (!filters.hasOwnProperty(type.token)) {
                 filters[type.token] = {
                     label: type.title,
                     checked: true,
                 };
-                groupedOptions.push({
-                    label: type.title,
-                    options: [],
-                });
             }
+        });
+
+        Object.entries(institutions).forEach(([key, institution]) => {
+            const type = institution.institution_type;
             groupedOptions[_.findIndex(groupedOptions, { label: type.title })].options.push({
                 value: key,
                 label: institution.title,
                 type: type.token,
             });
         });
+
+        filters = _.omitBy(filters, (filter) => {
+            return (
+                groupedOptions[_.findIndex(groupedOptions, { label: filter.label })].options
+                    .length === 0
+            );
+        });
+        setInstitutions(institutions);
         setFilters(filters);
         setGroupedOptions(groupedOptions);
     }, []);

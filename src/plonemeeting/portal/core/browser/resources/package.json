@@ -4,11 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "builds": "webpack --mode=production",
-    "watch": "webpack serve --mode=development",
-    "dev": "vite",
-    "preview": "vite preview",
-    "build": "vite build"
+    "build": "webpack --mode=production",
+    "watch": "webpack serve --mode=development"
   },
   "author": "iMio",
   "license": "GPLv2",
