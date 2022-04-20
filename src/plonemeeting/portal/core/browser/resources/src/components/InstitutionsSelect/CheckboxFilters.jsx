@@ -1,15 +1,7 @@
 import { Fragment, h, render } from "preact";
 import { useState, useEffect } from "preact/hooks";
 
-const opt = ["Zone de police", "Ville/commune"];
-
 const CheckboxFilters = ({ options, onChange }) => {
-    const [selected, setSelected] = useState({});
-
-    const handleChange = (event) => {
-        setSelected(event.target.value);
-    };
-
     return (
         <div className="checkbox-filter-select">
             {opt.map((o) => (

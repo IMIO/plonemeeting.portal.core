@@ -2,16 +2,21 @@
 from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
+from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import DEMO_INSTITUTION_IDS
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
 from plonemeeting.portal.core.config import REGION_INS_CODE
-from Products.Five.browser import BrowserView
 from plonemeeting.portal.core.interfaces import IInstitutionSerializeToJson
+from Products.Five.browser import BrowserView
+from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
+from zope.schema.interfaces import IVocabulary
+from zope.schema.interfaces import IVocabularyFactory
 
+import ipdb
 import json
 import requests
 
@@ -44,6 +49,16 @@ class HomepageView(BrowserView):
                 serializer = queryMultiAdapter((institution, self.request), IInstitutionSerializeToJson)
                 institutions[brain.id] = serializer(fieldnames=["title", "institution_type"])
         return json.dumps(institutions)
+
+    @ram.cache(institutions_cachekey)
+    def get_json_institution_type_vocabulary(self):
+        """
+        Get institution_type vocabulary from this portal and serialize it in JSON
+        """
+        factory = getUtility(IVocabularyFactory, 'plonemeeting.portal.vocabularies.institution_types')
+        vocabulary = factory(self.context)
+        serializer = queryMultiAdapter((vocabulary, self.request), ISerializeToJson)
+        return json.dumps(serializer("institution_type"))
 
     def get_faq_items(self):
         """

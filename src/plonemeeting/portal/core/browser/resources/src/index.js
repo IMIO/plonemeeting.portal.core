@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jquery from "jquery";
 import register from "preact-custom-element";
 
 import InstitutionsSelect from "./components/InstitutionsSelect";
@@ -15,13 +15,13 @@ register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selec
 function setUpEnvironmentLabel() {
     let hostname = document.location.hostname;
     if (hostname === "localhost" || hostname === "0.0.0.0") {
-        $("body").append("<span class='environment-label environment-dev'>DEV</span>");
+        jquery("body").append("<span class='environment-label environment-dev'>DEV</span>");
     } else if (hostname.includes("staging")) {
-        $("body").append("<span class='environment-label environment-test'>TEST</span>");
+        jquery("body").append("<span class='environment-label environment-test'>TEST</span>");
     }
 }
 
-$(document).ready(function ($) {
+jquery(document).ready(function ($) {
     setUpEnvironmentLabel();
     if (window.Faceted) {
         $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function () {
