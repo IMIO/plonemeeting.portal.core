@@ -3,7 +3,6 @@ from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.interfaces import ISerializeToJson
-from plone.restapi.interfaces import ISerializeToJsonSummary
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import DEMO_INSTITUTION_IDS
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
@@ -13,10 +12,8 @@ from Products.Five.browser import BrowserView
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
-from zope.schema.interfaces import IVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 
-import ipdb
 import json
 import requests
 

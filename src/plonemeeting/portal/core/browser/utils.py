@@ -2,7 +2,6 @@
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
-from plone.dexterity.interfaces import IDexterityFTI
 from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
@@ -10,7 +9,6 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
-from zope.component import getUtility
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
