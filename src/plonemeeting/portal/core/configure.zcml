@@ -15,12 +15,13 @@
   <include package="eea.facetednavigation" />
 
   <include file="permissions.zcml" />
-  <include file="./migrations/upgrades.zcml" />
+
 
   <include package=".browser" />
   <include package=".content" />
   <include package=".events" />
   <include package=".faceted" />
+  <include package=".migrations" />
   <include package=".viewlets" />
   <include package=".widgets" />
   <include package=".filters" />

@@ -383,9 +383,9 @@ def get_term_title(context, fieldname):
             field = schema.get(fieldname)
             break
     if not field:
-        raise ValueError(f"No such field {field} in {context.portal_type} context")
+        raise ValueError(f"No such field {fieldname} in {context.portal_type} context")
     if not hasattr(field, "vocabularyName"):
-        raise ValueError(f"Field {field} in {context.portal_type} context doesn't have a vocabulary")
+        raise ValueError(f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
     vocabulary_name = field.vocabularyName
     vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
     vocabulary = vocabulary_factory(context)

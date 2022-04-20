@@ -3,19 +3,28 @@ from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
 from plonemeeting.portal.core.interfaces import IInstitutionSerializeToJson
-from zope.component import adapter, queryMultiAdapter
-from zope.interface import implementer, Interface
+from zope.component import adapter
+from zope.component import queryMultiAdapter
+from zope.interface import implementer
+from zope.interface import Interface
 from zope.schema import getFields
 
 
 @implementer(IInstitutionSerializeToJson)
 @adapter(IDexterityContent, Interface)
 class InstitutionSerializerToJson:
+    """
+    Custom JSON serializer using the plone.restapi fields serializer
+    """
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def __call__(self, fieldnames=["title"]):
+        """
+        :param fieldnames: fieldnames to be serialized and included
+        """
         obj = self.context
         result = {
             "@id": obj.absolute_url(),

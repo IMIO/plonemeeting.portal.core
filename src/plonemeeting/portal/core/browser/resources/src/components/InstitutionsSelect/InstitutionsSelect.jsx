@@ -67,7 +67,7 @@ const InstitutionsSelect = (props) => {
 
     return (
         <Fragment>
-            <div style={{ width: "500px" }}>
+            <div className="institution-select-input">
                 {!_.isEmpty(filters) && !_.isEmpty(groupedOptions) && (
                     <FilterSelect
                         isSearchable

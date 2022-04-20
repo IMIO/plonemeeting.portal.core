@@ -345,3 +345,9 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
         self.belleville.plonemeeting_url = "https://demo-pm.imio.be"
         self.belleville.meeting_config_id = None
         self.assertIsNone(utils.get_api_url_for_categories(self.belleville, "foo"))
+
+    def test_get_term_title(self):
+        self.assertEqual(utils.get_term_title(self.belleville, "meeting_type"), "Séance publique du Conseil")
+        self.assertEqual(utils.get_term_title(self.belleville, "institution_type"), "Ville/Commune")
+        self.assertRaises(ValueError, utils.get_term_title, self.belleville, "no_such_field")
+        self.assertRaises(ValueError, utils.get_term_title, self.belleville, "plonemeeting_url")

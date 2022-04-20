@@ -124,7 +124,7 @@
     destination="1008"
     profile="plonemeeting.portal.core:default">
     <genericsetup:upgradeDepends
-      title="Re-apply registry to add institution_types"
+      title="Re-apply registry to add institution_types and meeting_types"
       description=""
       import_profile="plonemeeting.portal.core:default"
       import_steps="plone.app.registry"
