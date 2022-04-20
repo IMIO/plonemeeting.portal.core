@@ -1,11 +1,17 @@
 import { Fragment, h, render } from "preact";
 import { useState, useEffect } from "preact/hooks";
-import loadable from "@loadable/component";
 import RightArrowSVG from "../../../assets/arrow-right.svg";
 import { theme as imioTheme, style as imioStyle } from "./theme";
 import _ from "lodash";
 import FilterSelect from "./FilterSelect.jsx";
 
+/**
+ * Component for showing a select of institutions.
+ * This uses a custom filterSelect that wraps react-select
+ * to be able to filter institutions based on their type.
+ *
+ * @component
+ */
 const InstitutionsSelect = (props) => {
     const [selected, setSelected] = useState({});
     const [institutions, setInstitutions] = useState();
@@ -51,6 +57,10 @@ const InstitutionsSelect = (props) => {
         setGroupedOptions(groupedOptions);
     }, []);
 
+    /**
+     * handle click of the institution.
+     * Set selected state so <a> link can be used to navigate to the institution.
+     */
     const handleChange = (option) => {
         setSelected(institutions[option.value]);
     };
