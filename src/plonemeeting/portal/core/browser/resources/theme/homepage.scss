@@ -3,6 +3,10 @@
     font-family: "Quicksand";
     font-weight: 500;
   }
+
+  #mainnavigation-wrapper{
+    display: none;
+  }
 }
 
 .template-homepage_view header#content-header {
@@ -79,6 +83,12 @@ a.btn-white {
   svg {
     color: #DE007B;
     transition: all 0.1s ease-in-out;
+  }
+
+  &:focus {
+    border: 0;
+    outline: 0 !important;
+    box-shadow: 0 0 0 3px #f1f1f180;
   }
 
   &:hover, &:active {

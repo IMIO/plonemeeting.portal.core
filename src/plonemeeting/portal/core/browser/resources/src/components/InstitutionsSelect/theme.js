@@ -10,8 +10,18 @@ export const theme = (originalTheme) => ({
 });
 
 export const style = {
-    control: (provided, state) => ({
-        ...provided,
-        border: "0",
-    }),
+    control: (provided, state) => {
+        if (state.isFocused) {
+            return {
+                ...provided,
+                border: 0,
+                outline: 0,
+                boxShadow: "0 0 0 3px #f1f1f180",
+            };
+        }
+        return {
+            ...provided,
+            border: "0",
+        };
+    },
 };
