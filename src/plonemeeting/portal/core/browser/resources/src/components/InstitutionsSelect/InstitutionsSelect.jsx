@@ -61,8 +61,10 @@ const InstitutionsSelect = (props) => {
      * handle click of the institution.
      * Set selected state so <a> link can be used to navigate to the institution.
      */
-    const handleChange = (option) => {
+    const handleChange = (option, { action }) => {
         setSelected(institutions[option.value]);
+        console.log(action);
+        return true;
     };
 
     return (

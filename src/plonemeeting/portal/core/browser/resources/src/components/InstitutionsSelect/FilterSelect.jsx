@@ -19,24 +19,33 @@ const FilterContext = createContext(null);
  */
 const FilterMenu = (props) => {
     const { filters, toggleFilter } = useContext(FilterContext);
-    const handleChange = (event) => {
+    const handleClick = (event) => {
         toggleFilter(event.target.name);
+    };
+    const handleLabelClick = (event) => {
+        // This will prevent the loss of focus when clicking on a label,
+        // which has the unfortunate effect of closing the select.
+        event.preventDefault();
+        toggleFilter(event.target.attributes["name"].value);
     };
     return (
         <components.Menu {...props}>
-            <div className="checkbox-filter-select">
+            <fieldset className="checkbox-filter-select">
                 {Object.entries(filters).map(([key, filter]) => (
                     <div className="option" key={key}>
                         <input
+                            id={key}
                             name={key}
-                            onChange={handleChange}
+                            onChange={handleClick}
                             type="checkbox"
                             checked={filter.checked}
                         />
-                        <span>{filter.label}</span>
+                        <label name={key} onClick={handleLabelClick} htmlFor={key}>
+                            {filter.label}
+                        </label>
                     </div>
                 ))}
-            </div>
+            </fieldset>
             {props.children}
         </components.Menu>
     );
