@@ -96,4 +96,22 @@ a.btn-white {
   }
 }
 
+.checkbox-filter-select {
+  overflow: hidden;
+  padding: 0.5em;
+  background-color: $grey-100;
+  color: $grey-800;
+  border-radius: 4px 4px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  border-bottom: 1px solid $grey-200;
+  input[type=checkbox]  {
+    margin: 0.25em 0.5em;
+    accent-color: $delib-primary;
+  }
+}
 

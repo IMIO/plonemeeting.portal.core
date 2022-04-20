@@ -62,8 +62,8 @@ const defaultFilter = createFilter(); // default filter from react-select
  * @param {object} props React-select `Select` props that will be used.
  * @component
  */
-const FilterSelect = ({ filters, ...props }) => {
-    const [filters, setFilters] = useState(filters);
+const FilterSelect = ({ pfilters, ...props }) => {
+    const [filters, setFilters] = useState(pfilters);
 
     /**
      * First, we apply our filtering logic.

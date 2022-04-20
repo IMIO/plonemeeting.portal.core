@@ -72,7 +72,7 @@ const InstitutionsSelect = (props) => {
                     <FilterSelect
                         isSearchable
                         options={groupedOptions}
-                        filters={filters}
+                        pfilters={filters}
                         theme={imioTheme}
                         styles={imioStyle}
                         onChange={handleChange}
