@@ -31,6 +31,8 @@ Changelog
   [aduchene]
 - Updated theme and frontend dependencies.
   [aduchene]
+- Use HTTPS protocol for mr.developer.
+  [aduchene]
 
 1.4.5 (2021-11-29)
 ------------------
