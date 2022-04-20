@@ -1,5 +1,5 @@
-import { createContext, h, render } from "preact";
-import { useState, useContext } from "preact/hooks";
+import { createContext } from "preact";
+import { useState, useContext, useMemo } from "preact/hooks";
 import loadable from "@loadable/component";
 import { components, createFilter } from "react-select";
 const Select = loadable(() => import("react-select"));
@@ -10,7 +10,7 @@ const Select = loadable(() => import("react-select"));
  * to apply the filtering logic (see the `FilterSelect` component).
  * @type {PreactContext}
  */
-const FilterContext = createContext(null);
+const FilterContext = createContext({});
 
 /**
  * Custom Menu for react-select that shows a list of checkboxes at the top.
@@ -71,11 +71,16 @@ const defaultFilter = createFilter(); // default filter from react-select
  * @param {object} props React-select `Select` props that will be used.
  * @component
  */
-const FilterSelect = ({ pfilters, ...props }) => {
-    const [filters, setFilters] = useState(pfilters);
+const FilterSelect = ({ filters: filtersProp, ...props }) => {
+    const [filters, setFilters] = useState(filtersProp);
+
+    const isAllDeselected = useMemo(
+        () => _.isEmpty(_.pickBy(filters, (filter) => filter.checked)),
+        [filters]
+    );
 
     /**
-     * First, we apply our filtering logic.
+     * First, we apply our filtering logic (no filter => display everything, else filter accordingly)
      * Then, we use the default filter (because it does some interesting things,
      * like normalizing the input from the search field).
      * @param label {string} Option label.
@@ -85,7 +90,7 @@ const FilterSelect = ({ pfilters, ...props }) => {
      * @returns {boolean}
      */
     const filterOptions = ({ label, value, data }, input) => {
-        if (filters[data.type] && !filters[data.type].checked) {
+        if (!isAllDeselected && filters[data.type] && !filters[data.type].checked) {
             return false;
         }
         return defaultFilter({ label, value, data }, input);

@@ -1,4 +1,4 @@
-import { Fragment, h, render } from "preact";
+import { Fragment } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import RightArrowSVG from "../../../assets/arrow-right.svg";
 import { theme as imioTheme, style as imioStyle } from "./theme";
@@ -32,7 +32,7 @@ const InstitutionsSelect = (props) => {
             if (!filters.hasOwnProperty(type.token)) {
                 filters[type.token] = {
                     label: type.title,
-                    checked: true,
+                    checked: false,
                 };
             }
         });
@@ -61,10 +61,8 @@ const InstitutionsSelect = (props) => {
      * handle click of the institution.
      * Set selected state so <a> link can be used to navigate to the institution.
      */
-    const handleChange = (option, { action }) => {
+    const handleChange = (option) => {
         setSelected(institutions[option.value]);
-        console.log(action);
-        return true;
     };
 
     return (
@@ -74,7 +72,7 @@ const InstitutionsSelect = (props) => {
                     <FilterSelect
                         isSearchable
                         options={groupedOptions}
-                        pfilters={filters}
+                        filters={filters}
                         theme={imioTheme}
                         styles={imioStyle}
                         onChange={handleChange}
