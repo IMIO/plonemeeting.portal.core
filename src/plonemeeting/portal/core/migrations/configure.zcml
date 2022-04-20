@@ -129,10 +129,6 @@
       import_profile="plonemeeting.portal.core:default"
       import_steps="plone.app.registry"
       run_deps="True"/>
-    <genericsetup:upgradeStep
-      title="Go to portal 1008"
-      description="Fill institution_type in registry and set a default institution type"
-      handler="plonemeeting.portal.core.migrations.migrate_to_1008.migrate"/>
   </genericsetup:upgradeSteps>
 
 </configure>
