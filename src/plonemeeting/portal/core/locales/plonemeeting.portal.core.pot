@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-18 14:08+0000\n"
+"POT-Creation-Date: 2022-04-21 14:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -345,8 +345,12 @@ msgstr ""
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../sync_utils.py:321
+#: ../sync_utils.py:325
 msgid "Unexpected meeting count in web service response !"
+msgstr ""
+
+#: ../sync_utils.py:97
+msgid "Unexpected publishable annex value in web service response !"
 msgstr ""
 
 #: ../configure.zcml:53
@@ -384,7 +388,7 @@ msgstr ""
 msgid "Web service connection error !"
 msgstr ""
 
-#: ../browser/sync.py:65
+#: ../browser/sync.py:61
 #: ../content/institution.py:406
 msgid "Webservice connection error !"
 msgstr ""
@@ -434,7 +438,7 @@ msgid "meeting_filter_query_description"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:332
+#: ../sync_utils.py:336
 msgid "meeting_imported"
 msgstr ""
 
