@@ -15,29 +15,6 @@ register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
 
-import { i18n } from "@lingui/core";
-
-export const locales = {
-    en: "English",
-    fr: "French",
-};
-export const defaultLocale = "en";
-
-i18n.loadLocaleData({
-    en: {},
-    fr: {},
-});
-
-/**
- * We do a dynamic import of just the catalog that we need
- * @param locale any locale string
- */
-export async function dynamicActivate(locale) {
-    const { messages } = await import(`./locales/${locale}/messages`);
-    i18n.load(locale, messages);
-    i18n.activate(locale);
-}
-
 function setUpEnvironmentLabel() {
     let hostname = document.location.hostname;
     if (hostname === "localhost" || hostname === "0.0.0.0") {

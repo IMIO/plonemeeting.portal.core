@@ -1,9 +1,8 @@
 import { h, render } from "preact";
 import { useState } from "preact/hooks";
 import Icon from "@mdi/react";
-import { mdiPlus, mdiEqual, mdiMinus, mdiPencil, mdiDotsHorizontal } from "@mdi/js";
+import { mdiPlus, mdiEqual, mdiMinus, mdiPencil } from "@mdi/js";
 import ReactTooltip from "react-tooltip";
-import { Trans } from "@lingui/react";
 
 const Annexe = ({ data, type }) => {
     const id = Math.random();
@@ -20,7 +19,6 @@ const Annexe = ({ data, type }) => {
             <Icon path={getIcon()} color="white" />
             <span>{data.count}</span>
             <ReactTooltip id={`pp${id}`} type="dark" place="left" effect="solid">
-                <Trans id="Hello World" />;
                 <ul>
                     {data.titles.map((title) => (
                         <li key={title}>{title}</li>
