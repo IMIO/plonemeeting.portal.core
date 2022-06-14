@@ -92,6 +92,10 @@ def sync_annexes_data(item, institution, annexes_json, force=False):
 
     # we receive only publishable annexes
     for annex_data in annexes_json:
+        if not annex_data.get("publishable", False):
+            # Make sure we have publishable annexes. Otherwise, we abort and notify the user.
+            raise ValueError(_(u"Unexpected publishable annex value in web service response !"))
+
         annex_pm_uid = annex_data.get("UID")
         annex = get_annex_if_exists(annex_pm_uid)
 

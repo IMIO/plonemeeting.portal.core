@@ -7,7 +7,6 @@ from plonemeeting.portal.core import logger
 from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.sync_utils import sync_meeting
-from plonemeeting.portal.core.utils import redirect
 from plonemeeting.portal.core.utils import redirect_back
 from Products.Five import BrowserView
 from z3c.form import button
@@ -46,13 +45,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         if errors:
             self.status = self.formErrorsMessage
             return
-        external_meeting_uid = data.get("meeting")
-        next_form_url = (
-            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
-        )
-        redirect(self.request, next_form_url)
-
-    # _sync_meeting(institution, meeting_uid, self.request)
+        institution = self.context
+        meeting_uid = data.get("meeting")
+        _sync_meeting(institution, meeting_uid, self.request)
 
     def update(self):
         try:

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-18 14:08+0000\n"
+"POT-Creation-Date: 2022-04-21 14:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,9 +342,13 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../sync_utils.py:321
+#: ../sync_utils.py:325
 msgid "Unexpected meeting count in web service response !"
 msgstr "Nombre de Séances inatendu dans la réponse du service web !"
+
+#: ../sync_utils.py:97
+msgid "Unexpected publishable annex value in web service response !"
+msgstr "Une annexe non publiable a été trouvée dans la réponse du web service !"
 
 #: ../configure.zcml:53
 msgid "Uninstalls the plonemeeting.portal.core add-on."
@@ -381,7 +385,7 @@ msgstr "Voir la séance"
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
-#: ../browser/sync.py:65
+#: ../browser/sync.py:61
 #: ../content/institution.py:406
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
@@ -431,7 +435,7 @@ msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:332
+#: ../sync_utils.py:336
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 

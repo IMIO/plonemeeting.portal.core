@@ -17,6 +17,10 @@ Changelog
   [odelaere]
 - Fix history is lost in some case after resync representatives from delib #PM-3816.
   [odelaere]
+- Added a cross-checking against publishable annexes, to be sure it can be published.
+  [aduchene]
+- Fixed import meeting form as pre-report sync is not already merged.
+  [aduchene]
 
 
 1.4.5 (2021-11-29)

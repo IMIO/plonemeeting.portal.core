@@ -14,6 +14,7 @@ from plonemeeting.portal.core.sync_utils import sync_items_number
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
+import copy
 import json
 import os
 import pytz
@@ -400,3 +401,17 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         with self.assertRaises(ValueError) as ws_err:
             _call_delib_rest_api("fake_url", self.institution)
         self.assertEqual(u"Web service connection error !", str(ws_err.exception))
+
+    def test_raises_when_encountered_not_publishable_annexes(self):
+        self.institution.info_annex_formatting_tal = "python: json['category_title']"
+        annexes_not_publishable_but_published = copy.deepcopy(self.json_annexes_publishable_mock)
+        annexes_not_publishable_but_published[0]["publishable"] = False
+        with self.assertRaises(ValueError):
+            sync_annexes_data(self.item, self.institution, annexes_not_publishable_but_published)
+
+        annexes_not_publishable_but_published[0]["publishable"] = True
+        sync_annexes_data(self.item, self.institution, annexes_not_publishable_but_published)
+
+        del annexes_not_publishable_but_published[0]["publishable"]
+        with self.assertRaises(ValueError):
+            sync_annexes_data(self.item, self.institution, annexes_not_publishable_but_published)
