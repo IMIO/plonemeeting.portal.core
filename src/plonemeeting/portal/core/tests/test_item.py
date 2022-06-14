@@ -62,7 +62,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
                          'Mr Wara, Mme LOREM, Mme Ipsum, Mr Bara')
 
     def test_decision_with_images(self):
-        pattern = '<p>Text with image <img src="{0}"/> and more text.</p>'
+        pattern = '<p>Text with image <img src="{0}"> and more text.</p>'
         text = pattern.format(IMG_BASE64_DATA)
         self.item.decision = richtextval(text)
         self.assertEqual(self.item.decision.output, text)
