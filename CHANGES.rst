@@ -21,7 +21,9 @@ Changelog
   [aduchene]
 - Fixed import meeting form as pre-report sync is not already merged.
   [aduchene]
-
+- Require `imio.helpers>=0.58` so we get the fix in `xhtml.replace_content` that
+  makes sure anonymized text is correctly handled (was failing when containing sub tags).
+  [gbastien]
 
 1.4.5 (2021-11-29)
 ------------------
