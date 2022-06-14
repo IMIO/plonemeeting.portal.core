@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-04-20 11:54+0000\n"
+"POT-Creation-Date: 2022-06-14 13:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:41
+#: ../browser/sync.py:40
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Mapping"
 msgstr ""
 
-#: ../browser/sync.py:27
+#: ../browser/sync.py:26
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:40
+#: ../browser/sync.py:39
 msgid "Meeting import form"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:43
+#: ../browser/sync.py:42
 msgid "Select"
 msgstr ""
 
@@ -388,11 +388,15 @@ msgstr ""
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../sync_utils.py:321
+#: ../sync_utils.py:325
 msgid "Unexpected meeting count in web service response !"
 msgstr ""
 
-#: ../configure.zcml:55
+#: ../sync_utils.py:97
+msgid "Unexpected publishable annex value in web service response !"
+msgstr ""
+
+#: ../configure.zcml:56
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -431,7 +435,7 @@ msgstr ""
 msgid "Web service connection error !"
 msgstr ""
 
-#: ../browser/sync.py:65
+#: ../browser/sync.py:60
 #: ../content/institution.py:420
 msgid "Webservice connection error !"
 msgstr ""
@@ -497,19 +501,19 @@ msgid "meeting_filter_query_description"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:332
+#: ../sync_utils.py:336
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:55
+#: ../configure.zcml:56
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

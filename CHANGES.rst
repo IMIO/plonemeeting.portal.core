@@ -33,6 +33,11 @@ Changelog
   [aduchene]
 - Use HTTPS protocol for mr.developer.
   [aduchene]
+- Added a cross-checking against publishable annexes, to be sure it can be published.
+  [aduchene]
+- Fixed import meeting form as pre-report sync is not already merged.
+  [aduchene]
+
 
 1.4.5 (2021-11-29)
 ------------------

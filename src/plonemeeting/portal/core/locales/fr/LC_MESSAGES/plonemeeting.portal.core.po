@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-04-20 11:54+0000\n"
+"POT-Creation-Date: 2022-06-14 13:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr "Matière"
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:41
+#: ../browser/sync.py:40
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la Séance que vous souhaitez importer dans le portail."
 
@@ -79,7 +79,7 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
@@ -150,7 +150,7 @@ msgstr "Importer une séance"
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des annexes"
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -230,7 +230,7 @@ msgstr "Logo"
 msgid "Mapping"
 msgstr "Correspondances"
 
-#: ../browser/sync.py:27
+#: ../browser/sync.py:26
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
@@ -243,7 +243,7 @@ msgstr "Type de séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
-#: ../browser/sync.py:40
+#: ../browser/sync.py:39
 msgid "Meeting import form"
 msgstr "Importation de Séance"
 
@@ -348,7 +348,7 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:43
+#: ../browser/sync.py:42
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -385,11 +385,15 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../sync_utils.py:321
+#: ../sync_utils.py:325
 msgid "Unexpected meeting count in web service response !"
 msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 
-#: ../configure.zcml:55
+#: ../sync_utils.py:97
+msgid "Unexpected publishable annex value in web service response !"
+msgstr "Une annexe non publiable a été trouvée dans la réponse du web service !"
+
+#: ../configure.zcml:56
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -428,7 +432,7 @@ msgstr "Ville/Commune"
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
-#: ../browser/sync.py:65
+#: ../browser/sync.py:60
 #: ../content/institution.py:420
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
@@ -494,19 +498,19 @@ msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:332
+#: ../sync_utils.py:336
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../configure.zcml:37
+#: ../configure.zcml:38
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:46
+#: ../configure.zcml:47
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:55
+#: ../configure.zcml:56
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

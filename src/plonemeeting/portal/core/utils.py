@@ -119,6 +119,7 @@ def get_api_url_for_annexes(item_json_id):
           "&include_all=false" \
           "&metadata_fields=file" \
           "&metadata_fields=content_category" \
+          "&additional_values=publishable" \
           "&additional_values=category_title" \
           "&additional_values=subcategory_title".format(item_json_id)
     return url
