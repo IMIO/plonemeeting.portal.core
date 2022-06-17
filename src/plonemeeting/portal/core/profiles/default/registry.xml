@@ -100,7 +100,7 @@
     <value key="compile">True</value>
     <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-    <value key="last_compilation">2022-04-20 15:18:24.587Z</value>
+    <value key="last_compilation">2022-06-17 07:59:26.208Z</value>
   </records>
   <records prefix="plone.resources/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IResourceRegistry">
     <value key="css">

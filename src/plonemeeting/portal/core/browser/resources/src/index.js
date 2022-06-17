@@ -6,7 +6,6 @@ import InstitutionsMap from "./components/InstitutionsMap";
 import MasonryColumns from "./components/MasonryColumns";
 
 import "../theme/main.scss";
-import "preact/debug";
 
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);

@@ -4,7 +4,7 @@
     font-weight: 500;
   }
 
-  #mainnavigation-wrapper{
+  #mainnavigation-wrapper {
     display: none;
   }
 }
@@ -119,9 +119,15 @@ a.btn-white {
   letter-spacing: 0.1em;
   font-weight: bold;
   border-bottom: 1px solid $grey-200;
-  input[type=checkbox]  {
+
+  input[type=checkbox] {
     margin: 0.25em 0.5em;
     accent-color: $delib-primary;
+  }
+
+  @include media-breakpoint-down(md) {
+      grid-template-columns: repeat(1, 1fr);
+      font-size: 0.7em;
   }
 }
 

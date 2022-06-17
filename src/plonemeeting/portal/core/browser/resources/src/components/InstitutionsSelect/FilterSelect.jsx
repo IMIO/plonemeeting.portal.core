@@ -20,12 +20,15 @@ const FilterContext = createContext({});
 const FilterMenu = (props) => {
     const { filters, toggleFilter } = useContext(FilterContext);
     const handleClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         toggleFilter(event.target.name);
     };
     const handleLabelClick = (event) => {
         // This will prevent the loss of focus when clicking on a label,
         // which has the unfortunate effect of closing the select.
         event.preventDefault();
+        event.stopPropagation();
         toggleFilter(event.target.attributes["name"].value);
     };
     return (
@@ -37,10 +40,16 @@ const FilterMenu = (props) => {
                             id={key}
                             name={key}
                             onChange={handleClick}
+                            onTouchEnd={handleClick}
                             type="checkbox"
                             checked={filter.checked}
                         />
-                        <label name={key} onClick={handleLabelClick} htmlFor={key}>
+                        <label
+                            name={key}
+                            onClick={handleLabelClick}
+                            onTouchEnd={handleLabelClick}
+                            htmlFor={key}
+                        >
                             {filter.label}
                         </label>
                     </div>
