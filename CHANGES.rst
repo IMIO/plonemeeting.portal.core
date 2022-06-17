@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.6 (unreleased)
+1.5.0 (unreleased)
 ------------------
 
 - Properly redirect anonymous users when using meeting direct url.
@@ -21,7 +21,7 @@ Changelog
   [aduchene]
 - Added an utils function `get_term_title` to easily get the term title of a given context and fieldname.
   [aduchene]
-- Added two new fields `institution_type` and `meeting_type`on Institution.
+- Added two new fields `institution_type` and `meeting_type` on Institution.
   Added an upgrade step to 1008 to add the vocabulary values in the registry.
   [aduchene]
 - Reworked homepage_view according to the new field `institution_type`.
