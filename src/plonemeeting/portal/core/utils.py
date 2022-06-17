@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.app.textfield.value import IRichTextValue
+from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
 from plonemeeting.portal.core import _
@@ -16,6 +17,7 @@ from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
+from zope.schema.interfaces import IVocabularyFactory
 
 
 def format_institution_managers_group_id(institution):
@@ -372,3 +374,20 @@ def redirect(request, to):
 def redirect_back(request):
     """Redirect back"""
     redirect(request, request.get("HTTP_REFERER"))
+
+
+def get_term_title(context, fieldname):
+    """Get the term title for the given context and fieldname."""
+    field = None
+    for schema in iterSchemata(context):
+        if fieldname in schema.names():
+            field = schema.get(fieldname)
+            break
+    if not field:
+        raise ValueError(f"No such field {fieldname} in {context.portal_type} context")
+    if not hasattr(field, "vocabularyName"):
+        raise ValueError(f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
+    vocabulary_name = field.vocabularyName
+    vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
+    vocabulary = vocabulary_factory(context)
+    return vocabulary.getTerm(getattr(context, fieldname)).title

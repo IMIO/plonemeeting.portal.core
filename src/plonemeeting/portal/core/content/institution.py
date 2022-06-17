@@ -125,6 +125,20 @@ class IRepresentativeMappingRowSchema(Interface):
 class IInstitution(model.Schema):
     """ Marker interface and Dexterity Python Schema for Institution
     """
+    institution_type = schema.Choice(
+        title=_(u"Institution Type"),
+        vocabulary="plonemeeting.portal.vocabularies.institution_types",
+        required=True,
+        default="commune"
+    )
+
+    meeting_type = schema.Choice(
+        title=_(u"Meeting Type"),
+        vocabulary="plonemeeting.portal.vocabularies.meeting_types",
+        required=True,
+        default="council"
+    )
+
     plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_(u"Username"), required=False)

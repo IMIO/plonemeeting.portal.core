@@ -132,6 +132,7 @@ module.exports = (env, argv) => {
                 "react-dom": "preact/compat",
                 leaflet$: "leaflet/dist/leaflet",
             },
+            extensions: ["", ".js", ".jsx"],
         },
         externals: {
             jquery: "jQuery",

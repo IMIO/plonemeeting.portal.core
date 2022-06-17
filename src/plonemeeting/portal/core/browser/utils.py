@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -7,7 +6,9 @@ from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
+from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -20,6 +21,12 @@ class UtilsView(BrowserView):
     """
 
     def get_current_institution(self):
+        if ICatalogBrain.providedBy(self.context):
+            # context could be a brain in a faceted view, so we need to get the real object.
+            # Otherwise, api.portal.get_navigation_root returns the PloneSite.
+            # Which is not what we want
+            obj = self.context.getObject()
+            return api.portal.get_navigation_root(obj)
         return self.is_institution() and self.context or api.portal.get_navigation_root(self.context)
 
     def is_institution(self):
@@ -91,6 +98,12 @@ class UtilsView(BrowserView):
 
     def protect_url(self, url):
         return addTokenToUrl(url)
+
+    def meeting_type(self):
+        return get_term_title(self.get_current_institution(), "meeting_type")
+
+    def institution_type(self):
+        return get_term_title(self.get_current_institution(), "institution_type")
 
 
 def path_to_dx_default_template():

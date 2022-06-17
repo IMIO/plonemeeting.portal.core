@@ -22,6 +22,7 @@
            tal:define="portal_url context/@@plone_portal_state/portal_url;
                        utils_view nocall:context/@@utils_view;
                        meeting nocall:context/aq_parent;
+                       institution python: utils_view.get_current_institution();
                        review_state python: utils_view.get_state(meeting);
                        isAnon context/@@plone_portal_state/anonymous;"
            tal:attributes="class string:item-infos ${review_state}">
@@ -55,9 +56,7 @@
                   i18n:translate=""
                   tal:attributes="class string:state-${review_state}">Decision</span>
           </div>
-          <div class="public-meeting"
-               i18n:translate="">Public meeting
-          </div>
+          <div class="public-meeting" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
           <div class="meeting-title">
             <a href="" class="meeting-title-link"
                tal:content="meeting/title"

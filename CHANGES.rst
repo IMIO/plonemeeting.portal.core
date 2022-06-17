@@ -17,6 +17,22 @@ Changelog
   [odelaere]
 - Fix history is lost in some case after resync representatives from delib #PM-3816.
   [odelaere]
+- Moved upgrade steps in a separate `migrations` module and changed configure.zcml accordingly.
+  [aduchene]
+- Added an utils function `get_term_title` to easily get the term title of a given context and fieldname.
+  [aduchene]
+- Added two new fields `institution_type` and `meeting_type`on Institution.
+  Added an upgrade step to 1008 to add the vocabulary values in the registry.
+  [aduchene]
+- Reworked homepage_view according to the new field `institution_type`.
+  InstitutionSelect component is now properly decomposed in sub-components.
+  [aduchene]
+- Reworked faceted view according to the new field `meeting_type`.
+  [aduchene]
+- Updated theme and frontend dependencies.
+  [aduchene]
+- Use HTTPS protocol for mr.developer.
+  [aduchene]
 - Added a cross-checking against publishable annexes, to be sure it can be published.
   [aduchene]
 - Fixed import meeting form as pre-report sync is not already merged.

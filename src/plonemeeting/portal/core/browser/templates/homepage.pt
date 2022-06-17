@@ -9,6 +9,7 @@
   fill-slot="content-core"
 >
   <tal:defines define="institutions view/get_json_institutions;
+                       institution_type_vocabulary view/get_json_institution_type_vocabulary;
                        faq_items view/get_faq_items;">
     <section class="hero-primary full-width">
       <div class="row">
@@ -25,7 +26,8 @@
 
             <x-institution-select
               class="institution-select"
-               tal:attributes="data-institutions institutions"
+               tal:attributes="data-institutions institutions;
+                               data-institution-type-vocabulary institution_type_vocabulary"
             >
             </x-institution-select>
           </div>
