@@ -19,6 +19,8 @@ Changelog
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
   [odelaere]
+- Handle deactivated representatives.
+  [odelaere]
 - Fix bad status code would raise an unexpected error #PM-3805.
   [odelaere]
 - Fix history is lost in some case after resync representatives from delib #PM-3816.
