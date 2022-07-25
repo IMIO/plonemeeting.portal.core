@@ -5,7 +5,10 @@ Changelog
 1.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use plone 5.2.9.
+  [odelaere]
+- Handle deactivated representatives.
+  [odelaere]
 
 
 1.5.0 (2022-06-17)
@@ -18,8 +21,6 @@ Changelog
 - Reworked sync + allow partial sync of arbitrary items.
   [odelaere]
 - Auto cancel ImportMeetingForm if failed to connect to iA.Delib.
-  [odelaere]
-- Handle deactivated representatives.
   [odelaere]
 - Fix bad status code would raise an unexpected error #PM-3805.
   [odelaere]

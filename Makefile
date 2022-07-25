@@ -12,7 +12,7 @@ help:  ## Displays this help
 
 .PHONY: bootstrap
 bootstrap:  ## Creates virtualenv and installs requirements.txt
-	virtualenv -p python3 .
+	virtualenv -p python3.8 .
 	make install-requirements
 
 install-requirements:
