@@ -1,4 +1,3 @@
-import { h, render } from "preact";
 import { useLeafletContext } from "@react-leaflet/core";
 import { useEffect } from "preact/hooks";
 import L from "leaflet";

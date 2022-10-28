@@ -1,0 +1,134 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <genericsetup:upgradeStep
+    title="Go to portal 1001"
+    description="Fix indexes after adding sortable_number for items"
+    source="1000"
+    destination="1001"
+    sortkey="1"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1001.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 1002"
+    description="Add new bundles and resources to the registry"
+    source="*"
+    destination="1002"
+    sortkey="2"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1002.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeSteps
+    source="1002"
+    destination="1003"
+    sortkey="3"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeStep
+      title="Go to portal 1003 (handler)"
+      description=""
+      handler="plonemeeting.portal.core.migrations.migrate_to_1003.migrate"/>
+    <genericsetup:upgradeDepends
+      title="Install plone.restapi"
+      description=""
+      import_profile="plone.restapi:default"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply rolemap.xml of plonemeeting.portal.core after plone.restapi install"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="rolemap"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="1003"
+    destination="1004"
+    sortkey="3"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply workflow to update institution_workflow"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="workflow"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply content to update Folder constraints"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="content"
+      run_deps="True"/>
+    <genericsetup:upgradeStep
+      title="Go to portal 1004 (handler)"
+      description=""
+      handler="plonemeeting.portal.core.migrations.migrate_to_1004.migrate"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="1004"
+    destination="1005"
+    sortkey="4"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply actions for Meeting sync and reimport actions"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="actions"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Upgrade collective.z3cform.datagridfield"
+      description=""
+      import_profile="collective.z3cform.datagridfield:default"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 1005"
+    description="Re-apply faceted configuration"
+    source="1004"
+    destination="1005"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1005.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeSteps
+    source="1005"
+    destination="1006"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Apply upgrade steps for datagridfield"
+      description=""
+      import_profile="collective.z3cform.datagridfield:default"
+      run_deps="True"/>
+    <genericsetup:upgradeStep
+      title="Go to portal 1006"
+      description="Fetched data from delib are kept if used AND URL parameters are now in a datagridfiel widget"
+      handler="plonemeeting.portal.core.migrations.migrate_to_1006.migrate"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="1006"
+    destination="1007"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply registry to add GDPR masked text related attributes"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="plone.app.registry"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="1007"
+    destination="1008"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply registry to add institution_types and meeting_types"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="plone.app.registry"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
+</configure>

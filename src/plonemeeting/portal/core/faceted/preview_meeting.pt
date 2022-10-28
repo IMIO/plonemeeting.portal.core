@@ -109,11 +109,13 @@
           </tal:meeting>
 
           <span tal:condition="folderContents">
-            <tal:entries tal:define="preview nocall:context/@@faceted_pm_macros/preview_meeting_item">
+            <tal:entries tal:define="preview nocall:context/@@faceted_pm_macros/preview_meeting_item;
+                                     meeting_type context/@@utils_view/meeting_type">
               <tal:entry repeat="brain batch">
 
                 <metal:macro use-macro="preview"
-                             tal:define="brain nocall:brain"/>
+                             tal:define="brain nocall:brain;
+                                         meeting_type meeting_type"/>
 
               </tal:entry>
             </tal:entries>

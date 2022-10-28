@@ -158,3 +158,41 @@ class DelibCategoryMappingFieldsVocabularyFactory:
 
 
 DelibCategoryMappingFieldsVocabulary = DelibCategoryMappingFieldsVocabularyFactory()
+
+
+class InstitutionTypesVocabularyFactory:
+    def __call__(self, context):
+        institution_types = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.institution_types"
+        )
+        if not institution_types:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=id, title=title)
+                for id, title in institution_types.items()
+            ]
+        )
+
+
+InstitutionTypesVocabulary = InstitutionTypesVocabularyFactory()
+
+
+class MeetingTypesVocabularyFactory:
+    def __call__(self, context):
+        meeting_types = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.meeting_types"
+        )
+        if not meeting_types:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=id, title=title)
+                for id, title in meeting_types.items()
+            ]
+        )
+
+
+MeetingTypesVocabulary = MeetingTypesVocabularyFactory()

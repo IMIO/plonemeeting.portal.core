@@ -1,4 +1,3 @@
-import { Fragment, h, render } from "preact";
 import { useEffect, useState, useCallback } from "preact/hooks";
 import loadable from "@loadable/component";
 import axios from "axios";

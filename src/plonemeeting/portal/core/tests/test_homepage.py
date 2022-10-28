@@ -24,6 +24,17 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         self.assertIn("x-institution-map", html_content)
         self.assertIn("x-institution-select", html_content)
 
+    def test_get_json_institution_type_vocabulary(self):
+        """ Test if the institution_type vocabulary is correctly returned"""
+        portal = api.portal.get()
+        view = portal.unrestrictedTraverse("homepage_view")
+        vocabulary_values = api.portal.get_registry_record("plonemeeting.portal.core.institution_types")
+        json_str = view.get_json_institution_type_vocabulary()
+        result = json.loads(json_str)
+        self.assertEqual(len(result["items"]), len(vocabulary_values.items()))
+        for value in result["items"]:
+            self.assertEqual(value["title"], vocabulary_values[value["token"]])
+
     def test_institution_locations_view(self):
         """ Test if the values from InstitutionLocationsView are correct"""
         portal = api.portal.get()

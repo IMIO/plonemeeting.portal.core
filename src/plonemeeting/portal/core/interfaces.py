@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
+from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
@@ -14,3 +15,7 @@ class IMeetingsFolder(IFacetedNavigable):
 
 class IItemsFolder(IFacetedNavigable):
     """Kept while migrating to 1003, to be removed after"""
+
+
+class IInstitutionSerializeToJson(Interface):
+    """Adapter to serialize an Institution object into a JSON object."""
