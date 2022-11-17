@@ -15,10 +15,11 @@ const Annexe = ({ data, type }) => {
     };
 
     return (
-        <div className={`annex-status ${type}`} data-tip data-for={`pp${id}`}>
+        <div className={`annex-status ${type}`} data-tip data-for={`tooltip-${id}`}>
             <Icon path={getIcon()} color="white" />
             <span>{data.count}</span>
-            <ReactTooltip id={`pp${id}`} type="dark" place="left" effect="solid">
+            <ReactTooltip id={`tooltip-${id}`} type="dark" place="left" effect="solid">
+                <h5>{data.label}</h5>
                 <ul>
                     {data.titles.map((title) => (
                         <li key={title}>{title}</li>

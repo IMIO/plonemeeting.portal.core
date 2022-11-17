@@ -1,19 +1,26 @@
 .items-datatables-container {
-  padding: 0em 2em 1em 2em;
+  padding: 0 3em 1em 3em;
   margin-top: -2em;
+  @include media-breakpoint-down(md) {
+    padding: 0 0 1em 0;
+  }
 
   #items-datatables_filter {
     margin-right: 15px;
   }
+
+  .checkbox-cell, .checkbox-header {
+    text-align: center;
+  }
+}
+
+#items-datatables_wrapper th {
+  background-color: $grey-100;
 }
 
 .template-pre_sync_report_form {
   #items-datatables_wrapper th.checkbox-header {
     border-left: 8px solid $grey-200 !important;
-  }
-
-  #items-datatables_wrapper th {
-    background-color: $grey-100;
   }
 
   #items-datatables .unchanged > .checkbox-cell {
@@ -33,7 +40,6 @@
   }
 }
 
-
 .annexes-status {
   width: 100%;
   display: flex;
@@ -47,13 +53,18 @@
   padding: 0.1em 0.25em;
   margin: 0.1em 0;
   color: #FFF;
-  font-weight: bolder;
   border: none;
   width: 4em;
   display: flex;
   box-shadow: $shadow-md;
   align-items: center;
 
+  h5 {
+    font-weight: bold;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.25em;
+    border-bottom: 1px solid $white;
+  }
   svg {
     width: 15px;
     height: 15px;
@@ -71,6 +82,7 @@
     &:hover {
       background-color: darken($grey-500, 10);
     }
+
     background-color: $grey-500;
   }
 
@@ -78,6 +90,7 @@
     &:hover {
       background-color: darken($green, 10);
     }
+
     background-color: $green;
   }
 
@@ -85,6 +98,7 @@
     &:hover {
       background-color: darken($red, 10);
     }
+
     background-color: $red;
   }
 
@@ -92,6 +106,7 @@
     &:hover {
       background-color: darken($orange, 10);
     }
+
     background-color: $orange;
   }
 

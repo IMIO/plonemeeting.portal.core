@@ -9,7 +9,6 @@ import MasonryColumns from "./components/MasonryColumns";
 
 import "../theme/main.scss";
 
-register(InstitutionSelect, "x-institution-select", ["data-institutions"]);
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
 register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
@@ -26,15 +25,15 @@ function setUpEnvironmentLabel() {
 }
 
 jquery(document).ready(function ($) {
-  setUpEnvironmentLabel();
-  if (window.Faceted) {
-    $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function () {
-      $(".toggle-link").click(function (e) {
-        $("#meeting-custom-info-content-toggle").slideToggle("fast", function () {
-          $(".toggle-link").toggle();
+    setUpEnvironmentLabel();
+    if (window.Faceted) {
+        $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function () {
+            $(".toggle-link").click(function (e) {
+                $("#meeting-custom-info-content-toggle").slideToggle("fast", function () {
+                    $(".toggle-link").toggle();
+                });
+                e.preventDefault();
+            });
         });
-        e.preventDefault();
-      });
-    });
-  }
+    }
 });

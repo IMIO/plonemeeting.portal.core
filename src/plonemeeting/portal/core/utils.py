@@ -65,7 +65,8 @@ def get_api_url_for_meetings(institution, meeting_external_uid=None):
               "&fullobjects=True" \
               "&include_all=false" \
               "&metadata_fields=date" \
-              "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
+              "&b_size=9999".format(url, _get_uids_filter_url(
+            [meeting_external_uid]))
     else:
         url += _datagrid_to_url_param(institution.meeting_filter_query)
     return url
@@ -128,11 +129,13 @@ def get_api_url_for_annexes(item_json_id):
 def _datagrid_to_url_param(values):
     res = ''
     for dict_value in values:
-        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
+        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'],
+                                             value=dict_value['value'])
     return res
 
-def get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
 
+def get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                       item_external_uids=[]):
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
 
@@ -180,8 +183,10 @@ def get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_e
     return url
 
 
-def get_api_url_for_presync_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
-    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids)
+def get_api_url_for_presync_meeting_items(institution, meeting_external_uid,
+                                          item_external_uids=[]):
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                             item_external_uids)
     url += "&extra_include=annexes" \
            "&extra_include_annexes_fullobjects" \
            "&extra_include_annexes_include_all=false" \
@@ -189,11 +194,13 @@ def get_api_url_for_presync_meeting_items(institution, meeting_external_uid, ite
     return url
 
 
-def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
+def get_api_url_for_meeting_items(institution, meeting_external_uid,
+                                  item_external_uids=[]):
     if not institution.plonemeeting_url or not institution.meeting_config_id:
         return
     item_content_query = _datagrid_to_url_param(institution.item_content_query)
-    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids)
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                             item_external_uids)
     url += item_content_query
     return url
 
@@ -308,7 +315,8 @@ def remove_portlets(column):
         del assignments[portlet]
 
 
-def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)", lang=None):
+def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)",
+                                  lang=None):
     """
     Format the meeting date while managing translations of months and weekdays
     :param date: Datetime reprensenting the meeting date
@@ -354,7 +362,8 @@ def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)", lan
 
     if u"[weekday]" in date_str:
         weekday = translate(
-            WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
+            WEEKDAYS_IDS[date.weekday()], domain="plonelocales",
+            target_language=lang
         )
         date_str = date_str.replace(u"[weekday]", weekday)
 
@@ -378,11 +387,6 @@ def redirect(request, to):
     request.response.redirect(to)
 
 
-def redirect_back(request):
-    """Redirect back"""
-    redirect(request, request.get("HTTP_REFERER"))
-
-
 def get_term_title(context, fieldname):
     """Get the term title for the given context and fieldname."""
     field = None
@@ -391,9 +395,11 @@ def get_term_title(context, fieldname):
             field = schema.get(fieldname)
             break
     if not field:
-        raise ValueError(f"No such field {fieldname} in {context.portal_type} context")
+        raise ValueError(
+            f"No such field {fieldname} in {context.portal_type} context")
     if not hasattr(field, "vocabularyName"):
-        raise ValueError(f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
+        raise ValueError(
+            f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
     vocabulary_name = field.vocabularyName
     vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
     vocabulary = vocabulary_factory(context)

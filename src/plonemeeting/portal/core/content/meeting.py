@@ -7,6 +7,7 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFPlone import PloneMessageFactory as plone_
+from plonemeeting.portal.core.content.item import IItem
 from zope import schema
 from zope.interface import implementer
 
@@ -35,3 +36,7 @@ class IMeeting(model.Schema):
 class Meeting(Container):
     """
     """
+
+    def get_items(self):
+        """Get the items of this meeting."""
+        return [i for i in self.contentValues() if IItem.providedBy(i)]

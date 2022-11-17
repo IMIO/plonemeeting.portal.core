@@ -1,13 +1,14 @@
 <tal:defines
    i18n:domain="plonemeeting.portal.core"
   define="items view/get_items;
-          is_syncing not:view/parent/is_importing;
-          institution nocall:view/parent/institution
+          is_syncing view/parent/is_syncing;
+          institution nocall:view/parent/institution;
+          has_representatives institution/is_representatives_mapping_used
 ">
   <div class="full-width items-datatables-container">
     <table id="items-datatables"
            class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
-           style="width:100%" tal:attributes="data-pat-datatables view/get_datatables_config">
+           style="width:100%" tal:attributes="data-pat-datatables options/datatable_config">
       <thead>
       <tr>
         <th class="checkbox-header">
@@ -15,14 +16,16 @@
         </th>
         <th>N°</th>
         <th i18n:translate="">Title</th>
-        <th i18n:translate="">Last modification (iA.Delib)</th>
-        <th i18n:translate="" tal:condition="is_syncing">Last modification (délibérations.be)</th>
+        <th i18n:translate="">Last modification date (iA.Delib)</th>
+        <th i18n:translate="" tal:condition="is_syncing">
+          Last modification date (deliberations.be)
+        </th>
 
         <th tal:content="institution/delib_category_field"
            i18n:translate="">
           Category or Classifier
         </th>
-        <th i18n:translate="">
+        <th tal:condition="has_representatives" i18n:translate="">
           Representative
         </th>
         <th tal:condition="is_syncing">Status</th>
@@ -30,29 +33,52 @@
       </tr>
       </thead>
       <tbody>
-      <tr tal:repeat="item items" tal:attributes="class python:is_syncing and item['status'] or ''">
+      <tr
+        tal:repeat="item items"
+        tal:attributes="class python:is_syncing and item['status'] or ''"
+      >
         <td class="checkbox-cell">
-          <input type="checkbox" tal:attributes="name python: 'item_uid__' + item['UID']" checked/>
+          <input type="checkbox"
+            tal:attributes="name python: 'item_uid__' + item['UID']" checked/>
         </td>
         <td tal:content="item/formatted_itemNumber">itemNumber</td>
-        <td tal:content="item/title">title</td>
-        <td class="pat-moment"
-            data-pat-moment="format: Do/M/YYYY hh:mm:ss;" tal:content="item/modified">Last
-          modification in iA.Delib
+        <td>
+          <a target="_blank"
+            tal:condition="python: item.get('@id')"
+            tal:attributes="href python: item['@id']"
+            tal:content="item/title">
+            title
+          </a>
+          <span tal:condition="python: not item.get('@id')"
+            tal:content="item/title">
+            title
+          </span>
         </td>
         <td class="pat-moment"
-            data-pat-moment="format: Do/M/YYYY, hh:mm:ss;" tal:condition="is_syncing" tal:content="item/local_last_modified">
+            data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
+          tal:content="item/modified">
+          Last modification in iA.Delib
+        </td>
+        <td class="pat-moment"
+            data-pat-moment="format: Do/M/YYYY, hh:mm:ss;"
+          tal:condition="is_syncing"
+          tal:content="item/local_last_modified">
           local_last_modified
         </td>
         <td tal:content="python: item.get(institution.delib_category_field)['title']">
           Category/Classifier
         </td>
-        <td tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''">
+        <td
+          tal:condition="has_representatives"
+          tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''"
+        >
           Representative
         </td>
-        <td tal:condition="is_syncing" tal:content="item/status">status</td>
+        <td tal:condition="is_syncing" tal:content="item/status_label">status_label</td>
         <td tal:condition="is_syncing">
-          <x-annexes-status tal:attributes="data-annexes python:view.to_json(item['annexes_status'])" />
+          <x-annexes-status
+            tal:attributes="data-annexes python:view.to_json(item['annexes_status'])"
+          />
         </td>
       </tr>
       </tbody>

@@ -48,8 +48,8 @@ img {
 // Meeting
 
 .meeting-actions {
-    display: inline-block;
-    min-width: 200px;
+    display: flex;
+    margin-left: 10px;
     flex: 1;
 }
 
@@ -536,4 +536,15 @@ body #portal-footer > .row {
     select{
         max-width: 350px;
     }
+}
+
+
+// Form
+.formControls {
+  display: flex;
+  flex-direction: row-reverse;
+  box-shadow: none;
+  .submit-widget {
+    margin: 0 .2em;
+  }
 }
