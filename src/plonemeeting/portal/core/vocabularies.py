@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.content.institution import Institution
@@ -79,7 +80,13 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 class RepresentativeVocabularyFactory:
     def __call__(self, context, representative_value_key='representative_value'):
         institution = api.portal.get_navigation_root(context)
-        mapping = getattr(institution, "representatives_mappings", [])
+        mapping = copy.deepcopy(getattr(institution, "representatives_mappings", []))
+        representatives_mappings = [rpz for rpz in mapping if rpz['active']]
+        disabled_representatives = [rpz for rpz in mapping if not rpz['active']]
+        for rpz in disabled_representatives:
+            rpz[representative_value_key] = _(u'(Passed term of office) ${representative_value}',
+                                              mapping={'representative_value': rpz[representative_value_key]})
+        mapping = representatives_mappings + disabled_representatives
         return SimpleVocabulary(
             [
                 SimpleTerm(

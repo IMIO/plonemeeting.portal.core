@@ -17,6 +17,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
+#: ../vocabularies.py:87
+msgid "(Passed term of office) ${representative_value}"
+msgstr ""
+
 #: ../content/institution.py:122
 msgid "Active"
 msgstr ""

@@ -2,10 +2,19 @@ Changelog
 =========
 
 
-1.5.1 (unreleased)
+1.5.2 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.5.1 (2022-07-25)
+------------------
+
+- Use plone 5.2.9.
+  [odelaere]
+- Handle deactivated representatives.
+  [odelaere]
 
 
 1.5.0 (2022-06-17)

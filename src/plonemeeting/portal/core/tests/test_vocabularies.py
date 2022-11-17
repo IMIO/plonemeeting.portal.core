@@ -2,6 +2,7 @@
 from plone import api
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from zope.component import queryUtility
+from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -52,6 +53,13 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         values_city1 = [term.title for term in voc._terms]
         self.assertListEqual(values_city1,
                              ['Mr DUPONT', 'Mr Dupuis', 'Mr Oniz', 'Mr Baka', 'Mr Kuro'])
+        self.institution.representatives_mappings[2]['active'] = False
+        self.institution.representatives_mappings[4]['active'] = False
+        voc = vocab(self.item)
+        values_city1 = [translate(term.title) for term in voc._terms]
+        self.assertListEqual(values_city1,
+                             ['Mr DUPONT', 'Mr Dupuis', 'Mr Baka',
+                              '(Passed term of office) Mr Oniz', '(Passed term of office) Mr Kuro'])
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
         self.assertListEqual(values_city2,
@@ -69,6 +77,14 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
                               "Mr Oniz, Échevin de l'éducation",
                               "Mr Baka, Échevin de des sports",
                               "Mr Kuro, Échevin de la culture"])
+        self.institution.representatives_mappings[2]['active'] = False
+        self.institution.representatives_mappings[4]['active'] = False
+        voc = vocab(self.item)
+        values_city1 = [translate(term.title) for term in voc._terms]
+        self.assertListEqual(values_city1,
+                             ['Mr DUPONT Bourgmestre F.F.', 'Mr Dupuis 1ère Échevin', 'Mr Baka, Échevin de des sports',
+                              "(Passed term of office) Mr Oniz, Échevin de l'éducation",
+                              '(Passed term of office) Mr Kuro, Échevin de la culture'])
         voc = vocab(self.item2)
         values_city2 = [term.title for term in voc._terms]
         self.assertListEqual(values_city2,
