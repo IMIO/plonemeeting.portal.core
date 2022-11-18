@@ -5,9 +5,9 @@ from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.content.item import IItem
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFPlone import PloneMessageFactory as plone_
-from plonemeeting.portal.core.content.item import IItem
 from zope import schema
 from zope.interface import implementer
 
