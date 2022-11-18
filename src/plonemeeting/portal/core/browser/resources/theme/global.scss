@@ -542,7 +542,8 @@ body #portal-footer > .row {
 // Form
 .formControls {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: center;
   box-shadow: none;
   .submit-widget {
     margin: 0 .2em;

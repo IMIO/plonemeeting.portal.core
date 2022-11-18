@@ -129,7 +129,12 @@ class ItemsContentProvider(ContentProviderBase):
     def render(self, *args, **kwargs):
         datatable_config = {
             "paging": False,
-            "columnDefs": [{"orderable": False, "width": "30px", "targets": 0}],
+            "columnDefs": [
+                {"orderable": False, "width": "30px", "targets": 0},
+                {"orderable": False, "width": "50px", "targets": 3},
+                {"orderable": False, "width": "50px", "targets": 4}
+
+            ],
             "scrollY": "50vh",
             "autoWidth": True,
             "scrollCollapse": True,
@@ -243,13 +248,10 @@ class PreSyncReportForm(Form):
                 item[
                     "local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
                 item["modified"] = plonemeeting_last_modified.isoformat()
-                if local_item.plonemeeting_last_modified == plonemeeting_last_modified:
-                    if local_item.number == item["formatted_itemNumber"]:
+                if local_item.plonemeeting_last_modified == plonemeeting_last_modified \
+                    and local_item.number == item["formatted_itemNumber"]:
                         item["status"] = "unchanged"
                         item["status_label"] = _(u"Unchanged")
-                    else:
-                        item["status"] = "modified"
-                        item["status_label"] = _(u"Modified")
                 else:
                     item["status"] = "modified"
                     item["status_label"] = _(u"Modified")
@@ -280,8 +282,7 @@ class PreSyncReportForm(Form):
                     "titles": [annex.Title() for annex in
                                local_item.objectValues()],
                 }
-            reconciled["items"].insert(
-                int(local_item.number),
+            reconciled["items"].append(
                 {
                     "UID": local_item.plonemeeting_uid,
                     "title": local_item.title,
