@@ -12,7 +12,7 @@
       <thead>
       <tr>
         <th class="checkbox-header">
-          <x-checkbox-selector scope="items-datatables" checked/>
+          <x-checkbox-selector scope="items-datatables" checked></x-checkbox-selector>
         </th>
         <th>N°</th>
         <th i18n:translate="">Title</th>
