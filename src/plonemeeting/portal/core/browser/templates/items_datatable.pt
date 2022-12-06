@@ -11,25 +11,32 @@
            style="width:100%" tal:attributes="data-pat-datatables options/datatable_config">
       <thead>
       <tr>
+        <th class="status-header" tal:condition="is_syncing">Status</th>
         <th class="checkbox-header">
           <x-checkbox-selector scope="items-datatables" checked></x-checkbox-selector>
         </th>
         <th>N°</th>
         <th i18n:translate="">Title</th>
-        <th i18n:translate="">Last modification date (iA.Delib)</th>
-        <th i18n:translate="" tal:condition="is_syncing">
-          Last modification date (deliberations.be)
+        <th class="date-header split-header">
+          <div class="top-header">iA.Délib</div>
+          <div i18n:translate="">Modified at</div>
         </th>
-
-        <th tal:content="institution/delib_category_field"
-           i18n:translate="">
-          Category or Classifier
+        <th class="date-header split-header" tal:condition="is_syncing">
+          <div class="top-header">délibérations.be</div>
+          <div i18n:translate="">Modified at</div>
         </th>
-        <th tal:condition="has_representatives" i18n:translate="">
-          Representative
+        <th class="split-header">
+          <div class="top-header">iA.Délib</div>
+          <div  tal:content="institution/delib_category_field"
+           i18n:translate="">Category or Classifier</div>
         </th>
-        <th tal:condition="is_syncing">Status</th>
-        <th tal:condition="is_syncing">Annexes</th>
+        <th class="split-header">
+          <div class="top-header">iA.Délib</div>
+          <div tal:condition="has_representatives" i18n:translate="">
+            Groups in charge
+          </div>
+        </th>
+        <th class="annexes-header" tal:condition="is_syncing">Annexes</th>
       </tr>
       </thead>
       <tbody>
@@ -37,36 +44,41 @@
         tal:repeat="item items"
         tal:attributes="class python:is_syncing and item['status'] or ''"
       >
+        <td class="status-cell" tal:condition="is_syncing">
+          <span tal:content="item/status_label">
+            status_label
+          </span>
+        </td>
         <td class="checkbox-cell">
           <input type="checkbox"
             tal:attributes="name python: 'item_uid__' + item['UID']" checked/>
         </td>
-        <td tal:content="item/formatted_itemNumber">itemNumber</td>
+        <td class="item-number-cell" tal:content="item/formatted_itemNumber">itemNumber</td>
         <td>
           <a target="_blank"
             tal:condition="python: item.get('@id')"
             tal:attributes="href python: item['@id']"
             tal:content="item/title">
-            title
+            Title
           </a>
           <span tal:condition="python: not item.get('@id')"
             tal:content="item/title">
-            title
+            Title
           </span>
         </td>
         <td class="pat-moment"
             data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
           tal:content="item/modified">
-          Last modification in iA.Delib
+          Modified at (iA.Délib)
         </td>
         <td class="pat-moment"
-            data-pat-moment="format: Do/M/YYYY, hh:mm:ss;"
+            data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
           tal:condition="is_syncing"
           tal:content="item/local_last_modified">
-          local_last_modified
+          Modified at (délibération.be)
         </td>
         <td tal:content="python: item.get(institution.delib_category_field)['title']">
-          Category/Classifier
+          Category
         </td>
         <td
           tal:condition="has_representatives"
@@ -74,7 +86,6 @@
         >
           Representative
         </td>
-        <td tal:condition="is_syncing" tal:content="item/status_label">status_label</td>
         <td tal:condition="is_syncing">
           <x-annexes-status
             tal:attributes="data-annexes python:view.to_json(item['annexes_status'])"

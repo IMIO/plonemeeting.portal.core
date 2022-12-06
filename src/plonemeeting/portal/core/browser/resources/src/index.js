@@ -37,3 +37,6 @@ jquery(document).ready(function ($) {
         });
     }
 });
+if (module.hot) {
+    module.hot.accept();
+}

@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-11-16 14:42+0000\n"
+"POT-Creation-Date: 2022-12-06 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../browser/sync.py:253
+#: ../browser/sync.py:263
 msgid "Added"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Can manage institution"
 msgstr ""
 
-#: ../browser/sync.py:214
+#: ../browser/sync.py:229
 msgid "Cancel"
 msgstr ""
 
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:360
+#: ../browser/sync.py:375
 msgid "Choose items you want to import in the portal."
 msgstr ""
 
-#: ../browser/sync.py:152
+#: ../browser/sync.py:167
 msgid "Choose items you want to sync/import in the portal."
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr ""
 
 #: ../browser/templates/item.pt:79
 #: ../content/item.py:67
-#: ../content/meeting.py:27
+#: ../content/meeting.py:28
 msgid "Custom info"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../browser/sync.py:195
+#: ../browser/sync.py:210
 msgid "Delete"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Footer text color"
 msgstr ""
 
-#: ../browser/sync.py:183
+#: ../browser/sync.py:198
 msgid "Force"
 msgstr ""
 
@@ -164,15 +164,19 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
+#: ../browser/templates/items_datatable.pt:32
+msgid "Groups in charge"
+msgstr ""
+
 #: ../content/institution.py:282
 msgid "Header color"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:98
+#: ../faceted/preview_meeting.pt:106
 msgid "Hide meeting infos"
 msgstr ""
 
-#: ../browser/sync.py:380
+#: ../browser/sync.py:395
 msgid "Import"
 msgstr ""
 
@@ -246,17 +250,9 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
-#: ../browser/templates/items_datatable.pt:19
-msgid "Last modification date (deliberations.be)"
-msgstr ""
-
-#: ../browser/templates/items_datatable.pt:18
-msgid "Last modification date (iA.Delib)"
-msgstr ""
-
 #: ../browser/templates/item.pt:66
 #: ../content/item.py:70
-#: ../content/meeting.py:30
+#: ../content/meeting.py:31
 msgid "Last modification in iA.Delib"
 msgstr ""
 
@@ -293,11 +289,11 @@ msgstr ""
 msgid "Meeting import form"
 msgstr ""
 
-#: ../browser/sync.py:359
+#: ../browser/sync.py:374
 msgid "Meeting pre import form"
 msgstr ""
 
-#: ../browser/sync.py:151
+#: ../browser/sync.py:166
 msgid "Meeting pre sync form"
 msgstr ""
 
@@ -321,8 +317,12 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
-#: ../browser/sync.py:242
+#: ../browser/sync.py:255
 msgid "Modified"
+msgstr ""
+
+#: ../browser/templates/items_datatable.pt:22
+msgid "Modified at"
 msgstr ""
 
 #: ../content/institution.py:290
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../browser/sync.py:130
+#: ../browser/sync.py:144
 msgid "No data available in table"
 msgstr ""
 
@@ -377,12 +377,11 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/sync.py:269
+#: ../browser/sync.py:280
 msgid "Removed"
 msgstr ""
 
 #: ../browser/templates/item.pt:37
-#: ../browser/templates/items_datatable.pt:25
 #: ../faceted/macros.pt:30
 msgid "Representative"
 msgstr ""
@@ -419,11 +418,11 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:93
+#: ../faceted/preview_meeting.pt:101
 msgid "Show meeting infos"
 msgstr ""
 
-#: ../browser/sync.py:131
+#: ../browser/sync.py:147
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
@@ -435,7 +434,7 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
-#: ../browser/sync.py:172
+#: ../browser/sync.py:187
 msgid "Sync"
 msgstr ""
 
@@ -455,16 +454,16 @@ msgstr ""
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
-#: ../browser/templates/items_datatable.pt:17
+#: ../browser/templates/items_datatable.pt:19
 msgid "Title"
 msgstr ""
 
 #: ../content/item.py:32
-#: ../content/meeting.py:21
+#: ../content/meeting.py:22
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:239
+#: ../browser/sync.py:252
 msgid "Unchanged"
 msgstr ""
 
@@ -532,11 +531,11 @@ msgstr ""
 msgid "Zone de Secours"
 msgstr ""
 
-#: ../browser/sync.py:133
+#: ../browser/sync.py:151
 msgid "activate to sort column ascending"
 msgstr ""
 
-#: ../browser/sync.py:134
+#: ../browser/sync.py:154
 msgid "activate to sort column descending"
 msgstr ""
 

@@ -1,6 +1,7 @@
 const path = require("path");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const PreactRefreshPlugin = require("@prefresh/webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PlonePlugin = require("./webpackPlonePlugin");
@@ -22,6 +23,7 @@ module.exports = (env, argv) => {
         },
         plugins: [
             mode === "production" && new CleanWebpackPlugin(),
+            new PreactRefreshPlugin(),
             new CopyPlugin({
                 patterns: [{ from: "assets", to: "assets" }],
             }),
@@ -154,9 +156,10 @@ module.exports = (env, argv) => {
         devServer: {
             port: 3000,
             hot: true,
-            watchFiles: {
-                paths: ["./../../**/*.pt"], // Watch for .pt file change
-            },
+            liveReload: false,
+            // watchFiles: {
+            //     paths: ["./../../**/*.pt"], // Watch for .pt file change
+            // },
             // Proxy everything to the Plone Backend EXCEPT our bundle as
             // Webpack Dev Server will serve it.
             proxy: [

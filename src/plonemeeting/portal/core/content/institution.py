@@ -421,4 +421,5 @@ class Institution(Container):
         return res
 
     def is_representatives_mapping_used(self):
+        """Check if this config is using the representatives in charge feature"""
         return len(self.representatives_mappings) > 0
