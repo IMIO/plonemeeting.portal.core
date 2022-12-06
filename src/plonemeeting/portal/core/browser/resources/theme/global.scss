@@ -537,15 +537,3 @@ body #portal-footer > .row {
         max-width: 350px;
     }
 }
-
-
-// Form
-.formControls {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-shadow: none;
-  .submit-widget {
-    margin: 0 .2em;
-  }
-}

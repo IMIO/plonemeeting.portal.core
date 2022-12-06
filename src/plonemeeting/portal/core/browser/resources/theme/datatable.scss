@@ -1,8 +1,25 @@
 .items-datatables-container {
-  padding: 0 3em 1em 3em;
+  padding: 0 5em 1em 5em;
   margin-top: -2em;
+
   @include media-breakpoint-down(md) {
     padding: 0 0 1em 0;
+  }
+
+  th {
+    background-color: $grey-100;
+    color: $grey-900;
+  }
+
+
+  th.split-header .top-header {
+    padding-bottom: 0.25em;
+    margin-right: -20px;
+    margin-bottom: 0.25em;
+    border-bottom: 1px dashed $grey-300;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: $grey-700;
   }
 
   #items-datatables_filter {
@@ -11,35 +28,73 @@
 
   .checkbox-cell, .checkbox-header {
     text-align: center;
+    vertical-align: bottom;
   }
 }
 
-#items-datatables_wrapper th {
-  background-color: $grey-100;
-}
-
+// Specific to pre sync form
 .template-pre_sync_report_form {
-  #items-datatables_wrapper th.checkbox-header {
+
+  th.status-header {
     border-left: 8px solid $grey-200 !important;
   }
 
-  #items-datatables .unchanged > .checkbox-cell {
+  #items-datatables .status-cell {
+    font-weight: bold;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+
+    span {
+      border-radius: $rounded;
+      display: inline-block;
+      padding: 1px 6px;
+      box-shadow: $shadow-md;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin: 0 6px;
+    }
+  }
+
+  #items-datatables .unchanged > .status-cell {
     border-left: 8px solid $grey-500;
+
+    span {
+      background-color: $grey-500;
+      color: $white;
+    }
   }
 
-  #items-datatables .added > .checkbox-cell {
+  #items-datatables .added > .status-cell {
     border-left: 8px solid $green;
+
+    span {
+      background-color: $green;
+      color: $white;
+    }
   }
 
-  #items-datatables .removed > .checkbox-cell {
+  #items-datatables .removed > .status-cell {
     border-left: 8px solid $red;
+
+    span {
+      background-color: $red;
+      color: $white;
+    }
   }
 
-  #items-datatables .modified > .checkbox-cell {
+  #items-datatables .modified > .status-cell {
     border-left: 8px solid $orange;
+
+    span {
+      background-color: $orange;
+      color: $white;
+    }
   }
 }
 
+
+// Annexes status
 .annexes-status {
   width: 100%;
   display: flex;
@@ -49,7 +104,7 @@
 }
 
 .annex-status {
-  border-radius: 2px;
+  border-radius: $rounded;
   padding: 0.1em 0.25em;
   margin: 0.1em 0;
   color: #FFF;
@@ -65,6 +120,7 @@
     margin-bottom: 0.25em;
     border-bottom: 1px solid $white;
   }
+
   svg {
     width: 15px;
     height: 15px;

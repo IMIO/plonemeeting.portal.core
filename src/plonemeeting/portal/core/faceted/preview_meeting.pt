@@ -66,6 +66,14 @@
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
+
+                    <x-window-button>
+
+
+
+
+                    </x-window-button>
+
                   </div>
                 </tal:if>
                 <div class="meeting-state meeting-state--top"

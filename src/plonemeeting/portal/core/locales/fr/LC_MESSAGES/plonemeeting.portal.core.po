@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-11-16 14:42+0000\n"
+"POT-Creation-Date: 2022-12-06 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr "(Ancien mandat) ${representative_value}"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/sync.py:253
+#: ../browser/sync.py:263
 msgid "Added"
 msgstr "Ajouté"
 
@@ -47,7 +47,7 @@ msgstr "Attention"
 msgid "Can manage institution"
 msgstr ""
 
-#: ../browser/sync.py:214
+#: ../browser/sync.py:229
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -69,11 +69,11 @@ msgstr "Matière"
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:360
+#: ../browser/sync.py:375
 msgid "Choose items you want to import in the portal."
 msgstr "Choisissez les points que vous souhaitez importer dans le portail."
 
-#: ../browser/sync.py:152
+#: ../browser/sync.py:167
 msgid "Choose items you want to sync/import in the portal."
 msgstr "Choisissez les points que vous souhaitez synchroniser (mettre à jour)."
 
@@ -87,7 +87,7 @@ msgstr "Dossier de configuration"
 
 #: ../browser/templates/item.pt:79
 #: ../content/item.py:67
-#: ../content/meeting.py:27
+#: ../content/meeting.py:28
 msgid "Custom info"
 msgstr "Informations complémentaires"
 
@@ -99,7 +99,7 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../browser/sync.py:195
+#: ../browser/sync.py:210
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -133,7 +133,7 @@ msgstr "Couleur du pied de page"
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
 
-#: ../browser/sync.py:183
+#: ../browser/sync.py:198
 msgid "Force"
 msgstr "Forcer"
 
@@ -161,15 +161,19 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
+#: ../browser/templates/items_datatable.pt:32
+msgid "Groups in charge"
+msgstr "Groupes en charge"
+
 #: ../content/institution.py:282
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
-#: ../faceted/preview_meeting.pt:98
+#: ../faceted/preview_meeting.pt:106
 msgid "Hide meeting infos"
 msgstr "Cacher les informations de la séance"
 
-#: ../browser/sync.py:380
+#: ../browser/sync.py:395
 msgid "Import"
 msgstr "Importer"
 
@@ -243,17 +247,9 @@ msgstr "Expression TAL pour le formatage du titre du point. Si laissé vide, le 
 msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
-#: ../browser/templates/items_datatable.pt:19
-msgid "Last modification date (deliberations.be)"
-msgstr "Date de dernière modification (deliberations.be)"
-
-#: ../browser/templates/items_datatable.pt:18
-msgid "Last modification date (iA.Delib)"
-msgstr "Date de dernière modification (iA.Délib)"
-
 #: ../browser/templates/item.pt:66
 #: ../content/item.py:70
-#: ../content/meeting.py:30
+#: ../content/meeting.py:31
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
 
@@ -290,11 +286,11 @@ msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 msgid "Meeting import form"
 msgstr "Importation de séance"
 
-#: ../browser/sync.py:359
+#: ../browser/sync.py:374
 msgid "Meeting pre import form"
 msgstr "Rapport d'importation"
 
-#: ../browser/sync.py:151
+#: ../browser/sync.py:166
 msgid "Meeting pre sync form"
 msgstr "Rapport de synchronisation"
 
@@ -318,9 +314,13 @@ msgstr "Types de séance"
 msgid "Meetings"
 msgstr "Séances"
 
-#: ../browser/sync.py:242
+#: ../browser/sync.py:255
 msgid "Modified"
 msgstr "Modifié"
+
+#: ../browser/templates/items_datatable.pt:22
+msgid "Modified at"
+msgstr "Modifié le"
 
 #: ../content/institution.py:290
 msgid "Navigation bar color"
@@ -334,7 +334,7 @@ msgstr "Couleur du texte de la barre de navigation"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../browser/sync.py:130
+#: ../browser/sync.py:144
 msgid "No data available in table"
 msgstr "Aucun élément"
 
@@ -374,12 +374,11 @@ msgstr "Paramètres pour obtenir la liste des Points à importer"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/sync.py:269
+#: ../browser/sync.py:280
 msgid "Removed"
 msgstr "Enlevé"
 
 #: ../browser/templates/item.pt:37
-#: ../browser/templates/items_datatable.pt:25
 #: ../faceted/macros.pt:30
 msgid "Representative"
 msgstr "Mandataire"
@@ -416,11 +415,11 @@ msgstr ""
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../faceted/preview_meeting.pt:93
+#: ../faceted/preview_meeting.pt:101
 msgid "Show meeting infos"
 msgstr "Montrer les informations de la séance"
 
-#: ../browser/sync.py:131
+#: ../browser/sync.py:147
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 
@@ -432,7 +431,7 @@ msgstr "Numéro triable du point"
 msgid "Styling"
 msgstr "Styles"
 
-#: ../browser/sync.py:172
+#: ../browser/sync.py:187
 msgid "Sync"
 msgstr "Synchroniser"
 
@@ -452,16 +451,16 @@ msgstr "Séance publique du Conseil de Zone"
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
 
-#: ../browser/templates/items_datatable.pt:17
+#: ../browser/templates/items_datatable.pt:19
 msgid "Title"
 msgstr "Titre"
 
 #: ../content/item.py:32
-#: ../content/meeting.py:21
+#: ../content/meeting.py:22
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../browser/sync.py:239
+#: ../browser/sync.py:252
 msgid "Unchanged"
 msgstr "Inchangé"
 
@@ -529,11 +528,11 @@ msgstr "Zone de Police"
 msgid "Zone de Secours"
 msgstr "Zone de Secours"
 
-#: ../browser/sync.py:133
+#: ../browser/sync.py:151
 msgid "activate to sort column ascending"
 msgstr "activer pour trier la colonne par ordre croissant"
 
-#: ../browser/sync.py:134
+#: ../browser/sync.py:154
 msgid "activate to sort column descending"
 msgstr "activer pour trier la colonne par ordre décroissant"
 

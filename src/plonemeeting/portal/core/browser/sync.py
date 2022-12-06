@@ -6,12 +6,12 @@ from plone.autoform.form import AutoExtensibleForm
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core import plone_
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import sync_meeting
-from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_api_url_for_presync_meeting_items
 from plonemeeting.portal.core.utils import redirect
@@ -46,6 +46,8 @@ class IImportMeetingForm(Interface):
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
     """
+    This is a form where the user can select which meeting he wants to import.
+    This is shown before de PreImportForm
     """
 
     schema = IImportMeetingForm
@@ -83,9 +85,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
     @button.buttonAndHandler(plone_(u"Cancel"))
     def handle_cancel(self, action):
-        meeting_faceted_url = (
-            self.context.absolute_url() + "/seances"
-        )
+        meeting_faceted_url = f"{ self.context.absolute_url()}/{APP_FOLDER_ID}"
         redirect(self.request, meeting_faceted_url)
 
     def updateActions(self):
@@ -94,6 +94,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         self.actions["cancel"].addClass("standalone")
 
 class ImportMeetingView(BrowserView):  # pragma: no cover
+    """Deprecated: replaced by PreImportReportForm"""
     def import_meeting(self, force=False):
         meeting = self.context
         institution = meeting.aq_parent
@@ -102,20 +103,27 @@ class ImportMeetingView(BrowserView):  # pragma: no cover
 
 
 class SyncMeetingView(ImportMeetingView):  # pragma: no cover
+    """Deprecated: replaced by PreSyncReportForm"""
     def __call__(self):
         self.import_meeting()
 
 
 class ForceReimportMeetingView(ImportMeetingView):  # pragma: no cover
+    """Deprecated: replaced by PreSyncReportForm"""
     def __call__(self):
         self.import_meeting(force=True)
 
 
-class ItemsContentProvider(ContentProviderBase):
+class ItemsReportContentProvider(ContentProviderBase):
+    """
+    This content provider contains a pre-sync/import report based on Datatables
+    The user can select which item he wants to sync
+    """
+
     template = ViewPageTemplateFile("templates/items_datatable.pt")
 
     def __init__(self, context, request, view):
-        super(ItemsContentProvider, self).__init__(context, request, view)
+        super(ItemsReportContentProvider, self).__init__(context, request, view)
         self.parent = view
         self.meeting_uid = None
 
@@ -130,15 +138,15 @@ class ItemsContentProvider(ContentProviderBase):
         datatable_config = {
             "paging": False,
             "columnDefs": [
-                {"orderable": False, "width": "30px", "targets": 0},
-                {"orderable": False, "width": "50px", "targets": 3},
-                {"orderable": False, "width": "50px", "targets": 4}
-
+                {"orderable": True, "width": "50px", "targets": "status-header"},
+                {"orderable": False, "width": "30px", "targets": "checkbox-header"},
+                {"orderable": True, "width": "150px", "targets": "date-header"},
+                {"orderable": False, "width": "50px", "targets": "annexes-header"}
             ],
             "scrollY": "50vh",
             "autoWidth": True,
             "scrollCollapse": True,
-            "order": [[1, "asc"]],
+            "order": [[2, "asc"]],
             "language": {
                 "search": translate(plone_(u"Search"), context=self.request),
                 "emptyTable": translate(_(u"No data available in table"),
@@ -161,13 +169,15 @@ class ItemsContentProvider(ContentProviderBase):
 
 @implementer(IFieldsAndContentProvidersForm)
 class PreSyncReportForm(Form):
-    """"""
+    """
+    Before synchronizing, ask the user what he wants to sync.
+    """
 
     label = _(u"Meeting pre sync form")
     description = _(u"Choose items you want to sync/import in the portal.")
 
     contentProviders = ContentProviders()
-    contentProviders["items"] = ItemsContentProvider
+    contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0
 
     def __call__(self):
@@ -177,10 +187,12 @@ class PreSyncReportForm(Form):
         self.institution = self.utils_view.get_current_institution()
         self.items = self.context.get_items()
         self.meeting_title = self.context.Title()
-        self.api_response_data = _fetch_preview_items(self.context,
-                                                      self.external_meeting_uid)
-        self.api_response_data = self._reconcile_items(self.api_response_data,
-                                                       self.items)
+        # Avoid unnecessary request whe submitting the form
+        if self.request.get("REQUEST_METHOD") == "GET":
+            self.api_response_data = _fetch_preview_items(self.context,
+                                                          self.external_meeting_uid)
+            self.api_response_data = self._reconcile_items(self.api_response_data,
+                                                           self.items)
 
         return super(PreSyncReportForm, self).__call__()
 
@@ -229,12 +241,14 @@ class PreSyncReportForm(Form):
     @button.buttonAndHandler(_(u"Cancel"))
     def handle_cancel(self, action):
         """"""
-        meeting_faceted_url = (
-            self.institution.absolute_url() + "/seances#seance=" + self.context.UID()
-        )
+        meeting_faceted_url = f"{self.institution.absolute_url()}/{APP_FOLDER_ID}/#seance={self.context.UID()}"
         redirect(self.request, meeting_faceted_url)
 
     def _reconcile_items(self, api_items, local_items):
+        """
+        Reconcile api items and local items into one list and
+        compute the status of each item (unchanged, modified, added, removed)
+        """
         reconciled = copy.deepcopy(api_items)
         local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item
                                            in local_items}
@@ -243,10 +257,8 @@ class PreSyncReportForm(Form):
             api_annexes = item.get("extra_include_annexes", [])
             if item["UID"] in local_items_by_plonemeeting_uid.keys():
                 local_item = local_items_by_plonemeeting_uid[item["UID"]]
-                plonemeeting_last_modified = _json_date_to_datetime(
-                    item["modified"])
-                item[
-                    "local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
+                plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
+                item["local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
                 item["modified"] = plonemeeting_last_modified.isoformat()
                 if local_item.plonemeeting_last_modified == plonemeeting_last_modified \
                     and local_item.number == item["formatted_itemNumber"]:
@@ -267,6 +279,7 @@ class PreSyncReportForm(Form):
                 if api_annexes:
                     item["annexes_status"] = {
                         "added": {
+                            "label": translate(_(u"Added"), context=self.request),
                             "count": len(api_annexes),
                             "titles": [annex["title"] for annex in api_annexes],
                         },
@@ -301,6 +314,10 @@ class PreSyncReportForm(Form):
         return reconciled
 
     def _reconcile_annexes(self, api_annexes, local_annexes):
+        """
+        Reconcile api annexes and local annexes into one list and
+        compute the status of each one (unchanged, modified, added, removed)
+        """
         annexes_status = {
             "added": {"count": 0,
                       "label": translate(_(u"Added"), context=self.request),
@@ -352,15 +369,11 @@ class PreSyncReportForm(Form):
 
         return annexes_status
 
-    def _fetch_preview_items(self, meeting_external_uid):
-        url = get_api_url_for_meeting_items(
-            self.context, meeting_external_uid=meeting_external_uid
-        )
-        response = _call_delib_rest_api(url, self.context)
-        self.api_response_data = json.loads(response.text)
-
     @staticmethod
     def _extract_checked_items(form):
+        """
+        Extract the list of checked item_uid from the form
+        """
         checked_item_uids = []
         for inputs in form.keys():
             if inputs.startswith("item_uid"):
@@ -370,14 +383,18 @@ class PreSyncReportForm(Form):
 
 @implementer(IFieldsAndContentProvidersForm)
 class PreImportReportForm(Form):
-    """"""
+    """
+    Before importing a new meeting, we ask the user what he wants to import.
+    This is basically a simplified PreSyncReportForm as they use the
+    same ItemsReportContentProvider.
+    """
 
     label = _(u"Meeting pre import form")
     description = _(u"Choose items you want to import in the portal.")
 
     ignoreContext = True
     contentProviders = ContentProviders()
-    contentProviders["items"] = ItemsContentProvider
+    contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0
 
     def __call__(self):
@@ -389,8 +406,10 @@ class PreImportReportForm(Form):
                                      self.external_meeting_uid),
             self.institution,
         ).json()["items"][0]["title"]
-        self.api_response_data = _fetch_preview_items(self.context,
-                                                      self.external_meeting_uid)
+        # Avoid unnecessary request when submitting the form
+        if self.request.get("REQUEST_METHOD") == "GET":
+            self.api_response_data = _fetch_preview_items(self.context,
+                                                          self.external_meeting_uid)
         return super(PreImportReportForm, self).__call__()
 
     @button.buttonAndHandler(_(u"Import"))
@@ -418,7 +437,12 @@ class PreImportReportForm(Form):
         self.actions["cancel"].addClass("standalone")
 
 
-def _fetch_preview_items(context, meeting_external_uid):
+def _fetch_preview_items(context, meeting_external_uid): # pragma: no cover
+    """
+    Fetch the preview from api. We use a specific utils
+    `get_api_url_for_presync_meeting_items` to have the
+    minimum data possible.
+    """
     url = get_api_url_for_presync_meeting_items(context,
                                                 meeting_external_uid=meeting_external_uid)
     response = _call_delib_rest_api(url, context)
