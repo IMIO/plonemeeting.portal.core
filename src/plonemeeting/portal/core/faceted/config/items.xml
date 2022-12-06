@@ -61,6 +61,15 @@
    <property name="hidezerocount">False</property>
    <property name="sortreversed">True</property>
   </criterion>
+
+  <criterion name="annexes">
+   <property name="widget">boolean</property>
+   <property name="title">Annexes?</property>
+   <property name="index">has_annexes</property>
+   <property name="position">top</property>
+   <property name="hidden">False</property>
+  </criterion>
+
   <criterion name="text">
    <property name="widget">text</property>
    <property name="title">Recherche</property>
@@ -121,5 +130,6 @@
    <property name="position">right</property>
    <property name="hidden">True</property>
   </criterion>
+
  </criteria>
 </object>

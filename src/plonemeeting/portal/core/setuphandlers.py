@@ -8,7 +8,6 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_XML_PATH
@@ -153,7 +152,7 @@ def create_demo_content(context):
             group = api.group.get(format_institution_managers_group_id(institution_obj))
             group.addMember(user.id)
 
-            for meeting in institution[APP_FOLDER_ID]:
+            for meeting in institution["meetings"]:
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
                     container=institution_obj,

@@ -79,3 +79,13 @@ class TestFacetedCriteria(PmPortalTestCase):
         self.assertEqual(sort_widget.query(request.form),
                          {'sort_on': ['sortable_number'],
                           'sort_order': ['ascending']})
+
+    def test_annexes_faceted_criteria(self):
+        """The "Annexes?" faceted criterion is only available to institution managers."""
+        for faceted_folder in (self.amityville[APP_FOLDER_ID], self.belleville[APP_FOLDER_ID]):
+            self.login_as_manager()
+            criteria = ICriteria(faceted_folder)
+            self.assertTrue(criteria.get("annexes"))
+            self.logout()
+            criteria = ICriteria(faceted_folder)
+            self.assertIsNone(criteria.get("annexes"))
