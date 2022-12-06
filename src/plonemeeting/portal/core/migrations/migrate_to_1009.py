@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.helpers.catalog import addOrUpdateIndexes
-from imio.helpers.content import object_values
+from imio.helpers.content import object_ids
 from imio.migrator.migrator import Migrator
 from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
@@ -52,7 +52,7 @@ class MigrateTo1009(Migrator):
         institutions = [obj for obj in self.portal.objectValues()
                         if obj.portal_type == "Institution"]
         for institution in institutions:
-            if "meetings" in object_values(institution, "Folder"):
+            if "meetings" in object_ids(institution, "Folder"):
                 institution.manage_renameObject("meetings", APP_FOLDER_ID)
         logger.info("Done.")
 
