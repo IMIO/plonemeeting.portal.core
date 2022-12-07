@@ -5,7 +5,8 @@ Changelog
 1.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- install_requires: imio.helpers>=0.65.
+  [aduchene]
 
 
 1.5.1 (2022-07-25)
