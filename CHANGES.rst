@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.2 (unreleased)
+1.5.2 (2022-12-07)
 ------------------
 
 - install_requires: imio.helpers>=0.65.
