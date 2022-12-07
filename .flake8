@@ -4,3 +4,4 @@ return-status-codes = True
 exclude = *.egg,omelette,.git,bin,develop-eggs,include,var,lib,local,parts
 ignore = E501, W503, E203, Q000, C812, C819
 max-complexity = 15
+max-line-length = 120
