@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective import dexteritytextindexer
 from copy import deepcopy
+from imio.helpers.content import object_values
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
@@ -172,6 +173,11 @@ def get_annexes_infos(object):
         # Unfortunately, we can't store dicts
         index.append((annexe.title, annexe.absolute_url(), icon))
     return index
+
+
+@indexer(IItem)
+def has_annexes(object):
+    return bool(object_values(object, "File"))
 
 
 @indexer(IItem)

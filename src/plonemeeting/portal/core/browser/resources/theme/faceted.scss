@@ -166,3 +166,21 @@ body.template-facetednavigation_view .searchButton {
 #faceted-form .widget-fieldset {
   border: 0;
 }
+
+// Hide label of Has annexes? faceted filter and display a bigger checkbox
+div#annexes_widget {
+    legend {
+        color: #999999;
+    }
+    label {
+        display: none;
+    }
+    ul {
+        padding-top: 0.5em;
+        padding-left: 2em;
+    }
+    input {
+        width: 20px;
+        height: 20px;
+    }
+}

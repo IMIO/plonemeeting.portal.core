@@ -65,7 +65,8 @@ def get_api_url_for_meetings(institution, meeting_external_uid=None):
               "&fullobjects=True" \
               "&include_all=false" \
               "&metadata_fields=date" \
-              "&b_size=9999".format(url, _get_uids_filter_url([meeting_external_uid]))
+              "&b_size=9999".format(url, _get_uids_filter_url(
+            [meeting_external_uid]))
     else:
         url += _datagrid_to_url_param(institution.meeting_filter_query)
     return url

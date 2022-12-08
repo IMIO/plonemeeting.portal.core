@@ -7,6 +7,7 @@ import logging
 
 logger = logging.getLogger("plonemeeting.portal.core")
 
+
 from plonemeeting.portal.core import patches  # NOQA
 
 

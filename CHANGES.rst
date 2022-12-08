@@ -5,6 +5,13 @@ Changelog
 1.6.0 (unreleased)
 ------------------
 
+- Added `Annexes?` faceted filter only displayed to institution manager,
+  this rely on new portal_catalog index `has_annexes`.
+  Upgrade step to 1009 needs to be run.
+  [gbastien]
+- Be coherent with institutions created at the beginning with the id of the folder
+  holding faceted filters in the institution, use id `seances` instead `meetings`.
+  [gbastien]
 - install_requires: imio.helpers>=0.65.
   [aduchene]
 - Add a pre import form and a pre sync form before importing/synchronizing a meeting #PM-3291.

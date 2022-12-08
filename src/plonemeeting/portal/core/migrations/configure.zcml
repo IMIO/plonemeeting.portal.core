@@ -131,4 +131,12 @@
       run_deps="True"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+    title="Go to portal 1009"
+    description="Re-apply faceted configuration"
+    source="1008"
+    destination="1009"
+    handler="plonemeeting.portal.core.migrations.migrate_to_1009.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>

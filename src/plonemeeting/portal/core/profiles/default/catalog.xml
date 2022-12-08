@@ -54,6 +54,10 @@
       <indexed_attr value="annexes_infos"/>
     </index>
 
+    <index name="has_annexes" meta_type="BooleanIndex">
+      <indexed_attr value="has_annexes"/>
+    </index>
+
     <index name="icon" meta_type="FieldIndex">
       <indexed_attr value="icon"/>
     </index>

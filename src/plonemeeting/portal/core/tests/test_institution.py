@@ -35,7 +35,9 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         view_content = view()
         self.assertTrue("Meeting config ID" not in view_content)
         self.assertEqual(view.request.response.status, 302)
-        self.assertDictEqual(view.request.response.headers, {'location': 'http://nohost/plone/belleville/meetings'})
+        self.assertDictEqual(
+            view.request.response.headers,
+            {'location': 'http://nohost/plone/belleville/seances'})
 
     def test_validate_color_parameters(self):
         self.assertTrue(validate_color_parameters("#FFF"))
@@ -231,7 +233,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
            so rules.xml is correctly compiled..."""
         rules = "/++theme++barceloneta/rules.xml"
         inst = self.institution
-        self.layer['request']['PUBLISHED'] = inst.meetings
+        self.layer['request']['PUBLISHED'] = inst.seances
         # when institution "published"
         self.assertEqual(api.content.get_state(inst), "published")
         self.assertTrue(compileThemeTransform(rules=rules))
