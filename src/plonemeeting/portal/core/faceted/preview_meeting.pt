@@ -64,6 +64,15 @@
                        tal:attributes="href python: utils_view.protect_url(url)"
                        title="Import a new meeting"
                        i18n:attributes="title"
+                    ><img src=""
+                       tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/reload-alert.svg"></a>
+
+                    <a href=""
+                       tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+                       tal:condition="python: checkPermission('Modify portal content', meeting)"
+                       tal:attributes="href python: utils_view.protect_url(url)"
+                       title="Import a new meeting"
+                       i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
 

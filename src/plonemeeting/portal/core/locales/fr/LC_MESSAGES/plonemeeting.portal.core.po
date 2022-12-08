@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-12-06 12:47+0000\n"
+"POT-Creation-Date: 2022-12-08 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr "(Ancien mandat) ${representative_value}"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/sync.py:263
+#: ../browser/sync.py:264
 msgid "Added"
 msgstr "Ajouté"
 
@@ -47,7 +47,7 @@ msgstr "Attention"
 msgid "Can manage institution"
 msgstr ""
 
-#: ../browser/sync.py:229
+#: ../browser/sync.py:228
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -69,15 +69,15 @@ msgstr "Matière"
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:375
-msgid "Choose items you want to import in the portal."
+#: ../browser/sync.py:380
+msgid "Choose the items you want to import in the portal."
 msgstr "Choisissez les points que vous souhaitez importer dans le portail."
 
-#: ../browser/sync.py:167
-msgid "Choose items you want to sync/import in the portal."
-msgstr "Choisissez les points que vous souhaitez synchroniser (mettre à jour)."
+#: ../browser/sync.py:176
+msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
+msgstr "Choisissez les points que vous souhaitez synchroniser (mettre à jour). Il est également possible d'enlever des points du portail en utilisant le bouton 'Enlever'."
 
-#: ../browser/sync.py:55
+#: ../browser/sync.py:57
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la séance que vous souhaitez importer dans le portail."
 
@@ -98,10 +98,6 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 #: ../content/item.py:58
 msgid "Decision"
 msgstr "Décision"
-
-#: ../browser/sync.py:210
-msgid "Delete"
-msgstr "Supprimer"
 
 #: ../configure.zcml:47
 msgid "Demo profile for the plonemeeting.portal.core add-on."
@@ -133,10 +129,7 @@ msgstr "Couleur du pied de page"
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
 
-#: ../browser/sync.py:198
-msgid "Force"
-msgstr "Forcer"
-
+#: ../faceted/preview_meeting.pt:61
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
 msgstr "Réimporter toute cette séance (plus lent)"
@@ -161,7 +154,7 @@ msgstr "Identifiant de matière globale"
 msgid "Global category title"
 msgstr "Titre de matière globale"
 
-#: ../browser/templates/items_datatable.pt:32
+#: ../browser/templates/items_datatable.pt:35
 msgid "Groups in charge"
 msgstr "Groupes en charge"
 
@@ -169,15 +162,15 @@ msgstr "Groupes en charge"
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
-#: ../faceted/preview_meeting.pt:106
+#: ../faceted/preview_meeting.pt:115
 msgid "Hide meeting infos"
 msgstr "Cacher les informations de la séance"
 
-#: ../browser/sync.py:395
+#: ../browser/sync.py:402
 msgid "Import"
 msgstr "Importer"
 
-#: ../faceted/preview_meeting.pt:61
+#: ../faceted/preview_meeting.pt:70
 msgid "Import a new meeting"
 msgstr "Importer une nouvelle séance"
 
@@ -282,15 +275,15 @@ msgstr "Type de séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
-#: ../browser/sync.py:54
+#: ../browser/sync.py:56
 msgid "Meeting import form"
 msgstr "Importation de séance"
 
-#: ../browser/sync.py:374
+#: ../browser/sync.py:379
 msgid "Meeting pre import form"
 msgstr "Rapport d'importation"
 
-#: ../browser/sync.py:166
+#: ../browser/sync.py:175
 msgid "Meeting pre sync form"
 msgstr "Rapport de synchronisation"
 
@@ -314,7 +307,7 @@ msgstr "Types de séance"
 msgid "Meetings"
 msgstr "Séances"
 
-#: ../browser/sync.py:255
+#: ../browser/sync.py:256
 msgid "Modified"
 msgstr "Modifié"
 
@@ -334,7 +327,7 @@ msgstr "Couleur du texte de la barre de navigation"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../browser/sync.py:144
+#: ../browser/sync.py:151
 msgid "No data available in table"
 msgstr "Aucun élément"
 
@@ -374,7 +367,11 @@ msgstr "Paramètres pour obtenir la liste des Points à importer"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/sync.py:280
+#: ../browser/sync.py:210
+msgid "Remove"
+msgstr "Enlever"
+
+#: ../browser/sync.py:281
 msgid "Removed"
 msgstr "Enlevé"
 
@@ -411,15 +408,15 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:57
+#: ../browser/sync.py:59
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../faceted/preview_meeting.pt:101
+#: ../faceted/preview_meeting.pt:110
 msgid "Show meeting infos"
 msgstr "Montrer les informations de la séance"
 
-#: ../browser/sync.py:147
+#: ../browser/sync.py:154
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 
@@ -427,11 +424,15 @@ msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 msgid "Sortable Item number"
 msgstr "Numéro triable du point"
 
+#: ../browser/templates/items_datatable.pt:14
+msgid "Status"
+msgstr "Statut"
+
 #: ../content/institution.py:266
 msgid "Styling"
 msgstr "Styles"
 
-#: ../browser/sync.py:187
+#: ../browser/sync.py:199
 msgid "Sync"
 msgstr "Synchroniser"
 
@@ -460,7 +461,7 @@ msgstr "Titre"
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../browser/sync.py:252
+#: ../browser/sync.py:253
 msgid "Unchanged"
 msgstr "Inchangé"
 
@@ -511,7 +512,7 @@ msgstr "Ville/Commune"
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
-#: ../browser/sync.py:79
+#: ../browser/sync.py:81
 #: ../content/institution.py:420
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
@@ -528,11 +529,11 @@ msgstr "Zone de Police"
 msgid "Zone de Secours"
 msgstr "Zone de Secours"
 
-#: ../browser/sync.py:151
+#: ../browser/sync.py:158
 msgid "activate to sort column ascending"
 msgstr "activer pour trier la colonne par ordre croissant"
 
-#: ../browser/sync.py:154
+#: ../browser/sync.py:161
 msgid "activate to sort column descending"
 msgstr "activer pour trier la colonne par ordre décroissant"
 

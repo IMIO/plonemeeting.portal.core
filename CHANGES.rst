@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.2 (2022-12-07)
+1.6.0 (unreleased)
 ------------------
 
 - Added `Annexes?` faceted filter only displayed to institution manager,
@@ -13,6 +13,8 @@ Changelog
   holding faceted filters in the institution, use id `seances` instead `meetings`.
   [gbastien]
 - install_requires: imio.helpers>=0.65.
+  [aduchene]
+- Add a pre import form and a pre sync form before importing/synchronizing a meeting #PM-3291.
   [aduchene]
 
 

@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+from AccessControl import Unauthorized
 from datetime import datetime
 from imio.helpers.content import object_values
 from mockito import mock
 from mockito import when
 from plone import api
+from plone.app.testing import login
+from plone.app.testing import logout
+from plonemeeting.portal.core.browser.sync import PreImportReportForm
+from plonemeeting.portal.core.browser.sync import PreSyncReportForm
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
@@ -58,6 +63,13 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
             )
         ) as json_file:
             self.json_annexes_publishable_updated_mock = json.load(json_file)
+        with open(
+            os.path.join(
+                os.path.dirname(__file__),
+                "resources/preview_import_items_mock.json",
+            )
+        ) as json_file:
+            self.preview_import_items_mock = json.load(json_file)
 
     def test_sync_meeting_data(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
@@ -415,3 +427,69 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         del annexes_not_publishable_but_published[0]["publishable"]
         with self.assertRaises(ValueError):
             sync_annexes_data(self.item, self.institution, annexes_not_publishable_but_published)
+
+    def test_pre_import_view(self):
+        meeting = self.json_meeting
+        items = self.preview_import_items_mock
+
+        def __call__mock(p_self):
+            p_self.external_meeting_uid = meeting['items'][0]['UID']
+            p_self.is_syncing = False
+            p_self.institution = p_self.context
+            p_self.meeting_title = meeting['items'][0]['title']
+            p_self.api_response_data = items
+            return super(PreImportReportForm, p_self).__call__()
+
+        PreImportReportForm.original__call__ = PreImportReportForm.__call__
+        PreImportReportForm.__call__ = __call__mock
+        pre_import_view = self.institution.restrictedTraverse(
+            "@@pre_import_report_form"
+        )
+
+        self.assertTrue(pre_import_view())  # This should render with no exception
+
+        logout()  # Anonymous may not access this form
+        with self.assertRaises(Unauthorized):
+            self.institution.restrictedTraverse("@@pre_import_report_form")
+
+        login(self.portal, "belleville-manager")  # Foreign institution manager may not access this form either
+        with self.assertRaises(Unauthorized):
+            self.institution.restrictedTraverse("@@pre_import_report_form")
+
+        PreImportReportForm.__call__ = PreImportReportForm.original__call__  # Restore the monkey patch
+
+    def test_pre_sync_view(self):
+        items = self.preview_import_items_mock
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+
+        def __call__mock(p_self):
+            p_self.utils_view = self.institution.restrictedTraverse("@@utils_view")
+            p_self.external_meeting_uid = p_self.context.plonemeeting_uid
+            p_self.is_syncing = True
+            p_self.institution = p_self.utils_view.get_current_institution()
+            p_self.items = p_self.context.get_items()
+            p_self.meeting_title = p_self.context.Title()
+
+            p_self.api_response_data = items
+            p_self.api_response_data = p_self._reconcile_items(p_self.api_response_data, p_self.items)
+
+            return super(PreSyncReportForm, p_self).__call__()
+
+        PreSyncReportForm.original__call__ = PreSyncReportForm.__call__
+        PreSyncReportForm.__call__ = __call__mock
+
+        pre_sync_view = meeting.restrictedTraverse(
+            "@@pre_sync_report_form"
+        )
+
+        self.assertTrue(pre_sync_view())  # This should render with no exception
+
+        logout()  # Anonymous may not access this form
+        with self.assertRaises(Unauthorized):
+            meeting.restrictedTraverse("@@pre_sync_report_form")
+
+        login(self.portal, "belleville-manager")  # Foreign institution manager may not access this form either
+        with self.assertRaises(Unauthorized):
+            meeting.restrictedTraverse("@@pre_sync_report_form")
+
+        PreSyncReportForm.__call__ = PreSyncReportForm.original__call__  # Restore the monkey patch

@@ -1,0 +1,108 @@
+{
+   "@id":"https://demo-pm.imio.be/@search?type=item&privacy=public&privacy=public_heading&additional_values=formatted_itemNumber&config_id=meeting-config-council&linkedMeetingUID=ee79f351a11e4120996783aadbf97f37&meeting_uid=ee79f351a11e4120996783aadbf97f37&fullobjects=True&include_all=false&metadata_fields=itemNumber&metadata_fields=groupsInCharge&metadata_fields=category&review_state=presented&review_state=itemfrozen&review_state=accepted&review_state=accepted_but_modified&listType=normal&listType=late&getCategory=administration&getCategory=immo&getCategory=espaces-publics&getCategory=batiments-communaux&getCategory=animaux&getCategory=communication&getCategory=cultes&getCategory=culture&getCategory=economie&getCategory=enseignement&getCategory=population&getCategory=finances&getCategory=informatique&getCategory=interculturalite&getCategory=jeunesse&getCategory=logement&getCategory=mobilite&getCategory=quartier&getCategory=patrimoine&getCategory=enfance&getCategory=politique&getCategory=environnement&getCategory=sante&getCategory=securite&getCategory=social&getCategory=sport&getCategory=tourisme&getCategory=urbanisme&getCategory=police&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b&getGroupsInCharge=5335715758dd4b07880d1b769c0501d8&extra_include=annexes&extra_include_annexes_include_all=false&extra_include_annexes_publishable=true",
+   "items":[
+      {
+         "@extra_includes":[
+            "annexes",
+            "proposing_group",
+            "category",
+            "classifier",
+            "groups_in_charge",
+            "associated_groups",
+            "pod_templates",
+            "meeting",
+            "linked_items",
+            "*deliberation*"
+         ],
+         "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/copy34_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+         "@type":"MeetingItemCouncil",
+         "UID":"c035377c526745e6b23251ea0be0ef5f",
+         "allow_discussion":false,
+         "category":{
+            "title":"Administration générale",
+            "token":"administration"
+         },
+         "created":"2022-11-14T12:04:02+00:00",
+         "extra_include_annexes":[
+
+         ],
+         "formatted_itemNumber":"1",
+         "groupsInCharge":[
+            {
+               "title":"Bourgmestre",
+               "token":"7a82fee367a0416f8d7e8f4a382db0d1"
+            }
+         ],
+         "id":"copy34_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+         "itemNumber":100,
+         "layout":"meetingitem_view",
+         "modified":"2022-11-15T12:24:38+00:00",
+         "next_item":{
+            "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/point-test-pour-demo-deliberations-be-ac-anthisnes",
+            "@type":"MeetingItemCouncil",
+            "description":"<p>test</p>",
+            "title":"point test pour démo déliberations.be - AC Anthisnes"
+         },
+         "previous_item":{
+            "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/meetingcouncil-38",
+            "@type":"MeetingCouncil",
+            "description":"",
+            "title":"15 novembre 2022 (17:00)"
+         },
+         "review_state":"itemfrozen",
+         "title":"Approuve le procès-verbal de la séance antérieure"
+      },
+      {
+         "@extra_includes":[
+            "annexes",
+            "proposing_group",
+            "category",
+            "classifier",
+            "groups_in_charge",
+            "associated_groups",
+            "pod_templates",
+            "meeting",
+            "linked_items",
+            "*deliberation*"
+         ],
+         "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/point-test-pour-demo-deliberations-be-ac-genappe",
+         "@type":"MeetingItemCouncil",
+         "UID":"2d4da4bbd2114858affe98212a15c175",
+         "allow_discussion":false,
+         "category":{
+            "title":"Affaires immobilières",
+            "token":"immo"
+         },
+         "created":"2022-11-14T11:59:37+00:00",
+         "extra_include_annexes":[
+
+         ],
+         "formatted_itemNumber":"2",
+         "groupsInCharge":[
+            {
+               "title":"1er Échevin",
+               "token":"a2396143f11f4e2292f12ee3b3447739"
+            }
+         ],
+         "id":"point-test-pour-demo-deliberations-be-ac-genappe",
+         "itemNumber":200,
+         "layout":"meetingitem_view",
+         "modified":"2022-11-15T12:51:23+00:00",
+         "next_item":{
+            "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/point-seance-huis-clos-ac-genappe",
+            "@type":"MeetingItemCouncil",
+            "description":"",
+            "title":"Point séance Huis-clos - AC Genappe"
+         },
+         "previous_item":{
+            "@id":"https://demo-pm.imio.be/Members/dgen/mymeetings/meeting-config-council/copy33_of_approuve-le-proces-verbal-de-la-seance-anterieure",
+            "@type":"MeetingItemCouncil",
+            "description":"<p>Approuve le </p>",
+            "title":"Approuve le procès-verbal de la séance antérieure"
+         },
+         "review_state":"itemfrozen",
+         "title":"point test pour démo déliberations.be - AC Genappe"
+      }
+   ],
+   "items_total":2
+}

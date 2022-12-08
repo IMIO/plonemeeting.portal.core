@@ -11,7 +11,7 @@
            style="width:100%" tal:attributes="data-pat-datatables options/datatable_config">
       <thead>
       <tr>
-        <th class="status-header" tal:condition="is_syncing">Status</th>
+        <th class="status-header" tal:condition="is_syncing" i18n:translate="">Status</th>
         <th class="checkbox-header">
           <x-checkbox-selector scope="items-datatables" checked></x-checkbox-selector>
         </th>
@@ -30,9 +30,9 @@
           <div  tal:content="institution/delib_category_field"
            i18n:translate="">Category or Classifier</div>
         </th>
-        <th class="split-header">
+        <th class="split-header" tal:condition="has_representatives">
           <div class="top-header">iA.Délib</div>
-          <div tal:condition="has_representatives" i18n:translate="">
+          <div i18n:translate="">
             Groups in charge
           </div>
         </th>
