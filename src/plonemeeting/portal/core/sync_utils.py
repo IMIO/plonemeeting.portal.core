@@ -14,8 +14,6 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_global_category
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.Expression import getExprContext
-from requests.adapters import HTTPAdapter
-from urllib3 import Retry
 from zope.i18n import translate
 
 import dateutil.parser
