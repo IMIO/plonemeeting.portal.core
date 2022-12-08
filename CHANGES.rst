@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.2 (unreleased)
+1.5.2 (2022-12-07)
 ------------------
 
 - Added `Annexes?` faceted filter only displayed to institution manager,
@@ -12,6 +12,9 @@ Changelog
 - Be coherent with institutions created at the beginning with the id of the folder
   holding faceted filters in the institution, use id `seances` instead `meetings`.
   [gbastien]
+- install_requires: imio.helpers>=0.65.
+  [aduchene]
+
 
 1.5.1 (2022-07-25)
 ------------------
