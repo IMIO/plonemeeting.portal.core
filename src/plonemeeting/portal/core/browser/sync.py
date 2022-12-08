@@ -135,6 +135,10 @@ class ItemsReportContentProvider(ContentProviderBase):
         return json_dumps(value)
 
     def render(self, *args, **kwargs):
+        if self.parent.is_syncing:
+            item_number_col_idx = 2
+        else:
+            item_number_col_idx = 1
         datatable_config = {
             "paging": False,
             "columnDefs": [
@@ -146,7 +150,7 @@ class ItemsReportContentProvider(ContentProviderBase):
             "scrollY": "50vh",
             "autoWidth": True,
             "scrollCollapse": True,
-            "order": [[2, "asc"]],
+            "order": [[item_number_col_idx, "asc"]],
             "language": {
                 "search": translate(plone_("Search"), context=self.request),
                 "emptyTable": translate(

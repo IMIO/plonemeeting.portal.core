@@ -5,7 +5,8 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed an issue with default ordering column on pre import form.
+  [aduchene]
 
 
 1.6.0 (2022-12-08)
