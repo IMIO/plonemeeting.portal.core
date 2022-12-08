@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.1 (unreleased)
+1.6.1 (2022-12-08)
 ------------------
 
 - Fixed an issue with default ordering column on pre import form.
