@@ -1,0 +1,101 @@
+<tal:defines
+   i18n:domain="plonemeeting.portal.core"
+  define="items view/get_items;
+          is_syncing view/parent/is_syncing;
+          institution nocall:view/parent/institution;
+          has_representatives institution/is_representatives_mapping_used
+">
+  <div class="full-width items-datatables-container">
+    <table id="items-datatables"
+           class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
+           style="width:100%" tal:attributes="data-pat-datatables options/datatable_config">
+      <thead>
+      <tr>
+        <th class="status-header" tal:condition="is_syncing" i18n:translate="">Status</th>
+        <th class="checkbox-header">
+          <x-checkbox-selector scope="items-datatables" checked></x-checkbox-selector>
+        </th>
+        <th>N°</th>
+        <th i18n:translate="">Title</th>
+        <th class="date-header split-header">
+          <div class="top-header">iA.Délib</div>
+          <div i18n:translate="">Modified at</div>
+        </th>
+        <th class="date-header split-header" tal:condition="is_syncing">
+          <div class="top-header">délibérations.be</div>
+          <div i18n:translate="">Modified at</div>
+        </th>
+        <th class="split-header">
+          <div class="top-header">iA.Délib</div>
+          <div  tal:content="institution/delib_category_field"
+           i18n:translate="">Category or Classifier</div>
+        </th>
+        <th class="split-header" tal:condition="has_representatives">
+          <div class="top-header">iA.Délib</div>
+          <div i18n:translate="">
+            Groups in charge
+          </div>
+        </th>
+        <th class="annexes-header" tal:condition="is_syncing">Annexes</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        tal:repeat="item items"
+        tal:attributes="class python:is_syncing and item['status'] or ''"
+      >
+        <td class="status-cell" tal:condition="is_syncing">
+          <span tal:content="item/status_label">
+            status_label
+          </span>
+        </td>
+        <td class="checkbox-cell">
+          <input type="checkbox"
+            tal:attributes="name python: 'item_uid__' + item['UID']" checked/>
+        </td>
+        <td class="item-number-cell" tal:content="item/formatted_itemNumber">itemNumber</td>
+        <td>
+          <a target="_blank"
+            tal:condition="python: item.get('@id')"
+            tal:attributes="href python: item['@id']"
+            tal:content="item/title">
+            Title
+          </a>
+          <span tal:condition="python: not item.get('@id')"
+            tal:content="item/title">
+            Title
+          </span>
+        </td>
+        <td class="pat-moment"
+            data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
+          tal:content="item/modified">
+          Modified at (iA.Délib)
+        </td>
+        <td class="pat-moment"
+            data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
+          tal:condition="is_syncing"
+          tal:content="item/local_last_modified">
+          Modified at (délibération.be)
+        </td>
+        <td tal:content="python: item.get(institution.delib_category_field)['title']">
+          Category
+        </td>
+        <td
+          tal:condition="has_representatives"
+          tal:content="python: item.get('groupsInCharge') and item.get('groupsInCharge')[0]['title'] or ''"
+        >
+          Representative
+        </td>
+        <td tal:condition="is_syncing">
+          <x-annexes-status
+            tal:attributes="data-annexes python:view.to_json(item['annexes_status'])"
+          />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <input type="hidden" name="external_meeting_uid"
+     tal:define="external_meeting_uid view/parent/external_meeting_uid"
+     tal:attributes="value external_meeting_uid">
+</tal:defines>

@@ -97,11 +97,11 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
             "&getCategory=VOID"
-            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&extra_include=public_deliberation",
             url,
         )
         self.belleville.delib_category_field = "classifier"
@@ -126,11 +126,11 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted"
             "&review_state=accepted_but_modified"
             "&getRawClassifier=VOID"
-            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&extra_include=public_deliberation",
             url,
         )
         self.belleville.categories_mappings = [{'local_category_id': 'administration',
@@ -159,11 +159,11 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted_but_modified"
             "&getRawClassifier=administration"
             "&getRawClassifier=immo"
-            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&extra_include=public_deliberation",
             url,
         )
         self.belleville.delib_category_field = "category"
@@ -189,11 +189,11 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             "&review_state=accepted_but_modified"
             "&getCategory=administration"
             "&getCategory=immo"
-            "&extra_include=public_deliberation"
             "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
             "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
             "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
-            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b",
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&extra_include=public_deliberation",
             url,
         )
 

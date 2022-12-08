@@ -5,6 +5,7 @@ from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.content.item import IItem
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFPlone import PloneMessageFactory as plone_
 from zope import schema
@@ -35,3 +36,7 @@ class IMeeting(model.Schema):
 class Meeting(Container):
     """
     """
+
+    def get_items(self):
+        """Get the items of this meeting."""
+        return [i for i in self.contentValues() if IItem.providedBy(i)]

@@ -8,6 +8,7 @@
       {
         "runtime": "automatic"
       }
-    ]
+    ],
+    "macros"
   ]
 }

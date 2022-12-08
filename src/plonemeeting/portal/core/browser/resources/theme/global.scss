@@ -48,8 +48,8 @@ img {
 // Meeting
 
 .meeting-actions {
-    display: inline-block;
-    min-width: 200px;
+    display: flex;
+    margin-left: 10px;
     flex: 1;
 }
 

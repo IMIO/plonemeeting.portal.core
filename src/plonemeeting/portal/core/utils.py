@@ -128,24 +128,17 @@ def get_api_url_for_annexes(item_json_id):
 def _datagrid_to_url_param(values):
     res = ''
     for dict_value in values:
-        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'], value=dict_value['value'])
+        res += '&{parameter}={value}'.format(parameter=dict_value['parameter'],
+                                             value=dict_value['value'])
     return res
 
 
-def get_api_url_for_annexes_summary(item_json_id):
-    url = "{0}/@annexes?" \
-          "publishable=true".format(item_json_id)
-    return url
-
-
-def get_api_url_for_meeting_items(institution, meeting_external_uid, item_external_uids=[]):
-    if not institution.plonemeeting_url or not institution.meeting_config_id:
-        return
+def get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                       item_external_uids=[]):
     category_filter = _get_category_filter_url(institution)
     representatives_filter = _get_representatives_filter_url(institution)
 
     item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
-    item_content_query = _datagrid_to_url_param(institution.item_content_query)
 
     item_uids_filter = _get_uids_filter_url(item_external_uids)
     # XXX linkedMeetingUID/meeting_uid compatibility, index was renamed to meeting_uid
@@ -172,7 +165,6 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
         "&metadata_fields={delib_category_field}"
         "{item_filter_query}"
         "{category_filter}"
-        "{item_content_query}"
         "{representatives_filter}"
         "{item_uids_filter}".format(
             plonemeeting_url=institution.plonemeeting_url.rstrip("/"),
@@ -181,13 +173,34 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
             meeting_external_uid=meeting_external_uid,
             delib_category_field=institution.delib_category_field,
             item_filter_query=item_filter_query,
-            item_content_query=item_content_query,
             category_filter=category_filter,
             representatives_filter=representatives_filter,
             item_uids_filter=item_uids_filter
         )
     )
 
+    return url
+
+
+def get_api_url_for_presync_meeting_items(institution, meeting_external_uid,
+                                          item_external_uids=[]):
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                             item_external_uids)
+    url += "&extra_include=annexes" \
+           "&extra_include_annexes_fullobjects" \
+           "&extra_include_annexes_include_all=false" \
+           "&extra_include_annexes_publishable=true"
+    return url
+
+
+def get_api_url_for_meeting_items(institution, meeting_external_uid,
+                                  item_external_uids=[]):
+    if not institution.plonemeeting_url or not institution.meeting_config_id:
+        return
+    item_content_query = _datagrid_to_url_param(institution.item_content_query)
+    url = get_base_api_url_for_meeting_items(institution, meeting_external_uid,
+                                             item_external_uids)
+    url += item_content_query
     return url
 
 
@@ -301,7 +314,8 @@ def remove_portlets(column):
         del assignments[portlet]
 
 
-def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)", lang=None):
+def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)",
+                                  lang=None):
     """
     Format the meeting date while managing translations of months and weekdays
     :param date: Datetime reprensenting the meeting date
@@ -347,7 +361,8 @@ def format_meeting_date_and_state(date, state_id, format="%d %B %Y (%H:%M)", lan
 
     if u"[weekday]" in date_str:
         weekday = translate(
-            WEEKDAYS_IDS[date.weekday()], domain="plonelocales", target_language=lang
+            WEEKDAYS_IDS[date.weekday()], domain="plonelocales",
+            target_language=lang
         )
         date_str = date_str.replace(u"[weekday]", weekday)
 
@@ -371,11 +386,6 @@ def redirect(request, to):
     request.response.redirect(to)
 
 
-def redirect_back(request):
-    """Redirect back"""
-    redirect(request, request.get("HTTP_REFERER"))
-
-
 def get_term_title(context, fieldname):
     """Get the term title for the given context and fieldname."""
     field = None
@@ -384,9 +394,11 @@ def get_term_title(context, fieldname):
             field = schema.get(fieldname)
             break
     if not field:
-        raise ValueError(f"No such field {fieldname} in {context.portal_type} context")
+        raise ValueError(
+            f"No such field {fieldname} in {context.portal_type} context")
     if not hasattr(field, "vocabularyName"):
-        raise ValueError(f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
+        raise ValueError(
+            f"Field {fieldname} in {context.portal_type} context doesn't have a vocabulary")
     vocabulary_name = field.vocabularyName
     vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
     vocabulary = vocabulary_factory(context)

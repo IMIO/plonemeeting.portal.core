@@ -82,6 +82,22 @@
     />
 
   <browser:page
+    name="pre_import_report_form"
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    permission="cmf.ModifyPortalContent"
+    class=".sync.PreImportReportForm"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    name="pre_sync_report_form"
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    permission="cmf.ModifyPortalContent"
+    class=".sync.PreSyncReportForm"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
       name="utils_view"
       for="*"
       class=".utils.UtilsView"

@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-06-14 13:15+0000\n"
+"POT-Creation-Date: 2022-12-08 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,11 +25,15 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: ../browser/sync.py:264
+msgid "Added"
+msgstr ""
+
 #: ../content/item.py:54
 msgid "Additional data"
 msgstr ""
 
-#: ../browser/templates/item.pt:93
+#: ../browser/templates/item.pt:92
 msgid "Annexes"
 msgstr ""
 
@@ -37,13 +41,17 @@ msgstr ""
 msgid "Anonymised text tag from ia.Delib to be replaced"
 msgstr ""
 
-#: ../browser/templates/item.pt:74
+#: ../browser/templates/item.pt:73
 #: ../faceted/macros.pt:86
 msgid "Attention"
 msgstr ""
 
 #: ../profiles/default/sharing.xml
 msgid "Can manage institution"
+msgstr ""
+
+#: ../browser/sync.py:228
+msgid "Cancel"
 msgstr ""
 
 #: ../content/institution.py:247
@@ -54,7 +62,7 @@ msgstr ""
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
-#: ../browser/templates/item.pt:35
+#: ../browser/templates/item.pt:34
 #: ../content/item.py:62
 #: ../faceted/macros.pt:27
 msgid "Category"
@@ -64,7 +72,15 @@ msgstr ""
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:40
+#: ../browser/sync.py:380
+msgid "Choose the items you want to import in the portal."
+msgstr ""
+
+#: ../browser/sync.py:176
+msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
+msgstr ""
+
+#: ../browser/sync.py:57
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
@@ -72,9 +88,9 @@ msgstr ""
 msgid "Configuration folder"
 msgstr ""
 
-#: ../browser/templates/item.pt:80
+#: ../browser/templates/item.pt:79
 #: ../content/item.py:67
-#: ../content/meeting.py:27
+#: ../content/meeting.py:28
 msgid "Custom info"
 msgstr ""
 
@@ -141,12 +157,24 @@ msgstr ""
 msgid "Global category title"
 msgstr ""
 
+#: ../browser/templates/items_datatable.pt:35
+msgid "Groups in charge"
+msgstr ""
+
 #: ../content/institution.py:282
 msgid "Header color"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:98
+#: ../faceted/preview_meeting.pt:115
 msgid "Hide meeting infos"
+msgstr ""
+
+#: ../browser/sync.py:402
+msgid "Import"
+msgstr ""
+
+#: ../faceted/preview_meeting.pt:70
+msgid "Import a new meeting"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -201,7 +229,7 @@ msgstr ""
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: ../browser/templates/item.pt:32
+#: ../browser/templates/item.pt:31
 #: ../content/item.py:25
 #: ../faceted/macros.pt:24
 msgid "Item number"
@@ -215,9 +243,9 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
-#: ../browser/templates/item.pt:67
+#: ../browser/templates/item.pt:66
 #: ../content/item.py:70
-#: ../content/meeting.py:30
+#: ../content/meeting.py:31
 msgid "Last modification in iA.Delib"
 msgstr ""
 
@@ -237,7 +265,7 @@ msgstr ""
 msgid "Mapping"
 msgstr ""
 
-#: ../browser/sync.py:26
+#: ../browser/sync.py:41
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
@@ -250,8 +278,16 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:39
+#: ../browser/sync.py:56
 msgid "Meeting import form"
+msgstr ""
+
+#: ../browser/sync.py:379
+msgid "Meeting pre import form"
+msgstr ""
+
+#: ../browser/sync.py:175
+msgid "Meeting pre sync form"
 msgstr ""
 
 #: ../content/institution.py:152
@@ -274,6 +310,14 @@ msgstr ""
 msgid "Meetings"
 msgstr ""
 
+#: ../browser/sync.py:256
+msgid "Modified"
+msgstr ""
+
+#: ../browser/templates/items_datatable.pt:22
+msgid "Modified at"
+msgstr ""
+
 #: ../content/institution.py:290
 msgid "Navigation bar color"
 msgstr ""
@@ -284,6 +328,10 @@ msgstr ""
 
 #: ../faceted/widgets/root_path.py:29
 msgid "Navigation root path"
+msgstr ""
+
+#: ../browser/sync.py:151
+msgid "No data available in table"
 msgstr ""
 
 #: ../content/institution.py:78
@@ -322,7 +370,15 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/templates/item.pt:38
+#: ../browser/sync.py:210
+msgid "Remove"
+msgstr ""
+
+#: ../browser/sync.py:281
+msgid "Removed"
+msgstr ""
+
+#: ../browser/templates/item.pt:37
 #: ../faceted/macros.pt:30
 msgid "Representative"
 msgstr ""
@@ -355,20 +411,32 @@ msgstr ""
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:42
+#: ../browser/sync.py:59
 msgid "Select"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:93
+#: ../faceted/preview_meeting.pt:110
 msgid "Show meeting infos"
+msgstr ""
+
+#: ../browser/sync.py:154
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
 #: ../content/item.py:28
 msgid "Sortable Item number"
 msgstr ""
 
+#: ../browser/templates/items_datatable.pt:14
+msgid "Status"
+msgstr ""
+
 #: ../content/institution.py:266
 msgid "Styling"
+msgstr ""
+
+#: ../browser/sync.py:199
+msgid "Sync"
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -387,16 +455,24 @@ msgstr ""
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
+#: ../browser/templates/items_datatable.pt:19
+msgid "Title"
+msgstr ""
+
 #: ../content/item.py:32
-#: ../content/meeting.py:21
+#: ../content/meeting.py:22
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../sync_utils.py:325
+#: ../browser/sync.py:253
+msgid "Unchanged"
+msgstr ""
+
+#: ../sync_utils.py:327
 msgid "Unexpected meeting count in web service response !"
 msgstr ""
 
-#: ../sync_utils.py:97
+#: ../sync_utils.py:99
 msgid "Unexpected publishable annex value in web service response !"
 msgstr ""
 
@@ -435,11 +511,11 @@ msgstr ""
 msgid "Ville/Commune"
 msgstr ""
 
-#: ../sync_utils.py:35
+#: ../sync_utils.py:37
 msgid "Web service connection error !"
 msgstr ""
 
-#: ../browser/sync.py:60
+#: ../browser/sync.py:81
 #: ../content/institution.py:420
 msgid "Webservice connection error !"
 msgstr ""
@@ -454,6 +530,14 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Zone de Secours"
+msgstr ""
+
+#: ../browser/sync.py:158
+msgid "activate to sort column ascending"
+msgstr ""
+
+#: ../browser/sync.py:161
+msgid "activate to sort column descending"
 msgstr ""
 
 #: ../content/institution.py:248
@@ -505,7 +589,7 @@ msgid "meeting_filter_query_description"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:336
+#: ../sync_utils.py:338
 msgid "meeting_imported"
 msgstr ""
 

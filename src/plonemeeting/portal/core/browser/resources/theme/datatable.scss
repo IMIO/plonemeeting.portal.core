@@ -1,0 +1,189 @@
+.items-datatables-container {
+  padding: 0 5em 1em 5em;
+  margin-top: -2em;
+
+  @include media-breakpoint-down(md) {
+    padding: 0 0 1em 0;
+  }
+
+  th {
+    background-color: $grey-100;
+    color: $grey-900;
+    white-space: nowrap;
+  }
+
+
+  th.split-header .top-header {
+    padding-bottom: 0.25em;
+    margin-right: -20px;
+    margin-bottom: 0.25em;
+    border-bottom: 1px dashed $grey-300;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: $grey-700;
+  }
+
+  #items-datatables_filter {
+    margin-right: 15px;
+  }
+
+  .checkbox-cell, .item-number-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .item-number-cell {
+    font-weight: bolder;
+    color: $grey-900;
+  }
+
+  .checkbox-header {
+    text-align: center;
+    vertical-align: bottom;
+  }
+
+  td {
+    vertical-align: middle !important;
+  }
+
+  td.pat-moment {
+    word-break: break-word;
+  }
+}
+
+// Specific to pre sync form
+.template-pre_sync_report_form {
+
+  th.status-header {
+    border-left: 8px solid $grey-200 !important;
+  }
+
+  #items-datatables .status-cell {
+    font-weight: bold;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+
+    span {
+      border-radius: $rounded;
+      display: inline-block;
+      padding: 1px 6px;
+      box-shadow: $shadow-md;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin: 0 6px;
+    }
+  }
+
+  #items-datatables .unchanged > .status-cell {
+    border-left: 8px solid $grey-500;
+
+    span {
+      background-color: $grey-500;
+      color: $white;
+    }
+  }
+
+  #items-datatables .added > .status-cell {
+    border-left: 8px solid $green;
+
+    span {
+      background-color: $green;
+      color: $white;
+    }
+  }
+
+  #items-datatables .removed > .status-cell {
+    border-left: 8px solid $red;
+
+    span {
+      background-color: $red;
+      color: $white;
+    }
+  }
+
+  #items-datatables .modified > .status-cell {
+    border-left: 8px solid $orange;
+
+    span {
+      background-color: $orange;
+      color: $white;
+    }
+  }
+}
+
+
+// Annexes status
+.annexes-status {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.annex-status {
+  border-radius: $rounded;
+  padding: 0.1em 0.25em;
+  margin: 0.1em 0;
+  color: #FFF;
+  border: none;
+  width: 4em;
+  display: flex;
+  box-shadow: $shadow-md;
+  align-items: center;
+
+  h5 {
+    font-weight: bold;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.25em;
+    border-bottom: 1px solid $white;
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+    margin-right: 0.5em;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0em;
+    list-style: none;
+  }
+
+  &.unchanged {
+    &:hover {
+      background-color: darken($grey-500, 10);
+    }
+
+    background-color: $grey-500;
+  }
+
+  &.added {
+    &:hover {
+      background-color: darken($green, 10);
+    }
+
+    background-color: $green;
+  }
+
+  &.removed {
+    &:hover {
+      background-color: darken($red, 10);
+    }
+
+    background-color: $red;
+  }
+
+  &.modified {
+    &:hover {
+      background-color: darken($orange, 10);
+    }
+
+    background-color: $orange;
+  }
+
+}
+

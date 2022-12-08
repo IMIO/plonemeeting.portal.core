@@ -17,7 +17,6 @@
 
 <metal:text fill-slot="content-core">
     <tal:text-macro metal:define-macro="content-core">
-
       <div class=""
            tal:define="portal_url context/@@plone_portal_state/portal_url;
                        utils_view nocall:context/@@utils_view;
