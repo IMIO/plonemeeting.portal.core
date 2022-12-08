@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.0 (unreleased)
+1.6.0 (2022-12-08)
 ------------------
 
 - Added `Annexes?` faceted filter only displayed to institution manager,
