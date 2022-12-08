@@ -140,7 +140,7 @@ class ItemsReportContentProvider(ContentProviderBase):
             "columnDefs": [
                 {"orderable": True, "width": "50px", "targets": "status-header"},
                 {"orderable": False, "width": "30px", "targets": "checkbox-header"},
-                {"orderable": True, "width": "110px", "targets": "date-header"},
+                {"orderable": True, "width": "60px", "targets": "date-header"},
                 {"orderable": False, "width": "50px", "targets": "annexes-header"},
             ],
             "scrollY": "50vh",
