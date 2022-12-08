@@ -225,6 +225,9 @@ class PreSyncReportForm(Form):
         if len(deleted_ids) > 0:
             self.context.manage_delObjects(deleted_ids)
 
+        meeting_faceted_url = f"{self.institution.absolute_url()}/{APP_FOLDER_ID}/#seance={self.context.UID()}"
+        redirect(self.request, meeting_faceted_url)
+
     def updateActions(self):
         super().updateActions()
         self.actions["sync"].addClass("context")
