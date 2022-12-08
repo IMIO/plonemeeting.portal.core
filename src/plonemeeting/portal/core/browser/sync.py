@@ -34,11 +34,10 @@ import time
 
 
 class IImportMeetingForm(Interface):
-    """
-    """
+    """ """
 
     meeting = schema.Choice(
-        title=_(u"Meeting"),
+        title=_("Meeting"),
         vocabulary="plonemeeting.portal.vocabularies.remote_meetings",
         required=True,
     )
@@ -53,10 +52,10 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
     schema = IImportMeetingForm
     ignoreContext = True
 
-    label = _(u"Meeting import form")
-    description = _(u"Choose the meeting you want to import in the portal.")
+    label = _("Meeting import form")
+    description = _("Choose the meeting you want to import in the portal.")
 
-    @button.buttonAndHandler(_(u"Select"))
+    @button.buttonAndHandler(_("Select"))
     def handle_select(self, action):
         data, errors = self.extractData()
         if errors:
@@ -64,7 +63,9 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
+            self.context.absolute_url()
+            + "/@@pre_import_report_form?external_meeting_uid="
+            + external_meeting_uid
         )
         redirect(self.request, next_form_url)
 
@@ -75,17 +76,15 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             self._notify_error_and_cancel(err)
 
     def _notify_error_and_cancel(self, err=None):
-        logger.warning("Error while trying to connect to iA.Delib",
-                       exc_info=err)
+        logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
         api.portal.show_message(
-            _("Webservice connection error !"), request=self.request,
-            type="error"
+            _("Webservice connection error !"), request=self.request, type="error"
         )
         self.handle_cancel(self, None)
 
-    @button.buttonAndHandler(plone_(u"Cancel"))
+    @button.buttonAndHandler(plone_("Cancel"))
     def handle_cancel(self, action):
-        meeting_faceted_url = f"{ self.context.absolute_url()}/{APP_FOLDER_ID}"
+        meeting_faceted_url = f"{self.context.absolute_url()}/{APP_FOLDER_ID}"
         redirect(self.request, meeting_faceted_url)
 
     def updateActions(self):
@@ -93,23 +92,24 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
         self.actions["select"].addClass("context")
         self.actions["cancel"].addClass("standalone")
 
+
 class ImportMeetingView(BrowserView):  # pragma: no cover
     """Deprecated: replaced by PreImportReportForm"""
+
     def import_meeting(self, force=False):
         meeting = self.context
         institution = meeting.aq_parent
-        _sync_meeting(institution, meeting.plonemeeting_uid, self.request,
-                      force)
+        _sync_meeting(institution, meeting.plonemeeting_uid, self.request, force)
 
 
 class SyncMeetingView(ImportMeetingView):  # pragma: no cover
     """Deprecated: replaced by PreSyncReportForm"""
+
     def __call__(self):
         self.import_meeting()
 
 
 class ForceReimportMeetingView(ImportMeetingView):  # pragma: no cover
-    """Deprecated: replaced by PreSyncReportForm"""
     def __call__(self):
         self.import_meeting(force=True)
 
@@ -140,27 +140,29 @@ class ItemsReportContentProvider(ContentProviderBase):
             "columnDefs": [
                 {"orderable": True, "width": "50px", "targets": "status-header"},
                 {"orderable": False, "width": "30px", "targets": "checkbox-header"},
-                {"orderable": True, "width": "150px", "targets": "date-header"},
-                {"orderable": False, "width": "50px", "targets": "annexes-header"}
+                {"orderable": True, "width": "110px", "targets": "date-header"},
+                {"orderable": False, "width": "50px", "targets": "annexes-header"},
             ],
             "scrollY": "50vh",
             "autoWidth": True,
             "scrollCollapse": True,
             "order": [[2, "asc"]],
             "language": {
-                "search": translate(plone_(u"Search"), context=self.request),
-                "emptyTable": translate(_(u"No data available in table"),
-                                        context=self.request),
+                "search": translate(plone_("Search"), context=self.request),
+                "emptyTable": translate(
+                    _("No data available in table"), context=self.request
+                ),
                 "info": translate(
                     _("Showing _START_ to _END_ of _TOTAL_ entries"),
-                    context=self.request),
+                    context=self.request,
+                ),
                 "aria": {
                     "sortAscending": translate(
-                        _("activate to sort column ascending"),
-                        context=self.request),
+                        _("activate to sort column ascending"), context=self.request
+                    ),
                     "sortDescendintranslate": translate(
-                        _("activate to sort column descending"),
-                        context=self.request)
+                        _("activate to sort column descending"), context=self.request
+                    ),
                 },
             },
         }
@@ -173,14 +175,17 @@ class PreSyncReportForm(Form):
     Before synchronizing, ask the user what he wants to sync.
     """
 
-    label = _(u"Meeting pre sync form")
-    description = _(u"Choose items you want to sync/import in the portal.")
+    label = _("Meeting pre sync form")
+    description = _(
+        "Choose the items you want to sync/import in the portal. "
+        "It is also possible to remove items from the portal, by using the 'remove' button."
+    )
 
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0
 
-    def __call__(self):
+    def __call__(self):  # pragma: no cover
         self.utils_view = self.context.restrictedTraverse("@@utils_view")
         self.external_meeting_uid = self.context.plonemeeting_uid
         self.is_syncing = True
@@ -189,14 +194,16 @@ class PreSyncReportForm(Form):
         self.meeting_title = self.context.Title()
         # Avoid unnecessary request whe submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
-            self.api_response_data = _fetch_preview_items(self.context,
-                                                          self.external_meeting_uid)
-            self.api_response_data = self._reconcile_items(self.api_response_data,
-                                                           self.items)
+            self.api_response_data = _fetch_preview_items(
+                self.context, self.external_meeting_uid
+            )
+            self.api_response_data = self._reconcile_items(
+                self.api_response_data, self.items
+            )
 
         return super(PreSyncReportForm, self).__call__()
 
-    @button.buttonAndHandler(_(u"Sync"))
+    @button.buttonAndHandler(_("Sync"))
     def handle_sync(self, action):
         form = self.request.form
         checked_item_uids = self._extract_checked_items(form)
@@ -207,26 +214,13 @@ class PreSyncReportForm(Form):
             item_external_uids=checked_item_uids,
         )
 
-    @button.buttonAndHandler(_(u"Force"))
-    def handle_force_sync(self, action):
-        form = self.request.form
-        checked_item_uids = self._extract_checked_items(form)
-        _sync_meeting(
-            self.institution,
-            self.external_meeting_uid,
-            self.request,
-            item_external_uids=checked_item_uids,
-            force=True
-        )
-
-    @button.buttonAndHandler(_(u"Delete"))
-    def handle_delete(self, action):
+    @button.buttonAndHandler(_("Remove"))
+    def handle_remove(self, action):
         form = self.request.form
         checked_item_uids = self._extract_checked_items(form)
         deleted_ids = []
         for item in self.context.objectValues():
-            if IItem.providedBy(
-                item) and item.plonemeeting_uid in checked_item_uids:
+            if IItem.providedBy(item) and item.plonemeeting_uid in checked_item_uids:
                 deleted_ids.append(item.id)
         if len(deleted_ids) > 0:
             self.context.manage_delObjects(deleted_ids)
@@ -234,11 +228,10 @@ class PreSyncReportForm(Form):
     def updateActions(self):
         super().updateActions()
         self.actions["sync"].addClass("context")
-        self.actions["force"].addClass("destructive")
-        self.actions["delete"].addClass("destructive")
+        self.actions["remove"].addClass("destructive")
         self.actions["cancel"].addClass("standalone")
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
         """"""
         meeting_faceted_url = f"{self.institution.absolute_url()}/{APP_FOLDER_ID}/#seance={self.context.UID()}"
@@ -250,23 +243,28 @@ class PreSyncReportForm(Form):
         compute the status of each item (unchanged, modified, added, removed)
         """
         reconciled = copy.deepcopy(api_items)
-        local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item
-                                           in local_items}
+        local_items_by_plonemeeting_uid = {
+            item.plonemeeting_uid: item for item in local_items
+        }
 
         for item in reconciled["items"]:
             api_annexes = item.get("extra_include_annexes", [])
             if item["UID"] in local_items_by_plonemeeting_uid.keys():
                 local_item = local_items_by_plonemeeting_uid[item["UID"]]
                 plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
-                item["local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
+                item[
+                    "local_last_modified"
+                ] = local_item.plonemeeting_last_modified.isoformat()
                 item["modified"] = plonemeeting_last_modified.isoformat()
-                if local_item.plonemeeting_last_modified == plonemeeting_last_modified \
-                    and local_item.number == item["formatted_itemNumber"]:
-                        item["status"] = "unchanged"
-                        item["status_label"] = _(u"Unchanged")
+                if (
+                    local_item.plonemeeting_last_modified == plonemeeting_last_modified
+                    and local_item.number == item["formatted_itemNumber"]
+                ):
+                    item["status"] = "unchanged"
+                    item["status_label"] = _("Unchanged")
                 else:
                     item["status"] = "modified"
-                    item["status_label"] = _(u"Modified")
+                    item["status_label"] = _("Modified")
                 item["annexes_status"] = self._reconcile_annexes(
                     api_annexes, local_item.objectValues()
                 )
@@ -274,12 +272,12 @@ class PreSyncReportForm(Form):
             else:
                 item["local_last_modified"] = "-"
                 item["status"] = "added"
-                item["status_label"] = _(u"Added")
+                item["status_label"] = _("Added")
                 item["annexes_status"] = {}
                 if api_annexes:
                     item["annexes_status"] = {
                         "added": {
-                            "label": translate(_(u"Added"), context=self.request),
+                            "label": translate(_("Added"), context=self.request),
                             "count": len(api_annexes),
                             "titles": [annex["title"] for annex in api_annexes],
                         },
@@ -291,9 +289,8 @@ class PreSyncReportForm(Form):
             if annexes_count:
                 annexes_status["removed"] = {
                     "count": annexes_count,
-                    "label": _(u"Removed"),
-                    "titles": [annex.Title() for annex in
-                               local_item.objectValues()],
+                    "label": _("Removed"),
+                    "titles": [annex.Title() for annex in local_item.objectValues()],
                 }
             reconciled["items"].append(
                 {
@@ -302,13 +299,11 @@ class PreSyncReportForm(Form):
                     "formatted_itemNumber": local_item.number,
                     "modified": "-",
                     "local_last_modified": local_item.plonemeeting_last_modified.isoformat(),
-                    "category": {
-                        "title": "-"
-                    },
+                    "category": {"title": "-"},
                     "representatives_in_charge": "-",
                     "status": "removed",
-                    "status_label": _(u"Removed"),
-                    "annexes_status": annexes_status
+                    "status_label": _("Removed"),
+                    "annexes_status": annexes_status,
                 },
             )
         return reconciled
@@ -319,18 +314,26 @@ class PreSyncReportForm(Form):
         compute the status of each one (unchanged, modified, added, removed)
         """
         annexes_status = {
-            "added": {"count": 0,
-                      "label": translate(_(u"Added"), context=self.request),
-                      "titles": []},
-            "unchanged": {"count": 0, "label": translate(_(u"Unchanged"),
-                                                         context=self.request),
-                          "titles": []},
-            "modified": {"count": 0, "label": translate(_(u"Modified"),
-                                                        context=self.request),
-                         "titles": []},
-            "removed": {"count": 0,
-                        "label": translate(_(u"Removed"), context=self.request),
-                        "titles": []},
+            "added": {
+                "count": 0,
+                "label": translate(_("Added"), context=self.request),
+                "titles": [],
+            },
+            "unchanged": {
+                "count": 0,
+                "label": translate(_("Unchanged"), context=self.request),
+                "titles": [],
+            },
+            "modified": {
+                "count": 0,
+                "label": translate(_("Modified"), context=self.request),
+                "titles": [],
+            },
+            "removed": {
+                "count": 0,
+                "label": translate(_("Removed"), context=self.request),
+                "titles": [],
+            },
         }
         local_annexes_by_plonemeeting_uid = {
             annexe.plonemeeting_uid: annexe for annexe in local_annexes
@@ -341,19 +344,17 @@ class PreSyncReportForm(Form):
                 annexes_status["added"]["count"] += 1
                 annexes_status["added"]["titles"].append(api_annexe["title"])
             else:
-                local_annexe = local_annexes_by_plonemeeting_uid[
-                    api_annexe["UID"]]
+                local_annexe = local_annexes_by_plonemeeting_uid[api_annexe["UID"]]
                 api_annexe_last_modified = _json_date_to_datetime(
-                    api_annexe["modified"])
+                    api_annexe["modified"]
+                )
 
                 if api_annexe_last_modified == local_annexe.plonemeeting_last_modified:
                     annexes_status["unchanged"]["count"] += 1
-                    annexes_status["unchanged"]["titles"].append(
-                        api_annexe["title"])
+                    annexes_status["unchanged"]["titles"].append(api_annexe["title"])
                 else:
                     annexes_status["modified"]["count"] += 1
-                    annexes_status["modified"]["titles"].append(
-                        api_annexe["title"])
+                    annexes_status["modified"]["titles"].append(api_annexe["title"])
                 local_annexes_by_plonemeeting_uid.pop(api_annexe["UID"])
 
         for local_annexe in local_annexes_by_plonemeeting_uid.values():
@@ -389,31 +390,32 @@ class PreImportReportForm(Form):
     same ItemsReportContentProvider.
     """
 
-    label = _(u"Meeting pre import form")
-    description = _(u"Choose items you want to import in the portal.")
+    label = _("Meeting pre import form")
+    description = _("Choose the items you want to import in the portal.")
 
     ignoreContext = True
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0
 
-    def __call__(self):
+    def __call__(self):  # pragma: no cover
         self.external_meeting_uid = self.request.form["external_meeting_uid"]
         self.is_syncing = False
         self.institution = self.context
         self.meeting_title = _call_delib_rest_api(
-            get_api_url_for_meetings(self.institution,
-                                     self.external_meeting_uid),
+            get_api_url_for_meetings(self.institution, self.external_meeting_uid),
             self.institution,
         ).json()["items"][0]["title"]
         # Avoid unnecessary request when submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
-            self.api_response_data = _fetch_preview_items(self.context,
-                                                          self.external_meeting_uid)
+            self.api_response_data = _fetch_preview_items(
+                self.context, self.external_meeting_uid
+            )
+
         return super(PreImportReportForm, self).__call__()
 
-    @button.buttonAndHandler(_(u"Import"))
-    def handle_import(self, action):
+    @button.buttonAndHandler(_("Import"))
+    def handle_import(self, actin):
         form = self.request.form
         checked_item_uids = []
         for inputs in form.keys():
@@ -426,10 +428,9 @@ class PreImportReportForm(Form):
             item_external_uids=checked_item_uids,
         )
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
-        redirect(self.request,
-                 self.context.absolute_url() + "/@@import_meeting")
+        redirect(self.request, self.context.absolute_url() + "/@@import_meeting")
 
     def updateActions(self):
         super().updateActions()
@@ -437,14 +438,15 @@ class PreImportReportForm(Form):
         self.actions["cancel"].addClass("standalone")
 
 
-def _fetch_preview_items(context, meeting_external_uid): # pragma: no cover
+def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
     """
     Fetch the preview from api. We use a specific utils
     `get_api_url_for_presync_meeting_items` to have the
     minimum data possible.
     """
-    url = get_api_url_for_presync_meeting_items(context,
-                                                meeting_external_uid=meeting_external_uid)
+    url = get_api_url_for_presync_meeting_items(
+        context, meeting_external_uid=meeting_external_uid
+    )
     response = _call_delib_rest_api(url, context)
     return json.loads(response.text)
 
@@ -460,20 +462,16 @@ def _sync_meeting(
         )
         if new_meeting_uid:
             brains = api.content.find(
-                context=institution,
-                object_provides=IMeetingsFolder.__identifier__
+                context=institution, object_provides=IMeetingsFolder.__identifier__
             )
 
             if brains:
                 request.response.redirect(
                     "{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid)
                 )
-                api.portal.show_message(message=status, request=request,
-                                        type="info")
+                api.portal.show_message(message=status, request=request, type="info")
         else:
-            api.portal.show_message(message=status, request=request,
-                                    type="error")
+            api.portal.show_message(message=status, request=request, type="error")
         logger.info(end_time(start_time, "SYNC PROCESSED IN "))
     except ValueError as error:
-        api.portal.show_message(message=error.args[0], request=request,
-                                type="error")
+        api.portal.show_message(message=error.args[0], request=request, type="error")

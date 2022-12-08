@@ -9,6 +9,7 @@
   th {
     background-color: $grey-100;
     color: $grey-900;
+    white-space: nowrap;
   }
 
 
@@ -26,9 +27,27 @@
     margin-right: 15px;
   }
 
-  .checkbox-cell, .checkbox-header {
+  .checkbox-cell, .item-number-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .item-number-cell {
+    font-weight: bolder;
+    color: $grey-900;
+  }
+
+  .checkbox-header {
     text-align: center;
     vertical-align: bottom;
+  }
+
+  td {
+    vertical-align: middle !important;
+  }
+
+  td.pat-moment {
+    word-break: break-all;
   }
 }
 
