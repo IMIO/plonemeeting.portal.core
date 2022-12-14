@@ -17,7 +17,7 @@ runs:
         python-version: ${{ inputs.py-version }}
     - name: Install dependencies
       run: |
-        pip install -U pip setuptools coveralls coverage mockito
+        pip install -U pip setuptools coveralls coverage mockito pre-commit
         pip install -r https://dist.plone.org/release/${{ inputs.plone-version }}-latest/requirements.txt
       shell: bash
     - name: buildout
