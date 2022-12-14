@@ -29,6 +29,7 @@ jobs:
         uses: IMIO/plonemeeting.portal.core/actions/buildout/@plone6_ci
         with:
           py-version: ${{ matrix.python-version }}
+          plone-version: ${{ matrix.plone-version }}
       - name: Coverage action
         uses: IMIO/plonemeeting.portal.core/actions/coverage/@plone6_ci
         with:
