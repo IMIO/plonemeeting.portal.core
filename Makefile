@@ -31,7 +31,7 @@ buildout:  ## Runs bootstrap if needed and builds the buildout and update versio
 	bin/pre-commit install
 	bin/pre-commit autoupdate
 	echo "[versions]" > versions.cfg
-	time bin/python bin/buildout -c test_plone$(plone).cfg
+	bin/python bin/buildout -c test_plone$(plone).cfg
 	echo "Finished on $(shell date)"
 
 .PHONY: run
