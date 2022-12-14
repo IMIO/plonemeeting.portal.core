@@ -62,7 +62,7 @@ jobs:
         with:
           py-version: ${{ matrix.python-version }}
       - name: Coverage action
-        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@${{ github.ref_name }}
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cobertura
