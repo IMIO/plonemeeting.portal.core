@@ -22,7 +22,7 @@ jobs:
             plone-version: 60
           - python-version: 3.9
             plone-version: 60
-          - python-version: 3.10
+          - python-version: "3.10"
             plone-version: 60
           - python-version: 3.11
             plone-version: 60

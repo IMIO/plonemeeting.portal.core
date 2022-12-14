@@ -17,9 +17,8 @@ runs:
         python-version: ${{ inputs.py-version }}
     - name: Install dependencies
       run: |
-        pip install -U pip setuptools coveralls coverage
-        pip install -r requirements.txt -c constraints_plone${{ inputs.plone-version }}.txt
-        pre-commit install
+        pip install -U pip setuptools coveralls coverage mockito
+        pip install -r constraints_plone${{ inputs.plone-version }}.txt
       shell: bash
     - name: buildout
       run: |
