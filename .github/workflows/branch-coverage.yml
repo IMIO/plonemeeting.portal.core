@@ -26,10 +26,10 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/actions/buildout/@${{ env.GITHUB_REPOSITORY }}
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@plone6_ci
         with:
           py-version: ${{ matrix.python-version }}
       - name: Coverage action
-        uses: IMIO/plonemeeting.portal.core/actions/coverage/@${{ env.GITHUB_REPOSITORY }}
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@plone6_ci
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
