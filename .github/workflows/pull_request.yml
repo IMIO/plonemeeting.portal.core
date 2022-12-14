@@ -29,7 +29,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}-${{ hashFiles('setup.*') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}
     - name: Buildout action
-      uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
+      uses: IMIO/plonemeeting.portal.core/actions/buildout/@${{ github.ref_name }}
       with:
         py-version: ${{ matrix.python-version }}
         plone-version: ${{ matrix.plone-version }}
@@ -58,7 +58,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@${{ github.ref_name }}
         with:
           py-version: ${{ matrix.python-version }}
       - name: Coverage action
