@@ -12,7 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8 ]
+        python-version: [3.8]
+        plone-version: [52]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
