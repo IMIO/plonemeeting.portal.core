@@ -12,7 +12,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.8]
+        - python-version: 3.8
+          plone-version: 52
+        - python-version: 3.11
+          plone-version: 60
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -22,12 +25,13 @@ jobs:
         cache-name: cache-eggs
       with:
         path: ./buildout-cache/eggs
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ hashFiles('setup.*') }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}-${{ hashFiles('setup.*') }}
+        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}
     - name: Buildout action
       uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
       with:
         py-version: ${{ matrix.python-version }}
+        plone-version: ${{ matrix.plone-version }}
     - name: code analysis
       run: |
         pre-commit run --all-files
