@@ -18,7 +18,7 @@ runs:
     - name: Install dependencies
       run: |
         pip install -U pip setuptools coveralls coverage mockito
-        pip install -r constraints_plone${{ inputs.plone-version }}.txt
+        pip install -r https://dist.plone.org/release/${{ inputs.plone-version }}-latest/requirements.txt
       shell: bash
     - name: buildout
       run: |
