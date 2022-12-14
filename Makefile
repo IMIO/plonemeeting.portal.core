@@ -31,7 +31,7 @@ buildout:  ## Runs bootstrap if needed and builds the buildout and update versio
 	bin/pre-commit install
 	bin/pre-commit autoupdate
 	echo "[versions]" > versions.cfg
-	time bin/python bin/buildout
+	time bin/python bin/buildout -c test_plone$(plone).cfg
 	echo "Finished on $(shell date)"
 
 .PHONY: run
@@ -41,7 +41,7 @@ run:  ## Runs buildout if needed and starts instance in foregroud
 
 .PHONY: cleanall
 cleanall:  ## Clears build artefacts and virtualenv
-	rm -fr bin include lib local share develop-eggs downloads eggs parts .installed.cfg .git/hooks/pre-commit
+	rm -fr bin include lib local share develop-eggs downloads eggs parts .installed.cfg .mr.developer.cfg pyvenv.cfg .git/hooks/pre-commit
 
 .PHONY: test
 test:
