@@ -5,7 +5,9 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Commented collective.pwexpiry because it is not maintained anymore and not compatible plone 6 (not even plone 5 actually).
+  See https://github.com/plone/Products.CMFPlone/issues/3370
+  [odelaere]
 
 
 1.6.1 (2022-12-08)
