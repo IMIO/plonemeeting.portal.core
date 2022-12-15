@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# TODO remove pwexpiry.See https://github.com/plone/Products.CMFPlone/issues/3370
 from collective.pwexpiry.interfaces import ICustomPasswordValidator
 from plonemeeting.portal.core import _
 from zope.interface import implementer

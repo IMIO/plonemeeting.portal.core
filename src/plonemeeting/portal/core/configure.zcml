@@ -60,14 +60,6 @@
       name="plonemeeting.portal.core-hiddenprofiles"
       />
 
-  <!-- Password policy -->
-  <adapter
-    name="plonemeeting_password_policy"
-    factory=".passwords.PloneMeetingPasswordValidator"
-    provides="collective.pwexpiry.interfaces.ICustomPasswordValidator"
-    for="zope.interface.Interface"
-    />
-
   <!-- Serializers -->
   <adapter factory=".serializers.InstitutionSerializerToJson" />
 

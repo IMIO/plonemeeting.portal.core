@@ -5,6 +5,9 @@ inputs:
     description: 'python version'
     required: true
     default: '3.8'
+  plone-version:
+    description: 'Plone version'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -14,11 +17,10 @@ runs:
         python-version: ${{ inputs.py-version }}
     - name: Install dependencies
       run: |
-        pip install -U pip setuptools coveralls coverage
-        pip install -r requirements.txt -c constraints_plone52.txt
-        pre-commit install
+        pip install -U pip setuptools coveralls coverage mockito pre-commit
+        pip install -r https://dist.plone.org/release/${{ inputs.plone-version }}-latest/requirements.txt
       shell: bash
     - name: buildout
       run: |
-        buildout -c test_plone52.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+        buildout -c test_plone${{ inputs.plone-version }}.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
       shell: bash

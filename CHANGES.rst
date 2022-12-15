@@ -5,7 +5,7 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Nothing yet
 
 
 1.6.1 (2022-12-08)

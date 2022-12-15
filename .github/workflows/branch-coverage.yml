@@ -12,7 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8 ]
+        python-version: [3.8]
+        plone-version: [5.2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,10 +26,11 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
       - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
+        uses: IMIO/plonemeeting.portal.core/actions/buildout/@plone6_ci
         with:
           py-version: ${{ matrix.python-version }}
+          plone-version: ${{ matrix.plone-version }}
       - name: Coverage action
-        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
+        uses: IMIO/plonemeeting.portal.core/actions/coverage/@plone6_ci
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
