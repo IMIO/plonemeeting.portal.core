@@ -5,8 +5,8 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing yet
-
+- Added "Province" and "Séance publique du Conseil Provincial" to institution type and meeting type.
+  [aduchene]
 
 1.6.1 (2022-12-08)
 ------------------

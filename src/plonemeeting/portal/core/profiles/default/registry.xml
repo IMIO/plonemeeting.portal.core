@@ -52,6 +52,7 @@
       <element key="ic" i18n:translate="">Intercommunale</element>
       <element key="rca" i18n:translate="">Régie Communale Autonome</element>
       <element key="cpas" i18n:translate="">Centre public d'action sociale</element>
+      <element key="prov" i18n:translate="">Province</element>
     </value>
   </record>
   <record name="plonemeeting.portal.core.meeting_types">
@@ -66,6 +67,7 @@
     </field>
     <value purge="false">
       <element key="council" i18n:translate="">Séance publique du Conseil</element>
+      <element key="prov-council" i18n:translate="">Séance publique du Conseil Provincial</element>
       <element key="zp-council" i18n:translate="">Séance publique du Conseil de Police</element>
       <element key="zs-council" i18n:translate="">Séance publique du Conseil de Zone</element>
     </value>

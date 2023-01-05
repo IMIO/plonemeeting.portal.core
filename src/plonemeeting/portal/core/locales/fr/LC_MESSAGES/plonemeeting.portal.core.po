@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-12-08 08:51+0000\n"
+"POT-Creation-Date: 2023-01-05 09:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,11 +22,11 @@ msgstr "(Ancien mandat) ${representative_value}"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/sync.py:264
+#: ../browser/sync.py:282
 msgid "Added"
 msgstr "Ajouté"
 
-#: ../content/item.py:54
+#: ../content/item.py:55
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
@@ -47,7 +47,7 @@ msgstr "Attention"
 msgid "Can manage institution"
 msgstr ""
 
-#: ../browser/sync.py:228
+#: ../browser/sync.py:241
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -60,7 +60,7 @@ msgid "Categories mappings - iA.Delib category mapped more than once : ${categor
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
 #: ../browser/templates/item.pt:34
-#: ../content/item.py:62
+#: ../content/item.py:63
 #: ../faceted/macros.pt:27
 msgid "Category"
 msgstr "Matière"
@@ -69,24 +69,24 @@ msgstr "Matière"
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:380
+#: ../browser/sync.py:401
 msgid "Choose the items you want to import in the portal."
 msgstr "Choisissez les points que vous souhaitez importer dans le portail."
 
-#: ../browser/sync.py:176
+#: ../browser/sync.py:183
 msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
 msgstr "Choisissez les points que vous souhaitez synchroniser (mettre à jour). Il est également possible d'enlever des points du portail en utilisant le bouton 'Enlever'."
 
-#: ../browser/sync.py:57
+#: ../browser/sync.py:56
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la séance que vous souhaitez importer dans le portail."
 
-#: ../setuphandlers.py:55
+#: ../setuphandlers.py:54
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
 #: ../browser/templates/item.pt:79
-#: ../content/item.py:67
+#: ../content/item.py:68
 #: ../content/meeting.py:28
 msgid "Custom info"
 msgstr "Informations complémentaires"
@@ -95,7 +95,7 @@ msgstr "Informations complémentaires"
 msgid "Custom page for GDPR text"
 msgstr "Url de redirection pour les portions de texte anonymisées"
 
-#: ../content/item.py:58
+#: ../content/item.py:59
 msgid "Decision"
 msgstr "Décision"
 
@@ -113,7 +113,7 @@ msgstr "Editer"
 msgid "Edit meeting"
 msgstr "Modifier la séance"
 
-#: ../setuphandlers.py:63
+#: ../setuphandlers.py:62
 msgid "Faceted"
 msgstr "Facettes"
 
@@ -129,7 +129,6 @@ msgstr "Couleur du pied de page"
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
 
-#: ../faceted/preview_meeting.pt:61
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
 msgstr "Réimporter toute cette séance (plus lent)"
@@ -166,11 +165,11 @@ msgstr "Couleur de l'en-tête"
 msgid "Hide meeting infos"
 msgstr "Cacher les informations de la séance"
 
-#: ../browser/sync.py:402
+#: ../browser/sync.py:424
 msgid "Import"
 msgstr "Importer"
 
-#: ../faceted/preview_meeting.pt:70
+#: ../faceted/preview_meeting.pt:61
 msgid "Import a new meeting"
 msgstr "Importer une nouvelle séance"
 
@@ -227,7 +226,7 @@ msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des points"
 
 #: ../browser/templates/item.pt:31
-#: ../content/item.py:25
+#: ../content/item.py:26
 #: ../faceted/macros.pt:24
 msgid "Item number"
 msgstr "Numéro du point"
@@ -241,7 +240,7 @@ msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
 #: ../browser/templates/item.pt:66
-#: ../content/item.py:70
+#: ../content/item.py:71
 #: ../content/meeting.py:31
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
@@ -262,7 +261,7 @@ msgstr "Logo"
 msgid "Mapping"
 msgstr "Correspondances"
 
-#: ../browser/sync.py:41
+#: ../browser/sync.py:40
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr "Séance"
@@ -275,15 +274,15 @@ msgstr "Type de séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
-#: ../browser/sync.py:56
+#: ../browser/sync.py:55
 msgid "Meeting import form"
 msgstr "Importation de séance"
 
-#: ../browser/sync.py:379
+#: ../browser/sync.py:400
 msgid "Meeting pre import form"
 msgstr "Rapport d'importation"
 
-#: ../browser/sync.py:175
+#: ../browser/sync.py:182
 msgid "Meeting pre sync form"
 msgstr "Rapport de synchronisation"
 
@@ -307,7 +306,7 @@ msgstr "Types de séance"
 msgid "Meetings"
 msgstr "Séances"
 
-#: ../browser/sync.py:256
+#: ../browser/sync.py:274
 msgid "Modified"
 msgstr "Modifié"
 
@@ -327,7 +326,7 @@ msgstr "Couleur du texte de la barre de navigation"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../browser/sync.py:151
+#: ../browser/sync.py:157
 msgid "No data available in table"
 msgstr "Aucun élément"
 
@@ -355,6 +354,10 @@ msgstr "URL iA.Délib"
 msgid "Project decision disclaimer"
 msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 
+#: ../profiles/default/registry.xml
+msgid "Province"
+msgstr ""
+
 #: ../content/institution.py:173
 msgid "Published Items content query"
 msgstr "Paramètres pour obtenir les champs des Points à importer"
@@ -367,11 +370,11 @@ msgstr "Paramètres pour obtenir la liste des Points à importer"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/sync.py:210
+#: ../browser/sync.py:221
 msgid "Remove"
 msgstr "Enlever"
 
-#: ../browser/sync.py:281
+#: ../browser/sync.py:299
 msgid "Removed"
 msgstr "Enlevé"
 
@@ -380,7 +383,7 @@ msgstr "Enlevé"
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:39
+#: ../content/item.py:40
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -408,7 +411,7 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:59
+#: ../browser/sync.py:58
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -416,11 +419,11 @@ msgstr "Sélectionner"
 msgid "Show meeting infos"
 msgstr "Montrer les informations de la séance"
 
-#: ../browser/sync.py:154
+#: ../browser/sync.py:160
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 
-#: ../content/item.py:28
+#: ../content/item.py:29
 msgid "Sortable Item number"
 msgstr "Numéro triable du point"
 
@@ -432,13 +435,17 @@ msgstr "Statut"
 msgid "Styling"
 msgstr "Styles"
 
-#: ../browser/sync.py:199
+#: ../browser/sync.py:210
 msgid "Sync"
 msgstr "Synchroniser"
 
 #: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil"
 msgstr "Séance publique du Conseil"
+
+#: ../profiles/default/registry.xml
+msgid "Séance publique du Conseil Provincial"
+msgstr "Séance publique du Conseil Provincial"
 
 #: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil de Police"
@@ -456,20 +463,20 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "Title"
 msgstr "Titre"
 
-#: ../content/item.py:32
+#: ../content/item.py:33
 #: ../content/meeting.py:22
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../browser/sync.py:253
+#: ../browser/sync.py:271
 msgid "Unchanged"
 msgstr "Inchangé"
 
-#: ../sync_utils.py:327
+#: ../sync_utils.py:325
 msgid "Unexpected meeting count in web service response !"
 msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 
-#: ../sync_utils.py:99
+#: ../sync_utils.py:97
 msgid "Unexpected publishable annex value in web service response !"
 msgstr "Une annexe non publiable a été trouvée dans la réponse du web service !"
 
@@ -508,7 +515,7 @@ msgstr "Voir la séance"
 msgid "Ville/Commune"
 msgstr "Ville/Commune"
 
-#: ../sync_utils.py:37
+#: ../sync_utils.py:35
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
@@ -529,11 +536,11 @@ msgstr "Zone de Police"
 msgid "Zone de Secours"
 msgstr "Zone de Secours"
 
-#: ../browser/sync.py:158
+#: ../browser/sync.py:165
 msgid "activate to sort column ascending"
 msgstr "activer pour trier la colonne par ordre croissant"
 
-#: ../browser/sync.py:161
+#: ../browser/sync.py:168
 msgid "activate to sort column descending"
 msgstr "activer pour trier la colonne par ordre décroissant"
 
@@ -541,15 +548,15 @@ msgstr "activer pour trier la colonne par ordre décroissant"
 msgid "categories_mappings_description"
 msgstr "Les points pour lesquels aucune correspondance de matière ne sera trouvée seront ignorés."
 
-#: ../config.py:22
+#: ../config.py:23
 msgid "category"
 msgstr "Catégorie"
 
-#: ../config.py:23
+#: ../config.py:24
 msgid "classifier"
 msgstr "Classificateur"
 
-#: ../config.py:18
+#: ../config.py:19
 msgid "decision"
 msgstr "Décision"
 
@@ -561,7 +568,7 @@ msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document
 msgid "iA.Delib field to use for category mapping"
 msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 
-#: ../config.py:18
+#: ../config.py:19
 msgid "in_project"
 msgstr "Projet de décision"
 
@@ -586,7 +593,7 @@ msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:338
+#: ../sync_utils.py:336
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
@@ -602,7 +609,7 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../config.py:18
+#: ../config.py:19
 msgid "private"
 msgstr "Privé"
 
