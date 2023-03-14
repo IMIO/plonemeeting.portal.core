@@ -16,13 +16,14 @@
         b_start python:request.get('b_start', 0);
         batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
         isAnon context/@@plone_portal_state/anonymous;
-        checkPermission nocall: context/portal_membership/checkPermission">
+        checkPermission nocall: context/portal_membership/checkPermission;
+        utils_view nocall:context/@@utils_view
+        ">
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
 
         <div class="pm-preview-meeting">
-          <tal:meeting define="utils_view nocall:context/@@utils_view;
-                               meeting python: utils_view.get_linked_meeting();"
+          <tal:meeting define="meeting python: utils_view.get_linked_meeting();"
                        condition="nocall:meeting">
             <div class=""
                  tal:define="meeting_utils_view nocall:meeting/@@utils_view;
@@ -59,13 +60,13 @@
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
 
                     <a href=""
-                       tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+                       tal:define="url string:${meeting/absolute_url}/@@force_reimport_meeting"
                        tal:condition="python: checkPermission('Modify portal content', meeting)"
                        tal:attributes="href python: utils_view.protect_url(url)"
-                       title="Import a new meeting"
+                       title="Force reimport this meeting"
                        i18n:attributes="title"
-                    ><img src=""
-                       tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/reload-alert.svg"></a>
+                     ><img src=""
+                           tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/reload-alert.svg"></a>
 
                     <a href=""
                        tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
@@ -75,13 +76,6 @@
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
-
-                    <x-window-button>
-
-
-
-
-                    </x-window-button>
 
                   </div>
                 </tal:if>
@@ -138,17 +132,27 @@
             </tal:entries>
 
           </span>
-
-          <span tal:condition="not: batch/sequence_length"
-                class="table_faceted_no_results"
-                i18n:domain="plone"
-                i18n:translate="description_no_results_found">No results were found.</span>
+          <div class="faceted-no-results"
+               tal:condition="not: batch/sequence_length"
+          >
+            <span
+              class="table_faceted_no_results"
+              i18n:domain="plone"
+              i18n:translate="description_no_results_found">No results were found.</span>
+            <a href=""
+               class="standalone"
+               tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+               tal:condition='not: isAnon'
+               tal:attributes="href python: utils_view.protect_url(url)"
+               title="Import a new meeting"
+               i18n:attributes="title"
+            >Importer une séance
+              <img src=""
+               tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline-muted.svg"></a>
+          </div>
         </div>
-
         <div metal:use-macro="context/batch_macros/macros/navigation" />
-
       </div>
-
     </metal:block>
   </metal:content-core>
 </body>

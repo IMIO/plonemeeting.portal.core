@@ -184,3 +184,10 @@ div#annexes_widget {
         height: 20px;
     }
 }
+
+.faceted-no-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
