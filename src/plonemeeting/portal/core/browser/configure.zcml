@@ -110,6 +110,15 @@
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".colors.ColorsCSSView"
     permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    />
+
+  <browser:page
+    for="*"
+    name="contact-info"
+    class=".contact_info.CaptchaContactForm"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
     />
 
   <!-- Institution add / edit form -->

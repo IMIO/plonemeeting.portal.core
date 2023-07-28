@@ -13,6 +13,7 @@
   <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
   <include package="eea.facetednavigation" />
+  <include package="plone.formwidget.hcaptcha" />
 
   <include file="permissions.zcml" />
 

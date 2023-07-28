@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-05 09:00+0000\n"
+"POT-Creation-Date: 2023-07-28 09:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,7 +356,7 @@ msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 
 #: ../profiles/default/registry.xml
 msgid "Province"
-msgstr ""
+msgstr "Province"
 
 #: ../content/institution.py:173
 msgid "Published Items content query"
@@ -455,6 +455,10 @@ msgstr "Séance publique du Conseil de Police"
 msgid "Séance publique du Conseil de Zone"
 msgstr "Séance publique du Conseil de Zone"
 
+#: ../browser/contact_info.py:56
+msgid "The CAPTCHA validation was unsuccessful. Please retry by carefully following the instructions."
+msgstr "La validation CAPTCHA a échoué. Veuillez réessayer en suivant attentivement les instructions fournies."
+
 #: ../content/institution.py:194
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
@@ -500,6 +504,10 @@ msgstr "Nom d'utilisateur"
 #: ../content/institution.py:83
 msgid "Value"
 msgstr "Valeur"
+
+#: ../browser/contact_info.py:41
+msgid "Verification"
+msgstr "Vérification"
 
 #: ../profiles/default/types/Institution.xml
 #: ../profiles/default/types/Item.xml
@@ -587,6 +595,11 @@ msgstr "Paramètres URL servant à obtenir le contenu des points à importer"
 #: ../content/institution.py:164
 msgid "item_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des points à importer."
+
+#. Default: "Send"
+#: ../browser/contact_info.py:47
+msgid "label_send"
+msgstr "Envoyer"
 
 #: ../content/institution.py:153
 msgid "meeting_filter_query_description"

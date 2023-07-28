@@ -7,6 +7,8 @@ Changelog
 
 - Added "Province" and "Séance publique du Conseil Provincial" to institution type and meeting type.
   [aduchene]
+- Added hcaptcha to contact-info form
+  [aduchene]
 
 1.6.1 (2022-12-08)
 ------------------
