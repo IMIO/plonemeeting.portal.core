@@ -12,8 +12,6 @@ long_description = "\n\n".join(
         open("CHANGES.rst").read(),
     ]
 )
-
-
 setup(
     name="plonemeeting.portal.core",
     version="1.6.2.dev0",
@@ -58,11 +56,12 @@ setup(
         "eea.facetednavigation",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
+        "plone.formwidget.hcaptcha>=1.0.2",
         "plone.restapi",
         "requests",
         "z3c.jbot",
         "imio.helpers>=0.65",
-        "imio.migrator>=1.27",
+        "imio.migrator>=1.27"
     ],
     extras_require={
         "test": [
