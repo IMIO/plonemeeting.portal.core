@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-05 09:00+0000\n"
+"POT-Creation-Date: 2023-05-26 12:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,14 @@ msgstr ""
 msgid "Additional data"
 msgstr ""
 
+#: ../content/institution.py:331
+msgid "Analytics"
+msgstr ""
+
+#: ../content/institution.py:337
+msgid "Analytics snippet"
+msgstr ""
+
 #: ../browser/templates/item.pt:92
 msgid "Annexes"
 msgstr ""
@@ -58,7 +66,7 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:349
+#: ../content/institution.py:363
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -359,7 +367,7 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Province"
-msgstr "Province"
+msgstr ""
 
 #: ../content/institution.py:173
 msgid "Published Items content query"
@@ -406,7 +414,7 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:369
+#: ../content/institution.py:383
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
@@ -458,6 +466,10 @@ msgstr ""
 msgid "Séance publique du Conseil de Zone"
 msgstr ""
 
+#: ../content/institution.py:338
+msgid "The code snippet for your analytics needs"
+msgstr ""
+
 #: ../content/institution.py:194
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
@@ -487,7 +499,7 @@ msgstr ""
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:398
+#: ../content/institution.py:412
 msgid "Unknown value: ${key}"
 msgstr ""
 
@@ -523,7 +535,7 @@ msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:81
-#: ../content/institution.py:420
+#: ../content/institution.py:434
 msgid "Webservice connection error !"
 msgstr ""
 

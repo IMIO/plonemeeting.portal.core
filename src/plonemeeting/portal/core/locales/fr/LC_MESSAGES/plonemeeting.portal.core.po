@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-05 09:00+0000\n"
+"POT-Creation-Date: 2023-05-26 12:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,14 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
+#: ../content/institution.py:331
+msgid "Analytics"
+msgstr "Statistiques"
+
+#: ../content/institution.py:337
+msgid "Analytics snippet"
+msgstr "JavaScript pour le support des statistiques web"
+
 #: ../browser/templates/item.pt:92
 msgid "Annexes"
 msgstr "Annexes"
@@ -55,7 +63,7 @@ msgstr "Annuler"
 msgid "Categories mappings"
 msgstr "Correspondances des matières"
 
-#: ../content/institution.py:349
+#: ../content/institution.py:363
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
@@ -403,7 +411,7 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Correspondances des mandataires"
 
-#: ../content/institution.py:369
+#: ../content/institution.py:383
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
@@ -455,6 +463,10 @@ msgstr "Séance publique du Conseil de Police"
 msgid "Séance publique du Conseil de Zone"
 msgstr "Séance publique du Conseil de Zone"
 
+#: ../content/institution.py:338
+msgid "The code snippet for your analytics needs"
+msgstr "Active le support de statistiques web venant de fournisseurs externes (par exemple Google Analytics). Collez le bout de code prévu ici. Il sera rendu comme entré près de la fin de la page."
+
 #: ../content/institution.py:194
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
@@ -484,7 +496,7 @@ msgstr "Une annexe non publiable a été trouvée dans la réponse du web servic
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
-#: ../content/institution.py:398
+#: ../content/institution.py:412
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
@@ -520,7 +532,7 @@ msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:81
-#: ../content/institution.py:420
+#: ../content/institution.py:434
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 

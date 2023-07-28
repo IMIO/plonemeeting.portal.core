@@ -325,6 +325,20 @@ class IInstitution(model.Schema):
         constraint=validate_color_parameters,
     )
 
+    # Analytics fieldset
+    model.fieldset(
+        "analytics",
+        label=_(u"Analytics"),
+        fields=[
+            "webstats_js",
+        ],
+    )
+    webstats_js = schema.Text(
+        title=_(u"Analytics snippet"),
+        description=_(u"The code snippet for your analytics needs"),
+        required=False
+    )
+
     @invariant
     def institution_invariant(data):
         categories_mappings_invariant(data)
