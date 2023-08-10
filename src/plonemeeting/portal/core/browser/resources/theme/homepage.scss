@@ -131,3 +131,13 @@ a.btn-white {
   }
 }
 
+.userrole-anonymous .institution-select .institution-select-option .badge {
+  display: none;
+}
+
+.institution-select .institution-select-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

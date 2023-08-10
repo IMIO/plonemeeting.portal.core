@@ -83,9 +83,6 @@ img {
     margin: 1.25em 0;
 }
 
-.meeting-state--top {
-    font-weight: 400;
-}
 
 .meeting-metadata {
     margin: 10px 0;
@@ -132,9 +129,6 @@ img {
     }
 }
 
-.meeting-state {
-    font-size: 20px;
-}
 
 // Item
 
@@ -178,13 +172,13 @@ img {
 }
 
 .meeting-title-link {
-    background: #007bb1;
-    border-radius: 25px;
+    background: transparent;
+    border-radius: $rounded-full;
     padding: 11px 21px;
     display: inline-block;
     font-size: 16px;
     border: solid 1px #007bb1;
-    transition: all .15s ease;
+    transition: all .15s ease-in-out;
     min-width: 200px;
     text-align: center;
     max-width: 320px;
@@ -195,21 +189,6 @@ img {
     font-size: 20px;
     margin-bottom: 10px;
     font-weight: 500;
-}
-
-#content .state-in_project:hover,
-.state-in_project {
-    color: #ff7a05 !important;
-}
-
-#content .state-decision:hover,
-.state-decision {
-    color: #469721 !important;
-}
-
-#content .state-private:hover,
-.state-private {
-    color: #c21b1b !important;
 }
 
 #seance_widget fieldset {

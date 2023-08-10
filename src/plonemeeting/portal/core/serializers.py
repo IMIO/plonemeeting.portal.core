@@ -1,3 +1,5 @@
+import zope.i18n
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IFieldSerializer
@@ -26,10 +28,15 @@ class InstitutionSerializerToJson:
         :param fieldnames: fieldnames to be serialized and included
         """
         obj = self.context
+        state_id = api.content.get_state(obj)
         result = {
             "@id": obj.absolute_url(),
             "id": obj.id,
             "UID": obj.UID(),
+            "review_state":  {
+                "token":  state_id,
+                "title": zope.i18n.translate(state_id, context=self.request, domain="plone")
+            }
         }
 
         for schema in iterSchemata(self.context):

@@ -42,6 +42,7 @@ const InstitutionsSelect = (props) => {
             groupedOptions[_.findIndex(groupedOptions, { label: type.title })].options.push({
                 value: key,
                 label: institution.title,
+                review_state: institution.review_state,
                 type: type.token,
             });
         });

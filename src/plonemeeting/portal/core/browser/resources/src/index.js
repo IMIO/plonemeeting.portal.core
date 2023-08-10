@@ -6,6 +6,7 @@ import AnnexesStatus from "./components/AnnexesStatus";
 import InstitutionsSelect from "./components/InstitutionsSelect";
 import InstitutionsMap from "./components/InstitutionsMap";
 import MasonryColumns from "./components/MasonryColumns";
+import { StateBadge } from "./components/Badge";
 
 import "../theme/main.scss";
 
@@ -14,6 +15,7 @@ register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
+register(StateBadge, "x-state-badge", ["state", "toast"]);
 
 function setUpEnvironmentLabel() {
     let hostname = document.location.hostname;
@@ -40,3 +42,5 @@ jquery(document).ready(function ($) {
 if (module.hot) {
     module.hot.accept();
 }
+
+import "preact/debug";

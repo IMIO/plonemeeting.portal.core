@@ -1,0 +1,50 @@
+.badge {
+  font-weight: bold;
+  vertical-align: baseline;
+  text-align: center;
+  border-radius: $rounded;
+  display: inline-block;
+  padding: 2px 8px;
+  box-shadow: $shadow-md;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+
+  color: $white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+
+  &.badge-xl {
+    width: 100%;
+    font-size: 1.7rem;
+    border-radius: $rounded-md;
+    padding: 4px 24px;
+  }
+
+  &.badge-md {
+    width: 100%;
+    font-size: 1.3rem;
+    border-radius: $rounded-md;
+    padding: 4px 24px;
+  }
+
+  &.grey {
+    background-color: $grey-500;
+  }
+
+  &.green, &.badge-decision {
+    background-color: $green;
+  }
+
+  &.red, &.badge-private {
+    color: $white;
+    background-color: $red;
+  }
+
+  &.orange, &.badge-in_project {
+    background-color: $orange;
+  }
+}
+

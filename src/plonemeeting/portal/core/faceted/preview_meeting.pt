@@ -75,27 +75,19 @@
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
-
-                    <x-window-button>
-
-
-
-
-                    </x-window-button>
-
                   </div>
                 </tal:if>
                 <div class="meeting-state meeting-state--top"
                      i18n:domain="plone">
-                    <span tal:condition="python: review_state == 'private'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">Private</span>
-                    <span tal:condition="python: review_state == 'in_project'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">In project</span>
-                    <span tal:condition="python: review_state == 'decision'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">Decision</span>
+                    <span class="badge badge-xl red"
+                          tal:condition="python: review_state == 'private'"
+                          i18n:translate="">Private</span>
+                    <span class="badge badge-xl orange"
+                          tal:condition="python: review_state == 'in_project'"
+                          i18n:translate="">In project</span>
+                    <span class="badge badge-xl green"
+                          tal:condition="python: review_state == 'decision'"
+                          i18n:translate="">Decision</span>
               </div>
               </div>
               <div class="meeting-last-pm-modified"

@@ -2,6 +2,8 @@ import { createContext } from "preact";
 import { useState, useContext, useMemo } from "preact/hooks";
 import loadable from "@loadable/component";
 import { components, createFilter } from "react-select";
+import Badge, { StateToColor } from "../Badge";
+
 const Select = loadable(() => import("react-select"));
 
 /**
@@ -57,6 +59,24 @@ const FilterMenu = (props) => {
             </fieldset>
             {props.children}
         </components.Menu>
+    );
+};
+
+/**
+ *
+ * @param props
+ * @constructor
+ */
+const StateOption = (props) => {
+    return (
+        <components.Option {...props} className={`institution-select-option`}>
+            <span>{props.data.label}</span>
+            <span style={{ display: "flex", width: "80px", justifyContent: "center" }}>
+                <Badge color={StateToColor[props.data.review_state.token]}>
+                    {props.data.review_state.title}
+                </Badge>
+            </span>
+        </components.Option>
     );
 };
 
@@ -121,7 +141,12 @@ const FilterSelect = ({ filters: filtersProp, ...props }) => {
 
     return (
         <FilterContext.Provider value={{ filters, toggleFilter }}>
-            <Select {...props} components={{ Menu: FilterMenu }} filterOption={filterOptions} />
+            <Select
+                {...props}
+                menuIsOpen={true}
+                components={{ Menu: FilterMenu, Option: StateOption }}
+                filterOption={filterOptions}
+            />
         </FilterContext.Provider>
     );
 };

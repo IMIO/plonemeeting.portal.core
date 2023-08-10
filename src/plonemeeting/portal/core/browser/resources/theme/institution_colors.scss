@@ -57,13 +57,13 @@
 
     // Content
     .meeting-title-link {
-        background-color: var(--links-color);
-        border: solid 1px var(--links-color) !important;
-        color: #fff;
+        //background-color: var(--links-color);
+        border: solid 2px var(--links-color) !important;
+        color: var(--links-color);
 
         &:hover, &:focus{
-        background: 0 0;
-        color: var(--links-color);
+        background-color: var(--links-color);
+        color: $white;
         text-decoration: none;
         }
     }
