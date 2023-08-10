@@ -1,4 +1,3 @@
-import zope.i18n
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.utils import iterSchemata
@@ -10,6 +9,8 @@ from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.schema import getFields
+
+import zope.i18n
 
 
 @implementer(IInstitutionSerializeToJson)
