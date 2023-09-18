@@ -9,6 +9,8 @@ Changelog
   [aduchene]
 - Added hcaptcha to contact-info form
   [aduchene]
+- Fixed wrong action link on meeting_preview.pt
+  [aduchene]
 
 1.6.1 (2022-12-08)
 ------------------
