@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.2 (unreleased)
+1.6.2 (2023-09-18)
 ------------------
 
 - Added "Province" and "Séance publique du Conseil Provincial" to institution type and meeting type.
