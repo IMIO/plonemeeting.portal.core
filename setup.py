@@ -49,11 +49,11 @@ setup(
         "setuptools",
         # -*- Extra requirements: -*-
         "collective.cookiecuttr>=1.0.2",
-        "collective.dexteritytextindexer",
+        # "collective.dexteritytextindexer",
         "collective.fingerpointing",
         "collective.pwexpiry",
         "collective.z3cform.datagridfield",
-        "eea.facetednavigation",
+        "eea.facetednavigation>=16.0a1",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.2",

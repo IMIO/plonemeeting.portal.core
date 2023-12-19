@@ -6,16 +6,16 @@
 
   <metal:macro define-macro="preview_meeting_item">
 
-    <div class="item-container"
+    <div class="item-container card py-5"
          tal:define="portal_url context/@@plone_portal_state/portal_url;
                      review_state brain/linkedMeetingReviewState;
                      meeting_utils_view nocall:brain/@@utils_view"
          i18n:domain="plonemeeting.portal.core">
 
-      <div class=""
-           tal:attributes="class string:item-preview ${review_state}">
-        <div class="item-main">
+      <div tal:attributes="class string:item-preview card-body row ${review_state}">
+        <div class="item-main col-lg-8">
           <a href=""
+             class="card-title"
              tal:attributes="href brain/getURL">
               <div class="item-title" tal:content="structure brain/formatted_title" />
           </a>
@@ -32,7 +32,7 @@
 
         </div>
 
-        <div class="item-metadata">
+        <div class="item-metadata col-lg-4">
           <div class="meeting-state"
                i18n:domain="plone">
               <span tal:condition="python: review_state == 'private'"
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="project-disclaimer"
+      <div class="project-disclaimer alert alert-warning" role="alert"
            tal:define="utils_view nocall:context/@@utils_view;"
            tal:condition="python: review_state != 'decision'">
           <span>

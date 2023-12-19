@@ -40,7 +40,7 @@
     <element value="plone.publication"/>
     <element value="plone.categorization"/>
     <element value="plone.locking" />
-    <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
+<!--    <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />-->
   </property>
 
   <!-- View information -->

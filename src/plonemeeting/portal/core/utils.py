@@ -279,7 +279,7 @@ def create_faceted_folder(container, title, id):
         type="Folder", title=title, container=container, id=id
     )
     subtyper = folder.restrictedTraverse("@@faceted_subtyper")
-    subtyper.enable()
+    # subtyper.enable()
     return folder
 
 

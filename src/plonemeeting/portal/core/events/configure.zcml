@@ -3,12 +3,12 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plonemeeting.portal.core">
 
-    <subscriber for="..content.institution.IInstitution
-                     zope.lifecycleevent.interfaces.IObjectAddedEvent"
-                     handler=".institution_events.update_custom_css" />
+<!--    <subscriber for="..content.institution.IInstitution-->
+<!--                     zope.lifecycleevent.interfaces.IObjectAddedEvent"-->
+<!--                     handler=".institution_events.update_custom_css" />-->
 
-    <subscriber for="..content.institution.IInstitution
-                      zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-                      handler=".institution_events.update_custom_css" />
+<!--    <subscriber for="..content.institution.IInstitution-->
+<!--                      zope.lifecycleevent.interfaces.IObjectModifiedEvent"-->
+<!--                      handler=".institution_events.update_custom_css" />-->
 
 </configure>

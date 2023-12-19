@@ -2,8 +2,8 @@
 #
 args = $(filter-out $@,$(MAKECMDGOALS))
 RESOURCES_PATH = src/plonemeeting/portal/core/browser/resources
-py = 3.8
-plone = 5.2
+py = 3.11
+plone = 6.0
 
 all: run
 

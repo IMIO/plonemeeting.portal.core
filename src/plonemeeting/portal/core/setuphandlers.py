@@ -63,12 +63,12 @@ def post_install(context):
         id=FACETED_FOLDER_ID,
     )
     subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
-    subtyper.enable()
+    # subtyper.enable()
     faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
-    with open(faceted_config_path, "rb") as faceted_config:
-        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-            import_file=faceted_config
-        )
+    # with open(faceted_config_path, "rb") as faceted_config:
+    #     faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+    #         import_file=faceted_config
+    #     )
 
 
 def uninstall(context):

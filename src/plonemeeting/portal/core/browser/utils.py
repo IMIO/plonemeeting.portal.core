@@ -10,11 +10,18 @@ from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import queryUtility
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 
 import os
 import plone
 
+
+class IUtilsView:
+    """"""
+    def is_institution(self):
+        """See IUtilsView"""
+        return True
 
 class UtilsView(BrowserView):
     """
