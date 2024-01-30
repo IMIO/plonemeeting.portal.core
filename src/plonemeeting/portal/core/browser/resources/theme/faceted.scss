@@ -24,9 +24,20 @@ body.template-facetednavigation_view textarea {
   background-color: #fff;
   background-image: none;
   border: none;
-  border-radius: 4px;
+  border-radius: $rounded-xl;
   box-shadow: none !important;
   border: solid 1px #dcdbdb;
+
+
+  &:focus {
+    outline: 2px solid var(--links-color);
+  }
+}
+
+
+body.template-facetednavigation_view input[type=text]:focus{
+  margin-right: -50px;
+  border-radius: $rounded-xl !important;
 }
 
 body.template-facetednavigation_view input:hover,
@@ -60,7 +71,8 @@ body.template-facetednavigation_view #top-area legend {
 }
 
 body.template-facetednavigation_view .searchButton:hover {
-  background-color: rgba(189, 189, 189, .438);
+  background-color: #F1F1F1;
+  transition: ease-in-out 0.2s;
 }
 
 body.template-facetednavigation_view #top---default---widgets legend {
@@ -115,7 +127,7 @@ body #faceted-form {
     }
 
     input[type=text] {
-      border-radius: 4px 0 0 4px;
+      border-radius: $rounded-xl 0 0 $rounded-xl;
       border-right: none;
     }
   }
@@ -128,7 +140,7 @@ html body .faceted-criteria-reset a:hover {
 }
 
 .faceted-widget-loading {
-  display: none;
+  visibility: hidden;
 }
 
 .faceted-area.center-area {
@@ -138,22 +150,20 @@ html body .faceted-criteria-reset a:hover {
 // Search widget
 
 #text_widget form {
-    display: flex;
-    input[type=text] {
-        min-width: 0; // important, without it FF doesn't size it correctly
-    }
+  display: flex;
+
+  input[type=text] {
+    min-width: 0; // important, without it FF doesn't size it correctly
+  }
 }
 
 body.template-facetednavigation_view .searchButton {
   z-index: 1;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
   background-image: url('../assets/magnify.svg');
   background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;
-
+  border-radius: 0 $rounded-xl $rounded-xl 0;
   color: transparent;
   text-shadow: none;
   font-size: 15px;
@@ -169,18 +179,73 @@ body.template-facetednavigation_view .searchButton {
 
 // Hide label of Has annexes? faceted filter and display a bigger checkbox
 div#annexes_widget {
-    legend {
-        color: #999999;
-    }
-    label {
-        display: none;
-    }
-    ul {
-        padding-top: 0.5em;
-        padding-left: 2em;
-    }
-    input {
-        width: 20px;
-        height: 20px;
-    }
+  legend {
+    color: #999999;
+  }
+
+  label {
+    display: none;
+  }
+
+  ul {
+    padding-top: 0.5em;
+    padding-left: 2em;
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+.no_results_actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.no_results_actions .button {
+  border: 2px solid $delib-lightgrey !important;
+  border-radius: $rounded-lg;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em 0.75em;
+  color: #b2b2b2;
+  font-weight: bold;
+
+  img {
+    margin: 0 0.25em;
+  }
+}
+
+.no_results_actions .button:hover {
+  background-color: $delib-lightgrey;
+  color: #b2b2b2;
+  text-decoration: none;
+}
+
+.no_results_actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.no_results_actions .button {
+  border: 2px solid $delib-lightgrey !important;
+  border-radius: $rounded-lg;
+  padding: 0.5em 0.75em;
+  color: #b2b2b2;
+  font-weight: bold;
+
+  img {
+    margin: 0 0.5em 0.25em 0.25em;
+  }
+
+  &:hover, &:focus {
+    background-color: $delib-lightgrey;
+    color: #4d4d4d;
+    text-decoration: none;
+  }
 }

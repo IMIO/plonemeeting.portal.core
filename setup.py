@@ -53,7 +53,7 @@ setup(
         "collective.fingerpointing",
         "collective.pwexpiry",
         "collective.z3cform.datagridfield",
-        "eea.facetednavigation",
+        "eea.facetednavigation<16.0",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.2",

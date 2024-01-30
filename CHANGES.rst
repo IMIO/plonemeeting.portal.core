@@ -5,17 +5,19 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix deselecting issue with the react-select `InstitutionSelect` component.
+  [aduchene]
+- Remove shortcut force resync meeting as it is not useful on `meeting_preview.pt`.
+  [aduchene]
 
 1.6.2 (2023-09-18)
 ------------------
 
 - Added "Province" and "Séance publique du Conseil Provincial" to institution type and meeting type.
   [aduchene]
-- Added hcaptcha to contact-info form
+- Added hcaptcha to contact-info form.
   [aduchene]
-- Fixed wrong action link on meeting_preview.pt
+- Fixed wrong action link on `meeting_preview.pt`.
   [aduchene]
 
 1.6.1 (2022-12-08)

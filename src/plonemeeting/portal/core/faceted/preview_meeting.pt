@@ -16,7 +16,8 @@
         b_start python:request.get('b_start', 0);
         batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
         isAnon context/@@plone_portal_state/anonymous;
-        checkPermission nocall: context/portal_membership/checkPermission">
+        checkPermission nocall: context/portal_membership/checkPermission;
+        utils_view nocall:context/@@utils_view">
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
 
@@ -66,14 +67,6 @@
                        i18n:attributes="title"
                      ><img src=""
                            tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
-
-                    <x-window-button>
-
-
-
-
-                    </x-window-button>
-
                   </div>
                 </tal:if>
                 <div class="meeting-state meeting-state--top"
@@ -134,6 +127,21 @@
                 class="table_faceted_no_results"
                 i18n:domain="plone"
                 i18n:translate="description_no_results_found">No results were found.</span>
+
+          <div
+            class="no_results_actions"
+            tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+            tal:condition="python: not batch.sequence_length and not isAnon">
+            <a
+               tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+               tal:condition="python: not batch.sequence_length and not isAnon"
+               tal:attributes="href python: utils_view.protect_url(url)"
+              title="Import a new meeting"
+              class="button import_new_meeting">
+              <img tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline-grey.svg" />
+              <span i18n:translate="">Import a new meeting</span>
+            </a>
+          </div>
         </div>
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
