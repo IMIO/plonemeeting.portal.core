@@ -14,7 +14,7 @@ jobs:
       continue-on-error: ${{ matrix.experimental }}
       matrix:
         python-version: [3.8]
-        plone-version: [5.2]
+        plone-version: [52]
         experimental: [false]
         include:
           - python-version: 3.11
