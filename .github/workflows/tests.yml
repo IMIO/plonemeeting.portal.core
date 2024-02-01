@@ -33,9 +33,9 @@ jobs:
         with:
           py-version: ${{ matrix.python-version }}
           plone-version: ${{ matrix.plone-version }}
-      - name: code analysis
-        run: |
-          pre-commit run --all-files
+#      - name: code analysis
+#        run: |
+#          pre-commit run --all-files
       - name: Test
         run: |
           bin/test

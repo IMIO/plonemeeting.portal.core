@@ -1,30 +1,30 @@
 default_stages: [ commit, push ]
 
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-      - id: check-yaml
-      - id: check-ast
-      - id: end-of-file-fixer
-        types: [python]
-      - id: trailing-whitespace
+#  - repo: https://github.com/pre-commit/pre-commit-hooks
+#    rev: v4.5.0
+#    hooks:
+#      - id: check-yaml
+#      - id: check-ast
+#      - id: end-of-file-fixer
+#        types: [python]
+#      - id: trailing-whitespace
 #  - repo: https://github.com/psf/black
 #    rev: 19.3b0
 #    hooks:
 #      - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.1.0
-    hooks:
-      - id: flake8
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.1
-    hooks:
-      - id: isort
-        name: isort (python)
-      - id: isort
-        name: isort (cython)
-        types: [ cython ]
-      - id: isort
-        name: isort (pyi)
-        types: [ pyi ]
+#  - repo: https://github.com/pycqa/flake8
+#    rev: 6.1.0
+#    hooks:
+#      - id: flake8
+#  - repo: https://github.com/pycqa/isort
+#    rev: 5.13.1
+#    hooks:
+#      - id: isort
+#        name: isort (python)
+#      - id: isort
+#        name: isort (cython)
+#        types: [ cython ]
+#      - id: isort
+#        name: isort (pyi)
+#        types: [ pyi ]

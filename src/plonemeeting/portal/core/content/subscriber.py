@@ -33,8 +33,9 @@ def handle_institution_creation(obj, event):
         id=APP_FOLDER_ID
     )
     alsoProvides(meetings, IMeetingsFolder)
-    IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
-    set_constrain_types(meetings, [])
+    # TODO
+    # IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
+    # set_constrain_types(meetings, [])
 
     request = getRequest()
     if request:  # Request can be `None` during test setup
