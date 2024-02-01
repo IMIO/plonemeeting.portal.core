@@ -9,9 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
-      continue-on-error: ${{ matrix.experimental }}
       matrix:
         python-version: ["3.11"]
         plone-version: ["6.0"]
