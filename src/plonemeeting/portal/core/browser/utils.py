@@ -16,13 +16,6 @@ import os
 import plone
 
 
-class IUtilsView:
-    """"""
-    def is_institution(self):
-        """See IUtilsView"""
-        return True
-
-
 class UtilsView(BrowserView):
     """
     """

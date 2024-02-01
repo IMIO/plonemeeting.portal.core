@@ -26,3 +26,6 @@ class IUtilsView(Interface):
     def is_institution(self):
         """See IUtilsView"""
         return True
+    def is_meeting(self):
+        """See IUtilsView"""
+        return True

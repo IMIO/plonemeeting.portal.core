@@ -9,14 +9,15 @@ from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-# from plonemeeting.portal.core.utils import create_faceted_folder
-# from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-# from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
+from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
@@ -56,20 +57,20 @@ def post_install(context):
     )
     config_folder.exclude_from_nav = True
 
+
     # TODO
     # Create global faceted folder
-    # faceted = create_faceted_folder(
-    #     config_folder,
-    #     translate(_(u"Faceted"), target_language=current_lang),
-    #     id=FACETED_FOLDER_ID,
-    # )
-    # subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
-    # subtyper.enable()
-    # faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
-    # with open(faceted_config_path, "rb") as faceted_config:
-    #     faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-    #         import_file=faceted_config
-    #     )
+    faceted = create_faceted_folder(
+        config_folder,
+        translate(_(u"Faceted"), target_language=current_lang),
+        id=FACETED_FOLDER_ID,
+    )
+
+    faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
+    with open(faceted_config_path, "rb") as faceted_config:
+        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+            import_file=faceted_config
+        )
 
 
 def uninstall(context):

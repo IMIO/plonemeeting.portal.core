@@ -69,6 +69,7 @@ def institution_state_changed(obj, event):
 
 def handle_institution_deletion(obj, event):
     # Configure manager group & local permissions
+    return
     group_id = format_institution_managers_group_id(obj)
     # Don't use api.group.delete(group_id) because it breaks when trying to delete the entire plone site
     obj.aq_parent.portal_groups.removeGroup(group_id)
