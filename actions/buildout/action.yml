@@ -18,9 +18,9 @@ runs:
     - name: Install dependencies
       run: |
         pip install -U pip setuptools coveralls coverage mockito pre-commit
-        pip install -r https://dist.plone.org/release/${{ inputs.plone-version }}-latest/requirements.txt
+        pip install -r requirements-${{ inputs.plone-version }}.txt
       shell: bash
     - name: buildout
       run: |
-        buildout -c test_plone${{ inputs.plone-version }}.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
+        buildout -c test-${{ inputs.plone-version }}.cfg buildout:download-cache=./buildout-cache/downloads buildout:eggs-directory=./buildout-cache/eggs
       shell: bash
