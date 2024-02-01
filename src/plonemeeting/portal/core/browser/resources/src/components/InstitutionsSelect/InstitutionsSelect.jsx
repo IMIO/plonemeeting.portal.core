@@ -61,8 +61,12 @@ const InstitutionsSelect = (props) => {
      * handle click of the institution.
      * Set selected state so <a> link can be used to navigate to the institution.
      */
-    const handleChange = (option) => {
-        setSelected(institutions[option.value]);
+    const handleChange = (option, changeType) => {
+        if (option) {
+            setSelected(institutions[option.value]);
+        } else {
+            setSelected({});
+        }
     };
 
     return (
@@ -78,6 +82,7 @@ const InstitutionsSelect = (props) => {
                         onChange={handleChange}
                         placeholder={"Sélectionner"}
                         noOptionsMessage={() => <span>Aucun résulat</span>}
+                        isClearable
                         autoBlur
                     />
                 )}

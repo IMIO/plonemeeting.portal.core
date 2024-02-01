@@ -2,12 +2,20 @@ Changelog
 =========
 
 
-1.6.2 (unreleased)
+1.6.3 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.6.2 (2023-09-18)
 ------------------
 
 - Added "Province" and "Séance publique du Conseil Provincial" to institution type and meeting type.
   [aduchene]
 - Added hcaptcha to contact-info form
+  [aduchene]
+- Fixed wrong action link on meeting_preview.pt
   [aduchene]
 
 1.6.1 (2022-12-08)
