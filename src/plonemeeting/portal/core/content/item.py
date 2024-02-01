@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # from collective import dexteritytextindexer
-from plone.app.dexterity.textindexer import directives
 from copy import deepcopy
 from imio.helpers.content import object_values
 from plone import api
+from plone.app.dexterity.textindexer import directives
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
