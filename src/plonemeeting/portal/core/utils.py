@@ -278,7 +278,8 @@ def create_faceted_folder(container, title, id):
     folder = api.content.create(
         type="Folder", title=title, container=container, id=id
     )
-    subtyper = folder.restrictedTraverse("@@faceted_subtyper")
+    # TODO
+    # subtyper = folder.restrictedTraverse("@@faceted_subtyper")
     # subtyper.enable()
     return folder
 
