@@ -61,7 +61,9 @@ setup(
         "requests",
         "z3c.jbot",
         "imio.helpers>=0.65",
-        "imio.migrator>=1.27"
+        "imio.migrator>=1.27",
+        "rich",
+        "shutup"
     ],
     extras_require={
         "test": [
@@ -71,7 +73,6 @@ setup(
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
-            "plone.app.robotframework[debug]",
             "mockito"
         ]
     },

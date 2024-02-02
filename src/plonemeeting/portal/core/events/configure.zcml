@@ -3,12 +3,32 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plonemeeting.portal.core">
 
-<!--    <subscriber for="..content.institution.IInstitution-->
-<!--                     zope.lifecycleevent.interfaces.IObjectAddedEvent"-->
-<!--                     handler=".institution_events.update_custom_css" />-->
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".institution.handle_institution_creation"
+        />
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".institution.handle_institution_modified"
+        />
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+          handler=".institution.institution_state_changed"
+        />
 
-<!--    <subscriber for="..content.institution.IInstitution-->
-<!--                      zope.lifecycleevent.interfaces.IObjectModifiedEvent"-->
-<!--                      handler=".institution_events.update_custom_css" />-->
+    <subscriber
+        for="plonemeeting.portal.core.content.institution.IInstitution
+             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+        handler=".institution.handle_institution_deletion"
+        />
+
+    <subscriber
+        for="plonemeeting.portal.core.content.meeting.IMeeting
+             Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+          handler=".institution.meeting_state_changed"
+        />
 
 </configure>

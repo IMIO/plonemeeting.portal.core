@@ -104,11 +104,6 @@
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
     <value key="last_compilation">2023-10-02 15:11:11.391Z</value>
   </records>
-  <records prefix="plone.resources/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IResourceRegistry">
-    <value key="css">
-      <element>@@custom_colors.css</element>
-    </value>
-  </records>
   <records prefix="plone.bundles/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">
       <element>plonemeeting.portal.core-custom</element>
@@ -116,6 +111,6 @@
     <value key="enabled">True</value>
     <value key="compile">True</value>
     <value key="last_compilation">2020-09-04 12:30:00</value>
-    <value key="csscompilation">++plone++static/plonemeeting.portal.core-custom-compiled.css</value>
+    <value key="csscompilation">/custom_colors.css</value>
   </records>
 </registry>

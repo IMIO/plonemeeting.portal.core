@@ -58,7 +58,6 @@ def post_install(context):
     config_folder.exclude_from_nav = True
 
 
-    # TODO
     # Create global faceted folder
     faceted = create_faceted_folder(
         config_folder,
