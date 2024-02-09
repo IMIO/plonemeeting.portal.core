@@ -70,6 +70,7 @@
       <element key="prov-council" i18n:translate="">Séance publique du Conseil Provincial</element>
       <element key="zp-council" i18n:translate="">Séance publique du Conseil de Police</element>
       <element key="zs-council" i18n:translate="">Séance publique du Conseil de Zone</element>
+      <element key="general-assembly" i18n:translate="">Assemblée générale</element>
     </value>
   </record>
   <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">

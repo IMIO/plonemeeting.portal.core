@@ -5,8 +5,8 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added `general-assembly` to the registry `meeting_types`.
+  [gbastien]
 
 1.6.2 (2023-09-18)
 ------------------
