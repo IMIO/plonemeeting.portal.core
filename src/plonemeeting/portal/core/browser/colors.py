@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from Products.Five.browser import BrowserView
+from zope.datetime import rfc1123_date
 
 
 class ColorsCSSView(BrowserView):
@@ -21,6 +22,8 @@ class ColorsCSSView(BrowserView):
 
     def __call__(self, *args, **kwargs):
         self.request.response.setHeader("Content-type", "text/css")
+        # self.request.response.setHeader("Last-Modified", rfc1123_date(float(scripts_timestamp)))
+        self.request.response.setHeader("Cache-Control", "max-age=31536000, public")
         return self.render()
 
     def render(self):

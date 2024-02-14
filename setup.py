@@ -49,11 +49,10 @@ setup(
         "setuptools",
         # -*- Extra requirements: -*-
         "collective.cookiecuttr>=1.0.2",
-        "collective.dexteritytextindexer",
+        # "collective.dexteritytextindexer",
         "collective.fingerpointing",
-        "collective.pwexpiry",
         "collective.z3cform.datagridfield",
-        "eea.facetednavigation",
+        "eea.facetednavigation>=16.0a1",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.2",
@@ -61,7 +60,9 @@ setup(
         "requests",
         "z3c.jbot",
         "imio.helpers>=0.65",
-        "imio.migrator>=1.27"
+        "imio.migrator>=1.27",
+        "rich",
+        "shutup"
     ],
     extras_require={
         "test": [
@@ -71,7 +72,6 @@ setup(
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
-            "plone.app.robotframework[debug]",
             "mockito"
         ]
     },

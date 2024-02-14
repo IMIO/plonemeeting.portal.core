@@ -19,3 +19,13 @@ class IItemsFolder(IFacetedNavigable):
 
 class IInstitutionSerializeToJson(Interface):
     """Adapter to serialize an Institution object into a JSON object."""
+
+
+class IUtilsView(Interface):
+    """"""
+    def is_institution(self):
+        """See IUtilsView"""
+        return True
+    def is_meeting(self):
+        """See IUtilsView"""
+        return True

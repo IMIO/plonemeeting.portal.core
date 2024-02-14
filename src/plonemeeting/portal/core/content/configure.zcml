@@ -16,35 +16,4 @@
     <adapter name="formatted_title" factory=".item.get_formatted_title_output" />
     <adapter name="icon" factory=".file.get_icon" />
 
-    <!-- Subscribers -->
-
-    <subscriber
-        for="plonemeeting.portal.core.content.institution.IInstitution
-             zope.lifecycleevent.interfaces.IObjectAddedEvent"
-        handler=".subscriber.handle_institution_creation"
-        />
-    <subscriber
-        for="plonemeeting.portal.core.content.institution.IInstitution
-             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-        handler=".subscriber.handle_institution_modified"
-        />
-    <subscriber
-        for="plonemeeting.portal.core.content.institution.IInstitution
-             Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-          handler=".subscriber.institution_state_changed"
-        />
-
-    <subscriber
-        for="plonemeeting.portal.core.content.institution.IInstitution
-             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-        handler=".subscriber.handle_institution_deletion"
-        />
-
-    <subscriber
-        for="plonemeeting.portal.core.content.meeting.IMeeting
-             Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-          handler=".subscriber.meeting_state_changed"
-        />
-
-
 </configure>

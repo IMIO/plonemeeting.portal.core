@@ -1,5 +1,5 @@
 export function get_portal_url() {
-    return window.PORTAL_URL;
+    return document.body.getAttribute("data-portal-url");
 }
 
 export function get_bundle_url() {

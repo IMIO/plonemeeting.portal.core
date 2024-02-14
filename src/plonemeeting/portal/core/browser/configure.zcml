@@ -101,7 +101,8 @@
       name="utils_view"
       for="*"
       class=".utils.UtilsView"
-      permission="zope2.View"
+      permission="zope.Public"
+      allowed_interface="plonemeeting.portal.core.interfaces.IUtilsView"
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
