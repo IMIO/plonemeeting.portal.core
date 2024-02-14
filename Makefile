@@ -12,21 +12,11 @@ all: run
 help:  ## Displays this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-.PHONY: plone5.2
-plone5.2:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
-	make cleanall
-	make buildout py=3.8 plone=5.2
-
-.PHONY: plone6.0
-plone6.0:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
-	make cleanall
-	make buildout py=3.11 plone=6.0
-
 .PHONY: buildout
 buildout:  ## Runs bootstrap if needed and builds the buildout and update versions.cfg
 	echo "Starting Buildout on $(shell date)"
 	rm -f .installed.cfg
-	virtualenv -p python$(py) .
+	python3 -m venv .
 	bin/python bin/pip install -r "https://dist.plone.org/release/$(plone)-latest/requirements.txt" pre-commit
 	bin/pre-commit install
 	bin/pre-commit autoupdate

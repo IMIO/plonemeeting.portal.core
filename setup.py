@@ -51,7 +51,6 @@ setup(
         "collective.cookiecuttr>=1.0.2",
         # "collective.dexteritytextindexer",
         "collective.fingerpointing",
-        "collective.pwexpiry",
         "collective.z3cform.datagridfield",
         "eea.facetednavigation>=16.0a1",
         "plone.api>=1.8.4",
