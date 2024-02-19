@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.3 (unreleased)
+1.6.3 (2024-02-19)
 ------------------
 
 - Added `general-assembly` to the registry `meeting_types`.
