@@ -60,8 +60,9 @@ setup(
         "plone.restapi",
         "requests",
         "z3c.jbot",
-        "imio.helpers>=0.65",
-        "imio.migrator>=1.27"
+        "imio.helpers>=1.0.0rc1",
+        "imio.migrator>=1.34",
+        "imio.pyutils>=1.0.0a1"
     ],
     extras_require={
         "test": [

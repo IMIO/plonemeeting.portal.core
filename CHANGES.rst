@@ -7,6 +7,8 @@ Changelog
 
 - Added `general-assembly` to the registry `meeting_types`.
   [gbastien]
+- Upgrade dependencies versions.
+  [aduchene]
 
 1.6.2 (2023-09-18)
 ------------------
