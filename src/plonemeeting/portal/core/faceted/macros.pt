@@ -4,91 +4,100 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en">
 
-  <metal:macro define-macro="preview_meeting_item">
+<metal:macro define-macro="preview_meeting_item">
 
-    <div class="item-container card py-5"
-         tal:define="portal_url context/@@plone_portal_state/portal_url;
-                     review_state brain/linkedMeetingReviewState;
-                     meeting_utils_view nocall:brain/@@utils_view"
-         i18n:domain="plonemeeting.portal.core">
-
-      <div tal:attributes="class string:item-preview card-body row ${review_state}">
-        <div class="item-main col-lg-8">
-          <a href=""
-             class="card-title"
-             tal:attributes="href brain/getURL">
-              <div class="item-title" tal:content="structure brain/formatted_title" />
-          </a>
-
-          <div class="item-number">
-            <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="brain/number" />
-          </div>
-          <div class="item-category">
-            <span class="item-label" i18n:translate="">Category</span> : <span class="selected-option" tal:content="brain/pretty_category" />
-          </div>
-          <div class="item-representative" tal:condition="brain/pretty_representatives">
-            <span class="item-label" i18n:translate="">Representative</span> : <span class="selected-option" tal:content="brain/pretty_representatives" />
-          </div>
-
+  <div class="item-card"
+     tal:define="portal_url context/@@plone_portal_state/portal_url;
+    review_state brain/linkedMeetingReviewState;
+    meeting_utils_view nocall:brain/@@utils_view"
+     i18n:domain="plonemeeting.portal.core">
+    <span class="item-number-bg" tal:content="brain/number" tal:condition="nocall:meeting"></span>
+    <div tal:attributes="class string:item-preview card-body row ${review_state}">
+      <div class="item-main col-lg-12">
+        <div class="item-header" i18n:domain="plone">
+          <h5><a href=""
+                 class="card-title"
+             tal:attributes="href brain/getURL"
+             tal:content="structure brain/formatted_title">
+          </a></h5>
+          <span tal:condition="python: review_state == 'private'" i18n:translate="" class="badge bg-danger">
+            Private
+          </span>
+          <span tal:condition="python: review_state == 'in_project'" i18n:translate="" class="badge bg-warning">
+            In project
+          </span>
+          <span tal:condition="python: review_state == 'decision'" i18n:translate="" class="badge bg-success">
+            Decision
+          </span>
         </div>
 
-        <div class="item-metadata col-lg-4">
-          <div class="meeting-state"
-               i18n:domain="plone">
-              <span tal:condition="python: review_state == 'private'"
-                    i18n:translate=""
-                    tal:attributes="class string:state-${review_state}">Private</span>
-              <span tal:condition="python: review_state == 'in_project'"
-                    i18n:translate=""
-                    tal:attributes="class string:state-${review_state}">In project</span>
-              <span tal:condition="python: review_state == 'decision'"
-                    i18n:translate=""
-                    tal:attributes="class string:state-${review_state}">Decision</span>
+
+        <!--?                  <div class="item-number">-->
+        <!--?                    <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="brain/number" />-->
+        <!--?                  </div>-->
+
+        <div class="item-metadatas">
+          <div class="item-metadata-row" tal:condition="python: not meeting">
+            <div class="item-metadata-label" i18n:translate="">Item number</div>
+            <span tal:content="brain/number" />
           </div>
-          <div class="public-meeting" tal:content="meeting_type">Meeting type</div>
-          <div class="meeting-title">
-            <a class="meeting-title-link" href=""
-               tal:define="utils_view nocall:context/@@utils_view;"
-               tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)"
-               tal:content="brain/linkedMeetingTitle">
-            </a>
+          <div class="item-metadata-row">
+            <div class="item-metadata-label" i18n:translate="">Category</div>
+            <span tal:content="brain/pretty_category" />
           </div>
-          <div class="item-last-pm-modified"
-               tal:condition='not: isAnon' >
-               <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>
-               <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
+          <div class="item-metadata-row" tal:condition="brain/pretty_representatives">
+            <div class="item-metadata-label" i18n:translate="">Representative</div>
+            <span tal:content="brain/pretty_representatives" />
           </div>
         </div>
 
-        <div class="annexes"
-             tal:condition='not: isAnon' >
-          <ul>
-            <li tal:repeat="annexe brain/annexes_infos">
-              <a href=""
-                 target="_blank"
-                 tal:define="title python: annexe[0];
-                             url python: annexe[1];
-                             icon python: annexe[2]"
-                 tal:attributes="href url">
-                <img src=""
-                     tal:attributes="src string: ${portal_url}/${icon}"
-                     ><span tal:replace="title" />
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
 
-      <div class="project-disclaimer alert alert-warning" role="alert"
-           tal:define="utils_view nocall:context/@@utils_view;"
-           tal:condition="python: review_state != 'decision'">
-          <span>
-             <span i18n:translate="">Attention</span>
-             <span tal:replace="structure utils_view/get_project_decision_disclaimer_output" />
-          </span>
+      <div class="item-metadata col-lg-4">
+        <!--?          <div class="public-meeting" tal:content="meeting_type">Meeting type</div>-->
+        <!--?          <div class="meeting-title">-->
+        <!--?            <a class="meeting-title-link" href=""-->
+        <!--?               tal:define="utils_view nocall:context/@@utils_view;"-->
+        <!--?               tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)"-->
+        <!--?               tal:content="brain/linkedMeetingTitle">-->
+        <!--?            </a>-->
+        <!--?          </div>-->
+        <!--?          <div class="item-last-pm-modified"-->
+        <!--?               tal:condition='not: isAnon' >-->
+        <!--?               <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>-->
+        <!--?               <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />-->
+        <!--?          </div>-->
+        <!--?        </div>-->
+
+        <!--?        <div class="annexes"-->
+        <!--?             tal:condition='not: isAnon' >-->
+        <!--?          <ul>-->
+        <!--?            <li tal:repeat="annexe brain/annexes_infos">-->
+        <!--?              <a href=""-->
+        <!--?                 target="_blank"-->
+        <!--?                 tal:define="title python: annexe[0];-->
+          <!--?                             url python: annexe[1];-->
+          <!--?                             icon python: annexe[2]"-->
+        <!--?                 tal:attributes="href url">-->
+        <!--?                <img src=""-->
+        <!--?                     tal:attributes="src string: ${portal_url}/${icon}"-->
+        <!--?                     ><span tal:replace="title" />-->
+        <!--?              </a>-->
+        <!--?            </li>-->
+        <!--?          </ul>-->
       </div>
     </div>
 
-  </metal:macro>
+    <!--?      <div class="project-disclaimer alert alert-warning" role="alert"-->
+    <!--?           tal:define="utils_view nocall:context/@@utils_view;"-->
+    <!--?           tal:condition="python: review_state != 'decision'">-->
+    <!--?          <span>-->
+    <!--?             <span i18n:translate="">Attention</span>-->
+    <!--?             <span tal:replace="structure utils_view/get_project_decision_disclaimer_output" />-->
+    <!--?          </span>-->
+    <!--?      </div>-->
+  </div>
+
+</metal:macro>
 
 </html>

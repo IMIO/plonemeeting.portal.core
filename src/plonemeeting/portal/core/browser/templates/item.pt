@@ -3,17 +3,12 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      metal:use-macro="context/main_template/macros/master"
+      metal:use-macro="context/@@main_template/macros/master"
       i18n:domain="plonemeeting.portal.core">
 <body>
 
-<metal:text fill-slot="content-title">
-    <tal:text-macro metal:define-macro="content-title">
-      <h1>
-          <span tal:content="structure python:context.formatted_title.output_relative_to(context)" />
-      </h1>
-    </tal:text-macro>
-</metal:text>
+<metal:item-title fill-slot="content-title">
+</metal:item-title>
 
 <metal:text fill-slot="content-core">
     <tal:text-macro metal:define-macro="content-core">
@@ -26,63 +21,66 @@
                        isAnon context/@@plone_portal_state/anonymous;"
            tal:attributes="class string:item-infos ${review_state}">
 
-        <div class="item-metadata">
-          <div class="item-number">
-            <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="context/number" />
-          </div>
-          <div class="category">
-            <span class="item-label" i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
-          </div>
-          <div class="representative" tal:condition="context/representatives_in_charge">
-            <span class="item-label" i18n:translate="">Representative</span> : <span tal:content="structure view/w/long_representatives_in_charge/render" />
-          </div>
-          <div class="additional-data"
-             tal:condition="context/additional_data">
-             <span tal:content="structure python:context.additional_data.output_relative_to(context)" />
-          </div>
-        </div>
+<!--?        <div class="item-metadata">-->
+<!--?          <div class="item-number">-->
+<!--?            <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="context/number" />-->
+<!--?          </div>-->
+<!--?          <div class="category">-->
+<!--?            <span class="item-label" i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />-->
+<!--?          </div>-->
+<!--?          <div class="representative" tal:condition="context/representatives_in_charge">-->
+<!--?            <span class="item-label" i18n:translate="">Representative</span> : <span tal:content="structure view/w/long_representatives_in_charge/render" />-->
+<!--?          </div>-->
+<!--?          <div class="additional-data"-->
+<!--?             tal:condition="context/additional_data">-->
+<!--?             <span tal:content="structure python:context.additional_data.output_relative_to(context)" />-->
+<!--?          </div>-->
+<!--?        </div>-->
 
-        <div class="meeting-metadata">
-          <div class="meeting-state"
-               i18n:domain="plone">
-            <span tal:condition="python: review_state == 'private'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">Private</span>
-            <span tal:condition="python: review_state == 'in_project'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">In project</span>
-            <span tal:condition="python: review_state == 'decision'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">Decision</span>
-          </div>
-          <div class="public-meeting" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
-          <div class="meeting-title">
-            <a href="" class="meeting-title-link"
-               tal:content="meeting/title"
-               tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
-          </div>
-          <div class="item-last-pm-modified"
-               tal:condition='not: isAnon'>
-            <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>
-            <span tal:content="utils_view/get_plonemeeting_last_modified" />
-          </div>
-        </div>
+<!--?        <div class="meeting-metadata">-->
+<!--?          <div class="meeting-state"-->
+<!--?               i18n:domain="plone">-->
+<!--?            <span tal:condition="python: review_state == 'private'"-->
+<!--?                  i18n:translate=""-->
+<!--?                  tal:attributes="class string:state-${review_state}">Private</span>-->
+<!--?            <span tal:condition="python: review_state == 'in_project'"-->
+<!--?                  i18n:translate=""-->
+<!--?                  tal:attributes="class string:state-${review_state}">In project</span>-->
+<!--?            <span tal:condition="python: review_state == 'decision'"-->
+<!--?                  i18n:translate=""-->
+<!--?                  tal:attributes="class string:state-${review_state}">Decision</span>-->
+<!--?          </div>-->
+<!--?          <div class="public-meeting" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>-->
+<!--?          <div class="meeting-title">-->
+<!--?            <a href="" class="meeting-title-link"-->
+<!--?               tal:content="meeting/title"-->
+<!--?               tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />-->
+<!--?          </div>-->
+<!--?          <div class="item-last-pm-modified"-->
+<!--?               tal:condition='not: isAnon'>-->
+<!--?            <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>-->
+<!--?            <span tal:content="utils_view/get_plonemeeting_last_modified" />-->
+<!--?          </div>-->
+<!--?        </div>-->
 
-        <div class="portalMessage warning"
-             tal:condition="python: review_state != 'decision'">
-            <strong i18n:translate="">Attention</strong>
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+          <i class=""></i>
           <div class="project-disclaimer" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
         </div>
 
-        <div class="custom-info"
-             tal:condition="context/custom_info">
-             <span i18n:translate="">Custom info</span>
-             <span tal:content="structure python:context.custom_info.output_relative_to(context)" />
-        </div>
 
-        <div class="decision"
+<!--?        <div class="custom-info"-->
+<!--?             tal:condition="context/custom_info">-->
+<!--?             <span i18n:translate="">Custom info</span>-->
+<!--?             <span tal:content="structure python:context.custom_info.output_relative_to(context)" />-->
+<!--?        </div>-->
+
+        <div class="item-content"
              tal:condition="context/decision"
              i18n:domain="plone">
+          <h1>
+            <span tal:content="structure python:context.formatted_title.output_relative_to(context)" />
+          </h1>
             <span tal:content="structure python:context.decision.output_relative_to(context)" />
         </div>
 

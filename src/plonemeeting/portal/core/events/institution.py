@@ -8,6 +8,7 @@
 
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
+from plone.api.exc import CannotGetPortalError
 from plone.api.portal import get_registry_record
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
@@ -78,11 +79,13 @@ def institution_state_changed(obj, event):
 
 def handle_institution_deletion(obj, event):
     # Configure manager group & local permissions
-
-    import ipdb; ipdb.set_trace() # TODO: REMOVE BEFORE FLIGHT <-------------------------------
-    group_id = format_institution_managers_group_id(obj)
-    # Don't use api.group.delete(group_id) because it breaks when trying to delete the entire plone site
-    obj.aq_parent.portal_groups.removeGroup(group_id)
+    try:
+        group_id = format_institution_managers_group_id(obj)
+        # Don't use api.group.delete(group_id) because it breaks when trying to delete the entire plone site
+        obj.aq_parent.portal_groups.removeGroup(group_id)
+    except CannotGetPortalError:
+        # It's alright, it happens when we try to delete the whole plone site.
+        pass
 
 
 def meeting_state_changed(obj, event):

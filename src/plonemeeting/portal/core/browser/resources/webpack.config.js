@@ -154,9 +154,14 @@ module.exports = (env, argv) => {
             maxEntrypointSize: 750 * 1024,
         },
         devServer: {
-            port: 3000,
+            port: 3001,
             hot: true,
             liveReload: false,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+              "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+            },
             // watchFiles: {
             //     paths: ["./../../**/*.pt"], // Watch for .pt file change
             // },
@@ -164,20 +169,14 @@ module.exports = (env, argv) => {
             // Webpack Dev Server will serve it.
             proxy: [
                 {
-                    context: ["/**", `!${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
+                    context: ["/**", `!**/${BUNDLE_NAME}/**`],
                     target: "http://localhost:8080",
                 },
                 {
-                    context: [`${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
+                    context: [`**/${BUNDLE_NAME}/**`],
                     target: "http://localhost:3000",
                     pathRewrite: function (path) {
-                        // We need to rewrite the path as Plone add some crap timestamp
-                        // to it and doesn't provide a way of disabling it.
-                        if (path.includes("++unique++")) {
-                            const reg = /\/\+\+unique\+\+[^/]+/; // Strip ++unique++ part
-                            path = path.replace(reg, "");
-                        }
-                        path = path.replace(`${PLONE_SITE_PATH}/${BUNDLE_NAME}/`, "");
+                        path = path.split(BUNDLE_NAME)[1]; // Keep only the path after our bundle name
                         return path;
                     },
                 },
