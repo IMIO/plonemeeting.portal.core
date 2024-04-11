@@ -167,20 +167,20 @@ module.exports = (env, argv) => {
             // },
             // Proxy everything to the Plone Backend EXCEPT our bundle as
             // Webpack Dev Server will serve it.
-            proxy: [
-                {
-                    context: ["/**", `!**/${BUNDLE_NAME}/**`],
-                    target: "http://localhost:8080",
-                },
-                {
-                    context: [`**/${BUNDLE_NAME}/**`],
-                    target: "http://localhost:3000",
-                    pathRewrite: function (path) {
-                        path = path.split(BUNDLE_NAME)[1]; // Keep only the path after our bundle name
-                        return path;
-                    },
-                },
-            ],
+            // proxy: [
+            //     {
+            //         context: ["/**", `!**/${BUNDLE_NAME}/**`],
+            //         target: "http://localhost:8080",
+            //     },
+            //     {
+            //         context: [`**/${BUNDLE_NAME}/**`],
+            //         target: "http://localhost:3001",
+            //         pathRewrite: function (path) {
+            //             path = path.split(BUNDLE_NAME)[1]; // Keep only the path after our bundle name
+            //             return path;
+            //         },
+            //     },
+            // ],
         },
     };
 };
