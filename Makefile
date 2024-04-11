@@ -17,11 +17,11 @@ buildout:  ## Runs bootstrap if needed and builds the buildout and update versio
 	echo "Starting Buildout on $(shell date)"
 	rm -f .installed.cfg
 	python3 -m venv .
-	bin/python bin/pip install -r "https://dist.plone.org/release/$(plone)-latest/requirements.txt" pre-commit
-	bin/pre-commit install
-	bin/pre-commit autoupdate
-	echo "[versions]" > versions.cfg
-	bin/python bin/buildout -c test_plone$(plone).cfg
+	bin/python bin/pip install -r "https://dist.plone.org/release/$(plone)-latest/requirements.txt"
+	# bin/pre-commit install
+	# bin/pre-commit autoupdate
+	# echo "[versions]" > versions.cfg
+	bin/python bin/buildout -c test-$(plone).cfg
 	echo "Finished on $(shell date)"
 
 .PHONY: run
