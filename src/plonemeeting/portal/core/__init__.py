@@ -6,7 +6,6 @@ import logging
 
 from rich.logging import RichHandler
 import logging
-import shutup; shutup.please()
 logging.getLogger().handlers[0] = RichHandler()
 
 logger = logging.getLogger("plonemeeting.portal.core")

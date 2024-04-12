@@ -154,11 +154,6 @@
       import_steps="plone.app.registry"
       run_deps="True"/>
     <genericsetup:upgradeDepends
-      title="Uninstall jQueryUI"
-      description=""
-      import_profile="collective.js.jqueryui:uninstall"
-      run_deps="True"/>
-    <genericsetup:upgradeDepends
       title="Install plonetheme.deliberations"
       description=""
       import_profile="plonetheme.deliberations:default"

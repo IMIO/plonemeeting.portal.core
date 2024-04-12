@@ -175,25 +175,25 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         tmp_var = belleville.plonemeeting_url
         belleville.plonemeeting_url = None
         belleville.fetch_delib_representatives()
-        self.assertDictEqual(belleville.delib_representatives, {})
+        self.assertFalse(hasattr("belleville", "delib_representatives"))
 
         belleville.plonemeeting_url = tmp_var
         tmp_var = belleville.meeting_config_id
         belleville.meeting_config_id = None
         belleville.fetch_delib_representatives()
-        self.assertDictEqual(belleville.delib_representatives, {})
+        self.assertFalse(hasattr("belleville", "delib_representatives"))
 
         belleville.meeting_config_id = tmp_var
         tmp_var = belleville.username
         belleville.username = None
         belleville.fetch_delib_representatives()
-        self.assertDictEqual(belleville.delib_representatives, {})
+        self.assertFalse(hasattr("belleville", "delib_representatives"))
 
         belleville.username = tmp_var
         tmp_var = belleville.password
         belleville.password = None
         belleville.fetch_delib_representatives()
-        self.assertDictEqual(belleville.delib_representatives, {})
+        self.assertFalse(hasattr("belleville", "delib_representatives"))
 
         belleville.password = tmp_var
         belleville.fetch_delib_representatives()

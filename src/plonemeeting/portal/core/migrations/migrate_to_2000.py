@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.Expression import Expression
+from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from imio.migrator.migrator import Migrator
+from plone.base.utils import get_installer
 from zope.component import getMultiAdapter
 
 from zope.interface.declarations import alsoProvides
@@ -13,11 +15,13 @@ from plonemeeting.portal.core.config import FACETED_XML_PATH
 import logging
 import os
 
-
 logger = logging.getLogger("plonemeeting.portal.core")
 
 
 class MigrateTo2000(Migrator):
+    def __init__(self, context, disable_linkintegrity_checks=False):
+        super().__init__(context, disable_linkintegrity_checks)
+        self.qi: InstallerView = get_installer(self.portal)
 
     def _fix_missing_fingerpointing_icon(self):
         """ This will make plone icon resolver happy and not dump a lot of log for nothing"""
@@ -50,12 +54,26 @@ class MigrateTo2000(Migrator):
             )
         logger.info("Done.")
 
+    def _uninstall_jqueryUI(self):
+        logger.info("Uninstalling collective.js.jqueryui...")
+        self.qi.uninstall_product("collective.js.jqueryui")
+        logger.info("Done.")
+
+    def _upgrades_packages(self):
+        """ """
+        logger.info("Upgrading packages...")
+        self.qi.upgrade_product("eea.facetednavigation")
+        self.qi.upgrade_product("collective.z3cform.datagridfield")
+        self.qi.upgrade_product("collective.cookiecuttr")
+        logger.info("Done.")
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal.core 2000...")
         self._fix_missing_fingerpointing_icon()
         self._fix_faceted_interfaces()
         self._re_apply_faceted_config()
+        self._uninstall_jqueryUI()
+        self._upgrades_packages()
         logger.info("Done.")
 
 

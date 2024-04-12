@@ -143,7 +143,6 @@ def create_demo_content(context):
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
             content.transition(obj=institution_obj, transition="publish")
-
             user = api.user.create(
                 username="{}-manager".format(institution_obj.id),
                 email="noob@plone.org",

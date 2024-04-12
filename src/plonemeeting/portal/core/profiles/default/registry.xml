@@ -112,6 +112,6 @@
     <value key="enabled">False</value>
     <value key="compile">False</value>
     <value key="last_compilation">2020-09-04 12:30:00</value>
-    <value key="jscompilation">http://localhost:3001/dist/js/core.js</value>
+    <value key="jscompilation">http://localhost:3001/js/core.js</value>
   </records>
 </registry>

@@ -111,18 +111,17 @@ LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 
     def __call__(self, context):
-        if context == NO_VALUE or isinstance(context, dict):
-            req = getRequest()
-            institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution):
-                local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
-                if local_representatives:
-                    return SimpleVocabulary(
-                        [
-                            SimpleTerm(value=representative_uid, title=local_representatives[representative_uid])
-                            for representative_uid in local_representatives.keys()
-                        ]
-                    )
+        req = getRequest()
+        institution = req.get('PUBLISHED').context
+        if isinstance(institution, Institution):
+            local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
+            if local_representatives:
+                return SimpleVocabulary(
+                    [
+                        SimpleTerm(value=representative_uid, title=local_representatives[representative_uid])
+                        for representative_uid in local_representatives.keys()
+                    ]
+                )
         return SimpleVocabulary([])
 
 

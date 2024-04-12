@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pprint
+
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from copy import deepcopy
@@ -394,13 +396,15 @@ class Institution(Container):
                                                                    REPRESENTATIVE_IA_DELIB_FIELD,
                                                                    'UID',
                                                                    'title')
-        # keep history
-        if self.representatives_mappings:
-            for row in self.representatives_mappings:
-                key = row['representative_key']
-                if key not in representatives:
-                    representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
-            self.delib_representatives = representatives
+
+        if len(self.representatives_mappings) == 0:
+            logger.warning(f"No representatives mappings found for {self.title}")
+
+        for row in self.representatives_mappings:
+            key = row['representative_key']
+            if key not in representatives: # keep history
+                representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
+        self.delib_representatives = representatives
 
     def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title):
         # ensure empty dict if None or attr doesn't exist
