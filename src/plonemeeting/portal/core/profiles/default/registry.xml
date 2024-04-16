@@ -97,7 +97,7 @@
     <value key="compile">True</value>
     <value key="csscompilation">++plone++plonemeeting.portal.core/css/core.css</value>
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-    <value key="last_compilation">2023-10-02 15:11:11.391Z</value>
+    <value key="last_compilation">2024-04-16 07:22:50.168Z</value>
   </records>
   <records prefix="plone.bundles/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">

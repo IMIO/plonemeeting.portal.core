@@ -8,8 +8,6 @@ const PlonePlugin = require("./webpackPlonePlugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const PLONE_SITE_PATH = process.env.PLONE_SITE_PATH ?? "/Plone";
-const BUNDLE_NAME = "++plone++plonemeeting.portal.core";
 const BUNDLE_PREFIX = "plone.bundles/plonemeeting.portal.core";
 
 module.exports = (env, argv) => {
@@ -28,7 +26,7 @@ module.exports = (env, argv) => {
                 patterns: [{ from: "assets", to: "assets" }],
             }),
             new MiniCssExtractPlugin({
-                filename: "css/[name]-compiled.css",
+                filename: "css/core.css",
             }),
             new PlonePlugin({
                 mode: argv.mode,

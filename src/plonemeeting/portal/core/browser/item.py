@@ -13,3 +13,9 @@ class ItemView(DefaultView):
             portal_type="File", context=self.context, sort_on="getObjPositionInParent"
         )
         return brains
+
+    def next_item(self):
+        return ""
+
+    def previous_item(self):
+        return ""
