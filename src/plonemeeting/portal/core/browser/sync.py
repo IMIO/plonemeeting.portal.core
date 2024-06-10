@@ -42,6 +42,14 @@ class IImportMeetingForm(Interface):
         required=True,
     )
 
+class ISyncMeetingForm(Interface):
+
+    is_annexes_synced = schema.Bool(
+        title=_("Sync annexes ?"),
+        description=_("Sync annexes"),
+        required=False,
+        default=True,
+    )
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
     """
@@ -174,16 +182,19 @@ class ItemsReportContentProvider(ContentProviderBase):
 
 
 @implementer(IFieldsAndContentProvidersForm)
-class PreSyncReportForm(Form):
+class PreSyncReportForm(AutoExtensibleForm, Form):
     """
     Before synchronizing, ask the user what he wants to sync.
     """
+
 
     label = _("Meeting pre sync form")
     description = _(
         "Choose the items you want to sync/import in the portal. "
         "It is also possible to remove items from the portal, by using the 'remove' button."
     )
+    schema = ISyncMeetingForm
+    ignoreContext = True
 
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
@@ -390,7 +401,7 @@ class PreSyncReportForm(Form):
 
 
 @implementer(IFieldsAndContentProvidersForm)
-class PreImportReportForm(Form):
+class PreImportReportForm(AutoExtensibleForm, Form):
     """
     Before importing a new meeting, we ask the user what he wants to import.
     This is basically a simplified PreSyncReportForm as they use the
@@ -400,7 +411,9 @@ class PreImportReportForm(Form):
     label = _("Meeting pre import form")
     description = _("Choose the items you want to import in the portal.")
 
+    schema = ISyncMeetingForm
     ignoreContext = True
+
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0

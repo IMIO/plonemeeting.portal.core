@@ -195,16 +195,19 @@ img {
 
 #content .state-in_project:hover,
 .state-in_project {
+    @extend .badge;
     color: #ff7a05 !important;
 }
 
 #content .state-decision:hover,
 .state-decision {
+      @extend .badge;
     color: #469721 !important;
 }
 
 #content .state-private:hover,
 .state-private {
+      @extend .badge;
     color: #c21b1b !important;
 }
 

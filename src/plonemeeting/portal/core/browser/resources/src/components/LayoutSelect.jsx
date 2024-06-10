@@ -13,8 +13,7 @@ const LayoutSelect = ({id, targetSelector, defaultOption}) => {
         const layout = localStorage.getItem(id);
         if (layout) {
             setActive(layout);
-        }
-        else {
+        } else {
             setActive(defaultOption);
         }
     }, []);
@@ -38,10 +37,14 @@ const LayoutSelect = ({id, targetSelector, defaultOption}) => {
     return (
         <div class="btn-group" role="group" aria-label="Layout selection">
             <button type="button" className={cssClass("list")} onClick={() => setActive("list")}>
-                <i className="bi bi-list"></i>
+                <span className="icon-wrapper">
+                    <i className="bi bi-list"></i>
+                </span>
             </button>
             <button type="button" className={cssClass("grid")} onClick={() => setActive("grid")}>
-                <i className="bi bi-grid"></i>
+                <span className="icon-wrapper">
+                    <i className="bi bi-grid"></i>
+                </span>
             </button>
         </div>
     )

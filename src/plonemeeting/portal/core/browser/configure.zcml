@@ -1,22 +1,22 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="plonemeeting.portal.core">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="plonemeeting.portal.core">
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include package="z3c.jbot" file="meta.zcml" />
+  <include package="z3c.jbot" file="meta.zcml"/>
   <browser:jbot
-      directory="overrides"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    directory="overrides"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <!-- Publish static files -->
   <plone:static
-      name="plonemeeting.portal.core"
-      type="plone"
-      directory="static"
-      />
+    name="plonemeeting.portal.core"
+    type="plone"
+    directory="static"
+  />
 
   <browser:page
     name="homepage_view"
@@ -25,7 +25,7 @@
     template="templates/homepage.pt"
     permission="zope2.View"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-    />
+  />
 
   <browser:page
     name="institution_locations"
@@ -36,34 +36,42 @@
   />
 
   <browser:page
-      name="view"
-      for="plonemeeting.portal.core.content.institution.IInstitution"
-      class=".institution.InstitutionView"
-      permission="zope2.View"
-      />
-
-    <browser:page
-      name="view"
-      for="plonemeeting.portal.core.content.meeting.IMeeting"
-      class=".meeting.MeetingView"
-      permission="zope2.View"
-      />
+    name="view"
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    class=".institution.InstitutionView"
+    permission="zope2.View"
+  />
 
   <browser:page
-      name="view"
-      for="plonemeeting.portal.core.content.item.IItem"
-      class=".item.ItemView"
-      template="templates/item.pt"
-      permission="zope2.View"
-      />
+    name="view"
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    class=".meeting.MeetingView"
+    permission="zope2.View"
+  />
 
   <browser:page
-      name="import_meeting"
-      for="plonemeeting.portal.core.content.institution.IInstitution"
-      permission="cmf.ModifyPortalContent"
-      class=".sync.ImportMeetingForm"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    name="view"
+    for="plonemeeting.portal.core.content.item.IItem"
+    class=".item.ItemView"
+    template="templates/item.pt"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.content.item.IItem"
+    name="navigation-infos"
+    class=".rest.item.ItemNavigationAPIView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    name="import_meeting"
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    permission="cmf.ModifyPortalContent"
+    class=".sync.ImportMeetingForm"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <browser:page
     name="update_meeting"
@@ -71,7 +79,7 @@
     permission="cmf.ModifyPortalContent"
     class=".sync.SyncMeetingView"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-    />
+  />
 
   <browser:page
     name="force_reimport_meeting"
@@ -79,7 +87,7 @@
     permission="cmf.ModifyPortalContent"
     class=".sync.ForceReimportMeetingView"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-    />
+  />
 
   <browser:page
     name="pre_import_report_form"
@@ -98,13 +106,13 @@
   />
 
   <browser:page
-      name="utils_view"
-      for="*"
-      class=".utils.UtilsView"
-      permission="zope.Public"
-      allowed_interface="plonemeeting.portal.core.interfaces.IUtilsView"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    name="utils_view"
+    for="*"
+    class=".utils.UtilsView"
+    permission="zope.Public"
+    allowed_interface="plonemeeting.portal.core.interfaces.IUtilsView"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <browser:page
     name="custom_colors.css"
@@ -112,7 +120,7 @@
     class=".colors.ColorsCSSView"
     permission="zope2.View"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-    />
+  />
 
   <browser:page
     for="*"
@@ -120,23 +128,23 @@
     class=".contact_info.CaptchaContactForm"
     permission="zope.Public"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-    />
+  />
 
   <!-- Institution add / edit form -->
 
   <adapter
-      for="Products.CMFCore.interfaces.IFolderish
+    for="Products.CMFCore.interfaces.IFolderish
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
            plone.dexterity.interfaces.IDexterityFTI"
-      provides="zope.publisher.interfaces.browser.IBrowserPage"
-      factory=".institution.AddView"
-      name="Institution"
-      />
+    provides="zope.publisher.interfaces.browser.IBrowserPage"
+    factory=".institution.AddView"
+    name="Institution"
+  />
   <class class=".institution.AddView">
-      <require
-          permission="plonemeeting.portal.core.AddInstitution"
-          interface="zope.publisher.interfaces.browser.IBrowserPage"
-          />
+    <require
+      permission="plonemeeting.portal.core.AddInstitution"
+      interface="zope.publisher.interfaces.browser.IBrowserPage"
+    />
   </class>
 
   <browser:page
@@ -144,6 +152,7 @@
     name="edit"
     class=".institution.EditForm"
     permission="cmf.ModifyPortalContent"
-    />
+  />
+
 
 </configure>

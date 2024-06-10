@@ -11,6 +11,7 @@
     review_state brain/linkedMeetingReviewState;
     meeting_utils_view nocall:brain/@@utils_view"
      i18n:domain="plonemeeting.portal.core">
+
     <span class="item-number-bg" tal:content="brain/number" tal:condition="nocall:meeting"></span>
     <div tal:attributes="class string:item-preview card-body row ${review_state}">
       <div class="item-main col-lg-12">
@@ -20,13 +21,16 @@
              tal:attributes="href brain/getURL"
              tal:content="structure brain/formatted_title">
           </a></h5>
-          <span tal:condition="python: review_state == 'private'" i18n:translate="" class="badge bg-danger">
+          <span tal:condition="python: review_state == 'private'" i18n:translate=""
+            tal:attributes="class string:state-${review_state} state-badge state-badge-sm">
             Private
           </span>
-          <span tal:condition="python: review_state == 'in_project'" i18n:translate="" class="badge bg-warning">
+          <span tal:condition="python: review_state == 'in_project'" i18n:translate=""
+            tal:attributes="class string:state-${review_state} state-badge state-badge-sm">
             In project
           </span>
-          <span tal:condition="python: review_state == 'decision'" i18n:translate="" class="badge bg-success">
+          <span tal:condition="python: review_state == 'decision'" i18n:translate=""
+            tal:attributes="class string:state-${review_state} state-badge state-badge-sm">
             Decision
           </span>
         </div>
