@@ -5,7 +5,7 @@
           institution nocall:view/parent/institution;
           has_representatives institution/is_representatives_mapping_used
 ">
-  <div class="full-width items-datatables-container">
+  <div id="items-datatables-container" class="full-width">
     <table id="items-datatables"
            class="listing pat-datatables table table-striped table-bordered dataTable no-footer"
            style="width:100%" tal:attributes="data-pat-datatables options/datatable_config">

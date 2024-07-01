@@ -81,6 +81,7 @@
       i18n:attributes="title"
       title="View"
       url_expr="string:${object_url}"
+      icon_expr="string:toolbar-action/view"
       visible="True">
     <permission value="View"/>
   </action>
@@ -91,6 +92,7 @@
       i18n:attributes="title"
       title="Edit"
       url_expr="string:${object_url}/edit"
+      icon_expr="string:toolbar-action/edit"
       visible="True">
     <permission value="Modify portal content"/>
   </action>

@@ -62,7 +62,8 @@ setup(
         "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
         "rich",
-        "shutup"
+        "shutup",
+        "importlib-metadata"
     ],
     extras_require={
         "test": [

@@ -7,7 +7,7 @@ import InstitutionsMap from "./components/InstitutionsMap";
 import MasonryColumns from "./components/MasonryColumns";
 import DarkModeToggle from "./components/DarkModeToggle";
 import LayoutSelect from "./components/LayoutSelect";
-import ItemNavigation from "./components/ItemNavigation";
+import MeetingAgenda from "./components/MeetingAgenda";
 
 import "../theme/main.scss";
 
@@ -18,7 +18,7 @@ register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
-register(ItemNavigation, "x-item-navigation", []);
+register(MeetingAgenda, "x-meeting-agenda", ["count"]);
 
 
 

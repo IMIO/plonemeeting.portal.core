@@ -21,10 +21,11 @@
   <include package=".content" />
   <include package=".events" />
   <include package=".faceted" />
+  <include package=".filters" />
   <include package=".migrations" />
+  <include package=".rest" />
   <include package=".viewlets" />
   <include package=".widgets" />
-  <include package=".filters" />
 
   <!-- Profiles -->
 
@@ -59,9 +60,6 @@
       factory=".setuphandlers.HiddenProfiles"
       name="plonemeeting.portal.core-hiddenprofiles"
       />
-
-  <!-- Serializers -->
-  <adapter factory=".serializers.InstitutionSerializerToJson" />
 
   <!-- Vocabularies -->
 

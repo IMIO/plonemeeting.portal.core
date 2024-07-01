@@ -3,6 +3,7 @@ from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
 from plone.protect.utils import addTokenToUrl
+from plonemeeting.portal.core import _
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
@@ -10,8 +11,8 @@ from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import queryUtility
+from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
-
 import os
 import plone
 
@@ -105,6 +106,15 @@ class UtilsView(BrowserView):
     def institution_type(self):
         return get_term_title(self.get_current_institution(), "institution_type")
 
+    def get_watermark(self, state):
+        if state == 'in_project':
+            return translate(state, domain="plonemeeting.portal.core", context=self.request)
+        elif state == 'private':
+            return _("confidential")
+        return ""
+
+    def get_last_item_number(self, meeting):
+        return meeting.get_items(objects=False)[-1].number
 
 def path_to_dx_default_template():
     dx_path = os.path.dirname(plone.dexterity.browser.__file__)

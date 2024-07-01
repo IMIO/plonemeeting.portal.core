@@ -174,7 +174,7 @@ def _sync_item_number(item, new_item_sortable_number, new_item_number):
     return False
 
 
-def sync_items_data(meeting, items_data, institution, force=False, item_external_uids=[]):
+def sync_items_data(meeting, items_data, institution, force=False, with_annexes=True, item_external_uids=[]):
     nb_created = nb_modified = nb_deleted = 0
     if item_external_uids:
         existing_items_brains = api.content.find(
@@ -261,10 +261,10 @@ def sync_items_data(meeting, items_data, institution, force=False, item_external
                 institution, item_data.get(institution.delib_category_field)["token"]
             )
             item.reindexObject()
-
-            sync_annexes(
-                item, institution, item_data.get("@id"), force
-            )
+            if with_annexes:
+                sync_annexes(
+                    item, institution, item_data.get("@id"), force
+                )
         if created:
             nb_created += 1
         else:
@@ -306,7 +306,7 @@ def sync_meeting_data(institution, meeting_data):
     return meeting
 
 
-def sync_meeting(institution, meeting_external_uid, force=False, item_external_uids=[]):
+def sync_meeting(institution, meeting_external_uid, force=False, with_annexes=True, item_external_uids=[]):
     """
     synchronizes a single meeting through ia.Delib web services (Rest/JSON)
     :param force: Should force reload items. Default False
@@ -331,7 +331,10 @@ def sync_meeting(institution, meeting_external_uid, force=False, item_external_u
     response = _call_delib_rest_api(url, institution)
 
     json_items = json.loads(response.text)
-    results = sync_items_data(meeting, json_items, institution, force, item_external_uids)
+    results = sync_items_data(meeting, json_items, institution,
+                              force=force,
+                              with_annexes=with_annexes,
+                              item_external_uids=item_external_uids)
 
     status_msg = _(
         u"meeting_imported",

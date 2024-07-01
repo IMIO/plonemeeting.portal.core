@@ -245,9 +245,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["sync"].addClass("context")
-        self.actions["remove"].addClass("destructive")
-        self.actions["cancel"].addClass("standalone")
+        self.actions["sync"].addClass("btn-primary")
+        self.actions["remove"].addClass("btn-danger")
 
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
@@ -472,13 +471,13 @@ def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
 
 
 def _sync_meeting(
-    institution, meeting_uid, request, force=False, item_external_uids=[]
+    institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
 ):  # pragma: no cover
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
         status, new_meeting_uid = sync_meeting(
-            institution, meeting_uid, force, item_external_uids
+            institution, meeting_uid, force,with_annexes, item_external_uids
         )
         if new_meeting_uid:
             brains = api.content.find(

@@ -6,10 +6,11 @@
 
 <metal:macro define-macro="preview_meeting_item">
 
-  <div class="item-card"
+  <div class="item-card watermarked watermarked-small"
      tal:define="portal_url context/@@plone_portal_state/portal_url;
     review_state brain/linkedMeetingReviewState;
     meeting_utils_view nocall:brain/@@utils_view"
+    tal:attributes="data-watermark python:utils_view.get_watermark(review_state)"
      i18n:domain="plonemeeting.portal.core">
 
     <span class="item-number-bg" tal:content="brain/number" tal:condition="nocall:meeting"></span>

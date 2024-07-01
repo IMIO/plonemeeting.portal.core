@@ -30,6 +30,12 @@ class MigrateTo2000(Migrator):
             portal_actions.user["audit-log"].icon_expr = "string:plone-book"
             portal_actions.user["audit-log"].icon_expr_object = Expression("string:plone-book")
 
+    def _remove_footer_customizations(self):
+        """ This has been customized over time and should be removed"""
+        pvc = self.portal.portal_view_customizations
+        if "zope.interface.interface-footer" in pvc:
+            pvc.manage_delObjects(['zope.interface.interface-footer'])
+
     def _fix_faceted_interfaces(self):
         institutions = [obj for obj in self.portal.objectValues()
                         if obj.portal_type == "Institution"]
@@ -73,7 +79,11 @@ class MigrateTo2000(Migrator):
         self._fix_faceted_interfaces()
         self._re_apply_faceted_config()
         self._uninstall_jqueryUI()
+        self._remove_footer_customizations()
         self._upgrades_packages()
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "actions"
+        )  # re-import actions, needed for the configurable footer
         logger.info("Done.")
 
 

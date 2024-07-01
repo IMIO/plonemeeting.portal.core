@@ -2,6 +2,34 @@
 <object name="portal_actions" meta_type="Plone Actions Tool"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
+  <object name="site_socials" meta_type="CMF Action Category">
+    <object name="website" meta_type="CMF Action" i18n:domain="plone">
+      <property name="title" i18n:translate="">Site web</property>
+      <property name="url_expr">string:https://www.imio.be</property>
+      <property name="icon_expr">string:bi bi-globe2</property>
+    </object>
+    <object name="linkedin" meta_type="CMF Action" i18n:domain="plone">
+      <property name="title" i18n:translate="">LinkedIn</property>
+      <property name="url_expr">string:https://be.linkedin.com/company/imio</property>
+      <property name="icon_expr">string:bi bi-linkedin</property>
+    </object>
+    <object name="twitter-x" meta_type="CMF Action" i18n:domain="plone">
+      <property name="title" i18n:translate="">X</property>
+      <property name="url_expr">string:https://x.com/iMio_scrl</property>
+      <property name="icon_expr">string:bi bi-twitter-x</property>
+    </object>
+    <object name="github" meta_type="CMF Action" i18n:domain="plone">
+      <property name="title" i18n:translate="">Github</property>
+      <property name="url_expr">string:https://github.com/IMIO</property>
+      <property name="icon_expr">string:bi bi-github</property>
+    </object>
+    <object name="youtube" meta_type="CMF Action" i18n:domain="plone">
+      <property name="title" i18n:translate="">Youtube</property>
+      <property name="url_expr">string:https://www.youtube.com/channel/UCIFBI3o5mJj3am6iCkmNNyQ</property>
+      <property name="icon_expr">string:bi bi-youtube</property>
+    </object>
+  </object>
+
   <object name="portal_tabs" meta_type="CMF Action Category">
     <object name="index_html" meta_type="CMF Action">
       <property name="visible">False</property>

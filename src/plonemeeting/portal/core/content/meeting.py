@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Products.CMFCore.utils import getToolByName
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
@@ -23,7 +23,7 @@ class IMeeting(model.Schema):
     )
 
     form.write_permission(date_time=ManagePortal)
-    date_time = schema.Datetime(title=plone_(u"Date"), required=True, readonly=False,)
+    date_time = schema.Datetime(title=plone_(u"Date"), required=True, readonly=False, )
 
     custom_info = RichText(title=_(u"Custom info"), required=False)
 
@@ -37,6 +37,14 @@ class Meeting(Container):
     """
     """
 
-    def get_items(self):
-        """Get the items of this meeting."""
-        return [i for i in self.contentValues() if IItem.providedBy(i)]
+    def get_items(self, objects=True):
+        portal_catalog = getToolByName(self, "portal_catalog")
+        meeting_path = self.absolute_url_path()
+        brains = portal_catalog(
+            object_provides=IItem.__identifier__,
+            path={'query': meeting_path, 'depth': 1},
+            sort_on="sortable_number"
+        )
+        if objects:
+            return [brain.getObject() for brain in brains]
+        return brains

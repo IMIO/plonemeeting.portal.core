@@ -28,14 +28,6 @@
   />
 
   <browser:page
-    name="institution_locations"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".homepage.InstitutionLocationsView"
-    permission="zope2.View"
-    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-  />
-
-  <browser:page
     name="view"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     class=".institution.InstitutionView"
@@ -55,14 +47,6 @@
     class=".item.ItemView"
     template="templates/item.pt"
     permission="zope.Public"
-  />
-
-  <browser:page
-    for="plonemeeting.portal.core.content.item.IItem"
-    name="navigation-infos"
-    class=".rest.item.ItemNavigationAPIView"
-    permission="zope2.View"
-    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
   <browser:page
@@ -154,5 +138,13 @@
     permission="cmf.ModifyPortalContent"
   />
 
+  <browser:page
+    name="footer"
+    for="*"
+    template="templates/footer.pt"
+    class=".footer.FooterView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
 </configure>

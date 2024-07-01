@@ -10,6 +10,11 @@ from plonemeeting.portal.core import _
 class ItemView(DefaultView):
     """
     """
+    def get_meeting(self):
+        """
+        Get the meeting from which the item is part of. Items should always be inside a meeting.
+        """
+        return self.context.aq_parent
 
     def get_files(self):
         brains = api.content.find(
@@ -17,14 +22,11 @@ class ItemView(DefaultView):
         )
         return brains
 
-    def get_watermark(self, state):
-        if state == 'in_project':
-            return translate(state, domain="plonemeeting.portal.core", context=self.request)
-        elif state == 'private':
-            return _("confidential")
-        return ""
-
     def get_next_prev_infos(self):
+        """
+        Get the previous and next items in the meeting. This is based on Plone's
+        implementation of the NextPrev behavior.
+        """
         res = {}
         try:
             nextprevious = NextPrevPortalType(self.context.aq_parent, "Item")
@@ -39,10 +41,4 @@ class ItemView(DefaultView):
         return res
 
     def get_last_item_number(self):
-        catalog = api.portal.get_tool(name="portal_catalog")
-        meeting_path = '/'.join(self.context.aq_parent.getPhysicalPath())
-        return catalog.searchResults(
-            portal_type="Item",
-            path={'query': meeting_path, 'depth': 1},
-            sort_on = "sortable_number"
-        )[-1].number
+        return self.context.aq_parent.get_items(objects=False)[-1].number

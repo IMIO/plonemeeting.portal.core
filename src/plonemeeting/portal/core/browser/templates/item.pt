@@ -13,44 +13,49 @@
 <metal:text fill-slot="content-core">
   <div class="row">
     <div class="col-12">
-      <div id="nextprev-navigation"
+      <nav id="nextprev-navigation"
            class=""
          tal:define="
         next_prev_infos python:view.get_next_prev_infos();
         item_number context/number;
         last_item_num python:view.get_last_item_number();
         ">
-        <div class="col-2 prev-col">
-          <a id="query-nextprev-prev"
-             tal:condition="python:next_prev_infos.get('previous_item')"
-             tal:attributes="href python:next_prev_infos['previous_item']['url']"
-          >
-            <i class="bi bi-chevron-left"></i>
-            Précédent
-          </a>
-        </div>
-        <div class="col-8 center-col">
-          <span tal:content="item_number">1</span>&nbsp;sur&nbsp;
-          <span tal:content="last_item_num">255</span>
 
-          <div class="mx-3">
-            <x-item-navigation></x-item-navigation>
+        <div class="center-container">
+          <div id="number-col">
+            <span tal:content="item_number" tal:omit-tag="">1</span>
+            sur
+            <span tal:content="last_item_num" tal:omit-tag="">255</span>
           </div>
-
-        </div>
-        <div class="col-2 next-col">
-          <a
-             tal:condition="python:next_prev_infos.get('next_item')"
-             tal:attributes="href python:next_prev_infos['next_item']['url']"
-          >
-            Suivant
-            <i class="bi bi-chevron-right"></i>
-          </a>
         </div>
 
-      </div>
+        <div class="flex-container">
+          <div id="prev-col" class="nav-col action-col">
+            <a id="query-nextprev-prev"
+               tal:condition="python:next_prev_infos.get('previous_item')"
+               tal:attributes="href python:next_prev_infos['previous_item']['url']"
+            >
+              <i class="bi bi-chevron-left"></i>
+              Précédent
+            </a>
+          </div>
+          <div style="flex: 1"></div>
+          <div id="agenda-col" class="nav-col action-col">
+            <x-meeting-agenda tal:attributes="count last_item_num"></x-meeting-agenda>
+          </div>
+          <div id="next-col" class="nav-col action-col">
+            <a
+              id="query-nextprev-next"
+               tal:condition="python:next_prev_infos.get('next_item')"
+               tal:attributes="href python:next_prev_infos['next_item']['url']"
+            >
+              Suivant
+              <i class="bi bi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
     </div>
-
   </div>
   <tal:text-macro metal:define-macro="content-core">
     <div class=""
@@ -170,7 +175,7 @@
             </div>
           </div>
           <div class="item-metadata-row" tal:condition="python: context.additional_data.raw">
-              <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
+            <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
       </div>
@@ -187,8 +192,8 @@
       <div class="row mb-3">
         <div class="col-12">
           <div class="card">
-            <div class="item-content watermarked" aria-hidden="true"
-               tal:attributes="data-watermark python:view.get_watermark(review_state)"
+            <div class="item-content position-relative watermarked" aria-hidden="true"
+               tal:attributes="data-watermark python:utils_view.get_watermark(review_state)"
                tal:condition="context/decision"
                i18n:domain="plone">
               <h1>
