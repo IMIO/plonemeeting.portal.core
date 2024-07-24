@@ -1,0 +1,15 @@
+name: Test plone package
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    runs-on:
+      group: 'self-hosted'
+    steps:
+    - name: Run check
+      uses: IMIO/gha/plone-package-test-notify@main
+      with:
+        MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
