@@ -9,11 +9,30 @@ jobs:
     runs-on:
       group: self-hosted
     steps:
-      - name: Run checks
+      - name: Run checks (black)
         uses: IMIO/gha/code-analysis-notify@main
         with:
           CHECK: 'black'
-          BASE_DIR: 'src'
+          BASE_DIR: '.'
           PATH: |
-            plonemeeting
+            src
+            setup.py
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+      - name: Run checks (flake8)
+        uses: IMIO/gha/code-analysis-notify@main
+        with:
+          CHECK: 'flake8'
+          BASE_DIR: '.'
+          PATH: |
+            src
+            setup.py
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+      - name: Run checks (isort)
+        uses: IMIO/gha/code-analysis-notify@main
+        with:
+          CHECK: 'isort'
+          BASE_DIR: '.'
+          PATH: |
+            src
+            setup.py
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
