@@ -1,0 +1,14 @@
+name: Tests
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  tests:
+    runs-on:
+      group: self-hosted
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+      - name: Run checks
+        uses: plone/code-analysis-action@v2.1
