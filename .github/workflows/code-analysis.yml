@@ -8,11 +8,9 @@ jobs:
     runs-on:
       group: self-hosted
     steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v4
       - name: Run checks
         uses: IMIO/gha/code-analysis-notify@main
         with:
-          CHECK: "black"
-          BASE_DIR: "src"
+          CHECK: 'black'
+          BASE_DIR: 'src'
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
