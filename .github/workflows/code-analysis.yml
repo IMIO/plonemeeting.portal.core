@@ -14,4 +14,6 @@ jobs:
         with:
           CHECK: 'black'
           BASE_DIR: 'src'
+          PATH: |
+            plonemeeting
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
