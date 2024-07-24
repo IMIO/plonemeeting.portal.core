@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  lint-black:
     runs-on:
       group: self-hosted
     steps:
@@ -18,6 +18,10 @@ jobs:
             src
             setup.py
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+  lint-flake8:
+    runs-on:
+      group: self-hosted
+    steps:
       - name: Run checks (flake8)
         uses: IMIO/gha/code-analysis-notify@main
         with:
@@ -27,6 +31,10 @@ jobs:
             src
             setup.py
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+  lint-isort:
+    runs-on:
+      group: self-hosted
+    steps:
       - name: Run checks (isort)
         uses: IMIO/gha/code-analysis-notify@main
         with:
