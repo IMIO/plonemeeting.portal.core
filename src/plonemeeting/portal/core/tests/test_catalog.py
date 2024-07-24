@@ -15,13 +15,13 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
 
     def testSearchableText(self):
         self.item.formatted_title = richtextval("<p>test_title</p>")
-        self.item.decision = richtextval("test_decision")
+        self.item.decision = richtextval("<p>test_decision</p>")
         self.item.reindexObject()
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]
         indexes = self.catalog.getIndexDataForRID(brain.getRID())
         searchable_text = indexes.get("SearchableText")
-        self.assertTrue("test_title" in searchable_text)
-        self.assertTrue("test_decision" in searchable_text)
+        self.assertIn("test_title", searchable_text)
+        self.assertIn("test_decision", searchable_text)
 
     def testMeetingValues(self):
         brain = api.content.find(context=self.meeting, portal_type="Item")[0]

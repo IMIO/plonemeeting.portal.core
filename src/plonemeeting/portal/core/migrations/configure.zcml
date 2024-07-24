@@ -139,4 +139,25 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_1009.migrate"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeSteps
+    source="1009"
+    destination="2000"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeStep
+      title="Go to portal 2000"
+      description="Migrate to Plone 6"
+      handler="plonemeeting.portal.core.migrations.migrate_to_2000.migrate"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply registry to add changes for Plone 6"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="plone.app.registry"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Install plonetheme.deliberations"
+      description=""
+      import_profile="plonetheme.deliberations:default"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
 </configure>

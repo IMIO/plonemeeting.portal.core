@@ -1,0 +1,30 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="plonemeeting.portal.core">
+
+  <!-- Views -->
+  <browser:page
+    name="institution_locations"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".site.InstitutionLocationsAPIView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    name="agenda"
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    class=".meeting.MeetingAgendaAPIView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+
+  <!-- Serializers -->
+  <adapter factory=".serializers.InstitutionSerializerToJson"/>
+  <adapter factory=".serializers.MeetingSerializerToJson"/>
+  <adapter factory=".serializers.ItemSerializerToJson"/>
+
+</configure>

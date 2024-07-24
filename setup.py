@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="1.6.4.dev0",
+    version="2.0.0.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -22,9 +22,10 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -44,25 +45,25 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    python_requires="==2.7",
+    python_requires=">=3.10",
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
         "collective.cookiecuttr>=1.0.2",
-        "collective.dexteritytextindexer",
         "collective.fingerpointing",
-        "collective.pwexpiry",
-        "collective.z3cform.datagridfield",
-        "eea.facetednavigation",
-        "plone.api>=1.8.4",
+        "collective.z3cform.datagridfield>=3.0.2",
+        "eea.facetednavigation>=16.2",
+        "plone.api>=2.1.0",
         "plone.app.dexterity",
-        "plone.formwidget.hcaptcha>=1.0.2",
+        "plone.formwidget.hcaptcha>=1.0.3",
         "plone.restapi",
         "requests",
         "z3c.jbot",
-        "imio.helpers>=1.0.0rc1",
+        "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
-        "imio.pyutils>=1.0.0a1"
+        "rich",
+        "shutup",
+        "importlib-metadata"
     ],
     extras_require={
         "test": [
@@ -72,7 +73,7 @@ setup(
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
-            "plone.app.robotframework[debug]",
+            "plone.app.robotframework[test]",
             "mockito"
         ]
     },

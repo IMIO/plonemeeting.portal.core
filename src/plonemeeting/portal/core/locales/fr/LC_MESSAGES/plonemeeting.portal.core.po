@@ -626,6 +626,9 @@ msgstr ""
 msgid "private"
 msgstr "Privé"
 
+msgid "confidential"
+msgstr "Confidentiel"
+
 #: ../content/institution.py:120
 msgid "representative_long_value_description"
 msgstr "Affichée sur les pages des points"

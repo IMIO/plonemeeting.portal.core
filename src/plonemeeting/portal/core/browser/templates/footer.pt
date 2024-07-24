@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+   tal:omit-tag=""
+   i18n:domain="plone">
+<div metal:define-macro="portlet"
+   tal:define="isAnon context/@@plone_portal_state/anonymous;
+  root_url context/@@plone_portal_state/navigation_root_url;
+  social_actions view/get_social_actions;
+  site_actions view/get_site_actions">
+  <hr>
+  <div id="footer-links" class="row">
+    <div class="col-12">
+      <a tal:repeat="action site_actions"
+          tal:attributes="href action/url; id string:footer-links-${action/id};"
+          i18n:translate="">
+          ${action/title}
+      </a>
+    </div>
+  </div>
+  <div id="footer-socials" class="row">
+    <div class="col-8 offset-2">
+      <img id="footer-imio-logo" src="++theme++deliberations/assets/IMIO_Logo.svg" width="100px"/>
+      <div id="footer-socials-links">
+          <a href=""
+             target="_blank"
+             tal:repeat="action social_actions"
+             tal:attributes="href action/url; id string:footer-socials-${action/id};"
+             i18n:translate="">
+            <i class="${action/icon}"></i>
+          </a>
+      </div>
+    </div>
+    <div class="col-2">
+      <div id="portal-anontools" tal:condition="isAnon">
+        <i class="bi bi-person-fill"></i>
+        <a href=""
+           tal:attributes="href string:${root_url}/login"
+           i18n:translate="">Log in</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-copyright" class="row">
+    <div class="col-12 text-center text-muted">
+      <p class="">Site réalisé avec le <a href='https://plone.org'>CMS Plone</a> en collaboration avec <a
+        href='https://imio.be'>IMIO</a> sous licence libre - ©
+        <tal:year
+           tal:define="DateTime nocall:modules/DateTime.DateTime;
+            current_time python:DateTime()"
+           tal:content="python:current_time.year()" />
+      </p>
+      <p>Version
+        <tal:version tal:content="view/get_version"></tal:version>
+        <tal:build tal:content="view/get_build"></tal:build>
+      </p>
+    </div>
+  </div>
+</div>
+</html>

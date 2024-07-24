@@ -53,7 +53,7 @@ class TestUninstall(PmPortalTestCase):
             self.installer = get_installer(self.portal, self.layer["request"])
         else:
             self.installer = api.portal.get_tool("portal_quickinstaller")
-        self.installer.uninstallProducts(["plonemeeting.portal.core"])
+        self.installer.uninstall_product("plonemeeting.portal.core")
         self.login_as_test()
 
     def test_product_uninstalled(self):

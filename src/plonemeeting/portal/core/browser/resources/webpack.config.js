@@ -8,8 +8,6 @@ const PlonePlugin = require("./webpackPlonePlugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const PLONE_SITE_PATH = process.env.PLONE_SITE_PATH ?? "/Plone";
-const BUNDLE_NAME = "++plone++plonemeeting.portal.core";
 const BUNDLE_PREFIX = "plone.bundles/plonemeeting.portal.core";
 
 module.exports = (env, argv) => {
@@ -28,7 +26,7 @@ module.exports = (env, argv) => {
                 patterns: [{ from: "assets", to: "assets" }],
             }),
             new MiniCssExtractPlugin({
-                filename: "css/[name]-compiled.css",
+                filename: "css/core.css",
             }),
             new PlonePlugin({
                 mode: argv.mode,
@@ -154,34 +152,33 @@ module.exports = (env, argv) => {
             maxEntrypointSize: 750 * 1024,
         },
         devServer: {
-            port: 3000,
+            port: 3001,
             hot: true,
             liveReload: false,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+              "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+            },
             // watchFiles: {
             //     paths: ["./../../**/*.pt"], // Watch for .pt file change
             // },
             // Proxy everything to the Plone Backend EXCEPT our bundle as
             // Webpack Dev Server will serve it.
-            proxy: [
-                {
-                    context: ["/**", `!${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
-                    target: "http://localhost:8080",
-                },
-                {
-                    context: [`${PLONE_SITE_PATH}/${BUNDLE_NAME}/**`],
-                    target: "http://localhost:3000",
-                    pathRewrite: function (path) {
-                        // We need to rewrite the path as Plone add some crap timestamp
-                        // to it and doesn't provide a way of disabling it.
-                        if (path.includes("++unique++")) {
-                            const reg = /\/\+\+unique\+\+[^/]+/; // Strip ++unique++ part
-                            path = path.replace(reg, "");
-                        }
-                        path = path.replace(`${PLONE_SITE_PATH}/${BUNDLE_NAME}/`, "");
-                        return path;
-                    },
-                },
-            ],
+            // proxy: [
+            //     {
+            //         context: ["/**", `!**/${BUNDLE_NAME}/**`],
+            //         target: "http://localhost:8080",
+            //     },
+            //     {
+            //         context: [`**/${BUNDLE_NAME}/**`],
+            //         target: "http://localhost:3001",
+            //         pathRewrite: function (path) {
+            //             path = path.split(BUNDLE_NAME)[1]; // Keep only the path after our bundle name
+            //             return path;
+            //         },
+            //     },
+            // ],
         },
     };
 };

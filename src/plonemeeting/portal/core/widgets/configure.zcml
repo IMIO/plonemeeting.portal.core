@@ -8,17 +8,17 @@
       interface="plonemeeting.portal.core.widgets.colorselect.IColorSelectWidget"/>
   </class>
 
-  <z3c:widgetTemplate
-    mode="input"
-    widget="plonemeeting.portal.core.widgets.colorselect.ColorSelectWidget"
-    layer="z3c.form.interfaces.IFormLayer"
-    template="colorselect_input.pt"/>
 
   <z3c:widgetTemplate
     mode="display"
-    widget="plonemeeting.portal.core.widgets.colorselect.ColorSelectWidget"
+    widget="plonemeeting.portal.core.widgets.colorselect.IColorSelectWidget"
     layer="z3c.form.interfaces.IFormLayer"
-    template="colorselect_input.pt"/>
+    template="colorselect.pt"/>
 
+  <z3c:widgetTemplate
+    mode="input"
+    widget="plonemeeting.portal.core.widgets.colorselect.IColorSelectWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="colorselect.pt"/>
 
 </configure>
