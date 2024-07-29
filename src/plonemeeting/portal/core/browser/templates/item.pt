@@ -66,55 +66,6 @@
       review_state python: utils_view.get_state(meeting);
       isAnon context/@@plone_portal_state/anonymous;"
        tal:attributes="class string:item-infos ${review_state}">
-
-      <!--?        <div class="item-metadata">-->
-      <!--?          <div class="item-number">-->
-      <!--?            <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="context/number" />-->
-      <!--?          </div>-->
-      <!--?          <div class="category">-->
-      <!--?            <span class="item-label" i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />-->
-      <!--?          </div>-->
-      <!--?          <div class="representative" tal:condition="context/representatives_in_charge">-->
-      <!--?            <span class="item-label" i18n:translate="">Representative</span> : <span tal:content="structure view/w/long_representatives_in_charge/render" />-->
-      <!--?          </div>-->
-      <!--?          <div class="additional-data"-->
-      <!--?             tal:condition="context/additional_data">-->
-      <!--?             <span tal:content="structure python:context.additional_data.output_relative_to(context)" />-->
-      <!--?          </div>-->
-      <!--?        </div>-->
-
-      <!--?        <div class="meeting-metadata">-->
-      <!--?          <div class="meeting-state"-->
-      <!--?               i18n:domain="plone">-->
-      <!--?            <span tal:condition="python: review_state == 'private'"-->
-      <!--?                  i18n:translate=""-->
-      <!--?                  tal:attributes="class string:state-${review_state}">Private</span>-->
-      <!--?            <span tal:condition="python: review_state == 'in_project'"-->
-      <!--?                  i18n:translate=""-->
-      <!--?                  tal:attributes="class string:state-${review_state}">In project</span>-->
-      <!--?            <span tal:condition="python: review_state == 'decision'"-->
-      <!--?                  i18n:translate=""-->
-      <!--?                  tal:attributes="class string:state-${review_state}">Decision</span>-->
-      <!--?          </div>-->
-      <!--?          <div class="public-meeting" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>-->
-      <!--?          <div class="meeting-title">-->
-      <!--?            <a href="" class="meeting-title-link"-->
-      <!--?               tal:content="meeting/title"-->
-      <!--?               tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />-->
-      <!--?          </div>-->
-      <!--?          <div class="item-last-pm-modified"-->
-      <!--?               tal:condition='not: isAnon'>-->
-      <!--?            <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>-->
-      <!--?            <span tal:content="utils_view/get_plonemeeting_last_modified" />-->
-      <!--?          </div>-->
-      <!--?        </div>-->
-
-
-      <!--?        <div class="custom-info"-->
-      <!--?             tal:condition="context/custom_info">-->
-      <!--?             <span i18n:translate="">Custom info</span>-->
-      <!--?             <span tal:content="structure python:context.custom_info.output_relative_to(context)" />-->
-      <!--?        </div>-->
       <div class="row mb-3">
         <div class="col-lg-6">
           <div class="card meeting-card">
@@ -174,7 +125,7 @@
               John Doe, President
             </div>
           </div>
-          <div class="item-metadata-row" tal:condition="python: context.additional_data.raw">
+          <div class="item-metadata-row" tal:condition="python: context.additional_data">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
@@ -227,20 +178,6 @@
             </div>
           </div>
         </div>
-
-
-        <!--?          <ul>-->
-        <!--?            <li tal:repeat="file files">-->
-        <!--?              <a href=""-->
-        <!--?                 target="_blank"-->
-        <!--?                  class="d-block"-->
-        <!--?                 tal:attributes="href file/getURL">-->
-        <!--?                 <img src=""-->
-        <!--?                      tal:attributes="src string: ${portal_url}/${file/icon}"-->
-        <!--?                      ><span tal:replace="file/Title" />-->
-        <!--?              </a>-->
-        <!--?            </li>-->
-        <!--?          </ul>-->
       </div>
     </div>
 
