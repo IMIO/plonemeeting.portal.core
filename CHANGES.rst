@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-1.6.4 (unreleased)
+2.0.0a1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Plone 6 compatibility.
+  [aduchene]
+- Theme extracted to `plonetheme.deliberations` package.
+  [aduchene]
+- Use latest Python 3.12 and Plone 6.0.11.1.
+  [aduchene]
 
 1.6.3 (2024-02-19)
 ------------------
