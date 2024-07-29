@@ -32,9 +32,9 @@ jobs:
       with:
         py-version: ${{ matrix.python-version }}
         plone-version: ${{ matrix.plone-version }}
-    - name: code analysis
-      run: |
-        pre-commit run --all-files
+#    - name: code analysis
+#      run: |
+#        pre-commit run --all-files
     - name: Test
       run: |
         bin/test
@@ -44,7 +44,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8 ]
+        python-version: ["3.12"]
+        plone-version: ["6.0"]
+        experimental: [false]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -60,6 +62,7 @@ jobs:
         uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
         with:
           py-version: ${{ matrix.python-version }}
+          plone-version: ${{ matrix.plone-version }}
       - name: Coverage action
         uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
         with:

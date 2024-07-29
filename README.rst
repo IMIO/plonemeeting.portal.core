@@ -13,18 +13,22 @@
 plonemeeting.portal.core
 ========================
 
-``plonemeeting.portal.core`` is a package that allows to publish decisions from Products.PloneMeeting to the public.
+``plonemeeting.portal.core`` is a comprehensive package designed to facilitate public access
+to decisions and publications from local authorities. By leveraging this package, municipalities and other institutions
+can ensure transparency and foster public trust by making their decisions readily available to the public.
 
 Features
 --------
 
--
+- **Seamless Integration**: Integrates effortlessly with Products.PloneMeeting for streamlined decision publishing.
+- **User-Friendly Interface**: Offers a clean, intuitive interface for easy navigation and access to documents.
+- **Digital Trust**: Ensures that all publications are securely accessible by the public.
 
 
 Documentation
 -------------
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at #TODO
+Full documentation for end users can be found here: https://docs.imio.be/iadelib/deliberations.be/
 
 
 Translations
@@ -35,28 +39,11 @@ This product has been translated into
 - French
 
 
-Installation
-------------
-
-Install plonemeeting.portal.core by adding it to your buildout::
-
-    [buildout]
-
-    ...
-
-    eggs =
-        plonemeeting.portal.core
-
-
-and then running ``bin/buildout``
-
-
 Contribute
 ----------
 
 - Issue Tracker: https://github.com/collective/plonemeeting.portal.core/issues
 - Source Code: https://github.com/collective/plonemeeting.portal.core
-- Documentation: #TODO
 
 
 Support
