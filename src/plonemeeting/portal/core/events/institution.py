@@ -13,7 +13,9 @@ from plone.api.portal import get_registry_record
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
@@ -44,6 +46,15 @@ def handle_institution_creation(obj, event):
 
     IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
     set_constrain_types(meetings, [])
+
+    # Create publications faceted folder
+    publications = create_faceted_folder(
+        obj,
+        translate(_(u"Publications"),
+                  target_language=current_lang),
+        id=PUB_FOLDER_ID
+    )
+    alsoProvides(publications, IPublicationsFolder)
 
     request = getRequest()
     if request:  # Request can be `None` during test setup

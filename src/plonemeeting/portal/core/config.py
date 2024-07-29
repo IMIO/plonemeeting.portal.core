@@ -5,8 +5,13 @@ from plonemeeting.portal.core import _
 CONFIG_FOLDER_ID = "config"
 FACETED_FOLDER_ID = "faceted"
 FACETED_XML_PATH = "faceted/config/items.xml"
+
+FACETED_PUB_FOLDER_ID = "faceted_publications"
+FACETED_PUB_XML_PATH = "faceted/config/publications.xml"
+
 # appears in the URL so use french
 APP_FOLDER_ID = "seances"
+PUB_FOLDER_ID = "publications"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]
 
@@ -37,3 +42,4 @@ LOCATIONS_API_URL = "https://public.opendatasoft.com/api/records/1.0/search/?dat
 DEMO_INSTITUTION_IDS = ["belle-ville"]
 
 FACETED_MANAGER_CRITERIA = ["annexes"]
+FACETED_PUB_MANAGER_CRITERIA = []

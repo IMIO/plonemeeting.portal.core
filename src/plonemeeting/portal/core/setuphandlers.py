@@ -17,7 +17,6 @@ from plonemeeting.portal.core.utils import format_institution_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer

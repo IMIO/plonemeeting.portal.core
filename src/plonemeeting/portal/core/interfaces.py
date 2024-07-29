@@ -13,8 +13,8 @@ class IMeetingsFolder(IFacetedNavigable):
     """Marker interface for Meetings folder"""
 
 
-class IItemsFolder(IFacetedNavigable):
-    """Kept while migrating to 1003, to be removed after"""
+class IPublicationsFolder(IFacetedNavigable):
+    """Marker interface for Publications folder"""
 
 
 class IUtilsView(Interface):
@@ -22,6 +22,7 @@ class IUtilsView(Interface):
     def is_institution(self):
         """See IUtilsView"""
         return True
+
     def is_meeting(self):
         """See IUtilsView"""
         return True
