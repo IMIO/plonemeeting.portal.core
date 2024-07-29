@@ -9,8 +9,7 @@ on:
 
 jobs:
   test:
-    runs-on:
-      group: self-hosted
+    runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false

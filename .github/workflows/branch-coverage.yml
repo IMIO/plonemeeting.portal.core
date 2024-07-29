@@ -8,8 +8,7 @@ on:
 
 jobs:
   coverage:
-    runs-on:
-      group: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
