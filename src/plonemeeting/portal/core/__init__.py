@@ -4,12 +4,9 @@ from zope.i18nmessageid import MessageFactory
 
 import logging
 
-
 logger = logging.getLogger("plonemeeting.portal.core")
 
-
 from plonemeeting.portal.core import patches  # NOQA
-
 
 assert patches  # workaround for pyflakes issue #13, NOQA
 

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from Products.Five.utilities.marker import mark
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from plone import api
 from plone.app.textfield.value import IRichTextValue
 from plone.dexterity.utils import iterSchemata
@@ -15,7 +18,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-from zope.interface import provider
+from zope.interface import provider, alsoProvides
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -278,7 +281,8 @@ def create_faceted_folder(container, title, id):
     folder = api.content.create(
         type="Folder", title=title, container=container, id=id
     )
-    subtyper = folder.restrictedTraverse("@@faceted_subtyper")
+    alsoProvides(folder, IPossibleFacetedNavigable)
+    subtyper = getMultiAdapter((folder, folder.REQUEST), name=u'faceted_subtyper')
     subtyper.enable()
     return folder
 

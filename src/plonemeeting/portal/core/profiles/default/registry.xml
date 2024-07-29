@@ -89,11 +89,6 @@
     <value key="operations"/>
     <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
   </records>
-  <records prefix="plone.resources/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IResourceRegistry">
-    <value key="css">
-      <element>++plone++plonemeeting.portal.core/less/main.less</element>
-    </value>
-  </records>
   <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">
       <element>plonemeeting.portal.core</element>
@@ -101,14 +96,9 @@
     <value key="depends">plone</value>
     <value key="enabled">True</value>
     <value key="compile">True</value>
-    <value key="csscompilation">++plone++plonemeeting.portal.core/css/main-compiled.css</value>
+    <value key="csscompilation">++plone++plonemeeting.portal.core/css/core.css</value>
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
-    <value key="last_compilation">2022-12-08 14:30:59.863Z</value>
-  </records>
-  <records prefix="plone.resources/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IResourceRegistry">
-    <value key="css">
-      <element>@@custom_colors.css</element>
-    </value>
+    <value key="last_compilation">2024-07-29 10:43:48.116Z</value>
   </records>
   <records prefix="plone.bundles/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">
@@ -117,6 +107,12 @@
     <value key="enabled">True</value>
     <value key="compile">True</value>
     <value key="last_compilation">2020-09-04 12:30:00</value>
-    <value key="csscompilation">++plone++static/plonemeeting.portal.core-custom-compiled.css</value>
+    <value key="csscompilation">/custom_colors.css</value>
+  </records>
+  <records prefix="plone.bundles/plonemeeting.portal.core-devserver" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="enabled">False</value>
+    <value key="compile">False</value>
+    <value key="last_compilation">2020-09-04 12:30:00</value>
+    <value key="jscompilation">http://localhost:3001/js/core.js</value>
   </records>
 </registry>

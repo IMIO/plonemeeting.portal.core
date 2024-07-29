@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pprint
+
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from copy import deepcopy
@@ -147,7 +149,7 @@ class IInstitution(model.Schema):
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
-    directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True)
+    directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
     meeting_filter_query = schema.List(
         title=_(u"Meeting query filter for list"),
         description=_(u"meeting_filter_query_description"),
@@ -158,7 +160,7 @@ class IInstitution(model.Schema):
                  {'parameter': 'review_state', 'value': 'decided'}]
     )
 
-    directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True)
+    directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
     item_filter_query = schema.List(
         title=_(u"Published Items query filter"),
         description=_(u"item_filter_query_description"),
@@ -168,7 +170,7 @@ class IInstitution(model.Schema):
                  {'parameter': 'listType', 'value': 'late'}]
     )
 
-    directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True)
+    directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
     item_content_query = schema.List(
         title=_(u"Published Items content query"),
         description=_(u"item_content_query_description"),
@@ -242,7 +244,7 @@ class IInstitution(model.Schema):
         default=DEFAULT_CATEGORY_IA_DELIB_FIELD
     )
 
-    directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True)
+    directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True, auto_append=False)
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
         description=_(u"categories_mappings_description"),
@@ -250,7 +252,7 @@ class IInstitution(model.Schema):
         required=False,
     )
 
-    directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True)
+    directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True, auto_append=False)
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
         description=_(u"representatives_mappings_description"),
@@ -332,6 +334,7 @@ class IInstitution(model.Schema):
 
 
 def categories_mappings_invariant(data):
+    pass
     mapped_local_category_id = []
     local_category_id_errors = set()
     if data.categories_mappings:
@@ -351,6 +354,8 @@ def categories_mappings_invariant(data):
 
 
 def representatives_mappings_invariant(data):
+    if not data.representatives_mappings:
+        return
     new_representatives = data.representatives_mappings
     if new_representatives is None:
         new_representatives = []
@@ -391,10 +396,13 @@ class Institution(Container):
                                                                    REPRESENTATIVE_IA_DELIB_FIELD,
                                                                    'UID',
                                                                    'title')
-        # keep history
+
+        if len(self.representatives_mappings) == 0:
+            logger.warning(f"No representatives mappings found for {self.title}")
+
         for row in self.representatives_mappings:
             key = row['representative_key']
-            if key not in representatives:
+            if key not in representatives: # keep history
                 representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
         self.delib_representatives = representatives
 

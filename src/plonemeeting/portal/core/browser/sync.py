@@ -42,6 +42,14 @@ class IImportMeetingForm(Interface):
         required=True,
     )
 
+class ISyncMeetingForm(Interface):
+
+    is_annexes_synced = schema.Bool(
+        title=_("Sync annexes ?"),
+        description=_("Sync annexes"),
+        required=False,
+        default=True,
+    )
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
     """
@@ -174,16 +182,19 @@ class ItemsReportContentProvider(ContentProviderBase):
 
 
 @implementer(IFieldsAndContentProvidersForm)
-class PreSyncReportForm(Form):
+class PreSyncReportForm(AutoExtensibleForm, Form):
     """
     Before synchronizing, ask the user what he wants to sync.
     """
+
 
     label = _("Meeting pre sync form")
     description = _(
         "Choose the items you want to sync/import in the portal. "
         "It is also possible to remove items from the portal, by using the 'remove' button."
     )
+    schema = ISyncMeetingForm
+    ignoreContext = True
 
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
@@ -234,9 +245,8 @@ class PreSyncReportForm(Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["sync"].addClass("context")
-        self.actions["remove"].addClass("destructive")
-        self.actions["cancel"].addClass("standalone")
+        self.actions["sync"].addClass("btn-primary")
+        self.actions["remove"].addClass("btn-danger")
 
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
@@ -390,7 +400,7 @@ class PreSyncReportForm(Form):
 
 
 @implementer(IFieldsAndContentProvidersForm)
-class PreImportReportForm(Form):
+class PreImportReportForm(AutoExtensibleForm, Form):
     """
     Before importing a new meeting, we ask the user what he wants to import.
     This is basically a simplified PreSyncReportForm as they use the
@@ -400,7 +410,9 @@ class PreImportReportForm(Form):
     label = _("Meeting pre import form")
     description = _("Choose the items you want to import in the portal.")
 
+    schema = ISyncMeetingForm
     ignoreContext = True
+
     contentProviders = ContentProviders()
     contentProviders["items"] = ItemsReportContentProvider
     contentProviders["items"].position = 0
@@ -459,13 +471,13 @@ def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
 
 
 def _sync_meeting(
-    institution, meeting_uid, request, force=False, item_external_uids=[]
+    institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
 ):  # pragma: no cover
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
         status, new_meeting_uid = sync_meeting(
-            institution, meeting_uid, force, item_external_uids
+            institution, meeting_uid, force,with_annexes, item_external_uids
         )
         if new_meeting_uid:
             brains = api.content.find(

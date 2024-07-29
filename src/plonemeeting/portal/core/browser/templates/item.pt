@@ -3,109 +3,187 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plonemeeting.portal.core">
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core">
 <body>
 
-<metal:text fill-slot="content-title">
-    <tal:text-macro metal:define-macro="content-title">
-      <h1>
-          <span tal:content="structure python:context.formatted_title.output_relative_to(context)" />
-      </h1>
-    </tal:text-macro>
-</metal:text>
+<metal:item-title fill-slot="content-title">
+</metal:item-title>
 
 <metal:text fill-slot="content-core">
-    <tal:text-macro metal:define-macro="content-core">
-      <div class=""
-           tal:define="portal_url context/@@plone_portal_state/portal_url;
-                       utils_view nocall:context/@@utils_view;
-                       meeting nocall:context/aq_parent;
-                       institution python: utils_view.get_current_institution();
-                       review_state python: utils_view.get_state(meeting);
-                       isAnon context/@@plone_portal_state/anonymous;"
-           tal:attributes="class string:item-infos ${review_state}">
+  <div class="row">
+    <div class="col-12">
+      <nav id="nextprev-navigation"
+           class=""
+         tal:define="
+        next_prev_infos python:view.get_next_prev_infos();
+        item_number context/number;
+        last_item_num python:view.get_last_item_number();
+        ">
 
-        <div class="item-metadata">
-          <div class="item-number">
-            <span class="item-label" i18n:translate="">Item number</span> : <span class="selected-option" tal:content="context/number" />
-          </div>
-          <div class="category">
-            <span class="item-label" i18n:translate="">Category</span> : <span tal:content="structure view/w/category/render" />
-          </div>
-          <div class="representative" tal:condition="context/representatives_in_charge">
-            <span class="item-label" i18n:translate="">Representative</span> : <span tal:content="structure view/w/long_representatives_in_charge/render" />
-          </div>
-          <div class="additional-data"
-             tal:condition="context/additional_data">
-             <span tal:content="structure python:context.additional_data.output_relative_to(context)" />
+        <div class="center-container">
+          <div id="number-col">
+            <span tal:content="item_number" tal:omit-tag="">1</span>
+            sur
+            <span tal:content="last_item_num" tal:omit-tag="">255</span>
           </div>
         </div>
 
-        <div class="meeting-metadata">
-          <div class="meeting-state"
+        <div class="flex-container">
+          <div id="prev-col" class="nav-col action-col">
+            <a id="query-nextprev-prev"
+               tal:condition="python:next_prev_infos.get('previous_item')"
+               tal:attributes="href python:next_prev_infos['previous_item']['url']"
+            >
+              <i class="bi bi-chevron-left"></i>
+              Précédent
+            </a>
+          </div>
+          <div style="flex: 1"></div>
+          <div id="agenda-col" class="nav-col action-col">
+            <x-meeting-agenda tal:attributes="count last_item_num"></x-meeting-agenda>
+          </div>
+          <div id="next-col" class="nav-col action-col">
+            <a
+              id="query-nextprev-next"
+               tal:condition="python:next_prev_infos.get('next_item')"
+               tal:attributes="href python:next_prev_infos['next_item']['url']"
+            >
+              Suivant
+              <i class="bi bi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <tal:text-macro metal:define-macro="content-core">
+    <div class=""
+       tal:define="portal_url context/@@plone_portal_state/portal_url;
+      utils_view nocall:context/@@utils_view;
+      meeting nocall:context/aq_parent;
+      institution python: utils_view.get_current_institution();
+      review_state python: utils_view.get_state(meeting);
+      isAnon context/@@plone_portal_state/anonymous;"
+       tal:attributes="class string:item-infos ${review_state}">
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <div class="card meeting-card">
+            <div class="card-body">
+              <div class="meeting-card-icon">
+                <i class="bi bi-calendar">
+                  <span class="meeting-card-icon-day" tal:content="python:meeting.date_time.day">01</span>
+                </i>
+              </div>
+              <div class="meeting-infos">
+                <div class="meeting-type" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
+                <a href="" class="meeting-title-link"
+                   tal:content="meeting/title"
+                   tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)"
+                >
+                  01 january 2024 (16:00)
+                </a>
+                <div class="meeting-item-number">
+                  <span class="">Point N°</span>
+                  <span tal:content="context/number">99</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 item-metadatas">
+          <div class="item-metadata-row">
+            <div class="item-metadata-col header">
+              État <i class="bi bi-question-circle"></i>
+            </div>
+            <div class="item-metadata-col"
                i18n:domain="plone">
-            <span tal:condition="python: review_state == 'private'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">Private</span>
-            <span tal:condition="python: review_state == 'in_project'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">In project</span>
-            <span tal:condition="python: review_state == 'decision'"
-                  i18n:translate=""
-                  tal:attributes="class string:state-${review_state}">Decision</span>
+                <span tal:condition="python: review_state == 'private'"
+                   i18n:translate=""
+                   tal:attributes="class string:state-badge state-${review_state}">Private</span>
+              <span tal:condition="python: review_state == 'in_project'"
+                 i18n:translate=""
+                 tal:attributes="class string:state-badge state-${review_state}">In project</span>
+              <span tal:condition="python: review_state == 'decision'"
+                 i18n:translate=""
+                 tal:attributes="class string:state-badge state-${review_state}">Decision</span>
+            </div>
           </div>
-          <div class="public-meeting" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
-          <div class="meeting-title">
-            <a href="" class="meeting-title-link"
-               tal:content="meeting/title"
-               tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)" />
+          <div class="item-metadata-row">
+            <div class="item-metadata-col header" i18n:translate="">
+              Category
+            </div>
+            <div class="item-metadata-col" tal:content="structure view/w/category/render">
+              Urbanism
+            </div>
           </div>
-          <div class="item-last-pm-modified"
-               tal:condition='not: isAnon'>
-            <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span>
-            <span tal:content="utils_view/get_plonemeeting_last_modified" />
+          <div class="item-metadata-row" tal:condition="context/representatives_in_charge">
+            <div class="item-metadata-col header" i18n:translate="">
+              Representative
+            </div>
+            <div class="item-metadata-col" tal:content="structure view/w/long_representatives_in_charge/render">
+              John Doe, President
+            </div>
+          </div>
+          <div class="item-metadata-row" tal:condition="python: context.additional_data">
+            <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
-
-        <div class="portalMessage warning"
-             tal:condition="python: review_state != 'decision'">
-            <strong i18n:translate="">Attention</strong>
-          <div class="project-disclaimer" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="alert with-icon alert-warning project-warning" role="alert">
+            <div class="alert-icon">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+            <div class="alert-content" tal:content="structure utils_view/get_project_decision_disclaimer_output" />
+          </div>
         </div>
-
-        <div class="custom-info"
-             tal:condition="context/custom_info">
-             <span i18n:translate="">Custom info</span>
-             <span tal:content="structure python:context.custom_info.output_relative_to(context)" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card">
+            <div class="item-content position-relative watermarked" aria-hidden="true"
+               tal:attributes="data-watermark python:utils_view.get_watermark(review_state)"
+               tal:condition="context/decision"
+               i18n:domain="plone">
+              <h1>
+                <span tal:content="structure python:context.formatted_title.output_relative_to(context)" />
+              </h1>
+              <span tal:content="structure python:context.decision.output_relative_to(context)" />
+            </div>
+          </div>
         </div>
-
-        <div class="decision"
-             tal:condition="context/decision"
-             i18n:domain="plone">
-            <span tal:content="structure python:context.decision.output_relative_to(context)" />
-        </div>
-
-        <div class="annexes"
-             tal:define="files view/get_files"
-             tal:condition="files">
+      </div>
+      <div class="row annexes-section mb-3"
+         tal:define="files view/get_files"
+         tal:condition="files">
+        <div class="col-12">
           <h2 i18n:translate="">Annexes</h2>
-          <ul>
-            <li tal:repeat="file files">
-              <a href=""
-                 target="_blank"
-                 tal:attributes="href file/getURL">
-                 <img src=""
-                      tal:attributes="src string: ${portal_url}/${file/icon}"
-                      ><span tal:replace="file/Title" />
-              </a>
-            </li>
-          </ul>
+          <div class="annexes">
+            <div tal:repeat="file files">
+              <div class="annex">
+                <div class="type bg-file-xlsx">
+                  <i class="bi bi-filetype-xlsx"></i>
+                </div>
+                <div class="title">
+                  <h3 tal:content="file/Title" />
+                  <p>Taille: 145 kB</p>
+                </div>
+                <div class="annex-actions">
+                  <i class="bi bi-box-arrow-in-up-right"></i>
+                  <i class="bi bi-download"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
 
-    </tal:text-macro>
+  </tal:text-macro>
+
+
 </metal:text>
 
 </body>

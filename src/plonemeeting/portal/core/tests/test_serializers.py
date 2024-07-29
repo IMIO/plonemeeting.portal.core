@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from plone import api
-from plonemeeting.portal.core.interfaces import IInstitutionSerializeToJson
+from plonemeeting.portal.core.rest.interfaces import IInstitutionSerializeToJson
+from plonemeeting.portal.core.rest.interfaces import IMeetingSerializeToJson
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from zope.component import queryMultiAdapter
 
@@ -31,3 +34,19 @@ class TestSerializers(PmPortalTestCase):
 
         result = serializer(fieldnames=["non_existing_field"])
         self.assertNotIn("non_existing_field", result.keys())
+
+    def test_meeting_serializer(self):
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution", title="Gotham City"
+        )
+        meeting = api.content.create(
+            container=institution, type="Meeting", id="meeting", title="05 july 2024 (18:00)"
+        )
+        request = self.portal.REQUEST
+        serializer = queryMultiAdapter((meeting, request), IMeetingSerializeToJson)
+        result = serializer(fieldnames=["title"])
+        self.assertIn("title", result.keys())
+        self.assertEqual("05 july 2024 (18:00)", result['title'])
+        meeting.date_time = datetime.datetime(2024, 7, 5, 18, 0)
+        result = serializer(fieldnames=["title", "date_time"])
+        self.assertEqual("2024-07-05T18:00:00", result['date_time'])

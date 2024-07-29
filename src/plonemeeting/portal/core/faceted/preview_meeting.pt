@@ -1,146 +1,168 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-  xmlns:tal="http://xml.zope.org/namespaces/tal"
-  xmlns:metal="http://xml.zope.org/namespaces/metal"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  metal:use-macro="context/main_template/macros/master"
-  i18n:domain="plonemeeting.portal.core">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core">
 
 <body>
-  <metal:content-core fill-slot="content-core">
-    <metal:block define-macro="content-core">
-      <div i18n:domain="plonemeeting.portal.core"
-           tal:define="
-        portal_url context/@@plone_portal_state/portal_url;
-        folderContents folderContents | python:context.getFolderContents();
-        Batch python:modules['Products.CMFPlone'].Batch;
-        b_start python:request.get('b_start', 0);
-        batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
-        isAnon context/@@plone_portal_state/anonymous;
-        checkPermission nocall: context/portal_membership/checkPermission">
+<metal:content-core fill-slot="content-core">
+  <metal:block define-macro="content-core">
+    <div i18n:domain="plonemeeting.portal.core"
+       tal:define="
+      portal_url context/@@plone_portal_state/portal_url;
+      folderContents folderContents | python:context.getFolderContents();
+      Batch python:modules['Products.CMFPlone'].Batch;
+      b_start python:request.get('b_start', 0);
+      batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
+      isAnon context/@@plone_portal_state/anonymous;
+      checkPermission nocall: context/portal_membership/checkPermission;
+      utils_view nocall:context/@@utils_view;
+      meeting python: utils_view.get_linked_meeting();
+      ">
 
-        <div metal:use-macro="context/batch_macros/macros/navigation" />
 
-        <div class="pm-preview-meeting">
-          <tal:meeting define="utils_view nocall:context/@@utils_view;
+      <div class="pm-preview-meeting">
+        <tal:meeting define="utils_view nocall:context/@@utils_view;
                                meeting python: utils_view.get_linked_meeting();"
-                       condition="nocall:meeting">
-            <div class=""
-                 tal:define="meeting_utils_view nocall:meeting/@@utils_view;
-                             review_state python: utils_view.get_state(meeting)"
-                 tal:attributes="class string:meeting-infos ${review_state}">
-
-              <div class="meeting-title-row">
-                <span class="meeting-title" tal:content="meeting/title" />
-                <tal:if tal:condition='not: isAnon'>
-                  <div class="meeting-actions">
-                    <a href=""
-                       tal:condition="python: checkPermission('Modify portal content', meeting)"
-                       tal:attributes="href string: ${meeting/absolute_url}/view"
-                       title="View meeting"
-                       i18n:attributes="title"
-                     ><img src=""
-                           tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/eye.svg"></a>
-
-                    <a href=""
-                       tal:condition="python: checkPermission('Modify portal content', meeting)"
-                       tal:attributes="href string: ${meeting/absolute_url}/edit"
-                       title="Edit meeting"
-                       i18n:attributes="title"
-                     ><img src=""
-                           tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg"></a>
-
-                    <a href=""
-                       tal:define="url string:${meeting/absolute_url}/@@pre_sync_report_form"
-                       tal:condition="python: checkPermission('Modify portal content', meeting)"
-                       tal:attributes="href python: utils_view.protect_url(url)"
-                       title="Update meeting"
-                       i18n:attributes="title"
-                     ><img src=""
-                           tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
-
-                    <a href=""
-                       tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
-                       tal:condition="python: checkPermission('Modify portal content', meeting)"
-                       tal:attributes="href python: utils_view.protect_url(url)"
-                       title="Import a new meeting"
-                       i18n:attributes="title"
-                     ><img src=""
-                           tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
-
-                    <x-window-button>
+                     condition="nocall:meeting">
+          <div class=""
+             tal:define="meeting_utils_view nocall:meeting/@@utils_view;
+            review_state python: utils_view.get_state(meeting)"
+             tal:attributes="class string:meeting-infos ${review_state}">
 
 
+            <div class="row">
+              <div class="col-lg-2">
 
+              </div>
+              <div class="col-lg-8">
+                <div class="meeting-header">
 
-                    </x-window-button>
+                  <h2> Séance du Conseil Communal</h2>
+                  <h3 class="meeting-title" tal:content="meeting/title"></h3>
+                  <tal:if tal:condition='not: isAnon'>
+                    <div class="meeting-actions">
+                      <a href=""
+                         tal:condition="python: checkPermission('Modify portal content', meeting)"
+                         tal:attributes="href string: ${meeting/absolute_url}/view"
+                         title="View meeting"
+                         i18n:attributes="title"
+                      ><img src=""
+                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/eye.svg"></a>
 
-                  </div>
-                </tal:if>
+                      <a href=""
+                         tal:condition="python: checkPermission('Modify portal content', meeting)"
+                         tal:attributes="href string: ${meeting/absolute_url}/edit"
+                         title="Edit meeting"
+                         i18n:attributes="title"
+                      ><img src=""
+                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg"></a>
+
+                      <a href=""
+                         tal:define="url string:${meeting/absolute_url}/@@pre_sync_report_form"
+                         tal:condition="python: checkPermission('Modify portal content', meeting)"
+                         tal:attributes="href python: utils_view.protect_url(url)"
+                         title="Update meeting"
+                         i18n:attributes="title"
+                      ><img src=""
+                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
+
+                      <a href=""
+                         tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+                         tal:condition="python: checkPermission('Modify portal content', meeting)"
+                         tal:attributes="href python: utils_view.protect_url(url)"
+                         title="Import a new meeting"
+                         i18n:attributes="title"
+                      ><img src=""
+                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg"></a>
+
+                    </div>
+                  </tal:if>
+
+                </div>
+              </div>
+              <div class="col-lg-2">
                 <div class="meeting-state meeting-state--top"
-                     i18n:domain="plone">
-                    <span tal:condition="python: review_state == 'private'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">Private</span>
-                    <span tal:condition="python: review_state == 'in_project'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">In project</span>
-                    <span tal:condition="python: review_state == 'decision'"
-                          i18n:translate=""
-                          tal:attributes="class string:state-${review_state}">Decision</span>
-              </div>
-              </div>
-              <div class="meeting-last-pm-modified"
-                   tal:condition='not: isAnon'>
-                   <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span> :
-                   <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
-              </div>
-              <div class="meeting-custom-info"
-                   tal:condition="meeting/custom_info">
-                <div class="meeting-custom-info-content"
-                     tal:define="hidden meeting_utils_view/hidden_info_toggle">
-                  <a id="show-more-link"
-                     class="toggle-link"
-                     href=""
-                     tal:attributes="style python: hidden and ' ' or 'display: none'"
-                     i18n:translate="">Show meeting infos</a>
-                  <a id="show-less-link"
-                     class="toggle-link"
-                     href=""
-                     tal:attributes="style python: hidden and 'display: none' or ''"
-                     i18n:translate="">Hide meeting infos</a>
-                  <div id="meeting-custom-info-content-toggle"
-                       tal:attributes="style python: hidden and 'display: none' or ''"
-                       tal:content="structure python:meeting.custom_info.output_relative_to(meeting)" />
+                   i18n:domain="plone">
+                  <span tal:condition="python: review_state == 'private'"
+                     i18n:translate=""
+                     tal:attributes="class string:${review_state} state-badge">Private</span>
+                  <span tal:condition="python: review_state == 'in_project'"
+                     i18n:translate=""
+                     tal:attributes="class string:state-${review_state} state-badge">In project</span>
+                  <span tal:condition="python: review_state == 'decision'"
+                     i18n:translate=""
+                     tal:attributes="class string:state-${review_state} state-badge">Decision</span>
                 </div>
               </div>
             </div>
-          </tal:meeting>
 
-          <span tal:condition="folderContents">
+
+<!--?            <div class="meeting-last-pm-modified"-->
+<!--?               tal:condition='not: isAnon'>-->
+<!--?              <span i18n:translate="Last modification in iA.Delib">Last modification in iA.Delib</span> :-->
+<!--?              <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />-->
+<!--?            </div>-->
+            <div class="meeting-custom-info"
+               tal:condition="meeting/custom_info">
+              <div id="meeting-custom-info-collapse" class="meeting-custom-info-content"
+                 tal:define="hidden meeting_utils_view/hidden_info_toggle">
+<!--?                <a id="show-more-link"-->
+<!--?                   class="toggle-link"-->
+<!--?                   href=""-->
+<!--?                   tal:attributes="style python: hidden and ' ' or 'display: none'"-->
+<!--?                   i18n:translate="">Show meeting infos</a>-->
+<!--?                <a id="show-less-link"-->
+<!--?                   class="toggle-link"-->
+<!--?                   href=""-->
+<!--?                   tal:attributes="style python: hidden and 'display: none' or ''"-->
+<!--?                   i18n:translate="">Hide meeting infos</a>-->
+                <div id="meeting-custom-info-content-toggle"
+                   tal:content="structure python:meeting.custom_info.output_relative_to(meeting)" />
+              </div>
+            </div>
+          </div>
+        </tal:meeting>
+        <div class="row">
+
+          <div class="col-lg-6 offset-3">
+            <div metal:use-macro="context/batch_macros/macros/navigation" />
+          </div>
+          <div class="col-lg-3">
+            <x-layout-select id="items-layout-select" target-selector=".items-container" default-option="grid"></x-layout-select>
+          </div>
+        </div>
+
+
+        <span tal:condition="folderContents" class="items-container">
             <tal:entries tal:define="preview nocall:context/@@faceted_pm_macros/preview_meeting_item;
-                                     meeting_type context/@@utils_view/meeting_type">
+              meeting_type context/@@utils_view/meeting_type">
               <tal:entry repeat="brain batch">
 
                 <metal:macro use-macro="preview"
-                             tal:define="brain nocall:brain;
-                                         meeting_type meeting_type"/>
+                   tal:define="brain nocall:brain;
+                    meeting_type meeting_type;
+                    meeting nocall:meeting
+                    "/>
 
               </tal:entry>
             </tal:entries>
 
           </span>
 
-          <span tal:condition="not: batch/sequence_length"
-                class="table_faceted_no_results"
-                i18n:domain="plone"
-                i18n:translate="description_no_results_found">No results were found.</span>
-        </div>
-
+        <span tal:condition="not: batch/sequence_length"
+          class="table_faceted_no_results"
+           i18n:domain="plone"
+           i18n:translate="description_no_results_found">No results were found.</span>
         <div metal:use-macro="context/batch_macros/macros/navigation" />
-
       </div>
 
-    </metal:block>
-  </metal:content-core>
+
+
+    </div>
+
+  </metal:block>
+</metal:content-core>
 </body>
 </html>

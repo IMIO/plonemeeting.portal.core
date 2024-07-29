@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from collective import dexteritytextindexer
+# from collective import dexteritytextindexer
 from copy import deepcopy
 from imio.helpers.content import object_values
 from plone import api
+from plone.app.dexterity.textindexer import directives
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
@@ -20,7 +21,7 @@ class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
 
-    dexteritytextindexer.searchable("formatted_title")
+    directives.searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
     number = schema.TextLine(title=_(u"Item number"), required=True, readonly=True)
@@ -55,7 +56,7 @@ class IItem(model.Schema):
         title=_(u"Additional data"), required=False, readonly=True
     )
 
-    dexteritytextindexer.searchable("decision")
+    directives.searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False, readonly=True)
 
     category = schema.Choice(
@@ -167,11 +168,10 @@ def get_annexes_infos(object):
     if request is None:
         raise AttributeError
     files = object.listFolderContents(contentFilter={"portal_type": "File"})
-    for annexe in files:
-        utils_view = getMultiAdapter((annexe, request), name="file_view")
-        icon = utils_view.get_mimetype_icon()
+    for annex in files:
+        utils_view = getMultiAdapter((annex, request), name="file_view")
         # Unfortunately, we can't store dicts
-        index.append((annexe.title, annexe.absolute_url(), icon))
+        index.append((annex.title, annex.absolute_url(), utils_view.getMimeTypeIcon(annex.file)))
     return index
 
 
