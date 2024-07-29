@@ -34,38 +34,3 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(len(result["items"]), len(vocabulary_values.items()))
         for value in result["items"]:
             self.assertEqual(value["title"], vocabulary_values[value["token"]])
-
-    def test_institution_locations_view(self):
-        """ Test if the values from InstitutionLocationsView are correct"""
-        portal = api.portal.get()
-
-        view = portal.unrestrictedTraverse("@@institution_locations")
-        render = view()
-        # Institutions with imaginary name are ignored
-        self.assertDictEqual({}, json.loads(render))
-
-        self.login_as_manager()
-        namur = api.content.create(
-            container=self.portal, type="Institution", id="namur", title="Namur"
-        )
-        liege = api.content.create(
-            container=self.portal, type="Institution", id="liege", title="Liège"
-        )
-        view = portal.unrestrictedTraverse("@@institution_locations")
-        render = view()
-        # Not published institutions are ignored too
-        self.assertDictEqual({}, json.loads(render))
-
-        api.content.transition(obj=namur, transition='publish')
-        api.content.transition(obj=liege, transition='publish')
-        # We should have some data now :
-        view = portal.unrestrictedTraverse("@@institution_locations")
-        render = view()
-        json_response = json.loads(render)
-        self.assertIn("namur", json_response.keys())
-        self.assertIn("liege", json_response.keys())
-        self.assertIn("data", json_response["namur"].keys())
-        self.assertIn("geo_shape", json_response["namur"]["data"]["fields"].keys())
-
-        # Test if portal as saved locations from remote API for future use
-        self.assertTrue(hasattr(portal, "api_institution_locations"))

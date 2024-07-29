@@ -5,7 +5,7 @@ import L from "leaflet";
 const defaultOptions = {
     stroke: false,
     color: "#000000",
-    fillOpacity: 0.1,
+    fillOpacity: 0.05,
     clickable: false,
     outerBounds: new L.LatLngBounds([-90, -360], [90, 360]),
 };
