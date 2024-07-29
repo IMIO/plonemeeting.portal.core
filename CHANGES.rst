@@ -2,11 +2,19 @@ Changelog
 =========
 
 
-1.6.3 (unreleased)
+1.6.4 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+1.6.3 (2024-02-19)
+------------------
+
+- Added `general-assembly` to the registry `meeting_types`.
+  [gbastien]
+- Upgrade dependencies versions.
+  [aduchene]
 
 1.6.2 (2023-09-18)
 ------------------
