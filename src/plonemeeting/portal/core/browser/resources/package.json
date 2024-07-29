@@ -58,7 +58,7 @@
   "dependencies": {
     "@loadable/component": "^5.15.2",
     "@react-leaflet/core": "^1.1.1",
-    "axios": "^0.21.4",
+    "axios": "^0.28.0",
     "leaflet": "^1.8.0",
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
