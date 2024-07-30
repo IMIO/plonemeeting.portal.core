@@ -24,7 +24,6 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 
 
-
 def handle_institution_creation(obj, event):
     current_lang = api.portal.get_default_language()[:2]
     institution_title = obj.title
@@ -56,11 +55,12 @@ def handle_institution_creation(obj, event):
     )
     alsoProvides(publications, IPublicationsFolder)
 
+    # XXX to be changed to "faceted-preview-publication" when available
+    IFacetedLayout(publications).update_layout("faceted-preview-items")
+
     request = getRequest()
     if request:  # Request can be `None` during test setup
         request.response.redirect(obj.absolute_url())
-
-
 
 
 def handle_institution_modified(institution, event):
@@ -103,6 +103,7 @@ def meeting_state_changed(obj, event):
     items = obj.listFolderContents(contentFilter={"portal_type": "Item"})
     for item in items:
         item.reindexObject(idxs=["linkedMeetingReviewState"])
+
 
 def update_custom_css(context, event):
     """

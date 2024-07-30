@@ -11,6 +11,8 @@ from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
 from plonemeeting.portal.core.config import FACETED_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import format_institution_managers_group_id
@@ -56,19 +58,21 @@ def post_install(context):
     )
     config_folder.exclude_from_nav = True
 
-
-    # Create global faceted folder
-    faceted = create_faceted_folder(
-        config_folder,
-        translate(_(u"Faceted"), target_language=current_lang),
-        id=FACETED_FOLDER_ID,
-    )
-
-    faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
-    with open(faceted_config_path, "rb") as faceted_config:
-        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-            import_file=faceted_config
+    # Create global meetings and publications faceted folders
+    for faceted_folder_id, faceted_xml_path in (
+            (FACETED_FOLDER_ID, FACETED_XML_PATH),
+            (FACETED_PUB_FOLDER_ID, FACETED_PUB_XML_PATH)):
+        faceted = create_faceted_folder(
+            config_folder,
+            translate(_(faceted_folder_id.capitalize()), target_language=current_lang),
+            id=faceted_folder_id,
         )
+
+        faceted_config_path = os.path.join(os.path.dirname(__file__), faceted_xml_path)
+        with open(faceted_config_path, "rb") as faceted_config:
+            faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+                import_file=faceted_config
+            )
 
 
 def uninstall(context):
