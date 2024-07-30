@@ -1,0 +1,3 @@
+packages:
+  - "src/plonemeeting/portal/core/browser/resources"
+  - "src/plonetheme.deliberations/src/plonetheme/deliberations/theme"

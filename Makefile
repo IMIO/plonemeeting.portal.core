@@ -1,7 +1,6 @@
 #!/usr/bin/make
-#
+SHELL:=/bin/bash -O globstar
 args = $(filter-out $@,$(MAKECMDGOALS))
-RESOURCES_PATH = src/plonemeeting/portal/core/browser/resources
 py = 3.11
 plone = 6.0
 
@@ -40,18 +39,17 @@ test:
 
 .PHONY: resources
 resources:  ## Compile resources
-	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
-	. ${NVM_DIR}/nvm.sh && nvm use --lts
-	$(MAKE) -C $(RESOURCES_PATH) build
+	pnpm run build
 
 .PHONY: resources-install
 resources-install:  ## Install resources dependencies
-	. ${NVM_DIR}/nvm.sh && nvm install --lts
-	$(MAKE) -C $(RESOURCES_PATH) install
+	$(MAKE) resources-clean
+	pnpm i
+
+.PHONY: resources-clean
+resources-clean:  ## Clean all node_modules
+	rm -r **/node_modules || true
 
 .PHONY: resources-watch
-resources-watch:  ## Start a Webpack dev server and watch for resources changes
-	# You can pass your Plone site path with = --env PLONE_SITE_PATH=/conseil
-	# Default Plone site path is "/Plone"
-	if ! test -d $(RESOURCES_PATH)/node_modules;then make resources-install;fi
-	$(MAKE) -C $(RESOURCES_PATH) watch $(args)
+resources-watch:  ## Start a Webpack dev servers and watch for resources changes
+	pnpm run --parallel watch

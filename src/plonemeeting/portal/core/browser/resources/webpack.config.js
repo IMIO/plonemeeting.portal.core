@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const PreactRefreshPlugin = require("@prefresh/webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const PlonePlugin = require("./webpackPlonePlugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -27,11 +26,7 @@ module.exports = (env, argv) => {
             }),
             new MiniCssExtractPlugin({
                 filename: "css/core.css",
-            }),
-            new PlonePlugin({
-                mode: argv.mode,
-                bundlePrefix: BUNDLE_PREFIX,
-            }),
+            })
         ].filter(Boolean),
         module: {
             rules: [
