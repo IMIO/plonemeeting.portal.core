@@ -11,6 +11,9 @@ Changelog
   [aduchene]
 - Use latest Python 3.12 and Plone 6.0.11.1.
   [aduchene]
+- Switch to pnpm (from npm) to be able to build and watch css/js files on
+  multiple sub-packages at once.
+  [aduchene]
 
 1.6.3 (2024-02-19)
 ------------------
