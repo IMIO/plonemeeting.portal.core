@@ -1,0 +1,26 @@
+// Environment label
+
+.environment-label {
+    position: fixed;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: white;
+    bottom: 33px;
+    right: -50px;
+    font-size:1.2em;
+    width: 200px;
+    z-index: 100000;
+    transform: rotate(-45deg);
+    transform-origin: center center;
+    text-align: center;
+    white-space: pre;
+    opacity: 0.5;
+    pointer-events: none;
+
+  &.environment-dev {
+    background: rgb(255, 118, 0);
+  }
+  &.environment-test {
+    background: rgb(238, 3, 13);
+  }
+}

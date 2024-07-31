@@ -3,6 +3,7 @@ from Products.CMFPlone.CatalogTool import CatalogTool
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core.browser.nextprevious import NextPrevPortalType
+from plonemeeting.portal.core.browser.utils import pretty_file_size, pretty_file_icon
 from zope.i18n import translate
 from plonemeeting.portal.core import _
 
@@ -16,11 +17,19 @@ class ItemView(DefaultView):
         """
         return self.context.aq_parent
 
-    def get_files(self):
+    def get_files_infos(self):
         brains = api.content.find(
             portal_type="File", context=self.context, sort_on="getObjPositionInParent"
         )
-        return brains
+        res = []
+        for brain in brains:
+            file = brain.getObject()
+            res.append({
+                "file": file,
+                "size": pretty_file_size(int(file.get_size())),
+                "icon": pretty_file_icon(file.content_type()),
+            })
+        return res
 
     def get_next_prev_infos(self):
         """

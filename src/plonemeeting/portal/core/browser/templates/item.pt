@@ -4,7 +4,14 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
-   i18n:domain="plonemeeting.portal.core">
+   i18n:domain="plonemeeting.portal.core"
+    tal:define="portal_url context/@@plone_portal_state/portal_url;
+      utils_view nocall:context/@@utils_view;
+      meeting nocall:context/aq_parent;
+      institution python: utils_view.get_current_institution();
+      review_state python: utils_view.get_state(meeting);
+      isAnon context/@@plone_portal_state/anonymous;"
+>
 <body>
 
 <metal:item-title fill-slot="content-title">
@@ -41,7 +48,10 @@
           </div>
           <div style="flex: 1"></div>
           <div id="agenda-col" class="nav-col action-col">
-            <x-meeting-agenda tal:attributes="count last_item_num"></x-meeting-agenda>
+            <x-meeting-agenda tal:attributes="
+              count last_item_num;
+              meeting-url meeting/absolute_url
+              "></x-meeting-agenda>
           </div>
           <div id="next-col" class="nav-col action-col">
             <a
@@ -58,17 +68,13 @@
     </div>
   </div>
   <tal:text-macro metal:define-macro="content-core">
-    <div class=""
-       tal:define="portal_url context/@@plone_portal_state/portal_url;
-      utils_view nocall:context/@@utils_view;
-      meeting nocall:context/aq_parent;
-      institution python: utils_view.get_current_institution();
-      review_state python: utils_view.get_state(meeting);
-      isAnon context/@@plone_portal_state/anonymous;"
-       tal:attributes="class string:item-infos ${review_state}">
+    <div class="" tal:attributes="class string:item-infos ${review_state}">
       <div class="row mb-3">
         <div class="col-lg-6">
           <div class="card meeting-card">
+            <a href="" class="filled-link"
+               tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)">
+            </a>
             <div class="card-body">
               <div class="meeting-card-icon">
                 <i class="bi bi-calendar">
@@ -77,12 +83,11 @@
               </div>
               <div class="meeting-infos">
                 <div class="meeting-type" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
-                <a href="" class="meeting-title-link"
+                <span href="" class="meeting-title"
                    tal:content="meeting/title"
-                   tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)"
                 >
                   01 january 2024 (16:00)
-                </a>
+                </span>
                 <div class="meeting-item-number">
                   <span class="">Point N°</span>
                   <span tal:content="context/number">99</span>
@@ -125,7 +130,7 @@
               John Doe, President
             </div>
           </div>
-          <div class="item-metadata-row" tal:condition="python: context.additional_data">
+          <div id="item-metadata-extra" class="item-metadata-row" tal:condition="python:context.additional_data.output_relative_to(context)">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
@@ -156,23 +161,26 @@
         </div>
       </div>
       <div class="row annexes-section mb-3"
-         tal:define="files view/get_files"
-         tal:condition="files">
+         tal:define="files_infos view/get_files_infos"
+         tal:condition="files_infos">
         <div class="col-12">
           <h2 i18n:translate="">Annexes</h2>
           <div class="annexes">
-            <div tal:repeat="file files">
+            <div tal:repeat="info files_infos">
               <div class="annex">
-                <div class="type bg-file-xlsx">
-                  <i class="bi bi-filetype-xlsx"></i>
+                <div class="bg-file-color ${info/icon/color}">
+                  <i tal:attributes="class info/icon/icon"></i>
                 </div>
                 <div class="title">
-                  <h3 tal:content="file/Title" />
-                  <p>Taille: 145 kB</p>
+                  <h3 tal:content="info/file/Title" />
+                  <p>Taille: <span tal:content="info/size"></span></p>
                 </div>
                 <div class="annex-actions">
-                  <i class="bi bi-box-arrow-in-up-right"></i>
-                  <i class="bi bi-download"></i>
+                  <a href=""
+                     target="_blank"
+                     tal:attributes="href info/file/absolute_url">
+                    <i class="bi bi-box-arrow-in-up-right"></i>
+                  </a>
                 </div>
               </div>
             </div>
@@ -180,11 +188,7 @@
         </div>
       </div>
     </div>
-
   </tal:text-macro>
-
-
 </metal:text>
-
 </body>
 </html>

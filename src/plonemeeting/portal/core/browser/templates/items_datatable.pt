@@ -66,15 +66,15 @@
             Title
           </span>
         </td>
-        <td class="pat-moment"
+        <td class="datetime"
             data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
-          tal:content="item/modified">
+          tal:content="python:context.toLocalizedTime(item['modified'],long_format=1)">
           Modified at (iA.Délib)
         </td>
-        <td class="pat-moment"
-            data-pat-moment="format: Do/M/YYYY hh:mm:ss;"
+        <td class="datetime"
+            data-order="format: Do/M/YYYY hh:mm:ss;"
           tal:condition="is_syncing"
-          tal:content="item/local_last_modified">
+          tal:content="python:context.toLocalizedTime(item['local_last_modified'],long_format=1)">
           Modified at (délibération.be)
         </td>
         <td tal:content="python: item.get(institution.delib_category_field)['title']">

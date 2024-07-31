@@ -1,11 +1,6 @@
 import {useEffect, useState} from "preact/hooks";
 import axios from "axios";
-
-function getRandomInt(min, max) {
-    const minCeiled = Math.ceil(min);
-    const maxFloored = Math.floor(max);
-    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
-}
+import {randomInt} from "../utils";
 
 const placeHolderVariations = [
     [2, 1, 4, 3],
@@ -17,19 +12,19 @@ const placeHolderVariations = [
     [4, 1, 3, 1, 2],
     [1, 1, 2, 1, 2],
 ]
-const MeetingAgendaPlaceHolder = ({number}) => {
+const MeetingAgendaPlaceHolder = ({count}) => {
 
-    const rows = getRandomInt(1, 3);
+    const rows = randomInt(1, 3);
 
     return (
         <li>
             <a className="item-line placeholder-glow" href="">
             <span className="item-number">
-               {number}
+               {count}
             </span>
                 <span className="item-title">
                     {[...Array(rows)].map((x, i) => (
-                        placeHolderVariations[getRandomInt(0, placeHolderVariations.length)].map((col, j) => (
+                        placeHolderVariations[randomInt(0, placeHolderVariations.length)].map((col, j) => (
                                 <span className={`placeholder col-${col} mx-1`} key={j}></span>
                             )
                         )
@@ -40,7 +35,7 @@ const MeetingAgendaPlaceHolder = ({number}) => {
     )
 }
 
-const MeetingAgenda = () => {
+const MeetingAgenda = ({count, meetingUrl}) => {
     const [items, setItems] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
@@ -54,7 +49,7 @@ const MeetingAgenda = () => {
 
     const handleClick = () => {
         offcanvas.toggle();
-        axios.get("http://0.0.0.0:8080/conseil/charleroi/25-mars-2024-19-30/@@agenda")
+        axios.get(meetingUrl+"/@@agenda")
             .then((response) => {
                 setItems(response.data);
                 setIsLoading(false);
@@ -81,7 +76,7 @@ const MeetingAgenda = () => {
             </div>
             <div class="offcanvas-body">
                 <ul className="items-list">
-                    {isLoading && [...Array(50)].map((x, i) => <MeetingAgendaPlaceHolder number={i + 1} key={i}/>)}
+                    {isLoading && [...Array(parseInt(count))].map((x, i) => <MeetingAgendaPlaceHolder number={i + 1} key={i}/>)}
                     {!isLoading && <>
                         {items && items.map((item, index) => (
                             <li><a className="item-line" href={item["@id"]}>

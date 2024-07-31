@@ -18,18 +18,22 @@ register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
-register(MeetingAgenda, "x-meeting-agenda", ["count"]);
+register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
 
 
 
 function setUpEnvironmentLabel() {
     let hostname = document.location.hostname;
     if (hostname === "localhost" || hostname === "0.0.0.0") {
-        document.querySelector("body").append("<span class='environment-label environment-dev'>DEV</span>");
+        $("body").append("<span class='environment-label environment-dev'>DEV</span>");
     } else if (hostname.includes("staging")) {
-        document.querySelector("body").append("<span class='environment-label environment-test'>TEST</span>");
+        $("body").append("<span class='environment-label environment-test'>TEST</span>");
     }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  setUpEnvironmentLabel();
+})
+
 
 if (module.hot) {
     module.hot.accept();

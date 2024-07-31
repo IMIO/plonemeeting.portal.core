@@ -31,6 +31,7 @@
     name="view"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     class=".institution.InstitutionView"
+    template="templates/institution.pt"
     permission="zope2.View"
   />
 

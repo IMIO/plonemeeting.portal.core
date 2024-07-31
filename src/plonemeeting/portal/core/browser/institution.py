@@ -12,8 +12,6 @@ from zope.browserpage import ViewPageTemplateFile
 class InstitutionView(DefaultView):
     """
     """
-    index = ViewPageTemplateFile(path_to_dx_default_template())
-
     def __call__(self):
         # Don't redirect if user can edit institution
         # Don't use api.user.has_permission since the method breaks robot tests

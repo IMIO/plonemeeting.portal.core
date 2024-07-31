@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+   i18n:domain="plone"
+>
+<body>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation" i18n:domain="plone">
+        <button class="nav-link active"
+                id="pills-general-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-general"
+                type="button"
+                role="tab"
+                aria-controls="pills-general" i18n:translate="label_general">
+            General
+          </button>
+      </li>
+      <li class="nav-item" role="presentation"
+         tal:repeat="group view/groups|nothing"
+      >
+        <button class="nav-link"
+           tal:define="tab_id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')"
+                id="pills-${tab_id}-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-${tab_id}"
+                type="button"
+                role="tab"
+                aria-controls="pills-${tab_id}" tal:content="group/label">
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane show active fade"
+          id="pills-general" role="tabpanel"
+          aria-labelledby="pills-general-tab"
+        >
+          <tal:block repeat="widget view/widgets/values|nothing">
+            <tal:block tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+              <tal:widget tal:replace="structure widget/@@ploneform-render-widget" />
+            </tal:block>
+          </tal:block>
+        </div>
+      <tal:block tal:repeat="group view/groups|nothing">
+        <div class="tab-pane fade"
+           tal:define="tab_id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')"
+          id="pills-${tab_id}" role="tabpanel"
+          aria-labelledby="pills-${tab_id}-tab"
+        >
+          <tal:block tal:repeat="widget group/widgets/values|nothing">
+            <tal:widget tal:replace="structure widget/@@ploneform-render-widget" />
+          </tal:block>
+        </div>
+      </tal:block>
+    </div>
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>

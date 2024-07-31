@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import math
+
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
 from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import MIMETYPE_TO_ICON
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
@@ -119,3 +122,22 @@ class UtilsView(BrowserView):
 def path_to_dx_default_template():
     dx_path = os.path.dirname(plone.dexterity.browser.__file__)
     return os.path.join(dx_path, "item.pt")
+
+def pretty_file_size(size_bytes):
+   if size_bytes == 0:
+       return "0B"
+   size_name = ("o", "Ko", "Mo", "Go", "To", "Po", "Eo", "Zo", "Yo")
+   i = int(math.floor(math.log(size_bytes, 1024)))
+   p = math.pow(1024, i)
+   s = round(size_bytes / p, 2)
+   return f"{s} {size_name[i]}"
+
+def pretty_file_icon(mimetype):
+    """
+    Returns the Bootstrap icon class for a given MIME type.
+
+    :param mimetype: The MIME type to look up.
+    :return: A dictionary with 'icon' and 'color' keys.
+    """
+    default_icon = {'icon': 'bi bi-file', 'color': 'bg-grey'}  # Default icon and color for unknown MIME types
+    return MIMETYPE_TO_ICON.get(mimetype, default_icon)
