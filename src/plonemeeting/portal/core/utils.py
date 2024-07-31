@@ -287,9 +287,9 @@ def create_faceted_folder(container, title, id):
     return folder
 
 
-def set_constrain_types(obj, portal_type_ids):
+def set_constrain_types(obj, portal_type_ids, mode=1):
     behavior = ISelectableConstrainTypes(obj)
-    behavior.setConstrainTypesMode(1)
+    behavior.setConstrainTypesMode(mode)
     behavior.setImmediatelyAddableTypes(portal_type_ids)
     behavior.setLocallyAllowedTypes(portal_type_ids)
 

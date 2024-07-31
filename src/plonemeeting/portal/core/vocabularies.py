@@ -57,6 +57,45 @@ class LocalCategoryVocabularyFactory:
 LocalCategoryVocabulary = LocalCategoryVocabularyFactory()
 
 
+class DocumentTypesVocabularyFactory:
+    def __call__(self, context):
+        # use .copy() to make sure to return a copy of the record
+        document_types = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.document_types"
+        )
+        if not document_types:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=doc_type_id, title=doc_type_title)
+                for doc_type_id, doc_type_title in document_types.copy().items()
+            ]
+        )
+
+
+DocumentTypesVocabulary = DocumentTypesVocabularyFactory()
+
+
+class LegislativeAuthoritiesVocabularyFactory:
+    def __call__(self, context):
+        # use .copy() to make sure to return a copy of the record
+        legislative_authorities = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.legislative_authorities"
+        )
+        if not legislative_authorities:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=leg_auth_id, title=leg_auth_title)
+                for leg_auth_id, leg_auth_title in legislative_authorities.copy().items()
+            ]
+        )
+
+
+LegislativeAuthoritiesVocabulary = LegislativeAuthoritiesVocabularyFactory()
+
 class MeetingDateVocabularyFactory:
     def __call__(self, context):
         institution = api.portal.get_navigation_root(context)

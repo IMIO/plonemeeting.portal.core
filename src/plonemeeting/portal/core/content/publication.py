@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-
-from copy import deepcopy
+from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
 from plone import api
-from plone.app.dexterity.textindexer import directives
 from plone.app.textfield import RichText
+from plone.app.z3cform.widget import DatetimeFieldWidget
+from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel import model
 from plonemeeting.portal.core import _
-from Products.CMFPlone import PloneMessageFactory as plone_
+from Products.CMFPlone import PloneMessageFactory as Plone_
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
@@ -19,6 +18,16 @@ from zope.interface import implementer
 class IPublication(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
+    effective = schema.Datetime(
+        title=Plone_("label_effective_date", "Publishing Date"),
+        description=Plone_(
+            "help_effective_date",
+            default="If this date is in the future, the content will "
+            "not show up in listings and searches until this date.",
+        ),
+        required=False,
+    )
+    directives.widget("effective", DatetimeFieldWidget)
 
     decision_date = schema.Datetime(
         title=_(u"Decision date"),
@@ -30,10 +39,8 @@ class IPublication(model.Schema):
         required=False,
     )
 
-    document_type = schema.List(
-        value_type=schema.Choice(
-            vocabulary="plonemeeting.portal.vocabularies.document_types"
-        ),
+    document_type = schema.Choice(
+        vocabulary="plonemeeting.portal.vocabularies.document_types",
         title=_(u"Document type"),
         required=False,
     )
@@ -55,11 +62,6 @@ class IPublication(model.Schema):
         required=False
     )
 
-    directives.searchable("text")
-    text = RichText(
-        title=_(u"Text"), required=False, readonly=True
-    )
-
 
 @implementer(IPublication)
 class Publication(Container):
@@ -73,6 +75,21 @@ def get_decision_date(obj):
 
 
 @indexer(IPublication)
+def get_effective_date(obj):
+    """As elements are sorted in the faceted on effective date, if no date, it
+       it not returned so set a date of 01/01/1950 for publications without an
+       effective date."""
+    return obj.effective or EMPTY_DATETIME
+
+
+@indexer(IPublication)
+def get_effective_year(obj):
+    effective = obj.effective
+    if effective:
+        return str(effective.year)
+
+
+@indexer(IPublication)
 def get_document_type(obj):
     return obj.document_type
 
@@ -83,6 +100,15 @@ def get_pretty_category(obj):
         name="plonemeeting.portal.core.global_categories"
     )
     return global_categories.copy()[obj.category]
+
+
+@indexer(IPublication)
+def get_pretty_document_type(obj):
+    # use .copy() to make sure to return a copy of the record
+    document_types = api.portal.get_registry_record(
+        name="plonemeeting.portal.core.document_types"
+    )
+    return document_types.copy()[obj.document_type]
 
 
 @indexer(IPublication)

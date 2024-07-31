@@ -11,6 +11,11 @@
     provides="eea.facetednavigation.interfaces.ICriteria"
     factory=".criteria.MeetingsCriteria" />
 
+  <adapter
+    for="plonemeeting.portal.core.interfaces.IPublicationsFolder"
+    provides="eea.facetednavigation.interfaces.ICriteria"
+    factory=".criteria.PublicationsCriteria" />
+
   <faceted:view
     name="faceted-preview-meeting"
     template="preview_meeting.pt"

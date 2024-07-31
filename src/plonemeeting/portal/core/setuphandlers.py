@@ -84,12 +84,12 @@ def create_file(container, filename):
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/demo/data/", filename)
     if os.path.isfile(file_path):
-        contentType = mimetypes.guess_type(file_path)[0]
+        content_type = mimetypes.guess_type(file_path)[0]
         title = os.path.basename(file_path)
         with open(file_path, "rb") as fd:
             file_obj = content.create(container=container, type="File", title=title)
             file_obj.file = NamedFile(
-                data=fd, filename=title, contentType=contentType
+                data=fd, filename=title, contentType=content_type
             )
 
 
@@ -119,7 +119,13 @@ def create_demo_content(context):
         api.portal.set_registry_record(
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
-
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.document_types", data["document_types"]
+        )
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.legislative_authorities",
+            data["legislative_authorities"]
+        )
         normalizer = getUtility(IIDNormalizer)
         for institution in data["institutions"]:
             institution_id = normalizer.normalize(institution["title"])

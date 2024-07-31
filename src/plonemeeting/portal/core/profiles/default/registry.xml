@@ -17,6 +17,30 @@
     </field>
     <value purge="false"/>
   </record>
+  <record name="plonemeeting.portal.core.document_types">
+    <field type="plone.registry.field.Dict">
+      <title i18n:translate="">Document types</title>
+      <key_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Document type id</title>
+      </key_type>
+      <value_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Document type title</title>
+      </value_type>
+    </field>
+    <value purge="false"/>
+  </record>
+  <record name="plonemeeting.portal.core.legislative_authorities">
+    <field type="plone.registry.field.Dict">
+      <title i18n:translate="">Legislative authorities</title>
+      <key_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Legislative authority id</title>
+      </key_type>
+      <value_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Legislative authority title</title>
+      </value_type>
+    </field>
+    <value purge="false"/>
+  </record>
   <record name="plonemeeting.portal.core.rgpd_masked_text_redirect_path">
     <field type="plone.registry.field.TextLine">
       <title i18n:translate="">Internal redirect path for GDPR masked text links from site root</title>

@@ -33,14 +33,15 @@
   <property name="schema">plonemeeting.portal.core.content.publication.IPublication</property>
 
   <!-- Enabled behaviors -->
-  <property name="behaviors" purge="false">
+  <property name="behaviors" purge="true">
+    <element value="plone.basic"/>
     <element value="plone.namefromtitle"/>
     <element value="plone.shortname"/>
-    <element value="plone.ownership"/>
     <element value="plone.publication"/>
-    <element value="plone.categorization"/>
+    <element value="plone.richtext"/>
+    <element value="plone.relateditems"/>
+    <element value="plone.tableofcontents"/>
     <element value="plone.locking" />
-    <element value="plone.textindexer" />
   </property>
 
   <!-- View information -->

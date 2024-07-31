@@ -4,27 +4,22 @@
   i18n_domain="plone">
 
   <configure zcml:condition="installed AccessControl.security">
-  <!-- -*- extra stuff goes here -*- -->
-
     <permission
         id="plonemeeting.portal.core.AddItem"
         title="plonemeeting.portal.core: Add Item"
     />
-
-
     <permission
         id="plonemeeting.portal.core.AddMeeting"
         title="plonemeeting.portal.core: Add Meeting"
     />
-
-
     <permission
         id="plonemeeting.portal.core.AddInstitution"
         title="plonemeeting.portal.core: Add Institution"
     />
-
-
-
+    <permission
+        id="plonemeeting.portal.core.AddPublication"
+        title="plonemeeting.portal.core: Add Publication"
+    />
   </configure>
 
 </configure>

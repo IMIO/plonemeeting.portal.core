@@ -7,7 +7,6 @@
 
   <i18n:registerTranslations directory="locales" />
 
-<!--  <include package="collective.dexteritytextindexer" />-->
   <include package="collective.z3cform.datagridfield" />
   <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
@@ -72,6 +71,18 @@
   <utility
     component=".vocabularies.LocalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.local_categories"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.DocumentTypesVocabulary"
+    name="plonemeeting.portal.vocabularies.document_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.LegislativeAuthoritiesVocabulary"
+    name="plonemeeting.portal.vocabularies.legislative_authorities"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

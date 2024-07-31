@@ -57,6 +57,7 @@ def handle_institution_creation(obj, event):
 
     # XXX to be changed to "faceted-preview-publication" when available
     IFacetedLayout(publications).update_layout("faceted-preview-items")
+    set_constrain_types(publications, ["Publication"])
 
     request = getRequest()
     if request:  # Request can be `None` during test setup

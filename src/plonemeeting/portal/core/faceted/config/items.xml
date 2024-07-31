@@ -23,7 +23,7 @@
    <property name="title">Recherche</property>
    <property name="index">SearchableText</property>
    <property name="onlyallelements">True</property>
-   <property name="wildcard">False</property>
+   <property name="wildcard">True</property>
    <property name="position">top</property>
    <property name="section">default</property>
    <property name="hidden">False</property>

@@ -18,6 +18,11 @@
       <role name="Manager"/>
     </permission>
 
+    <permission name="plonemeeting.portal.core: Add Publication" acquire="True">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+
     <permission name="eea.facetednavigation: Configure faceted" acquire="True">
       <role name="Manager"/>
     </permission>
