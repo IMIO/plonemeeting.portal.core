@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode=production",
-    "watch": "webpack serve --mode=development",
+    "watch": "webpack serve --mode=development --no-client-overlay",
     "extract": "lingui extract",
     "compile": "lingui compile"
   },
@@ -66,8 +66,9 @@
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
     "preact": "^10.8.0",
-    "preact-custom-element": "^4.2.1",
+    "preact-custom-element": "^4.3.0",
     "react-leaflet": "^4.2.1",
-    "react-select": "^5.3.2"
+    "react-select": "^5.3.2",
+    "@mikecousins/react-pdf": "^7.1.0"
   }
 }

@@ -1,4 +1,3 @@
-import {h, render} from "preact";
 import {useState} from "preact/hooks";
 
 const CheckboxSelector = ({scope, checked}) => {
@@ -17,4 +16,4 @@ const CheckboxSelector = ({scope, checked}) => {
   return <input type="checkbox" onClick={handleClick} checked={selected} title="Tout cocher/décocher" />
 }
 
-export default CheckboxSelector
+export default CheckboxSelector;

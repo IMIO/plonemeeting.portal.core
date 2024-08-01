@@ -36,8 +36,8 @@
         <span tal:content="structure brain/formatted_title"></span>
       </h5>
     </div>
-    <div class="row item-metadatas">
-      <div class="item-metadatas-col col">
+    <div class="row content-metadatas">
+      <div class="content-metadatas-col col">
         <div class="item-metadata-row" tal:condition="python: not meeting">
           <div class="item-metadata-label" i18n:translate="">Meeting</div>
           <a class="meeting-title-link" href=""
@@ -88,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div tal:condition="nocall:meeting" id="item-metadatas-number" class="col">
+      <div tal:condition="nocall:meeting" id="content-metadatas-number" class="col">
         <div class="item-number-bg" tal:content="brain/number"></div>
       </div>
 

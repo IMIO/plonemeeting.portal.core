@@ -96,12 +96,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 item-metadatas">
-          <div class="item-metadata-row">
-            <div class="item-metadata-col header">
+        <div class="col-lg-6 content-metadatas">
+          <div class="content-metadata-row">
+            <div class="content-metadata-col header">
               État <i class="bi bi-question-circle"></i>
             </div>
-            <div class="item-metadata-col"
+            <div class="content-metadata-col"
                i18n:domain="plone">
                 <span tal:condition="python: review_state == 'private'"
                    i18n:translate=""
@@ -114,23 +114,23 @@
                  tal:attributes="class string:state-badge state-${review_state}">Decision</span>
             </div>
           </div>
-          <div class="item-metadata-row">
-            <div class="item-metadata-col header" i18n:translate="">
+          <div class="content-metadata-row">
+            <div class="content-metadata-col header" i18n:translate="">
               Category
             </div>
-            <div class="item-metadata-col" tal:content="structure view/w/category/render">
+            <div class="content-metadata-col" tal:content="structure view/w/category/render">
               Urbanism
             </div>
           </div>
-          <div class="item-metadata-row" tal:condition="context/representatives_in_charge">
-            <div class="item-metadata-col header" i18n:translate="">
+          <div class="content-metadata-row" tal:condition="context/representatives_in_charge">
+            <div class="content-metadata-col header" i18n:translate="">
               Representative
             </div>
-            <div class="item-metadata-col" tal:content="structure view/w/long_representatives_in_charge/render">
+            <div class="content-metadata-col" tal:content="structure view/w/long_representatives_in_charge/render">
               John Doe, President
             </div>
           </div>
-          <div id="item-metadata-extra" class="item-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
+          <div id="content-metadata-extra" class="content-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>

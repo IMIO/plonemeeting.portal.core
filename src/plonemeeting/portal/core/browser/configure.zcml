@@ -51,6 +51,14 @@
   />
 
   <browser:page
+    name="view"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationView"
+    template="templates/publication.pt"
+    permission="zope.Public"
+  />
+
+  <browser:page
     name="import_meeting"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     permission="cmf.ModifyPortalContent"

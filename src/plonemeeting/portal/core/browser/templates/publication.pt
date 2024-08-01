@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+    tal:define="portal_url context/@@plone_portal_state/portal_url;
+      utils_view nocall:context/@@utils_view;
+      review_state python: utils_view.get_state(context);
+      isAnon context/@@plone_portal_state/anonymous;"
+>
+<body>
+
+
+<metal:item-title fill-slot="content-title">
+</metal:item-title>
+
+
+<metal:content-core fill-slot="content-core">
+  <metal:content-core define-macro="content-core"
+    tal:define="filename python: context.file.filename;
+                filename_url python: '{}/@@download/file/{}'.format(context.absolute_url(), filename);">
+    <div class="row mb-3">
+      <div class="col-lg-6 content-metadatas border-end border-1">
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:translate="">
+            Document type
+          </div>
+          <div class="content-metadata-col" tal:content="structure view/w/document_type/render">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:translate="">
+            Category
+          </div>
+          <div class="content-metadata-col" tal:content="structure view/w/category/render">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:translate="">
+            Legislative authority
+          </div>
+          <div class="content-metadata-col" tal:content="structure view/w/legislative_authority/render">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 content-metadatas">
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:domain="plone" i18n:translate="label_effective_date">
+            Publishing date
+          </div>
+          <div class="content-metadata-col" tal:content="python:context.toLocalizedTime(context.effective,long_format=1)">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:translate="">
+            Decision date
+          </div>
+          <div class="content-metadata-col" tal:content="python:context.toLocalizedTime(context.decision_date,long_format=1)">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header" i18n:translate="">
+            Authority date
+          </div>
+          <div class="content-metadata-col" tal:content="python:context.toLocalizedTime(context.authority_date,long_format=1)">
+            2024-08-01 00:00:00
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="card p-4">
+          <div class=""
+             i18n:domain="plone">
+            <h1 tal:content="structure python:context.title">Title</h1>
+            <span tal:content="structure python:context.text.output_relative_to(context)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+
+          <x-pdf-viewer tal:attributes="file filename_url"></x-pdf-viewer>
+      </div>
+    </div>
+
+
+  </metal:content-core>
+</metal:content-core>
+</body>
+</html>
