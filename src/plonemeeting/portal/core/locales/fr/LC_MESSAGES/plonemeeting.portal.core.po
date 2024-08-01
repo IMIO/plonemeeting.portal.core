@@ -245,6 +245,10 @@ msgstr "Ordre de tri des points"
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
 
+#: ../browser/templates/item.pt:66
+msgid "Last modification"
+msgstr "Dernière modification"
+
 #: ../content/institution.py:306
 msgid "Links text color"
 msgstr "Couleur des liens"

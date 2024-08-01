@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from imio.helpers.content import richtextval
 from plone import api
+from plonemeeting.portal.core.config import MIMETYPE_TO_ICON
 from plonemeeting.portal.core.content.item import get_pretty_representatives
 from plonemeeting.portal.core.tests.portal_test_case import IMG_BASE64_DATA
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
@@ -27,10 +28,13 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         view = self.item.restrictedTraverse("@@view")
         self.assertTrue(view())
 
-    def test_get_files(self):
-        files = self.item.restrictedTraverse("@@view").get_files()
+    def test_get_files_infos(self):
+        files = self.item.restrictedTraverse("@@view").get_files_infos()
         self.assertEqual(1, len(files))
-        self.assertEqual(self.item["document.pdf"], files[0].getObject())
+        self.assertEqual(self.item["document.pdf"], files[0]['file'])
+        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")['icon'], files[0]['icon_infos']['icon'])
+        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")['color'], files[0]['icon_infos']['color'])
+        self.assertEqual("0o", files[0]['size'])
 
     def test_title(self):
         delattr(self.item, "_formatted_title")

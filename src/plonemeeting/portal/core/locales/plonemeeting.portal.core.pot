@@ -248,6 +248,10 @@ msgstr ""
 msgid "Last modification in iA.Delib"
 msgstr ""
 
+#: ../browser/templates/item.pt:66
+msgid "Last modification"
+msgstr ""
+
 #: ../content/institution.py:306
 msgid "Links text color"
 msgstr ""
