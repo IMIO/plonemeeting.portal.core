@@ -56,8 +56,7 @@ class MigrateTo2000(Migrator):
 
     def _re_apply_faceted_config(self):
         """ """
-        logger.info("Re-applying faceted config to add new filter "
-                    "\"Has annexes?\" available to institution managers...")
+        logger.info("Re-applying faceted config")
         # re-apply faceted config
         faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_FOLDER_ID)
         alsoProvides(faceted, IPossibleFacetedNavigable)
