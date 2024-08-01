@@ -1,33 +1,23 @@
 from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
 from plone import api
+from plone.app.contenttypes.content import File
+from plone.app.contenttypes.interfaces import IFile
 from plone.app.textfield import RichText
-from plone.app.z3cform.widget import DatetimeFieldWidget
-from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
-from Products.CMFPlone import PloneMessageFactory as Plone_
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 
-class IPublication(model.Schema):
-    """ Marker interface and Dexterity Python Schema for Item
+class IPublication(model.Schema, IFile):
+    """ Marker interface and Dexterity Python Schema for Publication
     """
-    effective = schema.Datetime(
-        title=Plone_("label_effective_date", "Publishing Date"),
-        description=Plone_(
-            "help_effective_date",
-            default="If this date is in the future, the content will "
-            "not show up in listings and searches until this date.",
-        ),
-        required=False,
-    )
-    directives.widget("effective", DatetimeFieldWidget)
 
     decision_date = schema.Datetime(
         title=_(u"Decision date"),
@@ -62,9 +52,13 @@ class IPublication(model.Schema):
         required=False
     )
 
+    model.primary('file')
+    file = NamedBlobFile(
+        title="File")
+
 
 @implementer(IPublication)
-class Publication(Container):
+class Publication(Container, File):
     """
     """
 
