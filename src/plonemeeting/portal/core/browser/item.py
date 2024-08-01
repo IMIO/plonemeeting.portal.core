@@ -27,7 +27,7 @@ class ItemView(DefaultView):
             res.append({
                 "file": file,
                 "size": pretty_file_size(int(file.get_size())),
-                "icon": pretty_file_icon(file.content_type()),
+                "icon_infos": pretty_file_icon(file.content_type()),
             })
         return res
 

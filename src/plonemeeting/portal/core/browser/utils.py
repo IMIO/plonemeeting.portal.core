@@ -125,7 +125,7 @@ def path_to_dx_default_template():
 
 def pretty_file_size(size_bytes):
    if size_bytes == 0:
-       return "0B"
+       return "0o"
    size_name = ("o", "Ko", "Mo", "Go", "To", "Po", "Eo", "Zo", "Yo")
    i = int(math.floor(math.log(size_bytes, 1024)))
    p = math.pow(1024, i)

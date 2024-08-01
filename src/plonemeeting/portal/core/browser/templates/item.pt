@@ -130,7 +130,7 @@
               John Doe, President
             </div>
           </div>
-          <div id="item-metadata-extra" class="item-metadata-row" tal:condition="python:context.additional_data.output_relative_to(context)">
+          <div id="item-metadata-extra" class="item-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
@@ -168,8 +168,8 @@
           <div class="annexes">
             <div tal:repeat="info files_infos">
               <div class="annex">
-                <div class="bg-file-color ${info/icon/color}">
-                  <i tal:attributes="class info/icon/icon"></i>
+                <div class="bg-file-color ${info/icon_infos/color}">
+                  <i tal:attributes="class info/icon_infos/icon"></i>
                 </div>
                 <div class="title">
                   <h3 tal:content="info/file/Title" />
