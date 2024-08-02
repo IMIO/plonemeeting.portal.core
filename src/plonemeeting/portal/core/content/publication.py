@@ -54,7 +54,9 @@ class IPublication(model.Schema, IFile):
 
     model.primary('file')
     file = NamedBlobFile(
-        title="File")
+        title="File",
+        accept=("application/pdf", ),
+        required=False)
 
 
 @implementer(IPublication)
