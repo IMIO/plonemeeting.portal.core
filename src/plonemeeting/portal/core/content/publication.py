@@ -4,6 +4,8 @@ from plone import api
 from plone.app.contenttypes.content import File
 from plone.app.contenttypes.interfaces import IFile
 from plone.app.textfield import RichText
+from plone.app.z3cform.widget import DateWidget
+from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
@@ -18,16 +20,6 @@ from zope.interface import implementer
 class IPublication(model.Schema, IFile):
     """ Marker interface and Dexterity Python Schema for Publication
     """
-
-    decision_date = schema.Datetime(
-        title=_(u"Decision date"),
-        required=False,
-    )
-
-    authority_date = schema.Datetime(
-        title=_(u"Authority date"),
-        required=False,
-    )
 
     document_type = schema.Choice(
         vocabulary="plonemeeting.portal.vocabularies.document_types",
@@ -44,6 +36,17 @@ class IPublication(model.Schema, IFile):
     legislative_authority = schema.Choice(
         vocabulary="plonemeeting.portal.vocabularies.legislative_authorities",
         title=_(u"Legislative autority"),
+        required=False,
+    )
+
+    decision_date = schema.Date(
+        title=_(u"Decision date"),
+        required=False,
+    )
+
+    directives.widget("authority_date", DateWidget, _formater_length="short")
+    authority_date = schema.Date(
+        title=_(u"Authority date"),
         required=False,
     )
 

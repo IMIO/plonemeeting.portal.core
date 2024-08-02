@@ -2,11 +2,12 @@
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
-from z3c.form.interfaces import NO_VALUE
 from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -14,6 +15,19 @@ from zope.schema.vocabulary import SimpleVocabulary
 import copy
 import json
 import requests
+
+
+class EnabledTabsVocabularyFactory:
+    def __call__(self, context):
+        return SimpleVocabulary(
+            (
+                SimpleTerm(value=APP_FOLDER_ID, title=_(APP_FOLDER_ID.capitalize())),
+                SimpleTerm(value=PUB_FOLDER_ID, title=_(PUB_FOLDER_ID.capitalize())),
+            ),
+        )
+
+
+EnabledTabsVocabulary = EnabledTabsVocabularyFactory()
 
 
 class GlobalCategoryVocabularyFactory:
@@ -39,18 +53,16 @@ GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 class LocalCategoryVocabularyFactory:
     def __call__(self, context):
-        if context == NO_VALUE or isinstance(context, dict):
-            req = getRequest()
-            institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution):
-                local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
-                if local_categories:
-                    return SimpleVocabulary(
-                        [
-                            SimpleTerm(value=category_id, title=local_categories[category_id])
-                            for category_id in local_categories.keys()
-                        ]
-                    )
+        institution = getRequest()['PUBLISHED'].context
+        if isinstance(institution, Institution):
+            local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
+            if local_categories:
+                return SimpleVocabulary(
+                    [
+                        SimpleTerm(value=category_id, title=local_categories[category_id])
+                        for category_id in local_categories.keys()
+                    ]
+                )
         return GlobalCategoryVocabularyFactory()(context)
 
 
@@ -96,6 +108,7 @@ class LegislativeAuthoritiesVocabularyFactory:
 
 LegislativeAuthoritiesVocabulary = LegislativeAuthoritiesVocabularyFactory()
 
+
 class MeetingDateVocabularyFactory:
     def __call__(self, context):
         institution = api.portal.get_navigation_root(context)
@@ -119,7 +132,7 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 class RepresentativeVocabularyFactory:
     def __call__(self, context, representative_value_key='representative_value'):
         institution = api.portal.get_navigation_root(context)
-        mapping = copy.deepcopy(getattr(institution, "representatives_mappings", []))
+        mapping = copy.deepcopy(getattr(institution, "representatives_mappings", [])) or []
         representatives_mappings = [rpz for rpz in mapping if rpz['active']]
         disabled_representatives = [rpz for rpz in mapping if not rpz['active']]
         for rpz in disabled_representatives:
@@ -150,8 +163,7 @@ LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 
     def __call__(self, context):
-        req = getRequest()
-        institution = req.get('PUBLISHED').context
+        institution = getRequest().get('PUBLISHED').context
         if isinstance(institution, Institution):
             local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
             if local_representatives:

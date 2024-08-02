@@ -136,6 +136,8 @@ class MigrateTo2000(Migrator):
         institutions = [obj for obj in self.portal.objectValues()
                         if obj.portal_type == "Institution"]
         for institution in institutions:
+            # for existing institutions, disable "Publications" for now
+            institution.enabled_tabs = [APP_FOLDER_ID]
             # make sure constrain types mode is disabled
             set_constrain_types(institution, [], mode=0)
             if PUB_FOLDER_ID not in institution:

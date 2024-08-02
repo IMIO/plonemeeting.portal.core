@@ -80,6 +80,16 @@ def handle_institution_modified(institution, event):
         institution.categories_mappings = categories_mappings
         logger.info("{} fetched iA.Delib categories matched.".format(len(categories_mappings)))
 
+    # publish/make private enabled tabs
+    for tab_id in (APP_FOLDER_ID, PUB_FOLDER_ID):
+        if tab_id in institution.enabled_tabs:
+            new_state_id = "published"
+        else:
+            new_state_id = "private"
+        tab = institution.get(tab_id)
+        if api.content.get_state(tab) != new_state_id:
+            api.content.transition(obj=tab, to_state=new_state_id)
+
 
 def institution_state_changed(obj, event):
     content_filter = {'portal_type': 'Folder'}

@@ -4,9 +4,9 @@ from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.browser.utils import path_to_dx_default_template
+from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from Products.CMFCore.permissions import ModifyPortalContent
-from zope.browserpage import ViewPageTemplateFile
 
 
 class InstitutionView(DefaultView):
@@ -27,8 +27,15 @@ class InstitutionView(DefaultView):
             )
             return super(InstitutionView, self).__call__()
 
+        # redirect to "seances" if enabled, to "publications" if not and
+        # to home page if nothing enabled
         utils_view = self.context.restrictedTraverse("@@utils_view")
-        self.request.response.redirect(utils_view.get_meeting_url())
+        if APP_FOLDER_ID in self.context.enabled_tabs:
+            self.request.response.redirect(utils_view.get_meeting_url())
+        elif PUB_FOLDER_ID in self.context.enabled_tabs:
+            self.request.response.redirect(utils_view.get_publications_url())
+        else:
+            self.request.response.redirect(api.portal.get().absolute_url())
         return ""
 
     def _update(self):

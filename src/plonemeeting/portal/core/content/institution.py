@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pprint
 
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
@@ -14,8 +13,10 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
 from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
@@ -27,6 +28,7 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema import ValidationError
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 import re
 import requests
@@ -121,7 +123,7 @@ class IRepresentativeMappingRowSchema(Interface):
     representative_long_value = schema.TextLine(title=_(u"Representative long values"),
                                                 description=_(u"representative_long_value_description"),
                                                 required=True)
-    active = schema.Bool(title=_(u"Active"), default=True, required=True)
+    active = schema.Bool(title=_(u"Active"), default=True, required=False)
 
 
 class IInstitution(model.Schema):
@@ -132,6 +134,15 @@ class IInstitution(model.Schema):
         vocabulary="plonemeeting.portal.vocabularies.institution_types",
         required=True,
         default="commune"
+    )
+
+    directives.widget("enabled_tabs", CheckBoxFieldWidget, multiple='multiple')
+    enabled_tabs = schema.List(
+        title=_(u"Enabled tabs"),
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.vocabularies.enabled_tabs"),
+        required=True,
+        default=[APP_FOLDER_ID, PUB_FOLDER_ID],
     )
 
     meeting_type = schema.Choice(
@@ -149,7 +160,12 @@ class IInstitution(model.Schema):
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
 
-    directives.widget("meeting_filter_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
+    directives.widget(
+        "meeting_filter_query",
+        DataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped")
     meeting_filter_query = schema.List(
         title=_(u"Meeting query filter for list"),
         description=_(u"meeting_filter_query_description"),
@@ -160,7 +176,12 @@ class IInstitution(model.Schema):
                  {'parameter': 'review_state', 'value': 'decided'}]
     )
 
-    directives.widget("item_filter_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
+    directives.widget(
+        "item_filter_query",
+        DataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped")
     item_filter_query = schema.List(
         title=_(u"Published Items query filter"),
         description=_(u"item_filter_query_description"),
@@ -170,7 +191,12 @@ class IInstitution(model.Schema):
                  {'parameter': 'listType', 'value': 'late'}]
     )
 
-    directives.widget("item_content_query", DataGridFieldFactory, allow_reorder=True, auto_append=False)
+    directives.widget(
+        "item_content_query",
+        DataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped")
     item_content_query = schema.List(
         title=_(u"Published Items content query"),
         description=_(u"item_content_query_description"),
@@ -244,7 +270,12 @@ class IInstitution(model.Schema):
         default=DEFAULT_CATEGORY_IA_DELIB_FIELD
     )
 
-    directives.widget("categories_mappings", DataGridFieldFactory, allow_reorder=True, auto_append=False)
+    directives.widget(
+        "categories_mappings",
+        DataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped")
     categories_mappings = schema.List(
         title=_(u"Categories mappings"),
         description=_(u"categories_mappings_description"),
@@ -252,7 +283,12 @@ class IInstitution(model.Schema):
         required=False,
     )
 
-    directives.widget("representatives_mappings", DataGridFieldFactory, allow_reorder=True, auto_append=False)
+    directives.widget(
+        "representatives_mappings",
+        DataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped")
     representatives_mappings = schema.List(
         title=_(u"Representatives mappings"),
         description=_(u"representatives_mappings_description"),
@@ -397,12 +433,13 @@ class Institution(Container):
                                                                    'UID',
                                                                    'title')
 
-        if len(self.representatives_mappings) == 0:
+        representatives_mappings = self.representatives_mappings or []
+        if len(representatives_mappings or []) == 0:
             logger.warning(f"No representatives mappings found for {self.title}")
 
-        for row in self.representatives_mappings:
+        for row in representatives_mappings:
             key = row['representative_key']
-            if key not in representatives: # keep history
+            if key not in representatives:  # keep history
                 representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
         self.delib_representatives = representatives
 
