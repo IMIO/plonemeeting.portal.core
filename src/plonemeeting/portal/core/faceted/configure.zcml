@@ -24,9 +24,24 @@
     />
 
   <browser:page
-    name="faceted_pm_macros"
+    name="faceted-macro-pm-item"
     for="eea.facetednavigation.interfaces.IFacetedNavigable"
-    template="macros.pt"
+    template="macro_item.pt"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    />
+
+  <faceted:view
+    name="faceted-preview-publications"
+    template="preview_publications.pt"
+    title="Faceted publications preview"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    name="faceted-macro-publication"
+    for="eea.facetednavigation.interfaces.IFacetedNavigable"
+    template="macro_publication.pt"
     permission="zope2.View"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
     />

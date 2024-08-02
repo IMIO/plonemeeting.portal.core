@@ -92,14 +92,17 @@ class MigrateTo2000(Migrator):
         self.ps.runImportStepFromProfile(
             "profile-plonemeeting.portal.core:default", "rolemap")
         # add the "get_document_type" and "get_legislative_authority" indexes
-        self.catalog.addIndex(
-            "get_document_type",
-            "FieldIndex",
-            {"indexed_attrs": ["document_type"]})
-        self.catalog.addIndex(
-            "get_legislative_authority",
-            "FieldIndex",
-            {"indexed_attrs": ["legislative_authority"]})
+        current_indexes = self.catalog.indexes()
+        if "get_document_type" not in current_indexes:
+            self.catalog.addIndex(
+                "get_document_type",
+                "FieldIndex",
+                {"indexed_attrs": ["document_type"]})
+        if "get_legislative_authority" not in current_indexes:
+            self.catalog.addIndex(
+                "get_legislative_authority",
+                "FieldIndex",
+                {"indexed_attrs": ["legislative_authority"]})
         # add document_types and legislative_authorities
         current_dir = os.path.abspath(os.path.dirname(__file__))
         json_path = os.path.join(current_dir, "../profiles/demo/data/data.json")
@@ -116,11 +119,14 @@ class MigrateTo2000(Migrator):
         # create faceted config
         config_folder = self.portal.get(CONFIG_FOLDER_ID)
         current_lang = api.portal.get_default_language()[:2]
-        faceted = create_faceted_folder(
-            config_folder,
-            translate(_(FACETED_PUB_FOLDER_ID.capitalize()), target_language=current_lang),
-            id=FACETED_PUB_FOLDER_ID,
-        )
+        if FACETED_PUB_FOLDER_ID not in config_folder:
+            faceted = create_faceted_folder(
+                config_folder,
+                translate(_(FACETED_PUB_FOLDER_ID.capitalize()), target_language=current_lang),
+                id=FACETED_PUB_FOLDER_ID,
+            )
+        else:
+            faceted = config_folder[FACETED_PUB_FOLDER_ID]
         faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_PUB_XML_PATH)
         with open(faceted_config_path, "rb") as faceted_config:
             faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
@@ -132,17 +138,18 @@ class MigrateTo2000(Migrator):
         for institution in institutions:
             # make sure constrain types mode is disabled
             set_constrain_types(institution, [], mode=0)
-            publications = create_faceted_folder(
-                institution,
-                translate(_(u"Publications"),
-                          target_language=current_lang),
-                id=PUB_FOLDER_ID
-            )
+            if PUB_FOLDER_ID not in institution:
+                publications = create_faceted_folder(
+                    institution,
+                    translate(_(u"Publications"),
+                              target_language=current_lang),
+                    id=PUB_FOLDER_ID
+                )
+            else:
+                publications = institution[PUB_FOLDER_ID]
             alsoProvides(publications, IPublicationsFolder)
             set_constrain_types(publications, ["Publication"])
-
-        # XXX to be changed to "faceted-preview-publication" when available
-        IFacetedLayout(publications).update_layout("faceted-preview-items")
+            IFacetedLayout(publications).update_layout("faceted-preview-publications")
         logger.info("Done.")
 
     def run(self):

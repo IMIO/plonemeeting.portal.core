@@ -136,7 +136,7 @@
 
 
         <span tal:condition="folderContents" class="items-container">
-            <tal:entries tal:define="preview nocall:context/@@faceted_pm_macros/preview_meeting_item;
+            <tal:entries tal:define="preview nocall:context/@@faceted-macro-pm-item/preview_meeting_item;
               meeting_type context/@@utils_view/meeting_type">
               <tal:entry repeat="brain batch">
 

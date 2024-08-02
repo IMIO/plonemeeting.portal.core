@@ -83,7 +83,7 @@
           <div class=""
              i18n:domain="plone">
             <h1 tal:content="structure python:context.title">Title</h1>
-            <span tal:content="structure python:context.text.output_relative_to(context)" />
+            <span tal:condition="context/text" tal:content="structure python:context.text.output_relative_to(context)" />
           </div>
         </div>
       </div>

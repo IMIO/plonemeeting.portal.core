@@ -41,9 +41,7 @@ const PdfViewer = ({ file }) => {
         }
     };
 
-    const handleFullScreen = () => {
-        setfullScreen(!fullScreen);
-    };
+    const handleFullScreen = () => setfullScreen(!fullScreen);
 
     const handleScaleIncrease = (event) => {
         if (fullWidth) {
@@ -73,10 +71,7 @@ const PdfViewer = ({ file }) => {
                 {Boolean(pdfDocument && pdfDocument.numPages) && (
                     <nav className="pdf-viewer-toolbar">
                         <div className="pdf-viewer-toolbar-left">
-                            <a
-                                className="btn"
-                                href="http://localhost:8080/conseil/liege/24-juin-2024-17-00/chr-de-la-citadelle-ago-du-28-juin-2024-approbation-des-points-portes-a-lordre-du-jour/document-soumis-au-conseil-1"
-                            >
+                            <a className="btn" href={file}>
                                 <i class="bi bi-file-earmark-arrow-down"></i>
                             </a>
                             <button className="btn" onClick={handlePrint}>
