@@ -87,7 +87,7 @@
                    i18n:domain="plone">
                   <span tal:condition="python: review_state == 'private'"
                      i18n:translate=""
-                     tal:attributes="class string:${review_state} state-badge">Private</span>
+                     tal:attributes="class string:state-${review_state} state-badge">Private</span>
                   <span tal:condition="python: review_state == 'in_project'"
                      i18n:translate=""
                      tal:attributes="class string:state-${review_state} state-badge">In project</span>

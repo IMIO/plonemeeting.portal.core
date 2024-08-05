@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from Products.Five.utilities.marker import mark
-from eea.facetednavigation.interfaces import IFacetedNavigable
+
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from plone import api
 from plone.app.textfield.value import IRichTextValue
@@ -18,7 +17,8 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-from zope.interface import provider, alsoProvides
+from zope.interface import alsoProvides
+from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -407,3 +407,15 @@ def get_term_title(context, fieldname):
     vocabulary_factory = getUtility(IVocabularyFactory, vocabulary_name)
     vocabulary = vocabulary_factory(context)
     return vocabulary.getTerm(getattr(context, fieldname)).title
+
+
+def get_context_from_request():
+    """Get "context" from the "request", useful when we do not have
+       the context and we try to get it from the current view."""
+    req = getRequest()
+    context = None
+    if 'PUBLISHED' in req:
+        context = req['PUBLISHED'].context
+    elif 'PARENTS' in req:
+        context = req['PARENTS'][-1].context
+    return context
