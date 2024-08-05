@@ -39,7 +39,7 @@ class Meeting(Container):
 
     def get_items(self, objects=True):
         portal_catalog = getToolByName(self, "portal_catalog")
-        meeting_path = self.absolute_url_path()
+        meeting_path = '/'.join(self.getPhysicalPath())
         brains = portal_catalog(
             object_provides=IItem.__identifier__,
             path={'query': meeting_path, 'depth': 1},
