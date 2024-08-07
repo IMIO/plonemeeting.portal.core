@@ -4,12 +4,33 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en">
 
-<metal:macro define-macro="preview_publications">
+<metal:macro define-macro="preview_publication">
 
-  <div class="card">
-    <h2 tal:content="brain/Title"></h2>
-    <p tal:content="brain/Description"></p>
-    <a tal:attributes="href brain/getURL" class="filled-link"></a>
+  <div class="item-card" tal:define="
+    review_state brain/review_state;
+    isAnon context/@@plone_portal_state/anonymous;">
+    <a href="" class="filled-link"
+       tal:attributes="href brain/getURL">
+    </a>
+    <div id="state-row" class="row" i18n:domain="plone" tal:condition="not: isAnon">
+      <div class="col d-flex justify-content-end mb-2">
+        <div tal:condition="python: review_state == 'private'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} state-badge">
+          Private
+        </div>
+        <div tal:condition="python: review_state == 'published'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} state-badge">
+          Published
+        </div>
+      </div>
+    </div>
+    <div id="title-row" class="row">
+      <h3 tal:content="brain/Title"></h3>
+    </div>
+    <div id="description-row" class="row" tal:condition="brain/Description">
+      <p tal:content="brain/Description"></p>
+    </div>
+
   </div>
 
 </metal:macro>

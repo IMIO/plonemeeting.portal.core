@@ -5,12 +5,12 @@
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
    i18n:domain="plonemeeting.portal.core"
-    tal:define="portal_url context/@@plone_portal_state/portal_url;
-      utils_view nocall:context/@@utils_view;
-      meeting nocall:context/aq_parent;
-      institution python: utils_view.get_current_institution();
-      review_state python: utils_view.get_state(meeting);
-      isAnon context/@@plone_portal_state/anonymous;"
+   tal:define="portal_url context/@@plone_portal_state/portal_url;
+  utils_view nocall:context/@@utils_view;
+  meeting nocall:context/aq_parent;
+  institution python: utils_view.get_current_institution();
+  review_state python: utils_view.get_state(meeting);
+  isAnon context/@@plone_portal_state/anonymous;"
 >
 <body>
 
@@ -99,7 +99,8 @@
         <div class="col-lg-6 content-metadatas">
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
-              État <i class="bi bi-question-circle"></i>
+              <tal:state i18n:domain="plone" i18n:translate="">State</tal:state> <i class="bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                      data-bs-content="L'état indique où se situe le document dans le processus de publication."></i>
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">
@@ -130,7 +131,8 @@
               John Doe, President
             </div>
           </div>
-          <div id="content-metadata-extra" class="content-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
+          <div id="content-metadata-extra"
+               class="content-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
@@ -161,7 +163,7 @@
         </div>
       </div>
       <div class="row annexes-section mb-3"
-         tal:define="files_infos view/get_files_infos"
+         tal:define="files_infos utils_view/get_files_infos"
          tal:condition="files_infos">
         <div class="col-12">
           <h2 i18n:translate="">Annexes</h2>

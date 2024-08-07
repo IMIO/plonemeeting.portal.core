@@ -126,6 +126,20 @@ class UtilsView(BrowserView):
     def get_last_item_number(self, meeting):
         return meeting.get_items(objects=False)[-1].number
 
+    def get_files_infos(self):
+        brains = api.content.find(
+            portal_type="File", context=self.context, sort_on="getObjPositionInParent"
+        )
+        res = []
+        for brain in brains:
+            file = brain.getObject()
+            res.append({
+                "file": file,
+                "size": pretty_file_size(int(file.get_size())),
+                "icon_infos": pretty_file_icon(file.content_type()),
+            })
+        return res
+
 
 def path_to_dx_default_template():
     dx_path = os.path.dirname(plone.dexterity.browser.__file__)

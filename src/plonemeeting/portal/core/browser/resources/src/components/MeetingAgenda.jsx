@@ -1,6 +1,6 @@
-import {useEffect, useState} from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import axios from "axios";
-import {randomInt} from "../utils";
+import { randomInt } from "../utils";
 
 const placeHolderVariations = [
     [2, 1, 4, 3],
@@ -11,87 +11,112 @@ const placeHolderVariations = [
     [1, 1, 4, 1, 2],
     [4, 1, 3, 1, 2],
     [1, 1, 2, 1, 2],
-]
-const MeetingAgendaPlaceHolder = ({count}) => {
-
+];
+const MeetingAgendaPlaceHolder = ({ count }) => {
     const rows = randomInt(1, 3);
 
     return (
         <li>
             <a className="item-line placeholder-glow" href="">
-            <span className="item-number">
-               {count}
-            </span>
+                <span className="item-number">{count}</span>
                 <span className="item-title">
-                    {[...Array(rows)].map((x, i) => (
-                        placeHolderVariations[randomInt(0, placeHolderVariations.length)].map((col, j) => (
+                    {[...Array(rows)].map((x, i) =>
+                        placeHolderVariations[randomInt(0, placeHolderVariations.length)].map(
+                            (col, j) => (
                                 <span className={`placeholder col-${col} mx-1`} key={j}></span>
                             )
                         )
-                    ))}
-            </span>
+                    )}
+                </span>
             </a>
         </li>
-    )
-}
+    );
+};
 
-const MeetingAgenda = ({count, meetingUrl}) => {
+const MeetingAgenda = ({ count, meetingUrl }) => {
     const [items, setItems] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     const [offcanvas, setOffcanvas] = useState(false);
 
-
     useEffect(() => {
-        setOffcanvas(new bootstrap.Offcanvas(document.getElementById('meeting-agenda')));
+        setOffcanvas(new bootstrap.Offcanvas(document.getElementById("meeting-agenda")));
     }, []);
-
 
     const handleClick = () => {
         offcanvas.toggle();
-        axios.get(meetingUrl+"/@@agenda")
+        axios
+            .get(meetingUrl + "/@@agenda")
             .then((response) => {
                 setItems(response.data);
                 setIsLoading(false);
-            }).catch(handleError);
-    }
+            })
+            .catch(handleError);
+    };
 
     const handleError = (error) => {
         console.error(error);
         setIsLoading(false);
         setError(error);
-    }
+    };
 
-    // data-bs-toggle="offcanvas" data-bs-target="#meeting-agenda
-    return (<>
-        <button className="btn btn-link" type="button" onClick={handleClick}
-                aria-controls="meeting-agenda">
-            <i class="bi bi-list-ol"></i> Ordre du jour
-        </button>
-        <div class="offcanvas offcanvas-end" tabIndex="-1" id="meeting-agenda"
-             aria-labelledby="meeting-agenda">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ordre du jour</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    return (
+        <>
+            <button
+                className="btn btn-link"
+                type="button"
+                onClick={handleClick}
+                aria-controls="meeting-agenda"
+            >
+                <i class="bi bi-list-ol"></i> Ordre du jour
+            </button>
+            <div
+                class="offcanvas offcanvas-end"
+                tabIndex="-1"
+                id="meeting-agenda"
+                aria-labelledby="meeting-agenda"
+            >
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title" id="offcanvas-agenda">
+                        Ordre du jour
+                    </h3>
+                    <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul className="items-list">
+                        {isLoading &&
+                            [...Array(parseInt(count))].map((x, i) => (
+                                <MeetingAgendaPlaceHolder number={i + 1} key={i} />
+                            ))}
+                        {!isLoading && (
+                            <>
+                                {items &&
+                                    items.map((item, index) => (
+                                        <li>
+                                            <a className="item-line" href={item["@id"]}>
+                                                <span className="item-number">{item.number}</span>
+                                                <span className="item-title">
+                                                    <div
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: item.formatted_title.data,
+                                                        }}
+                                                    ></div>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ))}
+                            </>
+                        )}
+                    </ul>
+                </div>
             </div>
-            <div class="offcanvas-body">
-                <ul className="items-list">
-                    {isLoading && [...Array(parseInt(count))].map((x, i) => <MeetingAgendaPlaceHolder number={i + 1} key={i}/>)}
-                    {!isLoading && <>
-                        {items && items.map((item, index) => (
-                            <li><a className="item-line" href={item["@id"]}>
-                                <span className="item-number">{item.number}</span>
-                                <span className="item-title">
-                        <div dangerouslySetInnerHTML={{__html: item.formatted_title.data}}></div>
-                    </span>
-                            </a>
-                            </li>
-                        ))}
-                    </>}
-                </ul>
-            </div>
-        </div>
-    </>)
-}
+        </>
+    );
+};
 
 export default MeetingAgenda;

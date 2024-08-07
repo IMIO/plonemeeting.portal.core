@@ -6,7 +6,7 @@ class PublicationView(DefaultView):
     """
 
     def get_effective_date(self):
-        return self.context.effective_date.strftime('%d/%m/%Y %H:%M') \
+        return self.context.effective_date.strftime('%d/%m/%Y à %H:%M') \
             if self.context.effective_date else "-"
 
     def get_decision_date(self):

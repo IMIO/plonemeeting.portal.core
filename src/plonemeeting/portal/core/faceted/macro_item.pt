@@ -32,9 +32,9 @@
       </div>
     </div>
     <div id="title-row" class="row">
-      <h5 class="card-title">
+      <h3 class="card-title">
         <span tal:content="structure brain/formatted_title"></span>
-      </h5>
+      </h3>
     </div>
     <div class="row content-metadatas">
       <div class="content-metadatas-col col">
@@ -68,9 +68,7 @@
         </div>
         <div class="item-metadata-row" tal:define="annexes_infos brain/annexes_infos"
            tal:condition='python: (not isAnon) and len(annexes_infos) > 0' >
-          <div class="item-metadata-label" i18n:translate="Annexes">Annexes
-          </div>
-          <div class="annexes">
+          <div class="item-metadata-label" i18n:translate="Annexes">Annexes</div>
             <ul class="list-group">
               <li class="list-group-item" tal:repeat="annexe annexes_infos">
                 <a href=""
@@ -85,7 +83,6 @@
                 </a>
               </li>
             </ul>
-          </div>
         </div>
       </div>
       <div tal:condition="nocall:meeting" id="content-metadatas-number" class="col">

@@ -1,108 +1,184 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+   tal:define="
+  portal_url context/@@plone_portal_state/portal_url;
+  utils_view nocall:context/@@utils_view;
+  review_state python: utils_view.get_state(context);
+  isAnon context/@@plone_portal_state/anonymous;
+  "
    i18n:domain="plonemeeting.portal.core"
-    tal:define="portal_url context/@@plone_portal_state/portal_url;
-      utils_view nocall:context/@@utils_view;
-      review_state python: utils_view.get_state(context);
-      isAnon context/@@plone_portal_state/anonymous;"
 >
 <body>
-
-
-<metal:item-title fill-slot="content-title">
-</metal:item-title>
-
-
 <metal:content-core fill-slot="content-core">
   <metal:content-core define-macro="content-core"
-    tal:define="filename python: context.file.filename;
-                filename_url python: '{}/@@download/file/{}'.format(context.absolute_url(), filename);
-                toLocalizedTime nocall:context/@@plone/toLocalizedTime;">
+     tal:define="
+    file python: context.file;
+    toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+    "
+  >
     <div class="row mb-3">
       <div class="col-lg-6 content-metadatas border-end border-1">
         <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:translate="">
-            Document type
+          <div class="content-metadata-col header"
+             i18n:domain="plone"
+             i18n:translate="label_effective_date"
+          >
+            Publishing date
           </div>
-          <div class="content-metadata-col" tal:content="structure view/w/document_type/render">
+          <div class="content-metadata-col"
+             tal:content="python: view.get_effective_date()"
+          >
             2024-08-01 00:00:00
           </div>
         </div>
         <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:translate="">
-            Category
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Decision date
           </div>
-          <div class="content-metadata-col" tal:content="structure view/w/category/render">
-            2024-08-01 00:00:00
+          <div class="content-metadata-col"
+             tal:content="python: view.get_decision_date()"
+          >
+            2024-08-01
           </div>
         </div>
         <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:translate="">
-            Legislative authority
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Authority date
           </div>
-          <div class="content-metadata-col" tal:content="structure view/w/legislative_authority/render">
-            2024-08-01 00:00:00
+          <div class="content-metadata-col"
+             tal:content="python: view.get_authority_date()"
+          >
+            2024-08-01
           </div>
         </div>
       </div>
       <div class="col-lg-6 content-metadatas">
-        <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:domain="plone" i18n:translate="label_effective_date">
-            Publishing date
+        <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: isAnon">
+          <div class="content-metadata-col header" data-bs-toggle="popover" data-bs-trigger="hover focus"
+               data-bs-content="L'état indique où se situe le document dans le processus de publication."
+          >
+            <tal:state i18n:translate="">State</tal:state>
+            <i class="bi bi-question-circle"></i>
           </div>
-          <div class="content-metadata-col" tal:content="python: view.get_effective_date()">
-            2024-08-01 00:00:00
+          <div class="content-metadata-col">
+              <span tal:condition="python: review_state == 'private'"
+                 i18n:translate=""
+                 tal:attributes="class string:state-badge state-${review_state}">Private</span>
+            <span tal:condition="python: review_state == 'published'"
+               i18n:translate=""
+               tal:attributes="class string:state-badge state-${review_state}">Published</span>
           </div>
         </div>
         <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:translate="">
-            Decision date
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Document type
           </div>
-          <div class="content-metadata-col" tal:content="python: view.get_decision_date()">
-            2024-08-01
+          <div class="content-metadata-col"
+             tal:content="structure view/w/document_type/render"
+          >
+            Document type value
           </div>
         </div>
         <div class="content-metadata-row">
-          <div class="content-metadata-col header" i18n:translate="">
-            Authority date
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Category
           </div>
-          <div class="content-metadata-col" tal:content="python: view.get_authority_date()">
-            2024-08-01
+          <div class="content-metadata-col"
+             tal:content="structure view/w/category/render"
+          >
+            Category value
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Legislative authority
+          </div>
+          <div class="content-metadata-col"
+             tal:content="structure view/w/legislative_authority/render"
+          >
+            Legislative authority value
           </div>
         </div>
       </div>
     </div>
-
-
-    <div class="row mb-3">
+    <div class="row mb-3" tal:condition="context/consultation_text">
       <div class="col-12">
-        <div class="card p-4">
-          <div class=""
-             i18n:domain="plone">
-            <h1 tal:content="structure python:context.title">Title</h1>
-            <span tal:condition="python: context.text"
-                  tal:content="structure python:context.text.output_relative_to(context)" />
-            <label class="content-metadata-col header" i18n:translate="">
-              Hour and place of consultation
-            </label>
-            <div class="content-metadata-col" tal:content="structure view/w/consultation_text/render">
+        <div class="alert with-icon alert-light"
+             role="alert"
+             style="margin: 0 !important;"
+
+        >
+          <div class="alert-icon">
+            <i class="bi bi-building-check"></i>
           </div>
+          <div class="alert-content">
+            <h3>Lieu et horaires de consultation</h3>
+            <div tal:content="structure view/w/consultation_text/render"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row mb-3" tal:condition="context/text">
+      <div class="col-12">
+        <div class="card p-4" tal:content="structure python:context.text.output_relative_to(context)">
+
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12">
+  <div class="row mb-3"
+     tal:condition="file"
+  >
+  <div class="col-12">
+    <h2>Document</h2>
+    <x-pdf-viewer tal:attributes="
+    file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename);
+    "></x-pdf-viewer>
+  </div>
+  </div>
 
-          <x-pdf-viewer tal:attributes="file filename_url"></x-pdf-viewer>
+    <div class="row annexes-section mb-3"
+     tal:define="files_infos utils_view/get_files_infos"
+     tal:condition="files_infos">
+    <div class="col-12">
+      <h2 i18n:translate="">Annexes</h2>
+      <div class="annexes">
+        <div tal:repeat="info files_infos">
+          <div class="annex">
+            <div class="bg-file-color ${info/icon_infos/color}">
+              <i tal:attributes="class info/icon_infos/icon"></i>
+            </div>
+            <div class="title">
+              <h3 tal:content="info/file/Title" />
+              <p>Taille: <span tal:content="info/size"></span></p>
+            </div>
+            <div class="annex-actions">
+              <a href=""
+                 target="_blank"
+                 tal:attributes="href info/file/absolute_url">
+                <i class="bi bi-box-arrow-in-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-
+  </div>
   </metal:content-core>
 </metal:content-core>
 </body>

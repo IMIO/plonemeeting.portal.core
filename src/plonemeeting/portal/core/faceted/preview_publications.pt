@@ -1,38 +1,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-  xmlns:tal="http://xml.zope.org/namespaces/tal"
-  xmlns:metal="http://xml.zope.org/namespaces/metal"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  metal:use-macro="context/main_template/macros/master"
-  i18n:domain="eea">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="eea">
 
 <body>
-  <metal:content-core fill-slot="content-core">
-    <metal:block define-macro="content-core">
-      <div tal:define="
-        folderContents folderContents | python:context.getFolderContents();
-        Batch python:modules['Products.CMFPlone'].Batch;
-        b_start python:request.get('b_start', 0);
-        batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);">
+<metal:content-core fill-slot="content-core">
+  <metal:block define-macro="content-core">
+    <div tal:define="
+      folderContents folderContents | python:context.getFolderContents();
+      Batch python:modules['Products.CMFPlone'].Batch;
+      b_start python:request.get('b_start', 0);
+      batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
+      isAnon context/@@plone_portal_state/anonymous;
+      ">
 
-        <div metal:use-macro="context/batch_macros/macros/navigation" />
-
-        <div class="row eea-preview-items grid">
-          <tal:entries tal:define="preview nocall:context/@@faceted-macro-publication/preview_publications">
-            <tal:entry repeat="brain batch">
-              <metal:macro use-macro="preview"
-                 tal:define="brain nocall:brain;
-                "/>
-            </tal:entry>
-          </tal:entries>
-          <span tal:condition="not: batch/sequence_length"
-                class="table_faceted_no_results"
-                i18n:domain="plone"
-                i18n:translate="description_no_results_found">No results were found.</span>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="btn-group btn-group-delib" tal:condition="not: isAnon">
+            <a class="btn-delib btn-delib-icon-text" href="${string:${context/absolute_url}/++add++Publication}"><i class="bi bi-plus-lg"></i><span i18n:translate="">Add a publication</span></a>
+          </div>
         </div>
-
-        <div metal:use-macro="context/batch_macros/macros/navigation" />
+        <div class="col-lg-6">
+          <div metal:use-macro="context/batch_macros/macros/navigation" />
+        </div>
+        <div class="col-lg-3">
+          <x-layout-select id="faceted-layout-select" target-selector=".faceted-container"
+                           default-option="grid"></x-layout-select>
+        </div>
       </div>
-    </metal:block>
-  </metal:content-core>
+
+      <div tal:condition="folderContents" class="faceted-container grid">
+        <tal:entries tal:define="preview nocall:context/@@faceted-macro-publication/preview_publication">
+          <tal:entry repeat="brain batch">
+            <metal:macro use-macro="preview"
+               tal:define="brain nocall:brain;
+              "/>
+          </tal:entry>
+        </tal:entries>
+        <span tal:condition="not: batch/sequence_length"
+          class="table_faceted_no_results"
+           i18n:domain="plone"
+           i18n:translate="description_no_results_found">No results were found.</span>
+      </div>
+
+      <div metal:use-macro="context/batch_macros/macros/navigation" />
+    </div>
+  </metal:block>
+</metal:content-core>
 </body>
 </html>
