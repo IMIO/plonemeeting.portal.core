@@ -3,14 +3,14 @@ from plonemeeting.portal.core import _
 
 
 CONFIG_FOLDER_ID = "config"
-FACETED_FOLDER_ID = "faceted"
-FACETED_XML_PATH = "faceted/config/items.xml"
+FACETED_DEC_FOLDER_ID = "faceted_decisions"
+FACETED_DEC_XML_PATH = "faceted/config/decisions.xml"
 
 FACETED_PUB_FOLDER_ID = "faceted_publications"
 FACETED_PUB_XML_PATH = "faceted/config/publications.xml"
 
 # appears in the URL so use french
-APP_FOLDER_ID = "seances"
+DEC_FOLDER_ID = "decisions"
 PUB_FOLDER_ID = "publications"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]

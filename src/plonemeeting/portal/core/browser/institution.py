@@ -4,7 +4,7 @@ from plone.dexterity.browser import add
 from plone.dexterity.browser import edit
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from Products.CMFCore.permissions import ModifyPortalContent
 
@@ -27,10 +27,10 @@ class InstitutionView(DefaultView):
             )
             return super(InstitutionView, self).__call__()
 
-        # redirect to "seances" if enabled, to "publications" if not and
-        # to home page if nothing enabled
+        # redirect to "DEC_FOLDER_ID" if enabled, to "PUB_FOLDER_ID" if not
+        # and to home page if nothing enabled
         utils_view = self.context.restrictedTraverse("@@utils_view")
-        if APP_FOLDER_ID in self.context.enabled_tabs:
+        if DEC_FOLDER_ID in self.context.enabled_tabs:
             self.request.response.redirect(utils_view.get_meeting_url())
         elif PUB_FOLDER_ID in self.context.enabled_tabs:
             self.request.response.redirect(utils_view.get_publications_url())

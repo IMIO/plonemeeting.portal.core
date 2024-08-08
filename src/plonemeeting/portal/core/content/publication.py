@@ -4,8 +4,6 @@ from plone import api
 from plone.app.contenttypes.content import File
 from plone.app.contenttypes.interfaces import IFile
 from plone.app.textfield import RichText
-from plone.app.z3cform.widget import DateWidget
-from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
@@ -35,7 +33,7 @@ class IPublication(model.Schema, IFile):
 
     legislative_authority = schema.Choice(
         vocabulary="plonemeeting.portal.vocabularies.legislative_authorities",
-        title=_(u"Legislative autority"),
+        title=_(u"Legislative authority"),
         required=False,
     )
 
@@ -44,7 +42,11 @@ class IPublication(model.Schema, IFile):
         required=False,
     )
 
-    directives.widget("authority_date", DateWidget, _formater_length="short")
+    entry_date = schema.Date(
+        title=_(u"Entry date"),
+        required=False,
+    )
+
     authority_date = schema.Date(
         title=_(u"Authority date"),
         required=False,

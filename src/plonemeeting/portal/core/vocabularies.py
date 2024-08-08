@@ -2,7 +2,7 @@
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import Institution
@@ -21,7 +21,7 @@ class EnabledTabsVocabularyFactory:
     def __call__(self, context):
         return SimpleVocabulary(
             (
-                SimpleTerm(value=APP_FOLDER_ID, title=_(APP_FOLDER_ID.capitalize())),
+                SimpleTerm(value=DEC_FOLDER_ID, title=_(DEC_FOLDER_ID.capitalize())),
                 SimpleTerm(value=PUB_FOLDER_ID, title=_(PUB_FOLDER_ID.capitalize())),
             ),
         )

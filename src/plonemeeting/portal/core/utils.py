@@ -23,8 +23,12 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
 
-def format_institution_managers_group_id(institution):
-    return "{0}-institution_managers".format(institution.id)
+def get_decisions_managers_group_id(institution):
+    return "{0}-decisions_managers".format(institution.getId())
+
+
+def get_publications_managers_group_id(institution):
+    return "{0}-publications_managers".format(institution.getId())
 
 
 def get_text_from_richtext(field):  # pragma: no cover

@@ -3,9 +3,9 @@
 
 from eea.facetednavigation.interfaces import ICriteria
 from plone import api
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.faceted.widgets.select import SelectMeetingWidget
 from plonemeeting.portal.core.faceted.widgets.sort import ItemsSortWidget
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
@@ -26,8 +26,8 @@ class TestFacetedCriteria(PmPortalTestCase):
 
     def test_compute_criteria(self):
         """Global defined criteria are used for every institutions."""
-        global_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_FOLDER_ID])
-        for faceted_folder in (self.amityville[APP_FOLDER_ID], self.belleville[APP_FOLDER_ID]):
+        global_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_DEC_FOLDER_ID])
+        for faceted_folder in (self.amityville[DEC_FOLDER_ID], self.belleville[DEC_FOLDER_ID]):
             criteria = ICriteria(faceted_folder)
             self.assertEqual(
                 global_criteria._criteria(),
@@ -37,7 +37,7 @@ class TestFacetedCriteria(PmPortalTestCase):
     def test_select_widget(self):
         # setup, reuse "seance" and "matiere" criteria
         request = self.layer["request"]
-        faceted_folder = self.belleville[APP_FOLDER_ID]
+        faceted_folder = self.belleville[DEC_FOLDER_ID]
         criteria = ICriteria(faceted_folder)
         seance_data = criteria.get("seance")
         self.assertIsNone(seance_data.default)
@@ -64,7 +64,7 @@ class TestFacetedCriteria(PmPortalTestCase):
     def test_sort_widget(self):
         # setup, reuse "sort" criterion
         request = self.layer["request"]
-        faceted_folder = self.belleville[APP_FOLDER_ID]
+        faceted_folder = self.belleville[DEC_FOLDER_ID]
         criteria = ICriteria(faceted_folder)
         sort_data = criteria.get("tri")
         self.assertIsNone(sort_data.default)
@@ -82,7 +82,7 @@ class TestFacetedCriteria(PmPortalTestCase):
 
     def test_annexes_faceted_criteria(self):
         """The "Annexes?" faceted criterion is only available to institution managers."""
-        for faceted_folder in (self.amityville[APP_FOLDER_ID], self.belleville[APP_FOLDER_ID]):
+        for faceted_folder in (self.amityville[DEC_FOLDER_ID], self.belleville[DEC_FOLDER_ID]):
             self.login_as_manager()
             criteria = ICriteria(faceted_folder)
             self.assertTrue(criteria.get("annexes"))

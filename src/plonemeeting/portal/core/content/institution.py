@@ -13,7 +13,7 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
@@ -142,7 +142,7 @@ class IInstitution(model.Schema):
         value_type=schema.Choice(
             vocabulary="plonemeeting.portal.vocabularies.enabled_tabs"),
         required=True,
-        default=[APP_FOLDER_ID, PUB_FOLDER_ID],
+        default=[DEC_FOLDER_ID, PUB_FOLDER_ID],
     )
 
     meeting_type = schema.Choice(

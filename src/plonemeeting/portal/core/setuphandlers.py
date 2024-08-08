@@ -10,12 +10,13 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.utils import create_faceted_folder
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
-from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
@@ -59,12 +60,12 @@ def post_install(context):
     config_folder.exclude_from_nav = True
 
     # Create global meetings and publications faceted folders
-    for faceted_folder_id, faceted_xml_path in (
-            (FACETED_FOLDER_ID, FACETED_XML_PATH),
-            (FACETED_PUB_FOLDER_ID, FACETED_PUB_XML_PATH)):
+    for faceted_folder_id, faceted_folder_title, faceted_xml_path in (
+            (FACETED_DEC_FOLDER_ID, _("Faceted decisions"), FACETED_DEC_XML_PATH),
+            (FACETED_PUB_FOLDER_ID, _("Faceted publications"), FACETED_PUB_XML_PATH)):
         faceted = create_faceted_folder(
             config_folder,
-            translate(_(faceted_folder_id.capitalize()), target_language=current_lang),
+            translate(faceted_folder_title, target_language=current_lang),
             id=faceted_folder_id,
         )
 
@@ -158,7 +159,9 @@ def create_demo_content(context):
                 password="supersecret",
             )
 
-            group = api.group.get(format_institution_managers_group_id(institution_obj))
+            group = api.group.get(get_decisions_managers_group_id(institution_obj))
+            group.addMember(user.id)
+            group = api.group.get(get_publications_managers_group_id(institution_obj))
             group.addMember(user.id)
 
             for meeting in institution["meetings"]:

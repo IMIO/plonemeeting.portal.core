@@ -69,8 +69,8 @@
 
   <browser:page
     name="import_meeting"
-    for="plonemeeting.portal.core.content.institution.IInstitution"
-    permission="cmf.ModifyPortalContent"
+    for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+    permission="cmf.AddPortalContent"
     class=".sync.ImportMeetingForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
@@ -93,8 +93,8 @@
 
   <browser:page
     name="pre_import_report_form"
-    for="plonemeeting.portal.core.content.institution.IInstitution"
-    permission="cmf.ModifyPortalContent"
+    for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+    permission="cmf.AddPortalContent"
     class=".sync.PreImportReportForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
