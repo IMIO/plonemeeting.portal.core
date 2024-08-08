@@ -194,6 +194,8 @@ class MigrateTo2000(Migrator):
                               target_language=current_lang),
                     id=PUB_FOLDER_ID
                 )
+                # move "Publications" folder just after "Decisions" folder
+                institution.moveObjectToPosition(id=PUB_FOLDER_ID, position=1)
             else:
                 publications = institution[PUB_FOLDER_ID]
             alsoProvides(publications, IPublicationsFolder)
@@ -206,8 +208,14 @@ class MigrateTo2000(Migrator):
             group_title = "{0} Decisions Managers".format(institution.title)
             api.group.create(groupname=group_id, title=group_title)
             institution.manage_setLocalRoles(group_id, ["Reader"])
-            institution.get(DEC_FOLDER_ID).manage_setLocalRoles(
-                group_id, ["Reader", "Contributor", "Editor"])
+            # give "Reader/Contributor/Editor" role to the "decisions" folder
+            # and any other custom folder except the "publications" folder
+            for folder in object_values(institution, ["Folder"]):
+                if folder.getId() in (PUB_FOLDER_ID, ):
+                    continue
+                folder.manage_setLocalRoles(
+                    group_id, ["Reader", "Contributor", "Editor"])
+
             # move users from old institution_managers group to
             # new decisions_managers group
             old_group_id = "{0}-institution_managers".format(institution.getId())
