@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core.browser.utils import path_to_dx_default_template

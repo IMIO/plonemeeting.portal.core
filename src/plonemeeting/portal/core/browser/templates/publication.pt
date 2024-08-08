@@ -70,12 +70,8 @@
             <i class="bi bi-question-circle"></i>
           </div>
           <div class="content-metadata-col">
-              <span tal:condition="python: review_state == 'private'"
-                 i18n:translate=""
-                 tal:attributes="class string:state-badge state-${review_state}">Private</span>
-            <span tal:condition="python: review_state == 'published'"
-               i18n:translate=""
-               tal:attributes="class string:state-badge state-${review_state}">Published</span>
+            <span tal:content="view/get_state_title"
+                  tal:attributes="class string:state-${review_state} state-badge"></span>
           </div>
         </div>
         <div class="content-metadata-row">
