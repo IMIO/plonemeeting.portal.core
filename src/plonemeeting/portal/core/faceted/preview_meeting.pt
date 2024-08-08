@@ -36,7 +36,7 @@
               <div class="col-lg-3">
                 <div class="btn-group btn-group-delib btn-group-delib-vertical" tal:condition="not: isAnon">
                   <a class="btn-delib btn-delib-icon-text"
-                     tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
+                     tal:define="url string:${context/absolute_url}/@@import_meeting"
                      tal:condition="python: checkPermission('Modify portal content', meeting)"
                      tal:attributes="href python: utils_view.protect_url(url)"
                      title="Import a new meeting"
