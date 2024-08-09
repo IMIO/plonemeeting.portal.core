@@ -28,7 +28,13 @@
     <subscriber
         for="plonemeeting.portal.core.content.meeting.IMeeting
              Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-          handler=".institution.meeting_state_changed"
+          handler=".meeting.meeting_state_changed"
+        />
+
+    <subscriber
+        for="plonemeeting.portal.core.content.publication.IPublication
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+          handler=".publication.publication_modified"
         />
 
 </configure>

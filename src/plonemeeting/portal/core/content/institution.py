@@ -13,8 +13,8 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
@@ -22,13 +22,13 @@ from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema import ValidationError
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 import re
 import requests
@@ -467,4 +467,4 @@ class Institution(Container):
 
     def is_representatives_mapping_used(self):
         """Check if this config is using the representatives in charge feature"""
-        return len(self.representatives_mappings) > 0
+        return bool(self.representatives_mappings)

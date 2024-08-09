@@ -43,7 +43,7 @@ DEMO_INSTITUTION_IDS = ["belle-ville"]
 
 FACETED_DEC_MANAGER_CRITERIA = ["annexes"]
 
-FACETED_PUB_MANAGER_CRITERIA = []
+FACETED_PUB_MANAGER_CRITERIA = ["annexes", "etat"]
 
 MIMETYPE_TO_ICON = {
     'text/plain': {'icon': 'bi bi-file-text', 'color': 'bg-light'},

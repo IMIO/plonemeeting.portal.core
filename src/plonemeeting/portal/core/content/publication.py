@@ -85,14 +85,10 @@ def get_effective_date(obj):
 
 @indexer(IPublication)
 def get_effective_year(obj):
-    effective = obj.effective
+    effective = obj.effective_date
     if effective:
-        return str(effective.year)
-
-
-@indexer(IPublication)
-def get_document_type(obj):
-    return obj.document_type
+        # effective is a Zope DateTime
+        return str(effective.year())
 
 
 @indexer(IPublication)
@@ -100,7 +96,7 @@ def get_pretty_category(obj):
     global_categories = api.portal.get_registry_record(
         name="plonemeeting.portal.core.global_categories"
     )
-    return global_categories.copy()[obj.category]
+    return global_categories.copy().get(obj.category, [])
 
 
 @indexer(IPublication)
@@ -118,8 +114,7 @@ def get_annexes_infos(obj):
     request = getRequest()
     if request is None:
         raise AttributeError
-    files = obj.listFolderContents(contentFilter={"portal_type": "File"})
-    for annex in files:
+    for annex in object_values(object, "File"):
         utils_view = getMultiAdapter((annex, request), name="file_view")
         # Unfortunately, we can't store dicts
         index.append((annex.title, annex.absolute_url(), utils_view.getMimeTypeIcon(annex.file)))

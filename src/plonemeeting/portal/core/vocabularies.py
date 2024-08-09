@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import API_HEADERS
-from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
@@ -255,3 +256,17 @@ class MeetingTypesVocabularyFactory:
 
 
 MeetingTypesVocabulary = MeetingTypesVocabularyFactory()
+
+
+class PublicationReviewStatesVocabularyFactory:
+    def __call__(self, context):
+        wf = api.portal.get_tool("portal_workflow").getWorkflowsFor("Publication")[0]
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=state_id, title=plone_(state.title))
+                for state_id, state in wf.states.items()
+            ]
+        )
+
+
+PublicationReviewStatesVocabulary = PublicationReviewStatesVocabularyFactory()

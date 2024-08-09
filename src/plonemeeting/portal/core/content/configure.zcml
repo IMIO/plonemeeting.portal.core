@@ -3,12 +3,12 @@
     xmlns:browser="http://namespaces.zope.org/browser">
 
     <!-- Indexers -->
-
+    <!-- File -->
+    <adapter name="icon" factory=".file.get_icon" />
+    <!-- Item -->
     <adapter name="annexes_infos" factory=".item.get_annexes_infos" />
-    <adapter name="effective" factory=".publication.get_effective_date" />
     <adapter name="has_annexes" factory=".item.has_annexes" />
     <adapter name="formatted_title" factory=".item.get_formatted_title_output" />
-    <adapter name="icon" factory=".file.get_icon" />
     <adapter name="linkedMeetingDate" factory=".item.get_datetime_from_meeting" />
     <adapter name="linkedMeetingReviewState" factory=".item.get_review_state_from_meeting" />
     <adapter name="linkedMeetingTitle" factory=".item.get_title_from_meeting" />
@@ -16,6 +16,11 @@
     <adapter name="pretty_representatives" factory=".item.get_pretty_representatives" />
     <adapter name="pretty_category" factory=".item.get_pretty_category" />
     <adapter name="year" factory=".item.get_year_from_meeting" />
+    <!-- Publication -->
+    <adapter name="effective" factory=".publication.get_effective_date" />
+    <adapter name="annexes_infos" factory=".publication.get_annexes_infos" />
+    <adapter name="has_annexes" factory=".publication.has_annexes" />
+    <adapter name="pretty_category" factory=".publication.get_pretty_category" />
     <adapter name="year" factory=".publication.get_effective_year" />
 
 </configure>

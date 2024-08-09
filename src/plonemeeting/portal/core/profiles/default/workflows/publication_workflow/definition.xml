@@ -88,7 +88,12 @@
     <permission-map acquired="False"
                     name="Access contents information"
     >
-      <permission-role>Anonymous</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="Modify portal content"
@@ -101,7 +106,12 @@
     <permission-map acquired="False"
                     name="View"
     >
-      <permission-role>Anonymous</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
     </permission-map>
 
   </state>

@@ -92,6 +92,16 @@
    <property name="custom_css"></property>
   </criterion>
 
+  <criterion name="etat">
+   <property name="widget">select</property>
+   <property name="title">État</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="index">review_state</property>
+   <property
+      name="vocabulary">plonemeeting.portal.vocabularies.publication_review_states</property>
+  </criterion>
+
   <criterion name="courante">
    <property name="widget">criteria</property>
    <property name="title">Current search</property>
