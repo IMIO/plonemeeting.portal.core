@@ -1,6 +1,6 @@
-import { useEffect, useState } from "preact/hooks";
+import {useEffect, useState} from "preact/hooks";
 import axios from "axios";
-import { randomInt } from "../utils";
+import {randomInt} from "../utils";
 
 const placeHolderVariations = [
     [2, 1, 4, 3],
@@ -12,7 +12,7 @@ const placeHolderVariations = [
     [4, 1, 3, 1, 2],
     [1, 1, 2, 1, 2],
 ];
-const MeetingAgendaPlaceHolder = ({ count }) => {
+const MeetingAgendaPlaceHolder = ({count}) => {
     const rows = randomInt(1, 3);
 
     return (
@@ -33,7 +33,7 @@ const MeetingAgendaPlaceHolder = ({ count }) => {
     );
 };
 
-const MeetingAgenda = ({ count, meetingUrl }) => {
+const MeetingAgenda = ({count, meetingUrl}) => {
     const [items, setItems] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
@@ -68,7 +68,10 @@ const MeetingAgenda = ({ count, meetingUrl }) => {
                 onClick={handleClick}
                 aria-controls="meeting-agenda"
             >
-                <i class="bi bi-list-ol"></i> Ordre du jour
+                <i class="bi bi-list-ol" style={{
+                    marginBottom: "-2px",
+                    padding: "0 5px"
+                }}></i><span className="d-none d-md-inline">Ordre du jour</span>
             </button>
             <div
                 class="offcanvas offcanvas-end"
@@ -91,7 +94,7 @@ const MeetingAgenda = ({ count, meetingUrl }) => {
                     <ul className="items-list">
                         {isLoading &&
                             [...Array(parseInt(count))].map((x, i) => (
-                                <MeetingAgendaPlaceHolder number={i + 1} key={i} />
+                                <MeetingAgendaPlaceHolder number={i + 1} key={i}/>
                             ))}
                         {!isLoading && (
                             <>

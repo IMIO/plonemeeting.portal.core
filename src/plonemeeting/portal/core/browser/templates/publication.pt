@@ -22,7 +22,7 @@
     "
   >
     <div class="row mb-3">
-      <div class="col-lg-6 content-metadatas border-end border-1">
+      <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
           <div class="content-metadata-col header"
              i18n:domain="plone"
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 content-metadatas">
+      <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
         <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: isAnon">
           <div class="content-metadata-col header" data-bs-toggle="popover" data-bs-trigger="hover focus"
                data-bs-content="L'état indique où se situe le document dans le processus de publication."

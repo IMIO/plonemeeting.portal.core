@@ -43,7 +43,7 @@
                tal:attributes="href python:next_prev_infos['previous_item']['url']"
             >
               <i class="bi bi-chevron-left"></i>
-              Précédent
+              <span class="d-none d-md-inline">Précédent</span>
             </a>
           </div>
           <div style="flex: 1"></div>
@@ -59,7 +59,7 @@
                tal:condition="python:next_prev_infos.get('next_item')"
                tal:attributes="href python:next_prev_infos['next_item']['url']"
             >
-              Suivant
+              <span class="d-none d-md-inline">Suivant</span>
               <i class="bi bi-chevron-right"></i>
             </a>
           </div>
@@ -70,7 +70,7 @@
   <tal:text-macro metal:define-macro="content-core">
     <div class="" tal:attributes="class string:item-infos ${review_state}">
       <div class="row mb-3">
-        <div class="col-lg-6">
+        <div class="col-lg-6 order-last order-lg-first">
           <div class="card meeting-card">
             <a href="" class="filled-link"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)">
@@ -96,7 +96,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 content-metadatas">
+        <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
               <tal:state i18n:domain="plone" i18n:translate="">State</tal:state> <i class="bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus"

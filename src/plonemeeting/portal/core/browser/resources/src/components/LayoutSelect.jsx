@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import {useEffect, useState} from "preact/hooks";
 
 /**
  * Layout selector component
@@ -6,7 +6,7 @@ import { useEffect, useState } from "preact/hooks";
  * @param targetSelector The selector of the element to apply the layout to
  * @param defaultOption The default layout to apply
  */
-const LayoutSelect = ({ id, targetSelector, defaultOption }) => {
+const LayoutSelect = ({id, targetSelector, defaultOption}) => {
     const [active, setActive] = useState(null);
 
     useEffect(() => {

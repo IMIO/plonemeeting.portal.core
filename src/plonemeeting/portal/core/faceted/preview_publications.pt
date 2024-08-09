@@ -25,7 +25,7 @@
         <div class="col-lg-6">
           <div metal:use-macro="context/batch_macros/macros/navigation" />
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 d-none d-xl-block">
           <x-layout-select id="faceted-layout-select" target-selector=".faceted-container"
                            default-option="grid"></x-layout-select>
         </div>

@@ -88,7 +88,7 @@ const InstitutionsSelect = (props) => {
                 )}
             </div>
             <a
-                className="btn btn-white"
+                className="btn btn-pink"
                 href={selected["@id"]}
                 role="button"
                 aria-disabled={_.isEmpty(selected)}

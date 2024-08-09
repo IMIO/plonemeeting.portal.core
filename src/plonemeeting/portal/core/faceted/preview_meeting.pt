@@ -20,8 +20,6 @@
       utils_view nocall:context/@@utils_view;
       meeting python: utils_view.get_linked_meeting();
       ">
-
-
       <div class="pm-preview-meeting">
         <tal:meeting define="utils_view nocall:context/@@utils_view;
                                meeting python: utils_view.get_linked_meeting();"
@@ -115,7 +113,7 @@
 
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3 order-first order-lg-last">
                 <div class="meeting-state meeting-state--top"
                    i18n:domain="plone">
                   <span i18n:translate=""
@@ -187,7 +185,7 @@
           <div class="col-lg-6">
             <div metal:use-macro="context/batch_macros/macros/navigation" />
           </div>
-          <div class="col-lg-3">
+          <div class="col-xl-3 d-none d-xl-block">
             <x-layout-select id="faceted-layout-select" target-selector=".faceted-container"
                              default-option="grid"></x-layout-select>
           </div>
