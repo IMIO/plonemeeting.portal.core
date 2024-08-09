@@ -41,7 +41,7 @@ LOCATIONS_API_URL = "https://public.opendatasoft.com/api/records/1.0/search/?dat
 
 DEMO_INSTITUTION_IDS = ["belle-ville"]
 
-FACETED_MANAGER_CRITERIA = ["annexes"]
+FACETED_DEC_MANAGER_CRITERIA = ["annexes"]
 
 FACETED_PUB_MANAGER_CRITERIA = []
 
@@ -57,9 +57,12 @@ MIMETYPE_TO_ICON = {
     'application/pdf': {'icon': 'bi bi-file-earmark-pdf', 'color': 'bg-red'},
     'application/msword': {'icon': 'bi bi-file-earmark-word', 'color': 'bg-blue'},
     'application/vnd.ms-excel': {'icon': 'bi bi-file-earmark-excel', 'color': 'bg-green'},
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': {'icon': 'bi bi-file-earmark-word', 'color': 'bg-blue'},
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {'icon': 'bi bi-file-earmark-excel', 'color': 'bg-green'},
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation': {'icon': 'bi bi-file-earmark-slides', 'color': 'bg-yellow'},
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        {'icon': 'bi bi-file-earmark-word', 'color': 'bg-blue'},
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        {'icon': 'bi bi-file-earmark-excel', 'color': 'bg-green'},
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+        {'icon': 'bi bi-file-earmark-slides', 'color': 'bg-yellow'},
     'application/zip': {'icon': 'bi bi-file-zip', 'color': 'bg-yellow'},
     'application/x-rar-compressed': {'icon': 'bi bi-file-zip', 'color': 'bg-dark'},
     'audio/mpeg': {'icon': 'bi bi-file-music', 'color': 'bg-dark'},
