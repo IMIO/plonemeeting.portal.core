@@ -1,0 +1,22 @@
+from imio.helpers.workflow import get_state_infos
+from plone.dexterity.browser.view import DefaultView
+
+
+class PublicationView(DefaultView):
+    """
+    """
+
+    def get_effective_date(self):
+        return self.context.effective_date.strftime('%d/%m/%Y à %H:%M') \
+            if self.context.effective_date else "-"
+
+    def get_decision_date(self):
+        return self.context.decision_date.strftime('%d/%m/%Y') \
+            if self.context.decision_date else "-"
+
+    def get_authority_date(self):
+        return self.context.authority_date.strftime('%d/%m/%Y') \
+            if self.context.authority_date else "-"
+
+    def get_state_title(self):
+        return get_state_infos(self.context)['state_title']

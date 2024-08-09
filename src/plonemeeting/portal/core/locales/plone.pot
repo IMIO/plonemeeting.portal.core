@@ -61,3 +61,11 @@ msgstr ""
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"
 msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Unpublish"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Unpublished"
+msgstr ""

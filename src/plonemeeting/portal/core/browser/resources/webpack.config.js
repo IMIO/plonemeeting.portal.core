@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
             }),
             new MiniCssExtractPlugin({
                 filename: "css/core.css",
-            })
+            }),
         ].filter(Boolean),
         module: {
             rules: [
@@ -151,9 +151,16 @@ module.exports = (env, argv) => {
             hot: true,
             liveReload: false,
             headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-              "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+                "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
+            },
+            client: {
+                overlay: {
+                    errors: false,
+                    warnings: false,
+                    runtimeErrors: false,
+                },
             },
             // watchFiles: {
             //     paths: ["./../../**/*.pt"], // Watch for .pt file change

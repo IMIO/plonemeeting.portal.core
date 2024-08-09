@@ -158,6 +158,7 @@ def get_year_from_meeting(object):
     meeting = object.aq_parent
     date_time = meeting.date_time
     if date_time:
+        # date_time is a python datetime
         return str(date_time.year)
 
 
@@ -167,8 +168,7 @@ def get_annexes_infos(object):
     request = getRequest()
     if request is None:
         raise AttributeError
-    files = object.listFolderContents(contentFilter={"portal_type": "File"})
-    for annex in files:
+    for annex in object_values(object, "File"):
         utils_view = getMultiAdapter((annex, request), name="file_view")
         # Unfortunately, we can't store dicts
         index.append((annex.title, annex.absolute_url(), utils_view.getMimeTypeIcon(annex.file)))

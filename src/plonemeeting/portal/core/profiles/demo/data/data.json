@@ -30,6 +30,30 @@
     "urbanisme": "Urbanisme & Aménagement du territoire",
     "police": "Zone de police"
   },
+  "document_types": {
+    "acte-delegation": "Acte de délégation",
+    "arrete-police": "Arrêté de police",
+    "avis": "Avis - Réunion d'information préalable/Avis d'enquête publique/Avis de décision",
+    "budget-comptes": "Budget et Comptes",
+    "contrat-gestion-asbl": "Contrat de gestion - ASBL",
+    "declaration-politique-generale": "Déclaration de politique générale",
+    "ordonnance-police": "Ordonnance de police",
+    "ordonnance-police-administrative": "Ordonnance de police administrative",
+    "ordonnance-temporaire-circulation-routiere": "Ordonnance temporaire de circulation routière",
+    "pst": "Programme stratégique transversal",
+    "reglement-complementaire-circulation": "Règlement complémentaire de circulation",
+    "reglement-administration": "Règlement d'administration",
+    "roi": "Règlement d'ordre intérieur",
+    "reglement-taxes-redevances": "Règlement Taxes et Redevances",
+    "schema-developpement": "Schéma de développement",
+    "tutelle-cultes": "Tutelle des Cultes",
+    "tutelle-cpas": "Tutelle des CPAS"
+  },
+  "legislative_authorities": {
+    "bourgmestre": "Bourgmestre",
+    "college-communal": "Collège communal",
+    "conseil-communal": "Conseil communal"
+  },
   "institutions": [
     {
       "title": "Amityville",

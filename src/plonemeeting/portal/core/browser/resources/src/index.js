@@ -7,11 +7,12 @@ import InstitutionsMap from "./components/InstitutionsMap";
 import MasonryColumns from "./components/MasonryColumns";
 import DarkModeToggle from "./components/DarkModeToggle";
 import LayoutSelect from "./components/LayoutSelect";
+import PdfViewer from "./components/PdfViewer";
 import MeetingAgenda from "./components/MeetingAgenda";
 
 import "../theme/main.scss";
 
-register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
+// register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
 register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);
@@ -19,8 +20,7 @@ register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selec
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
-
-
+register(PdfViewer, "x-pdf-viewer", ["file"]);
 
 function setUpEnvironmentLabel() {
     let hostname = document.location.hostname;
@@ -31,10 +31,10 @@ function setUpEnvironmentLabel() {
     }
 }
 document.addEventListener("DOMContentLoaded", () => {
-  setUpEnvironmentLabel();
-})
+    setUpEnvironmentLabel();
+});
 
-
-if (module.hot) {
-    module.hot.accept();
-}
+//
+// if (module.hot) {
+//     module.hot.accept();
+// }

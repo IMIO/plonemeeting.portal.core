@@ -11,4 +11,12 @@
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
+  <browser:viewlet
+      name="plone.documentbyline"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+      class=".overrides.PMDocumentBylineViewlet"
+      permission="zope2.View"
+      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+      />
+
 </configure>

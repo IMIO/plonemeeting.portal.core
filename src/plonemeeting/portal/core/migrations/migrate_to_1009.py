@@ -3,10 +3,10 @@
 from imio.helpers.catalog import addOrUpdateIndexes
 from imio.helpers.content import object_ids
 from imio.migrator.migrator import Migrator
-from plonemeeting.portal.core.config import APP_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 
 import logging
 import os
@@ -34,11 +34,11 @@ class MigrateTo1009(Migrator):
         logger.info("Re-applying faceted config to add new filter "
                     "\"Has annexes?\" available to institution managers...")
         # re-apply faceted config
-        faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_FOLDER_ID)
+        faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_DEC_FOLDER_ID)
         subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
         subtyper.enable()
         # file is one level up, we are in migrations folder
-        faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_XML_PATH)
+        faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_DEC_XML_PATH)
         with open(faceted_config_path, "rb") as faceted_config:
             faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
                 import_file=faceted_config
@@ -46,14 +46,14 @@ class MigrateTo1009(Migrator):
         logger.info("Done.")
 
     def _rename_app_folder_id(self):
-        """config.APP_FOLDER_ID changed from "seances" to "meetings",
+        """config.DEC_FOLDER_ID changed from "seances" to "meetings",
            back to "seances" for URL lisibility."""
         logger.info("Renaming institution faceted folder \"meetings\" to \"seances\"...")
         institutions = [obj for obj in self.portal.objectValues()
                         if obj.portal_type == "Institution"]
         for institution in institutions:
             if "meetings" in object_ids(institution, "Folder"):
-                institution.manage_renameObject("meetings", APP_FOLDER_ID)
+                institution.manage_renameObject("meetings", DEC_FOLDER_ID)
         logger.info("Done.")
 
     def run(self):

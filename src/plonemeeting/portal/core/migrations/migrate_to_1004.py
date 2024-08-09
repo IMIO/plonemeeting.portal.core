@@ -4,8 +4,8 @@ from copy import deepcopy
 from imio.migrator.migrator import Migrator
 from plone import api
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.utils import set_constrain_types
 
 import logging
@@ -54,11 +54,11 @@ class MigrateTo1004(Migrator):
             if decisions:
                 api.content.delete(decisions[0])
         # re-apply faceted config
-        faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_FOLDER_ID)
+        faceted = self.portal.get(CONFIG_FOLDER_ID).get(FACETED_DEC_FOLDER_ID)
         subtyper = faceted.restrictedTraverse("@@faceted_subtyper")
         subtyper.enable()
         # file is one level up, we are in migrations folder
-        faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_XML_PATH)
+        faceted_config_path = os.path.join(os.path.dirname(__file__), "..", FACETED_DEC_XML_PATH)
         with open(faceted_config_path, "rb") as faceted_config:
             faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
                 import_file=faceted_config

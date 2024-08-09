@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.dexterity.browser import add
-from plone.dexterity.browser import edit
+from plone.app.z3cform.views import AddForm as DefaultAddForm
+from plone.app.z3cform.views import DefaultAddView
+from plone.app.z3cform.views import EditForm as DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.browser.utils import path_to_dx_default_template
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from Products.CMFCore.permissions import ModifyPortalContent
-from zope.browserpage import ViewPageTemplateFile
 
 
 class InstitutionView(DefaultView):
@@ -27,8 +28,15 @@ class InstitutionView(DefaultView):
             )
             return super(InstitutionView, self).__call__()
 
+        # redirect to "DEC_FOLDER_ID" if enabled, to "PUB_FOLDER_ID" if not
+        # and to home page if nothing enabled
         utils_view = self.context.restrictedTraverse("@@utils_view")
-        self.request.response.redirect(utils_view.get_meeting_url())
+        if DEC_FOLDER_ID in self.context.enabled_tabs:
+            self.request.response.redirect(utils_view.get_meeting_url())
+        elif PUB_FOLDER_ID in self.context.enabled_tabs:
+            self.request.response.redirect(utils_view.get_publications_url())
+        else:
+            self.request.response.redirect(api.portal.get().absolute_url())
         return ""
 
     def _update(self):
@@ -40,7 +48,7 @@ class InstitutionView(DefaultView):
         super(InstitutionView, self).updateWidgets(prefix)
 
 
-class AddForm(add.DefaultAddForm):
+class AddForm(DefaultAddForm):
     portal_type = "Institution"
 
     def updateFields(self):
@@ -50,11 +58,11 @@ class AddForm(add.DefaultAddForm):
         super(AddForm, self).updateWidgets()
 
 
-class AddView(add.DefaultAddView):
+class AddView(DefaultAddView):
     form = AddForm
 
 
-class EditForm(edit.DefaultEditForm):
+class EditForm(DefaultEditForm):
     portal_type = "Institution"
 
     def __call__(self):

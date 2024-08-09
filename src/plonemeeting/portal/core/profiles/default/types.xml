@@ -3,5 +3,6 @@
   <object name="Institution" meta_type="Dexterity FTI"/>
   <object name="Meeting" meta_type="Dexterity FTI"/>
   <object name="Item" meta_type="Dexterity FTI"/>
+  <object name="Publication" meta_type="Dexterity FTI"/>
   <object name="Folder" meta_type="Dexterity FTI"/>
 </object>

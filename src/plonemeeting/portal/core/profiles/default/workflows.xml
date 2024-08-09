@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="manager_folder_workflow" meta_type="Workflow"/>
  <object name="institution_workflow" meta_type="Workflow"/>
  <object name="meeting_workflow" meta_type="Workflow"/>
+ <object name="publication_workflow" meta_type="Workflow"/>
  <bindings>
+  <type type_id="Folder">
+    <bound-workflow workflow_id="manager_folder_workflow"/>
+  </type>
   <type type_id="Institution">
     <bound-workflow workflow_id="institution_workflow"/>
   </type>
@@ -10,5 +15,8 @@
     <bound-workflow workflow_id="meeting_workflow"/>
   </type>
   <type type_id="Item"/>
+  <type type_id="Publication">
+    <bound-workflow workflow_id="publication_workflow"/>
+  </type>
  </bindings>
 </object>

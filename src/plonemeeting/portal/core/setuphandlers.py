@@ -10,14 +10,16 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.utils import create_faceted_folder
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
@@ -57,19 +59,21 @@ def post_install(context):
     )
     config_folder.exclude_from_nav = True
 
-
-    # Create global faceted folder
-    faceted = create_faceted_folder(
-        config_folder,
-        translate(_(u"Faceted"), target_language=current_lang),
-        id=FACETED_FOLDER_ID,
-    )
-
-    faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
-    with open(faceted_config_path, "rb") as faceted_config:
-        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-            import_file=faceted_config
+    # Create global meetings and publications faceted folders
+    for faceted_folder_id, faceted_folder_title, faceted_xml_path in (
+            (FACETED_DEC_FOLDER_ID, _("Faceted decisions"), FACETED_DEC_XML_PATH),
+            (FACETED_PUB_FOLDER_ID, _("Faceted publications"), FACETED_PUB_XML_PATH)):
+        faceted = create_faceted_folder(
+            config_folder,
+            translate(faceted_folder_title, target_language=current_lang),
+            id=faceted_folder_id,
         )
+
+        faceted_config_path = os.path.join(os.path.dirname(__file__), faceted_xml_path)
+        with open(faceted_config_path, "rb") as faceted_config:
+            faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+                import_file=faceted_config
+            )
 
 
 def uninstall(context):
@@ -81,12 +85,12 @@ def create_file(container, filename):
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/demo/data/", filename)
     if os.path.isfile(file_path):
-        contentType = mimetypes.guess_type(file_path)[0]
+        content_type = mimetypes.guess_type(file_path)[0]
         title = os.path.basename(file_path)
         with open(file_path, "rb") as fd:
             file_obj = content.create(container=container, type="File", title=title)
             file_obj.file = NamedFile(
-                data=fd, filename=title, contentType=contentType
+                data=fd, filename=title, contentType=content_type
             )
 
 
@@ -116,7 +120,13 @@ def create_demo_content(context):
         api.portal.set_registry_record(
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
-
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.document_types", data["document_types"]
+        )
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.legislative_authorities",
+            data["legislative_authorities"]
+        )
         normalizer = getUtility(IIDNormalizer)
         for institution in data["institutions"]:
             institution_id = normalizer.normalize(institution["title"])
@@ -149,7 +159,9 @@ def create_demo_content(context):
                 password="supersecret",
             )
 
-            group = api.group.get(format_institution_managers_group_id(institution_obj))
+            group = api.group.get(get_decisions_managers_group_id(institution_obj))
+            group.addMember(user.id)
+            group = api.group.get(get_publications_managers_group_id(institution_obj))
             group.addMember(user.id)
 
             for meeting in institution["meetings"]:
