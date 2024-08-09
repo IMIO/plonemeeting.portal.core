@@ -128,10 +128,15 @@ class MigrateTo2000(Migrator):
         # add the "Publication" portal_type
         self.ps.runImportStepFromProfile(
             "profile-plonemeeting.portal.core:default", "typeinfo")
+        # remove old related "Institution Manager" role and sharing info
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "sharing")
         self.ps.runImportStepFromProfile(
             "profile-plonemeeting.portal.core:default", "rolemap")
         self.ps.runImportStepFromProfile(
             "profile-plonemeeting.portal.core:default", "workflow")
+        # remove role "Institution Manager"
+        self.portal._delRoles(["Institution Manager"])
         # remap existing Folders to new manager_folder_workflow
         remap_workflow(
             context=self.portal,
@@ -210,15 +215,17 @@ class MigrateTo2000(Migrator):
             institution.manage_setLocalRoles(group_id, ["Reader"])
             # give "Reader/Contributor/Editor" role to the "decisions" folder
             # and any other custom folder except the "publications" folder
+            old_group_id = "{0}-institution_managers".format(institution.getId())
             for folder in object_values(institution, ["Folder"]):
                 if folder.getId() in (PUB_FOLDER_ID, ):
                     continue
                 folder.manage_setLocalRoles(
                     group_id, ["Reader", "Contributor", "Editor"])
+                # remove eventual old institution_managers local roles
+                folder.manage_delLocalRoles([old_group_id])
 
             # move users from old institution_managers group to
             # new decisions_managers group
-            old_group_id = "{0}-institution_managers".format(institution.getId())
             for user in api.user.get_users(groupname=old_group_id):
                 api.group.add_user(groupname=group_id, username=user.id)
                 api.group.remove_user(groupname=old_group_id, username=user.id)

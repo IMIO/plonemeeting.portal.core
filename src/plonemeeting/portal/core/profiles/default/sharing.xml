@@ -4,11 +4,6 @@
   <role id="Institution Manager"
         title="Can manage institution"
         i18n:attributes="title"
-        />
-
-  <role id="Publication Manager"
-        title="Can manage publications"
-        i18n:attributes="title"
-        />
+        remove="True" />
 
 </sharing>
