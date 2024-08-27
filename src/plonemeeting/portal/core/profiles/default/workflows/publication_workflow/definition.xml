@@ -6,24 +6,22 @@
              title="Workflow for Publications"
              workflow_id="publication_workflow"
              i18n:attributes="title; description"
-             i18n:domain="plone"
->
+             i18n:domain="plone">
 
   <permission>Access contents information</permission>
   <permission>Modify portal content</permission>
+  <permission>Delete objects</permission>
   <permission>View</permission>
 
   <state state_id="private"
          title="Private"
-         i18n:attributes="title"
-  >
+         i18n:attributes="title">
     <description i18n:translate="">
-    Can only be seen and edited by the Editors.
-  </description>
+      Can only be seen and edited by the Editors.
+    </description>
     <exit-transition transition_id="publish" />
     <permission-map acquired="False"
-                    name="Access contents information"
-    >
+                    name="Access contents information">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
@@ -32,16 +30,21 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="Modify portal content"
-    >
+                    name="Delete objects">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="View"
-    >
+                    name="Modify portal content">
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
@@ -53,41 +56,39 @@
   </state>
   <state state_id="published"
          title="Published"
-         i18n:attributes="title"
-  >
+         i18n:attributes="title">
     <description i18n:translate="">
-    Visible to everyone, not editable by the Editors.
-  </description>
+      Visible to everyone, not editable by the Editors.
+    </description>
     <exit-transition transition_id="unpublish" />
     <permission-map acquired="False"
-                    name="Access contents information"
-    >
+                    name="Access contents information">
       <permission-role>Anonymous</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="Modify portal content"
-    >
+                    name="Objects delete">
       <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="View"
-    >
+                    name="Modify portal content">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View">
       <permission-role>Anonymous</permission-role>
     </permission-map>
-
   </state>
   <state state_id="unpublished"
          title="Unpublished"
-         i18n:attributes="title"
-  >
+         i18n:attributes="title">
     <description i18n:translate="">
-    Can only be seen and edited by the Editors.
-  </description>
+      Can only be seen and edited by the Editors.
+    </description>
     <exit-transition transition_id="publish" />
     <permission-map acquired="False"
-                    name="Access contents information"
-    >
+                    name="Access contents information">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
@@ -96,16 +97,21 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="Modify portal content"
-    >
+                    name="Objects delete">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
-                    name="View"
-    >
+                    name="Modify portal content">
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View">
       <permission-role>Manager</permission-role>
       <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
@@ -122,15 +128,13 @@
               title="Back to private"
               transition_id="back_to_private"
               trigger="USER"
-              i18n:attributes="title"
-  >
+              i18n:attributes="title">
     <description i18n:translate="">
-    Making an item private.
-  </description>
+      Making an item private.
+    </description>
     <action category="workflow"
             url="%(content_url)s/content_status_modify?workflow_action=back_to_private"
-            i18n:translate=""
-    >Back to private</action>
+            i18n:translate="">Back to private</action>
     <guard>
       <guard-permission>Modify portal content</guard-permission>
     </guard>
@@ -141,15 +145,13 @@
               title="Publish"
               transition_id="publish"
               trigger="USER"
-              i18n:attributes="title"
-  >
+              i18n:attributes="title">
     <description i18n:translate="">
-    Publishing the item makes it visible to other users.
-  </description>
+      Publishing the item makes it visible to other users.
+    </description>
     <action category="workflow"
             url="%(content_url)s/content_status_modify?workflow_action=publish"
-            i18n:translate=""
-    >Publish</action>
+            i18n:translate="">Publish</action>
     <guard>
       <guard-permission>Modify portal content</guard-permission>
     </guard>
@@ -160,15 +162,13 @@
               title="Unpublish"
               transition_id="unpublish"
               trigger="USER"
-              i18n:attributes="title"
-  >
+              i18n:attributes="title">
     <description i18n:translate="">
-    Unpublishing an item will hide it, it can be published again.
-  </description>
+      Unpublishing an item will hide it, it can be published again.
+    </description>
     <action category="workflow"
             url="%(content_url)s/content_status_modify?workflow_action=unpublish"
-            i18n:translate=""
-    >Unpublish</action>
+            i18n:translate="">Unpublish</action>
     <guard>
       <guard-role>Manager</guard-role>
       <guard-role>Editor</guard-role>
@@ -178,26 +178,21 @@
   <variable for_catalog="False"
             for_status="True"
             update_always="True"
-            variable_id="action"
-  >
+            variable_id="action">
     <description i18n:translate="">Previous transition</description>
     <default>
-
       <expression>transition/getId|nothing</expression>
     </default>
-    <guard>
-</guard>
+    <guard></guard>
   </variable>
   <variable for_catalog="False"
             for_status="True"
             update_always="True"
-            variable_id="actor"
-  >
+            variable_id="actor">
     <description i18n:translate="">
-    The ID of the user who performed the last transition
-  </description>
+      The ID of the user who performed the last transition
+    </description>
     <default>
-
       <expression>user/getId</expression>
     </default>
     <guard>
@@ -206,24 +201,19 @@
   <variable for_catalog="False"
             for_status="True"
             update_always="True"
-            variable_id="comments"
-  >
+            variable_id="comments">
     <description i18n:translate="">Comment about the last transition</description>
     <default>
-
       <expression>python:state_change.kwargs.get('comment', '')</expression>
     </default>
-    <guard>
-</guard>
+    <guard></guard>
   </variable>
   <variable for_catalog="False"
             for_status="False"
             update_always="False"
-            variable_id="review_history"
-  >
+            variable_id="review_history">
     <description i18n:translate="">Provides access to workflow history</description>
     <default>
-
       <expression>state_change/getHistory</expression>
     </default>
     <guard>
@@ -234,17 +224,14 @@
   <variable for_catalog="False"
             for_status="True"
             update_always="True"
-            variable_id="time"
-  >
+            variable_id="time">
     <description i18n:translate="">
-    When the previous transition was performed
-  </description>
+      When the previous transition was performed
+    </description>
     <default>
-
       <expression>state_change/getDateTime</expression>
     </default>
-    <guard>
-</guard>
+    <guard></guard>
   </variable>
 
 </dc-workflow>

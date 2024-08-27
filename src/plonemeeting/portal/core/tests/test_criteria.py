@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from eea.facetednavigation.interfaces import ICriteria
 from plone import api
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
@@ -18,11 +17,11 @@ class TestFacetedCriteria(PmPortalTestCase):
 
     @property
     def amityville(self):
-        return self.layer["portal"]["amityville"]
+        return self.portal["amityville"]
 
     @property
     def belleville(self):
-        return self.layer["portal"]["belleville"]
+        return self.portal["belleville"]
 
     def test_compute_criteria(self):
         """Global defined criteria are used for every institutions."""
@@ -64,17 +63,17 @@ class TestFacetedCriteria(PmPortalTestCase):
     def test_sort_widget(self):
         # setup, reuse "sort" criterion
         request = self.layer["request"]
-        faceted_folder = self.belleville[DEC_FOLDER_ID]
-        criteria = ICriteria(faceted_folder)
+        decisions_folder = self.belleville[DEC_FOLDER_ID]
+        criteria = ICriteria(decisions_folder)
         sort_data = criteria.get("tri")
         self.assertIsNone(sort_data.default)
-        sort_widget = ItemsSortWidget(faceted_folder, request, data=sort_data)
+        sort_widget = ItemsSortWidget(decisions_folder, request, data=sort_data)
         # when no meeting selected in "seance"
         self.assertFalse("seance" in request.form)
         self.assertEqual(sort_widget.query(request.form),
                          {'sort_on': ['linkedMeetingDate', 'sortable_number'],
                           'sort_order': ['descending', 'ascending']})
-        meetings = self.belleville.getFolderContents({"portal_type": "Meeting"})
+        meetings = decisions_folder.getFolderContents({"portal_type": "Meeting"})
         request.form["seance"] = meetings[0].UID
         self.assertEqual(sort_widget.query(request.form),
                          {'sort_on': ['sortable_number'],

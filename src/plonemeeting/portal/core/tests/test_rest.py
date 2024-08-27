@@ -1,11 +1,11 @@
 from plone import api
-from plone.testing.zope import Browser
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 import json
 
 
 class TestRestViews(PmPortalDemoFunctionalTestCase):
-    def test_site_InstitutionLocationsAPIView(self):
+
+    def test_rest_institution_locations_api_view(self):
         """ Test if the values from InstitutionLocationsView are correct"""
         portal = api.portal.get()
 
@@ -40,9 +40,8 @@ class TestRestViews(PmPortalDemoFunctionalTestCase):
         # Test if portal as saved locations from remote API for future use
         self.assertTrue(hasattr(portal, "api_institution_locations"))
 
-
-    def test_meeting_MeetingAgendaAPIView(self):
-        meeting = self.portal["belleville"].listFolderContents(
+    def test_rest_meeting_agenda_api_view(self):
+        meeting = self.portal["belleville"].decisions.listFolderContents(
             {"portal_type": "Meeting"})[0]
         request = self.portal.REQUEST
         view = meeting.restrictedTraverse("@@view")

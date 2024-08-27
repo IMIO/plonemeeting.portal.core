@@ -421,5 +421,9 @@ def get_context_from_request():
     if 'PUBLISHED' in req:
         context = req['PUBLISHED'].context
     elif 'PARENTS' in req:
-        context = req['PARENTS'][-1].context
+        parent = req['PARENTS'][-1]
+        # in some cases like when creating Plone Site or in tests
+        # the parent is the Zope Application
+        if parent.__class__.__name__ != 'Application':
+            context = parent.context
     return context

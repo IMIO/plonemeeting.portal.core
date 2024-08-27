@@ -97,7 +97,9 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
                                   item_external_uids=item_external_uids + ['fake uid'])
         self.assertEqual(4, results.get("created"))
         self.assertListEqual(item_external_uids, [item.plonemeeting_uid for item in meeting.values()])
+        self.login_as_manager()
         api.content.delete(objects=meeting.values())
+        self.login_as_decisions_manager()
         # all items
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
         self.assertEqual(28, results.get("created"))
@@ -442,7 +444,8 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
         PreImportReportForm.original__call__ = PreImportReportForm.__call__
         PreImportReportForm.__call__ = __call__mock
-        pre_import_view = self.institution.restrictedTraverse(
+        decisions = self.institution.decisions
+        pre_import_view = decisions.restrictedTraverse(
             "@@pre_import_report_form"
         )
 
@@ -450,11 +453,12 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
         logout()  # Anonymous may not access this form
         with self.assertRaises(Unauthorized):
-            self.institution.restrictedTraverse("@@pre_import_report_form")
+            decisions.restrictedTraverse("@@pre_import_report_form")
 
-        login(self.portal, "belleville-manager")  # Foreign institution manager may not access this form either
+        # Foreign institution decisions manager may not access this form either
+        login(self.portal, "belleville-decisions-manager")
         with self.assertRaises(Unauthorized):
-            self.institution.restrictedTraverse("@@pre_import_report_form")
+            decisions.restrictedTraverse("@@pre_import_report_form")
 
         PreImportReportForm.__call__ = PreImportReportForm.original__call__  # Restore the monkey patch
 
@@ -488,7 +492,8 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         with self.assertRaises(Unauthorized):
             meeting.restrictedTraverse("@@pre_sync_report_form")
 
-        login(self.portal, "belleville-manager")  # Foreign institution manager may not access this form either
+        # Foreign institution decisions manager may not access this form either
+        login(self.portal, "belleville-decisions-manager")
         with self.assertRaises(Unauthorized):
             meeting.restrictedTraverse("@@pre_sync_report_form")
 

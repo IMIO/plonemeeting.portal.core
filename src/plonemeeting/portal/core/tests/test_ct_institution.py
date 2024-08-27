@@ -5,9 +5,11 @@ from plone.api.exc import InvalidParameterError
 from plone.api.portal import get_registry_record
 from plone.dexterity.interfaces import IDexterityFTI
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import createObject
 from zope.component import queryUtility
@@ -37,39 +39,39 @@ class InstitutionIntegrationTest(PmPortalTestCase):
 
     def test_ct_institution_adding(self):
         self.login_as_manager()
-        obj = api.content.create(
+        institution = api.content.create(
             container=self.portal, type="Institution", id="institution"
         )
-
-        group_id = get_decisions_managers_group_id(obj)
-        roles = api.group.get_roles(groupname=group_id)
-        self.assertEqual(roles, ["Authenticated"])
-        self.assertTupleEqual(
-            obj.get_local_roles_for_userid(group_id),
-            ("Reader", "Contributor"),
-        )
-
         self.assertTrue(
-            IInstitution.providedBy(obj),
-            u"IInstitution not provided by {0}!".format(obj.id),
+            IInstitution.providedBy(institution),
+            u"IInstitution not provided by {0}!".format(institution.id),
         )
 
-        faceted_folders = obj.listFolderContents()
-        self.assertEqual(len(faceted_folders), 1)
+        for group_id in (get_decisions_managers_group_id(institution),
+                         get_publications_managers_group_id(institution)):
+            roles = api.group.get_roles(groupname=group_id)
+            self.assertEqual(roles, ["Authenticated"])
+            self.assertTupleEqual(
+                institution.get_local_roles_for_userid(group_id),
+                ("Reader", ),
+            )
+
+        faceted_folders = institution.listFolderContents()
+        self.assertEqual(len(faceted_folders), 2)
         meetings = faceted_folders[0]
         constraints = ISelectableConstrainTypes(meetings)
-        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
 
-        agenda = api.content.create(obj, "Folder", "agenda")
+        agenda = api.content.create(institution, "Folder", "agenda")
         constraints = ISelectableConstrainTypes(agenda)
-        self.assertListEqual(['Document', 'Folder', 'File', 'Image'],
+        self.assertListEqual(['Document', 'Folder', 'File', 'Image', 'Meeting', 'Publication'],
                              constraints.getLocallyAllowedTypes())
 
         # check that deleting the object works too
-        parent = obj.__parent__
+        parent = institution.__parent__
         self.assertIn("institution", parent.objectIds())
 
-        api.content.delete(obj=obj)
+        api.content.delete(obj=institution)
         self.assertNotIn("institution", parent.objectIds())
         self.assertIsNone(api.group.get(group_id))
 
@@ -97,25 +99,31 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         )
 
         self.assertEqual(get_state(institution), 'private')
+        decisions = institution.decisions
         meeting = api.content.create(
-            container=institution, type="Meeting", id="test-meeting"
+            container=decisions, type="Meeting", id="test-meeting"
         )
         self.assertEqual(get_state(meeting), 'private')
 
         self.assertEqual(institution.listFolderContents({"portal_type": "Folder"}),
-                         [institution.get(DEC_FOLDER_ID)])
-        meetings_folder = institution.listFolderContents()[0]
-        self.assertEqual(get_state(meetings_folder), 'private')
+                         [institution[DEC_FOLDER_ID], institution[PUB_FOLDER_ID]])
+        decisions_folder = institution.decisions
+        publications_folder = institution.publications
+        self.assertEqual(get_state(decisions_folder), 'private')
+        self.assertEqual(get_state(publications_folder), 'private')
+        self.assertEqual(institution.enabled_tabs, [DEC_FOLDER_ID, PUB_FOLDER_ID])
 
         api.content.transition(institution, to_state='published')
         self.assertEqual(get_state(institution), 'published')
-        self.assertEqual(get_state(meetings_folder), 'published')
+        self.assertEqual(get_state(decisions_folder), 'published')
         self.assertEqual(get_state(meeting), 'private')
+        self.assertEqual(get_state(publications_folder), 'published')
 
         api.content.transition(institution, to_state='private')
         self.assertEqual(get_state(institution), 'private')
-        self.assertEqual(get_state(meetings_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), 'private')
         self.assertEqual(get_state(meeting), 'private')
+        self.assertEqual(get_state(publications_folder), 'private')
 
         agenda_folder = api.content.create(type="Folder",
                                            title="Agenda",
@@ -124,15 +132,15 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         # but put back to private if the institution goes back in private
         api.content.transition(institution, to_state='published')
         self.assertEqual(get_state(institution), 'published')
-        self.assertEqual(get_state(meetings_folder), 'published')
+        self.assertEqual(get_state(decisions_folder), 'published')
         self.assertEqual(get_state(agenda_folder), 'published')
         self.assertEqual(get_state(meeting), 'private')
+        self.assertEqual(get_state(publications_folder), 'published')
 
         api.content.transition(meeting, to_state='decision')
-
         api.content.transition(institution, to_state='private')
         self.assertEqual(get_state(institution), 'private')
-        self.assertEqual(get_state(meetings_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), 'private')
         self.assertEqual(get_state(agenda_folder), 'private')
         self.assertEqual(get_state(meeting), 'private')
 

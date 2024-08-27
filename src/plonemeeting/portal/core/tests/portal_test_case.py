@@ -77,7 +77,10 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
             0
         ].getObject()
         self.item = api.content.find(self.meeting, portal_type="Item")[0].getObject()
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
 
-    def login_as_institution_manager(self):
-        login(self.portal, "amityville-manager")
+    def login_as_decisions_manager(self):
+        login(self.portal, "amityville-decisions-manager")
+
+    def login_as_publications_manager(self):
+        login(self.portal, "amityville-publications-manager")

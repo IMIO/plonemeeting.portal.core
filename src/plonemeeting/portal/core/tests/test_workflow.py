@@ -21,15 +21,33 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.catalog = self.portal.portal_catalog
         self.workflow = self.portal.portal_workflow
 
-        self.portal.acl_users._doAddUser("member", "secret", ["Member"], [])
-        self.portal.acl_users._doAddUser("reviewer", "secret", ["Reviewer"], [])
-        self.portal.acl_users._doAddUser("manager", "secret", ["Manager"], [])
-        self.portal.acl_users._doAddUser("editor", " secret", ["Editor"], [])
-        self.portal.acl_users._doAddUser("reader", "secret", ["Reader"], [])
-
         self.login_as_manager()
+        api.user.create(
+            username="member",
+            email="noreply@pm.portal",
+            password="supersecret",
+            roles=["Member"])
+        api.user.create(
+            username="reviewer",
+            email="noreply@pm.portal",
+            password="supersecret",
+            roles=["Reviewer"])
+        api.user.create(
+            username="editor",
+            email="noreply@pm.portal",
+            password="supersecret",
+            roles=["Editor"])
+        api.user.create(
+            username="reader",
+            email="noreply@pm.portal",
+            password="supersecret",
+            roles=["Reader"])
+        self.decisions = self.institution.decisions
+        self.publications = self.institution.publications
         self.meeting = api.content.create(
-            container=self.institution, title="My meeting", type="Meeting"
+            container=self.decisions,
+            title="My meeting",
+            type="Meeting"
         )
         self.item = api.content.create(
             container=self.meeting, title="My item", type="Item"
@@ -116,7 +134,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
 
@@ -156,7 +174,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
 
@@ -189,7 +207,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(View, self.meeting))
         self.assertTrue(checkPerm(View, self.item))
 
@@ -226,7 +244,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
@@ -270,7 +288,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
@@ -302,7 +320,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(AccessContentsInformation, self.meeting))
         self.assertTrue(checkPerm(AccessContentsInformation, self.item))
 
@@ -339,7 +357,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
         self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
@@ -380,7 +398,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
         self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
@@ -415,20 +433,50 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertFalse(checkPerm(ModifyPortalContent, self.meeting))
         self.assertFalse(checkPerm(ModifyPortalContent, self.item))
         # Institution Manager is allowed
-        self.login_as_institution_manager()
+        self.login_as_decisions_manager()
         self.assertTrue(checkPerm(ModifyPortalContent, self.meeting))
         self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
     def testAddContent(self):
-        # Institution Manager can add content
-        self.login_as_institution_manager()
+        self.login_as_manager()
         self.assertTrue(checkPerm(AddPortalContent, self.institution))
+        self.assertTrue(checkPerm(AddPortalContent, self.decisions))
         self.assertTrue(checkPerm(AddPortalContent, self.meeting))
         self.assertTrue(checkPerm(AddPortalContent, self.item))
+        self.assertTrue(checkPerm(AddPortalContent, self.publications))
+
+        self.login_as_decisions_manager()
+        self.assertFalse(checkPerm(AddPortalContent, self.institution))
+        self.assertTrue(checkPerm(AddPortalContent, self.decisions))
+        self.assertTrue(checkPerm(AddPortalContent, self.meeting))
+        self.assertTrue(checkPerm(AddPortalContent, self.item))
+        self.assertFalse(checkPerm(AddPortalContent, self.publications))
+
+        self.login_as_publications_manager()
+        self.assertFalse(checkPerm(AddPortalContent, self.institution))
+        self.assertFalse(checkPerm(AddPortalContent, self.decisions))
+        self.assertFalse(checkPerm(AddPortalContent, self.meeting))
+        self.assertFalse(checkPerm(AddPortalContent, self.item))
+        self.assertTrue(checkPerm(AddPortalContent, self.publications))
 
     def testRemoveContent(self):
-        # Institution Manager can add content
-        self.login_as_institution_manager()
+        self.login_as_manager()
+        self.assertTrue(checkPerm(DeleteObjects, self.institution))
+        self.assertTrue(checkPerm(DeleteObjects, self.decisions))
+        self.assertTrue(checkPerm(DeleteObjects, self.meeting))
+        self.assertTrue(checkPerm(DeleteObjects, self.item))
+        self.assertTrue(checkPerm(DeleteObjects, self.publications))
+
+        self.login_as_decisions_manager()
         self.assertFalse(checkPerm(DeleteObjects, self.institution))
+        self.assertFalse(checkPerm(DeleteObjects, self.decisions))
         self.assertFalse(checkPerm(DeleteObjects, self.meeting))
         self.assertFalse(checkPerm(DeleteObjects, self.item))
+        self.assertFalse(checkPerm(DeleteObjects, self.publications))
+
+        self.login_as_publications_manager()
+        self.assertFalse(checkPerm(DeleteObjects, self.institution))
+        self.assertFalse(checkPerm(DeleteObjects, self.decisions))
+        self.assertFalse(checkPerm(DeleteObjects, self.meeting))
+        self.assertFalse(checkPerm(DeleteObjects, self.item))
+        self.assertFalse(checkPerm(DeleteObjects, self.publications))

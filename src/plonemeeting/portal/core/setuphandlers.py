@@ -9,12 +9,13 @@ from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
-from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
+from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
@@ -153,21 +154,26 @@ def create_demo_content(context):
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
             content.transition(obj=institution_obj, transition="publish")
-            user = api.user.create(
-                username="{}-manager".format(institution_obj.id),
+            decisions_manager = api.user.create(
+                username="{}-decisions-manager".format(institution_obj.id),
                 email="noob@plone.org",
                 password="supersecret",
             )
-
+            publications_manager = api.user.create(
+                username="{}-publications-manager".format(institution_obj.id),
+                email="noob@plone.org",
+                password="supersecret",
+            )
             group = api.group.get(get_decisions_managers_group_id(institution_obj))
-            group.addMember(user.id)
+            group.addMember(decisions_manager.id)
             group = api.group.get(get_publications_managers_group_id(institution_obj))
-            group.addMember(user.id)
+            group.addMember(publications_manager.id)
 
+            meetings_container = institution_obj.get(DEC_FOLDER_ID)
             for meeting in institution["meetings"]:
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
-                    container=institution_obj,
+                    container=meetings_container,
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,

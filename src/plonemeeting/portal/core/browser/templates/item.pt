@@ -5,13 +5,9 @@
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
    i18n:domain="plonemeeting.portal.core"
-   tal:define="portal_url context/@@plone_portal_state/portal_url;
-  utils_view nocall:context/@@utils_view;
-  meeting nocall:context/aq_parent;
-  institution python: utils_view.get_current_institution();
-  review_state python: utils_view.get_state(meeting);
-  isAnon context/@@plone_portal_state/anonymous;"
->
+   tal:define="utils_view nocall:context/@@utils_view;
+               meeting nocall:context/aq_parent;
+               review_state python: utils_view.get_state(meeting);">
 <body>
 
 <metal:item-title fill-slot="content-title">

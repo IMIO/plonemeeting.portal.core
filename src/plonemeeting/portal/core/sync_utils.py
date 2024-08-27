@@ -8,6 +8,7 @@ from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.utils import get_api_url_for_annexes
 from plonemeeting.portal.core.utils import get_api_url_for_meeting_items
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
@@ -284,13 +285,14 @@ def sync_items_data(meeting, items_data, institution, force=False, with_annexes=
 def sync_meeting_data(institution, meeting_data):
     meeting_uid = meeting_data.get("UID")
     meeting_title = meeting_data.get("title")
+    decisions = institution[DEC_FOLDER_ID]
     brains = api.content.find(
-        context=institution, portal_type="Meeting", plonemeeting_uid=meeting_uid
+        context=decisions, portal_type="Meeting", plonemeeting_uid=meeting_uid
     )
     if not brains:
         with api.env.adopt_roles(["Manager"]):
             meeting = api.content.create(
-                container=institution, type="Meeting", title=meeting_title
+                container=decisions, type="Meeting", title=meeting_title
             )
         meeting.plonemeeting_uid = meeting_uid
     else:
