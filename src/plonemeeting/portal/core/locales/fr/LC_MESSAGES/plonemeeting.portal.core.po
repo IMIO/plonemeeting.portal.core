@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-08-07 13:32+0000\n"
+"POT-Creation-Date: 2024-08-30 13:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../vocabularies.py:140
+#: ../vocabularies.py:141
 msgid "(Passed term of office) ${representative_value}"
 msgstr "(Ancien mandat) ${representative_value}"
 
@@ -22,7 +22,11 @@ msgstr "(Ancien mandat) ${representative_value}"
 msgid "Active"
 msgstr "Actif"
 
-#: ../browser/sync.py:292
+#: ../faceted/preview_publications.pt:26
+msgid "Add a publication"
+msgstr "Ajouter une publication"
+
+#: ../browser/sync.py:291
 msgid "Added"
 msgstr "Ajouté"
 
@@ -30,7 +34,8 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../browser/templates/item.pt:167
+#: ../browser/templates/item.pt:165
+#: ../browser/templates/publication.pt:155
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr "Annexes"
@@ -43,20 +48,12 @@ msgstr "Portion anonymisée venant de iA.Delib à remplacer"
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../browser/templates/publication.pt:70
+#: ../browser/templates/publication.pt:52
 #: ../content/publication.py:51
 msgid "Authority date"
 msgstr "Date décision tutelle"
 
-#: ../profiles/default/sharing.xml
-msgid "Can manage institution"
-msgstr ""
-
-#: ../profiles/default/sharing.xml
-msgid "Can manage publications"
-msgstr ""
-
-#: ../browser/sync.py:251
+#: ../browser/sync.py:250
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -68,8 +65,8 @@ msgstr "Correspondances des matières"
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
-#: ../browser/templates/item.pt:118
-#: ../browser/templates/publication.pt:36
+#: ../browser/templates/item.pt:115
+#: ../browser/templates/publication.pt:90
 #: ../content/item.py:64
 msgid "Category"
 msgstr "Matière"
@@ -78,19 +75,19 @@ msgstr "Matière"
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:411
+#: ../browser/sync.py:410
 msgid "Choose the items you want to import in the portal."
 msgstr "Choisissez les points que vous souhaitez importer dans le portail."
 
-#: ../browser/sync.py:192
+#: ../browser/sync.py:191
 msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
 msgstr "Choisissez les points que vous souhaitez synchroniser (mettre à jour). Il est également possible d'enlever des points du portail en utilisant le bouton 'Enlever'."
 
-#: ../browser/sync.py:64
+#: ../browser/sync.py:66
 msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la séance que vous souhaitez importer dans le portail."
 
-#: ../setuphandlers.py:57
+#: ../setuphandlers.py:58
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
@@ -107,13 +104,13 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../browser/templates/publication.pt:62
+#: ../browser/templates/publication.pt:40
 #: ../content/publication.py:41
 msgid "Decision date"
 msgstr "Date de décision"
 
 #: ../events/institution.py:34
-#: ../migrations/migrate_to_2000.py:106
+#: ../migrations/migrate_to_2000.py:114
 msgid "Decisions"
 msgstr "Décisions"
 
@@ -121,7 +118,7 @@ msgstr "Décisions"
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
-#: ../browser/templates/publication.pt:28
+#: ../browser/templates/publication.pt:78
 #: ../content/publication.py:24
 msgid "Document type"
 msgstr "Nature du document"
@@ -144,7 +141,7 @@ msgstr "Natures des documents"
 msgid "Edit"
 msgstr "Editer"
 
-#: ../faceted/preview_meeting.pt:54
+#: ../faceted/preview_meeting.pt:52
 msgid "Edit meeting"
 msgstr "Modifier la séance"
 
@@ -156,8 +153,8 @@ msgstr "Onglets activés"
 msgid "Entry date"
 msgstr "Date entrée en vigueur"
 
-#: ../migrations/migrate_to_2000.py:69
-#: ../setuphandlers.py:64
+#: ../migrations/migrate_to_2000.py:74
+#: ../setuphandlers.py:65
 msgid "Faceted decisions"
 msgstr "Facettes décisions"
 
@@ -165,8 +162,8 @@ msgstr "Facettes décisions"
 msgid "Faceted meeting preview"
 msgstr "Vue facettes Séance"
 
-#: ../migrations/migrate_to_2000.py:163
-#: ../setuphandlers.py:65
+#: ../migrations/migrate_to_2000.py:178
+#: ../setuphandlers.py:66
 msgid "Faceted publications"
 msgstr "Facettes publications"
 
@@ -218,11 +215,11 @@ msgstr "Couleur de l'en-tête"
 msgid "Hour and place of consultation"
 msgstr "Lieu et horaires de consultation"
 
-#: ../browser/sync.py:436
+#: ../browser/sync.py:435
 msgid "Import"
 msgstr "Importer"
 
-#: ../faceted/preview_meeting.pt:69
+#: ../faceted/preview_meeting.pt:36
 msgid "Import a new meeting"
 msgstr "Importer une nouvelle séance"
 
@@ -298,6 +295,7 @@ msgstr "Dernière modification"
 
 #: ../content/item.py:72
 #: ../content/meeting.py:31
+#: ../faceted/preview_meeting.pt:75
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
 
@@ -305,7 +303,7 @@ msgstr "Dernière modification dans iA.Délib"
 msgid "Legislative authorities"
 msgstr "Autorités délibérantes"
 
-#: ../browser/templates/publication.pt:44
+#: ../browser/templates/publication.pt:102
 #: ../content/publication.py:36
 msgid "Legislative authority"
 msgstr "Autorité délibérante"
@@ -348,15 +346,15 @@ msgstr "Type de séance"
 msgid "Meeting config ID"
 msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
-#: ../browser/sync.py:63
+#: ../browser/sync.py:65
 msgid "Meeting import form"
 msgstr "Importer une nouvelle séance"
 
-#: ../browser/sync.py:410
+#: ../browser/sync.py:409
 msgid "Meeting pre import form"
 msgstr "Rapport d'importation"
 
-#: ../browser/sync.py:191
+#: ../browser/sync.py:190
 msgid "Meeting pre sync form"
 msgstr "Rapport de synchronisation"
 
@@ -376,7 +374,7 @@ msgstr "Titre du type de séance"
 msgid "Meeting types"
 msgstr "Types de séance"
 
-#: ../browser/sync.py:284
+#: ../browser/sync.py:283
 msgid "Modified"
 msgstr "Modifié"
 
@@ -396,7 +394,7 @@ msgstr "Couleur du texte de la barre de navigation"
 msgid "Navigation root path"
 msgstr "Chemin de la racine de navigation"
 
-#: ../browser/sync.py:165
+#: ../browser/sync.py:166
 msgid "No data available in table"
 msgstr "Aucun élément"
 
@@ -429,7 +427,7 @@ msgid "Publication"
 msgstr "Publication"
 
 #: ../events/institution.py:46
-#: ../migrations/migrate_to_2000.py:184
+#: ../migrations/migrate_to_2000.py:198
 msgid "Publications"
 msgstr "Publications"
 
@@ -445,15 +443,15 @@ msgstr "Paramètres pour obtenir la liste des Points à importer"
 msgid "Related meeting date"
 msgstr "Date de la séance"
 
-#: ../browser/sync.py:232
+#: ../browser/sync.py:231
 msgid "Remove"
 msgstr "Enlever"
 
-#: ../browser/sync.py:309
+#: ../browser/sync.py:308
 msgid "Removed"
 msgstr "Enlevé"
 
-#: ../browser/templates/item.pt:126
+#: ../browser/templates/item.pt:123
 #: ../faceted/macro_item.pt:61
 msgid "Representative"
 msgstr "Mandataire"
@@ -486,11 +484,11 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:66
+#: ../browser/sync.py:68
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../browser/sync.py:168
+#: ../browser/sync.py:169
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 
@@ -506,15 +504,15 @@ msgstr "Statut"
 msgid "Styling"
 msgstr "Styles"
 
-#: ../browser/sync.py:221
+#: ../browser/sync.py:220
 msgid "Sync"
 msgstr "Synchroniser"
 
-#: ../browser/sync.py:49
+#: ../browser/sync.py:50
 msgid "Sync annexes"
 msgstr ""
 
-#: ../browser/sync.py:48
+#: ../browser/sync.py:49
 msgid "Sync annexes ?"
 msgstr ""
 
@@ -551,15 +549,15 @@ msgstr "Titre"
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 
-#: ../browser/sync.py:281
+#: ../browser/sync.py:280
 msgid "Unchanged"
 msgstr "Inchangé"
 
-#: ../sync_utils.py:325
+#: ../sync_utils.py:327
 msgid "Unexpected meeting count in web service response !"
 msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 
-#: ../sync_utils.py:97
+#: ../sync_utils.py:98
 msgid "Unexpected publishable annex value in web service response !"
 msgstr "Une annexe non publiable a été trouvée dans la réponse du web service !"
 
@@ -571,7 +569,7 @@ msgstr "Désinstalle le module plonemeeting.portal.core."
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
-#: ../faceted/preview_meeting.pt:61
+#: ../faceted/preview_meeting.pt:60
 #: ../profiles/default/actions.xml
 msgid "Update meeting"
 msgstr "Synchroniser cette séance"
@@ -594,7 +592,7 @@ msgstr "Vérification"
 msgid "View"
 msgstr "Voir"
 
-#: ../faceted/preview_meeting.pt:47
+#: ../faceted/preview_meeting.pt:44
 msgid "View meeting"
 msgstr "Voir la séance"
 
@@ -602,16 +600,16 @@ msgstr "Voir la séance"
 msgid "Ville/Commune"
 msgstr "Ville/Commune"
 
-#: ../sync_utils.py:35
+#: ../sync_utils.py:36
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
-#: ../browser/sync.py:89
+#: ../browser/sync.py:91
 #: ../content/institution.py:465
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
-#: ../browser/institution.py:20
+#: ../browser/institution.py:21
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
 msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers le dossier Séances. Pour voir la vue Séances, cliquez sur le dossier Séances."
 
@@ -623,11 +621,11 @@ msgstr "Zone de Police"
 msgid "Zone de Secours"
 msgstr "Zone de Secours"
 
-#: ../browser/sync.py:173
+#: ../browser/sync.py:174
 msgid "activate to sort column ascending"
 msgstr "activer pour trier la colonne par ordre croissant"
 
-#: ../browser/sync.py:176
+#: ../browser/sync.py:177
 msgid "activate to sort column descending"
 msgstr "activer pour trier la colonne par ordre décroissant"
 
@@ -689,7 +687,7 @@ msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:339
+#: ../sync_utils.py:341
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 

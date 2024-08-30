@@ -2,24 +2,28 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-   metal:use-macro="context/main_template/macros/master"
-   i18n:domain="eea">
+      metal:use-macro="context/main_template/macros/master">
 
 <body>
 <metal:content-core fill-slot="content-core">
-  <metal:block define-macro="content-core">
+  <metal:block define-macro="content-core" i18n:domain="plonemeeting.portal.core">
     <div tal:define="
       folderContents folderContents | python:context.getFolderContents();
       Batch python:modules['Products.CMFPlone'].Batch;
       b_start python:request.get('b_start', 0);
       batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
       isAnon context/@@plone_portal_state/anonymous;
-      ">
+      checkPermission nocall: context/portal_membership/checkPermission;">
 
       <div class="row">
         <div class="col-lg-3">
           <div class="btn-group btn-group-delib" tal:condition="not: isAnon">
-            <a class="btn-delib btn-delib-icon-text" href="${string:${context/absolute_url}/++add++Publication}"><i class="bi bi-plus-lg"></i><span i18n:translate="">Add a publication</span></a>
+            <a tal:condition="python: checkPermission('plonemeeting.portal.core: Add Publication', context)"
+               class="btn-delib btn-delib-icon-text"
+               href="${string:${context/absolute_url}/++add++Publication}">
+              <i class="bi bi-plus-lg"></i>
+              <span i18n:translate="">Add a publication</span>
+            </a>
           </div>
         </div>
         <div class="col-lg-6">

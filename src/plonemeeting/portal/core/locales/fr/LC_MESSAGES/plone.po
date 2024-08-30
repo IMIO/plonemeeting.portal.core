@@ -60,9 +60,9 @@ msgid "Send to project"
 msgstr "Mettre en projet"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Unpublished"
-msgstr "Dépublié (Privé)"
-
-#: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Unpublish"
 msgstr "Dépublier"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Unpublished"
+msgstr "Dépublié (Privé)"
