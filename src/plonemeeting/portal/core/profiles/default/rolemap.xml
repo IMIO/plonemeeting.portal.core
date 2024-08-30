@@ -32,6 +32,10 @@
       <role name="Member"/>
     </permission>
 
+    <permission name="Modify view template" acquire="False">
+      <role name="Manager"/>
+    </permission>
+
   </permissions>
 
 </rolemap>
