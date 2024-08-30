@@ -5,6 +5,7 @@
              state_variable="review_state" initial_state="private" manager_bypass="False"
              i18n:attributes="title">
     <permission>Access contents information</permission>
+    <permission>Delete objects</permission>
     <permission>Modify portal content</permission>
     <permission>View</permission>
     <permission>Request review</permission>
