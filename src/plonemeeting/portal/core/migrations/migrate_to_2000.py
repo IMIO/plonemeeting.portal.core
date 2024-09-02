@@ -138,6 +138,9 @@ class MigrateTo2000(Migrator):
         # remove role "Institution Manager"
         self.portal._delRoles(["Institution Manager"])
         # remap existing Folders to new manager_folder_workflow
+        # set back old workflow for Folder and remap it as "workflow" import step
+        # here above will already associate new manage_folder_workflow with Folder type
+        self.wfTool.setChainForPortalTypes(['Folder'], ['simple_publication_workflow'])
         remap_workflow(
             context=self.portal,
             type_ids=['Folder'],
