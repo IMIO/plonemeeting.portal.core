@@ -10,6 +10,7 @@
   <include package="collective.z3cform.datagridfield" />
   <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
+  <include package="collective.timestamp" />
   <include package="eea.facetednavigation" />
   <include package="plone.formwidget.hcaptcha" />
 

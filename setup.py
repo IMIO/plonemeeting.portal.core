@@ -51,6 +51,7 @@ setup(
         # -*- Extra requirements: -*-
         "collective.cookiecuttr>=1.0.2",
         "collective.fingerpointing",
+        "collective.timestamp",
         "collective.z3cform.datagridfield>=3.0.2",
         "eea.facetednavigation>=16.2",
         "plone.api>=2.1.0",

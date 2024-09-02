@@ -97,6 +97,9 @@
       <element key="general-assembly" i18n:translate="">Assemblée générale</element>
     </value>
   </record>
+  <records interface="collective.timestamp.interfaces.ITimestampingSettings">
+    <value key="timestamping_service_url">http://tss.pkiacc.tsp.zetes.com</value>
+  </records>
   <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
     <value key="title" i18n:translate="">Item number</value>
     <value key="description" i18n:translate=""/>
