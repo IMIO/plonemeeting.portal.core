@@ -43,6 +43,7 @@
     <element value="plone.tableofcontents"/>
     <element value="plone.locking" />
     <element value="collective.timestamp" />
+    <element value="collective.autopublishing" />
   </property>
 
   <!-- View information -->

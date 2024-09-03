@@ -5,6 +5,8 @@ from plone import api
 from plone.app.contenttypes.content import File
 from plone.app.contenttypes.interfaces import IFile
 from plone.app.textfield import RichText
+from plone.autoform.directives import read_permission
+from plone.autoform.directives import write_permission
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
@@ -17,6 +19,8 @@ from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
+
+
 
 
 class IPublication(model.Schema, IFile):
@@ -66,6 +70,14 @@ class IPublication(model.Schema, IFile):
         title="File",
         accept=("application/pdf", ),
         required=False)
+
+    read_permission(enableAutopublishing="cmf.ManagePortal")
+    write_permission(enableAutopublishing="cmf.ManagePortal")
+    enableAutopublishing = schema.Bool(
+        title=_("enableAutopublishing", default="Enable autopublishing?"),
+        required=False,
+        default=True,
+    )
 
 
 @implementer(IPublication)
