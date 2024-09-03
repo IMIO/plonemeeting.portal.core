@@ -4,6 +4,7 @@ from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from imio.helpers.content import object_values
 from imio.migrator.migrator import Migrator
 from plone import api
+from plone.api.exc import GroupNotFoundError
 from plone.app.workflow.remap import remap_workflow
 from plone.base.utils import get_installer
 from plonemeeting.portal.core import _
@@ -69,7 +70,8 @@ class MigrateTo2000(Migrator):
         logger.info("Re-applying faceted config")
         # faceted folder was renamed
         current_lang = api.portal.get_default_language()[:2]
-        api.content.rename(self.portal.get(CONFIG_FOLDER_ID).faceted, FACETED_DEC_FOLDER_ID)
+        if hasattr(self.portal.get(CONFIG_FOLDER_ID), 'faceted'):
+            api.content.rename(self.portal.get(CONFIG_FOLDER_ID).faceted, FACETED_DEC_FOLDER_ID)
         self.portal.get(CONFIG_FOLDER_ID).get(FACETED_DEC_FOLDER_ID).setTitle(
             translate(_("Faceted decisions"), target_language=current_lang))
         # re-apply faceted config
@@ -109,7 +111,8 @@ class MigrateTo2000(Migrator):
             # make sure constrain types mode is disabled
             set_constrain_types(institution, [], mode=0)
             # rename to "decisions"
-            api.content.rename(institution.seances, DEC_FOLDER_ID)
+            if hasattr(institution, "seances"):
+                api.content.rename(institution.seances, DEC_FOLDER_ID)
             decisions = institution.get(DEC_FOLDER_ID)
             decisions.setTitle(translate(_("Decisions"), target_language=current_lang))
             decisions.reindexObject()
@@ -229,9 +232,12 @@ class MigrateTo2000(Migrator):
 
             # move users from old institution_managers group to
             # new decisions_managers group
-            for user in api.user.get_users(groupname=old_group_id):
-                api.group.add_user(groupname=group_id, username=user.id)
-                api.group.remove_user(groupname=old_group_id, username=user.id)
+            try:
+                for user in api.user.get_users(groupname=old_group_id):
+                    api.group.add_user(groupname=group_id, username=user.id)
+                    api.group.remove_user(groupname=old_group_id, username=user.id)
+            except GroupNotFoundError:
+                continue
             # remove institution_managers group local_roles on institution
             institution.manage_delLocalRoles([old_group_id])
             # delete old institution_managers group
