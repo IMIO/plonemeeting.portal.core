@@ -69,3 +69,11 @@ msgstr ""
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Unpublished"
 msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Planned"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Plan"
+msgstr ""

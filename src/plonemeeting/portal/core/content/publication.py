@@ -1,3 +1,4 @@
+from DateTime import DateTime
 from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
 from plone import api
@@ -9,6 +10,9 @@ from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
+from Products.CMFCore.permissions import ManagePortal
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
@@ -69,6 +73,32 @@ class Publication(Container, File):
     """
     """
 
+    def may_back_to_private(self):
+        """Only Manager may back to private except if
+           current review_state is "planned"."""
+        if api.content.get_state(self) == "planned":
+            return _checkPermission(ModifyPortalContent, self)
+        else:
+            return _checkPermission(ManagePortal, self)
+
+    def may_plan(self):
+        """May plan if able to modify and
+           a "publication date" (effectiveDate) is defined."""
+        return _checkPermission(ModifyPortalContent, self) and \
+            self.effective_date is not None and self.effective_date > DateTime()
+
+    def may_publish(self):
+        """May publish if able to modify and
+           a "publication date" (effectiveDate) is NOT defined.
+           When "unpublished" check that time stamp  was not modified."""
+        return _checkPermission(ModifyPortalContent, self) and \
+            (self.effective_date is None or
+             (api.content.get_state(self) == "unpublished") and
+             self.timestamp_still_valid())
+
+    def timestamp_still_valid(self):
+        """Check if timestamp still corresponds to effective_date."""
+        return True
 
 @indexer(IPublication)
 def get_decision_date(obj):

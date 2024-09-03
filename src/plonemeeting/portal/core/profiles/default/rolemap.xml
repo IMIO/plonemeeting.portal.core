@@ -33,7 +33,17 @@
     </permission>
 
     <permission name="Modify view template" acquire="False">
+      <!-- do not let editors change view template -->
       <role name="Manager"/>
+    </permission>
+
+    <permission name="Access inactive portal content" acquire="False">
+      <!-- give access to expired content to Member because checked by Plone
+           at the portal_catalog level, the View permission will hide not
+           viewable elements nevertheless -->
+      <role name="Member"/>
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
     </permission>
 
   </permissions>

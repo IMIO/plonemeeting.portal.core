@@ -39,6 +39,14 @@ msgstr "Processus de publication des Institutions"
 msgid "Meeting Workflow"
 msgstr "Processus de publication des Séances"
 
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Plan"
+msgstr "Planifier (publier auto)"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Planned"
+msgstr "Planifié (publié auto)"
+
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Private"
 msgstr "Privé"

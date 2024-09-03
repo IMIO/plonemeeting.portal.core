@@ -68,6 +68,13 @@
   />
 
   <browser:page
+    name="content_status_modify"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationContentStatusModifyView"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="import_meeting"
     for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
     permission="cmf.AddPortalContent"

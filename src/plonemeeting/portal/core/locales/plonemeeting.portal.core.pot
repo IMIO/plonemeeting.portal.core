@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-08-30 13:37+0000\n"
+"POT-Creation-Date: 2024-09-02 12:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: ../faceted/preview_publications.pt:26
+#: ../faceted/preview_publications.pt:25
 msgid "Add a publication"
 msgstr ""
 
@@ -52,7 +52,7 @@ msgid "Assemblée générale"
 msgstr ""
 
 #: ../browser/templates/publication.pt:52
-#: ../content/publication.py:51
+#: ../content/publication.py:54
 msgid "Authority date"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgid "Decision"
 msgstr ""
 
 #: ../browser/templates/publication.pt:40
-#: ../content/publication.py:41
+#: ../content/publication.py:44
 msgid "Decision date"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../browser/templates/publication.pt:78
-#: ../content/publication.py:24
+#: ../content/publication.py:27
 msgid "Document type"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Enabled tabs"
 msgstr ""
 
-#: ../content/publication.py:46
+#: ../content/publication.py:49
 msgid "Entry date"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../migrations/migrate_to_2000.py:178
+#: ../migrations/migrate_to_2000.py:181
 #: ../setuphandlers.py:66
 msgid "Faceted publications"
 msgstr ""
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:56
+#: ../content/publication.py:59
 msgid "Hour and place of consultation"
 msgstr ""
 
@@ -307,7 +307,7 @@ msgid "Legislative authorities"
 msgstr ""
 
 #: ../browser/templates/publication.pt:102
-#: ../content/publication.py:36
+#: ../content/publication.py:39
 msgid "Legislative authority"
 msgstr ""
 
@@ -430,7 +430,7 @@ msgid "Publication"
 msgstr ""
 
 #: ../events/institution.py:46
-#: ../migrations/migrate_to_2000.py:198
+#: ../migrations/migrate_to_2000.py:201
 msgid "Publications"
 msgstr ""
 
