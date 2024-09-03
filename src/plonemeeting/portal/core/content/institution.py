@@ -298,6 +298,24 @@ class IInstitution(model.Schema):
         required=False,
     )
 
+    # Publications fieldset
+    model.fieldset(
+        "publications",
+        label=_(u"Publications"),
+        fields=[
+            "publications_power_users",
+        ],
+    )
+
+    directives.widget("publications_power_users", CheckBoxFieldWidget, multiple='multiple')
+    publications_power_users = schema.List(
+        title=_(u"Power users"),
+        description=_("power_users_description"),
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.vocabularies.publications_power_users"),
+        required=True,
+    )
+
     # Styling fieldset
     model.fieldset(
         "style",

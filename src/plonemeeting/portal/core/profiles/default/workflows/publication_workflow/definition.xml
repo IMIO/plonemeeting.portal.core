@@ -9,6 +9,8 @@
              i18n:domain="plone">
 
   <permission>Access contents information</permission>
+  <permission>plone.app.contenttypes: Add Image</permission>
+  <permission>plone.app.contenttypes: Add File</permission>
   <permission>Modify portal content</permission>
   <permission>Delete objects</permission>
   <permission>View</permission>
@@ -24,7 +26,6 @@
     <permission-map acquired="False"
                     name="Access contents information">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
@@ -33,21 +34,30 @@
     <permission-map acquired="False"
                     name="Delete objects">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="Modify portal content">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image">
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File">
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="View">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
@@ -66,7 +76,6 @@
     <permission-map acquired="False"
                     name="Access contents information">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
@@ -75,21 +84,30 @@
     <permission-map acquired="False"
                     name="Delete objects">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="Modify portal content">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image">
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File">
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="View">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
@@ -120,6 +138,16 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
                     name="View">
       <permission-role>Anonymous</permission-role>
     </permission-map>
@@ -136,7 +164,6 @@
     <permission-map acquired="False"
                     name="Access contents information">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
@@ -145,21 +172,30 @@
     <permission-map acquired="False"
                     name="Delete objects">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="Modify portal content">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image">
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File">
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="View">
       <permission-role>Manager</permission-role>
-      <permission-role>Owner</permission-role>
       <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>

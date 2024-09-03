@@ -43,4 +43,9 @@
         handler=".publication.publication_state_changed"
         />
 
+    <subscriber
+        for="plonemeeting.portal.core.content.publication.IPublication
+             OFS.interfaces.IObjectWillBeRemovedEvent"
+        handler=".publication.publication_will_be_removed" />
+
 </configure>

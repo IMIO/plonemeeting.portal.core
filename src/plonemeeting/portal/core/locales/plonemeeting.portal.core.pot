@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-02 12:12+0000\n"
+"POT-Creation-Date: 2024-09-03 12:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../vocabularies.py:141
+#: ../vocabularies.py:154
 msgid "(Passed term of office) ${representative_value}"
 msgstr ""
 
@@ -52,7 +52,7 @@ msgid "Assemblée générale"
 msgstr ""
 
 #: ../browser/templates/publication.pt:52
-#: ../content/publication.py:54
+#: ../content/publication.py:55
 msgid "Authority date"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:388
+#: ../content/institution.py:406
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgid "Decision"
 msgstr ""
 
 #: ../browser/templates/publication.pt:40
-#: ../content/publication.py:44
+#: ../content/publication.py:45
 msgid "Decision date"
 msgstr ""
 
@@ -117,12 +117,12 @@ msgstr ""
 msgid "Decisions"
 msgstr ""
 
-#: ../configure.zcml:47
+#: ../configure.zcml:48
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
 #: ../browser/templates/publication.pt:78
-#: ../content/publication.py:27
+#: ../content/publication.py:28
 msgid "Document type"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Enabled tabs"
 msgstr ""
 
-#: ../content/publication.py:49
+#: ../content/publication.py:50
 msgid "Entry date"
 msgstr ""
 
@@ -174,11 +174,11 @@ msgstr ""
 msgid "Faceted publications preview"
 msgstr ""
 
-#: ../content/institution.py:352
+#: ../content/institution.py:370
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:360
+#: ../content/institution.py:378
 msgid "Footer text color"
 msgstr ""
 
@@ -210,11 +210,11 @@ msgstr ""
 msgid "Groups in charge"
 msgstr ""
 
-#: ../content/institution.py:320
+#: ../content/institution.py:338
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:59
+#: ../content/publication.py:60
 msgid "Hour and place of consultation"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -307,7 +307,7 @@ msgid "Legislative authorities"
 msgstr ""
 
 #: ../browser/templates/publication.pt:102
-#: ../content/publication.py:39
+#: ../content/publication.py:40
 msgid "Legislative authority"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Legislative authority title"
 msgstr ""
 
-#: ../content/institution.py:344
+#: ../content/institution.py:362
 msgid "Links text color"
 msgstr ""
 
@@ -327,7 +327,7 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:316
+#: ../content/institution.py:334
 msgid "Logo"
 msgstr ""
 
@@ -385,11 +385,11 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
-#: ../content/institution.py:328
+#: ../content/institution.py:346
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:336
+#: ../content/institution.py:354
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -417,6 +417,10 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
+#: ../content/institution.py:312
+msgid "Power users"
+msgstr ""
+
 #: ../content/institution.py:227
 msgid "Project decision disclaimer"
 msgstr ""
@@ -429,6 +433,7 @@ msgstr ""
 msgid "Publication"
 msgstr ""
 
+#: ../content/institution.py:304
 #: ../events/institution.py:46
 #: ../migrations/migrate_to_2000.py:201
 msgid "Publications"
@@ -479,7 +484,7 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:410
+#: ../content/institution.py:428
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
@@ -503,7 +508,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../content/institution.py:304
+#: ../content/institution.py:322
 msgid "Styling"
 msgstr ""
 
@@ -564,11 +569,11 @@ msgstr ""
 msgid "Unexpected publishable annex value in web service response !"
 msgstr ""
 
-#: ../configure.zcml:56
+#: ../configure.zcml:57
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:443
+#: ../content/institution.py:461
 msgid "Unknown value: ${key}"
 msgstr ""
 
@@ -608,8 +613,12 @@ msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:91
-#: ../content/institution.py:465
+#: ../content/institution.py:483
 msgid "Webservice connection error !"
+msgstr ""
+
+#: ../events/publication.py:31
+msgid "You must be publications power user to remove this element!"
 msgstr ""
 
 #: ../browser/institution.py:21
@@ -694,16 +703,20 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:38
+#: ../configure.zcml:39
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:47
+#: ../configure.zcml:48
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:56
+#: ../configure.zcml:57
 msgid "plonemeeting.portal.core (uninstall)"
+msgstr ""
+
+#: ../content/institution.py:313
+msgid "power_users_description"
 msgstr ""
 
 #: ../config.py:24

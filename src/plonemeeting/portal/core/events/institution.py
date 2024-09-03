@@ -127,12 +127,6 @@ def handle_institution_deletion(obj, event):
         pass
 
 
-def meeting_state_changed(obj, event):
-    items = obj.listFolderContents(contentFilter={"portal_type": "Item"})
-    for item in items:
-        item.reindexObject(idxs=["linkedMeetingReviewState"])
-
-
 def update_custom_css(context, event):
     """
     This will update the custom_colors.css in plone_resources directory and will update the bundle

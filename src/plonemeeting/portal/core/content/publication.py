@@ -73,6 +73,16 @@ class Publication(Container, File):
     """
     """
 
+    def _get_institution(self):
+        """ """
+        return api.portal.get_navigation_root(self)
+
+    def is_power_user(self):
+        """ """
+        institution = self._get_institution()
+        return not institution.publications_power_users or \
+            api.user.get_current().getId() in institution.publications_power_users
+
     def may_back_to_private(self):
         """Only Manager may back to private except if
            current review_state is "planned"."""
@@ -93,12 +103,14 @@ class Publication(Container, File):
            When "unpublished" check that time stamp  was not modified."""
         return _checkPermission(ModifyPortalContent, self) and \
             (self.effective_date is None or
-             (api.content.get_state(self) == "unpublished") and
-             self.timestamp_still_valid())
+             (api.content.get_state(self) == "unpublished" and
+              self.is_power_user() and
+              self.timestamp_still_valid()))
 
     def timestamp_still_valid(self):
         """Check if timestamp still corresponds to effective_date."""
         return True
+
 
 @indexer(IPublication)
 def get_decision_date(obj):
