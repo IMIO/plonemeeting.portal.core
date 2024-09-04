@@ -72,6 +72,13 @@ class IPublication(model.Schema, IFile):
         accept=("application/pdf", ),
         required=False)
 
+    write_permission(timestamped_file="cmf.ManagePortal")
+
+    timestamped_file = NamedBlobFile(
+        title="Timestamped file",
+        accept=("application/zip", ),
+        required=False)
+
     text = RichText(
         title=_("Text"),
         required=False,
