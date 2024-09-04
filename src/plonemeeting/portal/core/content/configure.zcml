@@ -21,6 +21,7 @@
     <adapter name="annexes_infos" factory=".publication.get_annexes_infos" />
     <adapter name="has_annexes" factory=".publication.has_annexes" />
     <adapter name="pretty_category" factory=".publication.get_pretty_category" />
+    <adapter name="pretty_document_type" factory=".publication.get_pretty_document_type" />
     <adapter name="year" factory=".publication.get_effective_year" />
 
 </configure>
