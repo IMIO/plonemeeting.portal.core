@@ -24,8 +24,6 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 
-
-
 class IPublication(model.Schema, IFile):
     """ Marker interface and Dexterity Python Schema for Publication
     """
@@ -73,14 +71,6 @@ class IPublication(model.Schema, IFile):
         title="File",
         accept=("application/pdf", ),
         required=False)
-
-    read_permission(enableAutopublishing="cmf.ManagePortal")
-    write_permission(enableAutopublishing="cmf.ManagePortal")
-    enableAutopublishing = schema.Bool(
-        title=_("enableAutopublishing", default="Enable autopublishing?"),
-        required=False,
-        default=True,
-    )
 
     text = RichText(
         title=_("Text"),

@@ -16,7 +16,7 @@
 
   <include file="permissions.zcml" />
 
-
+  <include package=".behaviors" />
   <include package=".browser" />
   <include package=".content" />
   <include package=".events" />
