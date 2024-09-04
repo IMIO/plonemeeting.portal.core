@@ -4,8 +4,11 @@ from imio.helpers.content import object_values
 from plone import api
 from plone.app.contenttypes.content import File
 from plone.app.contenttypes.interfaces import IFile
+from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
+from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
 from plone.autoform.directives import read_permission
+from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
@@ -78,6 +81,13 @@ class IPublication(model.Schema, IFile):
         required=False,
         default=True,
     )
+
+    text = RichText(
+        title=_("Text"),
+        required=False,
+    )
+    widget("text", RichTextFieldWidget)
+    searchable("text")
 
 
 @implementer(IPublication)
