@@ -11,6 +11,7 @@
   <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
   <include package="collective.timestamp" />
+  <include package="collective.autopublishing" />
   <include package="eea.facetednavigation" />
   <include package="plone.formwidget.hcaptcha" />
 
