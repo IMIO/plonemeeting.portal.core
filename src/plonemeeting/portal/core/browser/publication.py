@@ -34,6 +34,14 @@ class PublicationView(DefaultView):
         return self.context.authority_date.strftime('%d/%m/%Y') \
             if self.context.authority_date else "-"
 
+    def get_expired_authority_date(self):
+        return self.context.expired_authority_date.strftime('%d/%m/%Y') \
+            if self.context.expired_authority_date else "-"
+
+    def get_entry_date(self):
+        return self.context.entry_date.strftime('%d/%m/%Y') \
+            if self.context.entry_date else "-"
+
     def get_state_title(self):
         return get_state_infos(self.context)['state_title']
 

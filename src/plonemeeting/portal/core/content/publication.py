@@ -55,15 +55,17 @@ class IPublication(model.Schema, IFile):
         required=False,
     )
 
-    authority_date = schema.Date(
-        title=_(u"Authority date"),
-        required=False,
-    )
-
     consultation_text = RichText(
         title=_(u"Hour and place of consultation"),
         required=False
     )
+
+    text = RichText(
+        title=_("Text"),
+        required=False,
+    )
+    widget("text", RichTextFieldWidget)
+    searchable("text")
 
     model.primary('file')
     file = NamedBlobFile(
@@ -78,12 +80,33 @@ class IPublication(model.Schema, IFile):
         accept=("application/zip", ),
         required=False)
 
-    text = RichText(
-        title=_("Text"),
+    # Styling fieldset
+    model.fieldset(
+        "authority",
+        label=_(u"Authority"),
+        fields=[
+            "subject_to_authority",
+            "authority_date",
+            "expired_authority_date",
+        ],
+    )
+    subject_to_authority = schema.Bool(
+        title=_(u"Subject to authority?"),
+        required=False,
+        default=True,
+    )
+
+    authority_date = schema.Date(
+        title=_(u"Authority date"),
+        description=_("authority_date_description"),
         required=False,
     )
-    widget("text", RichTextFieldWidget)
-    searchable("text")
+
+    expired_authority_date = schema.Date(
+        title=_(u"Expired authority date"),
+        description=_("expired_authority_date_description"),
+        required=False,
+    )
 
 
 @implementer(IPublication)

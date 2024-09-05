@@ -48,7 +48,18 @@
             2024-08-01
           </div>
         </div>
-        <div class="content-metadata-row">
+        <div class="content-metadata-row" tal:condition="python:context.subject_to_authority is False">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Subject to authority?
+          </div>
+          <div class="content-metadata-col">
+            Non
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.authority_date">
           <div class="content-metadata-col header"
              i18n:translate=""
           >
@@ -60,6 +71,33 @@
             2024-08-01
           </div>
         </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.expired_authority_date">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Expired authority date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_expired_authority_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.entry_date">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Entry date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_entry_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+
       </div>
       <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
         <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: isAnon">
