@@ -7,7 +7,6 @@ from plone.app.contenttypes.interfaces import IFile
 from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
 from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
-from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
 from plone.dexterity.content import Container
@@ -122,6 +121,7 @@ class Publication(Container, File):
            When "unpublished" check that time stamp  was not modified."""
         return _checkPermission(ModifyPortalContent, self) and \
             (self.effective_date is None or
+             (api.content.get_state(self) == "planned" and self.effective_date < DateTime()) or
              (api.content.get_state(self) == "unpublished" and
               self.is_power_user() and
               self.timestamp_still_valid()))
