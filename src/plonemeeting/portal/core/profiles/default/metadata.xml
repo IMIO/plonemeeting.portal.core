@@ -10,5 +10,6 @@
     <dependency>profile-plone.restapi:default</dependency>
     <dependency>profile-plone.formwidget.hcaptcha:default</dependency>
     <dependency>profile-collective.timestamp:default</dependency>
+    <dependency>profile-collective.autopublishing:default</dependency>
   </dependencies>
 </metadata>

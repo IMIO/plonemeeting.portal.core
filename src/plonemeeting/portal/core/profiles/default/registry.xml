@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plonemeeting.portal.core">
-  <record name="plone.custom_attributes" interface="Products.CMFPlone.interfaces.controlpanel.IFilterSchema" field="custom_attributes">
+  <!-- Plone -->
+  <record name="plone.custom_attributes" interface="Products.CMFPlone.interfaces.controlpanel.IFilterSchema"
+          field="custom_attributes">
     <value purge="true">
       <element>style</element>
     </value>
   </record>
+  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
+    <value key="title" i18n:translate="">Item number</value>
+    <value key="description" i18n:translate=""/>
+    <value key="enabled">False</value>
+    <value key="sortable">True</value>
+    <value key="operations"/>
+    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
+  </records>
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.linkedMeetingDate">
+    <value key="title" i18n:translate="">Related meeting date</value>
+    <value key="description" i18n:translate=""/>
+    <value key="enabled">False</value>
+    <value key="sortable">True</value>
+    <value key="operations"/>
+    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
+  </records>
+
+  <!-- plonemeeting.portal.core -->
   <record name="plonemeeting.portal.core.global_categories">
     <field type="plone.registry.field.Dict">
       <title i18n:translate="">Global categories</title>
@@ -97,25 +118,145 @@
       <element key="general-assembly" i18n:translate="">Assemblée générale</element>
     </value>
   </record>
+
+  <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">
     <value key="timestamping_service_url">http://tss.pkiacc.tsp.zetes.com</value>
   </records>
-  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.number">
-    <value key="title" i18n:translate="">Item number</value>
-    <value key="description" i18n:translate=""/>
-    <value key="enabled">False</value>
-    <value key="sortable">True</value>
-    <value key="operations"/>
-    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
-  </records>
-  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.linkedMeetingDate">
-    <value key="title" i18n:translate="">Related meeting date</value>
-    <value key="description" i18n:translate=""/>
-    <value key="enabled">False</value>
-    <value key="sortable">True</value>
-    <value key="operations"/>
-    <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
-  </records>
+
+  <!-- collective.autopublishing -->
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema.clear_expiration_on_publish"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema"
+    field="clear_expiration_on_publish">
+    <value>False</value>
+  </record>
+  <record name="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema.dry_run"
+          interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema" field="dry_run">
+    <value>False</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema.overwrite_expiration_on_retract"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema"
+    field="overwrite_expiration_on_retract">
+    <value>False</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.date_index"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="date_index">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <default>effective</default>-->
+<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--                   ns0:translate="help_date_index">By default publishing date (the 'effective' index) is used for-->
+<!--        'publish actions', and expiration date (the 'expires' index) is used for 'retract actions'. If a custom method-->
+<!--        is to be used for the date, enter index_id|object_method_id. If index_id = method_id just enter index_id.-->
+<!--      </description>-->
+<!--      <missing_value>effective</missing_value>-->
+<!--      <required>False</required>-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_date_index">Transaction trigger date catalog index / method-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>effective</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.initial_state"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="initial_state">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_initial_state">Initial workflow state-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>planned</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.portal_types"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="portal_types">
+<!--    <field type="plone.registry.field.Tuple">-->
+<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--                   ns0:translate="help_ap_portaltypes">Content types this rule applies to.-->
+<!--      </description>-->
+<!--      <missing_value/>-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing" ns0:translate="">-->
+<!--        Content types-->
+<!--      </title>-->
+<!--      <value_type type="plone.registry.field.Choice">-->
+<!--        <vocabulary>plone.app.vocabularies.ReallyUserFriendlyTypes</vocabulary>-->
+<!--      </value_type>-->
+<!--    </field>-->
+    <value>
+      <element>Publication</element>
+    </value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.transition"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="transition">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_transition">Transition from initial state-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>publish</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.date_index"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="date_index">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <default>effective</default>-->
+<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--                   ns0:translate="help_date_index">By default publishing date (the 'effective' index) is used for-->
+<!--        'publish actions', and expiration date (the 'expires' index) is used for 'retract actions'. If a custom method-->
+<!--        is to be used for the date, enter index_id|object_method_id. If index_id = method_id just enter index_id.-->
+<!--      </description>-->
+<!--      <missing_value>effective</missing_value>-->
+<!--      <required>False</required>-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_date_index">Transaction trigger date catalog index / method-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>effective</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.initial_state"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="initial_state">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_initial_state">Initial workflow state-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>published</value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.portal_types"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="portal_types">
+<!--    <field type="plone.registry.field.Tuple">-->
+<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--                   ns0:translate="help_ap_portaltypes">Content types this rule applies to.-->
+<!--      </description>-->
+<!--      <missing_value/>-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing" ns0:translate="">-->
+<!--        Content types-->
+<!--      </title>-->
+<!--      <value_type type="plone.registry.field.Choice">-->
+<!--        <vocabulary>plone.app.vocabularies.ReallyUserFriendlyTypes</vocabulary>-->
+<!--      </value_type>-->
+<!--    </field>-->
+    <value>
+      <element>Publication</element>
+    </value>
+  </record>
+  <record
+    name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.transition"
+    interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="transition">
+<!--    <field type="plone.registry.field.TextLine">-->
+<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
+<!--             ns0:translate="label_transition">Transition from initial state-->
+<!--      </title>-->
+<!--    </field>-->
+    <value>unpublished</value>
+  </record>
+
+  <!--Products.CMFPlone.interfaces.IBundleRegistry (Theming) -->
   <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">
       <element>plonemeeting.portal.core</element>
@@ -127,7 +268,8 @@
     <value key="jscompilation">++plone++plonemeeting.portal.core/js/core.js</value>
     <value key="last_compilation">2024-07-29 10:43:48.116Z</value>
   </records>
-  <records prefix="plone.bundles/plonemeeting.portal.core-custom" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+  <records prefix="plone.bundles/plonemeeting.portal.core-custom"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">
       <element>plonemeeting.portal.core-custom</element>
     </value>
@@ -136,7 +278,8 @@
     <value key="last_compilation">2020-09-04 12:30:00</value>
     <value key="csscompilation">/custom_colors.css</value>
   </records>
-  <records prefix="plone.bundles/plonemeeting.portal.core-devserver" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+  <records prefix="plone.bundles/plonemeeting.portal.core-devserver"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="enabled">False</value>
     <value key="compile">False</value>
     <value key="last_compilation">2020-09-04 12:30:00</value>
