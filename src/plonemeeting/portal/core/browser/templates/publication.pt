@@ -9,7 +9,7 @@
   portal_url context/@@plone_portal_state/portal_url;
   utils_view nocall:context/@@utils_view;
   review_state python: utils_view.get_state(context);
-  isAnon context/@@plone_portal_state/anonymous;
+  is_anon context/@@plone_portal_state/anonymous;
   "
    i18n:domain="plonemeeting.portal.core"
 >
@@ -36,6 +36,21 @@
             2024-08-01 00:00:00
           </div>
         </div>
+
+        <div class="content-metadata-row" tal:condition="python:not is_anon and context.expiration_date">
+          <div class="content-metadata-col header"
+             i18n:domain="plone"
+             i18n:translate="label_expiration_date"
+          >
+            Expiration date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_expiration_date()"
+          >
+            2024-08-01 00:00:00
+          </div>
+        </div>
+
         <div class="content-metadata-row">
           <div class="content-metadata-col header"
              i18n:translate=""
@@ -48,6 +63,7 @@
             2024-08-01
           </div>
         </div>
+
         <div class="content-metadata-row" tal:condition="python:context.subject_to_authority is False">
           <div class="content-metadata-col header"
              i18n:translate=""
@@ -100,7 +116,7 @@
 
       </div>
       <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
-        <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: isAnon">
+        <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: is_anon">
           <div class="content-metadata-col header" data-bs-toggle="popover" data-bs-trigger="hover focus"
                data-bs-content="L'état indique où se situe le document dans le processus de publication."
           >

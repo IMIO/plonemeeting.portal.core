@@ -26,6 +26,10 @@ class PublicationView(DefaultView):
         return self.context.effective_date.strftime('%d/%m/%Y à %H:%M') \
             if self.context.effective_date else "-"
 
+    def get_expiration_date(self):
+        return self.context.expiration_date.strftime('%d/%m/%Y à %H:%M') \
+            if self.context.expiration_date else "-"
+
     def get_decision_date(self):
         return self.context.decision_date.strftime('%d/%m/%Y') \
             if self.context.decision_date else "-"
