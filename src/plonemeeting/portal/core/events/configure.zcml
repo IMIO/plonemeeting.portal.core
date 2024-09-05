@@ -48,4 +48,8 @@
              OFS.interfaces.IObjectWillBeRemovedEvent"
         handler=".publication.publication_will_be_removed" />
 
+    <subscriber
+       for="collective.timedevents.interfaces.IIntervalTicks15Event"
+       handler="collective.autopublishing.eventhandler.autopublish_handler" />
+
 </configure>
