@@ -253,7 +253,7 @@
 <!--             ns0:translate="label_transition">Transition from initial state-->
 <!--      </title>-->
 <!--    </field>-->
-    <value>unpublished</value>
+    <value>unpublish</value>
   </record>
 
   <!--Products.CMFPlone.interfaces.IBundleRegistry (Theming) -->
