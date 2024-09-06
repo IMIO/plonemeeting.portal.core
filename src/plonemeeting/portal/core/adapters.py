@@ -17,13 +17,14 @@ class PublicationTimeStamper(TimeStamper):
         zip_buffer = BytesIO()
         with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
             # add main file
-            if self.context.file.getSize() > 0:
+            if self.context.file:
                 zip_file.writestr(self.context.file.filename, self.context.file.data)
             # add annexes
             for item in object_values(self.context, "File"):
                 zip_file.writestr(item.file.filename, item.file.data)
             # add text
-            zip_file.writestr("text.txt", self.context.text.output)
+            if self.context.text:
+                zip_file.writestr("text.txt", self.context.text.raw)
         zip_buffer.seek(0)
         return zip_buffer.getvalue()
 
