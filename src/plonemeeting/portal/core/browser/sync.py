@@ -417,9 +417,10 @@ class PreImportReportForm(AutoExtensibleForm, Form):
     contentProviders["items"].position = 0
 
     def __call__(self):  # pragma: no cover
+        self.utils_view = self.context.restrictedTraverse("@@utils_view")
         self.external_meeting_uid = self.request.form["external_meeting_uid"]
         self.is_syncing = False
-        self.institution = self.context
+        self.institution = self.utils_view.get_current_institution()
         self.meeting_title = _call_delib_rest_api(
             get_api_url_for_meetings(self.institution, self.external_meeting_uid),
             self.institution,
