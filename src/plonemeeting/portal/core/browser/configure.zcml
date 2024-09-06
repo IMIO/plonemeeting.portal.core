@@ -172,4 +172,14 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <!-- author is called on INavigationRoot -->
+  <configure package="Products.CMFPlone.browser">
+    <browser:page
+      name="author"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class="Products.CMFPlone.browser.author.AuthorView"
+      template="templates/author.pt"
+      permission="zope.Public" />
+  </configure>
+
 </configure>

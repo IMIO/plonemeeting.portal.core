@@ -45,7 +45,7 @@ msgstr "Planifier (publier auto)"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Planned"
-msgstr "Planifié (publié auto)"
+msgstr "Planifié (privé, publié auto)"
 
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Private"
