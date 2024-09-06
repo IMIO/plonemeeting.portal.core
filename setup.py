@@ -63,6 +63,7 @@ setup(
         "z3c.jbot",
         "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
+        "imio.pyutils",
         "rich",
         "shutup",
         "importlib-metadata"
