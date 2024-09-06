@@ -1,3 +1,4 @@
+from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from DateTime import DateTime
 from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
@@ -23,7 +24,7 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 
-class IPublication(model.Schema, IFile):
+class IPublication(model.Schema, IFile, ITimestampableDocument):
     """ Marker interface and Dexterity Python Schema for Publication
     """
 
@@ -73,13 +74,6 @@ class IPublication(model.Schema, IFile):
         accept=("application/pdf", ),
         required=False)
 
-    write_permission(timestamped_file="cmf.ManagePortal")
-
-    timestamped_file = NamedBlobFile(
-        title="Timestamped file",
-        accept=("application/zip", ),
-        required=False)
-
     # Styling fieldset
     model.fieldset(
         "authority",
@@ -107,6 +101,17 @@ class IPublication(model.Schema, IFile):
         description=_("expired_authority_date_description"),
         required=False,
     )
+
+    # Timestamping fieldset
+    model.fieldset(
+        "timestamp",
+        fields=["timestamped_file"],
+    )
+    write_permission(timestamped_file="cmf.ManagePortal")
+    timestamped_file = NamedBlobFile(
+        title="Timestamped file",
+        accept=("application/zip", ),
+        required=False)
 
 
 @implementer(IPublication)

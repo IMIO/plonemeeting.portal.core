@@ -41,7 +41,6 @@
     <element value="plone.relateditems"/>
     <element value="plone.tableofcontents"/>
     <element value="plone.locking" />
-    <element value="collective.timestamp" />
     <element value="pm.autopublishing" />
   </property>
 

@@ -15,6 +15,7 @@
   <include package="eea.facetednavigation" />
   <include package="plone.formwidget.hcaptcha" />
 
+  <include file="adapters.zcml" />
   <include file="permissions.zcml" />
 
   <include package=".behaviors" />
