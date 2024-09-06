@@ -1,10 +1,40 @@
 from DateTime import DateTime
 from imio.helpers.workflow import get_state_infos
+from imio.pyutils.utils import sort_by_indexes
 from plone import api
 from plone.app.content.browser.content_status_modify import ContentStatusModifyView
+from plone.app.z3cform.views import AddForm as DefaultAddForm
+from plone.app.z3cform.views import AddView as DefaultAddView
+from plone.app.z3cform.views import EditForm as DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
+
+
+FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
+
+
+class AddForm(DefaultAddForm):
+    """Override to reorder fieldsets."""
+
+    def updateFields(self):
+        super(AddForm, self).updateFields()
+        indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
+        self.groups = sort_by_indexes(self.groups, indexes)
+
+
+class PublicationAdd(DefaultAddView):
+
+    form = AddForm
+
+
+class EditForm(DefaultEditForm):
+    """Override to reorder fieldsets."""
+
+    def updateFields(self):
+        super(EditForm, self).updateFields()
+        indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
+        self.groups = sort_by_indexes(self.groups, indexes)
 
 
 class PublicationView(DefaultView):

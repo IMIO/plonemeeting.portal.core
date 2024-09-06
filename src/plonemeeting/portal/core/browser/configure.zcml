@@ -59,6 +59,25 @@
     permission="zope.Public"
   />
 
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".publication.PublicationAdd" />
+  <class class=".publication.PublicationAdd">
+      <require
+          permission="cmf.AddPortalContent"
+          interface="zope.publisher.interfaces.browser.IBrowserPage" />
+  </class>
+
+  <browser:page
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    name="edit"
+    class=".publication.EditForm"
+    permission="cmf.ModifyPortalContent"
+  />
+
   <browser:page
     name="view"
     for="plonemeeting.portal.core.content.publication.IPublication"

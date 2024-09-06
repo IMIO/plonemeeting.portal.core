@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
+from plone.app.z3cform.interfaces import IPloneFormLayer
 from zope.interface import Interface
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class IPlonemeetingPortalCoreLayer(IDefaultBrowserLayer):
+class IPlonemeetingPortalCoreLayer(IPloneFormLayer):
     """Marker interface that defines a browser layer."""
 
 
