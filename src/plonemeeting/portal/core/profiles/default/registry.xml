@@ -121,7 +121,7 @@
 
   <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">
-    <value key="timestamping_service_url">http://tss.pkiacc.tsp.zetes.com</value>
+    <value key="timestamping_service_url">http://tss.eidpki.belgium.be</value>
   </records>
 
   <!-- collective.autopublishing -->
