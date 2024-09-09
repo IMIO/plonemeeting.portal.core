@@ -22,7 +22,7 @@
   </div>
   <div id="footer-socials" class="row">
     <div class="col-12 col-xl-8 offset-xl-2">
-      <img id="footer-imio-logo" src="++theme++deliberations/assets/IMIO_Logo.svg" width="100px"/>
+      <img id="footer-imio-logo" src="/++theme++deliberations/assets/IMIO_Logo.svg" width="100px"/>
       <div id="footer-socials-links">
         <a href=""
            target="_blank"
