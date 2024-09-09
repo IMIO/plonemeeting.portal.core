@@ -44,13 +44,13 @@ class IImportMeetingForm(Interface):
 
 
 class ISyncMeetingForm(Interface):
-
-    is_annexes_synced = schema.Bool(
-        title=_("Sync annexes ?"),
-        description=_("Sync annexes"),
-        required=False,
-        default=True,
-    )
+    pass
+    # is_annexes_synced = schema.Bool(
+    #     title=_("Sync annexes ?"),
+    #     description=_("Sync annexes"),
+    #     required=False,
+    #     default=True,
+    # )
 
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
