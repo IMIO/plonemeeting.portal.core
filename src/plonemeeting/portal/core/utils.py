@@ -31,6 +31,16 @@ def get_publications_managers_group_id(institution):
     return "{0}-publications_managers".format(institution.getId())
 
 
+def is_decisions_manager(institution):
+    return get_decisions_managers_group_id(institution) in \
+        api.user.get_current().getGroups()
+
+
+def is_publications_manager(institution):
+    return get_publications_managers_group_id(institution) in \
+        api.user.get_current().getGroups()
+
+
 def get_text_from_richtext(field):  # pragma: no cover
     if IRichTextValue.providedBy(field):
         transforms = api.portal.get_tool("portal_transforms")
