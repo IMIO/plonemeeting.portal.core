@@ -1,4 +1,3 @@
-from DateTime import DateTime
 from imio.helpers.workflow import get_state_infos
 from imio.pyutils.utils import sort_by_indexes
 from plone import api
@@ -7,6 +6,7 @@ from plone.app.z3cform.views import AddForm as DefaultAddForm
 from plone.app.z3cform.views import AddView as DefaultAddView
 from plone.app.z3cform.views import EditForm as DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 
@@ -46,7 +46,7 @@ class PublicationView(DefaultView):
            _checkPermission(ModifyPortalContent, self.context) and \
            self.context.enable_timestamping is False:
             api.portal.show_message(
-                "Timestamping is disabled for this element!",
+                _("Timestamping is disabled for this element!"),
                 request=self.request,
                 type="warning")
         return super(PublicationView, self).__call__()

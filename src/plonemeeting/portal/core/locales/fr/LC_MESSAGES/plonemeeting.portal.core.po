@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-09 13:18+0000\n"
+"POT-Creation-Date: 2024-09-09 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,6 +566,10 @@ msgstr "La validation CAPTCHA a échoué. Veuillez réessayer en suivant attenti
 #: ../content/institution.py:222
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
+
+#: ../browser/publication.py:49
+msgid "Timestamping is disabled for this element!"
+msgstr "L'horodatage est désactivé pour cet élément!"
 
 #: ../browser/templates/items_datatable.pt:19
 msgid "Title"
