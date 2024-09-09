@@ -20,8 +20,8 @@ class InstitutionView(DefaultView):
             api.portal.show_message(
                 _(
                     "You see this page because you have permissions to edit it. "
-                    "Otherwise you would have been redirected to Meetings folder. "
-                    "To see the Meetings view, click on Meetings folder."
+                    "Otherwise you would have been redirected to the application. "
+                    "Click on the links here above to access the elements."
                 ),
                 request=self.request,
                 type="info",

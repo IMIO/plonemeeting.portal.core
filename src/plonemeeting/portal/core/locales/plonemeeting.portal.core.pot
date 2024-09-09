@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-09 13:40+0000\n"
+"POT-Creation-Date: 2024-09-09 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../migrations/migrate_to_2000.py:184
+#: ../migrations/migrate_to_2000.py:185
 #: ../setuphandlers.py:66
 msgid "Faceted publications"
 msgstr ""
@@ -456,7 +456,7 @@ msgstr ""
 
 #: ../content/institution.py:304
 #: ../events/institution.py:46
-#: ../migrations/migrate_to_2000.py:204
+#: ../migrations/migrate_to_2000.py:205
 msgid "Publications"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgid "You must be publications power user to remove this element!"
 msgstr ""
 
 #: ../browser/institution.py:21
-msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to Meetings folder. To see the Meetings view, click on Meetings folder."
+msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to the application. Click on the links here above to access the elements."
 msgstr ""
 
 #: ../profiles/default/registry.xml
