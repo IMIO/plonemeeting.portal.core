@@ -118,7 +118,7 @@
                    i18n:domain="plone">
                   <span i18n:translate=""
                         tal:content="python: review_state.capitalize().replace('_', ' ')"
-                        tal:attributes="class string:state-${review_state} state-badge"></span>
+                        tal:attributes="class string:state-${review_state} badge state-badge"></span>
                 </div>
               </div>
             </div>

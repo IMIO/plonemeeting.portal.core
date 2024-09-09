@@ -55,6 +55,18 @@
           <div class="content-metadata-col header"
              i18n:translate=""
           >
+            Legislative authority
+          </div>
+          <div class="content-metadata-col"
+             tal:content="structure view/w/legislative_authority/render"
+          >
+            Legislative authority value
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
             Decision date
           </div>
           <div class="content-metadata-col"
@@ -125,7 +137,7 @@
           </div>
           <div class="content-metadata-col">
             <span tal:content="view/get_state_title"
-                  tal:attributes="class string:state-${review_state} state-badge"></span>
+                  tal:attributes="class string:state-${review_state} badge state-badge"></span>
           </div>
         </div>
         <div class="content-metadata-row">
@@ -156,7 +168,7 @@
           <div class="content-metadata-col header"
              i18n:translate=""
           >
-            Legislative authority
+            Entrée en vigueur
           </div>
           <div class="content-metadata-col"
              tal:content="structure view/w/legislative_authority/render"
