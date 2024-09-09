@@ -19,8 +19,10 @@
      tal:define="
     file python: context.file;
     toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+    toc python:  getattr(context, 'table_of_contents', False);
     "
   >
+
     <div class="row mb-3">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
@@ -182,9 +184,7 @@
       <div class="col-12">
         <div class="alert with-icon alert-light"
              role="alert"
-             style="margin: 0 !important;"
-
-        >
+             style="margin: 0 !important;">
           <div class="alert-icon">
             <i class="bi bi-building-check"></i>
           </div>
@@ -195,11 +195,11 @@
       </div>
     </div>
     </div>
-    <div class="row mb-3" tal:condition="context/text">
+    <div class="row mb-3" tal:condition="python:getattr(context, 'text', None)">
       <div class="col-12">
-        <div class="card p-4" tal:content="structure python:context.text.output_relative_to(context)">
-
-        </div>
+        <section class="${python: toc and 'pat-autotoc card p-4' or 'card p-4'}"
+             tal:content="structure python:context.text.output_relative_to(context)">
+        </section>
       </div>
     </div>
 
