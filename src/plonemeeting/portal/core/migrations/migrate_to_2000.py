@@ -31,7 +31,7 @@ import logging
 import os
 
 
-BREAK = 5
+BREAK = 999
 
 logger = logging.getLogger("plonemeeting.portal.core")
 
