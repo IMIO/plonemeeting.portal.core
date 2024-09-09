@@ -23,7 +23,7 @@
     "
   >
 
-    <div class="row mb-3">
+    <section class="row metadatas-section mb-3">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
           <div class="content-metadata-col header"
@@ -167,97 +167,97 @@
           </div>
         </div>
       </div>
-      </section>
-      <section class="row text-section mb-3" tal:condition="context/text">
-        <div class="col-12">
-          <div class="${python: toc and 'pat-autotoc card p-4' or 'card p-4'}"
-             tal:content="structure python:context.text.output_relative_to(context)">
-          </div>
+    </section>
+    <section class="row text-section mb-3" tal:condition="context/text">
+      <div class="col-12">
+        <div class="${python: toc and 'pat-autotoc card p-4' or 'card p-4'}"
+           tal:content="structure python:context.text.output_relative_to(context)">
         </div>
-      </section>
-      <section class="row pdf-section mb-3"
-         tal:condition="file"
-      >
-        <div class="col-12">
-          <h2>Document</h2>
-          <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
-        </div>
-      </section>
-      <section class="row annexes-section mb-3"
-         tal:define="files_infos utils_view/get_files_infos"
-         tal:condition="files_infos">
-        <div class="col-12">
-          <h2 i18n:translate="">Annexes</h2>
-          <div class="annexes">
-            <div tal:repeat="info files_infos">
-              <div class="annex">
-                <div class="bg-file-color ${info/icon_infos/color}">
-                  <i tal:attributes="class info/icon_infos/icon"></i>
-                </div>
-                <div class="title">
-                  <h3 tal:content="info/file/Title" />
-                  <p>Taille: <span tal:content="info/size"></span></p>
-                </div>
-                <div class="annex-actions">
-                  <a href=""
-                     target="_blank"
-                     tal:attributes="href info/file/absolute_url">
-                    <i class="bi bi-box-arrow-in-up-right"></i>
-                  </a>
-                </div>
+      </div>
+    </section>
+    <section class="row pdf-section mb-3"
+       tal:condition="file"
+    >
+      <div class="col-12">
+        <h2>Document</h2>
+        <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
+      </div>
+    </section>
+    <section class="row annexes-section mb-3"
+       tal:define="files_infos utils_view/get_files_infos"
+       tal:condition="files_infos">
+      <div class="col-12">
+        <h2 i18n:translate="">Annexes</h2>
+        <div class="annexes">
+          <div tal:repeat="info files_infos">
+            <div class="annex">
+              <div class="bg-file-color ${info/icon_infos/color}">
+                <i tal:attributes="class info/icon_infos/icon"></i>
+              </div>
+              <div class="title">
+                <h3 tal:content="info/file/Title" />
+                <p>Taille: <span tal:content="info/size"></span></p>
+              </div>
+              <div class="annex-actions">
+                <a href=""
+                   target="_blank"
+                   tal:attributes="href info/file/absolute_url">
+                  <i class="bi bi-box-arrow-in-up-right"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section class="row legal-section mb-3">
-        <div class="${python: context.is_timestamped() and 'col-lg-8' or 'col-lg-12'}">
-          <div class="alert with-icon alert-light"
-               role="alert"
-               style="margin: 0 !important;"
+      </div>
+    </section>
+    <section class="row legal-section mb-3">
+      <div class="${python: context.is_timestamped() and 'col-lg-8' or 'col-lg-12'}">
+        <div class="alert with-icon alert-light"
+             role="alert"
+             style="margin: 0 !important;"
 
-          >
-            <div class="alert-icon">
-              <i class="bi bi-building-check"></i>
-            </div>
-            <div class="alert-content">
-              <h3>Lieu et horaires de consultation</h3>
-              <div tal:content="structure view/w/consultation_text/render"></div>
-            </div>
+        >
+          <div class="alert-icon">
+            <i class="bi bi-building-check"></i>
+          </div>
+          <div class="alert-content">
+            <h3>Lieu et horaires de consultation</h3>
+            <div tal:content="structure view/w/consultation_text/render"></div>
           </div>
         </div>
-        <div class="col-lg-4" tal:condition="context/is_timestamped">
-          <div class="alert with-icon alert-light"
-               role="alert"
-               style="margin: 0 !important;"
+      </div>
+      <div class="col-lg-4" tal:condition="context/is_timestamped">
+        <div class="alert with-icon alert-light"
+             role="alert"
+             style="margin: 0 !important;"
 
-          >
-            <div class="alert-icon">
-              <i class="bi bi-clock"></i>
-            </div>
-            <div class="alert-content">
-              <h3>Horodatage qualifié</h3>
-              Cette publication a été horodatée conformément à la législation en vigueur.
-              <div class="row my-2 ">
-                <div class="col d-flex justify-content-start">
-                  <a class="btn btn-outline-secondary me-2"
-                     target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
-                    <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
-                  <a class="btn btn-outline-secondary"
-                     target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamped_file/filename}">Signature
-                    <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
-                </div>
+        >
+          <div class="alert-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="alert-content">
+            <h3>Horodatage qualifié</h3>
+            Cette publication a été horodatée conformément à la législation en vigueur.
+            <div class="row my-2 ">
+              <div class="col d-flex justify-content-start">
+                <a class="btn btn-outline-secondary me-2"
+                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
+                  <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
+                <a class="btn btn-outline-secondary"
+                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamped_file/filename}">Signature
+                  <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
               </div>
-              <div class="row">
-                <div class="text-end">
-                  <a href="/faq/horodatage" target="_blank" class="text-muted italic d-inline" style="font-size: 0.7em">Comment
-                    vérifier un horodatage ?</a>
-                </div>
+            </div>
+            <div class="row">
+              <div class="text-end">
+                <a href="/faq/horodatage" target="_blank" class="text-muted italic d-inline" style="font-size: 0.7em">Comment
+                  vérifier un horodatage ?</a>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   </metal:content-core>
 </metal:content-core>
 </body>
