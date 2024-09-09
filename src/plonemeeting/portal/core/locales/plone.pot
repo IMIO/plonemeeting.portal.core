@@ -77,3 +77,18 @@ msgstr ""
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Plan"
 msgstr ""
+
+#. Default: "Allowed types: ${accepted_types}."
+#: To be removed when managed in plone.app.locales
+msgid "namedfile_accepted_types"
+msgstr ""
+
+#. Default: "Help effective date"
+#: Overrided by plonemeeting.portal.core
+msgid "help_effective_date"
+msgstr ""
+
+#. Default: "Help expiration date"
+#: Overrided by plonemeeting.portal.core
+msgid "help_expiration_date"
+msgstr ""

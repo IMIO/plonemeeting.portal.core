@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-05 13:10+0000\n"
+"POT-Creation-Date: 2024-09-09 13:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,8 +37,8 @@ msgstr ""
 msgid "Additional data"
 msgstr ""
 
-#: ../browser/templates/item.pt:165
-#: ../browser/templates/publication.pt:180
+#: ../browser/templates/item.pt:166
+#: ../browser/templates/publication.pt:190
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr ""
@@ -51,12 +51,12 @@ msgstr ""
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:86
+#: ../content/publication.py:81
 msgid "Authority"
 msgstr ""
 
-#: ../browser/templates/publication.pt:63
-#: ../content/publication.py:100
+#: ../browser/templates/publication.pt:93
+#: ../content/publication.py:95
 msgid "Authority date"
 msgstr ""
 
@@ -72,8 +72,8 @@ msgstr ""
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
-#: ../browser/templates/item.pt:115
-#: ../browser/templates/publication.pt:115
+#: ../browser/templates/item.pt:116
+#: ../browser/templates/publication.pt:146
 #: ../content/item.py:64
 msgid "Category"
 msgstr ""
@@ -111,8 +111,8 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../browser/templates/publication.pt:40
-#: ../content/publication.py:49
+#: ../browser/templates/publication.pt:69
+#: ../content/publication.py:51
 msgid "Decision date"
 msgstr ""
 
@@ -121,12 +121,12 @@ msgstr ""
 msgid "Decisions"
 msgstr ""
 
-#: ../configure.zcml:49
+#: ../configure.zcml:50
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../browser/templates/publication.pt:103
-#: ../content/publication.py:32
+#: ../browser/templates/publication.pt:134
+#: ../content/publication.py:34
 msgid "Document type"
 msgstr ""
 
@@ -156,12 +156,16 @@ msgstr ""
 msgid "Enabled tabs"
 msgstr ""
 
-#: ../content/publication.py:54
+#: ../content/publication.py:56
 msgid "Entry date"
 msgstr ""
 
-#: ../browser/templates/publication.pt:76
-#: ../content/publication.py:106
+#: ../browser/templates/publication.pt:158
+msgid "Entrée en vigueur"
+msgstr ""
+
+#: ../browser/templates/publication.pt:106
+#: ../content/publication.py:101
 msgid "Expired authority date"
 msgstr ""
 
@@ -223,11 +227,11 @@ msgstr ""
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:59
+#: ../content/publication.py:61
 msgid "Hour and place of consultation"
 msgstr ""
 
-#: ../browser/sync.py:435
+#: ../browser/sync.py:436
 msgid "Import"
 msgstr ""
 
@@ -243,7 +247,7 @@ msgstr ""
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: ../configure.zcml:40
+#: ../configure.zcml:41
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -315,8 +319,8 @@ msgstr ""
 msgid "Legislative authorities"
 msgstr ""
 
-#: ../browser/templates/publication.pt:127
-#: ../content/publication.py:44
+#: ../browser/templates/publication.pt:57
+#: ../content/publication.py:46
 msgid "Legislative authority"
 msgstr ""
 
@@ -476,7 +480,7 @@ msgstr ""
 msgid "Removed"
 msgstr ""
 
-#: ../browser/templates/item.pt:123
+#: ../browser/templates/item.pt:124
 #: ../faceted/macro_item.pt:61
 msgid "Representative"
 msgstr ""
@@ -529,21 +533,13 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
-#: ../browser/templates/publication.pt:52
-#: ../content/publication.py:94
+#: ../browser/templates/publication.pt:82
+#: ../content/publication.py:89
 msgid "Subject to authority?"
 msgstr ""
 
 #: ../browser/sync.py:220
 msgid "Sync"
-msgstr ""
-
-#: ../browser/sync.py:50
-msgid "Sync annexes"
-msgstr ""
-
-#: ../browser/sync.py:49
-msgid "Sync annexes ?"
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -562,7 +558,7 @@ msgstr ""
 msgid "Séance publique du Conseil de Zone"
 msgstr ""
 
-#: ../content/publication.py:77
+#: ../content/publication.py:66
 msgid "Text"
 msgstr ""
 
@@ -595,7 +591,7 @@ msgstr ""
 msgid "Unexpected publishable annex value in web service response !"
 msgstr ""
 
-#: ../configure.zcml:58
+#: ../configure.zcml:59
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
@@ -643,7 +639,7 @@ msgstr ""
 msgid "Webservice connection error !"
 msgstr ""
 
-#: ../events/publication.py:31
+#: ../events/publication.py:42
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
@@ -667,7 +663,7 @@ msgstr ""
 msgid "activate to sort column descending"
 msgstr ""
 
-#: ../content/publication.py:101
+#: ../content/publication.py:96
 msgid "authority_date_description"
 msgstr ""
 
@@ -700,7 +696,7 @@ msgstr ""
 msgid "enableAutopublishing"
 msgstr ""
 
-#: ../content/publication.py:107
+#: ../content/publication.py:102
 msgid "expired_authority_date_description"
 msgstr ""
 
@@ -742,15 +738,15 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
-#: ../configure.zcml:40
+#: ../configure.zcml:41
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:49
+#: ../configure.zcml:50
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:58
+#: ../configure.zcml:59
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 

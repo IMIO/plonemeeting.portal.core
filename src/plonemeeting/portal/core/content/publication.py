@@ -153,11 +153,14 @@ class Publication(Container, File):
            When "unpublished" check that time stamp  was not modified."""
         return _checkPermission(ModifyPortalContent, self) and \
             (self.effective_date is None or
-             (api.content.get_state(self) == "planned" and self.effective_date < DateTime()) or
+             (api.content.get_state(self) == "planned" and
+              self.effective_date < DateTime()) or
              (api.content.get_state(self) == "unpublished" and
               self.is_power_user() and
               self.timestamp_still_valid()) or
-             (api.content.get_state(self) == "private" and self.effective_date < DateTime()))
+             (api.content.get_state(self) == "private" and
+              self.effective_date < DateTime() and
+              self.enable_timestamping is False))
 
     def timestamp_still_valid(self):
         """Check if timestamp still corresponds to effective_date."""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-05 13:10+0000\n"
+"POT-Creation-Date: 2024-09-09 13:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,8 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../browser/templates/item.pt:165
-#: ../browser/templates/publication.pt:180
+#: ../browser/templates/item.pt:166
+#: ../browser/templates/publication.pt:190
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr "Annexes"
@@ -48,12 +48,12 @@ msgstr "Portion anonymisée venant de iA.Delib à remplacer"
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:86
+#: ../content/publication.py:81
 msgid "Authority"
 msgstr "Tutelle"
 
-#: ../browser/templates/publication.pt:63
-#: ../content/publication.py:100
+#: ../browser/templates/publication.pt:93
+#: ../content/publication.py:95
 msgid "Authority date"
 msgstr "Date approbation tutelle"
 
@@ -69,8 +69,8 @@ msgstr "Correspondances des matières"
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
-#: ../browser/templates/item.pt:115
-#: ../browser/templates/publication.pt:115
+#: ../browser/templates/item.pt:116
+#: ../browser/templates/publication.pt:146
 #: ../content/item.py:64
 msgid "Category"
 msgstr "Matière"
@@ -108,8 +108,8 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Decision"
 msgstr "Décision"
 
-#: ../browser/templates/publication.pt:40
-#: ../content/publication.py:49
+#: ../browser/templates/publication.pt:69
+#: ../content/publication.py:51
 msgid "Decision date"
 msgstr "Date de décision"
 
@@ -118,12 +118,12 @@ msgstr "Date de décision"
 msgid "Decisions"
 msgstr "Décisions"
 
-#: ../configure.zcml:49
+#: ../configure.zcml:50
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
-#: ../browser/templates/publication.pt:103
-#: ../content/publication.py:32
+#: ../browser/templates/publication.pt:134
+#: ../content/publication.py:34
 msgid "Document type"
 msgstr "Nature du document"
 
@@ -153,12 +153,16 @@ msgstr "Modifier la séance"
 msgid "Enabled tabs"
 msgstr "Onglets activés"
 
-#: ../content/publication.py:54
+#: ../content/publication.py:56
 msgid "Entry date"
 msgstr "Date entrée en vigueur"
 
-#: ../browser/templates/publication.pt:76
-#: ../content/publication.py:106
+#: ../browser/templates/publication.pt:158
+msgid "Entrée en vigueur"
+msgstr ""
+
+#: ../browser/templates/publication.pt:106
+#: ../content/publication.py:101
 msgid "Expired authority date"
 msgstr "Exécutoire en date du (expiration délai tutelle)"
 
@@ -220,11 +224,11 @@ msgstr "Groupes en charge"
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
-#: ../content/publication.py:59
+#: ../content/publication.py:61
 msgid "Hour and place of consultation"
 msgstr "Lieu et horaires de consultation"
 
-#: ../browser/sync.py:435
+#: ../browser/sync.py:436
 msgid "Import"
 msgstr "Importer"
 
@@ -240,7 +244,7 @@ msgstr "Importer une séance"
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des annexes"
 
-#: ../configure.zcml:40
+#: ../configure.zcml:41
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr "Installe le module plonemeeting.portal.core."
 
@@ -312,8 +316,8 @@ msgstr "Dernière modification dans iA.Délib"
 msgid "Legislative authorities"
 msgstr "Autorités délibérantes"
 
-#: ../browser/templates/publication.pt:127
-#: ../content/publication.py:44
+#: ../browser/templates/publication.pt:57
+#: ../content/publication.py:46
 msgid "Legislative authority"
 msgstr "Autorité délibérante"
 
@@ -473,7 +477,7 @@ msgstr "Enlever"
 msgid "Removed"
 msgstr "Enlevé"
 
-#: ../browser/templates/item.pt:123
+#: ../browser/templates/item.pt:124
 #: ../faceted/macro_item.pt:61
 msgid "Representative"
 msgstr "Mandataire"
@@ -526,22 +530,14 @@ msgstr "Statut"
 msgid "Styling"
 msgstr "Styles"
 
-#: ../browser/templates/publication.pt:52
-#: ../content/publication.py:94
+#: ../browser/templates/publication.pt:82
+#: ../content/publication.py:89
 msgid "Subject to authority?"
 msgstr "Soumis à la tutelle?"
 
 #: ../browser/sync.py:220
 msgid "Sync"
 msgstr "Synchroniser"
-
-#: ../browser/sync.py:50
-msgid "Sync annexes"
-msgstr ""
-
-#: ../browser/sync.py:49
-msgid "Sync annexes ?"
-msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil"
@@ -559,7 +555,7 @@ msgstr "Séance publique du Conseil de Police"
 msgid "Séance publique du Conseil de Zone"
 msgstr "Séance publique du Conseil de Zone"
 
-#: ../content/publication.py:77
+#: ../content/publication.py:66
 msgid "Text"
 msgstr "Texte"
 
@@ -592,7 +588,7 @@ msgstr "Nombre de Séances inatendu dans la réponse du service web !"
 msgid "Unexpected publishable annex value in web service response !"
 msgstr "Une annexe non publiable a été trouvée dans la réponse du web service !"
 
-#: ../configure.zcml:58
+#: ../configure.zcml:59
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
@@ -640,7 +636,7 @@ msgstr "Erreur de connexion au service web !"
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
-#: ../events/publication.py:31
+#: ../events/publication.py:42
 msgid "You must be publications power user to remove this element!"
 msgstr "Vous devez avoir le rôle super-utilisateur pour supprimer une publication!"
 
@@ -664,7 +660,7 @@ msgstr "activer pour trier la colonne par ordre croissant"
 msgid "activate to sort column descending"
 msgstr "activer pour trier la colonne par ordre décroissant"
 
-#: ../content/publication.py:101
+#: ../content/publication.py:96
 msgid "authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -697,7 +693,7 @@ msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document
 msgid "enableAutopublishing"
 msgstr "Activer l'auto-publication"
 
-#: ../content/publication.py:107
+#: ../content/publication.py:102
 msgid "expired_authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -739,15 +735,15 @@ msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../configure.zcml:40
+#: ../configure.zcml:41
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: ../configure.zcml:49
+#: ../configure.zcml:50
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: ../configure.zcml:58
+#: ../configure.zcml:59
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
