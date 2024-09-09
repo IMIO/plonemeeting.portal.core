@@ -31,7 +31,7 @@ import logging
 import os
 
 
-BREAK = 999
+BREAK = 5
 
 logger = logging.getLogger("plonemeeting.portal.core")
 
@@ -120,7 +120,16 @@ class MigrateTo2000(Migrator):
 
             # move meetings into new folder "decisions"
             for meeting in object_values(institution, "Meeting"):
+                # avoid modified on moved element
+                orig_modified = meeting.modified()
+                orig_items_modified = {item.UID(): item.modified()
+                                       for item in object_values(meeting, "Item")}
                 api.content.move(meeting, decisions)
+                meeting.setModificationDate(orig_modified)
+                meeting.reindexObject(idxs=["modified"], update_metadata=1)
+                for item in object_values(meeting, "Item"):
+                    item.setModificationDate(orig_items_modified[item.UID()])
+                    item.reindexObject(idxs=["modified"], update_metadata=1)
             i = i + 1
             if i == BREAK:
                 break
