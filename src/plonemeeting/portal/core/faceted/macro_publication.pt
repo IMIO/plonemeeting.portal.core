@@ -1,4 +1,4 @@
-from paste.httpheaders import category
+from collective.timestamp.indexers import is_timestampedpaste.httpheaders import category
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -16,11 +16,9 @@ from paste.httpheaders import category
     <div id="state-row" class="row" i18n:domain="plone">
 
       <div class="col d-flex justify-content-end mb-2">
-        <div i18n:translate=""
+        <div i18n:translate="" tal:condition="brain/is_timestamped"
           class="badge timestamp-badge info"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
         </div>
-
-
         <div tal:condition="python: review_state == 'private'" i18n:translate=""
            tal:attributes="class string:state-${review_state} badge state-badge ms-2">
           Private
@@ -28,6 +26,14 @@ from paste.httpheaders import category
         <div tal:condition="python: review_state == 'published'" i18n:translate=""
            tal:attributes="class string:state-${review_state} badge state-badge ms-2">
           Published
+        </div>
+        <div tal:condition="python: review_state == 'unpublished'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Unpublished
+        </div>
+        <div tal:condition="python: review_state == 'planned'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Planned
         </div>
       </div>
     </div>

@@ -18,15 +18,15 @@
     <div id="state-row" class="row" i18n:domain="plone">
       <div class="col d-flex justify-content-end mb-2">
         <div tal:condition="python: review_state == 'private'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} state-badge">
+           tal:attributes="class string:state-${review_state} badge state-badge">
           Private
         </div>
         <div tal:condition="python: review_state == 'in_project'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} state-badge">
+           tal:attributes="class string:state-${review_state} badge state-badge">
           In project
         </div>
         <div tal:condition="python: review_state == 'decision'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} state-badge">
+           tal:attributes="class string:state-${review_state} badge state-badge">
           Decision
         </div>
       </div>

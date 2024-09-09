@@ -12,7 +12,7 @@ import MeetingAgenda from "./components/MeetingAgenda";
 
 import "../theme/main.scss";
 
-// register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
+register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
 register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);
@@ -33,8 +33,3 @@ function setUpEnvironmentLabel() {
 document.addEventListener("DOMContentLoaded", () => {
     setUpEnvironmentLabel();
 });
-
-//
-// if (module.hot) {
-//     module.hot.accept();
-// }

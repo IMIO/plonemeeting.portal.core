@@ -41,11 +41,11 @@ msgstr "Processus de publication des Séances"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Plan"
-msgstr "Planifier (publier auto)"
+msgstr "Planifier"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Planned"
-msgstr "Planifié (privé, publié auto)"
+msgstr "Planifié"
 
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Private"
@@ -73,4 +73,4 @@ msgstr "Dépublier"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Unpublished"
-msgstr "Dépublié (Privé)"
+msgstr "Dépublié"

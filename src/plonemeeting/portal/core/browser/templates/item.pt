@@ -95,8 +95,9 @@
         <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
-              <tal:state i18n:domain="plone" i18n:translate="">State</tal:state> <i class="bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus"
-                      data-bs-content="L'état indique où se situe le document dans le processus de publication."></i>
+              <tal:state i18n:domain="plone" i18n:translate="">State</tal:state>
+<!--?                <i class="bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus"-->
+<!--?                      data-bs-content="L'état indique où se situe le document dans le processus de publication."></i>-->
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">

@@ -1,5 +1,6 @@
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from DateTime import DateTime
+from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
 from plone import api
@@ -128,6 +129,9 @@ class Publication(Container, File):
         institution = self._get_institution()
         return not institution.publications_power_users or \
             api.user.get_current().getId() in institution.publications_power_users
+
+    def is_timestamped(self):
+        return ITimeStamper(self).is_timestamped()
 
     def may_back_to_private(self):
         """Only Manager may back to private except if
