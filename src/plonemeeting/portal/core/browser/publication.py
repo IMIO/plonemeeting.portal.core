@@ -44,10 +44,9 @@ class PublicationView(DefaultView):
     def __call__(self):
         if api.content.get_state(self.context) == 'private' and \
            _checkPermission(ModifyPortalContent, self.context) and \
-           self.context.effective_date and self.context.effective_date < DateTime():
+           self.context.enable_timestamping is False:
             api.portal.show_message(
-                "An effective date is defined in the past, "
-                "you can not publish or plan this Publication!",
+                "Timestamping is disabled for this element!",
                 request=self.request,
                 type="warning")
         return super(PublicationView, self).__call__()
