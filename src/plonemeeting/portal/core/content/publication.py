@@ -175,10 +175,7 @@ def get_effective_date(obj):
 
 @indexer(IPublication)
 def get_effective_year(obj):
-    effective = obj.effective_date
-    if effective:
-        # effective is a Zope DateTime
-        return str(effective.year())
+    return str(obj.effective.year()) if obj.effective_date else None
 
 
 @indexer(IPublication)
@@ -191,11 +188,10 @@ def get_pretty_category(obj):
 
 @indexer(IPublication)
 def get_pretty_document_type(obj):
-    # use .copy() to make sure to return a copy of the record
     document_types = api.portal.get_registry_record(
         name="plonemeeting.portal.core.document_types"
     )
-    return document_types.copy()[obj.document_type]
+    return document_types.copy().get(obj.document_type, [])
 
 
 @indexer(IPublication)
