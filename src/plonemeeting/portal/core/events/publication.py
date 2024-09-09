@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
+from collective.timestamp import _ as _cts
+from collective.timestamp import logger as cts_logger
+from collective.timestamp.interfaces import ITimeStamper
 from plone import api
 from plonemeeting.portal.core import _
 from zExceptions import Redirect
@@ -20,9 +22,18 @@ def publication_state_changed(publication, event):
     if event.transition is None:
         return
 
-    if event.new_state.id == 'published' and publication.effective_date is None:
-        publication.setEffectiveDate(DateTime())
-        publication.reindexObject(idxs=["effective", "effectiveRange", "year"])
+    if event.new_state.id == 'published':
+        timestamper = ITimeStamper(publication)
+        if timestamper.is_timestampable():
+            timestamper.timestamp()
+            # "effective", "effectiveRange", "is_timestamped"
+            # already reindexed by timestamper.timestamp
+            publication.reindexObject(idxs=["year"])
+            cts_logger.info(f"Timestamp generated for {publication.absolute_url()}")
+            api.portal.show_message(
+                _cts("Timestamp file has been successfully generated and saved"),
+                publication.REQUEST
+            )
 
 
 def publication_will_be_removed(publication, event):
