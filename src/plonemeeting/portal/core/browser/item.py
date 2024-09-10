@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.CatalogTool import CatalogTool
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.memoize import ram
-from plonemeeting.portal.core.browser.nextprevious import NextPrevPortalType
-from plonemeeting.portal.core.browser.utils import pretty_file_size, pretty_file_icon
-from plonemeeting.portal.core.cache import item_meeting_modified_cachekey
-from zope.i18n import translate
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.browser.nextprevious import NextPrevPortalType
+from plonemeeting.portal.core.browser.utils import pretty_file_icon
+from plonemeeting.portal.core.browser.utils import pretty_file_size
+from plonemeeting.portal.core.cache import item_meeting_modified_cachekey
+from Products.CMFPlone.CatalogTool import CatalogTool
+from zope.i18n import translate
 
 
 class ItemView(DefaultView):
