@@ -142,8 +142,8 @@ class UtilsView(BrowserView):
 
 
 def path_to_dx_default_template():
-    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
-    return os.path.join(dx_path, "item.pt")
+    dx_path = os.path.dirname(plone.app.dexterity.__file__)
+    return os.path.join(dx_path, "browser/item.pt")
 
 
 def pretty_file_size(size_bytes):
