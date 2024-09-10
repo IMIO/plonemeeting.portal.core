@@ -147,6 +147,8 @@ class MigrateTo2000(Migrator):
             "profile-plonemeeting.portal.core:default", "rolemap")
         self.ps.runImportStepFromProfile(
             "profile-plonemeeting.portal.core:default", "workflow")
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "catalog")
         # remove role "Institution Manager"
         self.portal._delRoles(["Institution Manager"])
         # remap existing Folders to new manager_folder_workflow
@@ -159,18 +161,6 @@ class MigrateTo2000(Migrator):
             chain=['manager_folder_workflow'],
             state_map={'private': 'private',
                        'published': 'published'})
-        # add the "get_document_type" and "get_legislative_authority" indexes
-        current_indexes = self.catalog.indexes()
-        if "get_document_type" not in current_indexes:
-            self.catalog.addIndex(
-                "get_document_type",
-                "FieldIndex",
-                {"indexed_attrs": ["document_type"]})
-        if "get_legislative_authority" not in current_indexes:
-            self.catalog.addIndex(
-                "get_legislative_authority",
-                "FieldIndex",
-                {"indexed_attrs": ["legislative_authority"]})
         # add document_types and legislative_authorities
         current_dir = os.path.abspath(os.path.dirname(__file__))
         json_path = os.path.join(current_dir, "../profiles/demo/data/data.json")
