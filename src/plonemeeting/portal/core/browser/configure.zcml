@@ -64,7 +64,10 @@
            plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer
            plone.dexterity.interfaces.IDexterityFTI"
       provides="zope.publisher.interfaces.browser.IBrowserPage"
-      factory=".publication.PublicationAdd" />
+      factory=".publication.PublicationAdd"
+      name="Publication"
+  />
+
   <class class=".publication.PublicationAdd">
       <require
           permission="cmf.AddPortalContent"

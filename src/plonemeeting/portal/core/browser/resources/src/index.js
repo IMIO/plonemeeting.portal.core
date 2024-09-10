@@ -23,13 +23,16 @@ register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
 register(PdfViewer, "x-pdf-viewer", ["file"]);
 
 function setUpEnvironmentLabel() {
-    let hostname = document.location.hostname;
-    if (hostname === "localhost" || hostname === "0.0.0.0") {
-        $("body").append("<span class='environment-label environment-dev'>DEV</span>");
-    } else if (hostname.includes("staging")) {
-        $("body").append("<span class='environment-label environment-test'>TEST</span>");
-    }
+  let hostname = document.location.hostname;
+  if (hostname === "localhost" || hostname === "0.0.0.0") {
+    $("body").append("<span class='environment-label environment-dev'>DEV</span>");
+  } else if (hostname.includes("staging")) {
+    $("body").append("<span class='environment-label environment-test'>STAGING</span>");
+  } else if (hostname.includes("test")) {
+    $("body").append("<span class='environment-label environment-test'>TEST</span>");
+  }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
-    setUpEnvironmentLabel();
+  setUpEnvironmentLabel();
 });
