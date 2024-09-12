@@ -144,46 +144,16 @@
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.date_index"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="date_index">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <default>effective</default>-->
-<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--                   ns0:translate="help_date_index">By default publishing date (the 'effective' index) is used for-->
-<!--        'publish actions', and expiration date (the 'expires' index) is used for 'retract actions'. If a custom method-->
-<!--        is to be used for the date, enter index_id|object_method_id. If index_id = method_id just enter index_id.-->
-<!--      </description>-->
-<!--      <missing_value>effective</missing_value>-->
-<!--      <required>False</required>-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_date_index">Transaction trigger date catalog index / method-->
-<!--      </title>-->
-<!--    </field>-->
     <value>effective</value>
   </record>
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.initial_state"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="initial_state">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_initial_state">Initial workflow state-->
-<!--      </title>-->
-<!--    </field>-->
     <value>planned</value>
   </record>
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.portal_types"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="portal_types">
-<!--    <field type="plone.registry.field.Tuple">-->
-<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--                   ns0:translate="help_ap_portaltypes">Content types this rule applies to.-->
-<!--      </description>-->
-<!--      <missing_value/>-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing" ns0:translate="">-->
-<!--        Content types-->
-<!--      </title>-->
-<!--      <value_type type="plone.registry.field.Choice">-->
-<!--        <vocabulary>plone.app.vocabularies.ReallyUserFriendlyTypes</vocabulary>-->
-<!--      </value_type>-->
-<!--    </field>-->
     <value>
       <element>Publication</element>
     </value>
@@ -191,56 +161,21 @@
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.publish_actions/r0.transition"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="transition">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_transition">Transition from initial state-->
-<!--      </title>-->
-<!--    </field>-->
     <value>publish</value>
   </record>
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.date_index"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="date_index">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <default>effective</default>-->
-<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--                   ns0:translate="help_date_index">By default publishing date (the 'effective' index) is used for-->
-<!--        'publish actions', and expiration date (the 'expires' index) is used for 'retract actions'. If a custom method-->
-<!--        is to be used for the date, enter index_id|object_method_id. If index_id = method_id just enter index_id.-->
-<!--      </description>-->
-<!--      <missing_value>effective</missing_value>-->
-<!--      <required>False</required>-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_date_index">Transaction trigger date catalog index / method-->
-<!--      </title>-->
-<!--    </field>-->
     <value>effective</value>
   </record>
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.initial_state"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="initial_state">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_initial_state">Initial workflow state-->
-<!--      </title>-->
-<!--    </field>-->
     <value>published</value>
   </record>
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.portal_types"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="portal_types">
-<!--    <field type="plone.registry.field.Tuple">-->
-<!--      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--                   ns0:translate="help_ap_portaltypes">Content types this rule applies to.-->
-<!--      </description>-->
-<!--      <missing_value/>-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing" ns0:translate="">-->
-<!--        Content types-->
-<!--      </title>-->
-<!--      <value_type type="plone.registry.field.Choice">-->
-<!--        <vocabulary>plone.app.vocabularies.ReallyUserFriendlyTypes</vocabulary>-->
-<!--      </value_type>-->
-<!--    </field>-->
     <value>
       <element>Publication</element>
     </value>
@@ -248,11 +183,6 @@
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification.retract_actions/r0.transition"
     interface="collective.autopublishing.browser.autopublishsettings.IAutopublishSpecification" field="transition">
-<!--    <field type="plone.registry.field.TextLine">-->
-<!--      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.autopublishing"-->
-<!--             ns0:translate="label_transition">Transition from initial state-->
-<!--      </title>-->
-<!--    </field>-->
     <value>unpublish</value>
   </record>
 
