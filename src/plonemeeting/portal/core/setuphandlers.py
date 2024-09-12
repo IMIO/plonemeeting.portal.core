@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.exportimport.import_content import ImportContent
 from imio.helpers.content import richtextval
 from plone import api
 from plone.api import content
@@ -222,3 +223,23 @@ def create_demo_content(context):
     if brain:
         default_front_page = content.get(UID=brain[0].UID)
         content.delete(default_front_page)
+
+    with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
+        pub_data = json.load(f)
+
+    context = portal.restrictedTraverse("belleville/publications")
+    request = getattr(context, "REQUEST", None)
+
+    if request is None:
+        request = portal.REQUEST
+    import_content = ImportContent(context, request)
+
+    import_content.handle_existing_content = 1 # Replace
+    import_content.limit = None
+    import_content.commit = None
+    import_content.import_old_revisions = False
+    import_content.import_to_current_folder = True
+
+    import_content.start()
+    import_content.do_import(pub_data)
+    import_content.finish()

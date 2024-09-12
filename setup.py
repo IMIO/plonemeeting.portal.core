@@ -53,6 +53,7 @@ setup(
         "collective.fingerpointing",
         "collective.timestamp",
         "collective.autopublishing",
+        "collective.exportimport",
         "collective.z3cform.datagridfield>=3.0.2",
         "eea.facetednavigation>=16.2",
         "plone.api>=2.1.0",
