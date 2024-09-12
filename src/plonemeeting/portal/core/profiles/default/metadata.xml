@@ -11,6 +11,5 @@
     <dependency>profile-plone.formwidget.hcaptcha:default</dependency>
     <dependency>profile-collective.timestamp:default</dependency>
     <dependency>profile-collective.autopublishing:default</dependency>
-    <dependency>profile-plonetheme.deliberations:default</dependency>
   </dependencies>
 </metadata>

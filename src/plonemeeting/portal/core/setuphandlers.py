@@ -31,6 +31,7 @@ import dateutil.parser
 import json
 import mimetypes
 import os
+import transaction
 
 
 @implementer(INonInstallable)
@@ -223,23 +224,25 @@ def create_demo_content(context):
     if brain:
         default_front_page = content.get(UID=brain[0].UID)
         content.delete(default_front_page)
+    transaction.commit()
+    for institution_id in ("belleville", "amityville"):
+        with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
+            pub_data = json.load(f)
+            for item in pub_data: # We need to specify a custom @id otherwise exportimport doesn't work
+                item["@id"] = "/".join(portal.getPhysicalPath() +  (institution_id, "publications", item["@id"]))
+        context = portal.unrestrictedTraverse(f"{institution_id}/publications")
+        request = getattr(context, "REQUEST", None)
 
-    with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
-        pub_data = json.load(f)
+        if request is None:
+            request = portal.REQUEST
+        import_content = ImportContent(context, request)
 
-    context = portal.restrictedTraverse("belleville/publications")
-    request = getattr(context, "REQUEST", None)
+        import_content.handle_existing_content = 1 # Replace
+        import_content.limit = None
+        import_content.commit = None
+        import_content.import_old_revisions = False
+        import_content.import_to_current_folder = True
 
-    if request is None:
-        request = portal.REQUEST
-    import_content = ImportContent(context, request)
-
-    import_content.handle_existing_content = 1 # Replace
-    import_content.limit = None
-    import_content.commit = None
-    import_content.import_old_revisions = False
-    import_content.import_to_current_folder = True
-
-    import_content.start()
-    import_content.do_import(pub_data)
-    import_content.finish()
+        import_content.start()
+        import_content.do_import(pub_data)
+        import_content.finish()
