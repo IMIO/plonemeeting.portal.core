@@ -268,7 +268,7 @@ class MigrateTo2000(Migrator):
             "profile-plonemeeting.portal.core:default", "actions"
         )  # re-import actions, needed for the configurable footer
         self.ps.runImportStepFromProfile(
-            "profile-plone.staticresources:default", "registry"
+            "profile-plone.staticresources:default", "plone.app.registry"
         )  # Making sure we have the latest icons. Weirdly enough, it's not handled by the Plone upgrade
         logger.info("Done.")
 
