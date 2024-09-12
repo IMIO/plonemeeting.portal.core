@@ -177,12 +177,12 @@ def get_effective_date(obj):
     """As elements are sorted in the faceted on effective date, if no date, it
        it not returned so set a date of 01/01/1950 for publications without an
        effective date."""
-    return obj.effective or EMPTY_DATETIME
+    return obj.effective_date or EMPTY_DATETIME
 
 
 @indexer(IPublication)
 def get_effective_year(obj):
-    return str(obj.effective.year()) if obj.effective_date else None
+    return str(obj.effective_date.year()) if obj.effective_date else None
 
 
 @indexer(IPublication)
