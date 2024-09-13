@@ -2,9 +2,11 @@
 
 from collective.timestamp import _ as _cts
 from collective.timestamp import logger as cts_logger
+from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from collective.timestamp.interfaces import ITimeStamper
 from plone import api
 from plonemeeting.portal.core import _
+from Products.CMFPlone.utils import parent
 from zExceptions import Redirect
 from zope.container.contained import ContainerModifiedEvent
 
@@ -14,6 +16,21 @@ def publication_modified(publication, event):
     # reindex if element in container modified (annex)
     if isinstance(event, ContainerModifiedEvent):
         publication.reindexObject(idxs=["has_annexes"], update_metadata=False)
+
+
+def check_publication_timestamp(obj, event):
+    obj = parent(obj)
+    if not ITimestampableDocument.providedBy(obj):
+        return
+    handler = ITimeStamper(obj)
+    if not handler.file_has_changed(obj, event):
+        return
+    obj.timestamp = None
+    obj.reindexObject(idxs=["is_timestamped"])
+    request = getattr(obj, "REQUEST", None)
+    if request is not None:
+        message = _("Timestamp information has been removed since the data has changed")
+        api.portal.show_message(message, request)
 
 
 def publication_state_changed(publication, event):

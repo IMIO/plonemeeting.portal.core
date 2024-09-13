@@ -49,6 +49,12 @@
         handler=".publication.publication_will_be_removed" />
 
     <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".publication.check_publication_timestamp"
+        />
+
+    <subscriber
        for="collective.timedevents.interfaces.IIntervalTicks15Event"
        handler="collective.autopublishing.eventhandler.autopublish_handler" />
 
