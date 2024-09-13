@@ -28,6 +28,9 @@ class PublicationTimeStamper(TimeStamper):
         zip_buffer.seek(0)
         return zip_buffer.getvalue()
 
+    def file_has_changed(self, obj, event):
+        return obj.timestamped_file.data != self.get_data()
+
     def timestamp(self):
         if not self.is_timestampable():
             raise ValueError("This content is not timestampable")
