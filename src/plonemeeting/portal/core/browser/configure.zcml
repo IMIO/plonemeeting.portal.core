@@ -86,7 +86,7 @@
     for="plonemeeting.portal.core.content.publication.IPublication"
     class=".publication.PublicationView"
     template="templates/publication.pt"
-    permission="zope.Public"
+    permission="zope2.View"
   />
 
   <browser:page

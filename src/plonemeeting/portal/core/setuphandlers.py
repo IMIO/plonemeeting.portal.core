@@ -246,3 +246,5 @@ def create_demo_content(context):
         import_content.start()
         import_content.do_import(pub_data)
         import_content.finish()
+
+    portal.portal_workflow.updateRoleMappings()

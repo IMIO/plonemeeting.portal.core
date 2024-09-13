@@ -1,7 +1,7 @@
 from AccessControl import Unauthorized
 from plone import api
+from plone.locking.interfaces import ILockable
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
-
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
@@ -14,72 +14,104 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.login_as_test()
 
     def test_private_publication_view(self):
-        self.logout()
         self.assertEqual(api.content.get_state(self.private_publication), "private")
-        self.private_publication.restrictedTraverse("@@view")
-
-
-
-        self.login_as_manager()
-        view = self.private_publication.restrictedTraverse("@@view")
-        self.assertTrue(view())
+        self.logout()
+        with self.assertRaises(Unauthorized):
+            self.private_publication.restrictedTraverse("@@view")
+            self.private_publication.restrictedTraverse("@@edit")
 
         self.login_as_decisions_manager()
         view = self.private_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.private_publication.restrictedTraverse("@@edit")
 
         self.login_as_publications_manager()
         view = self.private_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.private_publication.restrictedTraverse("@@edit")
+        self.assertTrue(view())
+        ILockable(self.private_publication).unlock()
+
+        self.login_as_manager()
+        view = self.private_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.private_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
 
     def test_planned_publication_view(self):
         self.assertEqual(api.content.get_state(self.planned_publication), "planned")
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
-
-        self.login_as_manager()
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
+        self.logout()
+        with self.assertRaises(Unauthorized):
+            self.planned_publication.restrictedTraverse("@@view")
+            self.planned_publication.restrictedTraverse("@@edit")
 
         self.login_as_decisions_manager()
         view = self.item.restrictedTraverse("@@view")
         self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.planned_publication.restrictedTraverse("@@edit")
 
         self.login_as_publications_manager()
-        view = self.item.restrictedTraverse("@@view")
+        view = self.planned_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.planned_publication.restrictedTraverse("@@edit")
+        self.assertTrue(view())
+        ILockable(self.planned_publication).unlock()
+
+        self.login_as_manager()
+        view = self.planned_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.planned_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
 
     def test_published_publication_view(self):
         self.assertEqual(api.content.get_state(self.published_publication), "published")
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
-
-        self.login_as_manager()
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
+        self.logout()
+        self.published_publication.restrictedTraverse("view")
+        with self.assertRaises(Unauthorized):
+            self.published_publication.restrictedTraverse("@@edit")
 
         self.login_as_decisions_manager()
-        view = self.item.restrictedTraverse("@@view")
+        view = self.published_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.published_publication.restrictedTraverse("@@edit")
 
         self.login_as_publications_manager()
-        view = self.item.restrictedTraverse("@@view")
+        view = self.published_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.published_publication.restrictedTraverse("@@edit")
 
+        self.login_as_manager()
+        view = self.published_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.published_publication.restrictedTraverse("@@edit")
+        self.assertTrue(view())
 
     def test_unpublished_publication_view(self):
         self.assertEqual(api.content.get_state(self.unpublished_publication), "unpublished")
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
-
-        self.login_as_manager()
-        view = self.item.restrictedTraverse("@@view")
-        self.assertTrue(view())
+        self.logout()
+        with self.assertRaises(Unauthorized):
+            self.unpublished_publication.restrictedTraverse("@@view")
 
         self.login_as_decisions_manager()
-        view = self.item.restrictedTraverse("@@view")
+        view = self.unpublished_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.unpublished_publication.restrictedTraverse("@@edit")
 
         self.login_as_publications_manager()
-        view = self.item.restrictedTraverse("@@view")
+        view = self.unpublished_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.unpublished_publication.restrictedTraverse("@@edit")
+        self.assertTrue(view())
+        ILockable(self.unpublished_publication).unlock()
+
+
+        self.login_as_manager()
+        view = self.unpublished_publication.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        view = self.unpublished_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
