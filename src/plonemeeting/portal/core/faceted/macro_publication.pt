@@ -57,7 +57,8 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
         <div class="item-metadata-row" tal:condition='not: isAnon'>
           <div class="item-metadata-label" i18n:domain="plone" i18n:translate="">Expiration date
           </div>
-          <span tal:content="python:context.toLocalizedTime(brain.expires)" />
+          <span tal:condition="python:brain.expires.year() < 2499" tal:content="python:context.toLocalizedTime(brain.expires)" />
+          <span tal:condition="python:brain.expires.year() == 2499"> - </span>
         </div>
         <div class="item-metadata-row">
           <div class="item-metadata-label" i18n:translate="">Document type</div>
