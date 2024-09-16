@@ -156,7 +156,7 @@ class ItemsReportContentProvider(ContentProviderBase):
                 {"orderable": True, "width": "60px", "targets": "date-header"},
                 {"orderable": False, "width": "50px", "targets": "annexes-header"},
             ],
-            "scrollY": "50vh",
+            "scrollY": "55vh",
             "autoWidth": True,
             "scrollCollapse": True,
             "order": [[item_number_col_idx, "asc"]],

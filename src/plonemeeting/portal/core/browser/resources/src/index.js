@@ -14,7 +14,7 @@ import "../theme/main.scss";
 import Tooltip from "./components/Tooltip";
 
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
-// register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
+register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);

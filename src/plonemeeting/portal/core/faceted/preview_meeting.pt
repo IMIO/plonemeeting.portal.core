@@ -74,37 +74,6 @@
                     <span i18n:translate=''>Last modification in iA.Delib</span> :
                     <span tal:content="meeting_utils_view/get_plonemeeting_last_modified" />
                   </div>
-                  <tal:if tal:condition='not: isAnon'>
-                    <div class="meeting-actions"
-                         tal:condition="python: checkPermission('Modify portal content', meeting)">
-                      <a href=""
-                         tal:attributes="href string: ${meeting/absolute_url}/view"
-                         title="View meeting"
-                         i18n:attributes=''
-                      ><img src=""
-                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/eye.svg"></a>
-                      <a href=""
-                         tal:attributes="href string: ${meeting/absolute_url}/edit"
-                         title="Edit meeting"
-                         i18n:attributes="title"
-                      ><img src=""
-                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/pencil.svg"></a>
-                      <a href=""
-                         tal:define="url string:${meeting/absolute_url}/@@pre_sync_report_form"
-                         tal:attributes="href python: utils_view.protect_url(url)"
-                         title="Update meeting"
-                         i18n:attributes="title"
-                      ><img src=""
-                         tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/sync.svg"></a>
-                      <a href=""
-                         tal:define="url string:${context/aq_parent/absolute_url}/@@import_meeting"
-                         tal:attributes="href python: utils_view.protect_url(url)"
-                         title="Import a new meeting"
-                         i18n:attributes="title"
-                      ><img src="" tal:attributes="src string:${portal_url}/++plone++plonemeeting.portal.core/assets/plus-circle-outline.svg">
-                      </a>
-                    </div>
-                  </tal:if>
                 </div>
               </div>
               <div class="col-lg-3 order-first order-lg-last">

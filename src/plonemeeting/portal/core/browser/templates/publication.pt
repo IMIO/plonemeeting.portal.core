@@ -118,53 +118,66 @@
 
       </div>
       <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
-        <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: is_anon">
+        <x-tooltip target-selector="#state-tooltip" position="right" tal:condition="not: is_anon">
+          <div slot="content">
+            <div class="tooltip-header">
+              <h4>Information sur le processus de publication</h4>
+            </div>
+            <div class="tooltip-content">
+              <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
+              <p><strong>Les états de publication sont les suivants :</strong></p>
+              <ol>
+                <li><span class="badge state-badge state-private">Privé</span>
+                  <p>La publication est en cours de rédaction.</p>
+                  <p>
+                    Les gestionnaires de publication peuvent consulter et éditer la publication.
+                  </p>
+                  <p>Les citoyens ne peuvent pas voir la publication.</p>
+                  <p>La publication peut dès qu'elle est prête être publiée directement si aucune <code>date de
+                    publication</code> n'est renseignée ou bien être plannifiée dans le cas contraire</p>
+                </li>
+                <li>
+                  <span class="badge state-badge state-planned">Planifié</span>
+                  <p>La publication est plannifiée pour être publiée à la <code>date de publication</code>
+                    renseignée.
+                  </p>
+                  <p>
+                    Les gestionnaires de publication peuvent toujours consulter et éditer la publication.
+                  </p>
+                  <p>Les citoyens ne peuvent pas voir la publication.</p>
+                </li>
+                <li><span class="badge state-badge state-published">Publié</span>
+                  <p>La publication est publiée et accessible aux citoyens.</p>
+                  <p>La publication sera automatiquement horodatée si <code>Activer l'horodatage</code> est coché
+                    (par
+                    défaut oui).</p>
+                  <p>Un publication horodatée comportera la mention suivante :
+                  <div i18n:translate=""
+                    class="badge timestamp-badge info"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
+                  </div>
+                  .</p>
+                </li>
+                <li><span class="badge state-badge state-unpublished">Dépublié</span>
+                  <p>La publication n'est plus accessible aux citoyens.</p>
+                </li>
+              </ol>
+            </div>
+
+          </div>
+        </x-tooltip>
+        <div class="content-metadata-row"  i18n:domain="plone">
           <div id="state-header" class="content-metadata-col header">
             <tal:state i18n:translate="">State</tal:state>
-            <i class="bi bi-question-circle"></i>
-            <x-tooltip target-selector="#state-header" position="right">
-              <div slot="content">
-                <div class="tooltip-header">
-                  <h4>Information sur le processus de publication</h4>
-                </div>
-                <div class="tooltip-content">
-                  <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
-                  <p><strong>Les états de publication sont les suivants :</strong></p>
-                  <ol>
-                    <li><span class="badge state-badge state-private">Privé</span>
-                      <p>La publication est en cours de rédaction.</p>
-                      <p>
-                        Les gestionnaires de publication peuvent consulter et éditer la publication.
-                      </p>
-                      <p>Les citoyens ne peuvent pas voir la publication.</p>
-                      <p>La publication peut dès qu'elle est prête être publiée directement si aucune <code>date de
-                        publication</code> n'est renseignée ou bien être plannifiée dans le cas contraire</p>
-                    </li>
-                    <li>
-                      <span class="badge state-badge state-planned">Planifié</span>
-                      <p>La publication est plannifiée pour être publiée à la <code>date de publication</code> renseignée.</p>
-                      <p>
-                        Les gestionnaires de publication peuvent toujours consulter et éditer la publication.
-                      </p>
-                      <p>Les citoyens ne peuvent pas voir la publication.</p>
-                    </li>
-                    <li><span class="badge state-badge state-published">Publié</span>
-                      <p>La publication est publiée et accessible aux citoyens.</p>
-                      <p>La publication sera automatiquement horodatée si <code>Activer l'horodatage</code> est coché (par défaut oui).</p>
-                      <p>Un publication horodatée comportera la mention suivante : <span class="badge timestamp-badge info">Horodatage qualifié</span>.</p>
-                    </li>
-                    <li><span class="badge state-badge state-unpublished">Dépublié</span>
-                      <p>La publication n'est plus accessible aux citoyens.</p>
-                    </li>
-                  </ol>
-                </div>
-
-              </div>
-            </x-tooltip>
+            <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
           </div>
           <div class="content-metadata-col">
-            <span tal:content="view/get_state_title"
-               tal:attributes="class string:state-${review_state} badge state-badge"></span>
+            <div class="d-flex">
+              <span i18n:translate="" tal:condition="context/is_timestamped"
+                class="badge timestamp-badge info me-2"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
+              </span>
+              <span tal:content="view/get_state_title"
+                 tal:attributes="class string:state-${review_state} badge state-badge"></span>
+            </div>
           </div>
         </div>
         <div class="content-metadata-row">
@@ -273,8 +286,23 @@
             <i class="bi bi-clock"></i>
           </div>
           <div class="alert-content">
-            <h3>Horodatage qualifié</h3>
-            Cette publication a été horodatée conformément à la législation en vigueur.
+            <x-tooltip target-selector="#timestamping-tooltip" position="top">
+              <div slot="content">
+                <div class="tooltip-header">
+                  <h4>Horodatage qualifié</h4>
+                </div>
+                <div class="tooltip-content">
+                  <p>Un horodatage qualifié garantit la date et l'heure exactes d'un document numérique, conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du document.</p>
+                </div>
+
+              </div>
+            </x-tooltip>
+            <div class="d-flex align-items-center mb-1">
+              <h3 class="mb-0">Horodatage qualifié</h3>
+              <i id="timestamping-tooltip" class="bi bi-question-circle help-icon ms-1"></i>
+            </div>
+            Cette publication a été horodatée le <strong>${view/get_effective_date}</strong> conformément à la
+            législation en vigueur.
             <div class="row my-2 ">
               <div class="col d-flex justify-content-start">
                 <a class="btn btn-outline-secondary me-2"
@@ -287,7 +315,7 @@
             </div>
             <div class="row">
               <div class="text-end">
-                <a href="/faq/horodatage" target="_blank" class="text-muted italic d-inline" style="font-size: 0.7em">Comment
+                <a href="/faq/horodatage" target="_blank" class="help-link">Comment
                   vérifier un horodatage ?</a>
               </div>
             </div>
