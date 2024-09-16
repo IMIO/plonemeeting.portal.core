@@ -292,7 +292,7 @@
                   <h4>Horodatage qualifié</h4>
                 </div>
                 <div class="tooltip-content">
-                  <p>Un horodatage qualifié garantit la date et l'heure exactes d'un document numérique, conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du document.</p>
+                  <p>Un horodatage qualifié garantit la date et l'heure exactes de publication d'un document numérique, conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du document.</p>
                 </div>
 
               </div>
@@ -308,18 +308,30 @@
                 <a class="btn btn-outline-secondary me-2"
                    target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
                   <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
-                <a class="btn btn-outline-secondary"
+                <a class="btn btn-outline-secondary me-2"
                    target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamp/filename}">Signature
                   <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
               </div>
             </div>
             <div class="row">
-              <div class="text-end">
-                <a href="/faq/horodatage" target="_blank" class="help-link">Comment
-                  vérifier un horodatage ?</a>
+              <div class="">
+                <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapse-timestamping-more-info" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                  En savoir plus <i class="bi bi-info-circle" style="font-size: 1em"></i>
+                </a>
               </div>
             </div>
           </div>
+        </div>
+        <div class="collapse alert-collapse" id="collapse-timestamping-more-info">
+          <ul class="text-muted dashed">
+            <li>
+              <a href="/faq/quest-ce-que-l-horodatage" target="_blank" class="help-link">Qu'est-ce que l'horodatage qualifié ?</a>
+            </li>
+            <li>
+              <a href="/faq/verifier-un-horodatage" target="_blank" class="help-link">Comment vérifier un horodatage ?</a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

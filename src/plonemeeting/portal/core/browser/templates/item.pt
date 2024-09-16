@@ -7,7 +7,8 @@
    i18n:domain="plonemeeting.portal.core"
    tal:define="utils_view nocall:context/@@utils_view;
                meeting nocall:context/aq_parent;
-               review_state python: utils_view.get_state(meeting);">
+               review_state python: utils_view.get_state(meeting);
+               is_anon context/@@plone_portal_state/anonymous;">
 <body>
 
 <metal:item-title fill-slot="content-title">
@@ -67,6 +68,33 @@
     <div class="" tal:attributes="class string:item-infos ${review_state}">
       <div class="row mb-3">
         <div class="col-lg-6 order-last order-lg-first">
+          <x-tooltip target-selector="#state-tooltip" position="right" tal:condition="not: is_anon">
+            <div slot="content">
+              <div class="tooltip-header">
+                <h4>Information sur les états des décisions</h4>
+              </div>
+              <div class="tooltip-content">
+                <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
+                <p><strong>Les états de publication sont les suivants :</strong></p>
+                <ol>
+                  <li><span class="badge state-badge state-private">Privé</span>
+                    <p>
+                      Les gestionnaires de décisions peuvent consulter les décisions avant publication.
+                    </p>
+                    <p>Les citoyens ne peuvent pas voir la décision.</p>
+                  </li>
+                  <li>
+                    <span class="badge state-badge state-in_project">Projet de décision</span>
+                    <p>Les citoyens ne peuvent pas voir la publication.</p>
+                  </li>
+                  <li><span class="badge state-badge state-decision">Décidé</span>
+                    <p>La publication est publiée et accessible aux citoyens.</p>
+                  </li>
+                </ol>
+              </div>
+
+            </div>
+          </x-tooltip>
           <div class="card meeting-card">
             <a href="" class="filled-link"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)">
@@ -96,8 +124,7 @@
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
               <tal:state i18n:domain="plone" i18n:translate="">State</tal:state>
-<!--?                <i class="bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus"-->
-<!--?                      data-bs-content="L'état indique où se situe le document dans le processus de publication."></i>-->
+              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">
