@@ -119,11 +119,48 @@
       </div>
       <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
         <div class="content-metadata-row"  i18n:domain="plone" tal:condition="not: is_anon">
-          <div class="content-metadata-col header" data-bs-toggle="popover" data-bs-trigger="hover focus"
-               data-bs-content="L'état indique où se situe le document dans le processus de publication."
-          >
+          <div id="state-header" class="content-metadata-col header">
             <tal:state i18n:translate="">State</tal:state>
-            <!--?                        <i class="bi bi-question-circle"></i>-->
+            <i class="bi bi-question-circle"></i>
+            <x-tooltip target-selector="#state-header" position="right">
+              <div slot="content">
+                <div class="tooltip-header">
+                  <h4>Information sur le processus de publication</h4>
+                </div>
+                <div class="tooltip-content">
+                  <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
+                  <p><strong>Les états de publication sont les suivants :</strong></p>
+                  <ol>
+                    <li><span class="badge state-badge state-private">Privé</span>
+                      <p>La publication est en cours de rédaction.</p>
+                      <p>
+                        Les gestionnaires de publication peuvent consulter et éditer la publication.
+                      </p>
+                      <p>Les citoyens ne peuvent pas voir la publication.</p>
+                      <p>La publication peut dès qu'elle est prête être publiée directement si aucune <code>date de
+                        publication</code> n'est renseignée ou bien être plannifiée dans le cas contraire</p>
+                    </li>
+                    <li>
+                      <span class="badge state-badge state-planned">Planifié</span>
+                      <p>La publication est plannifiée pour être publiée à la <code>date de publication</code> renseignée.</p>
+                      <p>
+                        Les gestionnaires de publication peuvent toujours consulter et éditer la publication.
+                      </p>
+                      <p>Les citoyens ne peuvent pas voir la publication.</p>
+                    </li>
+                    <li><span class="badge state-badge state-published">Publié</span>
+                      <p>La publication est publiée et accessible aux citoyens.</p>
+                      <p>La publication sera automatiquement horodatée si <code>Activer l'horodatage</code> est coché (par défaut oui).</p>
+                      <p>Un publication horodatée comportera la mention suivante : <span class="badge timestamp-badge info">Horodatage qualifié</span>.</p>
+                    </li>
+                    <li><span class="badge state-badge state-unpublished">Dépublié</span>
+                      <p>La publication n'est plus accessible aux citoyens.</p>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </x-tooltip>
           </div>
           <div class="content-metadata-col">
             <span tal:content="view/get_state_title"

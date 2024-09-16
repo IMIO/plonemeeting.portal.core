@@ -1,9 +1,11 @@
-const Tooltip = ({children}) => {
+import {Tooltip} from "react-tooltip";
+
+const PmTooltip = ({targetSelector, content, position}) => {
     return (
-        <div className="tooltip">
-            {children}
-        </div>
+        <Tooltip className="pm-tooltip" variant="light" anchorSelect={targetSelector} place={position} opacity={1} offset={15}>
+            {content}
+        </Tooltip>
     )
 };
 
-export default Tooltip;
+export default PmTooltip;

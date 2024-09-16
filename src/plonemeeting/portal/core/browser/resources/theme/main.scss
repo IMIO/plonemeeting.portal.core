@@ -1,26 +1,88 @@
 // Environment label
 
+@import "./variables.scss";
+
 .environment-label {
-    position: fixed;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: white;
-    bottom: 33px;
-    right: -50px;
-    font-size:1.2em;
-    width: 200px;
-    z-index: 100000;
-    transform: rotate(-45deg);
-    transform-origin: center center;
-    text-align: center;
-    white-space: pre;
-    opacity: 0.5;
-    pointer-events: none;
+  position: fixed;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: white;
+  bottom: 33px;
+  right: -50px;
+  font-size: 1.2em;
+  width: 200px;
+  z-index: 100000;
+  transform: rotate(-45deg);
+  transform-origin: center center;
+  text-align: center;
+  white-space: pre;
+  opacity: 0.5;
+  pointer-events: none;
 
   &.environment-dev {
     background: rgb(255, 118, 0);
   }
+
   &.environment-test {
     background: rgb(238, 3, 13);
   }
+}
+
+x-tooltip > div[slot="content"] {
+  display: none;
+}
+
+.pm-tooltip {
+  box-shadow: $shadow-md;
+  border: 1px solid $grey-200 !important;
+  //opacity: 100% !important;
+  border-radius: $rounded-md !important;
+  //overflow: hidden;
+  pointer-events: auto !important;
+  padding: 0.75rem !important;
+  z-index: 5000;
+
+  h4 {
+    margin: 0;
+  }
+
+  .tooltip-header {
+    background: $grey-100;
+    padding: 10px;
+    border-bottom: 1px solid $grey-200;
+    border-radius:  $rounded-md $rounded-md 0 0 !important;
+    font-weight: 700;
+    margin: -0.75rem -0.75rem 0.75rem -0.75rem;
+  }
+
+  .tooltip-content {
+    text-decoration: none;
+    font-weight: normal;
+    max-width: 300px;
+
+    p {
+      margin-bottom: 0.3em;
+    }
+  }
+
+  .react-tooltip-arrow {
+    border-bottom: 1px solid $grey-300 !important;
+    border-right: 1px solid $grey-300 !important;
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.react-tooltip__place-right .react-tooltip-arrow {
+  left: -9px !important;
+}
+
+.react-tooltip__place-left .react-tooltip-arrow {
+  right: -9px !important;
+}
+.react-tooltip__place-bottom .react-tooltip-arrow {
+  top: -9px !important;
+}
+.react-tooltip__place-top .react-tooltip-arrow {
+  bottom: -9px !important;
 }

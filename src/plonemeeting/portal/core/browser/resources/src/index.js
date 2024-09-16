@@ -11,9 +11,10 @@ import PdfViewer from "./components/PdfViewer";
 import MeetingAgenda from "./components/MeetingAgenda";
 
 import "../theme/main.scss";
+import Tooltip from "./components/Tooltip";
 
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
-register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
+// register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
 register(InstitutionsSelect, "x-institution-select", ["data-institutions"]);
 register(InstitutionsMap, "x-institution-map", []);
 register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selector", "gutter"]);
@@ -21,6 +22,7 @@ register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-opt
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
 register(PdfViewer, "x-pdf-viewer", ["file"]);
+
 
 function setUpEnvironmentLabel() {
   let hostname = document.location.hostname;
@@ -35,4 +37,6 @@ function setUpEnvironmentLabel() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setUpEnvironmentLabel();
+  // As the tooltip accepts slots we need to use shadow dom and register it after DOMContentLoaded
+  register(Tooltip, "x-tooltip", ["target-selector", "position"], { shadow: false });
 });
