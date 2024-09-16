@@ -205,6 +205,9 @@ def create_demo_content(context):
                     if "files" in item:
                         for file in item["files"]:
                             create_file(item_obj, file)
+
+            create_demo_publications(portal, institution_obj)
+
         faqs = content.create(
             container=portal,
             type="Folder",
@@ -224,27 +227,27 @@ def create_demo_content(context):
     if brain:
         default_front_page = content.get(UID=brain[0].UID)
         content.delete(default_front_page)
-    transaction.commit()
-    for institution_id in ("belleville", "amityville"):
-        with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
-            pub_data = json.load(f)
-            for item in pub_data: # We need to specify a custom @id otherwise exportimport doesn't work
-                item["@id"] = "/".join(portal.getPhysicalPath() +  (institution_id, "publications", item["@id"]))
-        context = portal.unrestrictedTraverse(f"{institution_id}/publications")
-        request = getattr(context, "REQUEST", None)
-
-        if request is None:
-            request = portal.REQUEST
-        import_content = ImportContent(context, request)
-
-        import_content.handle_existing_content = 1 # Replace
-        import_content.limit = None
-        import_content.commit = None
-        import_content.import_old_revisions = False
-        import_content.import_to_current_folder = True
-
-        import_content.start()
-        import_content.do_import(pub_data)
-        import_content.finish()
 
     portal.portal_workflow.updateRoleMappings()
+
+def create_demo_publications(portal, context):
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+
+    with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
+        pub_data = json.load(f)
+        for item in pub_data:  # We need to specify a custom @id otherwise exportimport doesn't work
+            item["@id"] = "/".join(portal.getPhysicalPath() + (context.id, "publications", item["@id"]))
+    request = getattr(context, "REQUEST", None)
+
+    if request is None:
+        request = portal.REQUEST
+    import_content = ImportContent(context.publications, request)
+
+    import_content.handle_existing_content = 1  # Replace
+    import_content.limit = None
+    import_content.commit = None
+    import_content.import_old_revisions = False
+    import_content.import_to_current_folder = True
+    # We need to use `import_new_content` instead of `do_import` to avoid commiting
+    # because it breaks test layers
+    import_content.import_new_content(pub_data)
