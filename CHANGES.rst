@@ -2,18 +2,28 @@ Changelog
 =========
 
 
-2.0.0a1 (unreleased)
+2.0.0b1 (unreleased)
 ------------------
 
 - Plone 6 compatibility.
   [aduchene]
 - Theme extracted to `plonetheme.deliberations` package.
   [aduchene]
-- Use latest Python 3.12 and Plone 6.0.11.1.
+- Use latest Python 3.12 and Plone 6.0.13.
   [aduchene]
-- Switch to pnpm (from npm) to be able to build and watch css/js files on
-  multiple sub-packages at once.
-  [aduchene]
+- "Publications" feature :
+    - Rename "meetings" folder to "decisions".
+    - Use `collective.autopublishing` to manage automatic publishing of publications.
+    - Use `collective.timestamp` to manage publication timestamping.
+    - Use `imio.webspellchecker` to have better webspellchecking.
+    - Add `Publication` content type.
+    - Add `Publication` views and faceted navigation.
+    - Add custom workflows to manage publications and folders.
+    - Add new groups `*-publications-manager` for each institution to manage publications.
+    - Add some unit tests about the feature.
+    - Add an upgrade step to migrate meetings and items in decisions folder.
+    - Miscellaneous fixes and tweaks to make it work nicely.
+  [gbastien, laulaz, aduchene]
 
 1.6.3 (2024-02-19)
 ------------------

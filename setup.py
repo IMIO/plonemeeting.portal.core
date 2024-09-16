@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.0.0.dev0",
+    version="2.0.0b1.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -24,8 +24,8 @@ setup(
         "Framework :: Plone :: Addon",
         "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
