@@ -7,3 +7,4 @@ include *.txt
 exclude *.yml
 exclude Makefile
 include tox.ini
+prune src/plonemeeting/portal/core/browser/resources/node_modules/*

@@ -14,9 +14,10 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.0.0b1",
+    version="2.0.0b1.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
+    long_description_content_type="text/x-rst",
     # Get more from https://pypi.org/classifiers/
     classifiers=[
         "Environment :: Web Environment",
