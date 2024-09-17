@@ -10,7 +10,7 @@ from plone.app.theming.utils import compileThemeTransform
 from plonemeeting.portal.core.content.institution import InvalidColorParameters
 from plonemeeting.portal.core.content.institution import validate_color_parameters
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
-from Products.CMFCore.permissions import AccessContentsInformation as ACI
+from Products.CMFCore.permissions import AccessContentsInformation
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import requests
@@ -37,7 +37,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(view.request.response.status, 302)
         self.assertDictEqual(
             view.request.response.headers,
-            {'location': 'http://nohost/plone/belleville/seances'})
+            {'location': 'http://nohost/plone/belleville/decisions'})
 
     def test_validate_color_parameters(self):
         self.assertTrue(validate_color_parameters("#FFF"))
@@ -48,13 +48,26 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
             validate_color_parameters("#XXXXXXXXX")
 
     def test_available_allowed_types(self):
-        constraints = ISelectableConstrainTypes(self.institution)
+        institution_constraints = ISelectableConstrainTypes(self.institution)
+        decisions_constraints = ISelectableConstrainTypes(self.institution.decisions)
+        publications_constraints = ISelectableConstrainTypes(self.institution.publications)
         self.login_as_manager()
-        self.assertListEqual(["Folder", "Meeting"], constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Folder"], institution_constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Meeting"], decisions_constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Publication"], publications_constraints.getLocallyAllowedTypes())
         self.login_as_test()
-        self.assertListEqual([], constraints.getLocallyAllowedTypes())
-        self.login_as_institution_manager()
-        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+        self.assertListEqual([], institution_constraints.getLocallyAllowedTypes())
+        self.assertListEqual([], decisions_constraints.getLocallyAllowedTypes())
+        self.assertListEqual([], publications_constraints.getLocallyAllowedTypes())
+        self.login_as_decisions_manager()
+        self.assertListEqual([], institution_constraints.getLocallyAllowedTypes())
+        # "Meeting" is not addable manually
+        self.assertListEqual([], decisions_constraints.getLocallyAllowedTypes())
+        self.assertListEqual([], publications_constraints.getLocallyAllowedTypes())
+        self.login_as_publications_manager()
+        self.assertListEqual([], institution_constraints.getLocallyAllowedTypes())
+        self.assertListEqual([], decisions_constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Publication"], publications_constraints.getLocallyAllowedTypes())
 
     def test_load_category_from_delib(self):
         belleville = self.portal["belleville"]
@@ -218,14 +231,16 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         belleville.fetch_delib_representatives()
         self.assertDictEqual({'fake': 'Wolverine', 'fake++': 'Cyclop'},
                              belleville.delib_representatives)
-        belleville.representatives_mappings.append({'representative_key': 'trololo',
-                                                    'representative_value': 'Mr Trololo',
-                                                    'representative_long_value': 'Mr Trololo Bourgmestre F.F.',
-                                                    'active': True})
+        belleville.representatives_mappings.append(
+            {'representative_key': 'trololo',
+             'representative_value': 'Mr Trololo',
+             'representative_long_value': 'Mr Trololo Bourgmestre F.F.',
+             'active': True})
         belleville.delib_representatives = {'trololo': 'Mr Trololo'}
         belleville.fetch_delib_representatives()
-        self.assertDictEqual({'trololo': 'Unknown value: ${key}', 'fake': 'Wolverine', 'fake++': 'Cyclop'},
-                             belleville.delib_representatives)
+        self.assertDictEqual(
+            {'trololo': 'Unknown value: ${key}', 'fake': 'Wolverine', 'fake++': 'Cyclop'},
+            belleville.delib_representatives)
 
     def test_rules_xml_compilation(self):
         """Make sure the "/++theme++barceloneta/rules.xml" entity does compile.
@@ -233,15 +248,17 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
            so rules.xml is correctly compiled..."""
         rules = "/++theme++barceloneta/rules.xml"
         inst = self.institution
-        self.layer['request']['PUBLISHED'] = inst.seances
+        self.layer['request']['PUBLISHED'] = inst.decisions
         # when institution "published"
         self.assertEqual(api.content.get_state(inst), "published")
         self.assertTrue(compileThemeTransform(rules=rules))
-        self.assertTrue("Anonymous" in rolesForPermissionOn(ACI, inst))
+        self.assertTrue(
+            "Anonymous" in rolesForPermissionOn(AccessContentsInformation, inst))
         self.login_as_manager()
         api.content.transition(inst, to_state="private")
         self.logout()
         # when institution "private"
         self.assertEqual(api.content.get_state(inst), "private")
         self.assertTrue(compileThemeTransform(rules=rules))
-        self.assertTrue("Anonymous" in rolesForPermissionOn(ACI, inst))
+        self.assertTrue(
+            "Anonymous" in rolesForPermissionOn(AccessContentsInformation, inst))

@@ -32,11 +32,9 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
 
         belleville.delib_categories = {"admin": "Administrative", "political": "Political"}
         values = vocab({"test": 'yolo'})
-        self.assertEqual(len(values), 2)
-
-        self.portal.REQUEST.set('PUBLISHED', self.item.restrictedTraverse("@@edit"))
-        values = vocab({"test": 'yolo'})
         self.assertEqual(len(values), 29)
+        values = vocab(belleville)
+        self.assertEqual(len(values), 2)
 
     def testGlobalCategoryVocabulary(self):
         vocab = queryUtility(

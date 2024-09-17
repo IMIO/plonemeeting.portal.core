@@ -66,31 +66,44 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                                             'local_category_id': 'administration'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale')
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            'Categories mappings - iA.Delib category mapped more than once : '
+            'Administration générale')
         data['categories_mappings'].append({'global_category_id': 'police',
                                             'local_category_id': 'police'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            'Categories mappings - iA.Delib category mapped more than once : '
+            'Administration générale, Zone de police')
         # multiple time the same value returns only once in the message
-        data['categories_mappings'].append({'global_category_id': 'administration',
-                                            'local_category_id': 'administration'})
+        data['categories_mappings'].append(
+            {'global_category_id': 'administration',
+             'local_category_id': 'administration'})
         validation = invariants.validate(data)
         self.assertEqual(1, len(validation))
-        self.assertEqual(translate(self.exc_msg(validation[0])),
-                         'Categories mappings - iA.Delib category mapped more than once : Administration générale, Zone de police')
+        self.assertEqual(
+            translate(self.exc_msg(validation[0])),
+            'Categories mappings - iA.Delib category mapped more than once : '
+            'Administration générale, Zone de police')
 
     def test_representatives_mappings_invariant(self):
-        class mock(dict):
+        class Mock(dict):
             def __init__(self, institution, categories_mappings, representatives_mappings):
                 self.__context__ = institution
                 self.categories_mappings = deepcopy(categories_mappings)
                 self.representatives_mappings = deepcopy(representatives_mappings)
-        data = mock(None, self.belleville.categories_mappings, self.belleville.representatives_mappings)
+        data = Mock(
+            None,
+            self.belleville.categories_mappings,
+            self.belleville.representatives_mappings)
         representatives_mappings_invariant(data)
-        data = mock(self.belleville, self.belleville.categories_mappings, self.belleville.representatives_mappings)
+        data = Mock(
+            self.belleville,
+            self.belleville.categories_mappings,
+            self.belleville.representatives_mappings)
         representatives_mappings_invariant(data)
         data.representatives_mappings[0]['active'] = False
         data.representatives_mappings[0]['representative_long_value'] = 'fake name long'

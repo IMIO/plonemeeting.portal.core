@@ -5,7 +5,7 @@ from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunction
 class TestMeetingView(PmPortalDemoFunctionalTestCase):
 
     def test_call_meeting_view_as_manager(self):
-        meeting = self.portal["belleville"].listFolderContents(
+        meeting = self.portal["belleville"].decisions.listFolderContents(
             {"portal_type": "Meeting"})[0]
         self.login_as_manager()
         request = self.portal.REQUEST
@@ -15,7 +15,7 @@ class TestMeetingView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(view.request.response.status, 200)
 
     def test_call_meeting_view_as_anonymous(self):
-        meeting = self.portal["belleville"].listFolderContents(
+        meeting = self.portal["belleville"].decisions.listFolderContents(
             {"portal_type": "Meeting"})[-1]
         self.login_as_test()
         view = meeting.restrictedTraverse("@@view")
@@ -23,5 +23,5 @@ class TestMeetingView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(view.request.response.status, 302)
         self.assertDictEqual(
             view.request.response.headers,
-            {'location': 'http://nohost/plone/belleville/seances#seance={}'.format(
+            {'location': 'http://nohost/plone/belleville/decisions#seance={}'.format(
                 meeting.UID())})

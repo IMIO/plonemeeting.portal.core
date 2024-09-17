@@ -14,26 +14,26 @@
   <div id="footer-links" class="row">
     <div class="col-12">
       <a tal:repeat="action site_actions"
-          tal:attributes="href action/url; id string:footer-links-${action/id};"
-          i18n:translate="">
-          ${action/title}
+         tal:attributes="href action/url; id string:footer-links-${action/id};"
+         i18n:translate="">
+        ${action/title}
       </a>
     </div>
   </div>
   <div id="footer-socials" class="row">
-    <div class="col-8 offset-2">
-      <img id="footer-imio-logo" src="++theme++deliberations/assets/IMIO_Logo.svg" width="100px"/>
+    <div class="col-12 col-xl-8 offset-xl-2">
+      <img id="footer-imio-logo" src="/++theme++deliberations/assets/IMIO_Logo.svg" width="100px"/>
       <div id="footer-socials-links">
-          <a href=""
-             target="_blank"
-             tal:repeat="action social_actions"
-             tal:attributes="href action/url; id string:footer-socials-${action/id};"
-             i18n:translate="">
-            <i class="${action/icon}"></i>
-          </a>
+        <a href=""
+           target="_blank"
+           tal:repeat="action social_actions"
+           tal:attributes="href action/url; id string:footer-socials-${action/id};"
+           i18n:translate="">
+          <i class="${action/icon}"></i>
+        </a>
       </div>
     </div>
-    <div class="col-2">
+    <div class="mb-3 offset-3 col-6 order-first order-xl-last col-xl-2 offset-xl-0 mb-xl-0">
       <div id="portal-anontools" tal:condition="isAnon">
         <i class="bi bi-person-fill"></i>
         <a href=""

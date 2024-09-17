@@ -1,19 +1,47 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
-from z3c.form.interfaces import NO_VALUE
-from zope.globalrequest import getRequest
+from plonemeeting.portal.core.utils import get_context_from_request
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 import copy
 import json
 import requests
+
+
+class EnabledTabsVocabularyFactory:
+    def __call__(self, context):
+        return SimpleVocabulary(
+            (
+                SimpleTerm(value=DEC_FOLDER_ID, title=_(DEC_FOLDER_ID.capitalize())),
+                SimpleTerm(value=PUB_FOLDER_ID, title=_(PUB_FOLDER_ID.capitalize())),
+            ),
+        )
+
+
+EnabledTabsVocabulary = EnabledTabsVocabularyFactory()
+
+
+class PublicationsPowerUsersVocabularyFactory:
+    def __call__(self, context):
+        return SimpleVocabulary(
+            (
+                SimpleTerm(value="gbastien", title="Gauthier Bastien"),
+                SimpleTerm(value="gbastien2", title="Gauthier Bastien2"),
+            ),
+        )
+
+
+PublicationsPowerUsersVocabulary = PublicationsPowerUsersVocabularyFactory()
 
 
 class GlobalCategoryVocabularyFactory:
@@ -39,22 +67,61 @@ GlobalCategoryVocabulary = GlobalCategoryVocabularyFactory()
 
 class LocalCategoryVocabularyFactory:
     def __call__(self, context):
-        if context == NO_VALUE or isinstance(context, dict):
-            req = getRequest()
-            institution = req.get('PUBLISHED').context
-            if isinstance(institution, Institution):
-                local_categories = copy.deepcopy(getattr(institution, 'delib_categories', {}))
-                if local_categories:
-                    return SimpleVocabulary(
-                        [
-                            SimpleTerm(value=category_id, title=local_categories[category_id])
-                            for category_id in local_categories.keys()
-                        ]
-                    )
+        if context is None:
+            context = get_context_from_request()
+        if isinstance(context, Institution):
+            local_categories = copy.deepcopy(getattr(context, 'delib_categories', {}))
+            if local_categories:
+                return SimpleVocabulary(
+                    [
+                        SimpleTerm(value=category_id, title=local_categories[category_id])
+                        for category_id in local_categories.keys()
+                    ]
+                )
         return GlobalCategoryVocabularyFactory()(context)
 
 
 LocalCategoryVocabulary = LocalCategoryVocabularyFactory()
+
+
+class DocumentTypesVocabularyFactory:
+    def __call__(self, context):
+        # use .copy() to make sure to return a copy of the record
+        document_types = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.document_types"
+        )
+        if not document_types:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=doc_type_id, title=doc_type_title)
+                for doc_type_id, doc_type_title in document_types.copy().items()
+            ]
+        )
+
+
+DocumentTypesVocabulary = DocumentTypesVocabularyFactory()
+
+
+class LegislativeAuthoritiesVocabularyFactory:
+    def __call__(self, context):
+        # use .copy() to make sure to return a copy of the record
+        legislative_authorities = api.portal.get_registry_record(
+            name="plonemeeting.portal.core.legislative_authorities"
+        )
+        if not legislative_authorities:
+            return SimpleVocabulary([])
+
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=leg_auth_id, title=leg_auth_title)
+                for leg_auth_id, leg_auth_title in legislative_authorities.copy().items()
+            ]
+        )
+
+
+LegislativeAuthoritiesVocabulary = LegislativeAuthoritiesVocabularyFactory()
 
 
 class MeetingDateVocabularyFactory:
@@ -80,7 +147,7 @@ MeetingDateVocabulary = MeetingDateVocabularyFactory()
 class RepresentativeVocabularyFactory:
     def __call__(self, context, representative_value_key='representative_value'):
         institution = api.portal.get_navigation_root(context)
-        mapping = copy.deepcopy(getattr(institution, "representatives_mappings", []))
+        mapping = copy.deepcopy(getattr(institution, "representatives_mappings", [])) or []
         representatives_mappings = [rpz for rpz in mapping if rpz['active']]
         disabled_representatives = [rpz for rpz in mapping if not rpz['active']]
         for rpz in disabled_representatives:
@@ -111,10 +178,10 @@ LongRepresentativeVocabulary = LongRepresentativeVocabularyFactory()
 class EditableRepresentativeVocabularyFactory(RepresentativeVocabularyFactory):
 
     def __call__(self, context):
-        req = getRequest()
-        institution = req.get('PUBLISHED').context
-        if isinstance(institution, Institution):
-            local_representatives = copy.deepcopy(getattr(institution, "delib_representatives", {}))
+        if context is None:
+            context = get_context_from_request()
+        if isinstance(context, Institution):
+            local_representatives = copy.deepcopy(getattr(context, "delib_representatives", {}))
             if local_representatives:
                 return SimpleVocabulary(
                     [
@@ -202,3 +269,17 @@ class MeetingTypesVocabularyFactory:
 
 
 MeetingTypesVocabulary = MeetingTypesVocabularyFactory()
+
+
+class PublicationReviewStatesVocabularyFactory:
+    def __call__(self, context):
+        wf = api.portal.get_tool("portal_workflow").getWorkflowsFor("Publication")[0]
+        return SimpleVocabulary(
+            [
+                SimpleTerm(value=state_id, title=plone_(state.title))
+                for state_id, state in wf.states.items()
+            ]
+        )
+
+
+PublicationReviewStatesVocabulary = PublicationReviewStatesVocabularyFactory()

@@ -12,44 +12,64 @@ from plone.api.exc import CannotGetPortalError
 from plone.api.portal import get_registry_record
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
 
-
 def handle_institution_creation(obj, event):
     current_lang = api.portal.get_default_language()[:2]
-    institution_title = obj.title
 
-    # Configure manager group & local permissions
-    group_id = format_institution_managers_group_id(obj)
-    group_title = "{0} Institution Managers".format(institution_title)
-    api.group.create(groupname=group_id, title=group_title)
-    obj.manage_setLocalRoles(group_id, ["Institution Manager", "Contributor"])
-
-    # Create meetings faceted folder
-    meetings = create_faceted_folder(
+    # Create decisions faceted folder
+    decisions = create_faceted_folder(
         obj,
-        translate(_(u"Meetings"),
+        translate(_(u"Decisions"),
                   target_language=current_lang),
-        id=APP_FOLDER_ID
+        id=DEC_FOLDER_ID
     )
-    alsoProvides(meetings, IMeetingsFolder)
+    alsoProvides(decisions, IMeetingsFolder)
 
-    IFacetedLayout(meetings).update_layout("faceted-preview-meeting")
-    set_constrain_types(meetings, [])
+    IFacetedLayout(decisions).update_layout("faceted-preview-meeting")
+    set_constrain_types(decisions, ["Meeting"])
+
+    # Create publications faceted folder
+    publications = create_faceted_folder(
+        obj,
+        translate(_(u"Publications"),
+                  target_language=current_lang),
+        id=PUB_FOLDER_ID
+    )
+    alsoProvides(publications, IPublicationsFolder)
+    IFacetedLayout(publications).update_layout("faceted-preview-publications")
+    set_constrain_types(publications, ["Publication"])
+
+    # Create managers groups and configure local permissions
+    institution_title = obj.title
+    # Decisions
+    group_id = get_decisions_managers_group_id(obj)
+    group_title = "{0} Decisions Managers".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    obj.manage_setLocalRoles(group_id, ["Reader"])
+    obj.get(DEC_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Contributor", "Editor"])
+    # Publications
+    group_id = get_publications_managers_group_id(obj)
+    group_title = "{0} Publications Managers".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    obj.manage_setLocalRoles(group_id, ["Reader"])
+    obj.get(PUB_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Contributor", "Editor"])
+    obj.reindexObjectSecurity()
 
     request = getRequest()
     if request:  # Request can be `None` during test setup
         request.response.redirect(obj.absolute_url())
-
-
 
 
 def handle_institution_modified(institution, event):
@@ -68,30 +88,44 @@ def handle_institution_modified(institution, event):
         institution.categories_mappings = categories_mappings
         logger.info("{} fetched iA.Delib categories matched.".format(len(categories_mappings)))
 
+    # publish/make private enabled tabs if institution published
+    institution_state = api.content.get_state(institution)
+    for tab_id in (DEC_FOLDER_ID, PUB_FOLDER_ID):
+        if tab_id in institution.enabled_tabs and institution_state != "private":
+            new_state_id = "published"
+        else:
+            new_state_id = "private"
+        tab = institution.get(tab_id)
+        # tab could be None in MigrateTo2000 because we changed ids
+        # this test could be removed when migrated to 2000
+        if tab and api.content.get_state(tab) != new_state_id:
+            api.content.transition(obj=tab, to_state=new_state_id)
 
-def institution_state_changed(obj, event):
-    content_filter = {'portal_type': 'Folder'}
+
+def institution_state_changed(institution, event):
+    # bypass if creating institution
+    if event.transition is None:
+        return
+
     if event.new_state.id == 'private':
-        content_filter = {}
-    for child in obj.listFolderContents(contentFilter=content_filter):
+        children = institution.listFolderContents() + institution.decisions.listFolderContents()
+    else:
+        # only publish enabled tabs
+        children = institution.listFolderContents({'id': institution.enabled_tabs})
+    for child in children:
         api.content.transition(child, to_state=event.new_state.id)
 
 
 def handle_institution_deletion(obj, event):
     # Configure manager group & local permissions
     try:
-        group_id = format_institution_managers_group_id(obj)
         # Don't use api.group.delete(group_id) because it breaks when trying to delete the entire plone site
-        obj.aq_parent.portal_groups.removeGroup(group_id)
+        obj.aq_parent.portal_groups.removeGroup(get_decisions_managers_group_id(obj))
+        obj.aq_parent.portal_groups.removeGroup(get_publications_managers_group_id(obj))
     except CannotGetPortalError:
         # It's alright, it happens when we try to delete the whole plone site.
         pass
 
-
-def meeting_state_changed(obj, event):
-    items = obj.listFolderContents(contentFilter={"portal_type": "Item"})
-    for item in items:
-        item.reindexObject(idxs=["linkedMeetingReviewState"])
 
 def update_custom_css(context, event):
     """

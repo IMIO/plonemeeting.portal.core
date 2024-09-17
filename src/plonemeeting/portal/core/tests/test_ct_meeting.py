@@ -12,7 +12,7 @@ class MeetingIntegrationTest(PmPortalTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         super().setUp()
-        self.parent = self.create_object("Institution")
+        self.institution = self.create_object("Institution")
 
     def test_ct_meeting_schema(self):
         fti = queryUtility(IDexterityFTI, name="Meeting")
@@ -34,18 +34,18 @@ class MeetingIntegrationTest(PmPortalTestCase):
 
     def test_ct_meeting_adding(self):
         self.login_as_manager()
-        obj = api.content.create(container=self.parent, type="Meeting", id="meeting")
+        decisions = self.institution.decisions
+        obj = api.content.create(container=decisions, type="Meeting", id="meeting")
 
         self.assertTrue(
             IMeeting.providedBy(obj), u"IMeeting not provided by {0}!".format(obj.id)
         )
 
-        parent = obj.__parent__
-        self.assertIn("meeting", parent.objectIds())
+        self.assertIn("meeting", decisions.objectIds())
 
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertNotIn("meeting", parent.objectIds())
+        self.assertNotIn("meeting", decisions.objectIds())
 
     def test_ct_meeting_globally_not_addable(self):
         self.login_as_manager()

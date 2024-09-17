@@ -5,6 +5,7 @@
              state_variable="review_state" initial_state="private" manager_bypass="False"
              i18n:attributes="title">
     <permission>Access contents information</permission>
+    <permission>Delete objects</permission>
     <permission>Modify portal content</permission>
     <permission>View</permission>
     <permission>Request review</permission>
@@ -17,7 +18,6 @@
             <permission-role>Anonymous</permission-role>
         </permission-map>
         <permission-map name="Modify portal content" acquired="False">
-            <permission-role>Institution Manager</permission-role>
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Editor</permission-role>
@@ -30,20 +30,17 @@
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
         <permission-map name="Review portal content" acquired="False">
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
     </state>
     <state state_id="private" title="Private" i18n:attributes="title">
         <description></description>
         <exit-transition transition_id="send_to_project"/>
         <permission-map name="Access contents information" acquired="False">
-            <permission-role>Institution Manager</permission-role>
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Editor</permission-role>
@@ -52,14 +49,12 @@
             <permission-role>Site Administrator</permission-role>
         </permission-map>
         <permission-map name="Modify portal content" acquired="False">
-            <permission-role>Institution Manager</permission-role>
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Editor</permission-role>
             <permission-role>Site Administrator</permission-role>
         </permission-map>
         <permission-map name="View" acquired="False">
-            <permission-role>Institution Manager</permission-role>
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Editor</permission-role>
@@ -71,13 +66,11 @@
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
         <permission-map name="Review portal content" acquired="False">
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
     </state>
     <state state_id="decision" title="Decision" i18n:attributes="title">
@@ -87,7 +80,6 @@
             <permission-role>Anonymous</permission-role>
         </permission-map>
         <permission-map name="Modify portal content" acquired="False">
-            <permission-role>Institution Manager</permission-role>
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Editor</permission-role>
@@ -100,13 +92,11 @@
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
         <permission-map name="Review portal content" acquired="False">
             <permission-role>Manager</permission-role>
             <permission-role>Owner</permission-role>
             <permission-role>Site Administrator</permission-role>
-            <permission-role>Institution Manager</permission-role>
         </permission-map>
     </state>
     <transition transition_id="publish" title="Publish decision" new_state="decision" trigger="USER" before_script="" after_script="" i18n:attributes="title">

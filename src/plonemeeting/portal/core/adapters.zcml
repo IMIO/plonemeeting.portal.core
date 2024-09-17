@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <adapter
+      factory=".adapters.PublicationTimeStamper"
+      provides="collective.timestamp.adapters.ITimeStamper"
+      for="plonemeeting.portal.core.content.publication.IPublication"
+      />
+
+</configure>

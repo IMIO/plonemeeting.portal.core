@@ -28,7 +28,34 @@
     <subscriber
         for="plonemeeting.portal.core.content.meeting.IMeeting
              Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-          handler=".institution.meeting_state_changed"
+        handler=".meeting.meeting_state_changed"
         />
+
+    <subscriber
+        for="plonemeeting.portal.core.content.publication.IPublication
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".publication.publication_modified"
+        />
+
+    <subscriber
+        for="plonemeeting.portal.core.content.publication.IPublication
+             Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+        handler=".publication.publication_state_changed"
+        />
+
+    <subscriber
+        for="plonemeeting.portal.core.content.publication.IPublication
+             OFS.interfaces.IObjectWillBeRemovedEvent"
+        handler=".publication.publication_will_be_removed" />
+
+    <subscriber
+        for="plone.dexterity.interfaces.IDexterityContent
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".publication.check_publication_timestamp"
+        />
+
+    <subscriber
+       for="collective.timedevents.interfaces.IIntervalTicks15Event"
+       handler="collective.autopublishing.eventhandler.autopublish_handler" />
 
 </configure>

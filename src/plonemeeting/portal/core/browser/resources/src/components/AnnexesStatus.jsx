@@ -2,7 +2,7 @@ import { h, render } from "preact";
 import { useState } from "preact/hooks";
 import Icon from "@mdi/react";
 import { mdiPlus, mdiEqual, mdiMinus, mdiPencil } from "@mdi/js";
-import ReactTooltip from "react-tooltip";
+import {Tooltip} from "react-tooltip";
 
 const Annexe = ({ data, type }) => {
     const id = Math.random();
@@ -15,17 +15,17 @@ const Annexe = ({ data, type }) => {
     };
 
     return (
-        <div className={`annex-status ${type}`} data-tip data-for={`tooltip-${id}`}>
+        <div className={`annex-status ${type}`} data-tooltip-id={`tooltip-${id}`}>
             <Icon path={getIcon()} color="white" />
             <span>{data.count}</span>
-            <ReactTooltip id={`tooltip-${id}`} type="dark" place="left" effect="solid">
+            <Tooltip id={`tooltip-${id}`} className="pm-tooltip" variant="light" place="left" opacity={1} offset={15}>
                 <h5>{data.label}</h5>
                 <ul>
                     {data.titles.map((title) => (
                         <li key={title}>{title}</li>
                     ))}
                 </ul>
-            </ReactTooltip>
+            </Tooltip>
         </div>
     );
 };

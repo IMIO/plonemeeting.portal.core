@@ -7,16 +7,18 @@
 
   <i18n:registerTranslations directory="locales" />
 
-<!--  <include package="collective.dexteritytextindexer" />-->
   <include package="collective.z3cform.datagridfield" />
   <include package="collective.cookiecuttr" />
   <include package="collective.fingerpointing" />
+  <include package="collective.timestamp" />
+  <include package="collective.autopublishing" />
   <include package="eea.facetednavigation" />
   <include package="plone.formwidget.hcaptcha" />
 
+  <include file="adapters.zcml" />
   <include file="permissions.zcml" />
 
-
+  <include package=".behaviors" />
   <include package=".browser" />
   <include package=".content" />
   <include package=".events" />
@@ -64,6 +66,18 @@
   <!-- Vocabularies -->
 
   <utility
+    component=".vocabularies.EnabledTabsVocabulary"
+    name="plonemeeting.portal.vocabularies.enabled_tabs"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.PublicationsPowerUsersVocabulary"
+    name="plonemeeting.portal.vocabularies.publications_power_users"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
     component=".vocabularies.GlobalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.global_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"
@@ -72,6 +86,18 @@
   <utility
     component=".vocabularies.LocalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.local_categories"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.DocumentTypesVocabulary"
+    name="plonemeeting.portal.vocabularies.document_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.LegislativeAuthoritiesVocabulary"
+    name="plonemeeting.portal.vocabularies.legislative_authorities"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 
@@ -120,6 +146,12 @@
   <utility
     component=".vocabularies.MeetingTypesVocabulary"
     name="plonemeeting.portal.vocabularies.meeting_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <utility
+    component=".vocabularies.PublicationReviewStatesVocabulary"
+    name="plonemeeting.portal.vocabularies.publication_review_states"
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 

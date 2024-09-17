@@ -1,0 +1,77 @@
+from collective.timestamp.indexers import is_timestampedpaste.httpheaders import category
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en">
+
+<metal:macro define-macro="preview_publication">
+
+  <div class="item-card" tal:define="
+    review_state python:brain.review_state;
+    isAnon context/@@plone_portal_state/anonymous;">
+    <a href="" class="filled-link"
+       tal:attributes="href python:brain.getURL()">
+    </a>
+    <div id="state-row" class="row" i18n:domain="plone">
+
+      <div class="col d-flex justify-content-end mb-2">
+        <div i18n:translate="" tal:condition="python:brain.is_timestamped"
+          class="badge timestamp-badge info animated"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
+        </div>
+        <div tal:condition="python: review_state == 'private'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Private
+        </div>
+        <div tal:condition="python: review_state == 'published'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Published
+        </div>
+        <div tal:condition="python: review_state == 'unpublished'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Unpublished
+        </div>
+        <div tal:condition="python: review_state == 'planned'" i18n:translate=""
+           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
+          Planned
+        </div>
+      </div>
+    </div>
+    <div id="title-row" class="row">
+      <h3 tal:content="python:brain.Title"></h3>
+    </div>
+    <div id="description-row" class="row" tal:condition="python:brain.Description">
+      <p tal:content="structure python:brain.Description.replace('\n', '<br>')"></p>
+    </div>
+    <div class="row content-metadatas">
+      <div class="content-metadatas-col col">
+        <div class="item-metadata-row" tal:condition='not: isAnon'>
+          <div class="item-metadata-label" i18n:translate="Last modification">Last modification
+          </div>
+          <span tal:content="python:context.toLocalizedTime(brain.modified)" />
+        </div>
+        <div class="item-metadata-row">
+          <div class="item-metadata-label" i18n:domain="plone" i18n:translate="label_effective_date">label_effective_date</div>
+          <span tal:content="python:context.toLocalizedTime(brain.EffectiveDate)" />
+        </div>
+        <div class="item-metadata-row" tal:condition='not: isAnon'>
+          <div class="item-metadata-label" i18n:domain="plone" i18n:translate="">Expiration date
+          </div>
+          <span tal:condition="python:brain.expires.year() < 2499" tal:content="python:context.toLocalizedTime(brain.expires)" />
+          <span tal:condition="python:brain.expires.year() == 2499"> - </span>
+        </div>
+        <div class="item-metadata-row">
+          <div class="item-metadata-label" i18n:translate="">Document type</div>
+          <span tal:content="python:brain.pretty_document_type" />
+        </div>
+        <div class="item-metadata-row">
+          <div class="item-metadata-label" i18n:translate="">Category</div>
+          <span tal:content="python:brain.pretty_category" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</metal:macro>
+
+</html>

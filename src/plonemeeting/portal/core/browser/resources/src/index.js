@@ -7,9 +7,11 @@ import InstitutionsMap from "./components/InstitutionsMap";
 import MasonryColumns from "./components/MasonryColumns";
 import DarkModeToggle from "./components/DarkModeToggle";
 import LayoutSelect from "./components/LayoutSelect";
+import PdfViewer from "./components/PdfViewer";
 import MeetingAgenda from "./components/MeetingAgenda";
 
 import "../theme/main.scss";
+import Tooltip from "./components/Tooltip";
 
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
 register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
@@ -19,22 +21,22 @@ register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selec
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
-
+register(PdfViewer, "x-pdf-viewer", ["file"]);
 
 
 function setUpEnvironmentLabel() {
-    let hostname = document.location.hostname;
-    if (hostname === "localhost" || hostname === "0.0.0.0") {
-        $("body").append("<span class='environment-label environment-dev'>DEV</span>");
-    } else if (hostname.includes("staging")) {
-        $("body").append("<span class='environment-label environment-test'>TEST</span>");
-    }
+  let hostname = document.location.hostname;
+  if (hostname === "localhost" || hostname === "0.0.0.0") {
+    $("body").append("<span class='environment-label environment-dev'>DEV</span>");
+  } else if (hostname.includes("staging")) {
+    $("body").append("<span class='environment-label environment-test'>STAGING</span>");
+  } else if (hostname.includes("test")) {
+    $("body").append("<span class='environment-label environment-test'>TEST</span>");
+  }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   setUpEnvironmentLabel();
-})
-
-
-if (module.hot) {
-    module.hot.accept();
-}
+  // As the tooltip accepts slots we need to use shadow dom and register it after DOMContentLoaded
+  register(Tooltip, "x-tooltip", ["target-selector", "position"], { shadow: false });
+});

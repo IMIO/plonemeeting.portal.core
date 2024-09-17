@@ -1,11 +1,11 @@
-import os
-
-from importlib_metadata import version, PackageNotFoundError
-
+from importlib_metadata import PackageNotFoundError
+from importlib_metadata import version
+from plone import api
+from plone.memoize import forever
 from Products.CMFCore.ActionInformation import ActionInfo
 from Products.Five import BrowserView
-from plone.memoize import forever
-from plone import api
+
+import os
 
 
 class FooterView(BrowserView):

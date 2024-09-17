@@ -11,8 +11,8 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
         self.institution = self.portal["belleville"]
-        self.meeting = self.institution["16-novembre-2018-08-30"]
-        self.project_meeting = self.institution["16-novembre-2018-08-30"]
+        self.meeting = self.institution.decisions["16-novembre-2018-08-30"]
+        self.project_meeting = self.institution.decisions["16-novembre-2018-08-30"]
         self.item = self.meeting["approbation-du-pv-du-xxx"]
         self.login_as_test()
 
@@ -29,7 +29,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
 
     def test_get_files_infos(self):
-        files = self.item.restrictedTraverse("@@view").get_files_infos()
+        files = self.item.restrictedTraverse("@@utils_view").get_files_infos()
         self.assertEqual(1, len(files))
         self.assertEqual(self.item["document.pdf"], files[0]['file'])
         self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")['icon'], files[0]['icon_infos']['icon'])

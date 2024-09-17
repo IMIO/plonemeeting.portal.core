@@ -40,7 +40,7 @@ class TestSerializers(PmPortalTestCase):
             container=self.portal, type="Institution", id="institution", title="Gotham City"
         )
         meeting = api.content.create(
-            container=institution, type="Meeting", id="meeting", title="05 july 2024 (18:00)"
+            container=institution.decisions, type="Meeting", id="meeting", title="05 july 2024 (18:00)"
         )
         request = self.portal.REQUEST
         serializer = queryMultiAdapter((meeting, request), IMeetingSerializeToJson)

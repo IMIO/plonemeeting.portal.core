@@ -273,13 +273,12 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_set_constrain_types(self):
         constraints = ISelectableConstrainTypes(self.belleville)
         self.assertListEqual(
-            sorted(["Meeting", "Folder"]), sorted(constraints.getLocallyAllowedTypes())
+            sorted(["Folder"]), sorted(constraints.getLocallyAllowedTypes())
         )
-        utils.set_constrain_types(self.belleville, ["Meeting"])
-        self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
-
-        utils.set_constrain_types(self.belleville, ["Meeting", "Folder"])
-        self.assertListEqual(["Folder", "Meeting"], constraints.getLocallyAllowedTypes())
+        utils.set_constrain_types(self.belleville, [])
+        self.assertListEqual([], constraints.getLocallyAllowedTypes())
+        utils.set_constrain_types(self.belleville, ["Folder"])
+        self.assertListEqual(["Folder"], constraints.getLocallyAllowedTypes())
 
     def test_cleanup_contents(self):
         api.content.create(container=self.portal, id="news", type="Folder")

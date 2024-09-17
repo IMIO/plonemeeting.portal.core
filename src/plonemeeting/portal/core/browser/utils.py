@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import math
-
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -10,12 +8,15 @@ from plonemeeting.portal.core.config import MIMETYPE_TO_ICON
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import get_term_title
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
+
+import math
 import os
 import plone
 
@@ -71,9 +72,15 @@ class UtilsView(BrowserView):
             url = "{0}#seance={1}".format(meeting_folder_brains[0].getURL(), meeting_uid)
         return url
 
+    def get_publications_url(self):
+        institution = self.get_current_institution()
+        return api.content.find(
+            context=institution, object_provides=IPublicationsFolder.__identifier__
+        )[0].getURL()
+
     @staticmethod
-    def get_state(meeting):
-        return api.content.get_state(meeting)
+    def get_state(obj):
+        return api.content.get_state(obj)
 
     def get_categories_mappings_value(self, key):
         factory = queryUtility(
@@ -119,18 +126,35 @@ class UtilsView(BrowserView):
     def get_last_item_number(self, meeting):
         return meeting.get_items(objects=False)[-1].number
 
+    def get_files_infos(self):
+        brains = api.content.find(
+            portal_type="File", context=self.context, sort_on="getObjPositionInParent"
+        )
+        res = []
+        for brain in brains:
+            file = brain.getObject()
+            res.append({
+                "file": file,
+                "size": pretty_file_size(int(file.get_size())),
+                "icon_infos": pretty_file_icon(file.content_type()),
+            })
+        return res
+
+
 def path_to_dx_default_template():
-    dx_path = os.path.dirname(plone.dexterity.browser.__file__)
-    return os.path.join(dx_path, "item.pt")
+    dx_path = os.path.dirname(plone.app.dexterity.__file__)
+    return os.path.join(dx_path, "browser/item.pt")
+
 
 def pretty_file_size(size_bytes):
-   if size_bytes == 0:
-       return "0o"
-   size_name = ("o", "Ko", "Mo", "Go", "To", "Po", "Eo", "Zo", "Yo")
-   i = int(math.floor(math.log(size_bytes, 1024)))
-   p = math.pow(1024, i)
-   s = round(size_bytes / p, 2)
-   return f"{s} {size_name[i]}"
+    if size_bytes == 0:
+        return "0o"
+    size_name = ("o", "Ko", "Mo", "Go", "To", "Po", "Eo", "Zo", "Yo")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+    return f"{s} {size_name[i]}"
+
 
 def pretty_file_icon(mimetype):
     """

@@ -1,0 +1,341 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+   tal:define="
+  portal_url context/@@plone_portal_state/portal_url;
+  utils_view nocall:context/@@utils_view;
+  review_state python: utils_view.get_state(context);
+  is_anon context/@@plone_portal_state/anonymous;
+  "
+   i18n:domain="plonemeeting.portal.core"
+>
+<body>
+<metal:content-core fill-slot="content-core">
+  <metal:content-core define-macro="content-core"
+     tal:define="
+    file python: context.file;
+    toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+    toc python:  getattr(context, 'table_of_contents', False);
+    "
+  >
+
+    <section class="row metadatas-section mb-3">
+      <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:domain="plone"
+             i18n:translate="label_effective_date"
+          >
+            Publishing date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_effective_date()"
+          >
+            2024-08-01 00:00:00
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:not is_anon and context.expiration_date">
+          <div class="content-metadata-col header"
+             i18n:domain="plone"
+             i18n:translate="label_expiration_date"
+          >
+            Expiration date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_expiration_date()"
+          >
+            2024-08-01 00:00:00
+          </div>
+        </div>
+
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Legislative authority
+          </div>
+          <div class="content-metadata-col"
+             tal:content="structure view/w/legislative_authority/render"
+          >
+            Legislative authority value
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Decision date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_decision_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.subject_to_authority is False">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Subject to authority?
+          </div>
+          <div class="content-metadata-col">
+            Non
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.authority_date">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Authority date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_authority_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+
+        <div class="content-metadata-row" tal:condition="python:context.expired_authority_date">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Expired authority date
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_expired_authority_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
+        <x-tooltip target-selector="#state-tooltip" position="right" tal:condition="not: is_anon">
+          <div slot="content">
+            <div class="tooltip-header">
+              <h4>Information sur le processus de publication</h4>
+            </div>
+            <div class="tooltip-content">
+              <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
+              <p><strong>Les états de publication sont les suivants :</strong></p>
+              <ol>
+                <li><span class="badge state-badge state-private">Privé</span>
+                  <p>La publication est en cours de rédaction.</p>
+                  <p>
+                    Les gestionnaires de publication peuvent consulter et éditer la publication.
+                  </p>
+                  <p>Les citoyens ne peuvent pas voir la publication.</p>
+                  <p>La publication peut dès qu'elle est prête être publiée directement si aucune <code>date de
+                    publication</code> n'est renseignée ou bien être plannifiée dans le cas contraire</p>
+                </li>
+                <li>
+                  <span class="badge state-badge state-planned">Planifié</span>
+                  <p>La publication est plannifiée pour être publiée à la <code>date de publication</code>
+                    renseignée.
+                  </p>
+                  <p>
+                    Les gestionnaires de publication peuvent toujours consulter et éditer la publication.
+                  </p>
+                  <p>Les citoyens ne peuvent pas voir la publication.</p>
+                </li>
+                <li><span class="badge state-badge state-published">Publié</span>
+                  <p>La publication est publiée et accessible aux citoyens.</p>
+                  <p>La publication sera automatiquement horodatée si <code>Activer l'horodatage</code> est coché
+                    (par
+                    défaut oui).</p>
+                  <p>Un publication horodatée comportera la mention suivante :
+                  <div i18n:translate=""
+                    class="badge timestamp-badge info"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
+                  </div>
+                  .</p>
+                </li>
+                <li><span class="badge state-badge state-unpublished">Dépublié</span>
+                  <p>La publication n'est plus accessible aux citoyens.</p>
+                </li>
+              </ol>
+            </div>
+
+          </div>
+        </x-tooltip>
+        <div class="content-metadata-row"  i18n:domain="plone">
+          <div id="state-header" class="content-metadata-col header">
+            <tal:state i18n:translate="">State</tal:state>
+            <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
+          </div>
+          <div class="content-metadata-col">
+            <div class="d-flex">
+              <span i18n:translate="" tal:condition="context/is_timestamped"
+                class="badge timestamp-badge info me-2"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
+              </span>
+              <span tal:content="view/get_state_title"
+                 tal:attributes="class string:state-${review_state} badge state-badge"></span>
+            </div>
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Document type
+          </div>
+          <div class="content-metadata-col"
+             tal:content="structure view/w/document_type/render"
+          >
+            Document type value
+          </div>
+        </div>
+        <div class="content-metadata-row">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Category
+          </div>
+          <div class="content-metadata-col"
+             tal:content="structure view/w/category/render"
+          >
+            Category value
+          </div>
+        </div>
+        <div class="content-metadata-row" tal:condition="python:context.entry_date">
+          <div class="content-metadata-col header"
+             i18n:translate=""
+          >
+            Entrée en vigueur
+          </div>
+          <div class="content-metadata-col"
+             tal:content="python: view.get_entry_date()"
+          >
+            2024-08-01
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="row text-section mb-3" tal:condition="context/text">
+      <div class="col-12">
+        <div class="${python: toc and 'pat-autotoc card p-4' or 'card p-4'}"
+           tal:content="structure python:context.text.output_relative_to(context)">
+        </div>
+      </div>
+    </section>
+    <section class="row pdf-section mb-3"
+       tal:condition="file"
+    >
+      <div class="col-12">
+        <h2>Document</h2>
+        <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
+      </div>
+    </section>
+    <section class="row annexes-section mb-3"
+       tal:define="files_infos utils_view/get_files_infos"
+       tal:condition="files_infos">
+      <div class="col-12">
+        <h2 i18n:translate="">Annexes</h2>
+        <div class="annexes">
+          <div tal:repeat="info files_infos">
+            <div class="annex">
+              <div class="bg-file-color ${info/icon_infos/color}">
+                <i tal:attributes="class info/icon_infos/icon"></i>
+              </div>
+              <div class="title">
+                <h3 tal:content="info/file/Title" />
+                <p>Taille: <span tal:content="info/size"></span></p>
+              </div>
+              <div class="annex-actions">
+                <a href=""
+                   target="_blank"
+                   tal:attributes="href info/file/absolute_url">
+                  <i class="bi bi-box-arrow-in-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="row legal-section mb-3">
+      <div class="${python: context.is_timestamped() and 'col-lg-8' or 'col-lg-12'}">
+        <div class="alert with-icon alert-light"
+             role="alert"
+             style="margin: 0 !important;"
+
+        >
+          <div class="alert-icon">
+            <i class="bi bi-building-check"></i>
+          </div>
+          <div class="alert-content">
+            <h3>Lieu et horaires de consultation</h3>
+            <div tal:content="structure view/w/consultation_text/render"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" tal:condition="context/is_timestamped">
+        <div class="alert with-icon alert-light"
+             role="alert"
+             style="margin: 0 !important;"
+
+        >
+          <div class="alert-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="alert-content">
+            <x-tooltip target-selector="#timestamping-tooltip" position="top">
+              <div slot="content">
+                <div class="tooltip-header">
+                  <h4>Horodatage qualifié</h4>
+                </div>
+                <div class="tooltip-content">
+                  <p>Un horodatage qualifié garantit la date et l'heure exactes de publication d'un document numérique, conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du document.</p>
+                </div>
+
+              </div>
+            </x-tooltip>
+            <div class="d-flex align-items-center mb-1">
+              <h3 class="mb-0">Horodatage qualifié</h3>
+              <i id="timestamping-tooltip" class="bi bi-question-circle help-icon ms-1"></i>
+            </div>
+            Cette publication a été horodatée le <strong>${view/get_effective_date}</strong> conformément à la
+            législation en vigueur.
+            <div class="row my-2 ">
+              <div class="col d-flex justify-content-start">
+                <a class="btn btn-outline-secondary me-2"
+                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
+                  <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
+                <a class="btn btn-outline-secondary me-2"
+                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamp/filename}">Signature
+                  <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="">
+                <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapse-timestamping-more-info" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                  En savoir plus <i class="bi bi-info-circle" style="font-size: 1em"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="collapse alert-collapse" id="collapse-timestamping-more-info">
+          <ul class="text-muted dashed">
+            <li>
+              <a href="/faq/quest-ce-que-l-horodatage" target="_blank" class="help-link">Qu'est-ce que l'horodatage qualifié ?</a>
+            </li>
+            <li>
+              <a href="/faq/verifier-un-horodatage" target="_blank" class="help-link">Comment vérifier un horodatage ?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </metal:content-core>
+</metal:content-core>
+</body>
+</html>

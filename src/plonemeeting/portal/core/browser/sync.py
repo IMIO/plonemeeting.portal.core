@@ -6,7 +6,7 @@ from plone.autoform.form import AutoExtensibleForm
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core import plone_
-from plonemeeting.portal.core.config import APP_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
@@ -42,14 +42,16 @@ class IImportMeetingForm(Interface):
         required=True,
     )
 
-class ISyncMeetingForm(Interface):
 
-    is_annexes_synced = schema.Bool(
-        title=_("Sync annexes ?"),
-        description=_("Sync annexes"),
-        required=False,
-        default=True,
-    )
+class ISyncMeetingForm(Interface):
+    pass
+    # is_annexes_synced = schema.Bool(
+    #     title=_("Sync annexes ?"),
+    #     description=_("Sync annexes"),
+    #     required=False,
+    #     default=True,
+    # )
+
 
 class ImportMeetingForm(AutoExtensibleForm, Form):
     """
@@ -92,8 +94,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
     @button.buttonAndHandler(plone_("Cancel"))
     def handle_cancel(self, action):
-        meeting_faceted_url = f"{self.context.absolute_url()}/{APP_FOLDER_ID}"
-        redirect(self.request, meeting_faceted_url)
+        redirect(self.request, f"{self.context.absolute_url()}")
 
     def updateActions(self):
         super().updateActions()
@@ -155,7 +156,7 @@ class ItemsReportContentProvider(ContentProviderBase):
                 {"orderable": True, "width": "60px", "targets": "date-header"},
                 {"orderable": False, "width": "50px", "targets": "annexes-header"},
             ],
-            "scrollY": "50vh",
+            "scrollY": "55vh",
             "autoWidth": True,
             "scrollCollapse": True,
             "order": [[item_number_col_idx, "asc"]],
@@ -186,8 +187,6 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
     """
     Before synchronizing, ask the user what he wants to sync.
     """
-
-
     label = _("Meeting pre sync form")
     description = _(
         "Choose the items you want to sync/import in the portal. "
@@ -240,7 +239,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
         if len(deleted_ids) > 0:
             self.context.manage_delObjects(deleted_ids)
 
-        meeting_faceted_url = f"{self.institution.absolute_url()}/{APP_FOLDER_ID}/#seance={self.context.UID()}"
+        meeting_faceted_url = f"{self.institution.absolute_url()}/{DEC_FOLDER_ID}/#seance={self.context.UID()}"
         redirect(self.request, meeting_faceted_url)
 
     def updateActions(self):
@@ -251,7 +250,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
         """"""
-        meeting_faceted_url = f"{self.institution.absolute_url()}/{APP_FOLDER_ID}/#seance={self.context.UID()}"
+        meeting_faceted_url = f"{self.institution.absolute_url()}/{DEC_FOLDER_ID}/#seance={self.context.UID()}"
         redirect(self.request, meeting_faceted_url)
 
     def _reconcile_items(self, api_items, local_items):
@@ -418,9 +417,10 @@ class PreImportReportForm(AutoExtensibleForm, Form):
     contentProviders["items"].position = 0
 
     def __call__(self):  # pragma: no cover
+        self.utils_view = self.context.restrictedTraverse("@@utils_view")
         self.external_meeting_uid = self.request.form["external_meeting_uid"]
         self.is_syncing = False
-        self.institution = self.context
+        self.institution = self.utils_view.get_current_institution()
         self.meeting_title = _call_delib_rest_api(
             get_api_url_for_meetings(self.institution, self.external_meeting_uid),
             self.institution,
@@ -477,7 +477,7 @@ def _sync_meeting(
         start_time = time.time()
         logger.info("SYNC starting...")
         status, new_meeting_uid = sync_meeting(
-            institution, meeting_uid, force,with_annexes, item_external_uids
+            institution, meeting_uid, force, with_annexes, item_external_uids
         )
         if new_meeting_uid:
             brains = api.content.find(

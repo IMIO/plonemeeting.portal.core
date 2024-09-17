@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.exportimport.import_content import ImportContent
 from imio.helpers.content import richtextval
 from plone import api
 from plone.api import content
@@ -9,15 +10,18 @@ from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
-from plonemeeting.portal.core.utils import create_faceted_folder
-from plonemeeting.portal.core.config import FACETED_FOLDER_ID
-from plonemeeting.portal.core.config import FACETED_XML_PATH
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
+from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
+from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
 from plonemeeting.portal.core.utils import cleanup_contents
-from plonemeeting.portal.core.utils import format_institution_managers_group_id
+from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import implementer
@@ -27,6 +31,7 @@ import dateutil.parser
 import json
 import mimetypes
 import os
+import transaction
 
 
 @implementer(INonInstallable)
@@ -57,19 +62,21 @@ def post_install(context):
     )
     config_folder.exclude_from_nav = True
 
-
-    # Create global faceted folder
-    faceted = create_faceted_folder(
-        config_folder,
-        translate(_(u"Faceted"), target_language=current_lang),
-        id=FACETED_FOLDER_ID,
-    )
-
-    faceted_config_path = os.path.join(os.path.dirname(__file__), FACETED_XML_PATH)
-    with open(faceted_config_path, "rb") as faceted_config:
-        faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-            import_file=faceted_config
+    # Create global meetings and publications faceted folders
+    for faceted_folder_id, faceted_folder_title, faceted_xml_path in (
+            (FACETED_DEC_FOLDER_ID, _("Faceted decisions"), FACETED_DEC_XML_PATH),
+            (FACETED_PUB_FOLDER_ID, _("Faceted publications"), FACETED_PUB_XML_PATH)):
+        faceted = create_faceted_folder(
+            config_folder,
+            translate(faceted_folder_title, target_language=current_lang),
+            id=faceted_folder_id,
         )
+
+        faceted_config_path = os.path.join(os.path.dirname(__file__), faceted_xml_path)
+        with open(faceted_config_path, "rb") as faceted_config:
+            faceted.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+                import_file=faceted_config
+            )
 
 
 def uninstall(context):
@@ -81,12 +88,12 @@ def create_file(container, filename):
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/demo/data/", filename)
     if os.path.isfile(file_path):
-        contentType = mimetypes.guess_type(file_path)[0]
+        content_type = mimetypes.guess_type(file_path)[0]
         title = os.path.basename(file_path)
         with open(file_path, "rb") as fd:
             file_obj = content.create(container=container, type="File", title=title)
             file_obj.file = NamedFile(
-                data=fd, filename=title, contentType=contentType
+                data=fd, filename=title, contentType=content_type
             )
 
 
@@ -116,7 +123,13 @@ def create_demo_content(context):
         api.portal.set_registry_record(
             "plonemeeting.portal.core.global_categories", data["categories"]
         )
-
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.document_types", data["document_types"]
+        )
+        api.portal.set_registry_record(
+            "plonemeeting.portal.core.legislative_authorities",
+            data["legislative_authorities"]
+        )
         normalizer = getUtility(IIDNormalizer)
         for institution in data["institutions"]:
             institution_id = normalizer.normalize(institution["title"])
@@ -143,19 +156,26 @@ def create_demo_content(context):
                 info_annex_formatting_tal=institution["info_annex_formatting_tal"],
             )
             content.transition(obj=institution_obj, transition="publish")
-            user = api.user.create(
-                username="{}-manager".format(institution_obj.id),
+            decisions_manager = api.user.create(
+                username="{}-decisions-manager".format(institution_obj.id),
                 email="noob@plone.org",
                 password="supersecret",
             )
+            publications_manager = api.user.create(
+                username="{}-publications-manager".format(institution_obj.id),
+                email="noob@plone.org",
+                password="supersecret",
+            )
+            group = api.group.get(get_decisions_managers_group_id(institution_obj))
+            group.addMember(decisions_manager.id)
+            group = api.group.get(get_publications_managers_group_id(institution_obj))
+            group.addMember(publications_manager.id)
 
-            group = api.group.get(format_institution_managers_group_id(institution_obj))
-            group.addMember(user.id)
-
+            meetings_container = institution_obj.get(DEC_FOLDER_ID)
             for meeting in institution["meetings"]:
                 date_time = dateutil.parser.parse(meeting["datetime"])
                 meeting_obj = content.create(
-                    container=institution_obj,
+                    container=meetings_container,
                     type="Meeting",
                     title=meeting["title"],
                     date_time=date_time,
@@ -185,6 +205,9 @@ def create_demo_content(context):
                     if "files" in item:
                         for file in item["files"]:
                             create_file(item_obj, file)
+
+            create_demo_publications(portal, institution_obj)
+
         faqs = content.create(
             container=portal,
             type="Folder",
@@ -204,3 +227,27 @@ def create_demo_content(context):
     if brain:
         default_front_page = content.get(UID=brain[0].UID)
         content.delete(default_front_page)
+
+    portal.portal_workflow.updateRoleMappings()
+
+def create_demo_publications(portal, context):
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+
+    with open(os.path.join(current_dir, "profiles/demo/data/publications.json"), "r") as f:
+        pub_data = json.load(f)
+        for item in pub_data:  # We need to specify a custom @id otherwise exportimport doesn't work
+            item["@id"] = "/".join(portal.getPhysicalPath() + (context.id, "publications", item["@id"]))
+    request = getattr(context, "REQUEST", None)
+
+    if request is None:
+        request = portal.REQUEST
+    import_content = ImportContent(context.publications, request)
+
+    import_content.handle_existing_content = 1  # Replace
+    import_content.limit = None
+    import_content.commit = None
+    import_content.import_old_revisions = False
+    import_content.import_to_current_folder = True
+    # We need to use `import_new_content` instead of `do_import` to avoid commiting
+    # because it breaks test layers
+    import_content.import_new_content(pub_data)

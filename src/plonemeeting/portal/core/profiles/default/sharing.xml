@@ -3,7 +3,6 @@
 
   <role id="Institution Manager"
         title="Can manage institution"
-        i18n:attributes="title"
-        />
+        remove="True" />
 
 </sharing>

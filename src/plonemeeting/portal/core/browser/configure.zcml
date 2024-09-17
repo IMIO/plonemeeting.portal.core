@@ -28,6 +28,15 @@
   />
 
   <browser:page
+    name="sitemap_builder_view"
+    for="*"
+    class=".sitemap.PortalCatalogSiteMap"
+    allowed_attributes="siteMap"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
     name="view"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     class=".institution.InstitutionView"
@@ -50,10 +59,54 @@
     permission="zope.Public"
   />
 
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".publication.PublicationAdd"
+      name="Publication"
+  />
+
+  <class class=".publication.PublicationAdd">
+      <require
+          permission="cmf.AddPortalContent"
+          interface="zope.publisher.interfaces.browser.IBrowserPage" />
+  </class>
+
+  <browser:page
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    name="edit"
+    class=".publication.EditForm"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+    name="view"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationView"
+    template="templates/publication.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    name="description"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    template="templates/description.pt"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="content_status_modify"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationContentStatusModifyView"
+    permission="zope2.View"
+  />
+
   <browser:page
     name="import_meeting"
-    for="plonemeeting.portal.core.content.institution.IInstitution"
-    permission="cmf.ModifyPortalContent"
+    for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+    permission="cmf.AddPortalContent"
     class=".sync.ImportMeetingForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
@@ -76,8 +129,8 @@
 
   <browser:page
     name="pre_import_report_form"
-    for="plonemeeting.portal.core.content.institution.IInstitution"
-    permission="cmf.ModifyPortalContent"
+    for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+    permission="cmf.AddPortalContent"
     class=".sync.PreImportReportForm"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
@@ -147,5 +200,15 @@
     permission="zope.Public"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
+
+  <!-- author is called on INavigationRoot -->
+  <configure package="Products.CMFPlone.browser">
+    <browser:page
+      name="author"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class="Products.CMFPlone.browser.author.AuthorView"
+      template="templates/author.pt"
+      permission="zope.Public" />
+  </configure>
 
 </configure>

@@ -5,13 +5,10 @@
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
    i18n:domain="plonemeeting.portal.core"
-    tal:define="portal_url context/@@plone_portal_state/portal_url;
-      utils_view nocall:context/@@utils_view;
-      meeting nocall:context/aq_parent;
-      institution python: utils_view.get_current_institution();
-      review_state python: utils_view.get_state(meeting);
-      isAnon context/@@plone_portal_state/anonymous;"
->
+   tal:define="utils_view nocall:context/@@utils_view;
+               meeting nocall:context/aq_parent;
+               review_state python: utils_view.get_state(meeting);
+               is_anon context/@@plone_portal_state/anonymous;">
 <body>
 
 <metal:item-title fill-slot="content-title">
@@ -43,7 +40,7 @@
                tal:attributes="href python:next_prev_infos['previous_item']['url']"
             >
               <i class="bi bi-chevron-left"></i>
-              Précédent
+              <span class="d-none d-md-inline">Précédent</span>
             </a>
           </div>
           <div style="flex: 1"></div>
@@ -59,7 +56,7 @@
                tal:condition="python:next_prev_infos.get('next_item')"
                tal:attributes="href python:next_prev_infos['next_item']['url']"
             >
-              Suivant
+              <span class="d-none d-md-inline">Suivant</span>
               <i class="bi bi-chevron-right"></i>
             </a>
           </div>
@@ -70,7 +67,34 @@
   <tal:text-macro metal:define-macro="content-core">
     <div class="" tal:attributes="class string:item-infos ${review_state}">
       <div class="row mb-3">
-        <div class="col-lg-6">
+        <div class="col-lg-6 order-last order-lg-first">
+          <x-tooltip target-selector="#state-tooltip" position="right" tal:condition="not: is_anon">
+            <div slot="content">
+              <div class="tooltip-header">
+                <h4>Information sur les états des décisions</h4>
+              </div>
+              <div class="tooltip-content">
+                <p>Les états de publication permettent de suivre l'évolution de la publication.</p>
+                <p><strong>Les états de publication sont les suivants :</strong></p>
+                <ol>
+                  <li><span class="badge state-badge state-private">Privé</span>
+                    <p>
+                      Les gestionnaires de décisions peuvent consulter les décisions avant publication.
+                    </p>
+                    <p>Les citoyens ne peuvent pas voir la décision.</p>
+                  </li>
+                  <li>
+                    <span class="badge state-badge state-in_project">Projet de décision</span>
+                    <p>Les citoyens ne peuvent pas voir la publication.</p>
+                  </li>
+                  <li><span class="badge state-badge state-decision">Décidé</span>
+                    <p>La publication est publiée et accessible aux citoyens.</p>
+                  </li>
+                </ol>
+              </div>
+
+            </div>
+          </x-tooltip>
           <div class="card meeting-card">
             <a href="" class="filled-link"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)">
@@ -96,41 +120,43 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 item-metadatas">
-          <div class="item-metadata-row">
-            <div class="item-metadata-col header">
-              État <i class="bi bi-question-circle"></i>
+        <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
+          <div class="content-metadata-row">
+            <div class="content-metadata-col header">
+              <tal:state i18n:domain="plone" i18n:translate="">State</tal:state>
+              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
             </div>
-            <div class="item-metadata-col"
+            <div class="content-metadata-col"
                i18n:domain="plone">
                 <span tal:condition="python: review_state == 'private'"
                    i18n:translate=""
-                   tal:attributes="class string:state-badge state-${review_state}">Private</span>
+                   tal:attributes="class string:badge state-badge state-${review_state}">Private</span>
               <span tal:condition="python: review_state == 'in_project'"
                  i18n:translate=""
-                 tal:attributes="class string:state-badge state-${review_state}">In project</span>
+                 tal:attributes="class string:badge state-badge state-${review_state}">In project</span>
               <span tal:condition="python: review_state == 'decision'"
                  i18n:translate=""
-                 tal:attributes="class string:state-badge state-${review_state}">Decision</span>
+                 tal:attributes="class string:badge state-badge state-${review_state}">Decision</span>
             </div>
           </div>
-          <div class="item-metadata-row">
-            <div class="item-metadata-col header" i18n:translate="">
+          <div class="content-metadata-row">
+            <div class="content-metadata-col header" i18n:translate="">
               Category
             </div>
-            <div class="item-metadata-col" tal:content="structure view/w/category/render">
+            <div class="content-metadata-col" tal:content="structure view/w/category/render">
               Urbanism
             </div>
           </div>
-          <div class="item-metadata-row" tal:condition="context/representatives_in_charge">
-            <div class="item-metadata-col header" i18n:translate="">
+          <div class="content-metadata-row" tal:condition="context/representatives_in_charge">
+            <div class="content-metadata-col header" i18n:translate="">
               Representative
             </div>
-            <div class="item-metadata-col" tal:content="structure view/w/long_representatives_in_charge/render">
+            <div class="content-metadata-col" tal:content="structure view/w/long_representatives_in_charge/render">
               John Doe, President
             </div>
           </div>
-          <div id="item-metadata-extra" class="item-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
+          <div id="content-metadata-extra"
+               class="content-metadata-row" tal:condition="python:context.additional_data and context.additional_data.output_relative_to(context)">
             <span tal:content="structure python:context.additional_data.output_relative_to(context)"/>
           </div>
         </div>
@@ -161,7 +187,7 @@
         </div>
       </div>
       <div class="row annexes-section mb-3"
-         tal:define="files_infos view/get_files_infos"
+         tal:define="files_infos utils_view/get_files_infos"
          tal:condition="files_infos">
         <div class="col-12">
           <h2 i18n:translate="">Annexes</h2>

@@ -18,7 +18,7 @@ runs:
     - name: Install dependencies
       run: |
         pip install -U pip setuptools coveralls coverage mockito pre-commit
-        pip install -r requirements-${{ inputs.plone-version }}.txt
+        pip install -r https://raw.githubusercontent.com/IMIO/buildout.pm.portal/master/requirements.txt
       shell: bash
     - name: buildout
       run: |

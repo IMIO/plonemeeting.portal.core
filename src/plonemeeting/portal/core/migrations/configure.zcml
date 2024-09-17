@@ -143,20 +143,48 @@
     source="1009"
     destination="2000"
     profile="plonemeeting.portal.core:default">
-    <genericsetup:upgradeStep
-      title="Go to portal 2000"
-      description="Migrate to Plone 6"
-      handler="plonemeeting.portal.core.migrations.migrate_to_2000.migrate"/>
     <genericsetup:upgradeDepends
       title="Re-apply registry to add changes for Plone 6"
       description=""
       import_profile="plonemeeting.portal.core:default"
       import_steps="plone.app.registry"
       run_deps="True"/>
+    <genericsetup:upgradeStep
+      title="Go to portal 2000"
+      description="Migrate to Plone 6"
+      handler="plonemeeting.portal.core.migrations.migrate_to_2000.migrate"/>
     <genericsetup:upgradeDepends
       title="Install plonetheme.deliberations"
       description=""
       import_profile="plonetheme.deliberations:default"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="2000"
+    destination="2001"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Install collective.timestamp"
+      description=""
+      import_profile="collective.timestamp:default"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Install collective.autopublishing"
+      description=""
+      import_profile="collective.autopublishing:default"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply types profile step to add timestamp behavior on publications"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="typeinfo"
+      run_deps="True"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply registry profile step to configure timestamping service URL and collective.autopublishing"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="plone.app.registry"
       run_deps="True"/>
   </genericsetup:upgradeSteps>
 

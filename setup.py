@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.0.0.dev0",
+    version="2.0.0b1.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -24,8 +24,8 @@ setup(
         "Framework :: Plone :: Addon",
         "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -51,6 +51,9 @@ setup(
         # -*- Extra requirements: -*-
         "collective.cookiecuttr>=1.0.2",
         "collective.fingerpointing",
+        "collective.timestamp",
+        "collective.autopublishing",
+        "collective.exportimport",
         "collective.z3cform.datagridfield>=3.0.2",
         "eea.facetednavigation>=16.2",
         "plone.api>=2.1.0",
@@ -61,6 +64,7 @@ setup(
         "z3c.jbot",
         "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
+        "imio.pyutils",
         "rich",
         "shutup",
         "importlib-metadata"

@@ -32,12 +32,16 @@
         <indexed_attr value="sortable_number"/>
     </index>
 
-    <index name="pretty_representatives" meta_type="FieldIndex">
-        <indexed_attr value="pretty_representatives"/>
-    </index>
-
     <index name="pretty_category" meta_type="FieldIndex">
         <indexed_attr value="pretty_category"/>
+    </index>
+
+    <index name="pretty_document_type" meta_type="FieldIndex">
+        <indexed_attr value="pretty_document_type"/>
+    </index>
+
+    <index name="pretty_representatives" meta_type="FieldIndex">
+        <indexed_attr value="pretty_representatives"/>
     </index>
 
     <index name="getCategory" meta_type="FieldIndex">
@@ -46,6 +50,14 @@
 
     <index name="getGroupInCharge" meta_type="KeywordIndex">
       <indexed_attr value="representatives_in_charge"/>
+    </index>
+
+    <index name="get_document_type" meta_type="FieldIndex">
+      <indexed_attr value="document_type"/>
+    </index>
+
+    <index name="get_legislative_authority" meta_type="FieldIndex">
+      <indexed_attr value="legislative_authority"/>
     </index>
 
     <index name="plonemeeting_last_modified" meta_type="DateIndex" />
@@ -65,8 +77,9 @@
     <column value="date_time" />
     <column value="number" />
     <column value="sortable_number" />
-    <column value="pretty_representatives" />
     <column value="pretty_category" />
+    <column value="pretty_document_type" />
+    <column value="pretty_representatives" />
     <column value="linkedMeetingUID" />
     <column value="linkedMeetingTitle" />
     <column value="linkedMeetingReviewState" />

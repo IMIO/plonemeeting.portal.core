@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <rolemap>
 
-  <roles>
-    <role name="Institution Manager"/>
-  </roles>
-
   <permissions>
     <permission name="plonemeeting.portal.core: Add Item" acquire="True">
       <role name="Manager"/>
@@ -15,6 +11,11 @@
     </permission>
 
     <permission name="plonemeeting.portal.core: Add Institution" acquire="True">
+      <role name="Manager"/>
+    </permission>
+
+    <permission name="plonemeeting.portal.core: Add Publication" acquire="True">
+      <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
 
@@ -29,6 +30,20 @@
     <permission name="plone.restapi: Use REST API" acquire="True">
       <!-- was given to "Anonymous" by default by plone.restapi -->
       <role name="Member"/>
+    </permission>
+
+    <permission name="Modify view template" acquire="False">
+      <!-- do not let editors change view template -->
+      <role name="Manager"/>
+    </permission>
+
+    <permission name="Access inactive portal content" acquire="False">
+      <!-- give access to expired content to Member because checked by Plone
+           at the portal_catalog level, the View permission will hide not
+           viewable elements nevertheless -->
+      <role name="Member"/>
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
     </permission>
 
   </permissions>
