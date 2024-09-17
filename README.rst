@@ -8,8 +8,6 @@
 .. image:: https://coveralls.io/repos/github/IMIO/plonemeeting.portal.core/badge.svg
     :target: https://coveralls.io/github/IMIO/plonemeeting.portal.core
 
-
-========================
 plonemeeting.portal.core
 ========================
 
