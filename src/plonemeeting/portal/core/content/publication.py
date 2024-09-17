@@ -1,3 +1,4 @@
+from AccessControl import ClassSecurityInfo
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from DateTime import DateTime
 from collective.timestamp.interfaces import ITimeStamper
@@ -18,6 +19,7 @@ from plone.supermodel import model
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission
 from zope import schema
 from zope.component import getMultiAdapter
@@ -119,6 +121,13 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
 class Publication(Container, File):
     """
     """
+
+    security = ClassSecurityInfo()
+
+    @security.protected(View)
+    def Description(self):
+        """Overrided to keep line breaks."""
+        return self.description or ""
 
     def _get_institution(self):
         """ """

@@ -1,0 +1,6 @@
+<p class="lead"
+   tal:define="description python: context.Description().replace('\n', '<br>')"
+   tal:content="structure description"
+   tal:condition="python: context.description">
+  Description
+</p>

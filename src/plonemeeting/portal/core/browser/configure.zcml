@@ -90,6 +90,13 @@
   />
 
   <browser:page
+    name="description"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    template="templates/description.pt"
+    permission="zope.Public"
+  />
+
+  <browser:page
     name="content_status_modify"
     for="plonemeeting.portal.core.content.publication.IPublication"
     class=".publication.PublicationContentStatusModifyView"

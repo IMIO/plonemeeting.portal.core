@@ -8,15 +8,15 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
 <metal:macro define-macro="preview_publication">
 
   <div class="item-card" tal:define="
-    review_state brain/review_state;
+    review_state python:brain.review_state;
     isAnon context/@@plone_portal_state/anonymous;">
     <a href="" class="filled-link"
-       tal:attributes="href brain/getURL">
+       tal:attributes="href python:brain.getURL()">
     </a>
     <div id="state-row" class="row" i18n:domain="plone">
 
       <div class="col d-flex justify-content-end mb-2">
-        <div i18n:translate="" tal:condition="brain/is_timestamped"
+        <div i18n:translate="" tal:condition="python:brain.is_timestamped"
           class="badge timestamp-badge info animated"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
         </div>
         <div tal:condition="python: review_state == 'private'" i18n:translate=""
@@ -38,10 +38,10 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
       </div>
     </div>
     <div id="title-row" class="row">
-      <h3 tal:content="brain/Title"></h3>
+      <h3 tal:content="python:brain.Title"></h3>
     </div>
-    <div id="description-row" class="row" tal:condition="brain/Description">
-      <p tal:content="brain/Description"></p>
+    <div id="description-row" class="row" tal:condition="python:brain.Description">
+      <p tal:content="structure python:brain.Description.replace('\n', '<br>')"></p>
     </div>
     <div class="row content-metadatas">
       <div class="content-metadatas-col col">
@@ -62,11 +62,11 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
         </div>
         <div class="item-metadata-row">
           <div class="item-metadata-label" i18n:translate="">Document type</div>
-          <span tal:content="brain/pretty_document_type" />
+          <span tal:content="python:brain.pretty_document_type" />
         </div>
         <div class="item-metadata-row">
           <div class="item-metadata-label" i18n:translate="">Category</div>
-          <span tal:content="brain/pretty_category" />
+          <span tal:content="python:brain.pretty_category" />
         </div>
       </div>
     </div>
