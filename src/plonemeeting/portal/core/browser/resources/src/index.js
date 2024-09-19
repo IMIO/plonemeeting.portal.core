@@ -9,9 +9,9 @@ import DarkModeToggle from "./components/DarkModeToggle";
 import LayoutSelect from "./components/LayoutSelect";
 import PdfViewer from "./components/PdfViewer";
 import MeetingAgenda from "./components/MeetingAgenda";
+import Tooltip from "./components/Tooltip";
 
 import "../theme/main.scss";
-import Tooltip from "./components/Tooltip";
 
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
 register(AnnexesStatus, "x-annexes-status", ["data-annexes"]);
@@ -22,7 +22,6 @@ register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-opt
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
 register(PdfViewer, "x-pdf-viewer", ["file"]);
-
 
 function setUpEnvironmentLabel() {
   let hostname = document.location.hostname;
