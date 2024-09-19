@@ -1,0 +1,20 @@
+<tal:change-state-menu>
+    <button class="btn-delib btn-delib-icon-text dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+      <i class="bi bi-bezier2"></i>
+      <span i18n:translate="">Change state</span>
+<i class="bi bi-caret-right-fill"></i>
+    </button>
+    <ul class="dropdown-menu" i18n:domain="plone">
+      <li tal:repeat="transition view/transitions">
+        <a class="dropdown-item" href="#"
+           tal:attributes="href transition/url">
+          <tal:title content="structure transition/title"
+             i18n:translate=""
+          >
+            Title
+          </tal:title>
+        </a>
+      </li>
+    </ul>
+</tal:change-state-menu>

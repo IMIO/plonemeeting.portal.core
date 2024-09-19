@@ -52,6 +52,13 @@
   />
 
   <browser:page
+    name="content_status_modify"
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    class=".meeting.MeetingContentStatusModifyView"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="view"
     for="plonemeeting.portal.core.content.item.IItem"
     class=".item.ItemView"
@@ -211,4 +218,13 @@
       permission="zope.Public" />
   </configure>
 
+
+  <adapter
+    factory=".providers.change_state.ChangeStateButtonProvider"
+    provides="zope.contentprovider.interfaces.IContentProvider"
+    for="*
+         zope.publisher.interfaces.browser.IDefaultBrowserLayer
+         *"
+    name="plonemeeting.portal.core.change_state_button"
+    />
 </configure>
