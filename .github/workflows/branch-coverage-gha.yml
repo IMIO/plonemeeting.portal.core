@@ -17,6 +17,7 @@ jobs:
         env:
           cache-name: cache-eggs
         with:
+          PYTHON_VERSION: ${{ matrix.python-version }}
           CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
           TEST_COMMAND: coverage run bin/test
           REQUIREMENTS_FILE: 'requirements-tests.txt'
