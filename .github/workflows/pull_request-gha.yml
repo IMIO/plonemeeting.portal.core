@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    runs-on: gha-runner-delib-py3
+    runs-on: gha-runners-delib-py3
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
@@ -25,7 +25,7 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
           BUILDOUT_CONFIG_FILE: 'test-${{ matrix.plone-version }}.cfg'
   coverage:
-    runs-on: gha-runner-delib-py3
+    runs-on: gha-runners-delib-py3
     strategy:
       fail-fast: false
       matrix:

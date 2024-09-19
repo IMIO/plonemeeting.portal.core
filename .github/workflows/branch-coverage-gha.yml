@@ -5,7 +5,7 @@ on:
 
 jobs:
   coverage:
-    runs-on: gha-runner-delib-py3
+    runs-on: gha-runners-delib-py3
     strategy:
       fail-fast: false
       matrix:
