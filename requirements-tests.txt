@@ -1,0 +1,6 @@
+setuptools
+coveralls
+coverage
+mockito
+pre-commit
+-r https://raw.githubusercontent.com/IMIO/buildout.pm.portal/master/requirements.txt
