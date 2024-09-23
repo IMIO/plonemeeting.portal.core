@@ -19,6 +19,7 @@
                 checkPermission nocall: context/portal_membership/checkPermission;
                 utils_view nocall:context/@@utils_view;
                 meeting python: utils_view.get_linked_meeting();
+                meeting_type context/@@utils_view/meeting_type;
       ">
       <div class="pm-preview-meeting">
         <tal:meeting define="utils_view nocall:context/@@utils_view;
@@ -67,7 +68,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="meeting-header">
-                  <h2> Séance du Conseil Communal</h2>
+                  <h2>${meeting_type}</h2>
                   <h3 class="meeting-title" tal:content="meeting/title"></h3>
                   <div class="meeting-last-pm-modified"
                      tal:condition='not: isAnon'>

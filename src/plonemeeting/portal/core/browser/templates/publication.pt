@@ -261,7 +261,7 @@
       </div>
     </section>
     <section class="row legal-section mb-3">
-      <div class="${python: context.is_timestamped() and 'col-lg-8' or 'col-lg-12'}">
+      <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
         <div class="alert with-icon alert-light"
              role="alert"
              style="margin: 0 !important;"
@@ -276,7 +276,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4" tal:condition="context/is_timestamped">
+      <div class="col-xl-4 mt-3 mt-xl-0" tal:condition="context/is_timestamped">
         <div class="alert with-icon alert-light"
              role="alert"
              style="margin: 0 !important;"
@@ -303,28 +303,26 @@
             </div>
             Cette publication a été horodatée le <strong>${view/get_effective_date}</strong> conformément à la
             législation en vigueur.
-            <div class="row my-2 ">
-              <div class="col d-flex justify-content-start">
-                <a class="btn btn-outline-secondary me-2"
+            <div class="my-1">
+              <div class="col d-flex justify-content-start flex-wrap">
+                <a class="btn btn-outline-secondary my-1 me-2" style="width: 135px"
                    target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
                   <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
-                <a class="btn btn-outline-secondary me-2"
+                <a class="btn btn-outline-secondary my-1 me-2" style="width: 135px"
                    target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamp/filename}">Signature
                   <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="">
-                <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapse-timestamping-more-info" role="button"
-                   aria-expanded="false" aria-controls="collapseExample">
-                  En savoir plus <i class="bi bi-info-circle" style="font-size: 1em"></i>
+                <a class="btn btn-outline-info my-1" data-bs-toggle="collapse" href="#collapse-timestamping-more-info"
+                   role="button"
+                   title="En savoir plus"
+                   aria-expanded="false" aria-controls="collapse-timestamping-more-info">
+                  <i class="bi bi-info-circle" style="font-size: 1em"></i>
                 </a>
               </div>
             </div>
           </div>
         </div>
         <div class="collapse alert-collapse" id="collapse-timestamping-more-info">
-          <ul class="text-muted dashed">
+          <ul class="text-muted">
             <li>
               <a href="/faq/quest-ce-que-l-horodatage" target="_blank" class="help-link">Qu'est-ce que l'horodatage qualifié ?</a>
             </li>

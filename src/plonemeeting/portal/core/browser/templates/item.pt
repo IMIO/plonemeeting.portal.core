@@ -124,7 +124,7 @@
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
               <tal:state i18n:domain="plone" i18n:translate="">State</tal:state>
-              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
+<!--?              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>-->
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">

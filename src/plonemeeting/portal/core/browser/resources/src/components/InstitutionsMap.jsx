@@ -1,11 +1,12 @@
-import { useEffect, useState, useCallback } from "preact/hooks";
+import {useEffect, useState, useCallback} from "preact/hooks";
 import loadable from "@loadable/component";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
 import CircleChevronRight from "../../assets/circle-chevron-right.svg";
-import { get_bundle_url, get_portal_url } from "../utils";
-import { Mask } from "./LeafletMask";
+import {get_bundle_url, get_portal_url} from "../utils";
+import {Mask} from "./LeafletMask";
+import useWindowSize from "../hooks/useWindowSize";
 
 const ReactLeaflet = loadable.lib(() => import("react-leaflet"));
 
@@ -17,16 +18,16 @@ const InstitutionsMap = (props) => {
     const [institutionLocations, setInstitutionLocations] = useState();
     const [regionBoundaries, setRegionBoundaries] = useState();
     const [selectedInstitutionId, setSelectedInstitutionId] = useState();
+    const [defaultZoom, setDefaultZoom] = useState(9);
 
-    const defaultZoom = window.innerWidth < 900 ? 7 : 9;
-    const height = window.innerWidth < 900 ? "400px" : "750px";
+    const height = window.innerWidth < 1000 ? "400px" : "750px";
     const center = [50.15, 4.8];
     const maxBounds = [
         [54, 10],
         [46, 0],
     ];
-    const defaultPathOption = { weight: 1.5, color: "#DE007B", fillOpacity: 0.1 };
-    const selectedPathOption = { weight: 1.5, color: "#DE007B", fillOpacity: 0.8 };
+    const defaultPathOption = {weight: 1.5, color: "#DE007B", fillOpacity: 0.1};
+    const selectedPathOption = {weight: 1.5, color: "#DE007B", fillOpacity: 0.8};
 
     useEffect(() => {
         axios
@@ -37,13 +38,23 @@ const InstitutionsMap = (props) => {
             .then((response) => setInstitutionLocations(response.data));
     }, []);
 
+    useEffect(() => {
+        if (window.innerWidth < 600) {
+            setDefaultZoom(7);
+        } else if (window.innerWidth < 1000) {
+            setDefaultZoom(8);
+        } else {
+            setDefaultZoom(9)
+        }
+    }, []);
+
     const resetSelectedInstitutionId = useCallback(() => {
         setSelectedInstitutionId(null);
     }, []);
 
     return (
         <ReactLeaflet>
-            {({ MapContainer, TileLayer, ZoomControl, GeoJSON, Popup }) => {
+            {({MapContainer, TileLayer, ZoomControl, GeoJSON, Popup}) => {
                 return (
                     <MapContainer
                         center={center}
@@ -53,14 +64,14 @@ const InstitutionsMap = (props) => {
                         maxZoom={13}
                         scrollWheelZoom={false}
                         zoomControl={false}
-                        style={{ height: height }}
+                        style={{height: height}}
                     >
-                        <ZoomControl position={"bottomright"} />
+                        {/*<ZoomControl position={"bottomright"}/>*/}
                         <TileLayer
                             attribution='Carte &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> | Données &copy; <a href="https://www.ngi.be/website/fr/">NGI-IGN</a> '
                             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                         />
-                        {regionBoundaries && <Mask data={regionBoundaries} />}
+                        {regionBoundaries && <Mask data={regionBoundaries}/>}
                         {institutionLocations &&
                             Object.keys(institutionLocations).map((institutionId) => {
                                 const institution = institutionLocations[institutionId];
@@ -93,7 +104,7 @@ const InstitutionsMap = (props) => {
                                             >
                                                 {institution["data"]["fields"]["mun_name_fr"]}
                                                 <CircleChevronRight
-                                                    style={{ fill: "#DE007B" }}
+                                                    style={{fill: "#DE007B"}}
                                                     height={15}
                                                     viewBox="0 0 24 24"
                                                 />
