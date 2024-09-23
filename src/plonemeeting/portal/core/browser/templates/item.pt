@@ -161,7 +161,7 @@
           </div>
         </div>
       </div>
-      <div class="row mb-3">
+      <div class="row mb-3" tal:condition="python: view.show_project_decision_disclaimer()">
         <div class="col-12">
           <div class="alert with-icon alert-warning project-warning" role="alert">
             <div class="alert-icon">

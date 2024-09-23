@@ -21,12 +21,16 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(api.content.get_state(self.meeting), "decision")
         view = self.item.restrictedTraverse("@@view")
         self.assertTrue(view())
+        # project disclaimer message not displayed
+        self.assertFalse("alert-content" in view())
         # when meeting is in decision
         self.login_as_manager()
         api.content.transition(self.meeting, to_state="in_project")
         self.assertEqual(api.content.get_state(self.meeting), "in_project")
         view = self.item.restrictedTraverse("@@view")
         self.assertTrue(view())
+        # project disclaimer message displayed
+        self.assertTrue("alert-content" in view())
 
     def test_get_files_infos(self):
         files = self.item.restrictedTraverse("@@utils_view").get_files_infos()

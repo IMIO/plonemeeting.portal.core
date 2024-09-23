@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.dexterity.browser.view import DefaultView
-from plone.memoize import ram
-from plonemeeting.portal.core import _
 from plonemeeting.portal.core.browser.nextprevious import NextPrevPortalType
-from plonemeeting.portal.core.browser.utils import pretty_file_icon
-from plonemeeting.portal.core.browser.utils import pretty_file_size
-from plonemeeting.portal.core.cache import item_meeting_modified_cachekey
-from Products.CMFPlone.CatalogTool import CatalogTool
-from zope.i18n import translate
 
 
 class ItemView(DefaultView):
     """
     """
+
     def get_meeting(self):
         """
         Get the meeting from which the item is part of. Items should always be inside a meeting.
@@ -42,3 +36,7 @@ class ItemView(DefaultView):
     # @ram.cache(item_meeting_modified_cachekey)
     def get_last_item_number(self):
         return self.get_meeting().get_items(objects=False)[-1].number
+
+    def show_project_decision_disclaimer(self):
+        """ """
+        return api.content.get_state(self.get_meeting()) != "decision"
