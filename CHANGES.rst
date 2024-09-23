@@ -5,6 +5,8 @@ Changelog
 ---------------
 2.0.0.dev0 (Unreleased)
 -----------------------
+2.0.0 (2024-09-23)
+------------------
 
 - Fixed project disclaimer message displayed on item in `decision`,
   display it only when item is not in `decision`.
