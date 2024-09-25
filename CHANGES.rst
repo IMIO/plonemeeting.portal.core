@@ -1,14 +1,11 @@
 Changelog
 =========
 
-:q (2024-09-23)
----------------
-2.0.0.dev0 (Unreleased)
------------------------
-2.0.1 (unreleased)
+2.0.1.dev0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed wrong link on `preview_meeting.pt`.
+  [aduchene]
 
 
 2.0.0 (2024-09-23)
