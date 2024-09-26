@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: gha-runners-delib-py3
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
@@ -15,7 +15,7 @@ jobs:
         experimental: [false]
     steps:
       - name: Run tests
-        uses: IMIO/gha/plone-package-test-notify@main
+        uses: IMIO/gha/plone-package-test-notify@v3
         env:
           cache-name: cache-eggs
         with:
