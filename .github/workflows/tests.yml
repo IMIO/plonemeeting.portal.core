@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Test package
 
 on:
@@ -9,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: gha-runners-delib-py3
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
@@ -18,24 +15,14 @@ jobs:
         plone-version: ["6.0"]
         experimental: [false]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache eggs
-        uses: actions/cache@v2
+      - name: Run tests
+        uses: IMIO/gha/plone-package-test-notify@v3
         env:
           cache-name: cache-eggs
         with:
-          path: ./buildout-cache/eggs
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }} }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}
-      - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/actions/buildout@master
-        with:
-          py-version: ${{ matrix.python-version }}
-          plone-version: ${{ matrix.plone-version }}
-#      - name: code analysis
-#        run: |
-#          pre-commit run --all-files
-      - name: Test
-        run: |
-          bin/test
+          PYTHON_VERSION: ${{ matrix.python-version }}
+          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+          TEST_COMMAND: bin/test
+          REQUIREMENTS_FILE: 'requirements-tests.txt'
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+          BUILDOUT_CONFIG_FILE: 'test-${{ matrix.plone-version }}.cfg'

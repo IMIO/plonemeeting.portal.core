@@ -1,36 +1,37 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Branch Coverage
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: gha-runners-delib-py3
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.12"]
         plone-version: ["6.0"]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache eggs
-        uses: actions/cache@v2
+      - name: Run check
+        uses: IMIO/gha/plone-package-test-notify@v3
         env:
           cache-name: cache-eggs
         with:
-          path: ./buildout-cache/eggs
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }} }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
-      - name: Buildout action
-        uses: IMIO/plonemeeting.portal.core/actions/buildout/@master
-        with:
-          py-version: ${{ matrix.python-version }}
-          plone-version: ${{ matrix.plone-version }}
-      - name: Coverage action
-        uses: IMIO/plonemeeting.portal.core/actions/coverage/@master
-        with:
+          PYTHON_VERSION: ${{ matrix.python-version }}
+          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+          TEST_COMMAND: coverage run bin/test
+          REQUIREMENTS_FILE: 'requirements-tests.txt'
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+          BUILDOUT_CONFIG_FILE: 'test-${{ matrix.plone-version }}.cfg'
+      - name: Report
+        run: |
+          coverage report
+          coverage xml
+        shell: bash
+      - name: Publish to Coveralls
+        run: |
+          coveralls --service=github
+        shell: bash
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
