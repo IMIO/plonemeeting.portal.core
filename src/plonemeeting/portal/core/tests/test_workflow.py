@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from imio.helpers.workflow import get_transitions
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -480,3 +482,24 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertFalse(checkPerm(DeleteObjects, self.meeting))
         self.assertFalse(checkPerm(DeleteObjects, self.item))
         self.assertFalse(checkPerm(DeleteObjects, self.publications))
+
+    def test_any_decisions_manager_may_change_review_state(self):
+        # private
+        self.login_as_decisions_manager()
+        self.assertEqual(get_transitions(self.meeting), ["send_to_project"])
+        self.login_as_decisions_manager2()
+        self.assertEqual(get_transitions(self.meeting), ["send_to_project"])
+        # in_project
+        self.workflow.doActionFor(self.meeting, "send_to_project")
+        self.login_as_decisions_manager()
+        self.assertEqual(sorted(get_transitions(self.meeting)),
+                         ["back_to_private", "publish"])
+        self.login_as_decisions_manager2()
+        self.assertEqual(sorted(get_transitions(self.meeting)),
+                         ["back_to_private", "publish"])
+        # decision
+        self.workflow.doActionFor(self.meeting, "publish")
+        self.login_as_decisions_manager()
+        self.assertEqual(get_transitions(self.meeting), ["back_to_project"])
+        self.login_as_decisions_manager2()
+        self.assertEqual(get_transitions(self.meeting), ["back_to_project"])

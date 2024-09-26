@@ -31,7 +31,6 @@ import dateutil.parser
 import json
 import mimetypes
 import os
-import transaction
 
 
 @implementer(INonInstallable)
@@ -229,6 +228,7 @@ def create_demo_content(context):
         content.delete(default_front_page)
 
     portal.portal_workflow.updateRoleMappings()
+
 
 def create_demo_publications(portal, context):
     current_dir = os.path.abspath(os.path.dirname(__file__))

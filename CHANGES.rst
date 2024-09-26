@@ -6,7 +6,10 @@ Changelog
 
 - Fixed wrong link on `preview_meeting.pt`.
   [aduchene]
-
+- Adapted `meeting_workflow` so `Editor` may change a meeting `review_state`
+  and not only the `Owner`.  `Owner` is not more managed by `meeting_workflow`.
+  Fix meeting `review_state` could not be changed by another user than the `Owner`.
+  [gbastien]
 
 2.0.0 (2024-09-23)
 ------------------
