@@ -10,7 +10,6 @@ from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
 class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.catalog = self.portal.portal_catalog
         self.login_as_manager()
 
     def testSearchableText(self):

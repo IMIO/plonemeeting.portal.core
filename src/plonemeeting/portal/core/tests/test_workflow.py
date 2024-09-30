@@ -20,9 +20,6 @@ WF = "meeting_workflow"
 class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.catalog = self.portal.portal_catalog
-        self.workflow = self.portal.portal_workflow
-
         self.login_as_manager()
         api.user.create(
             username="member",
