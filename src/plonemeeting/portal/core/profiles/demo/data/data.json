@@ -33,7 +33,9 @@
   "document_types": {
     "acte-delegation": "Acte de délégation",
     "arrete-police": "Arrêté de police",
-    "avis": "Avis - Réunion d'information préalable/Avis d'enquête publique/Avis de décision",
+    "avis": "Avis de décision",
+    "avis-enquete-publique": "Avis d'enquête publique",
+    "avis-reunion-information": "Avis de réunion d'information",
     "budget-comptes": "Budget et Comptes",
     "contrat-gestion-asbl": "Contrat de gestion - ASBL",
     "declaration-politique-generale": "Déclaration de politique générale",
