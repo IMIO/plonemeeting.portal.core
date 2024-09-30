@@ -1,6 +1,5 @@
 from collective.timestamp.adapters import ITimeStamper
 from collective.timestamp.adapters import TimeStamper
-from collective.timestamp.utils import get_timestamp
 from imio.helpers.content import object_values
 from io import BytesIO
 from plone.namedfile.file import NamedBlobFile
@@ -31,15 +30,15 @@ class PublicationTimeStamper(TimeStamper):
     def file_has_changed(self, obj, event):
         return obj.timestamped_file.data != self.get_data()
 
+    def _effective_related_indexes(self):
+        idxs = super(PublicationTimeStamper, self)._effective_related_indexes()
+        # "effective", "effectiveRange", "is_timestamped"
+        # already managed by timestamper.timestamp
+        idxs.append("year")
+        return idxs
+
     def timestamp(self):
-        if not self.is_timestampable():
-            raise ValueError("This content is not timestampable")
-        data = self.get_data()
-        timestamp = get_timestamp(data)
-        self.context.timestamp = NamedBlobFile(
-            data=timestamp["tsr"], filename="timestamp.tsr"
-        )
-        self.context.setEffectiveDate(timestamp["timestamp_date"])
+        data, timestamp = super(PublicationTimeStamper, self).timestamp()
         formatted_date = (
             timestamp["timestamp_date"].astimezone().strftime("%Y%m%d-%H%M%S")
         )

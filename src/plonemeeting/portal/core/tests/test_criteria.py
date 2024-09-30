@@ -2,8 +2,8 @@
 
 from eea.facetednavigation.interfaces import ICriteria
 from plone import api
-from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.faceted.widgets.select import SelectMeetingWidget
 from plonemeeting.portal.core.faceted.widgets.sort import ItemsSortWidget

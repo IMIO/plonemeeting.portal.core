@@ -35,6 +35,7 @@ class PmPortalTestCase(unittest.TestCase):
         self.portal_url = self.portal.absolute_url()
         self.portal.acl_users._doAddUser("manager", "secretmaster", ["Manager"], [])
         self.login_as_manager()
+        self.catalog = self.portal.portal_catalog
         self.workflow = self.portal.portal_workflow
         # show entire diff when a test fails
         self.maxDiff = None

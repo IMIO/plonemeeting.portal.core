@@ -1,7 +1,10 @@
 from AccessControl import Unauthorized
+from collective.timestamp.interfaces import ITimeStamper
+from imio.helpers.content import uuidToCatalogBrain
 from plone import api
 from plone.locking.interfaces import ILockable
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
@@ -109,9 +112,33 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         ILockable(self.unpublished_publication).unlock()
 
-
         self.login_as_manager()
         view = self.unpublished_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
         view = self.unpublished_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
+
+    def test_published_publication_is_timestamped(self):
+        self.login_as_publications_manager()
+        pub = self.private_publication
+        # may be published only if no effectiveDate
+        timestamper = ITimeStamper(pub)
+        pub.setEffectiveDate(None)
+        pub.reindexObject(idxs=timestamper._effective_related_indexes())
+        # publication is not timestamped for now
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertTrue(timestamper.is_timestampable())
+        brain = uuidToCatalogBrain(pub.UID())
+        indexed = self.catalog.getIndexDataForRID(brain.getRID())
+        # 1044622740 is equivalent to "None"
+        self.assertEqual(indexed["effective"], 1044622740)
+        self.assertEqual(indexed["year"], "")
+        # publish so publication is timestamped
+        self.workflow.doActionFor(pub, "publish")
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertFalse(timestamper.is_timestampable())
+        # effective has been reindexed
+        brain = uuidToCatalogBrain(pub.UID())
+        indexed = self.catalog.getIndexDataForRID(brain.getRID())
+        self.assertNotEqual(indexed["effective"], 1044622740)
+        self.assertEqual(indexed["year"], str(pub.effective().year()))
