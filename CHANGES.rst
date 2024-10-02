@@ -11,7 +11,9 @@ Changelog
   Fix meeting `review_state` could not be changed by another user than the `Owner`.
   [gbastien]
 - Fixed publication effective date not reindexed after publish.
-  [gbastien]
+- Splitted `avis` `document_type` in 3 `document_types`
+  (`avis`, `avis-enquete-publique` and `avis-reunion-information`),
+  `avis` `id` kept for backward compatibility for publications already created.
 
 2.0.0 (2024-09-23)
 ------------------
