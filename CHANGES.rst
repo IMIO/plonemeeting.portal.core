@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.1.dev0 (unreleased)
+2.0.1 (2024-10-02)
 ------------------
 
 - Fixed wrong link on `preview_meeting.pt`.
