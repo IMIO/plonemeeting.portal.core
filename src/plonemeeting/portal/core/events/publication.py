@@ -43,9 +43,6 @@ def publication_state_changed(publication, event):
         timestamper = ITimeStamper(publication)
         if timestamper.is_timestampable():
             timestamper.timestamp()
-            # "effective", "effectiveRange", "is_timestamped"
-            # already reindexed by timestamper.timestamp
-            publication.reindexObject(idxs=["year"])
             cts_logger.info(f"Timestamp generated for {publication.absolute_url()}")
             api.portal.show_message(
                 _cts("Timestamp file has been successfully generated and saved"),

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from eea.facetednavigation.interfaces import ICriteria
+from imio.helpers.content import uuidToCatalogBrain
+from imio.helpers.content import uuidToObject
 from plone import api
-from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.faceted.widgets.select import SelectMeetingWidget
 from plonemeeting.portal.core.faceted.widgets.sort import ItemsSortWidget
@@ -48,14 +50,13 @@ class TestFacetedCriteria(PmPortalTestCase):
         self.assertEqual(matiere_widget.default, "")
         # but the "seance" widget returns the last meeting
         # we have the most recent meeting, so the meeting of "13 March 2020 (18:00) — decision"
-        catalog = self.portal.portal_catalog
         meeting_uid = seance_widget.default
-        brain = catalog(UID=meeting_uid)[0]
+        brain = uuidToCatalogBrain(meeting_uid)
         title = format_meeting_date_and_state(brain.date_time, brain.review_state)
         self.assertEqual(title, "13 March 2020 (18:00) — decision")
         # when no meetings exist, default is ""
         for meeting_uid, meeting_title in seance_widget.vocabulary():
-            api.content.delete(catalog(UID=meeting_uid)[0].getObject())
+            api.content.delete(uuidToObject(meeting_uid))
         self.assertEqual(seance_widget.vocabulary(), [])
         self.assertEqual(matiere_widget.default, "")
         self.assertEqual(seance_widget.default, "")

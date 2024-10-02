@@ -1,5 +1,6 @@
 from plone import api
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+
 import json
 
 

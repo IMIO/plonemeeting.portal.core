@@ -9,8 +9,6 @@ from zope.schema.interfaces import IVocabularyFactory
 class TestVocabularies(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.catalog = self.portal.portal_catalog
-
         self.login_as_manager()
         city2 = getattr(self.portal, "belleville")
         brains = api.content.find(context=city2, portal_type="Meeting")

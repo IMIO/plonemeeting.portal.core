@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import datetime
-
 from plone import api
 from plonemeeting.portal.core.rest.interfaces import IInstitutionSerializeToJson
 from plonemeeting.portal.core.rest.interfaces import IMeetingSerializeToJson
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from zope.component import queryMultiAdapter
+
+import datetime
 
 
 class TestSerializers(PmPortalTestCase):
