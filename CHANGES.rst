@@ -4,8 +4,9 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fixed call to `@@update_meeting` and `@@force_reimport_meeting` that was broken
+  because we were passing the `decisions` folder instead the `Institution`.
+  [gbastien]
 
 2.0.1 (2024-10-02)
 ------------------

@@ -107,7 +107,7 @@ class ImportMeetingView(BrowserView):  # pragma: no cover
 
     def import_meeting(self, force=False):
         meeting = self.context
-        institution = meeting.aq_parent
+        institution = api.portal.get_navigation_root(self.context)
         _sync_meeting(institution, meeting.plonemeeting_uid, self.request, force)
 
 
