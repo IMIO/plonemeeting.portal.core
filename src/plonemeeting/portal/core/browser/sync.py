@@ -211,6 +211,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
             self.api_response_data = _fetch_preview_items(
                 self.context, self.external_meeting_uid
             )
+            import ipdb; ipdb.set_trace()  # TODO: remove me <----------------
             self.api_response_data = self._reconcile_items(
                 self.api_response_data, self.items
             )
@@ -316,6 +317,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
                     "modified": "-",
                     "local_last_modified": local_item.plonemeeting_last_modified.isoformat(),
                     "category": {"title": "-"},
+                    "classifier": {"title": "-"},
                     "representatives_in_charge": "-",
                     "status": "removed",
                     "status_label": _("Removed"),

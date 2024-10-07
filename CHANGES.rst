@@ -7,6 +7,8 @@ Changelog
 - Fixed call to `@@update_meeting` and `@@force_reimport_meeting` that was broken
   because we were passing the `decisions` folder instead the `Institution`.
   [gbastien]
+- Fixed issue in pre-sync form when an item is removed and classifier field is used.
+  [aduchene]
 
 2.0.1 (2024-10-02)
 ------------------
