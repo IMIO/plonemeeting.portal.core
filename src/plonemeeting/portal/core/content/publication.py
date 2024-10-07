@@ -10,6 +10,7 @@ from plone.app.contenttypes.interfaces import IFile
 from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
 from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
+from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
 from plone.dexterity.content import Container
@@ -115,6 +116,10 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
         title="Timestamped file",
         accept=("application/zip", ),
         required=False)
+
+    # Making sure timestamp file is accessible to anonymous.
+    # By default it has a custom permission
+    read_permission(timestamp="zope2.View")
 
 
 @implementer(IPublication)

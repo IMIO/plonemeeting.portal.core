@@ -9,6 +9,8 @@ Changelog
   [gbastien]
 - Fixed issue in pre-sync form when an item is removed and classifier field is used.
   [aduchene]
+- Fixed issue with anonymous that could not download the timestamp field on `Publication`.
+  [aduchene]
 
 2.0.1 (2024-10-02)
 ------------------

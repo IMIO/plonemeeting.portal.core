@@ -3,6 +3,7 @@ from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
 from plone.locking.interfaces import ILockable
+from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 
 
@@ -13,6 +14,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.private_publication = self.institution.publications["publication-28"]
         self.planned_publication = self.institution.publications["publication-30"]
         self.published_publication = self.institution.publications["publication-1"]
+        self.published_publication.timestamp = NamedBlobFile(data=b"dummy", filename="timestamp.tsr")
         self.unpublished_publication = self.institution.publications["publication-27"]
         self.login_as_test()
 
@@ -142,3 +144,12 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         indexed = self.catalog.getIndexDataForRID(brain.getRID())
         self.assertNotEqual(indexed["effective"], 1044622740)
         self.assertEqual(indexed["year"], str(pub.effective().year()))
+
+    def test_timestamp_files_are_downloadable_by_anons(self):
+        self.logout()
+        download_view = self.published_publication.restrictedTraverse("@@download")
+        download_view = download_view.publishTraverse(self.portal.REQUEST, "timestamp")
+        # Avoid to call the view (__call__) as it streams the file and not close it when in unit tests
+        self.assertEqual(type(download_view._getFile()), NamedBlobFile)
+        download_view = download_view.publishTraverse(self.portal.REQUEST, "timestamped_file")
+        self.assertEqual(type(download_view._getFile()), NamedBlobFile)
