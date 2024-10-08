@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.2 (unreleased)
+2.0.2 (2024-10-08)
 ------------------
 
 - Fixed call to `@@update_meeting` and `@@force_reimport_meeting` that was broken
