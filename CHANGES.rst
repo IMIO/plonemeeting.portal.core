@@ -4,8 +4,8 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Removed ipdb.
+  [aduchene]
 
 2.0.2 (2024-10-08)
 ------------------

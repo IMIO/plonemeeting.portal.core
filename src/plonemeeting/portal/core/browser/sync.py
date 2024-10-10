@@ -211,7 +211,6 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
             self.api_response_data = _fetch_preview_items(
                 self.context, self.external_meeting_uid
             )
-            import ipdb; ipdb.set_trace()  # TODO: remove me <----------------
             self.api_response_data = self._reconcile_items(
                 self.api_response_data, self.items
             )
