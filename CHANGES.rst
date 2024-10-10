@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.3 (unreleased)
+2.0.3 (2024-10-10)
 ------------------
 
 - Removed ipdb.
