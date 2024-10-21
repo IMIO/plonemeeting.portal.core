@@ -17,37 +17,37 @@ from zope.interface import implementer
 
 
 class IMeeting(model.Schema):
-    """ Marker interface and Dexterity Python Schema for Meeting
-    """
+    """Marker interface and Dexterity Python Schema for Meeting"""
 
-    title = schema.TextLine(title=plone_(u"Title"), required=True, readonly=True)
+    title = schema.TextLine(title=plone_("Title"), required=True, readonly=True)
 
     plonemeeting_uid = schema.TextLine(
-        title=_(u"UID Plonemeeting"), required=True, readonly=True,
+        title=_("UID Plonemeeting"),
+        required=True,
+        readonly=True,
     )
 
     form.write_permission(date_time=ManagePortal)
-    date_time = schema.Datetime(title=plone_(u"Date"), required=True, readonly=False, )
-
-    custom_info = RichText(title=_(u"Custom info"), required=False)
-
-    plonemeeting_last_modified = schema.Datetime(
-        title=_(u"Last modification in iA.Delib"), required=True, readonly=True
+    date_time = schema.Datetime(
+        title=plone_("Date"),
+        required=True,
+        readonly=False,
     )
+
+    custom_info = RichText(title=_("Custom info"), required=False)
+
+    plonemeeting_last_modified = schema.Datetime(title=_("Last modification in iA.Delib"), required=True, readonly=True)
 
 
 @implementer(IMeeting)
 class Meeting(Container):
-    """
-    """
+    """ """
 
     def get_items(self, objects=True):
         portal_catalog = getToolByName(self, "portal_catalog")
-        meeting_path = '/'.join(self.getPhysicalPath())
+        meeting_path = "/".join(self.getPhysicalPath())
         brains = portal_catalog(
-            object_provides=IItem.__identifier__,
-            path={'query': meeting_path, 'depth': 1},
-            sort_on="sortable_number"
+            object_provides=IItem.__identifier__, path={"query": meeting_path, "depth": 1}, sort_on="sortable_number"
         )
         if objects:
             return [brain.getObject() for brain in brains]
@@ -58,5 +58,6 @@ class Meeting(Container):
 @adapter(IMeeting)
 class ItemNumberOrdering(UnorderedOrdering):
     """This implementation provides ordering based on the item number of the contained items."""
+
     def idsInOrder(self):
         return [i.id for i in self.context.get_items(objects=False)]

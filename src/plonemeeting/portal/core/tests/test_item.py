@@ -42,14 +42,10 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(next_prev_infos["next_item"]["id"], "point-tourisme")
         self.assertEqual(view.get_last_item_number(), "2.1")
 
-        self.assertSetEqual(
-            {"previous_item", "next_item"},
-            set(next_prev_infos.keys())
-        )
+        self.assertSetEqual({"previous_item", "next_item"}, set(next_prev_infos.keys()))
 
         self.assertSetEqual(
-            {"id", "title", "description","portal_type", "url"},
-            set(next_prev_infos["next_item"].keys())
+            {"id", "title", "description", "portal_type", "url"}, set(next_prev_infos["next_item"].keys())
         )
 
         # Moving item should not change the last item number and the next/previous items
@@ -73,14 +69,13 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(next_prev_infos["previous_item"]["id"], "approbation-du-pv-du-xxx")
         self.assertEqual(next_prev_infos["next_item"]["id"], "point-tourisme-urgent")
 
-
     def test_get_files_infos(self):
         files = self.item.restrictedTraverse("@@utils_view").get_files_infos()
         self.assertEqual(1, len(files))
-        self.assertEqual(self.item["document.pdf"], files[0]['file'])
-        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")['icon'], files[0]['icon_infos']['icon'])
-        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")['color'], files[0]['icon_infos']['color'])
-        self.assertEqual("0o", files[0]['size'])
+        self.assertEqual(self.item["document.pdf"], files[0]["file"])
+        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")["icon"], files[0]["icon_infos"]["icon"])
+        self.assertEqual(MIMETYPE_TO_ICON.get("application/pdf")["color"], files[0]["icon_infos"]["color"])
+        self.assertEqual("0o", files[0]["size"])
 
     def test_title(self):
         delattr(self.item, "_formatted_title")
@@ -90,26 +85,28 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(self.item.title, "test formatted title")
 
     def test_get_pretty_representatives(self):
-        self.assertEqual(get_pretty_representatives(self.item)(), 'Mme LOREM')
+        self.assertEqual(get_pretty_representatives(self.item)(), "Mme LOREM")
 
-        self.item.representatives_in_charge = ['Yololololo-lolo-lolololo']
+        self.item.representatives_in_charge = ["Yololololo-lolo-lolololo"]
         self.assertRaises(AttributeError, get_pretty_representatives(self.item))
 
-        self.item.representatives_in_charge = ['a2396143f11f4e2292f12ee3b3447739',
-                                               '7a82fee367a0416f8d7e8f4a382db0d1',
-                                               'f3f9e7808ddb4e56946b2dba6370eb9b',
-                                               'bf5fccd9bc9048e9957680c7ab5576b4']
-        self.assertEqual(get_pretty_representatives(self.item)(),
-                         'Mme Ipsum, Mme LOREM, Mr Bara, Mr Wara')
+        self.item.representatives_in_charge = [
+            "a2396143f11f4e2292f12ee3b3447739",
+            "7a82fee367a0416f8d7e8f4a382db0d1",
+            "f3f9e7808ddb4e56946b2dba6370eb9b",
+            "bf5fccd9bc9048e9957680c7ab5576b4",
+        ]
+        self.assertEqual(get_pretty_representatives(self.item)(), "Mme Ipsum, Mme LOREM, Mr Bara, Mr Wara")
 
-        self.item.representatives_in_charge = ['bf5fccd9bc9048e9957680c7ab5576b4',
-                                               '7a82fee367a0416f8d7e8f4a382db0d1',
-                                               'a2396143f11f4e2292f12ee3b3447739',
-                                               '7a82fee367a0416f8d7e8f4a382db0d1',
-                                               'f3f9e7808ddb4e56946b2dba6370eb9b',
-                                               'bf5fccd9bc9048e9957680c7ab5576b4']
-        self.assertEqual(get_pretty_representatives(self.item)(),
-                         'Mr Wara, Mme LOREM, Mme Ipsum, Mr Bara')
+        self.item.representatives_in_charge = [
+            "bf5fccd9bc9048e9957680c7ab5576b4",
+            "7a82fee367a0416f8d7e8f4a382db0d1",
+            "a2396143f11f4e2292f12ee3b3447739",
+            "7a82fee367a0416f8d7e8f4a382db0d1",
+            "f3f9e7808ddb4e56946b2dba6370eb9b",
+            "bf5fccd9bc9048e9957680c7ab5576b4",
+        ]
+        self.assertEqual(get_pretty_representatives(self.item)(), "Mr Wara, Mme LOREM, Mme Ipsum, Mr Bara")
 
     def test_decision_with_images(self):
         pattern = '<p>Text with image <img src="{0}"> and more text.</p>'
@@ -117,6 +114,6 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.item.decision = richtextval(text)
         self.assertEqual(self.item.decision.output, text)
         # a part from data:image, other elements are still removed
-        text = '<p>Text.</p><script>nasty();</script>'
+        text = "<p>Text.</p><script>nasty();</script>"
         self.item.decision = richtextval(text)
-        self.assertEqual(self.item.decision.output, '<p>Text.</p>')
+        self.assertEqual(self.item.decision.output, "<p>Text.</p>")

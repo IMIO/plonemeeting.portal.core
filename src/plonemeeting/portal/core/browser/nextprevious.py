@@ -41,11 +41,13 @@ class NextPrevPortalType(NextPreviousBase):
             if data:
                 return data
 
+
 class NextPrevItemNumber(NextPrevPortalType):
     """
     Based on NextPrevPortalType to get the next and previous Item in the container
     ordered by item_number.
     """
+
     def __init__(self, context):
         super().__init__(context, "Item")
         self.order = queryAdapter(self.context, IOrdering, name="item_number").idsInOrder()
