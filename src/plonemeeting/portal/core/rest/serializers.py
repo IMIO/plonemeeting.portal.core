@@ -3,8 +3,8 @@ from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
 from plonemeeting.portal.core.rest.interfaces import IInstitutionSerializeToJson
-from plonemeeting.portal.core.rest.interfaces import IMeetingSerializeToJson
 from plonemeeting.portal.core.rest.interfaces import IItemSerializeToJson
+from plonemeeting.portal.core.rest.interfaces import IMeetingSerializeToJson
 from zope.component import adapter
 from zope.component import queryMultiAdapter
 from zope.interface import implementer

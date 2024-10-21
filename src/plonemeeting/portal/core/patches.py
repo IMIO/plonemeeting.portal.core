@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from plonemeeting.portal.core import logger
+from Products.CMFPlone.resources import utils
+from Products.CMFPlone.resources.utils import get_resource
 from Products.PortalTransforms.transforms import safe_html
 from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
 from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 
-from Products.CMFPlone.resources import utils
-from Products.CMFPlone.resources.utils import get_resource
+import logging
+
 
 original_hasScript = safe_html.hasScript
 

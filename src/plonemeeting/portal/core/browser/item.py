@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.dexterity.browser.view import DefaultView
-from plonemeeting.portal.core.browser.nextprevious import NextPrevPortalType
+from plonemeeting.portal.core.browser.nextprevious import NextPrevItemNumber
 
 
 class ItemView(DefaultView):
@@ -22,7 +22,7 @@ class ItemView(DefaultView):
         """
         res = {}
         try:
-            nextprevious = NextPrevPortalType(self.context.aq_parent, "Item")
+            nextprevious = NextPrevItemNumber(self.context.aq_parent)
             res.update(
                 {"previous_item": nextprevious.getPreviousItem(self.context),
                  "next_item": nextprevious.getNextItem(self.context)}
