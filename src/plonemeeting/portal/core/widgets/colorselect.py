@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
+from z3c.form.browser import widget
 from z3c.form.browser.text import TextWidget
 from z3c.form.browser.widget import HTMLTextInputWidget
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import IWidget
-from z3c.form.widget import FieldWidget, Widget
+from z3c.form.widget import FieldWidget
+from z3c.form.widget import Widget
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import implementer_only
 from zope.schema.interfaces import IField
 
-from z3c.form.browser import widget
 
 class IColorSelectWidget(IWidget):
     """Marker interface"""

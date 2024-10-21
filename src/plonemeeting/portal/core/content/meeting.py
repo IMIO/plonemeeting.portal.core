@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-from Products.CMFCore.utils import getToolByName
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
-from plone.folder.interfaces import IOrdering, IOrderableFolder
+from plone.folder.interfaces import IOrderableFolder
+from plone.folder.interfaces import IOrdering
 from plone.folder.unordered import UnorderedOrdering
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.content.item import IItem
 from Products.CMFCore.permissions import ManagePortal
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as plone_
 from zope import schema
 from zope.component import adapter

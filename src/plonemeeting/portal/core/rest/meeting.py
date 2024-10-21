@@ -1,9 +1,8 @@
 from Acquisition import aq_parent
-from Products.CMFCore.utils import getToolByName
 from plone.restapi.interfaces import IJsonCompatible
-
 from plonemeeting.portal.core.rest.base import PublicAPIView
 from plonemeeting.portal.core.rest.interfaces import IItemSerializeToJson
+from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
 
 

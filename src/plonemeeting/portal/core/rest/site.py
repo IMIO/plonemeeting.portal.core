@@ -3,14 +3,14 @@ from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.interfaces import ISerializeToJson
-from plonemeeting.portal.core.cache import published_institutions_modified_cachekey
 from plonemeeting.portal.core import logger
+from plonemeeting.portal.core.cache import published_institutions_modified_cachekey
 from plonemeeting.portal.core.config import DEMO_INSTITUTION_IDS
 from plonemeeting.portal.core.config import LOCATIONS_API_URL
 from plonemeeting.portal.core.config import REGION_INS_CODE
+from plonemeeting.portal.core.rest.base import PublicAPIView
 from plonemeeting.portal.core.rest.interfaces import IInstitutionSerializeToJson
 from Products.Five.browser import BrowserView
-from plonemeeting.portal.core.rest.base import PublicAPIView
 from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
