@@ -1,10 +1,13 @@
 from plone.app.dexterity.behaviors.nextprevious import NextPreviousBase
+from plone.folder.interfaces import IOrdering
+from zope.component import queryAdapter
 
 
 class NextPrevPortalType(NextPreviousBase):
     """
     Based on plone.app.dexterity.behaviors.nextprevious.NextPreviousBase
-    to get the next and previous item in the container with a specific portal_type
+    to get the next and previous item in the container with a specific portal_type.
+    Besides, this handle correctly a custom order.
     """
 
     def __init__(self, context, portal_type):
@@ -13,9 +16,7 @@ class NextPrevPortalType(NextPreviousBase):
 
     def getNextItem(self, obj):
         """return info about the next item in the container"""
-        if not self.order:
-            return None
-        pos = self.context.getObjectPosition(obj.getId())
+        pos = self.order.index(obj.getId())
         if pos is None:
             return None
         for oid in self.order[pos + 1 :]:
@@ -39,3 +40,12 @@ class NextPrevPortalType(NextPreviousBase):
             data = self.getData(obj)
             if data:
                 return data
+
+class NextPrevItemNumber(NextPrevPortalType):
+    """
+    Based on NextPrevPortalType to get the next and previous Item in the container
+    ordered by item_number.
+    """
+    def __init__(self, context):
+        super().__init__(context, "Item")
+        self.order = queryAdapter(self.context, IOrdering, name="item_number").idsInOrder()

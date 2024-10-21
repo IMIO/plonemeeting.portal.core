@@ -32,6 +32,48 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         # project disclaimer message displayed
         self.assertTrue("alert-content" in view())
 
+    def test_next_previous_infos_items_view(self):
+        self.logout()
+        view = self.item.restrictedTraverse("@@view")
+        view()
+        self.assertEqual(view.request.response.status, 200)
+        next_prev_infos = view.get_next_prev_infos()
+        self.assertIsNone(next_prev_infos["previous_item"])
+        self.assertEqual(next_prev_infos["next_item"]["id"], "point-tourisme")
+        self.assertEqual(view.get_last_item_number(), "2.1")
+
+        self.assertSetEqual(
+            {"previous_item", "next_item"},
+            set(next_prev_infos.keys())
+        )
+
+        self.assertSetEqual(
+            {"id", "title", "description","portal_type", "url"},
+            set(next_prev_infos["next_item"].keys())
+        )
+
+        # Moving item should not change the last item number and the next/previous items
+        self.meeting.moveObjectsDown([self.item.id])
+        self.assertEqual("point-tourisme", self.meeting.objectIds()[0])
+        old_next_prev_infos = next_prev_infos
+        next_prev_infos = view.get_next_prev_infos()
+        # next/previous items should not change as it is based on item number
+        self.assertDictEqual(old_next_prev_infos, next_prev_infos)
+        self.assertEqual(view.get_last_item_number(), "2.1")
+
+        # Moving item at the end should change the last item number (nor the next/previous items)
+        self.meeting.moveObjectsDown([self.item.id])
+        self.assertEqual(view.get_last_item_number(), "2.1")
+        next_prev_infos = view.get_next_prev_infos()
+        self.assertDictEqual(old_next_prev_infos, next_prev_infos)
+
+        # We'll try the second item
+        view = self.meeting["point-tourisme"].restrictedTraverse("@@view")
+        next_prev_infos = view.get_next_prev_infos()
+        self.assertEqual(next_prev_infos["previous_item"]["id"], "approbation-du-pv-du-xxx")
+        self.assertEqual(next_prev_infos["next_item"]["id"], "point-tourisme-urgent")
+
+
     def test_get_files_infos(self):
         files = self.item.restrictedTraverse("@@utils_view").get_files_infos()
         self.assertEqual(1, len(files))
