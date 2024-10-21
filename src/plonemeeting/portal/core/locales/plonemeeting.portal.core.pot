@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-09-09 14:04+0000\n"
+"POT-Creation-Date: 2024-10-21 13:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Add a publication"
 msgstr ""
 
-#: ../browser/sync.py:291
+#: ../browser/sync.py:292
 msgid "Added"
 msgstr ""
 
@@ -37,8 +37,7 @@ msgstr ""
 msgid "Additional data"
 msgstr ""
 
-#: ../browser/templates/item.pt:166
-#: ../browser/templates/publication.pt:190
+#: ../browser/templates/item.pt:193
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr ""
@@ -51,16 +50,15 @@ msgstr ""
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:81
+#: ../content/publication.py:84
 msgid "Authority"
 msgstr ""
 
-#: ../browser/templates/publication.pt:93
-#: ../content/publication.py:95
+#: ../content/publication.py:98
 msgid "Authority date"
 msgstr ""
 
-#: ../browser/sync.py:250
+#: ../browser/sync.py:251
 msgid "Cancel"
 msgstr ""
 
@@ -72,9 +70,9 @@ msgstr ""
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
-#: ../browser/templates/item.pt:116
-#: ../browser/templates/publication.pt:146
+#: ../browser/templates/item.pt:143
 #: ../content/item.py:64
+#: ../content/publication.py:43
 msgid "Category"
 msgstr ""
 
@@ -82,24 +80,24 @@ msgstr ""
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: ../browser/sync.py:410
+#: ../browser/sync.py:412
 msgid "Choose the items you want to import in the portal."
 msgstr ""
 
-#: ../browser/sync.py:191
+#: ../browser/sync.py:190
 msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
 msgstr ""
 
-#: ../browser/sync.py:66
+#: ../browser/sync.py:65
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
-#: ../setuphandlers.py:58
+#: ../setuphandlers.py:59
 msgid "Configuration folder"
 msgstr ""
 
 #: ../content/item.py:69
-#: ../content/meeting.py:28
+#: ../content/meeting.py:38
 msgid "Custom info"
 msgstr ""
 
@@ -111,8 +109,7 @@ msgstr ""
 msgid "Decision"
 msgstr ""
 
-#: ../browser/templates/publication.pt:69
-#: ../content/publication.py:51
+#: ../content/publication.py:54
 msgid "Decision date"
 msgstr ""
 
@@ -125,8 +122,7 @@ msgstr ""
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../browser/templates/publication.pt:134
-#: ../content/publication.py:34
+#: ../content/publication.py:37
 msgid "Document type"
 msgstr ""
 
@@ -156,21 +152,16 @@ msgstr ""
 msgid "Enabled tabs"
 msgstr ""
 
-#: ../content/publication.py:56
+#: ../content/publication.py:59
 msgid "Entry date"
 msgstr ""
 
-#: ../browser/templates/publication.pt:158
-msgid "Entrée en vigueur"
-msgstr ""
-
-#: ../browser/templates/publication.pt:106
-#: ../content/publication.py:101
+#: ../content/publication.py:104
 msgid "Expired authority date"
 msgstr ""
 
 #: ../migrations/migrate_to_2000.py:76
-#: ../setuphandlers.py:65
+#: ../setuphandlers.py:66
 msgid "Faceted decisions"
 msgstr ""
 
@@ -178,8 +169,8 @@ msgstr ""
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: ../migrations/migrate_to_2000.py:185
-#: ../setuphandlers.py:66
+#: ../migrations/migrate_to_2000.py:183
+#: ../setuphandlers.py:67
 msgid "Faceted publications"
 msgstr ""
 
@@ -227,15 +218,15 @@ msgstr ""
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:61
+#: ../content/publication.py:64
 msgid "Hour and place of consultation"
 msgstr ""
 
-#: ../browser/sync.py:436
+#: ../browser/sync.py:439
 msgid "Import"
 msgstr ""
 
-#: ../faceted/preview_meeting.pt:36
+#: ../faceted/preview_meeting.pt:35
 msgid "Import a new meeting"
 msgstr ""
 
@@ -310,7 +301,7 @@ msgid "Last modification"
 msgstr ""
 
 #: ../content/item.py:72
-#: ../content/meeting.py:31
+#: ../content/meeting.py:40
 #: ../faceted/preview_meeting.pt:75
 msgid "Last modification in iA.Delib"
 msgstr ""
@@ -319,8 +310,7 @@ msgstr ""
 msgid "Legislative authorities"
 msgstr ""
 
-#: ../browser/templates/publication.pt:57
-#: ../content/publication.py:46
+#: ../content/publication.py:49
 msgid "Legislative authority"
 msgstr ""
 
@@ -348,7 +338,7 @@ msgstr ""
 msgid "Mapping"
 msgstr ""
 
-#: ../browser/sync.py:40
+#: ../browser/sync.py:39
 #: ../faceted/macro_item.pt:42
 #: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
@@ -362,15 +352,19 @@ msgstr ""
 msgid "Meeting config ID"
 msgstr ""
 
-#: ../browser/sync.py:65
+#: ../browser/sync.py:64
 msgid "Meeting import form"
 msgstr ""
 
-#: ../browser/sync.py:409
+#: ../browser/sync.py:208
+msgid "Meeting of"
+msgstr ""
+
+#: ../browser/sync.py:411
 msgid "Meeting pre import form"
 msgstr ""
 
-#: ../browser/sync.py:190
+#: ../browser/sync.py:189
 msgid "Meeting pre sync form"
 msgstr ""
 
@@ -390,7 +384,7 @@ msgstr ""
 msgid "Meeting types"
 msgstr ""
 
-#: ../browser/sync.py:283
+#: ../browser/sync.py:284
 msgid "Modified"
 msgstr ""
 
@@ -410,7 +404,7 @@ msgstr ""
 msgid "Navigation root path"
 msgstr ""
 
-#: ../browser/sync.py:166
+#: ../browser/sync.py:165
 msgid "No data available in table"
 msgstr ""
 
@@ -456,7 +450,7 @@ msgstr ""
 
 #: ../content/institution.py:304
 #: ../events/institution.py:46
-#: ../migrations/migrate_to_2000.py:205
+#: ../migrations/migrate_to_2000.py:203
 msgid "Publications"
 msgstr ""
 
@@ -472,15 +466,15 @@ msgstr ""
 msgid "Related meeting date"
 msgstr ""
 
-#: ../browser/sync.py:231
+#: ../browser/sync.py:232
 msgid "Remove"
 msgstr ""
 
-#: ../browser/sync.py:308
+#: ../browser/sync.py:309
 msgid "Removed"
 msgstr ""
 
-#: ../browser/templates/item.pt:124
+#: ../browser/templates/item.pt:151
 #: ../faceted/macro_item.pt:61
 msgid "Representative"
 msgstr ""
@@ -513,11 +507,11 @@ msgstr ""
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/sync.py:68
+#: ../browser/sync.py:67
 msgid "Select"
 msgstr ""
 
-#: ../browser/sync.py:169
+#: ../browser/sync.py:168
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
@@ -533,12 +527,11 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
-#: ../browser/templates/publication.pt:82
-#: ../content/publication.py:89
+#: ../content/publication.py:92
 msgid "Subject to authority?"
 msgstr ""
 
-#: ../browser/sync.py:220
+#: ../browser/sync.py:221
 msgid "Sync"
 msgstr ""
 
@@ -558,7 +551,7 @@ msgstr ""
 msgid "Séance publique du Conseil de Zone"
 msgstr ""
 
-#: ../content/publication.py:66
+#: ../content/publication.py:69
 msgid "Text"
 msgstr ""
 
@@ -570,6 +563,10 @@ msgstr ""
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
+#: ../events/publication.py:32
+msgid "Timestamp information has been removed since the data has changed"
+msgstr ""
+
 #: ../browser/publication.py:49
 msgid "Timestamping is disabled for this element!"
 msgstr ""
@@ -579,11 +576,11 @@ msgid "Title"
 msgstr ""
 
 #: ../content/item.py:34
-#: ../content/meeting.py:22
+#: ../content/meeting.py:26
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: ../browser/sync.py:280
+#: ../browser/sync.py:281
 msgid "Unchanged"
 msgstr ""
 
@@ -638,12 +635,12 @@ msgstr ""
 msgid "Web service connection error !"
 msgstr ""
 
-#: ../browser/sync.py:91
+#: ../browser/sync.py:90
 #: ../content/institution.py:483
 msgid "Webservice connection error !"
 msgstr ""
 
-#: ../events/publication.py:42
+#: ../events/publication.py:56
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
@@ -659,15 +656,15 @@ msgstr ""
 msgid "Zone de Secours"
 msgstr ""
 
-#: ../browser/sync.py:174
+#: ../browser/sync.py:173
 msgid "activate to sort column ascending"
 msgstr ""
 
-#: ../browser/sync.py:177
+#: ../browser/sync.py:176
 msgid "activate to sort column descending"
 msgstr ""
 
-#: ../content/publication.py:96
+#: ../content/publication.py:99
 msgid "authority_date_description"
 msgstr ""
 
@@ -700,7 +697,7 @@ msgstr ""
 msgid "enableAutopublishing"
 msgstr ""
 
-#: ../content/publication.py:102
+#: ../content/publication.py:105
 msgid "expired_authority_date_description"
 msgstr ""
 

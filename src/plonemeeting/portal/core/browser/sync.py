@@ -26,7 +26,6 @@ from zope.contentprovider.provider import ContentProviderBase
 from zope.i18n import translate
 from zope.interface import implementer
 from zope.interface import Interface
-
 import copy
 import json
 import requests
@@ -206,6 +205,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
         self.institution = self.utils_view.get_current_institution()
         self.items = self.context.get_items()
         self.meeting_title = self.context.Title()
+        self.label = f"{translate(_("Meeting of"), context=self.request)} {self.meeting_title} / {translate(self.label, context=self.request)}"
+
         # Avoid unnecessary request whe submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
             self.api_response_data = _fetch_preview_items(
@@ -426,6 +427,7 @@ class PreImportReportForm(AutoExtensibleForm, Form):
             get_api_url_for_meetings(self.institution, self.external_meeting_uid),
             self.institution,
         ).json()["items"][0]["title"]
+        self.label =  f"{translate(_("Meeting of"), context=self.request)} {self.meeting_title} / {translate(self.label, context=self.request)}"
         # Avoid unnecessary request when submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
             self.api_response_data = _fetch_preview_items(
@@ -454,8 +456,7 @@ class PreImportReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["import"].addClass("context")
-        self.actions["cancel"].addClass("standalone")
+        self.actions["import"].addClass("btn-primary")
 
 
 def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover

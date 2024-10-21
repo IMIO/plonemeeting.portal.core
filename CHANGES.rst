@@ -7,6 +7,8 @@ Changelog
 - DELIB-11: Fixed an issue with next/prev navigation on `ItemView` when items are not in correct order
   in the meeting folder.
   [aduchene]
+- DELIBE-3: Add meeting date in the title of `PreSyncForm` and `PreImportForm`.
+  [aduchene]
 
 2.0.3 (2024-10-10)
 ------------------
