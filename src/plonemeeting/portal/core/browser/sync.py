@@ -26,6 +26,7 @@ from zope.contentprovider.provider import ContentProviderBase
 from zope.i18n import translate
 from zope.interface import implementer
 from zope.interface import Interface
+
 import copy
 import json
 import requests
@@ -72,9 +73,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
             return
         external_meeting_uid = data.get("meeting")
         next_form_url = (
-            self.context.absolute_url()
-            + "/@@pre_import_report_form?external_meeting_uid="
-            + external_meeting_uid
+            self.context.absolute_url() + "/@@pre_import_report_form?external_meeting_uid=" + external_meeting_uid
         )
         redirect(self.request, next_form_url)
 
@@ -86,9 +85,7 @@ class ImportMeetingForm(AutoExtensibleForm, Form):
 
     def _notify_error_and_cancel(self, err=None):
         logger.warning("Error while trying to connect to iA.Delib", exc_info=err)
-        api.portal.show_message(
-            _("Webservice connection error !"), request=self.request, type="error"
-        )
+        api.portal.show_message(_("Webservice connection error !"), request=self.request, type="error")
         self.handle_cancel(self, None)
 
     @button.buttonAndHandler(plone_("Cancel"))
@@ -161,20 +158,14 @@ class ItemsReportContentProvider(ContentProviderBase):
             "order": [[item_number_col_idx, "asc"]],
             "language": {
                 "search": translate(plone_("Search"), context=self.request),
-                "emptyTable": translate(
-                    _("No data available in table"), context=self.request
-                ),
+                "emptyTable": translate(_("No data available in table"), context=self.request),
                 "info": translate(
                     _("Showing _START_ to _END_ of _TOTAL_ entries"),
                     context=self.request,
                 ),
                 "aria": {
-                    "sortAscending": translate(
-                        _("activate to sort column ascending"), context=self.request
-                    ),
-                    "sortDescendintranslate": translate(
-                        _("activate to sort column descending"), context=self.request
-                    ),
+                    "sortAscending": translate(_("activate to sort column ascending"), context=self.request),
+                    "sortDescendintranslate": translate(_("activate to sort column descending"), context=self.request),
                 },
             },
         }
@@ -186,6 +177,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
     """
     Before synchronizing, ask the user what he wants to sync.
     """
+
     label = _("Meeting pre sync form")
     description = _(
         "Choose the items you want to sync/import in the portal. "
@@ -204,17 +196,12 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
         self.is_syncing = True
         self.institution = self.utils_view.get_current_institution()
         self.items = self.context.get_items()
-        self.meeting_title = self.context.Title()
-        self.label = f"{translate(_("Meeting of"), context=self.request)} {self.meeting_title} / {translate(self.label, context=self.request)}"
-
+        self.meeting_title = translate(_("Meeting of"), context=self.request) + " " + self.context.Title()
+        self.label = f"{self.meeting_title} / {translate(self.label, context=self.request)}"
         # Avoid unnecessary request whe submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
-            self.api_response_data = _fetch_preview_items(
-                self.context, self.external_meeting_uid
-            )
-            self.api_response_data = self._reconcile_items(
-                self.api_response_data, self.items
-            )
+            self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
+            self.api_response_data = self._reconcile_items(self.api_response_data, self.items)
 
         return super(PreSyncReportForm, self).__call__()
 
@@ -260,18 +247,14 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
         compute the status of each item (unchanged, modified, added, removed)
         """
         reconciled = copy.deepcopy(api_items)
-        local_items_by_plonemeeting_uid = {
-            item.plonemeeting_uid: item for item in local_items
-        }
+        local_items_by_plonemeeting_uid = {item.plonemeeting_uid: item for item in local_items}
 
         for item in reconciled["items"]:
             api_annexes = item.get("extra_include_annexes", [])
             if item["UID"] in local_items_by_plonemeeting_uid.keys():
                 local_item = local_items_by_plonemeeting_uid[item["UID"]]
                 plonemeeting_last_modified = _json_date_to_datetime(item["modified"])
-                item[
-                    "local_last_modified"
-                ] = local_item.plonemeeting_last_modified.isoformat()
+                item["local_last_modified"] = local_item.plonemeeting_last_modified.isoformat()
                 item["modified"] = plonemeeting_last_modified.isoformat()
                 if (
                     local_item.plonemeeting_last_modified == plonemeeting_last_modified
@@ -282,9 +265,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
                 else:
                     item["status"] = "modified"
                     item["status_label"] = _("Modified")
-                item["annexes_status"] = self._reconcile_annexes(
-                    api_annexes, local_item.objectValues()
-                )
+                item["annexes_status"] = self._reconcile_annexes(api_annexes, local_item.objectValues())
                 local_items_by_plonemeeting_uid.pop(item["UID"])
             else:
                 item["local_last_modified"] = "-"
@@ -353,9 +334,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
                 "titles": [],
             },
         }
-        local_annexes_by_plonemeeting_uid = {
-            annexe.plonemeeting_uid: annexe for annexe in local_annexes
-        }
+        local_annexes_by_plonemeeting_uid = {annexe.plonemeeting_uid: annexe for annexe in local_annexes}
 
         for api_annexe in api_annexes:
             if api_annexe["UID"] not in local_annexes_by_plonemeeting_uid.keys():
@@ -363,9 +342,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
                 annexes_status["added"]["titles"].append(api_annexe["title"])
             else:
                 local_annexe = local_annexes_by_plonemeeting_uid[api_annexe["UID"]]
-                api_annexe_last_modified = _json_date_to_datetime(
-                    api_annexe["modified"]
-                )
+                api_annexe_last_modified = _json_date_to_datetime(api_annexe["modified"])
 
                 if api_annexe_last_modified == local_annexe.plonemeeting_last_modified:
                     annexes_status["unchanged"]["count"] += 1
@@ -423,16 +400,18 @@ class PreImportReportForm(AutoExtensibleForm, Form):
         self.external_meeting_uid = self.request.form["external_meeting_uid"]
         self.is_syncing = False
         self.institution = self.utils_view.get_current_institution()
-        self.meeting_title = _call_delib_rest_api(
-            get_api_url_for_meetings(self.institution, self.external_meeting_uid),
-            self.institution,
-        ).json()["items"][0]["title"]
-        self.label =  f"{translate(_("Meeting of"), context=self.request)} {self.meeting_title} / {translate(self.label, context=self.request)}"
+        self.meeting_title = (
+            translate(_("Meeting of"), context=self.request)
+            + " "
+            + _call_delib_rest_api(
+                get_api_url_for_meetings(self.institution, self.external_meeting_uid),
+                self.institution,
+            ).json()["items"][0]["title"]
+        )
+        self.label = f"{self.meeting_title} / {translate(self.label, context=self.request)}"
         # Avoid unnecessary request when submitting the form
         if self.request.get("REQUEST_METHOD") == "GET":
-            self.api_response_data = _fetch_preview_items(
-                self.context, self.external_meeting_uid
-            )
+            self.api_response_data = _fetch_preview_items(self.context, self.external_meeting_uid)
 
         return super(PreImportReportForm, self).__call__()
 
@@ -465,9 +444,7 @@ def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
     `get_api_url_for_presync_meeting_items` to have the
     minimum data possible.
     """
-    url = get_api_url_for_presync_meeting_items(
-        context, meeting_external_uid=meeting_external_uid
-    )
+    url = get_api_url_for_presync_meeting_items(context, meeting_external_uid=meeting_external_uid)
     response = _call_delib_rest_api(url, context)
     return json.loads(response.text)
 
@@ -478,18 +455,12 @@ def _sync_meeting(
     try:
         start_time = time.time()
         logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(
-            institution, meeting_uid, force, with_annexes, item_external_uids
-        )
+        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
         if new_meeting_uid:
-            brains = api.content.find(
-                context=institution, object_provides=IMeetingsFolder.__identifier__
-            )
+            brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
 
             if brains:
-                request.response.redirect(
-                    "{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid)
-                )
+                request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
                 api.portal.show_message(message=status, request=request, type="info")
         else:
             api.portal.show_message(message=status, request=request, type="error")
