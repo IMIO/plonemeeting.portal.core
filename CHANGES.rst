@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.4 (unreleased)
+2.0.4 (2024-10-23)
 ------------------
 
 - DELIB-11: Fixed an issue with next/prev navigation on `ItemView` when items are not in correct order
