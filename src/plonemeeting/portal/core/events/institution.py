@@ -10,6 +10,7 @@ from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
 from plone.api.exc import CannotGetPortalError
 from plone.api.portal import get_registry_record
+from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
@@ -69,7 +70,7 @@ def handle_institution_creation(obj, event):
 
     request = getRequest()
     if request:  # Request can be `None` during test setup
-        request.response.redirect(obj.absolute_url())
+        request.response.redirect(addTokenToUrl(obj.absolute_url()))
 
 
 def handle_institution_modified(institution, event):

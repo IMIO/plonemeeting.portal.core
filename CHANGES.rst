@@ -4,8 +4,8 @@ Changelog
 2.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Avoid a "@@confirm-action" on `Institution` creation.
+  [aduchene]
 
 2.0.4 (2024-10-23)
 ------------------
