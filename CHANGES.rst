@@ -4,7 +4,9 @@ Changelog
 2.0.5 (unreleased)
 ------------------
 
-- Avoid a "@@confirm-action" on `Institution` creation.
+- DELIBE-12: Avoid a "@@confirm-action" on `Institution` creation.
+  [aduchene]
+- DELIBE-29: Add ZoomControl back on institutions map
   [aduchene]
 
 2.0.4 (2024-10-23)
