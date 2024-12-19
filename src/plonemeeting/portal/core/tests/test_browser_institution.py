@@ -45,6 +45,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                               'population': 'Population / État-civil',
                               'locations': 'Locations',
                               'divers': 'Divers',
+                              'engagement': 'Engagement',
                               'finances': 'Finances'},
                              self.belleville.delib_categories)
 
