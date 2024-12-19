@@ -8,6 +8,8 @@ Changelog
   [aduchene]
 - DELIBE-29: Add ZoomControl back on institutions map
   [aduchene]
+- DELIBE-180: Fix some issues when an `Institution.representatives_mappings` could be None.
+  [aduchene]
 
 2.0.4 (2024-10-23)
 ------------------

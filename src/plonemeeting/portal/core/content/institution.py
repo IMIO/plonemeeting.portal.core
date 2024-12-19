@@ -417,7 +417,7 @@ def representatives_mappings_invariant(data):
     changes = {}
     for rpz in new_representatives:
         changes[rpz['representative_key']] = rpz['representative_value']
-    if data.__context__:
+    if data.__context__ and data.__context__.representatives_mappings:
         for rpz in data.__context__.representatives_mappings:
             rpz_uid = rpz['representative_key']
             if rpz_uid not in changes and rpz_uid not in missing_uids:
