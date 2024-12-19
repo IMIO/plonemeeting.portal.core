@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.5 (unreleased)
+2.0.5 (2024-12-19)
 ------------------
 
 - DELIBE-12: Avoid a "@@confirm-action" on `Institution` creation.
