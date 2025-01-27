@@ -188,4 +188,16 @@
       run_deps="True"/>
   </genericsetup:upgradeSteps>
 
+    <genericsetup:upgradeSteps
+    source="2001"
+    destination="2002"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply types profile step to add allow links in Institution content type"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="typeinfo"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
