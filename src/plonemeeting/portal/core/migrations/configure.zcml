@@ -239,4 +239,17 @@
     destination="2400"
     handler="plonemeeting.portal.core.migrations.migrate_to_2400.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeSteps
+    source="2400"
+    destination="2401"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply types profile step to allow Links in Institution content type"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="typeinfo"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
+
 </configure>
