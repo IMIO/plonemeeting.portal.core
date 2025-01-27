@@ -14,15 +14,6 @@
   />
 
   <browser:page
-    name="prometheus-export"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".site.PrometheusExporter"
-    permission="zope2.View"
-    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-  />
-
-
-  <browser:page
     name="agenda"
     for="plonemeeting.portal.core.content.meeting.IMeeting"
     class=".meeting.MeetingAgendaAPIView"
@@ -30,6 +21,13 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <browser:page
+    name="prometheus-export"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".site.PrometheusExportView"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <!-- Serializers -->
   <adapter factory=".serializers.InstitutionSerializerToJson"/>

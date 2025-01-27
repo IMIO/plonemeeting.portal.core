@@ -86,7 +86,7 @@ class InstitutionLocationsAPIView(PublicAPIView):
         self.request.response.setHeader("Content-type", "application/json")
         return json.dumps(institution_locations)
 
-class PrometheusExporter(PublicAPIView):
+class PrometheusExportView(PublicAPIView):
     """Publications Prometheus exporter"""
 
     def __call__(self):

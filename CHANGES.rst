@@ -13,6 +13,8 @@ Changelog
   [aduchene]
 - Complete tests about `MeetingAgendaAPIView`.
   [aduchene]
+- Rename `institution_locations` view name to `institution-locations`.
+  [aduchene]
 
 2.0.3 (2024-10-10)
 ------------------
