@@ -1,19 +1,33 @@
 Changelog
 =========
 
-2.0.4 (unreleased)
+2.0.6 (unreleased)
+------------------
+
+- DELIBE-186: Add a new Prometheus export view `prometheus-export` to monitor cron.
+  [aduchene]
+- Complete tests about `MeetingAgendaAPIView`.
+  [aduchene]
+- Rename `institution_locations` view name to `institution-locations`.
+  [aduchene]
+
+2.0.5 (2024-12-19)
+------------------
+
+- DELIBE-12: Avoid a "@@confirm-action" on `Institution` creation.
+  [aduchene]
+- DELIBE-29: Add ZoomControl back on institutions map
+  [aduchene]
+- DELIBE-180: Fix some issues when an `Institution.representatives_mappings` could be None.
+  [aduchene]
+
+2.0.4 (2024-10-23)
 ------------------
 
 - DELIB-11: Fixed an issue with next/prev navigation on `ItemView` when items are not in correct order
   in the meeting folder.
   [aduchene]
 - DELIBE-3: Add meeting date in the title of `PreSyncForm` and `PreImportForm`.
-  [aduchene]
-- DELIBE-186: Add a new Prometheus export view `prometheus-export` to monitor cron.
-  [aduchene]
-- Complete tests about `MeetingAgendaAPIView`.
-  [aduchene]
-- Rename `institution_locations` view name to `institution-locations`.
   [aduchene]
 
 2.0.3 (2024-10-10)

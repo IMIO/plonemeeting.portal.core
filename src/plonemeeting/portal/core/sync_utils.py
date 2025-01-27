@@ -58,7 +58,7 @@ def _get_mapped_representatives_in_charge(item_data, institution):
     ) or item_data.get("all_groupsInCharge")
 
     res = []
-    if groups_in_charge:
+    if groups_in_charge and institution.representatives_mappings:
         gic_tokens = [gic["token"] for gic in groups_in_charge]
         mapped_uids = [mapping["representative_key"] for mapping in institution.representatives_mappings]
         res = list(filter(lambda uid: uid in mapped_uids, gic_tokens))

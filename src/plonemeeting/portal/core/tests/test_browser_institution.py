@@ -45,6 +45,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                               'population': 'Population / État-civil',
                               'locations': 'Locations',
                               'divers': 'Divers',
+                              'engagement': 'Engagement',
                               'finances': 'Finances'},
                              self.belleville.delib_categories)
 
@@ -124,4 +125,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
                                               'representative_key': 'fake uid',
                                               'representative_long_value': 'fake name long',
                                               'representative_value': 'fake name'}, )
+        representatives_mappings_invariant(data)
+
+        data.__context__.representatives_mappings = None # Could be None in Plone 6
         representatives_mappings_invariant(data)

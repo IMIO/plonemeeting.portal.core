@@ -130,6 +130,9 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(meeting.values()[20].category, 'batiment')
         self.assertEqual(meeting.values()[-1].category, 'batiment')
 
+        self.institution.representatives_mappings = None
+        sync_items_data(meeting, self.json_meeting_items, self.institution, force=True)
+
     def test_sync_with_updates_meeting_items(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         # only a few picked items
