@@ -4,8 +4,12 @@ Changelog
 2.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-186: Add a new Prometheus export view `prometheus-export` to monitor cron.
+  [aduchene]
+- Complete tests about `MeetingAgendaAPIView`.
+  [aduchene]
+- Rename `institution_locations` view name to `institution-locations`.
+  [aduchene]
 
 2.0.5 (2024-12-19)
 ------------------
