@@ -6,12 +6,21 @@
 
   <!-- Views -->
   <browser:page
-    name="institution_locations"
+    name="institution-locations"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".site.InstitutionLocationsAPIView"
     permission="zope2.View"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
+
+  <browser:page
+    name="prometheus-export"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".site.PrometheusExporter"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
 
   <browser:page
     name="agenda"

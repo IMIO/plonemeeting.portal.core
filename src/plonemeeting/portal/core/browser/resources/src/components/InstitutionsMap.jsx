@@ -34,7 +34,7 @@ const InstitutionsMap = (props) => {
             .get(get_bundle_url() + "/assets/wallonia-boundaries.json")
             .then((response) => setRegionBoundaries(response.data));
         axios
-            .get(get_portal_url() + "/@@institution_locations")
+            .get(get_portal_url() + "/@@institution-locations")
             .then((response) => setInstitutionLocations(response.data));
     }, []);
 

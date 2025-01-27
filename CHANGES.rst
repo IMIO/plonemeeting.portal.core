@@ -9,6 +9,10 @@ Changelog
   [aduchene]
 - DELIBE-3: Add meeting date in the title of `PreSyncForm` and `PreImportForm`.
   [aduchene]
+- DELIBE-186: Add a new Prometheus export view `prometheus-export` to monitor cron.
+  [aduchene]
+- Complete tests about `MeetingAgendaAPIView`.
+  [aduchene]
 
 2.0.3 (2024-10-10)
 ------------------
