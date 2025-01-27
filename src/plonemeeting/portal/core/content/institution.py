@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Acquisition import aq_base
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from copy import deepcopy
@@ -24,6 +24,7 @@ from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
+from zope.component.testfiles.components import content
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface import Invalid
@@ -33,6 +34,7 @@ from zope.schema import ValidationError
 import re
 import requests
 
+WEBSITE_LINK_ID = 'website-url'
 
 class InvalidUrlParameters(ValidationError):
     """Exception for invalid url parameters"""
@@ -159,6 +161,8 @@ class IInstitution(model.Schema):
     password = schema.TextLine(title=_(u"Password"), required=False)
 
     meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
+
+    website_url = schema.URI(title=_(u"Website URL"), required=False)
 
     directives.widget(
         "meeting_filter_query",
@@ -434,6 +438,27 @@ def representatives_mappings_invariant(data):
 class Institution(Container):
     """
     """
+    @property
+    def website_url(self):
+        return self.__dict__.get('website_url', None)
+
+    @website_url.setter
+    def website_url(self, value):
+        institution = api.portal.get().get(self.id) # Weird hack to make acquisition work
+        if not value and WEBSITE_LINK_ID in institution.objectIds():
+            api.content.delete(institution[WEBSITE_LINK_ID])
+
+        self.__dict__['website_url'] = value
+
+        if WEBSITE_LINK_ID not in self.objectIds():
+            api.content.create(container=institution, type="Link", id=WEBSITE_LINK_ID, title=_("Website"))
+        link = institution[WEBSITE_LINK_ID]
+        api.content.disable_roles_acquisition(obj=link)
+        link.remoteUrl = value
+        if api.content.get_state(obj=link) == "private":
+            api.content.transition(obj=link, transition='publish')
+
+
     def fetch_delib_categories(self):
         delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
         url = get_api_url_for_categories(self, delib_config_category_field)
