@@ -2,9 +2,9 @@ from imio.helpers.workflow import get_state_infos
 from imio.pyutils.utils import sort_by_indexes
 from plone import api
 from plone.app.content.browser.content_status_modify import ContentStatusModifyView
-from plone.app.z3cform.views import AddForm as DefaultAddForm
-from plone.app.z3cform.views import AddView as DefaultAddView
-from plone.app.z3cform.views import EditForm as DefaultEditForm
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ModifyPortalContent

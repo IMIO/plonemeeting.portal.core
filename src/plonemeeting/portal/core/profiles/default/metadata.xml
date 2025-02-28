@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <metadata>
-  <version>2001</version>
+  <version>2100</version>
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
-<!--    <dependency>profile-collective.cookiecuttr:default</dependency>-->
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-eea.facetednavigation:default</dependency>
     <dependency>profile-collective.fingerpointing:default</dependency>

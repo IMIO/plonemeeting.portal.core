@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.app.z3cform.views import AddForm as DefaultAddForm
-from plone.app.z3cform.views import DefaultAddView
-from plone.app.z3cform.views import EditForm as DefaultEditForm
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import DEC_FOLDER_ID

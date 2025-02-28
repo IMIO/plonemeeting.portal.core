@@ -188,4 +188,12 @@
       run_deps="True"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+    title="Go to portal 2100"
+    description=""
+    source="2001"
+    destination="2100"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2100.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>
