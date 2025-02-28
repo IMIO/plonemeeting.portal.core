@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.1.0 (unreleased)
+------------------
+
+- DELIBE-196: Plone 6.1 compatibility.
+  [aduchene]
+- DELIBE-23/DELIBE-206: Uninstall collective.cookiecuttr.
+  [aduchene]
+
+
 2.0.6 (unreleased)
 ------------------
 

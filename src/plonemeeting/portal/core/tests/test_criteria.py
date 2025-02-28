@@ -74,7 +74,7 @@ class TestFacetedCriteria(PmPortalTestCase):
         self.assertEqual(sort_widget.query(request.form),
                          {'sort_on': ['linkedMeetingDate', 'sortable_number'],
                           'sort_order': ['descending', 'ascending']})
-        meetings = decisions_folder.getFolderContents({"portal_type": "Meeting"})
+        meetings = decisions_folder.values()
         request.form["seance"] = meetings[0].UID
         self.assertEqual(sort_widget.query(request.form),
                          {'sort_on': ['sortable_number'],

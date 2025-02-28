@@ -24,14 +24,14 @@ class TestContactForm(PmPortalTestCase):
             self.ci_view(),
         )
         self.assertIn(
-            '<textarea class="form-control textarea-widget text-field"',
+            '<textarea name="form.widgets.message" id="form-widgets-message"',
             self.ci_view(),
         )
 
     def test_accessible_by_anonymous(self):
         logout()
         self.assertIn(
-            '<textarea class="form-control textarea-widget text-field"',
+            '<textarea name="form.widgets.message" id="form-widgets-message"',
             self.ci_view(),
         )
 

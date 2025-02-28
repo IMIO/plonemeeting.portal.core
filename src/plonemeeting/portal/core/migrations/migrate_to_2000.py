@@ -97,7 +97,6 @@ class MigrateTo2000(Migrator):
         logger.info("Upgrading packages...")
         self.qi.upgrade_product("eea.facetednavigation")
         self.qi.upgrade_product("collective.z3cform.datagridfield")
-        self.qi.upgrade_product("collective.cookiecuttr")
         logger.info("Done.")
 
     def _rename_seances_to_decisions(self):
