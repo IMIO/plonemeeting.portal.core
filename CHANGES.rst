@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.0 (unreleased)
+2.1.0 (2025-02-28)
 ------------------
 
 - DELIBE-196: Plone 6.1 compatibility.
