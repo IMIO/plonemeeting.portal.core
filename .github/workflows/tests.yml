@@ -16,13 +16,13 @@ jobs:
         experimental: [false]
     steps:
       - name: Run tests
-        uses: IMIO/gha/plone-package-test-notify@v3
+        uses: IMIO/gha/plone-package-test-notify@main
         env:
           cache-name: cache-eggs
         with:
           PYTHON_VERSION: ${{ matrix.python-version }}
-          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}
+          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-Plone6.1-${{ matrix.python-version }}
           TEST_COMMAND: bin/test
-          REQUIREMENTS_FILE: 'requirements-tests.txt'
+          INSTALL_DEPENDENCIES_COMMANDS: 'pip install -r requirements-tests.txt'
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
           BUILDOUT_CONFIG_FILE: 'test-${{ matrix.plone-version }}.cfg'
