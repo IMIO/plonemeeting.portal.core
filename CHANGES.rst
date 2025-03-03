@@ -4,8 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-23/DELIBE-206: Complete the upgrade step 2100.
+  [aduchene]
 
 2.1.0 (2025-02-28)
 ------------------
@@ -14,7 +14,6 @@ Changelog
   [aduchene]
 - DELIBE-23/DELIBE-206: Uninstall collective.cookiecuttr.
   [aduchene]
-
 
 2.0.6 (unreleased)
 ------------------
