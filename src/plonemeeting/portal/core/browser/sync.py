@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from imio.migrator.utils import end_time
 from plone import api
+from plone.api.content import get_state
 from plone.app.content.utils import json_dumps
 from plone.autoform.form import AutoExtensibleForm
 from plonemeeting.portal.core import _
@@ -218,6 +219,16 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
 
     @button.buttonAndHandler(_("Remove"))
     def handle_remove(self, action):
+        meeting_faceted_url = f"{self.institution.absolute_url()}/{DEC_FOLDER_ID}/#seance={self.context.UID()}"
+        if get_state(self.context) == "decision":
+            api.portal.show_message(
+                message=_("You can't remove items from a decided meeting."),
+                request=self.request,
+                type="error",
+            )
+            redirect(self.request, meeting_faceted_url)
+            return
+
         form = self.request.form
         checked_item_uids = self._extract_checked_items(form)
         deleted_ids = []
@@ -225,9 +236,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
             if IItem.providedBy(item) and item.plonemeeting_uid in checked_item_uids:
                 deleted_ids.append(item.id)
         if len(deleted_ids) > 0:
-            self.context.manage_delObjects(deleted_ids)
-
-        meeting_faceted_url = f"{self.institution.absolute_url()}/{DEC_FOLDER_ID}/#seance={self.context.UID()}"
+            with api.env.adopt_roles(["Manager"]):
+                self.context.manage_delObjects(deleted_ids)
         redirect(self.request, meeting_faceted_url)
 
     def updateActions(self):
