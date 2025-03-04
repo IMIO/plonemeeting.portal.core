@@ -12,6 +12,7 @@ from plone.app.testing import logout
 
 import pytz
 import requests
+import transaction
 from AccessControl import Unauthorized
 from imio.helpers.content import object_values
 from plone import api
@@ -471,16 +472,18 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         pre_sync_view = meeting.restrictedTraverse("@@pre_sync_report_form")
         pre_sync_view.institution = self.institution
+
+        # Try to remove an item with the manager account
         api.content.create(
             meeting, "Item", id="toto", title="Toto", plonemeeting_uid=self.preview_import_items_mock["items"][0]["UID"]
         )
         self.assertEqual(len(meeting.items()), 1)
-
         self.portal.REQUEST.form["item_uid__" + self.preview_import_items_mock["items"][0]["UID"]] = True
         self.portal.REQUEST.form["form.buttons.remove"] = True
         pre_sync_view.handle_remove(pre_sync_view, "remove")
         self.assertEqual(len(meeting.items()), 0)
 
+        # Then with belleville-decisions-manager
         api.content.create(
             meeting, "Item", id="toto", title="Toto", plonemeeting_uid=self.preview_import_items_mock["items"][0]["UID"]
         )
@@ -491,3 +494,30 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.portal.REQUEST.form["form.buttons.remove"] = True
         pre_sync_view.handle_remove(pre_sync_view, "remove")
         self.assertEqual(len(meeting.items()), 0)
+
+        # Let's try with an anonymous user
+        login(self.portal, "manager")
+        api.content.create(
+            meeting, "Item", id="toto", title="Toto", plonemeeting_uid=self.preview_import_items_mock["items"][0]["UID"]
+        )
+        api.content.transition(meeting, "send_to_project")
+        logout()
+        self.assertEqual(len(meeting.items()), 1)
+        with self.assertRaises(Unauthorized):
+            pre_sync_view = meeting.restrictedTraverse("@@pre_sync_report_form")
+            self.portal.REQUEST.form["item_uid__" + self.preview_import_items_mock["items"][0]["UID"]] = True
+            self.portal.REQUEST.form["form.buttons.remove"] = True
+            pre_sync_view.handle_remove(pre_sync_view, "remove")
+        self.assertEqual(len(meeting.items()), 1)
+
+        # Finally when a meeting is accepted (you can't)
+        login(self.portal, "manager")
+        api.content.transition(meeting, "publish")
+        login(self.portal, "belleville-decisions-manager")
+        self.assertEqual(len(meeting.items()), 1)
+        self.portal.REQUEST.form["item_uid__" + self.preview_import_items_mock["items"][0]["UID"]] = True
+        self.portal.REQUEST.form["form.buttons.remove"] = True
+        pre_sync_view.handle_remove(pre_sync_view, "remove")
+        self.assertEqual(len(meeting.items()), 1)
+        self.assertIn("statusmessages", self.portal.REQUEST.response.cookies.keys())
+
