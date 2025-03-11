@@ -37,6 +37,9 @@ class UtilsView(BrowserView):
     def is_institution(self):
         return IInstitution.providedBy(self.context)
 
+    def is_in_institution(self):
+        return IInstitution.providedBy(api.portal.get_navigation_root(self.context))
+
     def is_meeting(self):
         return IMeeting.providedBy(self.context)
 
@@ -77,6 +80,10 @@ class UtilsView(BrowserView):
         return api.content.find(
             context=institution, object_provides=IPublicationsFolder.__identifier__
         )[0].getURL()
+
+    def get_settings_url(self):
+        institution = self.get_current_institution()
+        return f"{institution.absolute_url()}/@@manage-settings"
 
     @staticmethod
     def get_state(obj):

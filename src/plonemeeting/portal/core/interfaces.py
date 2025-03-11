@@ -23,6 +23,13 @@ class IUtilsView(Interface):
         """See IUtilsView"""
         return True
 
+    def is_in_institution(self):
+        """See IUtilsView"""
+        return True
+
+    def get_settings_url(self):
+        pass
+
     def is_meeting(self):
         """See IUtilsView"""
         return True

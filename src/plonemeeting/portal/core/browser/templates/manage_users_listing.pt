@@ -1,0 +1,134 @@
+<!-- my/product/templates/manage_users_listing.pt -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+   i18n:domain="my.product"
+   metal:use-macro="context/@@main_template/macros/master">
+<body>
+
+<metal:custom_title fill-slot="content-title">
+        <h1 class="documentFirstHeading"
+            i18n:translate="label_manage_users">Manage Users</h1>
+</metal:custom_title>
+
+<metal:custom_desc fill-slot="content-description">
+        <div class="documentDescription"
+           i18n:translate="description_manage_users">
+            Here you can manage the users of your institution.
+        </div>
+</metal:custom_desc>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+    <div class="row my-3">
+      <div class="col-lg-3">
+        <div class="btn-group btn-group-delib btn-group-delib-vertical">
+          <a class="btn-delib btn-delib-icon-text"
+             tal:attributes="href string:${context/absolute_url}/@@manage-settings"
+             title="Import a new meeting"
+             i18n:attributes="title">
+            <i class="bi bi-chevron-left"></i>
+            <span i18n:translate=''>Back to my institution</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a class="btn btn-primary mb-3 pat-plone-modal pat-inject"
+       href="@@manage-create-user"
+       data-pat-inject='{
+          "target": ".modal-body",
+          "source": "el.href",
+          "trigger": "click"
+        }'
+       data-pat-plone-modal='{
+               "width": "600px",
+               "backdropOptions": {
+                 "closeOnClick": true
+               }
+             }'
+       role="button">
+      <i class="bi bi-plus-square me-1"></i>
+      <span i18n:translate="label_create_new_user">Create New User</span>
+    </a>
+
+
+    <a class="btn btn-primary mb-3 pat-plone-modal pat-inject"
+       href="@@manage-invite-user"
+       data-pat-inject='{
+             "target": ".modal-body",
+             "source": "el.href",
+             "trigger": "click"
+           }'
+       data-pat-plone-modal='{
+             "width": "600px",
+             "backdropOptions": {
+               "closeOnClick": true
+             }
+           }'
+       role="button">
+      <i class="bi bi-person-plus-fill me-1"></i>
+      <span i18n:translate="label_invite_existing_user">Invite an existing user</span>
+    </a>
+
+    <!-- "No users found" notice -->
+    <tal:block tal:condition="python:not view.users">
+      <div class="alert alert-warning" i18n:translate="msg_no_users_found">
+        No users found.
+      </div>
+    </tal:block>
+
+    <!-- Table of users if present -->
+    <tal:block tal:condition="python:view.users">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col" i18n:translate="label_username">Username</th>
+          <th scope="col" i18n:translate="label_fullname">Full Name</th>
+          <th scope="col" i18n:translate="label_email">Email</th>
+          <th scope="col" class="text-end" i18n:translate="label_actions">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr tal:repeat="user view/users">
+          <td tal:content="user/id"></td>
+          <td tal:content="python:user.getProperty('fullname')"></td>
+          <td tal:content="python:user.getProperty('email')"></td>
+          <td class="text-end">
+            <!-- "Edit" link: also opens the same form in a modal, passing user_id -->
+            <a class="btn btn-sm btn-secondary pat-plone-modal pat-inject"
+               tal:attributes="href string:@@manage-edit-user?username=${user/id}"
+               data-pat-inject='{
+                           "target": "#myModal .modal-body",
+                           "source": "el.href",
+                           "trigger": "click"
+                         }'
+               data-pat-plone-modal='{
+                           "width": "600px",
+                           "backdropOptions": {
+                             "closeOnClick": true
+                           }
+                         }'>
+              <i class="bi bi-pencil-square"></i>
+              <span i18n:translate="label_edit">Edit</span>
+            </a>
+
+            <!-- "Delete" link: direct GET with confirm -->
+            <a class="btn btn-sm btn-danger"
+               tal:attributes="href python: view.unregister_url + '&username=' + user.id"
+               onclick="return confirm('Are you sure you want to unregister this user?');">
+              <i class="bi bi-trash"></i>
+              <span i18n:translate="label_delete">Unregister</span>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </tal:block>
+  </metal:content-core>
+</metal:main>
+</body>
+</html>
