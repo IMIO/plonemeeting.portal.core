@@ -8,6 +8,8 @@ Changelog
   [aduchene]
 - DELIBE-24: Fix an issue where a decisions manager could not remove items from a meeting.
   [aduchene]
+- Handle multiple possible cron paths in the Prometheus export view.
+  [aduchene]
 
 2.1.0 (2025-02-28)
 ------------------
