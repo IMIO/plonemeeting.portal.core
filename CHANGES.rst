@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.1.1 (2025-03-21)
 ------------------
 
 - DELIBE-23/DELIBE-206: Complete the upgrade step 2100.
