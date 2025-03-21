@@ -5,10 +5,10 @@ from plone.testing.z2 import Browser
 from plone.app.testing import login, logout, TEST_USER_NAME, TEST_USER_ID, setRoles
 from Products.CMFCore.utils import getToolByName
 
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase, PmPortalDemoFunctionalTestCase
 
 
-class TestManageUsers(PmPortalTestCase):
+class TestManageUsers(PmPortalDemoFunctionalTestCase):
     """Integration tests for the custom user manager (focusing on groups)."""
 
     def setUp(self):
@@ -17,20 +17,24 @@ class TestManageUsers(PmPortalTestCase):
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        login(self.portal, TEST_USER_NAME)
+        # setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        # login(self.portal, TEST_USER_NAME)
+
 
         # We'll reference these tools often
         self.acl_users = getToolByName(self.portal, 'acl_users')
         self.group_tool = getToolByName(self.portal, 'portal_groups')
         self.membership = getToolByName(self.portal, 'portal_membership')
+        super(TestManageUsers, self).setUp()
 
     def tearDown(self):
         logout()
 
-    def test_1_listing_view_no_users(self):
+    def test_listing_view_no_users(self):
         """Check listing view 'no users found' message when only default test user remains."""
         # Remove all users except the default test user
+
+        login(self.portal, "manager")
         for uid in list(self.acl_users.getUserIds()):
             if uid != TEST_USER_ID:
                 self.acl_users.userFolderDelUsers([uid])
@@ -42,7 +46,7 @@ class TestManageUsers(PmPortalTestCase):
             "Expected 'No users found.' message not present in listing."
         )
 
-    def test_2_create_user_via_form(self):
+    def test_create_user_via_form(self):
         """Create a new user from the form, assign one group, verify they appear in listing."""
         self.browser.open(self.portal.absolute_url() + '/manage-users-form')
 
@@ -65,7 +69,7 @@ class TestManageUsers(PmPortalTestCase):
         group_obj = self.group_tool.getGroupById('managers')
         self.assertIn('alice', group_obj.getGroupMemberIds(), "'alice' not actually in 'managers' group.")
 
-    def test_3_edit_user_update_groups(self):
+    def test_edit_user_update_groups(self):
         """Edit existing user to change group membership."""
         # Pre-create a user 'bob'
         reg = getToolByName(self.portal, 'portal_registration')
@@ -95,7 +99,7 @@ class TestManageUsers(PmPortalTestCase):
         self.assertIn('bob', managers_group.getGroupMemberIds(), "User 'bob' not added to 'managers'.")
         self.assertNotIn('bob', editors_group.getGroupMemberIds(), "User 'bob' was not removed from 'editors'.")
 
-    def test_4_delete_user(self):
+    def test_delete_user(self):
         """Delete a user via the form, ensure they're removed from all groups and membership."""
         reg = getToolByName(self.portal, 'portal_registration')
         reg.addMember('charlie', 'secret', properties={'email': 'charlie@example.com'})
@@ -115,7 +119,7 @@ class TestManageUsers(PmPortalTestCase):
             group_obj = self.group_tool.getGroupById(group_id)
             self.assertNotIn('charlie', group_obj.getGroupMemberIds(), f"'charlie' still in group {group_id}.")
 
-    def test_5_assign_multiple_groups_on_create(self):
+    def test_assign_multiple_groups_on_create(self):
         """Create user with multiple groups at once, verify membership."""
         self.browser.open(self.portal.absolute_url() + '/manage-users-form')
         self.browser.getControl(label='User ID').value = 'diana'
