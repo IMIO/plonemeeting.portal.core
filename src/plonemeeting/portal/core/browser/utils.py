@@ -10,6 +10,7 @@ from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import get_term_title
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import queryUtility
@@ -84,6 +85,12 @@ class UtilsView(BrowserView):
     def get_settings_url(self):
         institution = self.get_current_institution()
         return f"{institution.absolute_url()}/@@manage-settings"
+
+    def show_settings_tab(self):
+        portal_membership = getToolByName(self.context, 'portal_membership')
+        if portal_membership.isAnonymousUser() or not self.is_in_institution():
+            return False
+        return portal_membership.checkPermission('Modify portal content', self.get_current_institution())
 
     @staticmethod
     def get_state(obj):

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from plone import api
-from plone.dexterity import schema
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
@@ -11,12 +9,8 @@ from plone.dexterity.events import EditCancelledEvent, EditFinishedEvent
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
-from Products.CMFCore.permissions import ModifyPortalContent
 from z3c.form import button
 from zope.event import notify
-from zope.interface import Interface
-from zope import schema
-
 
 class InstitutionView(DefaultView):
     """

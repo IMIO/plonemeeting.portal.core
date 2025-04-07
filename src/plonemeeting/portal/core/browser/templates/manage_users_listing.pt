@@ -9,15 +9,15 @@
 <body>
 
 <metal:custom_title fill-slot="content-title">
-        <h1 class="documentFirstHeading"
-            i18n:translate="label_manage_users">Manage Users</h1>
+  <h1 class="documentFirstHeading"
+     i18n:translate="label_manage_users">Manage Users</h1>
 </metal:custom_title>
 
 <metal:custom_desc fill-slot="content-description">
-        <div class="documentDescription"
-           i18n:translate="description_manage_users">
-            Here you can manage the users of your institution.
-        </div>
+  <div class="documentDescription"
+     i18n:translate="description_manage_users">
+    Here you can manage the users of your institution.
+  </div>
 </metal:custom_desc>
 
 <metal:main fill-slot="content-core">
@@ -36,43 +36,6 @@
         </div>
       </div>
     </div>
-
-    <a class="btn btn-primary mb-3 pat-plone-modal pat-inject"
-       href="@@manage-create-user"
-       data-pat-inject='{
-          "target": ".modal-body",
-          "source": "el.href",
-          "trigger": "click"
-        }'
-       data-pat-plone-modal='{
-               "width": "600px",
-               "backdropOptions": {
-                 "closeOnClick": true
-               }
-             }'
-       role="button">
-      <i class="bi bi-plus-square me-1"></i>
-      <span i18n:translate="label_create_new_user">Create New User</span>
-    </a>
-
-
-    <a class="btn btn-primary mb-3 pat-plone-modal pat-inject"
-       href="@@manage-invite-user"
-       data-pat-inject='{
-             "target": ".modal-body",
-             "source": "el.href",
-             "trigger": "click"
-           }'
-       data-pat-plone-modal='{
-             "width": "600px",
-             "backdropOptions": {
-               "closeOnClick": true
-             }
-           }'
-       role="button">
-      <i class="bi bi-person-plus-fill me-1"></i>
-      <span i18n:translate="label_invite_existing_user">Invite an existing user</span>
-    </a>
 
     <!-- "No users found" notice -->
     <tal:block tal:condition="python:not view.users">
@@ -128,6 +91,49 @@
         </tbody>
       </table>
     </tal:block>
+
+
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-row-reverse">
+
+        <a class="btn btn-primary mb-3 pat-plone-modal pat-inject ms-2"
+           href="@@manage-create-user"
+           data-pat-inject='{
+              "target": ".modal-body",
+              "source": "el.href",
+              "trigger": "click"
+            }'
+           data-pat-plone-modal='{
+             "width": "600px",
+             "backdropOptions": {
+               "closeOnClick": true
+             }
+           }'
+           role="button">
+          <i class="bi bi-plus-square me-1"></i>
+          <span i18n:translate="label_create_new_user">Create New User</span>
+        </a>
+        <a class="btn btn-primary mb-3 pat-plone-modal pat-inject ms-2"
+           href="@@manage-invite-user"
+           data-pat-inject='{
+             "target": ".modal-body",
+             "source": "el.href",
+             "trigger": "click"
+           }'
+                   data-pat-plone-modal='{
+             "width": "600px",
+             "backdropOptions": {
+               "closeOnClick": true
+             }
+           }'
+           role="button">
+          <i class="bi bi-person-plus-fill me-1"></i>
+          <span i18n:translate="label_invite_existing_user">Invite an existing user</span>
+        </a>
+      </div>
+    </div>
+
+
   </metal:content-core>
 </metal:main>
 </body>

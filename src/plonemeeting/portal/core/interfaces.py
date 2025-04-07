@@ -17,19 +17,23 @@ class IPublicationsFolder(IFacetedNavigable):
     """Marker interface for Publications folder"""
 
 
+class IInstitutionSettingsView(Interface):
+    """Marker interface for Institution settings view"""
+    pass
+
 class IUtilsView(Interface):
     """"""
     def is_institution(self):
-        """See IUtilsView"""
-        return True
+        pass
 
     def is_in_institution(self):
-        """See IUtilsView"""
-        return True
+        pass
 
     def get_settings_url(self):
         pass
 
+    def show_settings_tab(self):
+        pass
+
     def is_meeting(self):
-        """See IUtilsView"""
-        return True
+        pass

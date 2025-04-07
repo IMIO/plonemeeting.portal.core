@@ -87,6 +87,9 @@ class MigrateTo2100(Migrator):
         self._uninstall_unnecessary_packages()
         self._add_institution_members_groups()
         self._add_institution_managers_groups()
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "actions"
+        )  # re-import actions, to add the institution settings tab in the navbar.
         logger.info("Done.")
 
 
