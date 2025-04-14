@@ -15,15 +15,15 @@ from z3c.form import form, button
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from plonemeeting.portal.core import _
-
+from plone.base import PloneMessageFactory as _plone
 
 class ManageUsersListingView(BrowserView):
     """
     Shows a manageable listing of the institution's users.
     """
 
-    label = "label_manage_single_user"
-    description = "desc_manage_single_user"
+    label = _("label_manage_users")
+    description = _("desc_manage_users")
 
     def __call__(self):
         self.users = self.get_all_institution_users(self.context.id)
@@ -50,7 +50,7 @@ class IManageUserForm(Interface):
     """Schema for user management form, focusing on groups now."""
 
     username = schema.ASCIILine(
-        title=_("label_user_name", default="User Name"),
+        title=_plone("label_user_name", default="User Name"),
         description=_(
             "help_user_name_creation_casesensitive",
             default="Enter a user name, usually something like 'jsmith'. "
@@ -66,7 +66,7 @@ class IManageUserForm(Interface):
         constraint=checkEmailAddress,
     )
     fullname = ProtectedTextLine(
-        title=_("label_full_name", default="Full Name"),
+        title=_("label_fullname", default="Full Name"),
         description=_(
             "help_full_name_creation", default="Enter full name, e.g. John Smith."
         ),
@@ -75,7 +75,7 @@ class IManageUserForm(Interface):
     directives.widget("user_groups", CheckBoxFieldWidget, multiple="multiple")
     user_groups = schema.List(
         title="label_groups",
-        description="help_select_groups",
+        description=_("help_select_groups"),
         value_type=schema.Choice(vocabulary="plonemeeting.portal.institution_manageable_groups_vocabulary"),
         required=False,
     )
@@ -85,7 +85,7 @@ class IInviteUserForm(Interface):
     """Schema for inviting a user to a group."""
 
     username = schema.ASCIILine(
-        title=_("label_user_name", default="User Name"),
+        title=_plone("label_user_name", default="User Name"),
         description=_(
             "help_user_name_creation_casesensitive",
             default="Enter a user name, usually something like 'jsmith'. "
@@ -155,10 +155,10 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
 class ManageCreateUserForm(BaseManageUserForm):
     schema = IManageUserForm
     ignoreContext = True
-    label = "label_manage_create_user"
-    description = "desc_manage_create_user"
+    label = _("label_manage_create_user")
+    description = _("desc_manage_create_user")
 
-    @button.buttonAndHandler("label_save_button", name="save")
+    @button.buttonAndHandler(_plone("save"), name="save")
     def handleSave(self, action):
         """Create or update user, then update their group membership."""
         data, errors = self.extractData()
@@ -199,8 +199,8 @@ class ManageEditUsersForm(BaseManageUserForm):
 
     schema = IManageUserForm
     ignoreContext = True
-    label = "label_manage_edit_user"
-    description = "desc_manage_edit_user"
+    label = _("label_manage_edit_user")
+    description = _("desc_manage_edit_user")
 
     def update(self):
         super().update()
@@ -240,7 +240,7 @@ class ManageEditUsersForm(BaseManageUserForm):
         self.widgets["fullname"].value = member.getProperty("fullname", "")
         self.widgets["user_groups"].value = self.get_manageable_groups_for_user(username)
 
-    @button.buttonAndHandler("label_save_button", name="save")
+    @button.buttonAndHandler(_plone("save"), name="save")
     def handleSave(self, action):
         """Create or update user, then update their group membership."""
         data, errors = self.extractData()
@@ -281,8 +281,8 @@ class InviteUserForm(BaseManageUserForm):
     """
     schema = IInviteUserForm
     ignoreContext = True
-    label = "label_invite_user"
-    description = "desc_invite_user"
+    label = _("label_invite_user")
+    description = _("desc_invite_user")
 
     @button.buttonAndHandler("label_invite_button", name="invite")
     def handleInvite(self, action):

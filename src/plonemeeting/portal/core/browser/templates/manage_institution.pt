@@ -2,24 +2,24 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="en"
       lang="en"
    metal:use-macro="context/@@main_template/macros/master"
-      xml:lang="en"
-   i18n:domain="plone"
+   i18n:domain="plonemeeting.portal.core"
    tal:define="utils_view nocall:context/@@utils_view;"
 >
 <body>
 
 <metal:custom_title fill-slot="content-title">
   <h1 class="documentFirstHeading"
-     i18n:translate="label_manage_users">Manage Institution</h1>
+     i18n:translate="label_manage_institution">Manage Institution</h1>
 </metal:custom_title>
 
 <metal:custom_desc fill-slot="content-description">
-  <div class="documentDescription"
-     i18n:translate="description_manage_users">
-    Here you can manage your institution.
-  </div>
+<!--?  <div class="documentDescription"-->
+<!--?     i18n:translate="description_manage_institution">-->
+<!--?    Here you can manage your institution.-->
+<!--?  </div>-->
 </metal:custom_desc>
 
 <metal:main fill-slot="content-core">
@@ -40,7 +40,7 @@
              title="Import a new meeting"
              i18n:attributes="title">
             <i class="bi bi-people"></i>
-            <span i18n:translate=''>label_manage_users</span>
+            <span i18n:translate=''>Users management</span>
           </a>
         </div>
       </div>

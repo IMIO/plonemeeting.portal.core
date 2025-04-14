@@ -31,6 +31,7 @@ class InstitutionView(DefaultView):
 class InstitutionSettingsView(DefaultView):
     """
     """
+
     def _update(self):
         super(InstitutionSettingsView, self)._update()
         if 'password' in self.w:
