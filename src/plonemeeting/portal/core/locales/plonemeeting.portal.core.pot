@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-03-04 14:05+0000\n"
+"POT-Creation-Date: 2025-04-15 12:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,760 +17,764 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/vocabularies.py:154
+#: ../vocabularies.py:154
 msgid "(Passed term of office) ${representative_value}"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:126
+#: ../content/item.py:69
+msgid "AI Summary"
+msgstr "Résumé avec de l'IA"
+
+#: ../content/institution.py:126
 msgid "Active"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_publications.pt:25
+#: ../faceted/preview_publications.pt:25
 msgid "Add a publication"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:283
+#: ../browser/sync.py:283
 msgid "Added"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:56
+#: ../content/item.py:56
 msgid "Additional data"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/item.pt:193
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/macro_item.pt:71
+#: ../browser/templates/item.pt:217
+#: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Anonymised text tag from ia.Delib to be replaced"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Assemblée générale"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:84
+#: ../content/publication.py:84
 msgid "Authority"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:98
+#: ../content/publication.py:98
 msgid "Authority date"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:248
+#: ../browser/sync.py:248
 msgid "Cancel"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:280
+#: ../content/institution.py:280
 msgid "Categories mappings"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:406
+#: ../content/institution.py:406
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/item.pt:143
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:64
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:43
+#: ../browser/templates/item.pt:143
+#: ../content/item.py:64
+#: ../content/publication.py:43
 msgid "Category"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Centre public d'action sociale"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:399
+#: ../browser/sync.py:399
 msgid "Choose the items you want to import in the portal."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:183
+#: ../browser/sync.py:183
 msgid "Choose the items you want to sync/import in the portal. It is also possible to remove items from the portal, by using the 'remove' button."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:67
+#: ../browser/sync.py:67
 msgid "Choose the meeting you want to import in the portal."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/setuphandlers.py:59
+#: ../setuphandlers.py:59
 msgid "Configuration folder"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:69
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/meeting.py:38
+#: ../content/item.py:71
+#: ../content/meeting.py:38
 msgid "Custom info"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:221
+#: ../content/institution.py:221
 msgid "Custom page for GDPR text"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:60
+#: ../content/item.py:60
 msgid "Decision"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:54
+#: ../content/publication.py:54
 msgid "Decision date"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/events/institution.py:35
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/migrations/migrate_to_2000.py:116
+#: ../events/institution.py:35
+#: ../migrations/migrate_to_2000.py:116
 msgid "Decisions"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:49
+#: ../configure.zcml:49
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:37
+#: ../content/publication.py:37
 msgid "Document type"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Document type id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Document type title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Document types"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Institution.xml
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Item.xml
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Meeting.xml
+#: ../profiles/default/types/Institution.xml
+#: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
 msgid "Edit"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_meeting.pt:52
+#: ../faceted/preview_meeting.pt:52
 msgid "Edit meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:141
+#: ../content/institution.py:141
 msgid "Enabled tabs"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:59
+#: ../content/publication.py:59
 msgid "Entry date"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:104
+#: ../content/publication.py:104
 msgid "Expired authority date"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/migrations/migrate_to_2000.py:76
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/setuphandlers.py:66
+#: ../migrations/migrate_to_2000.py:76
+#: ../setuphandlers.py:66
 msgid "Faceted decisions"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/configure.zcml:24
+#: ../faceted/configure.zcml:24
 msgid "Faceted meeting preview"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/migrations/migrate_to_2000.py:182
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/setuphandlers.py:67
+#: ../migrations/migrate_to_2000.py:182
+#: ../setuphandlers.py:67
 msgid "Faceted publications"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/configure.zcml:39
+#: ../faceted/configure.zcml:39
 msgid "Faceted publications preview"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:370
+#: ../content/institution.py:370
 msgid "Footer color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:378
+#: ../content/institution.py:378
 msgid "Footer text color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/actions.xml
+#: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:210
+#: ../content/institution.py:210
 msgid "Formatting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Global categories"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:74
+#: ../content/institution.py:74
 msgid "Global category"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Global category id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Global category title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/items_datatable.pt:35
+#: ../browser/templates/items_datatable.pt:35
 msgid "Groups in charge"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:338
+#: ../content/institution.py:338
 msgid "Header color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:64
+#: ../content/publication.py:64
 msgid "Hour and place of consultation"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:428
+#: ../browser/sync.py:428
 msgid "Import"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_meeting.pt:35
+#: ../faceted/preview_meeting.pt:35
 msgid "Import a new meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/actions.xml
+#: ../profiles/default/actions.xml
 msgid "Import meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:253
+#: ../content/institution.py:253
 msgid "Info annex formatting tal expression"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:40
+#: ../configure.zcml:40
 msgid "Installs the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Institution.xml
+#: ../profiles/default/types/Institution.xml
 msgid "Institution"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:133
+#: ../content/institution.py:133
 msgid "Institution Type"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Institution types"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Intercommunale"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Internal redirect path for GDPR masked text links from site root"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:46
+#: ../content/institution.py:46
 msgid "Invalid color parameter, the value should be a correct hexadecimal color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:40
+#: ../content/institution.py:40
 msgid "Invalid url parameters, the value should start with '&'"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Item.xml
+#: ../profiles/default/types/Item.xml
 msgid "Item"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:249
+#: ../content/institution.py:249
 msgid "Item additional data formatting tal expression"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:243
+#: ../content/institution.py:243
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:27
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/macro_item.pt:53
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../content/item.py:27
+#: ../faceted/macro_item.pt:53
+#: ../profiles/default/registry.xml
 msgid "Item number"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:235
+#: ../content/institution.py:235
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/widgets/sort.py:28
+#: ../faceted/widgets/sort.py:28
 msgid "Items sort order"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/macro_item.pt:65
+#: ../faceted/macro_item.pt:65
 msgid "Last modification"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:72
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/meeting.py:40
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_meeting.pt:75
+#: ../content/item.py:74
+#: ../content/meeting.py:40
+#: ../faceted/preview_meeting.pt:75
 msgid "Last modification in iA.Delib"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Legislative authorities"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:49
+#: ../content/publication.py:49
 msgid "Legislative authority"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Legislative authority id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Legislative authority title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:362
+#: ../content/institution.py:362
 msgid "Links text color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:69
+#: ../content/institution.py:69
 msgid "Local category id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:334
+#: ../content/institution.py:334
 msgid "Logo"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:259
+#: ../content/institution.py:259
 msgid "Mapping"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:41
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/macro_item.pt:42
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Meeting.xml
+#: ../browser/sync.py:41
+#: ../faceted/macro_item.pt:42
+#: ../profiles/default/types/Meeting.xml
 msgid "Meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:149
+#: ../content/institution.py:149
 msgid "Meeting Type"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:161
+#: ../content/institution.py:161
 msgid "Meeting config ID"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:66
+#: ../browser/sync.py:66
 msgid "Meeting import form"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:200
+#: ../browser/sync.py:200
 msgid "Meeting of"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:398
+#: ../browser/sync.py:398
 msgid "Meeting pre import form"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:182
+#: ../browser/sync.py:182
 msgid "Meeting pre sync form"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:170
+#: ../content/institution.py:170
 msgid "Meeting query filter for list"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Meeting type id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Meeting type title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Meeting types"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:277
+#: ../browser/sync.py:277
 msgid "Modified"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/items_datatable.pt:22
+#: ../browser/templates/items_datatable.pt:22
 msgid "Modified at"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:346
+#: ../content/institution.py:346
 msgid "Navigation bar color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:354
+#: ../content/institution.py:354
 msgid "Navigation bar text color"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/widgets/root_path.py:29
+#: ../faceted/widgets/root_path.py:29
 msgid "Navigation root path"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:162
+#: ../browser/sync.py:162
 msgid "No data available in table"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/behaviors/configure.zcml:17
+#: ../behaviors/configure.zcml:17
 msgid "PM Autopublishing"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/behaviors/configure.zcml:17
+#: ../behaviors/configure.zcml:17
 msgid "PM autopublishing for Managers and True by default"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:82
+#: ../content/institution.py:82
 msgid "Parameter"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:159
+#: ../content/institution.py:159
 msgid "Password"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:155
+#: ../content/institution.py:155
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:312
+#: ../content/institution.py:312
 msgid "Power users"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:227
+#: ../content/institution.py:227
 msgid "Project decision disclaimer"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Province"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Publication.xml
+#: ../profiles/default/types/Publication.xml
 msgid "Publication"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:304
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/events/institution.py:47
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/migrations/migrate_to_2000.py:202
+#: ../content/institution.py:304
+#: ../events/institution.py:47
+#: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:201
+#: ../content/institution.py:201
 msgid "Published Items content query"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:186
+#: ../content/institution.py:186
 msgid "Published Items query filter"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Related meeting date"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:220
+#: ../browser/sync.py:220
 msgid "Remove"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:300
+#: ../browser/sync.py:300
 msgid "Removed"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/item.pt:151
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/macro_item.pt:61
+#: ../browser/templates/item.pt:151
+#: ../faceted/macro_item.pt:61
 msgid "Representative"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:41
+#: ../content/item.py:41
 msgid "Representative group in charge"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:117
+#: ../content/institution.py:117
 msgid "Representative key"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:123
+#: ../content/institution.py:123
 msgid "Representative long values"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:120
+#: ../content/institution.py:120
 msgid "Representative value"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:293
+#: ../content/institution.py:293
 msgid "Representatives mappings"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:428
+#: ../content/institution.py:428
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:69
+#: ../browser/sync.py:69
 msgid "Select"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:164
+#: ../browser/sync.py:164
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:30
+#: ../content/item.py:30
 msgid "Sortable Item number"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/items_datatable.pt:14
+#: ../browser/templates/items_datatable.pt:14
 msgid "Status"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:322
+#: ../content/institution.py:322
 msgid "Styling"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:92
+#: ../content/publication.py:92
 msgid "Subject to authority?"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:209
+#: ../browser/sync.py:209
 msgid "Sync"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil Provincial"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil de Police"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Séance publique du Conseil de Zone"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:69
+#: ../content/publication.py:69
 msgid "Text"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/contact_info.py:32
+#: ../browser/contact_info.py:32
 msgid "The CAPTCHA validation was unsuccessful. Please retry by carefully following the instructions."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:222
+#: ../content/institution.py:222
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/events/publication.py:32
+#: ../events/publication.py:32
 msgid "Timestamp information has been removed since the data has changed"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/publication.py:49
+#: ../browser/publication.py:49
 msgid "Timestamping is disabled for this element!"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/templates/items_datatable.pt:19
+#: ../browser/templates/items_datatable.pt:19
 msgid "Title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/item.py:34
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/meeting.py:26
+#: ../content/item.py:34
+#: ../content/meeting.py:26
 msgid "UID Plonemeeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:274
+#: ../browser/sync.py:274
 msgid "Unchanged"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/sync_utils.py:327
+#: ../sync_utils.py:327
 msgid "Unexpected meeting count in web service response !"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/sync_utils.py:98
+#: ../sync_utils.py:98
 msgid "Unexpected publishable annex value in web service response !"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:58
+#: ../configure.zcml:58
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:461
+#: ../content/institution.py:461
 msgid "Unknown value: ${key}"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_meeting.pt:60
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/actions.xml
+#: ../faceted/preview_meeting.pt:60
+#: ../profiles/default/actions.xml
 msgid "Update meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:157
+#: ../content/institution.py:157
 msgid "Username"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:87
+#: ../content/institution.py:87
 msgid "Value"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/contact_info.py:17
+#: ../browser/contact_info.py:17
 msgid "Verification"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Institution.xml
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Item.xml
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/types/Meeting.xml
+#: ../profiles/default/types/Institution.xml
+#: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
 msgid "View"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/faceted/preview_meeting.pt:44
+#: ../faceted/preview_meeting.pt:44
 msgid "View meeting"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Ville/Commune"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/sync_utils.py:36
+#: ../sync_utils.py:36
 msgid "Web service connection error !"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:89
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:483
+#: ../browser/sync.py:89
+#: ../content/institution.py:483
 msgid "Webservice connection error !"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:225
+#: ../browser/sync.py:225
 msgid "You can't remove items from a decided meeting."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/events/publication.py:56
+#: ../events/publication.py:56
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/institution.py:21
+#: ../browser/institution.py:21
 msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to the application. Click on the links here above to access the elements."
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Zone de Police"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Zone de Secours"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:168
+#: ../browser/sync.py:168
 msgid "activate to sort column ascending"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/sync.py:169
+#: ../browser/sync.py:169
 msgid "activate to sort column descending"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:99
+#: ../content/publication.py:99
 msgid "authority_date_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:281
+#: ../content/institution.py:281
 msgid "categories_mappings_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/config.py:28
+#: ../config.py:28
 msgid "category"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/config.py:29
+#: ../config.py:29
 msgid "classifier"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/utils.py:123
+#: ../browser/utils.py:123
 msgid "confidential"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/config.py:24
+#: ../config.py:24
 msgid "decision"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:230
+#: ../content/institution.py:230
 msgid "default_in_project_disclaimer"
 msgstr ""
 
 #. Default: "Enable autopublishing?"
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/behaviors/autopublish.py:19
+#: ../behaviors/autopublish.py:19
 msgid "enableAutopublishing"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/publication.py:105
+#: ../content/publication.py:105
 msgid "expired_authority_date_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:267
+#: ../content/institution.py:267
 msgid "iA.Delib field to use for category mapping"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/config.py:24
+#: ../config.py:24
 msgid "in_project"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "institution type id"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "institution type title"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:202
+#: ../content/institution.py:202
 msgid "item_content_query_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:187
+#: ../content/institution.py:187
 msgid "item_filter_query_description"
 msgstr ""
 
 #. Default: "Send"
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/browser/contact_info.py:23
+#: ../browser/contact_info.py:23
 msgid "label_send"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:171
+#: ../content/institution.py:171
 msgid "meeting_filter_query_description"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/sync_utils.py:341
+#: ../sync_utils.py:341
 msgid "meeting_imported"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:40
+#: ../configure.zcml:40
 msgid "plonemeeting.portal.core"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:49
+#: ../configure.zcml:49
 msgid "plonemeeting.portal.core (demo)"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/configure.zcml:58
+#: ../configure.zcml:58
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:313
+#: ../content/institution.py:313
 msgid "power_users_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/config.py:24
+#: ../config.py:24
 msgid "private"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:124
+#: ../content/institution.py:124
 msgid "representative_long_value_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:121
+#: ../content/institution.py:121
 msgid "representative_value_description"
 msgstr ""
 
-#: plonemeeting.portal.core/src/plonemeeting/portal/core/content/institution.py:294
+#: ../content/institution.py:294
 msgid "representatives_mappings_description"
 msgstr ""

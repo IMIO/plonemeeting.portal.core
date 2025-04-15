@@ -171,6 +171,30 @@
           </div>
         </div>
       </div>
+      <div class="row mb-3" tal:condition="context/ai_summary">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header fw-bold" i18n:domain="plone">
+              Résumé avec de l'intelligence artificielle (IA)
+            </div>
+            <div class="card-body p-0">
+              <div
+                class="item-content position-relative watermarked"
+                aria-hidden="true"
+                 tal:attributes="data-watermark python:utils_view.get_watermark(review_state)"
+                 tal:condition="context/ai_summary"
+                 i18n:domain="plone"
+              >
+                <span tal:content="structure context/ai_summary" />
+              </div>
+            </div>
+            <div class="card-footer text-muted small text-center" i18n:domain="plone">
+              L'IA peut faire des erreurs. Envisagez de vérifier les informations importantes avec le texte original.
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div class="row mb-3">
         <div class="col-12">
           <div class="card">

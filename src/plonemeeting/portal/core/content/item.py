@@ -66,6 +66,8 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    ai_summary = RichText(title=_("AI Summary"), required=False)
+
     custom_info = RichText(title=_(u"Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(
