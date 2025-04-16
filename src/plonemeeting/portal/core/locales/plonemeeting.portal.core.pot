@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-04-15 12:45+0000\n"
+"POT-Creation-Date: 2025-04-14 14:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../vocabularies.py:154
+#: ../vocabularies.py:155
 msgid "(Passed term of office) ${representative_value}"
 msgstr ""
 
@@ -62,6 +62,11 @@ msgstr ""
 msgid "Authority date"
 msgstr ""
 
+#: ../browser/templates/manage_users_listing.pt:36
+msgid "Back to my institution"
+msgstr ""
+
+#: ../browser/institution.py:95
 #: ../browser/sync.py:248
 msgid "Cancel"
 msgstr ""
@@ -70,7 +75,7 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:406
+#: ../content/institution.py:405
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -148,8 +153,16 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: ../browser/institution.py:97
+msgid "Edit cancelled"
+msgstr ""
+
 #: ../faceted/preview_meeting.pt:52
 msgid "Edit meeting"
+msgstr ""
+
+#: ../browser/templates/manage_institution.pt:36
+msgid "Edit this institution"
 msgstr ""
 
 #: ../content/institution.py:141
@@ -230,6 +243,8 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: ../browser/templates/manage_institution.pt:30
+#: ../browser/templates/manage_users_listing.pt:31
 #: ../faceted/preview_meeting.pt:35
 msgid "Import a new meeting"
 msgstr ""
@@ -503,12 +518,16 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:428
+#: ../content/institution.py:427
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Régie Communale Autonome"
+msgstr ""
+
+#: ../browser/institution.py:80
+msgid "Save"
 msgstr ""
 
 #: ../browser/sync.py:69
@@ -600,7 +619,7 @@ msgstr ""
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:461
+#: ../content/institution.py:460
 msgid "Unknown value: ${key}"
 msgstr ""
 
@@ -611,6 +630,10 @@ msgstr ""
 
 #: ../content/institution.py:157
 msgid "Username"
+msgstr ""
+
+#: ../browser/templates/manage_institution.pt:43
+msgid "Users management"
 msgstr ""
 
 #: ../content/institution.py:87
@@ -635,12 +658,16 @@ msgstr ""
 msgid "Ville/Commune"
 msgstr ""
 
+#: ../browser/manage_users.py:64
+msgid "We will use this address if you need to recover your password"
+msgstr ""
+
 #: ../sync_utils.py:36
 msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:483
+#: ../content/institution.py:482
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -650,10 +677,6 @@ msgstr ""
 
 #: ../events/publication.py:56
 msgid "You must be publications power user to remove this element!"
-msgstr ""
-
-#: ../browser/institution.py:21
-msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to the application. Click on the links here above to access the elements."
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -688,7 +711,7 @@ msgstr ""
 msgid "classifier"
 msgstr ""
 
-#: ../browser/utils.py:123
+#: ../browser/utils.py:137
 msgid "confidential"
 msgstr ""
 
@@ -700,6 +723,27 @@ msgstr ""
 msgid "default_in_project_disclaimer"
 msgstr ""
 
+#: ../browser/manage_users.py:285
+msgid "desc_invite_user"
+msgstr ""
+
+#: ../browser/manage_users.py:159
+msgid "desc_manage_create_user"
+msgstr ""
+
+#: ../browser/manage_users.py:203
+msgid "desc_manage_edit_user"
+msgstr ""
+
+#: ../browser/manage_users.py:26
+msgid "desc_manage_users"
+msgstr ""
+
+#. Default: "Here you can manage the users of your institution."
+#: ../browser/templates/manage_users_listing.pt:19
+msgid "description_manage_users"
+msgstr ""
+
 #. Default: "Enable autopublishing?"
 #: ../behaviors/autopublish.py:19
 msgid "enableAutopublishing"
@@ -707,6 +751,20 @@ msgstr ""
 
 #: ../content/publication.py:105
 msgid "expired_authority_date_description"
+msgstr ""
+
+#. Default: "Enter full name, e.g. John Smith."
+#: ../browser/manage_users.py:70
+msgid "help_full_name_creation"
+msgstr ""
+
+#: ../browser/manage_users.py:78
+msgid "help_select_groups"
+msgstr ""
+
+#. Default: "Enter a user name, usually something like 'jsmith'. No spaces or special characters. Usernames and passwords are case sensitive, make sure the caps lock key is not enabled. This is the name used to log in."
+#: ../browser/manage_users.py:54
+msgid "help_user_name_creation_casesensitive"
 msgstr ""
 
 #: ../content/institution.py:267
@@ -733,9 +791,68 @@ msgstr ""
 msgid "item_filter_query_description"
 msgstr ""
 
+#. Default: "Actions"
+#: ../browser/templates/manage_users_listing.pt:57
+msgid "label_actions"
+msgstr ""
+
+#. Default: "Create New User"
+#: ../browser/templates/manage_users_listing.pt:116
+msgid "label_create_new_user"
+msgstr ""
+
+#. Default: "Edit"
+#: ../browser/templates/manage_users_listing.pt:81
+msgid "label_edit"
+msgstr ""
+
+#. Default: "Email"
+#: ../browser/manage_users.py:63
+#: ../browser/templates/manage_users_listing.pt:56
+msgid "label_email"
+msgstr ""
+
+#. Default: "Full Name"
+#: ../browser/manage_users.py:69
+#: ../browser/templates/manage_users_listing.pt:55
+msgid "label_fullname"
+msgstr ""
+
+#. Default: "Invite an existing user"
+#: ../browser/templates/manage_users_listing.pt:133
+msgid "label_invite_existing_user"
+msgstr ""
+
+#: ../browser/manage_users.py:284
+msgid "label_invite_user"
+msgstr ""
+
+#: ../browser/manage_users.py:158
+msgid "label_manage_create_user"
+msgstr ""
+
+#: ../browser/manage_users.py:202
+msgid "label_manage_edit_user"
+msgstr ""
+
+#. Default: "Manage Institution"
+#: ../browser/templates/manage_institution.pt:14
+msgid "label_manage_institution"
+msgstr ""
+
+#: ../browser/manage_users.py:25
+#: ../browser/templates/manage_users_listing.pt:14
+msgid "label_manage_users"
+msgstr ""
+
 #. Default: "Send"
 #: ../browser/contact_info.py:23
 msgid "label_send"
+msgstr ""
+
+#. Default: "Unregister"
+#: ../browser/templates/manage_users_listing.pt:89
+msgid "label_unregister"
 msgstr ""
 
 #: ../content/institution.py:171
@@ -745,6 +862,11 @@ msgstr ""
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
 #: ../sync_utils.py:341
 msgid "meeting_imported"
+msgstr ""
+
+#. Default: "No users found."
+#: ../browser/templates/manage_users_listing.pt:44
+msgid "msg_no_users_found"
 msgstr ""
 
 #: ../configure.zcml:40

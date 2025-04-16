@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import plone_
@@ -283,3 +284,22 @@ class PublicationReviewStatesVocabularyFactory:
 
 
 PublicationReviewStatesVocabulary = PublicationReviewStatesVocabularyFactory()
+
+
+class InstitutionManageableGroupsVocabularyFactory:
+    def __call__(self, context):
+        """
+        Returns a dynamic vocabulary of all portal group IDs.
+        You can adjust filtering logic if you want to exclude certain groups.
+        """
+        group_tool = api.portal.get_tool("portal_groups")
+        all_groups = group_tool.listGroups()
+        items = []
+        for group in all_groups:
+            gid = group.getId()
+            if context.id in gid and "members" not in gid:
+                items.append(SimpleTerm(value=gid, token=gid, title=group.getProperty("title")))
+
+        return SimpleVocabulary(items)
+
+InstitutionManageableGroupsVocabulary = InstitutionManageableGroupsVocabularyFactory()

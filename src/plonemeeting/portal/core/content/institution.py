@@ -388,7 +388,6 @@ class IInstitution(model.Schema):
 
 
 def categories_mappings_invariant(data):
-    pass
     mapped_local_category_id = []
     local_category_id_errors = set()
     if data.categories_mappings:

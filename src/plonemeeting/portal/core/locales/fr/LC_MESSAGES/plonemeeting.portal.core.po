@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-04-15 12:45+0000\n"
+"POT-Creation-Date: 2025-04-14 14:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../vocabularies.py:154
+#: ../vocabularies.py:155
 msgid "(Passed term of office) ${representative_value}"
 msgstr "(Ancien mandat) ${representative_value}"
 
@@ -59,6 +59,11 @@ msgstr "Tutelle"
 msgid "Authority date"
 msgstr "Date approbation tutelle"
 
+#: ../browser/templates/manage_users_listing.pt:36
+msgid "Back to my institution"
+msgstr "Retourner vers mon institution"
+
+#: ../browser/institution.py:95
 #: ../browser/sync.py:248
 msgid "Cancel"
 msgstr "Annuler"
@@ -67,7 +72,7 @@ msgstr "Annuler"
 msgid "Categories mappings"
 msgstr "Correspondances des matières"
 
-#: ../content/institution.py:406
+#: ../content/institution.py:405
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
@@ -143,11 +148,19 @@ msgstr "Natures des documents"
 #: ../profiles/default/types/Item.xml
 #: ../profiles/default/types/Meeting.xml
 msgid "Edit"
-msgstr "Editer"
+msgstr "Éditer"
+
+#: ../browser/institution.py:97
+msgid "Edit cancelled"
+msgstr "Édition annulée"
 
 #: ../faceted/preview_meeting.pt:52
 msgid "Edit meeting"
 msgstr "Modifier la séance"
+
+#: ../browser/templates/manage_institution.pt:36
+msgid "Edit this institution"
+msgstr "Modifier"
 
 #: ../content/institution.py:141
 msgid "Enabled tabs"
@@ -227,6 +240,8 @@ msgstr "Lieu et horaires de consultation"
 msgid "Import"
 msgstr "Importer"
 
+#: ../browser/templates/manage_institution.pt:30
+#: ../browser/templates/manage_users_listing.pt:31
 #: ../faceted/preview_meeting.pt:35
 msgid "Import a new meeting"
 msgstr "Importer une nouvelle séance"
@@ -500,13 +515,17 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Correspondances des mandataires"
 
-#: ../content/institution.py:428
+#: ../content/institution.py:427
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
 #: ../profiles/default/registry.xml
 msgid "Régie Communale Autonome"
 msgstr ""
+
+#: ../browser/institution.py:80
+msgid "Save"
+msgstr "Enregistrer"
 
 #: ../browser/sync.py:69
 msgid "Select"
@@ -566,7 +585,7 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 
 #: ../events/publication.py:32
 msgid "Timestamp information has been removed since the data has changed"
-msgstr ""
+msgstr "Les informations d'horodatage ont été supprimées car les données ont changé"
 
 #: ../browser/publication.py:49
 msgid "Timestamping is disabled for this element!"
@@ -597,7 +616,7 @@ msgstr "Une annexe non publiable a été trouvée dans la réponse du web servic
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
-#: ../content/institution.py:461
+#: ../content/institution.py:460
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
@@ -609,6 +628,10 @@ msgstr "Synchroniser cette séance"
 #: ../content/institution.py:157
 msgid "Username"
 msgstr "Nom d'utilisateur"
+
+#: ../browser/templates/manage_institution.pt:43
+msgid "Users management"
+msgstr "Gestion des utilisateurs"
 
 #: ../content/institution.py:87
 msgid "Value"
@@ -632,12 +655,16 @@ msgstr "Voir la séance"
 msgid "Ville/Commune"
 msgstr "Ville/Commune"
 
+#: ../browser/manage_users.py:64
+msgid "We will use this address if you need to recover your password"
+msgstr "Nous utiliserons cette adresse si l'utilisateur a perdu son mot de passe"
+
 #: ../sync_utils.py:36
 msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:483
+#: ../content/institution.py:482
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
@@ -648,10 +675,6 @@ msgstr "Vous ne pouvez pas enlever de points sur une séance déjà décidée."
 #: ../events/publication.py:56
 msgid "You must be publications power user to remove this element!"
 msgstr "Vous devez avoir le rôle super-utilisateur pour supprimer une publication!"
-
-#: ../browser/institution.py:21
-msgid "You see this page because you have permissions to edit it. Otherwise you would have been redirected to the application. Click on the links here above to access the elements."
-msgstr "Vous voyez cette page car vous avez la permission de l'éditer. Sinon, vous auriez été redirigé vers l'application. Cliquez sur les liens ci-dessus pour y accéder."
 
 #: ../profiles/default/registry.xml
 msgid "Zone de Police"
@@ -685,7 +708,7 @@ msgstr "Catégorie"
 msgid "classifier"
 msgstr "Classificateur"
 
-#: ../browser/utils.py:123
+#: ../browser/utils.py:137
 msgid "confidential"
 msgstr "Confidentiel"
 
@@ -697,6 +720,27 @@ msgstr "Décision"
 msgid "default_in_project_disclaimer"
 msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adopté</span> par l'autorité communale.</strong></p>"
 
+#: ../browser/manage_users.py:285
+msgid "desc_invite_user"
+msgstr "Vous pouvez inviter un utilisateur existant à rejoindre votre institution. Attention, veuillez vérifier avec l'utilisateur qu'il possède bien ce compte."
+
+#: ../browser/manage_users.py:159
+msgid "desc_manage_create_user"
+msgstr "Créer un nouvel utilisateur"
+
+#: ../browser/manage_users.py:203
+msgid "desc_manage_edit_user"
+msgstr "Modifier l'utilisateur"
+
+#: ../browser/manage_users.py:26
+msgid "desc_manage_users"
+msgstr ""
+
+#. Default: "Here you can manage the users of your institution."
+#: ../browser/templates/manage_users_listing.pt:19
+msgid "description_manage_users"
+msgstr "Ici, vous pouvez gérer les utilisateurs de votre institution. Si, lors de la création d'un nouvel utilisateur, son identifiant est déjà utilisé, vous pouvez l'inviter à rejoindre votre institution, à condition d'avoir vérifié avec l'utilisateur qu'il possédait bien ce compte. Sinon, vous pouvez simplement créer un nouvel utilisateur avec un autre identifiant. Attention, un identifiant ne peut être utilisé qu'une seule fois dans le système et ne peut être changé par la suite."
+
 #. Default: "Enable autopublishing?"
 #: ../behaviors/autopublish.py:19
 msgid "enableAutopublishing"
@@ -705,6 +749,20 @@ msgstr "Activer l'auto-publication"
 #: ../content/publication.py:105
 msgid "expired_authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
+
+#. Default: "Enter full name, e.g. John Smith."
+#: ../browser/manage_users.py:70
+msgid "help_full_name_creation"
+msgstr "Introduisez le nom complet, par exemple Jean Dupont."
+
+#: ../browser/manage_users.py:78
+msgid "help_select_groups"
+msgstr "Si un utilisateur est gestionnaire de décisions il pourra importer/synchroniser des séances depuis iA.Délib. Si un utilisateur est gestionnaire de publications il pourra publier des publications. Si un utilisateur est gestionnaire il pourra gérer les comptes utilisateurs."
+
+#. Default: "Enter a user name, usually something like 'jsmith'. No spaces or special characters. Usernames and passwords are case sensitive, make sure the caps lock key is not enabled. This is the name used to log in."
+#: ../browser/manage_users.py:54
+msgid "help_user_name_creation_casesensitive"
+msgstr "Introduisez un nom d'utilisateur, habituellement quelque chose comme 'jdupont'. Pas d'espaces ou de caractères spéciaux. Les noms d'utilisateur et les mots de passe sont sensibles à la casse, assurez-vous que la touche majuscule n'est pas activée. C'est le nom utilisé pour se connecter."
 
 #: ../content/institution.py:267
 msgid "iA.Delib field to use for category mapping"
@@ -730,10 +788,69 @@ msgstr "Paramètres URL servant à obtenir le contenu des points à importer"
 msgid "item_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des points à importer."
 
+#. Default: "Actions"
+#: ../browser/templates/manage_users_listing.pt:57
+msgid "label_actions"
+msgstr "Actions"
+
+#. Default: "Create New User"
+#: ../browser/templates/manage_users_listing.pt:116
+msgid "label_create_new_user"
+msgstr "Créer un nouvel utilisateur"
+
+#. Default: "Edit"
+#: ../browser/templates/manage_users_listing.pt:81
+msgid "label_edit"
+msgstr "Modifier"
+
+#. Default: "Email"
+#: ../browser/manage_users.py:63
+#: ../browser/templates/manage_users_listing.pt:56
+msgid "label_email"
+msgstr "Adresse e-mail"
+
+#. Default: "Full Name"
+#: ../browser/manage_users.py:69
+#: ../browser/templates/manage_users_listing.pt:55
+msgid "label_fullname"
+msgstr "Nom complet"
+
+#. Default: "Invite an existing user"
+#: ../browser/templates/manage_users_listing.pt:133
+msgid "label_invite_existing_user"
+msgstr "Inviter un utilisateur existant"
+
+#: ../browser/manage_users.py:284
+msgid "label_invite_user"
+msgstr "Inviter un utilisateur existant"
+
+#: ../browser/manage_users.py:158
+msgid "label_manage_create_user"
+msgstr "Créer un nouvel utilisateur"
+
+#: ../browser/manage_users.py:202
+msgid "label_manage_edit_user"
+msgstr "Modifier l'utilisateur"
+
+#. Default: "Manage Institution"
+#: ../browser/templates/manage_institution.pt:14
+msgid "label_manage_institution"
+msgstr "Paramètres de l'institution"
+
+#: ../browser/manage_users.py:25
+#: ../browser/templates/manage_users_listing.pt:14
+msgid "label_manage_users"
+msgstr "Gestion des utilisateurs"
+
 #. Default: "Send"
 #: ../browser/contact_info.py:23
 msgid "label_send"
 msgstr "Envoyer"
+
+#. Default: "Unregister"
+#: ../browser/templates/manage_users_listing.pt:89
+msgid "label_unregister"
+msgstr "Enlever"
 
 #: ../content/institution.py:171
 msgid "meeting_filter_query_description"
@@ -743,6 +860,11 @@ msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 #: ../sync_utils.py:341
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
+
+#. Default: "No users found."
+#: ../browser/templates/manage_users_listing.pt:44
+msgid "msg_no_users_found"
+msgstr "Aucun utilisateur trouvé."
 
 #: ../configure.zcml:40
 msgid "plonemeeting.portal.core"
