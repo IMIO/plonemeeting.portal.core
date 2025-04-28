@@ -296,3 +296,63 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
             url = f"{self.institution.absolute_url()}/{view}"
             browser.open(url)
             self.assertEqual(browser.url, url)
+
+    def test_user_form_handleSave(self):
+        """ManageCreateUserForm.handleSave should correctly create a new user with the provided properties and group memberships"""
+        self.login_as_manager()
+
+        new_username = "newuser"
+        new_email = "newuser@example.com"
+        new_fullname = "New User"
+        new_groups = [self.decisions_managers_group_id]
+
+        # User doesn't exist yet
+        self.assertIsNone(api.user.get(username=new_username))
+
+        # Set up the form data
+        self.request.form['form.widgets.username'] = new_username
+        self.request.form['form.widgets.email'] = new_email
+        self.request.form['form.widgets.fullname'] = new_fullname
+        self.request.form['form.widgets.user_groups'] = new_groups
+        self.request.form['form.buttons.save'] = "Save"
+
+        self.create_form()
+        self.create_form.handleSave(action="save", form=self.create_form)
+
+        # Verify the user was created with the correct properties
+        user = api.user.get(username=new_username)
+        self.assertIsNotNone(user)
+        self.assertEqual(new_email, user.getProperty("email"))
+        self.assertEqual(new_fullname, user.getProperty("fullname"))
+
+        # Verify the user was added to the institution
+        user_groups = self._get_user_groups_id(username=new_username)
+        self.assertIn(self.members_group_id, user_groups)
+
+        # Verify the user was assigned to the correct groups
+        self.assertIn(self.decisions_managers_group_id, user_groups)
+
+
+        updated_email = "updated@example.com"
+        updated_fullname = "Updated User"
+        updated_groups = [self.publications_managers_group_id]
+
+        self.request.form['form.widgets.username'] = new_username
+        self.request.form['form.widgets.email'] = updated_email
+        self.request.form['form.widgets.fullname'] = updated_fullname
+        self.request.form['form.widgets.user_groups'] = updated_groups
+        self.request.form['form.buttons.save'] = "Save"
+
+        self.edit_form()
+        self.edit_form.handleSave(action="save", form=self.edit_form)
+
+        # User's properties were updated
+        user = api.user.get(username=new_username)
+        self.assertEqual(updated_email, user.getProperty("email"))
+        self.assertEqual(updated_fullname, user.getProperty("fullname"))
+
+        # User's group memberships were updated
+        user_groups = self._get_user_groups_id(username=new_username)
+        self.assertIn(self.members_group_id, user_groups)  # Should still be in the institution
+        self.assertNotIn(self.decisions_managers_group_id, user_groups)  # Should be removed
+        self.assertIn(self.publications_managers_group_id, user_groups)  # Should be added

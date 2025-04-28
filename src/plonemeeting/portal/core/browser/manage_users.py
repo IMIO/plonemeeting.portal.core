@@ -196,8 +196,7 @@ ManageCreateUserFormView = wrap_form(ManageCreateUserForm)
 
 class ManageEditUsersForm(BaseManageUserForm):
     """
-    z3c.form class to create/update/delete Plone users,
-    with group membership (instead of roles).
+    Form to update an institution's user
     """
 
     schema = IManageUserForm
@@ -217,13 +216,9 @@ class ManageEditUsersForm(BaseManageUserForm):
             self.request.response.redirect("manage-users-listing")
             return
 
-    def updateWidgets(self, prefix=""):
-        """
-        Override updateWidgets to set widget values after they are created,
-        which is the recommended place to prefill a z3c.form.
-        """
-        super().updateWidgets(prefix=prefix)
-        username = self.request.form.get("username", None)
+    def updateWidgets(self, prefix=None):
+        super().updateWidgets(prefix)
+        username = self.request.form.get("username", self.request.form.get("form.widgets.username", None))
         if not username:
             return
 
@@ -247,8 +242,6 @@ class ManageEditUsersForm(BaseManageUserForm):
     def handleSave(self, action):
         """Create or update user, then update their group membership."""
         data, errors = self.extractData()
-        # if errors:
-        #     return
         username = data["username"].strip()
         email = data.get("email", "").strip()
         fullname = data.get("fullname", "").strip()
