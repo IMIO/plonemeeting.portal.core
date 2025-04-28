@@ -210,6 +210,7 @@
       permission="zope.Public"/>
   </configure>
 
+  <!-- institution management views -->
   <browser:page
     for="plonemeeting.portal.core.content.institution.IInstitution"
     name="manage-settings"
@@ -244,7 +245,7 @@
   <browser:page
     for="plonemeeting.portal.core.content.institution.IInstitution"
     name="manage-invite-user"
-    class=".manage_users.InviteUserForm"
+    class=".manage_users.InviteUserFormView"
     permission="cmf.ModifyPortalContent"
   />
 

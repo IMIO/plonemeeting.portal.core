@@ -1,141 +1,292 @@
-# my/product/tests/test_manage_users.py
-
-import unittest
-from plone.testing.z2 import Browser
+# -*- coding: utf-8 -*-
 from plone.app.testing import login, logout, TEST_USER_NAME, TEST_USER_ID, setRoles
-from Products.CMFCore.utils import getToolByName
+from plone.testing.z2 import Browser
+import transaction
 
-from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase, PmPortalDemoFunctionalTestCase
+from plone import api
+from plone.protect.authenticator import createToken
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.utils import get_members_group_id, get_decisions_managers_group_id, \
+    get_publications_managers_group_id, get_managers_group_id
+from zExceptions import Unauthorized
+from zope.component import getMultiAdapter
 
 
 class TestManageUsers(PmPortalDemoFunctionalTestCase):
-    """Integration tests for the custom user manager (focusing on groups)."""
+    """Test the custom user management per institution."""
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.app = self.layer['app']
-        self.browser = Browser(self.app)
-        self.browser.handleErrors = False
+        super().setUp()
+        self.institution = self.portal["amityville"]
+        self.members_group_id = get_members_group_id(self.institution)
+        self.decisions_managers_group_id = get_decisions_managers_group_id(self.institution)
+        self.publications_managers_group_id = get_publications_managers_group_id(self.institution)
+        self.manager_group_id = get_managers_group_id(self.institution)
 
-        # setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        # login(self.portal, TEST_USER_NAME)
+        self.portal.acl_users._doAddUser("testuser", "password", [], [])
 
+        # Create the form and view instances
+        self.request = self.layer['request']
+        self.request.form['_authenticator'] = createToken()
+        self.create_form = getMultiAdapter((self.institution, self.request), name="manage-create-user").form_instance
+        self.edit_form = getMultiAdapter((self.institution, self.request), name="manage-edit-user").form_instance
+        self.invite_form = getMultiAdapter((self.institution, self.request), name="manage-invite-user").form_instance
+        self.listing_view = getMultiAdapter((self.institution, self.request), name="manage-users-listing")
 
-        # We'll reference these tools often
-        self.acl_users = getToolByName(self.portal, 'acl_users')
-        self.group_tool = getToolByName(self.portal, 'portal_groups')
-        self.membership = getToolByName(self.portal, 'portal_membership')
-        super(TestManageUsers, self).setUp()
+    def _get_user_groups_id(self, username):
+        return [g.getId() for g in api.group.get_groups(username=username)]
 
-    def tearDown(self):
-        logout()
+    def test_get_manageable_groups_for_user(self):
+        """get_manageable_groups_for_user should return the correct groups"""
 
-    def test_listing_view_no_users(self):
-        """Check listing view 'no users found' message when only default test user remains."""
-        # Remove all users except the default test user
+        self.login_as_manager()
+        api.group.add_user(groupname=self.members_group_id, username="testuser")
 
-        login(self.portal, "manager")
-        for uid in list(self.acl_users.getUserIds()):
-            if uid != TEST_USER_ID:
-                self.acl_users.userFolderDelUsers([uid])
+        # Should not be in any manageable groups
+        self.assertEqual([], self.create_form.get_manageable_groups_for_user("testuser"))
 
-        self.browser.open(self.portal.absolute_url() + '/manage-users-listing')
+        # Add the user to a manageable group
+        api.group.add_user(groupname=self.decisions_managers_group_id, username="testuser")
+
+        # Now the user should be in the decisions_managers group
         self.assertIn(
-            'No users found.',
-            self.browser.contents,
-            "Expected 'No users found.' message not present in listing."
+            self.decisions_managers_group_id,
+            self.create_form.get_manageable_groups_for_user("testuser")
         )
 
-    def test_create_user_via_form(self):
-        """Create a new user from the form, assign one group, verify they appear in listing."""
-        self.browser.open(self.portal.absolute_url() + '/manage-users-form')
+        # Add the user to another manageable group
+        api.group.add_user(groupname=self.publications_managers_group_id, username="testuser")
 
-        # Fill out form
-        self.browser.getControl(label='User ID').value = 'alice'
-        self.browser.getControl(label='Email').value = 'alice@example.com'
-        self.browser.getControl(label='Full name').value = 'Alice Wonderland'
+        # Now the user should be in both manageable groups
+        manageable_groups = self.create_form.get_manageable_groups_for_user("testuser")
+        self.assertIn(self.decisions_managers_group_id, manageable_groups)
+        self.assertIn(self.publications_managers_group_id, manageable_groups)
 
-        # Assign one group (assuming the label is the group ID or something close)
-        # Depending on how your widget is rendered, you might see the label 'managers'
-        self.browser.getControl(label='managers').selected = True
+    def test_update_user_groups(self):
+        """update_user_groups should correctly updates the user's group memberships"""
+        self.login_as_manager()
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertEqual(1, len(user_groups))
+        self.assertEqual("AuthenticatedUsers", user_groups[0])
+        self.edit_form()
 
-        self.browser.getControl(name='form.buttons.save').click()
+        # Add the user to the decisions_managers group
+        selected_groups = [self.decisions_managers_group_id]
+        self.edit_form.update_user_groups("testuser", selected_groups)
 
-        # Check listing
-        self.assertIn('manage-users-listing', self.browser.url, "Did not return to listing after save.")
-        self.assertIn('alice', self.browser.contents, "New user 'alice' not found in listing.")
+        # Check that the user is now in the decisions_managers group
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertEqual(2, len(user_groups))
+        self.assertIn(self.decisions_managers_group_id, user_groups)
 
-        # Verify group membership
-        group_obj = self.group_tool.getGroupById('managers')
-        self.assertIn('alice', group_obj.getGroupMemberIds(), "'alice' not actually in 'managers' group.")
+        # Update to add the user to the publications_managers group and remove from decisions_managers
+        selected_groups = [self.publications_managers_group_id]
+        self.edit_form.update_user_groups("testuser", selected_groups)
 
-    def test_edit_user_update_groups(self):
-        """Edit existing user to change group membership."""
-        # Pre-create a user 'bob'
-        reg = getToolByName(self.portal, 'portal_registration')
-        reg.addMember('bob', 'secret', properties={'email': 'bob@oldmail.com', 'fullname': 'Bob Oldname'})
+        # Check that the user is now only in the publications_managers group
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertEqual(2, len(user_groups))
+        self.assertIn(self.publications_managers_group_id, user_groups)
 
-        # Add him to 'editors' group
-        self.group_tool.addPrincipalToGroup('bob', 'editors')
+        # Update to add the user to both groups
+        selected_groups = [self.decisions_managers_group_id, self.publications_managers_group_id]
+        self.edit_form.update_user_groups("testuser", selected_groups)
 
-        # Now open the form with user_id=bob
-        self.browser.open(self.portal.absolute_url() + '/manage-users-form?user_id=bob')
+        # Check that the user is now in both groups
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertEqual(3, len(user_groups))
+        self.assertIn(self.decisions_managers_group_id, user_groups)
+        self.assertIn(self.publications_managers_group_id, user_groups)
 
-        # Suppose we want to remove 'editors' and add 'managers'
-        self.browser.getControl(label='editors').selected = False
-        self.browser.getControl(label='managers').selected = True
+        # Update to remove the user from all groups
+        selected_groups = []
+        self.edit_form.update_user_groups("testuser", selected_groups)
 
-        self.browser.getControl(label='Email').value = 'bob@newmail.com'
-        self.browser.getControl(label='Full name').value = 'Bob Newname'
-        self.browser.getControl(name='form.buttons.save').click()
+        # Check that the user is not in any groups
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertEqual(1, len(user_groups))
+        self.assertEqual("AuthenticatedUsers", user_groups[0])
 
-        # Confirm changes in listing
-        self.assertIn('manage-users-listing', self.browser.url, "No redirect to listing after update.")
-        self.assertIn('bob', self.browser.contents, "Updated user 'bob' not found in listing.")
+    def test_join_institution(self):
+        """join_institution adds the user to the institution members group"""
+        self.login_as_manager()
+        self.invite_form()
+        # Initially the user should not be in the members group
+        self.assertNotIn(
+            self.members_group_id,
+            self._get_user_groups_id(username="testuser")
+        )
 
-        # Confirm new membership
-        managers_group = self.group_tool.getGroupById('managers')
-        editors_group = self.group_tool.getGroupById('editors')
-        self.assertIn('bob', managers_group.getGroupMemberIds(), "User 'bob' not added to 'managers'.")
-        self.assertNotIn('bob', editors_group.getGroupMemberIds(), "User 'bob' was not removed from 'editors'.")
+        # Add the user to the institution
+        self.invite_form.join_institution("testuser")
 
-    def test_delete_user(self):
-        """Delete a user via the form, ensure they're removed from all groups and membership."""
-        reg = getToolByName(self.portal, 'portal_registration')
-        reg.addMember('charlie', 'secret', properties={'email': 'charlie@example.com'})
+        # Check that the user is now in the members group
+        self.assertIn(
+            self.members_group_id,
+            self._get_user_groups_id(username="testuser")
+        )
 
-        # Put 'charlie' in 'managers' and 'editors'
-        self.group_tool.addPrincipalToGroup('charlie', 'managers')
-        self.group_tool.addPrincipalToGroup('charlie', 'editors')
+    def test_invite_form(self):
+        """handleInvite should correctly adds the user to the institution."""
+        self.login_as_manager()
 
-        self.browser.open(self.portal.absolute_url() + '/manage-users-form?user_id=charlie&delete=1')
-        self.assertIn('manage-users-listing', self.browser.url, "Did not redirect to listing after delete.")
+        # Initially the user should not be in the members group
+        self.assertNotIn(
+            self.members_group_id,
+            self._get_user_groups_id(username="testuser")
+        )
 
-        # Confirm 'charlie' is gone from membership
-        self.assertIsNone(self.membership.getMemberById('charlie'), "User 'charlie' still exists after delete.")
+        # Set up the form data
+        self.request.form['form.widgets.username'] = "testuser"
+        self.request.form['form.buttons.invite'] = "Invite"
 
-        # Confirm 'charlie' is gone from groups
-        for group_id in ['managers', 'editors']:
-            group_obj = self.group_tool.getGroupById(group_id)
-            self.assertNotIn('charlie', group_obj.getGroupMemberIds(), f"'charlie' still in group {group_id}.")
+        # Process the form
+        self.invite_form.update()
 
-    def test_assign_multiple_groups_on_create(self):
-        """Create user with multiple groups at once, verify membership."""
-        self.browser.open(self.portal.absolute_url() + '/manage-users-form')
-        self.browser.getControl(label='User ID').value = 'diana'
-        self.browser.getControl(label='Email').value = 'diana@example.com'
-        self.browser.getControl(label='Full name').value = 'Diana MultiGroups'
+        # Check that the user is now in the members group
+        self.assertIn(
+            self.members_group_id,
+            self._get_user_groups_id(username="testuser")
+        )
 
-        # Assign 'managers' and 'editors'
-        self.browser.getControl(label='managers').selected = True
-        self.browser.getControl(label='editors').selected = True
+    def test_unregister_from_institution(self):
+        """unregister_from_institution should removes the user from all institution groups"""
+        self.login_as_manager()
+        self.edit_form()
+        # Add the user to all institution groups
+        api.group.add_user(groupname=self.members_group_id, username="testuser")
+        api.group.add_user(groupname=self.decisions_managers_group_id, username="testuser")
+        api.group.add_user(groupname=self.publications_managers_group_id, username="testuser")
 
-        self.browser.getControl(name='form.buttons.save').click()
-        self.assertIn('manage-users-listing', self.browser.url, "Did not return to listing after create.")
+        # Check that the user is in all groups
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertIn(self.members_group_id, user_groups)
+        self.assertIn(self.decisions_managers_group_id, user_groups)
+        self.assertIn(self.publications_managers_group_id, user_groups)
 
-        # Verify group memberships
-        for group_id in ['managers', 'editors']:
-            group_obj = self.group_tool.getGroupById(group_id)
-            self.assertIn('diana', group_obj.getGroupMemberIds(), f"'diana' missing from {group_id} group.")
-        reviewers_group = self.group_tool.getGroupById('reviewers')
-        self.assertNotIn('diana', reviewers_group.getGroupMemberIds(), "Unexpected membership in 'reviewers'.")
+        # Unregister the user from the institution
+        self.edit_form.unregister_from_institution("testuser")
+
+        # Check that the user is not in any institution groups
+        user_groups = self._get_user_groups_id(username="testuser")
+        self.assertNotIn(self.members_group_id, user_groups)
+        self.assertNotIn(self.decisions_managers_group_id, user_groups)
+        self.assertNotIn(self.publications_managers_group_id, user_groups)
+
+    def test_get_all_institution_users(self):
+        """get_all_institution_users returns all users in the institution"""
+        self.login_as_manager()
+        self.portal.acl_users._doAddUser("testuser1", "password", [], [])
+        self.portal.acl_users._doAddUser("testuser2", "password", [], [])
+        self.listing_view()
+        # Initially there should be some users in the institution (from the demo setup)
+        initial_users = self.listing_view.get_all_institution_users(self.institution.id)
+        initial_count = len(initial_users)
+
+        # Add testuser1 to the institution
+        api.group.add_user(groupname=self.members_group_id, username="testuser1")
+
+        # Check that testuser1 is now in the list
+        users = self.listing_view.get_all_institution_users(self.institution.id)
+        self.assertEqual(initial_count + 1, len(users))
+        self.assertIn("testuser1", [user.getId() for user in users])
+
+        # Add testuser2 to the institution
+        api.group.add_user(groupname=self.members_group_id, username="testuser2")
+
+        # Check that both users are now in the list
+        users = self.listing_view.get_all_institution_users(self.institution.id)
+        self.assertEqual(initial_count + 2, len(users))
+        user_ids = [user.getId() for user in users]
+        self.assertIn("testuser1", user_ids)
+        self.assertIn("testuser2", user_ids)
+
+    def test_edit_form_updateWidgets(self):
+        """updateWidgets should correctly fill the form widgets"""
+        self.login_as_manager()
+
+        # Set up a member with properties
+        member = api.user.get(username="testuser")
+        member.setMemberProperties(mapping={"email": "test@example.com", "fullname": "Test User"})
+
+        # Add the user to a manageable group
+        api.group.add_user(groupname=self.decisions_managers_group_id, username="testuser")
+
+        # Set the username in the request
+        self.request.form['username'] = "testuser"
+
+        # Update the form
+        self.edit_form.update()
+
+        # Check that the widgets are correctly populated
+        self.assertEqual("testuser", self.edit_form.widgets["username"].value)
+        self.assertEqual("test@example.com", self.edit_form.widgets["email"].value)
+        self.assertEqual("Test User", self.edit_form.widgets["fullname"].value)
+        self.assertEqual([self.decisions_managers_group_id], self.edit_form.widgets["user_groups"].value)
+
+    def test_view_form_permission_access(self):
+        """Only users with in the manager group of the instution can access the manage users views and forms"""
+        app = self.layer['app']
+        browser = Browser(app)
+        browser.handleErrors = True
+
+        # Views to test
+        views = [
+            "manage-users-listing",
+            "manage-create-user",
+            "manage-edit-user",
+            "manage-invite-user",
+        ]
+
+        # Test access for anonymous users (should be denied)
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            browser.open(url)
+            # User should be redirected to login page
+            self.assertIn(f"login?came_from=/plone/{self.institution.getId()}/{view}", browser.url)
+
+        # Create a new user with no special permissions at first
+        self.portal.acl_users._doAddUser("perm-testuser", "password", [], [])
+        transaction.commit()
+        user_authorization_header = "Basic perm-testuser:password"
+
+        # Test access for regular members (should be denied)
+        browser = Browser(app)
+        browser.handleErrors = False
+        browser.addHeader('Authorization', user_authorization_header)
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            with self.assertRaises(Unauthorized):
+                browser.open(url)
+
+        # Test access for institution members (should be denied)
+        api.group.add_user(groupname=self.members_group_id, username="perm-testuser")
+        transaction.commit()
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            with self.assertRaises(Unauthorized):
+                browser.open(url)
+
+        # Test access for decisions managers (should be denied)
+        api.group.add_user(groupname=self.decisions_managers_group_id , username="perm-testuser")
+        transaction.commit()
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            with self.assertRaises(Unauthorized):
+                browser.open(url)
+
+        # Test access for publications managers (should be denied)
+        api.group.add_user(groupname=self.publications_managers_group_id , username="perm-testuser")
+        transaction.commit()
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            with self.assertRaises(Unauthorized):
+                browser.open(url)
+
+        # Test access for site managers (should be allowed)
+        api.group.add_user(groupname=self.manager_group_id , username="perm-testuser")
+        transaction.commit()
+        for view in views:
+            url = f"{self.institution.absolute_url()}/{view}"
+            browser.open(url)
+            self.assertEqual(browser.url, url)

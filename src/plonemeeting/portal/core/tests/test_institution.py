@@ -22,7 +22,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         institution = self.portal["belleville"]
         self.login_as_manager()
         request = self.portal.REQUEST
-        view = institution.restrictedTraverse("@@view")
+        view = institution.restrictedTraverse("@@manage-settings")
         request.set('PUBLISHED', view)
         view_content = view()
         self.assertEqual(view.request.response.status, 200)
