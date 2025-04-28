@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
-
-from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from imio.migrator.migrator import Migrator
 from plone import api
 from plone.base.interfaces import IBundleRegistry
@@ -9,7 +6,11 @@ from plone.base.utils import get_installer
 from plone.registry.interfaces import IRegistry
 from plonemeeting.portal.core.utils import get_managers_group_id
 from plonemeeting.portal.core.utils import get_members_group_id
+from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from zope.component import getUtility
+
+import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

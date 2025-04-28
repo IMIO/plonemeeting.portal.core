@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import os
-
+from datetime import datetime
+from datetime import timedelta
 from plone import api
 from plone.memoize import ram
 from plone.protect.interfaces import IDisableCSRFProtection
@@ -19,8 +19,8 @@ from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
 import json
+import os
 import requests
-from datetime import datetime, timedelta
 
 
 class InstitutionLocationsAPIView(PublicAPIView):

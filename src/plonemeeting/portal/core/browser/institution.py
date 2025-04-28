@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-from Products.statusmessages.interfaces import IStatusMessage
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
-from plone.dexterity.events import EditCancelledEvent, EditFinishedEvent
+from plone.dexterity.events import EditCancelledEvent
+from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
+
 
 class InstitutionView(DefaultView):
     """

@@ -1,21 +1,12 @@
 # -*- coding: utf-8 -*-
-import copy
-import json
-import os
+from AccessControl import Unauthorized
 from datetime import datetime
-from unittest.mock import patch
-
+from imio.helpers.content import object_values
 from mockito import mock
 from mockito import when
+from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
-
-import pytz
-import requests
-import transaction
-from AccessControl import Unauthorized
-from imio.helpers.content import object_values
-from plone import api
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
@@ -25,6 +16,14 @@ from plonemeeting.portal.core.sync_utils import sync_items_data
 from plonemeeting.portal.core.sync_utils import sync_items_number
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from unittest.mock import patch
+
+import copy
+import json
+import os
+import pytz
+import requests
+import transaction
 
 
 class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):

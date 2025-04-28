@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import plone_
@@ -11,6 +10,7 @@ from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
+from Products.CMFCore.utils import getToolByName
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 

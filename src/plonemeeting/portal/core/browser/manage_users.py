@@ -1,21 +1,24 @@
-from plone.app.users.schema import checkEmailAddress
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from plone import api
-from plone.app.users.schema import ProtectedTextLine, ProtectedEmail
+from plone.app.users.schema import ProtectedEmail
+from plone.app.users.schema import ProtectedTextLine
+from plone.app.users.schema import checkEmailAddress
 from plone.autoform import directives
 from plone.autoform.form import AutoExtensibleForm
+from plone.base import PloneMessageFactory as _plone
 from plone.protect.utils import addTokenToUrl
 from plone.z3cform.layout import wrap_form
+from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
+from z3c.form import button
+from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import Interface
-from z3c.form import form, button
-from Products.CMFCore.utils import getToolByName
-from Products.statusmessages.interfaces import IStatusMessage
-from plonemeeting.portal.core import _
-from plone.base import PloneMessageFactory as _plone
+
 
 class ManageUsersListingView(BrowserView):
     """

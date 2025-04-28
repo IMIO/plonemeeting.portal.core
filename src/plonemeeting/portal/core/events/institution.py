@@ -17,8 +17,10 @@ from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.interfaces import IPublicationsFolder
-from plonemeeting.portal.core.utils import create_faceted_folder, get_members_group_id, get_managers_group_id
+from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_managers_group_id
+from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
 from zope.globalrequest import getRequest
