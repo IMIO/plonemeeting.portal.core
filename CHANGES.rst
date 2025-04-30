@@ -4,7 +4,8 @@ Changelog
 2.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Change default timestamping service in default profile.
+  [aduchene]
 
 
 2.1.2 (2025-04-30)

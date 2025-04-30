@@ -121,7 +121,7 @@
 
   <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">
-    <value key="timestamping_service_url">http://tss.eidpki.belgium.be</value>
+    <value key="timestamping_service_url">https://freetsa.org/tsr</value>
   </records>
 
   <!-- collective.autopublishing -->
