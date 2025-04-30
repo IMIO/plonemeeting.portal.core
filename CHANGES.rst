@@ -8,6 +8,12 @@ Changelog
   [aduchene]
 - DELIBE-24: Fix an issue where a decisions manager could not remove items from a meeting.
   [aduchene]
+- DELIBE-199: Users are now manageable by institution.
+  [aduchene]
+- DELIBE-199: Add new member and manager groups for each institution.
+  [aduchene]
+- DELIBE-199: New institution settings navigation tab and view.
+  [aduchene]
 
 2.1.0 (2025-02-28)
 ------------------
