@@ -84,7 +84,9 @@
             <!-- "Delete" link: direct GET with confirm -->
             <a class="btn btn-sm btn-danger"
                tal:attributes="href python: view.unregister_url + '&username=' + user.id"
-               onclick="return confirm('Are you sure you want to unregister this user?');">
+               confirm-message="Are you sure you want to unregister this user?"
+               i18n:attributes="value; confirm-message"
+               onclick="return confirm(this.getAttribute('confirm-message'));">
               <i class="bi bi-x-square"></i>
               <span i18n:translate="label_unregister">Unregister</span>
             </a>

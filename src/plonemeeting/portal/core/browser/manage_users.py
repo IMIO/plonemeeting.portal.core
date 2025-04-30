@@ -121,11 +121,11 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
         all_user_groups = api.group.get_groups(username=username)
         # We'll say any group ID that ends (or contains) these strings is an 'institution group'
         # Adjust to match your actual naming convention.
-        manageable_institution_suffixes = ("decisions_managers", "publications_managers")
+        manageable_institution_suffixes = ("decisions_managers", "publications_managers", "managers")
         user_manageable_groups = []
         for group in all_user_groups:
             group_id = group.getId()
-            # # Keep only groups that appear to be institution-related
+            # Keep only groups that are institution-related
             if any(suffix in group_id for suffix in manageable_institution_suffixes):
                 user_manageable_groups.append(group_id)
 
@@ -262,9 +262,9 @@ class ManageEditUsersForm(BaseManageUserForm):
                 )
                 self.update_user_groups(username, groups_to_assign)
                 self.registration.registeredNotify(username)
-                self.messages.add("msg_user_created", type="info")
+                self.messages.add(_("msg_user_created"), type="info")
             except Exception as e:
-                self.messages.add("msg_user_create_failed: {}".format(str(e)), type="error")
+                self.messages.add(_("msg_user_create_failed"), type="error")
 
         self.request.response.redirect("manage-users-listing")
 
@@ -280,7 +280,7 @@ class InviteUserForm(BaseManageUserForm):
     label = _("label_invite_user")
     description = _("desc_invite_user")
 
-    @button.buttonAndHandler("label_invite_button", name="invite")
+    @button.buttonAndHandler(_("label_invite_button"), name="invite")
     def handleInvite(self, action):
         """Create or update user, then update their group membership."""
         data, errors = self.extractData()

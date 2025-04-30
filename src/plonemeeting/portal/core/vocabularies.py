@@ -298,7 +298,7 @@ class InstitutionManageableGroupsVocabularyFactory:
         for group in all_groups:
             gid = group.getId()
             if context.id in gid and "members" not in gid:
-                items.append(SimpleTerm(value=gid, token=gid, title=group.getProperty("title")))
+                items.append(SimpleTerm(value=gid, title=group.getProperty("title")))
 
         return SimpleVocabulary(items)
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-04-14 14:16+0000\n"
+"POT-Creation-Date: 2025-04-30 09:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,10 @@ msgstr ""
 msgid "Anonymised text tag from ia.Delib to be replaced"
 msgstr ""
 
+#: ../browser/templates/manage_users_listing.pt:85
+msgid "Are you sure you want to unregister this user?"
+msgstr ""
+
 #: ../profiles/default/registry.xml
 msgid "Assemblée générale"
 msgstr ""
@@ -62,7 +66,7 @@ msgstr ""
 msgid "Back to my institution"
 msgstr ""
 
-#: ../browser/institution.py:95
+#: ../browser/institution.py:97
 #: ../browser/sync.py:248
 msgid "Cancel"
 msgstr ""
@@ -118,7 +122,7 @@ msgstr ""
 msgid "Decision date"
 msgstr ""
 
-#: ../events/institution.py:35
+#: ../events/institution.py:37
 #: ../migrations/migrate_to_2000.py:116
 msgid "Decisions"
 msgstr ""
@@ -149,7 +153,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../browser/institution.py:97
+#: ../browser/institution.py:99
 msgid "Edit cancelled"
 msgstr ""
 
@@ -464,7 +468,7 @@ msgid "Publication"
 msgstr ""
 
 #: ../content/institution.py:304
-#: ../events/institution.py:47
+#: ../events/institution.py:49
 #: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
 msgstr ""
@@ -522,7 +526,7 @@ msgstr ""
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/institution.py:80
+#: ../browser/institution.py:82
 msgid "Save"
 msgstr ""
 
@@ -654,7 +658,7 @@ msgstr ""
 msgid "Ville/Commune"
 msgstr ""
 
-#: ../browser/manage_users.py:64
+#: ../browser/manage_users.py:67
 msgid "We will use this address if you need to recover your password"
 msgstr ""
 
@@ -719,19 +723,19 @@ msgstr ""
 msgid "default_in_project_disclaimer"
 msgstr ""
 
-#: ../browser/manage_users.py:285
+#: ../browser/manage_users.py:281
 msgid "desc_invite_user"
 msgstr ""
 
-#: ../browser/manage_users.py:159
+#: ../browser/manage_users.py:162
 msgid "desc_manage_create_user"
 msgstr ""
 
-#: ../browser/manage_users.py:203
+#: ../browser/manage_users.py:205
 msgid "desc_manage_edit_user"
 msgstr ""
 
-#: ../browser/manage_users.py:26
+#: ../browser/manage_users.py:29
 msgid "desc_manage_users"
 msgstr ""
 
@@ -750,16 +754,16 @@ msgid "expired_authority_date_description"
 msgstr ""
 
 #. Default: "Enter full name, e.g. John Smith."
-#: ../browser/manage_users.py:70
+#: ../browser/manage_users.py:73
 msgid "help_full_name_creation"
 msgstr ""
 
-#: ../browser/manage_users.py:78
+#: ../browser/manage_users.py:81
 msgid "help_select_groups"
 msgstr ""
 
 #. Default: "Enter a user name, usually something like 'jsmith'. No spaces or special characters. Usernames and passwords are case sensitive, make sure the caps lock key is not enabled. This is the name used to log in."
-#: ../browser/manage_users.py:54
+#: ../browser/manage_users.py:57
 msgid "help_user_name_creation_casesensitive"
 msgstr ""
 
@@ -793,7 +797,7 @@ msgid "label_actions"
 msgstr ""
 
 #. Default: "Create New User"
-#: ../browser/templates/manage_users_listing.pt:116
+#: ../browser/templates/manage_users_listing.pt:118
 msgid "label_create_new_user"
 msgstr ""
 
@@ -803,31 +807,35 @@ msgid "label_edit"
 msgstr ""
 
 #. Default: "Email"
-#: ../browser/manage_users.py:63
+#: ../browser/manage_users.py:66
 #: ../browser/templates/manage_users_listing.pt:56
 msgid "label_email"
 msgstr ""
 
 #. Default: "Full Name"
-#: ../browser/manage_users.py:69
+#: ../browser/manage_users.py:72
 #: ../browser/templates/manage_users_listing.pt:55
 msgid "label_fullname"
 msgstr ""
 
+#: ../browser/manage_users.py:283
+msgid "label_invite_button"
+msgstr ""
+
 #. Default: "Invite an existing user"
-#: ../browser/templates/manage_users_listing.pt:133
+#: ../browser/templates/manage_users_listing.pt:135
 msgid "label_invite_existing_user"
 msgstr ""
 
-#: ../browser/manage_users.py:284
+#: ../browser/manage_users.py:280
 msgid "label_invite_user"
 msgstr ""
 
-#: ../browser/manage_users.py:158
+#: ../browser/manage_users.py:161
 msgid "label_manage_create_user"
 msgstr ""
 
-#: ../browser/manage_users.py:202
+#: ../browser/manage_users.py:204
 msgid "label_manage_edit_user"
 msgstr ""
 
@@ -836,7 +844,7 @@ msgstr ""
 msgid "label_manage_institution"
 msgstr ""
 
-#: ../browser/manage_users.py:25
+#: ../browser/manage_users.py:28
 #: ../browser/templates/manage_users_listing.pt:14
 msgid "label_manage_users"
 msgstr ""
@@ -847,7 +855,7 @@ msgid "label_send"
 msgstr ""
 
 #. Default: "Unregister"
-#: ../browser/templates/manage_users_listing.pt:89
+#: ../browser/templates/manage_users_listing.pt:91
 msgid "label_unregister"
 msgstr ""
 
@@ -863,6 +871,14 @@ msgstr ""
 #. Default: "No users found."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
+msgstr ""
+
+#: ../browser/manage_users.py:267
+msgid "msg_user_create_failed"
+msgstr ""
+
+#: ../browser/manage_users.py:265
+msgid "msg_user_created"
 msgstr ""
 
 #: ../configure.zcml:40
