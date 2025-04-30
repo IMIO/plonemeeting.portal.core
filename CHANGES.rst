@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.2 (unreleased)
+2.1.2 (2025-04-30)
 ------------------
 
 - DELIBE-199: Users are now manageable by institution.
