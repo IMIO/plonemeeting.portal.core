@@ -128,8 +128,14 @@ class PrometheusExportView(PublicAPIView):
         res += "# HELP dangling_publications Number of dangling publications\n"
         res += "dangling_publications " + str(len(dangling_publications)) + "\n\n"
 
-        cron_log_path = "./var/log/cron.log"
-        if os.path.exists(cron_log_path):
+        possible_cron_paths = ["/data/log/cron.log", "./var/log/cron.log"]
+        cron_log_path = None
+        for possible_cron_path in possible_cron_paths:
+            if os.path.exists(possible_cron_path):
+                cron_log_path = possible_cron_path
+                break
+
+        if cron_log_path:
             last_cron_run = os.path.getmtime(cron_log_path)
             res += "# TYPE last_cron_run gauge\n"
             res += "# HELP last_cron_run Last cron run\n"

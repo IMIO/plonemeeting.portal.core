@@ -1,7 +1,13 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.1.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+2.1.1 (2025-03-21)
 ------------------
 
 - DELIBE-23/DELIBE-206: Complete the upgrade step 2100.
@@ -13,6 +19,7 @@ Changelog
 - DELIBE-199: Add new member and manager groups for each institution.
   [aduchene]
 - DELIBE-199: New institution settings navigation tab and view.
+- Handle multiple possible cron paths in the Prometheus export view.
   [aduchene]
 
 2.1.0 (2025-02-28)
