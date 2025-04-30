@@ -154,4 +154,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
     />
 
+  <utility
+    component=".vocabularies.InstitutionManageableGroupsVocabulary"
+    name="plonemeeting.portal.institution_manageable_groups_vocabulary"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

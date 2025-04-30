@@ -40,7 +40,6 @@
     name="view"
     for="plonemeeting.portal.core.content.institution.IInstitution"
     class=".institution.InstitutionView"
-    template="templates/institution.pt"
     permission="zope2.View"
   />
 
@@ -60,18 +59,18 @@
   />
 
   <adapter
-      for="Products.CMFCore.interfaces.IFolderish
+    for="Products.CMFCore.interfaces.IFolderish
            plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer
            plone.dexterity.interfaces.IDexterityFTI"
-      provides="zope.publisher.interfaces.browser.IBrowserPage"
-      factory=".publication.PublicationAdd"
-      name="Publication"
+    provides="zope.publisher.interfaces.browser.IBrowserPage"
+    factory=".publication.PublicationAdd"
+    name="Publication"
   />
 
   <class class=".publication.PublicationAdd">
-      <require
-          permission="cmf.AddPortalContent"
-          interface="zope.publisher.interfaces.browser.IBrowserPage" />
+    <require
+      permission="cmf.AddPortalContent"
+      interface="zope.publisher.interfaces.browser.IBrowserPage"/>
   </class>
 
   <browser:page
@@ -208,7 +207,46 @@
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
       class="Products.CMFPlone.browser.author.AuthorView"
       template="templates/author.pt"
-      permission="zope.Public" />
+      permission="zope.Public"/>
   </configure>
+
+  <!-- institution management views -->
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="manage-settings"
+    class=".institution.InstitutionSettingsView"
+    permission="cmf.ModifyPortalContent"
+    template="templates/manage_institution.pt"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="manage-users-listing"
+    class=".manage_users.ManageUsersListingView"
+    template="templates/manage_users_listing.pt"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="manage-create-user"
+    class=".manage_users.ManageCreateUserFormView"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="manage-edit-user"
+    class=".manage_users.ManageEditUserFormView"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="manage-invite-user"
+    class=".manage_users.InviteUserFormView"
+    permission="cmf.ModifyPortalContent"
+  />
 
 </configure>

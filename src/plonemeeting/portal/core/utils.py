@@ -23,13 +23,17 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
 
+def get_managers_group_id(institution):
+    return "{0}-managers".format(institution.getId())
+
+def get_members_group_id(institution):
+    return "{0}-members".format(institution.getId())
+
 def get_decisions_managers_group_id(institution):
     return "{0}-decisions_managers".format(institution.getId())
 
-
 def get_publications_managers_group_id(institution):
     return "{0}-publications_managers".format(institution.getId())
-
 
 def is_decisions_manager(institution):
     return get_decisions_managers_group_id(institution) in \

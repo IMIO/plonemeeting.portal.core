@@ -91,3 +91,6 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
 
     def login_as_publications_manager(self):
         login(self.portal, "amityville-publications-manager")
+
+    def login_as_instituion_manager(self):
+        login(self.portal, "belleville-decisions-manager")

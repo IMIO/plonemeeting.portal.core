@@ -10,6 +10,7 @@ from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
+from Products.CMFCore.utils import getToolByName
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -283,3 +284,22 @@ class PublicationReviewStatesVocabularyFactory:
 
 
 PublicationReviewStatesVocabulary = PublicationReviewStatesVocabularyFactory()
+
+
+class InstitutionManageableGroupsVocabularyFactory:
+    def __call__(self, context):
+        """
+        Returns a dynamic vocabulary of all portal group IDs.
+        You can adjust filtering logic if you want to exclude certain groups.
+        """
+        group_tool = api.portal.get_tool("portal_groups")
+        all_groups = group_tool.listGroups()
+        items = []
+        for group in all_groups:
+            gid = group.getId()
+            if context.id in gid and "members" not in gid:
+                items.append(SimpleTerm(value=gid, title=group.getProperty("title")))
+
+        return SimpleVocabulary(items)
+
+InstitutionManageableGroupsVocabulary = InstitutionManageableGroupsVocabularyFactory()

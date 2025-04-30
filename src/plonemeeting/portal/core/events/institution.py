@@ -19,6 +19,8 @@ from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_managers_group_id
+from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
 from zope.globalrequest import getRequest
@@ -54,6 +56,16 @@ def handle_institution_creation(obj, event):
 
     # Create managers groups and configure local permissions
     institution_title = obj.title
+
+    # Members group
+    group_id = get_members_group_id(obj)
+    group_title = "{0} Members".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    # Managers group
+    group_id = get_managers_group_id(obj)
+    group_title = "{0} Managers".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    obj.manage_setLocalRoles(group_id, ["Editor"])
     # Decisions
     group_id = get_decisions_managers_group_id(obj)
     group_title = "{0} Decisions Managers".format(institution_title)
@@ -121,37 +133,10 @@ def handle_institution_deletion(obj, event):
     # Configure manager group & local permissions
     try:
         # Don't use api.group.delete(group_id) because it breaks when trying to delete the entire plone site
+        obj.aq_parent.portal_groups.removeGroup(get_members_group_id(obj))
+        obj.aq_parent.portal_groups.removeGroup(get_managers_group_id(obj))
         obj.aq_parent.portal_groups.removeGroup(get_decisions_managers_group_id(obj))
         obj.aq_parent.portal_groups.removeGroup(get_publications_managers_group_id(obj))
     except CannotGetPortalError:
         # It's alright, it happens when we try to delete the whole plone site.
         pass
-
-
-def update_custom_css(context, event):
-    """
-    This will update the custom_colors.css in plone_resources directory and will update the bundle
-    registry entry when there is an event that add or modify an institution.
-    """
-    pass
-    # TODO
-    # First, save the compiled css in the plone_resources directory where static files are stored
-    # overrides = OverrideFolderManager(context)
-    # bundle_name = "plonemeeting.portal.core-custom"
-    # filepath = "static/{0}-compiled.css".format(bundle_name)
-    # color_custom_css_view = api.portal.get().unrestrictedTraverse("@@custom_colors.css")
-    # compiled_css = color_custom_css_view()
-
-    # overrides.save_file(filepath, compiled_css)
-
-    # Next, update the registry entry for the bundle
-    # registry = getUtility(IRegistry)
-    # bundles = registry.collectionOfInterface(
-    #     IBundleRegistry, prefix="plone.bundles", check=False
-    # )
-    # bundle = bundles.get(bundle_name)
-    # if bundle:
-    #     bundle.last_compilation = (
-    #         datetime.now()
-    #     )  # Important : it's used for cache busting
-    #     bundle.csscompilation = "++plone++{}".format(filepath)

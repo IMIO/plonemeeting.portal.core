@@ -5,4 +5,6 @@ omit =
     */migrations/*
     */test*
     */upgrades/*
+    */locales/*
     */__init__.py
+    */interfaces.py

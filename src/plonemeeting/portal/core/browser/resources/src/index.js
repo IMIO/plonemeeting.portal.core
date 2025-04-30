@@ -26,17 +26,33 @@ register(PdfViewer, "x-pdf-viewer", ["file"]);
 
 function setUpEnvironmentLabel() {
   let hostname = document.location.hostname;
+  let body = document.querySelector("body");
+  let span = document.createElement("span");
   if (hostname === "localhost" || hostname === "0.0.0.0") {
-    $("body").append("<span class='environment-label environment-dev'>DEV</span>");
+    span.className = 'environment-label environment-dev';
+    span.textContent = 'DEV';
   } else if (hostname.includes("staging")) {
-    $("body").append("<span class='environment-label environment-test'>STAGING</span>");
+    span.className = 'environment-label environment-test';
+    span.textContent = 'STAGING';
   } else if (hostname.includes("test")) {
-    $("body").append("<span class='environment-label environment-test'>TEST</span>");
+    span.className = 'environment-label environment-test';
+    span.textContent = 'TEST';
+  }
+  body.appendChild(span);
+}
+
+
+function displayInSettingsPath() {
+  let body = document.querySelector("body");
+  let settingsTab = document.querySelector("#mainnavigation li.settings");
+  if (body && settingsTab && body.className.includes("portaltype-institution")) {
+    settingsTab.className = settingsTab.className + " current inPath"
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   setUpEnvironmentLabel();
+  displayInSettingsPath();
   // As the tooltip accepts slots we need to use shadow dom and register it after DOMContentLoaded
-  register(Tooltip, "x-tooltip", ["target-selector", "position"], { shadow: false });
+  register(Tooltip, "x-tooltip", ["target-selector", "position"], {shadow: false});
 });

@@ -34,6 +34,13 @@
     <object name="index_html" meta_type="CMF Action">
       <property name="visible">False</property>
     </object>
+    <object name="institution_settings" meta_type="CMF Action">
+      <property name="title">Settings</property>
+      <property name="url_expr">context/@@utils_view/get_settings_url</property>
+      <property name="icon_expr">string:gear</property>
+      <property name="available_expr">context/@@utils_view/show_settings_tab</property>
+      <property name="visible">True</property>
+    </object>
   </object>
 
   <object name="object" meta_type="CMF Action Category">
