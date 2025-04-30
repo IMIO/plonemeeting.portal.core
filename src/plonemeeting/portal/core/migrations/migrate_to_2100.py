@@ -61,7 +61,7 @@ class MigrateTo2100(Migrator):
 
             # Grab all groups, then filter by those that start with institution_id
             all_groups = self.portal_groups.listGroups()
-            matching_groups = [g for g in all_groups if institution.id in g.getName()]
+            matching_groups = [g for g in all_groups if g.getName().startswith(f"{institution.id}-")]
             # Collect all user IDs from these groups
             users_id = set()
             for group in matching_groups:
