@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-from plone import api
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.protect.authenticator import createToken
 from plone.testing.z2 import Browser
+
+import transaction
+from plone import api
+from plone.protect.authenticator import createToken
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_managers_group_id
@@ -14,8 +16,6 @@ from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from zExceptions import Unauthorized
 from zope.component import getMultiAdapter
-
-import transaction
 
 
 class TestManageUsers(PmPortalDemoFunctionalTestCase):
