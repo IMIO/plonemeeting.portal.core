@@ -4,8 +4,12 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-199: Users are now manageable by institution.
+  [aduchene]
+- DELIBE-199: Add new member and manager groups for each institution.
+  [aduchene]
+- DELIBE-199: New institution settings navigation tab and view.
+  [aduchene]
 
 2.1.1 (2025-03-21)
 ------------------
@@ -14,11 +18,6 @@ Changelog
   [aduchene]
 - DELIBE-24: Fix an issue where a decisions manager could not remove items from a meeting.
   [aduchene]
-- DELIBE-199: Users are now manageable by institution.
-  [aduchene]
-- DELIBE-199: Add new member and manager groups for each institution.
-  [aduchene]
-- DELIBE-199: New institution settings navigation tab and view.
 - Handle multiple possible cron paths in the Prometheus export view.
   [aduchene]
 
