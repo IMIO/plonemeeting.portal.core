@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone.app.textfield import RichText
-from plone.autoform import directives as form
+from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
+from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.folder.interfaces import IOrderableFolder
 from plone.folder.interfaces import IOrdering
@@ -9,6 +10,7 @@ from plone.folder.unordered import UnorderedOrdering
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.content.item import IItem
+from plonemeeting.portal.core.utils import institution_richtext_pattern_options
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as plone_
@@ -28,13 +30,17 @@ class IMeeting(model.Schema):
         readonly=True,
     )
 
-    form.write_permission(date_time=ManagePortal)
+    directives.write_permission(date_time=ManagePortal)
     date_time = schema.Datetime(
         title=plone_("Date"),
         required=True,
         readonly=False,
     )
 
+    directives.widget(
+        "custom_info",
+        pattern_options=institution_richtext_pattern_options,
+    )
     custom_info = RichText(title=_("Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(title=_("Last modification in iA.Delib"), required=True, readonly=True)

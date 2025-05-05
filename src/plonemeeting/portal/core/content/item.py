@@ -11,6 +11,7 @@ from plone.indexer.decorator import indexer
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from Products.CMFPlone import PloneMessageFactory as plone_
+from plonemeeting.portal.core.utils import institution_richtext_pattern_options
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
@@ -66,6 +67,10 @@ class IItem(model.Schema):
         readonly=True,
     )
 
+    directives.widget(
+        "custom_info",
+        pattern_options=institution_richtext_pattern_options,
+    )
     custom_info = RichText(title=_(u"Custom info"), required=False)
 
     plonemeeting_last_modified = schema.Datetime(

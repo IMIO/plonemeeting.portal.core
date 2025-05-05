@@ -441,3 +441,11 @@ def get_context_from_request():
         if parent.__class__.__name__ != 'Application':
             context = parent.context
     return context
+
+def institution_richtext_pattern_options(ctx):
+    return {
+        "relatedItems": {
+            "baseUrl": ctx.absolute_url(),
+            "rootPath": ctx.navigation_root_url(),
+        }
+    }
