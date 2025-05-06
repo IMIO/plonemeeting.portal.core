@@ -6,6 +6,8 @@ Changelog
 
 - Change default timestamping service in default profile.
   [aduchene]
+- Make sure Contentbrowser is using the navigation root as rootPath.
+  [aduchene]
 
 
 2.1.2 (2025-04-30)

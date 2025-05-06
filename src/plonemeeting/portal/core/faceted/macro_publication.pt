@@ -62,11 +62,11 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
         </div>
         <div class="item-metadata-row">
           <div class="item-metadata-label" i18n:translate="">Document type</div>
-          <span tal:content="python:brain.pretty_document_type" />
+          <span tal:condition="python:brain.pretty_document_type" tal:content="python:brain.pretty_document_type" />
         </div>
         <div class="item-metadata-row">
           <div class="item-metadata-label" i18n:translate="">Category</div>
-          <span tal:content="python:brain.pretty_category" />
+          <span tal:condition="python:brain.pretty_category" tal:content="python:brain.pretty_category" />
         </div>
       </div>
     </div>

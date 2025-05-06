@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base
 from plone.app.textfield import RichText
-from plone.autoform import directives as form
+from plone.autoform import directives
 from plone.dexterity.content import Container
-from plone.folder.interfaces import IOrderableFolder
 from plone.folder.interfaces import IOrdering
 from plone.folder.unordered import UnorderedOrdering
 from plone.supermodel import model
@@ -28,7 +26,7 @@ class IMeeting(model.Schema):
         readonly=True,
     )
 
-    form.write_permission(date_time=ManagePortal)
+    directives.write_permission(date_time=ManagePortal)
     date_time = schema.Datetime(
         title=plone_("Date"),
         required=True,

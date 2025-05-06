@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# from collective import dexteritytextindexer
 from copy import deepcopy
 from imio.helpers.content import object_values
 from plone import api
-from plone.app.dexterity.textindexer import directives
+from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
@@ -21,7 +20,7 @@ class IItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for Item
     """
 
-    directives.searchable("formatted_title")
+    searchable("formatted_title")
     formatted_title = RichText(title=plone_(u"Title"), required=False, readonly=True)
 
     number = schema.TextLine(title=_(u"Item number"), required=True, readonly=True)
@@ -56,7 +55,7 @@ class IItem(model.Schema):
         title=_(u"Additional data"), required=False, readonly=True
     )
 
-    directives.searchable("decision")
+    searchable("decision")
     decision = RichText(title=_(u"Decision"), required=False, readonly=True)
 
     category = schema.Choice(
