@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.4 (unreleased)
+2.1.4 (2025-05-06)
 ------------------
 
 - Change default timestamping service in default profile.
