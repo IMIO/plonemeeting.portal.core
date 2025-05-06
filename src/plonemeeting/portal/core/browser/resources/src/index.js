@@ -43,9 +43,8 @@ function setUpEnvironmentLabel() {
 
 
 function displayInSettingsPath() {
-  let body = document.querySelector("body");
-  let settingsTab = document.querySelector("#mainnavigation li.settings");
-  if (body && settingsTab && body.className.includes("portaltype-institution")) {
+  let settingsTab = document.body.querySelector(".institution_settings");
+  if (settingsTab && document.body.className.includes("portaltype-institution")) {
     settingsTab.className = settingsTab.className + " current inPath"
   }
 }
