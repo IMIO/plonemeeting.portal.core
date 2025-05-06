@@ -64,3 +64,4 @@ def get_contentbrowser_options(*args, **kwargs):
 
 
 contentbrowser.get_contentbrowser_options = get_contentbrowser_options
+logger.info("Patching plone.app.z3cform.widgets import contentbrowser (get_contentbrowser_options)")
