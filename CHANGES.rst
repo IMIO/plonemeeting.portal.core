@@ -4,8 +4,8 @@ Changelog
 2.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-222: Fix an issue regarding the last Contentbrowser changes.
+  [aduchene]
 
 2.1.4 (2025-05-06)
 ------------------
@@ -14,7 +14,6 @@ Changelog
   [aduchene]
 - Make sure Contentbrowser is using the navigation root as rootPath.
   [aduchene]
-
 
 2.1.2 (2025-04-30)
 ------------------

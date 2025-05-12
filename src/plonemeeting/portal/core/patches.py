@@ -10,6 +10,7 @@ from plone.app.z3cform.widgets import contentbrowser
 from plone.base.navigationroot import get_navigation_root_object
 from plone.base.utils import get_top_site_from_url
 from plonemeeting.portal.core import logger
+from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
 
 original_hasScript = safe_html.hasScript
@@ -54,10 +55,12 @@ def get_contentbrowser_options(*args, **kwargs):
     """If we are in an institution, we need to set the rootPath to the institution"""
     res = contentbrowser._original_get_contentbrowser_options(*args, **kwargs)
     context = args[0] if args else kwargs.get("context")
+    if IForm.providedBy(context): # Sometimes context is a form
+        context = context.context
     request = getRequest()
     site = get_top_site_from_url(context, request)
     nav_root = get_navigation_root_object(context, site)
-    utils_view = context.restrictedTraverse("@@utils_view")
+    utils_view = context.unrestrictedTraverse("@@utils_view")
     if utils_view.is_in_institution():
         res["rootPath"] = "/".join(nav_root.getPhysicalPath()) if nav_root else "/"
     return res

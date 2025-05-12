@@ -18,6 +18,12 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.unpublished_publication = self.institution.publications["publication-27"]
         self.login_as_test()
 
+    def test_publication_add_form(self):
+        self.login_as_publications_manager()
+        add_form = self.institution.publications.restrictedTraverse("++add++Publication")
+        self.assertEqual(add_form.form_instance.portal_type, "Publication")
+        add_form() # should not raise an exception
+
     def test_private_publication_view(self):
         self.assertEqual(api.content.get_state(self.private_publication), "private")
         self.logout()
