@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.5 (unreleased)
+2.1.5 (2025-05-12)
 ------------------
 
 - DELIBE-222: Fix an issue regarding the last Contentbrowser changes.
