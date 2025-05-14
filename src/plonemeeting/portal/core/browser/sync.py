@@ -242,7 +242,7 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["sync"].addClass("btn-primary")
+        self.actions["sync"].klass = "submit-widget btn btn-primary"
         self.actions["remove"].addClass("btn-danger")
 
     @button.buttonAndHandler(_("Cancel"))
