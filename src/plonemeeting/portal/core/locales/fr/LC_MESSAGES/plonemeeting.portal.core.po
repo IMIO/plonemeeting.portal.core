@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-04-30 09:57+0000\n"
+"POT-Creation-Date: 2025-05-14 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,11 +30,10 @@ msgstr "Ajouter une publication"
 msgid "Added"
 msgstr "Ajouté"
 
-#: ../content/item.py:56
+#: ../content/item.py:55
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../browser/templates/item.pt:193
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr "Annexes"
@@ -77,7 +76,7 @@ msgid "Categories mappings - iA.Delib category mapped more than once : ${categor
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
 #: ../browser/templates/item.pt:143
-#: ../content/item.py:64
+#: ../content/item.py:63
 #: ../content/publication.py:43
 msgid "Category"
 msgstr "Matière"
@@ -102,8 +101,8 @@ msgstr "Choisissez la séance que vous souhaitez importer dans le portail."
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
-#: ../content/item.py:69
-#: ../content/meeting.py:38
+#: ../content/item.py:68
+#: ../content/meeting.py:36
 msgid "Custom info"
 msgstr "Informations complémentaires"
 
@@ -111,7 +110,7 @@ msgstr "Informations complémentaires"
 msgid "Custom page for GDPR text"
 msgstr "Url de redirection pour les portions de texte anonymisées"
 
-#: ../content/item.py:60
+#: ../content/item.py:59
 msgid "Decision"
 msgstr "Décision"
 
@@ -298,7 +297,7 @@ msgstr "Expression TAL pour le formatage du contenu additionnel des points"
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des points"
 
-#: ../content/item.py:27
+#: ../content/item.py:26
 #: ../faceted/macro_item.pt:53
 #: ../profiles/default/registry.xml
 msgid "Item number"
@@ -316,8 +315,8 @@ msgstr "Ordre de tri des points"
 msgid "Last modification"
 msgstr "Dernière modification"
 
-#: ../content/item.py:72
-#: ../content/meeting.py:40
+#: ../content/item.py:71
+#: ../content/meeting.py:38
 #: ../faceted/preview_meeting.pt:75
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
@@ -495,7 +494,7 @@ msgstr "Enlevé"
 msgid "Representative"
 msgstr "Mandataire"
 
-#: ../content/item.py:41
+#: ../content/item.py:40
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
@@ -535,7 +534,7 @@ msgstr "Sélectionner"
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 
-#: ../content/item.py:30
+#: ../content/item.py:29
 msgid "Sortable Item number"
 msgstr "Numéro triable du point"
 
@@ -587,7 +586,7 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "Timestamp information has been removed since the data has changed"
 msgstr "Les informations d'horodatage ont été supprimées car les données ont changé"
 
-#: ../browser/publication.py:49
+#: ../browser/publication.py:56
 msgid "Timestamping is disabled for this element!"
 msgstr "L'horodatage est désactivé pour cet élément!"
 
@@ -595,8 +594,8 @@ msgstr "L'horodatage est désactivé pour cet élément!"
 msgid "Title"
 msgstr "Titre"
 
-#: ../content/item.py:34
-#: ../content/meeting.py:26
+#: ../content/item.py:33
+#: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
 

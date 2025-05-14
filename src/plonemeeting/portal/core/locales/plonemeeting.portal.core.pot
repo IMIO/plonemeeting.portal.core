@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-04-30 09:57+0000\n"
+"POT-Creation-Date: 2025-05-14 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,11 +33,10 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: ../content/item.py:56
+#: ../content/item.py:55
 msgid "Additional data"
 msgstr ""
 
-#: ../browser/templates/item.pt:193
 #: ../faceted/macro_item.pt:71
 msgid "Annexes"
 msgstr ""
@@ -80,7 +79,7 @@ msgid "Categories mappings - iA.Delib category mapped more than once : ${categor
 msgstr ""
 
 #: ../browser/templates/item.pt:143
-#: ../content/item.py:64
+#: ../content/item.py:63
 #: ../content/publication.py:43
 msgid "Category"
 msgstr ""
@@ -105,8 +104,8 @@ msgstr ""
 msgid "Configuration folder"
 msgstr ""
 
-#: ../content/item.py:69
-#: ../content/meeting.py:38
+#: ../content/item.py:68
+#: ../content/meeting.py:36
 msgid "Custom info"
 msgstr ""
 
@@ -114,7 +113,7 @@ msgstr ""
 msgid "Custom page for GDPR text"
 msgstr ""
 
-#: ../content/item.py:60
+#: ../content/item.py:59
 msgid "Decision"
 msgstr ""
 
@@ -301,7 +300,7 @@ msgstr ""
 msgid "Item decision formatting tal expression"
 msgstr ""
 
-#: ../content/item.py:27
+#: ../content/item.py:26
 #: ../faceted/macro_item.pt:53
 #: ../profiles/default/registry.xml
 msgid "Item number"
@@ -319,8 +318,8 @@ msgstr ""
 msgid "Last modification"
 msgstr ""
 
-#: ../content/item.py:72
-#: ../content/meeting.py:40
+#: ../content/item.py:71
+#: ../content/meeting.py:38
 #: ../faceted/preview_meeting.pt:75
 msgid "Last modification in iA.Delib"
 msgstr ""
@@ -498,7 +497,7 @@ msgstr ""
 msgid "Representative"
 msgstr ""
 
-#: ../content/item.py:41
+#: ../content/item.py:40
 msgid "Representative group in charge"
 msgstr ""
 
@@ -538,7 +537,7 @@ msgstr ""
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
-#: ../content/item.py:30
+#: ../content/item.py:29
 msgid "Sortable Item number"
 msgstr ""
 
@@ -590,7 +589,7 @@ msgstr ""
 msgid "Timestamp information has been removed since the data has changed"
 msgstr ""
 
-#: ../browser/publication.py:49
+#: ../browser/publication.py:56
 msgid "Timestamping is disabled for this element!"
 msgstr ""
 
@@ -598,8 +597,8 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../content/item.py:34
-#: ../content/meeting.py:26
+#: ../content/item.py:33
+#: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr ""
 

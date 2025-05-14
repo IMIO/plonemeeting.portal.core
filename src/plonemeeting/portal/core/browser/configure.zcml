@@ -58,6 +58,14 @@
     permission="zope.Public"
   />
 
+  <browser:page
+      name="pm_macros"
+      for="*"
+      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+      template="templates/macros.pt"
+      permission="zope.Public"
+  />
+
   <adapter
     for="Products.CMFCore.interfaces.IFolderish
            plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer

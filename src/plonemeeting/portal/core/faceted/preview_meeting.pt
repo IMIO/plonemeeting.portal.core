@@ -98,7 +98,7 @@
         </tal:meeting>
         <div class="row">
           <div class="col-lg-3">
-            <div class="btn-group btn-group-delib" tal:condition="python: not isAnon and not meeting">
+            <div class="btn-group btn-group-delib" tal:condition="python: not isAnon and not meeting and checkPermission('cmf.AddPortalContent', context)">
               <a class="btn-delib btn-delib-icon-text" href="${context/absolute_url}/@@import_meeting"><i
                 class="bi bi-plus-lg"></i><span i18n:translate="">Import a new meeting</span></a>
             </div>

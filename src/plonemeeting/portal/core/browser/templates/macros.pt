@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<metal:annexes define-macro="annexes">
+  <div class="annexes" tal:define="files_infos python: files_infos">
+    <div tal:repeat="info files_infos">
+      <div class="annex card-link" tal:define="file nocall:info/file">
+        <div class="bg-file-color ${info/icon_infos/color}">
+          <i tal:attributes="class info/icon_infos/icon"></i>
+        </div>
+        <div class="title">
+          <h3 tal:content="file/Title" />
+          <p id="annex-file-size">Taille: <span tal:content="info/size"></span></p>
+        </div>
+        <div class="annex-actions">
+          <a tal:attributes="href python: '{}/@@download/file/{}'.format(file.absolute_url(), file.file.filename)" ><i
+            class="bi bi-cloud-download"></i></a>
+          <tal:manager-actions tal:condition="python: checkPermission('Modify portal content', context)">
+            <a tal:attributes="href string:${file/absolute_url}/view"><i class="bi bi-eye"></i></a>
+            <a tal:attributes="href string:${file/absolute_url}/@@edit"><i class="bi bi-pencil"></i></a>
+          </tal:manager-actions>
+        </div>
+        <a class="filled-link" target="_blank"
+           tal:attributes="href file/absolute_url"></a>
+      </div>
+    </div>
+  </div>
+</metal:annexes>
+
+<metal:annexes-section define-macro="annexes-section">
+  <div class="row annexes-section mb-3"
+     tal:define="files_infos utils_view/get_files_infos;"
+     tal:condition="files_infos">
+    <div class="col-12">
+      <h2 i18n:translate="">Annexes</h2>
+      <metal:use use-macro="context/@@pm_macros/annexes"/>
+    </div>
+  </div>
+</metal:annexes-section>
+
+</html>

@@ -26,7 +26,7 @@
   <metal:content-core define-macro="content-core">
 
     <div class="row my-3">
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <div class="btn-group btn-group-delib btn-group-delib-vertical">
           <a class="btn-delib btn-delib-icon-text"
              tal:attributes="href string:${context/absolute_url}/@@manage-settings"

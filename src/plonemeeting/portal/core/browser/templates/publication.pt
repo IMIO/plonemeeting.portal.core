@@ -233,33 +233,7 @@
         <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
       </div>
     </section>
-    <section class="row annexes-section mb-3"
-       tal:define="files_infos utils_view/get_files_infos"
-       tal:condition="files_infos">
-      <div class="col-12">
-        <h2 i18n:translate="">Annexes</h2>
-        <div class="annexes">
-          <div tal:repeat="info files_infos">
-            <div class="annex">
-              <div class="bg-file-color ${info/icon_infos/color}">
-                <i tal:attributes="class info/icon_infos/icon"></i>
-              </div>
-              <div class="title">
-                <h3 tal:content="info/file/Title" />
-                <p>Taille: <span tal:content="info/size"></span></p>
-              </div>
-              <div class="annex-actions">
-                <a href=""
-                   target="_blank"
-                   tal:attributes="href info/file/absolute_url">
-                  <i class="bi bi-box-arrow-in-up-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <metal:use use-macro="context/@@pm_macros/annexes-section"/>
     <section class="row legal-section mb-3">
       <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
         <div class="alert with-icon alert-light"

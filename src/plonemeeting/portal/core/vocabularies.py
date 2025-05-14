@@ -289,15 +289,14 @@ PublicationReviewStatesVocabulary = PublicationReviewStatesVocabularyFactory()
 class InstitutionManageableGroupsVocabularyFactory:
     def __call__(self, context):
         """
-        Returns a dynamic vocabulary of all portal group IDs.
-        You can adjust filtering logic if you want to exclude certain groups.
+        Return a vocabulary of groups that can be managed by the current institution.
         """
         group_tool = api.portal.get_tool("portal_groups")
         all_groups = group_tool.listGroups()
         items = []
         for group in all_groups:
             gid = group.getId()
-            if context.id in gid and "members" not in gid:
+            if gid.startswith(f"{context.id}-") and "members" not in gid:
                 items.append(SimpleTerm(value=gid, title=group.getProperty("title")))
 
         return SimpleVocabulary(items)

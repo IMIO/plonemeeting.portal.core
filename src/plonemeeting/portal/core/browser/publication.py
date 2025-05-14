@@ -8,19 +8,22 @@ from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-
+from Products.CMFCore.utils import _checkPermission, getToolByName
 
 FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
-
+ADMIN_FIELDSETS = ["settings"]
 
 class AddForm(DefaultAddForm):
-    """Override to reorder fieldsets."""
+    """Override to reorder and filter out fieldsets."""
 
     def updateFields(self):
         super(AddForm, self).updateFields()
         indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
-        self.groups = sort_by_indexes(self.groups, indexes)
+        groups = sort_by_indexes(self.groups, indexes)
+        pm = getToolByName(self.context, 'portal_membership')
+        if not pm.checkPermission('Manage portal', self.context):
+            groups = filter(lambda g: g.__name__ not in ADMIN_FIELDSETS, groups)
+        self.groups = groups
 
 
 class PublicationAdd(DefaultAddView):
@@ -29,12 +32,16 @@ class PublicationAdd(DefaultAddView):
 
 
 class EditForm(DefaultEditForm):
-    """Override to reorder fieldsets."""
+    """Override to reorder and filter out fieldsets."""
 
     def updateFields(self):
         super(EditForm, self).updateFields()
         indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
-        self.groups = sort_by_indexes(self.groups, indexes)
+        groups = sort_by_indexes(self.groups, indexes)
+        pm = getToolByName(self.context, 'portal_membership')
+        if not pm.checkPermission('Manage portal', self.context):
+            groups = filter(lambda g: g.__name__ not in ADMIN_FIELDSETS, groups)
+        self.groups = groups
 
 
 class PublicationView(DefaultView):
