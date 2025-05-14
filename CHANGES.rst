@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.6 (unreleased)
+2.1.6 (2025-05-14)
 ------------------
 
 - DELIBE-221: Fix an permission issue with the "Add meeting" button in the faceted view.
