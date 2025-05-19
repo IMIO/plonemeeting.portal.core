@@ -63,6 +63,7 @@ def get_contentbrowser_options(*args, **kwargs):
     utils_view = context.unrestrictedTraverse("@@utils_view")
     if utils_view.is_in_institution():
         res["rootPath"] = "/".join(nav_root.getPhysicalPath()) if nav_root else "/"
+        res["rootUrl"] = "/".join(nav_root.getPhysicalPath()) if nav_root else "/"
     return res
 
 

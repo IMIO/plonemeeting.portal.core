@@ -4,8 +4,8 @@ Changelog
 2.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-224: Fix file upload issue in the rich text editot's content browser.
+  [aduchene]
 
 2.1.6 (2025-05-14)
 ------------------
