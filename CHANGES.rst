@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.7 (unreleased)
+2.1.7 (2025-05-19)
 ------------------
 
 - DELIBE-224: Fix file upload issue in the rich text editot's content browser.
