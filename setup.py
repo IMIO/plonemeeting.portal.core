@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.1.6.dev0",
+    version="2.1.8.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     long_description_content_type="text/x-rst",

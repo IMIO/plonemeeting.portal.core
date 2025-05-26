@@ -1,7 +1,25 @@
 Changelog
 =========
 
-2.1.6 (unreleased)
+2.1.8 (unreleased)
+------------------
+
+- DELIBE-221: Fix an permission issue with the "Add meeting" button in the faceted view.
+  [aduchene]
+- DELIBE-223: Fix bleeding groups from other institutions in manage-edit-user view.
+  [aduchene]
+- Add a back button to the File view.
+  [aduchene]
+- Refactor and extract annexes into macros.
+  [aduchene]
+
+2.1.7 (2025-05-19)
+------------------
+
+- DELIBE-224: Fix file upload issue in the rich text editot's content browser.
+  [aduchene]
+
+2.1.6 (2025-05-14)
 ------------------
 
 - DELIBE-221: Fix an permission issue with the "Add meeting" button in the faceted view.
