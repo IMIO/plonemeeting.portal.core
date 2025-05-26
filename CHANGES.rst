@@ -4,13 +4,7 @@ Changelog
 2.1.8 (unreleased)
 ------------------
 
-- DELIBE-221: Fix an permission issue with the "Add meeting" button in the faceted view.
-  [aduchene]
-- DELIBE-223: Fix bleeding groups from other institutions in manage-edit-user view.
-  [aduchene]
-- Add a back button to the File view.
-  [aduchene]
-- Refactor and extract annexes into macros.
+- Fix wrong permission in `preview_meeting.pt`.
   [aduchene]
 
 2.1.7 (2025-05-19)
