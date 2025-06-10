@@ -253,6 +253,19 @@ class IInstitution(model.Schema):
         title=_(u"Info annex formatting tal expression"), required=False
     )
 
+    webstats_js = schema.SourceText(
+        title=_("JavaScript integrations"),
+        description=_(
+            "For enabling third-party JavaScript integrations "
+            "from external providers (e.g. Google "
+            "Analytics). Paste the provided code snippet here. "
+            "It will be rendered as "
+            "entered near the end of the page."
+        ),
+        default="",
+        required=False,
+    )
+
     # Mapping fieldset
     model.fieldset(
         "mapping",

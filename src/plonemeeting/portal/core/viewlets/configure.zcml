@@ -19,4 +19,12 @@
       layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
       />
 
+  <browser:viewlet
+      name="plone.analytics"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".overrides.PMAnalyticsViewlet"
+      permission="zope2.View"
+      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+      />
+
 </configure>

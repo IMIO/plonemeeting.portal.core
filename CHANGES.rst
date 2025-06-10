@@ -8,6 +8,8 @@ Changelog
   [aduchene]
 - DELIBE-111: Add a warning message to the publication manager if the publication date is in the past.
   [aduchene]
+- DELIBE-206: Add `webstats_js` field on Institution and override AnalyticsViewlet to use it.
+  [aduchene]
 
 2.1.7 (2025-05-19)
 ------------------
