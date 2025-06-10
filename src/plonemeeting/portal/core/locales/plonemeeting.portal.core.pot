@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-05-14 11:49+0000\n"
+"POT-Creation-Date: 2025-06-10 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -589,7 +589,7 @@ msgstr ""
 msgid "Timestamp information has been removed since the data has changed"
 msgstr ""
 
-#: ../browser/publication.py:56
+#: ../browser/publication.py:57
 msgid "Timestamping is disabled for this element!"
 msgstr ""
 
@@ -741,6 +741,10 @@ msgstr ""
 #. Default: "Here you can manage the users of your institution."
 #: ../browser/templates/manage_users_listing.pt:19
 msgid "description_manage_users"
+msgstr ""
+
+#: ../browser/publication.py:60
+msgid "effective_date_in_past_msg"
 msgstr ""
 
 #. Default: "Enable autopublishing?"

@@ -6,6 +6,8 @@ Changelog
 
 - Fix wrong permission in `preview_meeting.pt`.
   [aduchene]
+- DELIBE-111: Add a warning message to the publication manager if the publication date is in the past.
+  [aduchene]
 
 2.1.7 (2025-05-19)
 ------------------

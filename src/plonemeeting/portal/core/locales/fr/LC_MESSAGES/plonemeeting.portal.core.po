@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-05-14 11:49+0000\n"
+"POT-Creation-Date: 2025-06-10 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -586,7 +586,7 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "Timestamp information has been removed since the data has changed"
 msgstr "Les informations d'horodatage ont été supprimées car les données ont changé"
 
-#: ../browser/publication.py:56
+#: ../browser/publication.py:57
 msgid "Timestamping is disabled for this element!"
 msgstr "L'horodatage est désactivé pour cet élément!"
 
@@ -739,6 +739,10 @@ msgstr ""
 #: ../browser/templates/manage_users_listing.pt:19
 msgid "description_manage_users"
 msgstr "Ici, vous pouvez gérer les utilisateurs de votre institution. Si, lors de la création d'un nouvel utilisateur, son identifiant est déjà utilisé, vous pouvez l'inviter à rejoindre votre institution, à condition d'avoir vérifié avec l'utilisateur qu'il possédait bien ce compte. Sinon, vous pouvez simplement créer un nouvel utilisateur avec un autre identifiant. Attention, un identifiant ne peut être utilisé qu'une seule fois dans le système et ne peut être changé par la suite."
+
+#: ../browser/publication.py:60
+msgid "effective_date_in_past_msg"
+msgstr "Cet élément ne peut pas être publié car sa date de publication est dans le passé. Pour publier maintenant, supprimez la date. Pour planifier une publication, choisissez une date future."
 
 #. Default: "Enable autopublishing?"
 #: ../behaviors/autopublish.py:19
