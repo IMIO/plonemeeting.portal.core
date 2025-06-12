@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.8 (unreleased)
+2.1.8 (2025-06-12)
 ------------------
 
 - Fix wrong permission in `preview_meeting.pt`.
