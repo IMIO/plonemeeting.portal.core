@@ -1,4 +1,5 @@
 from AccessControl import Unauthorized
+from DateTime import DateTime
 from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
@@ -150,6 +151,19 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         indexed = self.catalog.getIndexDataForRID(brain.getRID())
         self.assertNotEqual(indexed["effective"], 1044622740)
         self.assertEqual(indexed["year"], str(pub.effective().year()))
+
+    def test_effective_date_publication_not_timestamped(self):
+        self.login_as_publications_manager()
+        pub = self.private_publication
+        pub.enable_timestamping = False
+        pub.setEffectiveDate(None)
+        self.workflow.doActionFor(pub, "publish")
+        self.assertIsNotNone(pub.effective_date)
+        self.assertEqual(round(DateTime() - pub.effective_date),0)
+        self.workflow.doActionFor(pub, "unpublish")
+        pub.effective_date = DateTime("1999/01/01")
+        self.workflow.doActionFor(pub, "publish")
+        self.assertIn("1999-01-01", pub.EffectiveDate())
 
     def test_timestamp_files_are_downloadable_by_anons(self):
         self.logout()
