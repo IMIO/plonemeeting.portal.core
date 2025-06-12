@@ -10,6 +10,8 @@ Changelog
   [aduchene]
 - DELIBE-206: Add `webstats_js` field on Institution and override AnalyticsViewlet to use it.
   [aduchene]
+- DELIBE-237: Fix no effective date when timestamping was disabled.
+  [aduchene]
 
 2.1.7 (2025-05-19)
 ------------------

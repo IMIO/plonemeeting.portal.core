@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from DateTime import DateTime
 from collective.timestamp import _ as _cts
 from collective.timestamp import logger as cts_logger
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
@@ -48,6 +48,9 @@ def publication_state_changed(publication, event):
                 _cts("Timestamp file has been successfully generated and saved"),
                 publication.REQUEST
             )
+        if publication.EffectiveDate() == "None":
+            publication.setEffectiveDate(DateTime())
+            publication.reindexObject(idxs=["effective", "effectiveRange"])
 
 
 def publication_will_be_removed(publication, event):
