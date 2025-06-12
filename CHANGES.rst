@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.9 (unreleased)
+2.1.9 (2025-06-12)
 ------------------
 
 - Fix bad release.
