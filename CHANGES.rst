@@ -4,8 +4,8 @@ Changelog
 2.1.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix bad release.
+  [aduchene]
 
 2.1.8 (2025-06-12)
 ------------------
