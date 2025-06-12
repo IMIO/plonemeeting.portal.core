@@ -159,9 +159,9 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         pub.setEffectiveDate(None)
         self.workflow.doActionFor(pub, "publish")
         self.assertIsNotNone(pub.effective_date)
-        self.assertEqual(round(DateTime() - pub.effective_date),0)
+        self.assertEqual(round(DateTime() - pub.effective_date), 0)
         self.workflow.doActionFor(pub, "unpublish")
-        pub.effective_date = DateTime("1999/01/01")
+        pub.setEffectiveDate(DateTime("1999/01/01"))
         self.workflow.doActionFor(pub, "publish")
         self.assertIn("1999-01-01", pub.EffectiveDate())
 
