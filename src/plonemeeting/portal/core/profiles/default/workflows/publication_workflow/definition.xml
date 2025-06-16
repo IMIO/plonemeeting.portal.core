@@ -84,25 +84,21 @@
     <permission-map acquired="False"
                     name="Delete objects">
       <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="Modify portal content">
       <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="plone.app.contenttypes: Add Image">
       <permission-role>Manager</permission-role>
-      <permission-role>Contributor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"
                     name="plone.app.contenttypes: Add File">
       <permission-role>Manager</permission-role>
-      <permission-role>Contributor</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False"

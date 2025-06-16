@@ -4,7 +4,8 @@ Changelog
 2.1.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Prevent Editor to edit a publication in planned state.
+  [aduchene]
 
 
 2.1.9 (2025-06-12)

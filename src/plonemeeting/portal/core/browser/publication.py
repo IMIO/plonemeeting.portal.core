@@ -54,7 +54,7 @@ class PublicationView(DefaultView):
         if api.content.get_state(self.context) == "private" and _checkPermission(ModifyPortalContent, self.context):
             if self.context.enable_timestamping is False:
                 api.portal.show_message(
-_("Timestamping is disabled for this element!"), request=self.request, type="warning"
+                    _("Timestamping is disabled for this element!"), request=self.request, type="warning"
                 )
             if self.context.effective_date and self.context.effective_date.isPast() and self.context.enable_timestamping:
                 api.portal.show_message(_("effective_date_in_past_msg"), request=self.request, type="warning")
