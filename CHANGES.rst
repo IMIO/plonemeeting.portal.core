@@ -6,7 +6,12 @@ Changelog
 
 - Prevent Editor to edit a publication in planned state.
   [aduchene]
-
+- Move table_of_contents field to the general fieldset.
+  [aduchene]
+- Prevent and show an error message when a publication effective date is removed in planned state.
+  [aduchene]
+- Add missing translations.
+  [aduchene]
 
 2.1.9 (2025-06-12)
 ------------------

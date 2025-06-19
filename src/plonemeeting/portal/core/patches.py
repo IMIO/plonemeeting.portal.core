@@ -6,9 +6,11 @@ from Products.CMFPlone.resources.utils import get_resource
 from Products.PortalTransforms.transforms import safe_html
 from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
 from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
+from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.z3cform.widgets import contentbrowser
 from plone.base.navigationroot import get_navigation_root_object
 from plone.base.utils import get_top_site_from_url
+from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
 from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
@@ -55,7 +57,7 @@ def get_contentbrowser_options(*args, **kwargs):
     """If we are in an institution, we need to set the rootPath to the institution"""
     res = contentbrowser._original_get_contentbrowser_options(*args, **kwargs)
     context = args[0] if args else kwargs.get("context")
-    if IForm.providedBy(context): # Sometimes context is a form
+    if IForm.providedBy(context):  # Sometimes context is a form
         context = context.context
     request = getRequest()
     site = get_top_site_from_url(context, request)
@@ -69,3 +71,22 @@ def get_contentbrowser_options(*args, **kwargs):
 
 contentbrowser.get_contentbrowser_options = get_contentbrowser_options
 logger.info("Patching plone.app.z3cform.widgets import contentbrowser (get_contentbrowser_options)")
+
+
+def remove_behavior_field_fieldset(interface, fieldname):
+    try:
+        fieldsets = interface.getTaggedValue(FIELDSETS_KEY)
+    except KeyError:
+        fieldsets = []
+        interface.setTaggedValue(FIELDSETS_KEY, fieldsets)
+
+    for fs in fieldsets:
+        if fieldname in fs.fields:
+            fs.fields.remove(fieldname)
+            break
+
+
+remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")
+logger.info(
+    "Patching plone.app.contenttypes.behaviors.tableofcontents to move ITableOfContents.table_of_contents field"
+)
