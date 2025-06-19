@@ -41,10 +41,17 @@ class EditForm(DefaultEditForm):
 
     @button.buttonAndHandler(_("Save"), name="save")
     def handleApply(self, action):
-        if api.content.get_state(self.context) == "planned" and not data.get("effective_date"):
+        data, errors = self.extractData()
+        if api.content.get_state(self.context) == "planned" and not data.get("IPublication.effective"):
             IStatusMessage(self.request).addStatusMessage(_("msg_missing_effective_date"), "error")
             return
-        super(EditForm, self).handleApply(action)
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        self.applyChanges(data)
+        IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
+        self.request.response.redirect(self.nextURL())
+        notify(EditFinishedEvent(self.context))
 
     def updateFields(self):
         super(EditForm, self).updateFields()

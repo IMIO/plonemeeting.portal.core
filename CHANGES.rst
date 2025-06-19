@@ -4,8 +4,8 @@ Changelog
 2.1.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Fix an issue with `publication.EditForm`.
+  [aduchene]
 
 2.1.10 (2025-06-19)
 -------------------
