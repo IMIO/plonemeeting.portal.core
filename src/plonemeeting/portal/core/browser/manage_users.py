@@ -174,7 +174,7 @@ class ManageCreateUserForm(BaseManageUserForm):
         groups_to_assign = data.get("user_groups", [])
         existing_user = self.acl_users.getUserById(username)
         if existing_user:
-            IStatusMessage(self.request).addStatusMessage("msg_existing_user_error", type="error")
+            IStatusMessage(self.request).addStatusMessage(_("msg_existing_user_error"), type="error")
             return
         try:
             password = self.registration.generatePassword()
@@ -184,9 +184,9 @@ class ManageCreateUserForm(BaseManageUserForm):
             self.join_institution(username)
             self.update_user_groups(username, groups_to_assign)
             self.registration.registeredNotify(username)
-            IStatusMessage(self.request).addStatusMessage("msg_user_created", type="info")
+            IStatusMessage(self.request).addStatusMessage(_("msg_user_created"), type="info")
         except Exception as e:
-            IStatusMessage(self.request).addStatusMessage("msg_user_create_failed: {}".format(str(e)), type="error")
+            IStatusMessage(self.request).addStatusMessage(_("msg_user_create_failed: {}").format(str(e)), type="error")
             return
 
         self.request.response.redirect("manage-users-listing")

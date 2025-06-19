@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-06-10 13:31+0000\n"
+"POT-Creation-Date: 2025-06-19 13:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,11 +70,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../content/institution.py:280
+#: ../content/institution.py:293
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:405
+#: ../content/institution.py:418
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -194,12 +194,16 @@ msgstr ""
 msgid "Faceted publications preview"
 msgstr ""
 
-#: ../content/institution.py:370
+#: ../content/institution.py:383
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:378
+#: ../content/institution.py:391
 msgid "Footer text color"
+msgstr ""
+
+#: ../content/institution.py:258
+msgid "For enabling third-party JavaScript integrations from external providers (e.g. Google Analytics). Paste the provided code snippet here. It will be rendered as entered near the end of the page."
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -230,7 +234,7 @@ msgstr ""
 msgid "Groups in charge"
 msgstr ""
 
-#: ../content/institution.py:338
+#: ../content/institution.py:351
 msgid "Header color"
 msgstr ""
 
@@ -314,6 +318,10 @@ msgstr ""
 msgid "Items sort order"
 msgstr ""
 
+#: ../content/institution.py:257
+msgid "JavaScript integrations"
+msgstr ""
+
 #: ../faceted/macro_item.pt:65
 msgid "Last modification"
 msgstr ""
@@ -340,7 +348,7 @@ msgstr ""
 msgid "Legislative authority title"
 msgstr ""
 
-#: ../content/institution.py:362
+#: ../content/institution.py:375
 msgid "Links text color"
 msgstr ""
 
@@ -348,11 +356,11 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:334
+#: ../content/institution.py:347
 msgid "Logo"
 msgstr ""
 
-#: ../content/institution.py:259
+#: ../content/institution.py:272
 msgid "Mapping"
 msgstr ""
 
@@ -410,11 +418,11 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
-#: ../content/institution.py:346
+#: ../content/institution.py:359
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:354
+#: ../content/institution.py:367
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -450,7 +458,7 @@ msgstr ""
 msgid "Plonemeeting URL"
 msgstr ""
 
-#: ../content/institution.py:312
+#: ../content/institution.py:325
 msgid "Power users"
 msgstr ""
 
@@ -466,7 +474,7 @@ msgstr ""
 msgid "Publication"
 msgstr ""
 
-#: ../content/institution.py:304
+#: ../content/institution.py:317
 #: ../events/institution.py:49
 #: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
@@ -513,11 +521,11 @@ msgstr ""
 msgid "Representative value"
 msgstr ""
 
-#: ../content/institution.py:293
+#: ../content/institution.py:306
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:427
+#: ../content/institution.py:440
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
@@ -526,6 +534,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:82
+#: ../browser/publication.py:41
 msgid "Save"
 msgstr ""
 
@@ -545,7 +554,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../content/institution.py:322
+#: ../content/institution.py:335
 msgid "Styling"
 msgstr ""
 
@@ -589,7 +598,7 @@ msgstr ""
 msgid "Timestamp information has been removed since the data has changed"
 msgstr ""
 
-#: ../browser/publication.py:57
+#: ../browser/publication.py:74
 msgid "Timestamping is disabled for this element!"
 msgstr ""
 
@@ -618,7 +627,7 @@ msgstr ""
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:460
+#: ../content/institution.py:473
 msgid "Unknown value: ${key}"
 msgstr ""
 
@@ -666,7 +675,7 @@ msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:482
+#: ../content/institution.py:495
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -674,7 +683,7 @@ msgstr ""
 msgid "You can't remove items from a decided meeting."
 msgstr ""
 
-#: ../events/publication.py:56
+#: ../events/publication.py:59
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
@@ -698,7 +707,7 @@ msgstr ""
 msgid "authority_date_description"
 msgstr ""
 
-#: ../content/institution.py:281
+#: ../content/institution.py:294
 msgid "categories_mappings_description"
 msgstr ""
 
@@ -743,7 +752,7 @@ msgstr ""
 msgid "description_manage_users"
 msgstr ""
 
-#: ../browser/publication.py:60
+#: ../browser/publication.py:77
 msgid "effective_date_in_past_msg"
 msgstr ""
 
@@ -770,7 +779,7 @@ msgstr ""
 msgid "help_user_name_creation_casesensitive"
 msgstr ""
 
-#: ../content/institution.py:267
+#: ../content/institution.py:280
 msgid "iA.Delib field to use for category mapping"
 msgstr ""
 
@@ -871,6 +880,14 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
+#: ../browser/manage_users.py:177
+msgid "msg_existing_user_error"
+msgstr ""
+
+#: ../browser/publication.py:49
+msgid "msg_missing_effective_date"
+msgstr ""
+
 #. Default: "No users found."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
@@ -880,7 +897,11 @@ msgstr ""
 msgid "msg_user_create_failed"
 msgstr ""
 
-#: ../browser/manage_users.py:265
+#: ../browser/manage_users.py:189
+msgid "msg_user_create_failed: {}"
+msgstr ""
+
+#: ../browser/manage_users.py:187
 msgid "msg_user_created"
 msgstr ""
 
@@ -896,7 +917,7 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../content/institution.py:313
+#: ../content/institution.py:326
 msgid "power_users_description"
 msgstr ""
 
@@ -912,6 +933,6 @@ msgstr ""
 msgid "representative_value_description"
 msgstr ""
 
-#: ../content/institution.py:294
+#: ../content/institution.py:307
 msgid "representatives_mappings_description"
 msgstr ""

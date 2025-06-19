@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-06-10 13:31+0000\n"
+"POT-Creation-Date: 2025-06-19 13:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,11 +67,11 @@ msgstr "Retourner vers mon institution"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../content/institution.py:280
+#: ../content/institution.py:293
 msgid "Categories mappings"
 msgstr "Correspondances des matières"
 
-#: ../content/institution.py:405
+#: ../content/institution.py:418
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
@@ -191,13 +191,17 @@ msgstr "Facettes publications"
 msgid "Faceted publications preview"
 msgstr "Prévisualisation des publications"
 
-#: ../content/institution.py:370
+#: ../content/institution.py:383
 msgid "Footer color"
 msgstr "Couleur du pied de page"
 
-#: ../content/institution.py:378
+#: ../content/institution.py:391
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
+
+#: ../content/institution.py:258
+msgid "For enabling third-party JavaScript integrations from external providers (e.g. Google Analytics). Paste the provided code snippet here. It will be rendered as entered near the end of the page."
+msgstr "Pour activer les intégrations JavaScript tierces provenant de fournisseurs externes (par exemple Google Analytics). Collez le code fourni ici. Il sera rendu tel quel près de la fin de la page."
 
 #: ../profiles/default/actions.xml
 msgid "Force reimport this meeting"
@@ -227,7 +231,7 @@ msgstr "Titre de matière globale"
 msgid "Groups in charge"
 msgstr "Groupes en charge"
 
-#: ../content/institution.py:338
+#: ../content/institution.py:351
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
@@ -311,6 +315,10 @@ msgstr "Expression TAL pour le formatage du titre du point. Si laissé vide, le 
 msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
+#: ../content/institution.py:257
+msgid "JavaScript integrations"
+msgstr "Intégrations JavaScript"
+
 #: ../faceted/macro_item.pt:65
 msgid "Last modification"
 msgstr "Dernière modification"
@@ -337,7 +345,7 @@ msgstr "Identifiant"
 msgid "Legislative authority title"
 msgstr "Titre"
 
-#: ../content/institution.py:362
+#: ../content/institution.py:375
 msgid "Links text color"
 msgstr "Couleur des liens"
 
@@ -345,11 +353,11 @@ msgstr "Couleur des liens"
 msgid "Local category id"
 msgstr "Matière dans iA.Délib"
 
-#: ../content/institution.py:334
+#: ../content/institution.py:347
 msgid "Logo"
 msgstr "Logo"
 
-#: ../content/institution.py:259
+#: ../content/institution.py:272
 msgid "Mapping"
 msgstr "Correspondances"
 
@@ -407,11 +415,11 @@ msgstr "Modifié"
 msgid "Modified at"
 msgstr "Modifié le"
 
-#: ../content/institution.py:346
+#: ../content/institution.py:359
 msgid "Navigation bar color"
 msgstr "Couleur de la barre de navigation"
 
-#: ../content/institution.py:354
+#: ../content/institution.py:367
 msgid "Navigation bar text color"
 msgstr "Couleur du texte de la barre de navigation"
 
@@ -447,7 +455,7 @@ msgstr "Texte à afficher pour les portions de texte anonymisées"
 msgid "Plonemeeting URL"
 msgstr "URL iA.Délib"
 
-#: ../content/institution.py:312
+#: ../content/institution.py:325
 msgid "Power users"
 msgstr "Super-utilisateurs"
 
@@ -463,7 +471,7 @@ msgstr "Province"
 msgid "Publication"
 msgstr "Publication"
 
-#: ../content/institution.py:304
+#: ../content/institution.py:317
 #: ../events/institution.py:49
 #: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
@@ -510,11 +518,11 @@ msgstr "Valeur longue de mandataire"
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
-#: ../content/institution.py:293
+#: ../content/institution.py:306
 msgid "Representatives mappings"
 msgstr "Correspondances des mandataires"
 
-#: ../content/institution.py:427
+#: ../content/institution.py:440
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
@@ -523,6 +531,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:82
+#: ../browser/publication.py:41
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -542,7 +551,7 @@ msgstr "Numéro triable du point"
 msgid "Status"
 msgstr "Statut"
 
-#: ../content/institution.py:322
+#: ../content/institution.py:335
 msgid "Styling"
 msgstr "Styles"
 
@@ -586,7 +595,7 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "Timestamp information has been removed since the data has changed"
 msgstr "Les informations d'horodatage ont été supprimées car les données ont changé"
 
-#: ../browser/publication.py:57
+#: ../browser/publication.py:74
 msgid "Timestamping is disabled for this element!"
 msgstr "L'horodatage est désactivé pour cet élément!"
 
@@ -615,7 +624,7 @@ msgstr "Une annexe non publiable a été trouvée dans la réponse du web servic
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
-#: ../content/institution.py:460
+#: ../content/institution.py:473
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
@@ -663,7 +672,7 @@ msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:482
+#: ../content/institution.py:495
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
@@ -671,7 +680,7 @@ msgstr "Erreur de connexion au web service !"
 msgid "You can't remove items from a decided meeting."
 msgstr "Vous ne pouvez pas enlever de points sur une séance déjà décidée."
 
-#: ../events/publication.py:56
+#: ../events/publication.py:59
 msgid "You must be publications power user to remove this element!"
 msgstr "Vous devez avoir le rôle super-utilisateur pour supprimer une publication!"
 
@@ -695,7 +704,7 @@ msgstr "activer pour trier la colonne par ordre décroissant"
 msgid "authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
-#: ../content/institution.py:281
+#: ../content/institution.py:294
 msgid "categories_mappings_description"
 msgstr "Les points pour lesquels aucune correspondance de matière ne sera trouvée seront ignorés."
 
@@ -740,7 +749,7 @@ msgstr ""
 msgid "description_manage_users"
 msgstr "Ici, vous pouvez gérer les utilisateurs de votre institution. Si, lors de la création d'un nouvel utilisateur, son identifiant est déjà utilisé, vous pouvez l'inviter à rejoindre votre institution, à condition d'avoir vérifié avec l'utilisateur qu'il possédait bien ce compte. Sinon, vous pouvez simplement créer un nouvel utilisateur avec un autre identifiant. Attention, un identifiant ne peut être utilisé qu'une seule fois dans le système et ne peut être changé par la suite."
 
-#: ../browser/publication.py:60
+#: ../browser/publication.py:77
 msgid "effective_date_in_past_msg"
 msgstr "Cet élément ne peut pas être publié car sa date de publication est dans le passé. Pour publier maintenant, supprimez la date. Pour planifier une publication, choisissez une date future."
 
@@ -767,7 +776,7 @@ msgstr "Si un utilisateur est gestionnaire de décisions il pourra importer/sync
 msgid "help_user_name_creation_casesensitive"
 msgstr "Introduisez un nom d'utilisateur, habituellement quelque chose comme 'jdupont'. Pas d'espaces ou de caractères spéciaux. Les noms d'utilisateur et les mots de passe sont sensibles à la casse, assurez-vous que la touche majuscule n'est pas activée. C'est le nom utilisé pour se connecter."
 
-#: ../content/institution.py:267
+#: ../content/institution.py:280
 msgid "iA.Delib field to use for category mapping"
 msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 
@@ -868,6 +877,14 @@ msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
+#: ../browser/manage_users.py:177
+msgid "msg_existing_user_error"
+msgstr "Un utilisateur ayant cet identifiant existe déjà. Veuillez en choisir un autre."
+
+#: ../browser/publication.py:49
+msgid "msg_missing_effective_date"
+msgstr "La date de publication est obligatoire dans cet état du workflow."
+
 #. Default: "No users found."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
@@ -877,7 +894,11 @@ msgstr "Aucun utilisateur trouvé."
 msgid "msg_user_create_failed"
 msgstr "Échec de la création de l'utilisateur"
 
-#: ../browser/manage_users.py:265
+#: ../browser/manage_users.py:189
+msgid "msg_user_create_failed: {}"
+msgstr "La création de l'utilisateur a échoué: {}"
+
+#: ../browser/manage_users.py:187
 msgid "msg_user_created"
 msgstr "Utilisateur créé"
 
@@ -893,7 +914,7 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../content/institution.py:313
+#: ../content/institution.py:326
 msgid "power_users_description"
 msgstr "Sélectionnez les utilisateurs qui pourront dépublier manuellement ou supprimer une publication \"privée\" ou \"dépubliée\".  Ne sélectionnez aucun utilisateur si tous les gestionnaires de publications doivent pouvoir effectuer ces actions."
 
@@ -909,6 +930,6 @@ msgstr "Affichée sur les pages des points"
 msgid "representative_value_description"
 msgstr "Affichée dans les filtres et dans les listes de points"
 
-#: ../content/institution.py:294
+#: ../content/institution.py:307
 msgid "representatives_mappings_description"
 msgstr "Si des correspondances de mandataires sont renseignées ci-dessous, les points pour lesquels aucune correspondance ne sera trouvée seront ignorés."
