@@ -67,7 +67,8 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.login_as_publications_manager()
         view = self.planned_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
-        view = self.planned_publication.restrictedTraverse("@@edit")
+        with self.assertRaises(Unauthorized):
+            view = self.planned_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
         ILockable(self.planned_publication).unlock()
 
