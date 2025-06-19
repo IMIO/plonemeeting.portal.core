@@ -14,7 +14,7 @@ jobs:
         plone-version: ["6.1"]
     steps:
       - name: Run check
-        uses: IMIO/gha/plone-package-test-notify@main
+        uses: IMIO/gha/plone-package-test-notify@v4.1.1
         env:
           cache-name: cache-eggs
         with:
