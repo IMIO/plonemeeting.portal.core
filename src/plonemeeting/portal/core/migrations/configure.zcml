@@ -196,4 +196,15 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_2100.migrate"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeSteps
+    source="2100"
+    destination="2101"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply workflow to update publication_workflow"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="workflow"
+      run_deps="True"/>
+  </genericsetup:upgradeSteps>
 </configure>
