@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.10 (unreleased)
+2.1.10 (2025-06-19)
 -------------------
 
 - Prevent Editor to edit a publication in planned state.
