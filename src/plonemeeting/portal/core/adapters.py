@@ -38,9 +38,9 @@ class PublicationTimeStamper(TimeStamper):
         return idxs
 
     def timestamp(self):
-        data, timestamp = super(PublicationTimeStamper, self).timestamp()
+        data, timestamp_date = super(PublicationTimeStamper, self).timestamp()
         formatted_date = (
-            timestamp["timestamp_date"].astimezone().strftime("%Y%m%d-%H%M%S")
+            timestamp_date.astimezone().strftime("%Y%m%d-%H%M%S")
         )
         filename = f"archive_{formatted_date}.zip"
         self.context.timestamped_file = NamedBlobFile(data=data, filename=filename)
