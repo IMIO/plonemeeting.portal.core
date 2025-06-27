@@ -23,11 +23,8 @@ class PublicationTimeStamper(TimeStamper):
 
     def _zips_equal_by_md5(self, blob_a: bytes, blob_b: bytes) -> bool:
         """
-        Two ZIP blobs are considered equal when:
-          • they contain exactly the same member names, and
-          • each corresponding member has the same MD5 digest.
-
-        Metadata (timestamps, permissions, comments, extra fields) is ignored.
+        Two ZIP blobs are considered equal when they contain exactly the same member names,
+        and each corresponding member has the same MD5 digest.
         """
         with zipfile.ZipFile(BytesIO(blob_a)) as za, zipfile.ZipFile(BytesIO(blob_b)) as zb:
             names_a = sorted(za.namelist())
@@ -35,7 +32,6 @@ class PublicationTimeStamper(TimeStamper):
             if names_a != names_b:
                 return False
 
-            # Build {name: md5} maps for both archives
             digests_a = {n: self._member_md5(za, n) for n in names_a}
             digests_b = {n: self._member_md5(zb, n) for n in names_b}
 
@@ -57,6 +53,7 @@ class PublicationTimeStamper(TimeStamper):
         return zip_buffer.getvalue()
 
     def file_has_changed(self, obj, event):
+        """Not used for publications, as we always generate a new timestamp."""
         return not self._zips_equal_by_md5(self.get_data(), obj.timestamped_file.data)
 
     def _effective_related_indexes(self):
