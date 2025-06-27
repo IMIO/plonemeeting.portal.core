@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
 from collective.timestamp import _ as _cts
 from collective.timestamp import logger as cts_logger
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from collective.timestamp.interfaces import ITimeStamper
+from DateTime import DateTime
 from plone import api
 from plonemeeting.portal.core import _
 from Products.CMFPlone.utils import parent

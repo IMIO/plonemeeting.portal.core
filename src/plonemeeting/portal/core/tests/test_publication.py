@@ -1,6 +1,6 @@
 from AccessControl import Unauthorized
-from DateTime import DateTime
 from collective.timestamp.interfaces import ITimeStamper
+from DateTime import DateTime
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
 from plone.locking.interfaces import ILockable

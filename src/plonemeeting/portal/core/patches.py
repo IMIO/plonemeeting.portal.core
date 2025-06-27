@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-import logging
-
-from Products.CMFPlone.resources import utils
-from Products.CMFPlone.resources.utils import get_resource
-from Products.PortalTransforms.transforms import safe_html
-from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
-from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.z3cform.widgets import contentbrowser
 from plone.base.navigationroot import get_navigation_root_object
 from plone.base.utils import get_top_site_from_url
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
+from Products.CMFPlone.resources import utils
+from Products.CMFPlone.resources.utils import get_resource
+from Products.PortalTransforms.transforms import safe_html
+from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
+from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
+
+import logging
+
 
 original_hasScript = safe_html.hasScript
 

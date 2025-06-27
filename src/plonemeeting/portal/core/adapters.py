@@ -1,7 +1,6 @@
-from hashlib import md5
-
 from collective.timestamp.adapters import ITimeStamper
 from collective.timestamp.adapters import TimeStamper
+from hashlib import md5
 from imio.helpers.content import object_values
 from io import BytesIO
 from plone.namedfile.file import NamedBlobFile
