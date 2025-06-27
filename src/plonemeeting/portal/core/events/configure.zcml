@@ -3,6 +3,16 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plonemeeting.portal.core">
 
+    <include package="z3c.unconfigure" file="meta.zcml" />
+    <unconfigure>
+      <subscriber for="collective.timestamp.behaviors.timestamp.ITimestampableDocument
+                       zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+                  handler="collective.timestamp.subscribers.modified_content" />
+      <subscriber for="collective.timestamp.behaviors.timestamp.ITimestampableDocument
+                       plone.dexterity.interfaces.IEditBegunEvent"
+                  handler="collective.timestamp.subscribers.warn_on_edition" />
+    </unconfigure>
+
     <subscriber
         for="plonemeeting.portal.core.content.institution.IInstitution
              zope.lifecycleevent.interfaces.IObjectAddedEvent"

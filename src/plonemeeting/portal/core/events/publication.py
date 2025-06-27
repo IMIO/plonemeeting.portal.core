@@ -16,6 +16,15 @@ def publication_modified(publication, event):
     # reindex if element in container modified (annex)
     if isinstance(event, ContainerModifiedEvent):
         publication.reindexObject(idxs=["has_annexes"], update_metadata=False)
+    if not publication.timestamp:
+        return
+    publication.timestamp = None
+    publication.reindexObject(idxs=["is_timestamped"])
+    request = getattr(publication, "REQUEST", None)
+    if request is not None:
+        message = _("msg_timestamp_removed")
+        api.portal.show_message(message, request)
+
 
 
 def check_publication_timestamp(obj, event):
@@ -29,7 +38,7 @@ def check_publication_timestamp(obj, event):
     obj.reindexObject(idxs=["is_timestamped"])
     request = getattr(obj, "REQUEST", None)
     if request is not None:
-        message = _("Timestamp information has been removed since the data has changed")
+        message = _("msg_timestamp_removed")
         api.portal.show_message(message, request)
 
 
@@ -40,8 +49,11 @@ def publication_state_changed(publication, event):
         return
 
     if event.new_state.id == 'published':
-        timestamper = ITimeStamper(publication)
-        if timestamper.is_timestampable():
+        if publication.enable_timestamping:
+            timestamper = ITimeStamper(publication)
+            if timestamper.is_timestamped():
+               cts_logger.info(f"Timestamp already generated for {publication.absolute_url()}. Updating it.")
+               publication.timestamp = None
             timestamper.timestamp()
             cts_logger.info(f"Timestamp generated for {publication.absolute_url()}")
             api.portal.show_message(
