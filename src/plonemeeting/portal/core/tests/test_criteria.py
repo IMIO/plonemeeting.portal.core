@@ -4,7 +4,7 @@ from eea.facetednavigation.interfaces import ICriteria
 from imio.helpers.content import uuidToCatalogBrain
 from imio.helpers.content import uuidToObject
 from plone import api
-from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID, FACETED_PUB_FOLDER_ID, PUB_FOLDER_ID
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.faceted.widgets.select import SelectMeetingWidget
@@ -27,13 +27,21 @@ class TestFacetedCriteria(PmPortalTestCase):
 
     def test_compute_criteria(self):
         """Global defined criteria are used for every institutions."""
-        global_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_DEC_FOLDER_ID])
+        global_dec_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_DEC_FOLDER_ID])
         for faceted_folder in (self.amityville[DEC_FOLDER_ID], self.belleville[DEC_FOLDER_ID]):
             criteria = ICriteria(faceted_folder)
             self.assertEqual(
-                global_criteria._criteria(),
+                global_dec_criteria._criteria(),
                 criteria._criteria(),
             )
+        global_pub_criteria = ICriteria(self.layer["portal"][CONFIG_FOLDER_ID][FACETED_PUB_FOLDER_ID])
+        for faceted_folder in (self.amityville[PUB_FOLDER_ID], self.belleville[PUB_FOLDER_ID]):
+            criteria = ICriteria(faceted_folder)
+            self.assertEqual(
+                global_pub_criteria._criteria(),
+                criteria._criteria(),
+            )
+
 
     def test_select_widget(self):
         # setup, reuse "seance" and "matiere" criteria
