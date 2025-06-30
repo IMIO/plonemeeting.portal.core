@@ -2,12 +2,12 @@ from unittest import mock
 
 import Testing
 import transaction
-from AccessControl import Unauthorized
+from zExceptions import Unauthorized, Redirect
 from collective.timestamp.interfaces import ITimeStamper
 from DateTime import DateTime
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
-from plone.dexterity.events import EditFinishedEvent, EditCancelledEvent
+from plone.dexterity.events import EditCancelledEvent
 from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
@@ -223,6 +223,19 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         timestamper.timestamp()
         self.assertTrue(timestamper.is_timestamped())
 
+        # If we unpublish and republish, it should be timestamped again
+        # with a fresh timestamp
+        self.workflow.doActionFor(pub, "unpublish")
+        # Should still be timestamped
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        old_timestamp = pub.timestamp
+
+        self.workflow.doActionFor(pub, "publish")
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        self.assertNotEqual(old_timestamp, pub.timestamp)
+
         # Testing the enable_timestamping feature
         self.workflow.doActionFor(pub, "unpublish")
         pub.enable_timestamping = False
@@ -233,10 +246,53 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertFalse(timestamper.is_timestamped())
         self.assertIsNone(pub.timestamp)
 
-    def test_edit_publication_missing_effective_date(self):
-        """Saving a *planned* publication without an effective date must be
-        refused: an *error* flash message and **no** redirect/event."""
+    def test_timestamp_invalidation_with_files(self):
+        self.login_as_publications_manager()
+        pub = self.published_publication
+        timestamper = ITimeStamper(pub)
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        self.workflow.doActionFor(pub, "unpublish")
+        # Should still be timestamped
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        # Add a file to the publication
+        api.content.create(
+            container=pub,
+            type="File",
+            id="new_file.txt",
+            title="New File",
+            file=NamedBlobFile(data=b"New file content", filename="new_file.txt")
+        )
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertIsNone(pub.timestamp)
 
+        timestamper.timestamp()
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+
+        # Now if we modify the file, it should invalidate the timestamp
+        pub["new_file.txt"].file = NamedBlobFile(data=b"Updated file content", filename="new_file.txt")
+        notify(ObjectModifiedEvent(pub["new_file.txt"]))
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertIsNone(pub.timestamp)
+
+
+    def test_remove_publication(self):
+        self.login_as_decisions_manager()
+        self.institution.publications_power_users = ["manager"]
+        with self.assertRaises(Unauthorized):
+            api.content.delete(self.private_publication)
+        self.login_as_publications_manager()
+        with self.assertRaises(Redirect):
+            # If we have power users, we should not be able to delete the publication
+            # As publications manager since he isn't a power user
+            api.content.delete(self.private_publication)
+        # If we don't have power users, publications manager should be able to delete the publication
+        self.institution.publications_power_users = None
+        api.content.delete(self.private_publication)
+
+    def test_edit_publication_missing_effective_date(self):
         self.login_as_admin()
         pub = self.planned_publication
         form = pub.restrictedTraverse("@@edit")
@@ -255,8 +311,6 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         notify.assert_not_called()
 
     def test_edit_publication_success(self):
-        """With a valid effective date the handler should flash *info*,
-        redirect to the object URL and emit an :class:`EditFinishedEvent`."""
         transaction.commit()
         browser = Browser(self.layer["app"])
         browser.addHeader("Authorization", f"Basic {PM_ADMIN_USER}:{PM_USER_PASSWORD}")
@@ -269,9 +323,6 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertTrue("MyTitle" in browser.contents)
 
     def test_handle_cancel_flashes_and_fires_event(self):
-        """Cancelling the form should flash *info*, redirect back to the
-        object URL and emit an :class:`EditCancelledEvent`."""
-
         self.login_as_publications_manager()
         pub = self.private_publication
         form = pub.restrictedTraverse("@@edit")
