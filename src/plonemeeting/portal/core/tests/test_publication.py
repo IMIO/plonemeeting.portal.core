@@ -6,6 +6,8 @@ from plone import api
 from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):
@@ -23,7 +25,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.login_as_publications_manager()
         add_form = self.institution.publications.restrictedTraverse("++add++Publication")
         self.assertEqual(add_form.form_instance.portal_type, "Publication")
-        add_form() # should not raise an exception
+        add_form()  # should not raise an exception
 
     def test_private_publication_view(self):
         self.assertEqual(api.content.get_state(self.private_publication), "private")
@@ -174,3 +176,53 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(type(download_view._getFile()), NamedBlobFile)
         download_view = download_view.publishTraverse(self.portal.REQUEST, "timestamped_file")
         self.assertEqual(type(download_view._getFile()), NamedBlobFile)
+
+    def test_timestamp_invalidation(self):
+        self.login_as_publications_manager()
+        pub = self.published_publication
+        timestamper = ITimeStamper(pub)
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        with self.assertRaises(ValueError):
+            timestamper.timestamp()  # raises ValueError if publication is already timestamped
+
+        self.workflow.doActionFor(pub, "unpublish")
+        # Should still be timestamped
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        # Invalidate timestamp
+        pub.restrictedTraverse("@@edit")
+        notify(ObjectModifiedEvent(pub))
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertIsNone(pub.timestamp)
+
+        self.workflow.doActionFor(pub, "publish")
+        # Should be timestamped again
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIsNotNone(pub.timestamp)
+        with self.assertRaises(Unauthorized):
+            # Should not be able to edit timestamped publication
+            pub.restrictedTraverse("@@edit")
+
+        self.login_as_manager()
+        # Manager should be able to edit timestamped publication
+        pub.restrictedTraverse("@@edit")
+        # But it'll invalidate the timestamp
+        notify(ObjectModifiedEvent(pub))
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertIsNone(pub.timestamp)
+
+        # Now we can timestamp it again
+        self.login_as_publications_manager()
+        timestamper.timestamp()
+        self.assertTrue(timestamper.is_timestamped())
+
+        # Testing the enable_timestamping feature
+        self.workflow.doActionFor(pub, "unpublish")
+        pub.enable_timestamping = False
+        notify(ObjectModifiedEvent(pub))
+
+        # Should not be timestamped anymore
+        self.workflow.doActionFor(pub, "publish")
+        self.assertFalse(timestamper.is_timestamped())
+        self.assertIsNone(pub.timestamp)
