@@ -10,7 +10,7 @@ from Products.PluginIndexes.DateIndex.DateIndex import DateIndex
 class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.login_as_manager()
+        self.login_as_admin()
 
     def testSearchableText(self):
         self.item.formatted_title = richtextval("<p>test_title</p>")

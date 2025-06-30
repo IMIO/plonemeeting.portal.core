@@ -24,7 +24,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         # project disclaimer message not displayed
         self.assertFalse("alert-content" in view())
         # when meeting is in decision
-        self.login_as_manager()
+        self.login_as_admin()
         api.content.transition(self.meeting, to_state="in_project")
         self.assertEqual(api.content.get_state(self.meeting), "in_project")
         view = self.item.restrictedTraverse("@@view")

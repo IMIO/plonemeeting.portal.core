@@ -91,7 +91,7 @@ class TestFacetedCriteria(PmPortalTestCase):
     def test_annexes_faceted_criteria(self):
         """The "Annexes?" faceted criterion is only available to institution managers."""
         for faceted_folder in (self.amityville[DEC_FOLDER_ID], self.belleville[DEC_FOLDER_ID]):
-            self.login_as_manager()
+            self.login_as_admin()
             criteria = ICriteria(faceted_folder)
             self.assertTrue(criteria.get("annexes"))
             self.logout()

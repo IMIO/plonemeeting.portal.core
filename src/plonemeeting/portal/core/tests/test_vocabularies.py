@@ -9,7 +9,7 @@ from zope.schema.interfaces import IVocabularyFactory
 class TestVocabularies(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.login_as_manager()
+        self.login_as_admin()
         city2 = getattr(self.portal, "belleville")
         brains = api.content.find(context=city2, portal_type="Meeting")
         self.meeting2 = brains[0].getObject()

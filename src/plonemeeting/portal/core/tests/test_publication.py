@@ -1,14 +1,20 @@
+from unittest import mock
+
+import Testing
+import transaction
 from AccessControl import Unauthorized
 from collective.timestamp.interfaces import ITimeStamper
 from DateTime import DateTime
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
+from plone.dexterity.events import EditFinishedEvent, EditCancelledEvent
 from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
+from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-
+from plone.testing.zope import Browser
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
@@ -47,7 +53,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         ILockable(self.private_publication).unlock()
 
-        self.login_as_manager()
+        self.login_as_admin()
         view = self.private_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
         view = self.private_publication.restrictedTraverse("@@edit")
@@ -74,7 +80,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         ILockable(self.planned_publication).unlock()
 
-        self.login_as_manager()
+        self.login_as_admin()
         view = self.planned_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
         view = self.planned_publication.restrictedTraverse("@@edit")
@@ -99,7 +105,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         with self.assertRaises(Unauthorized):
             self.published_publication.restrictedTraverse("@@edit")
 
-        self.login_as_manager()
+        self.login_as_admin()
         view = self.published_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
         view = self.published_publication.restrictedTraverse("@@edit")
@@ -124,7 +130,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         ILockable(self.unpublished_publication).unlock()
 
-        self.login_as_manager()
+        self.login_as_admin()
         view = self.unpublished_publication.restrictedTraverse("@@view")
         self.assertTrue(view())
         view = self.unpublished_publication.restrictedTraverse("@@edit")
@@ -204,9 +210,9 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
             # Should not be able to edit timestamped publication
             pub.restrictedTraverse("@@edit")
 
-        self.login_as_manager()
+        self.login_as_admin()
         # Manager should be able to edit timestamped publication
-        pub.restrictedTraverse("@@edit")
+        pub.restrictedTraverse('@@edit')
         # But it'll invalidate the timestamp
         notify(ObjectModifiedEvent(pub))
         self.assertFalse(timestamper.is_timestamped())
@@ -226,3 +232,65 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.workflow.doActionFor(pub, "publish")
         self.assertFalse(timestamper.is_timestamped())
         self.assertIsNone(pub.timestamp)
+
+    def test_edit_publication_missing_effective_date(self):
+        """Saving a *planned* publication without an effective date must be
+        refused: an *error* flash message and **no** redirect/event."""
+
+        self.login_as_admin()
+        pub = self.planned_publication
+        form = pub.restrictedTraverse("@@edit")
+        form.update()
+
+        with (mock.patch("plonemeeting.portal.core.browser.publication.IStatusMessage") as status_cls,
+              mock.patch("plonemeeting.portal.core.browser.publication.notify") as notify):
+            form.handleApply(form, action=None)
+
+        status_cls.return_value.addStatusMessage.assert_called_once()
+        msg, level = status_cls.return_value.addStatusMessage.call_args[0]
+        self.assertEqual(level, "error")
+        self.assertIn("msg_missing_effective_date", msg)
+
+        self.assertIsNone(form.request.response.getHeader("location"))
+        notify.assert_not_called()
+
+    def test_edit_publication_success(self):
+        """With a valid effective date the handler should flash *info*,
+        redirect to the object URL and emit an :class:`EditFinishedEvent`."""
+        transaction.commit()
+        browser = Browser(self.layer["app"])
+        browser.addHeader("Authorization", f"Basic {PM_ADMIN_USER}:{PM_USER_PASSWORD}")
+        browser.open(f"{self.private_publication.absolute_url()}/@@edit")
+        browser.getControl(name="form.widgets.IBasic.title").value = (
+            "MyTitle"
+        )
+        browser.getControl("Save").click()
+        self.assertTrue(browser.url.endswith(self.private_publication.absolute_url()))
+        self.assertTrue("MyTitle" in browser.contents)
+
+    def test_handle_cancel_flashes_and_fires_event(self):
+        """Cancelling the form should flash *info*, redirect back to the
+        object URL and emit an :class:`EditCancelledEvent`."""
+
+        self.login_as_publications_manager()
+        pub = self.private_publication
+        form = pub.restrictedTraverse("@@edit")
+        form.update()
+
+        with mock.patch(
+            "plonemeeting.portal.core.browser.publication.IStatusMessage"
+        ) as status_cls, mock.patch(
+            "plonemeeting.portal.core.browser.publication.notify"
+        ) as notify:
+            form.handleCancel(form, action=None)
+
+        status_cls.return_value.addStatusMessage.assert_called_once_with(
+            "Edit cancelled", "info"
+        )
+        self.assertEqual(
+            form.request.response.getHeader("location"), pub.absolute_url()
+        )
+
+        dispatched = notify.call_args[0][0]
+        self.assertIsInstance(dispatched, EditCancelledEvent)
+        self.assertIs(dispatched.object, pub)

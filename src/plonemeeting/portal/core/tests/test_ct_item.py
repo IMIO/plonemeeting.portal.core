@@ -32,7 +32,7 @@ class ItemIntegrationTest(PmPortalTestCase):
         )
 
     def test_ct_item_adding(self):
-        self.login_as_manager()
+        self.login_as_admin()
         obj = api.content.create(container=self.parent, type="Item", id="item")
 
         self.assertTrue(
@@ -47,6 +47,6 @@ class ItemIntegrationTest(PmPortalTestCase):
         self.assertNotIn("item", parent.objectIds())
 
     def test_ct_item_globally_not_addable(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Item")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))

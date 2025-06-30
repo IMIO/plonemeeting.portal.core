@@ -30,7 +30,7 @@ class PublicationIntegrationTest(PmPortalTestCase):
         )
 
     def test_ct_publication_adding(self):
-        self.login_as_manager()
+        self.login_as_admin()
 
         with self.assertRaises(InvalidParameterError):
             # Cannot create a publication at the portal root
@@ -49,6 +49,6 @@ class PublicationIntegrationTest(PmPortalTestCase):
 
 
     def test_ct_publication_globally_not_addable(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Publication")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))

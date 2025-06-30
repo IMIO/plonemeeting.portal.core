@@ -45,7 +45,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
     def test_get_manageable_groups_for_user(self):
         """get_manageable_groups_for_user should return the correct groups"""
 
-        self.login_as_manager()
+        self.login_as_admin()
         api.group.add_user(groupname=self.members_group_id, username="testuser")
 
         # Should not be in any manageable groups
@@ -70,7 +70,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_update_user_groups(self):
         """update_user_groups should correctly updates the user's group memberships"""
-        self.login_as_manager()
+        self.login_as_admin()
         user_groups = self._get_user_groups_id(username="testuser")
         self.assertEqual(1, len(user_groups))
         self.assertEqual("AuthenticatedUsers", user_groups[0])
@@ -115,7 +115,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_join_institution(self):
         """join_institution adds the user to the institution members group"""
-        self.login_as_manager()
+        self.login_as_admin()
         self.invite_form()
         # Initially the user should not be in the members group
         self.assertNotIn(
@@ -134,7 +134,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_invite_form(self):
         """handleInvite should correctly adds the user to the institution."""
-        self.login_as_manager()
+        self.login_as_admin()
 
         # Initially the user should not be in the members group
         self.assertNotIn(
@@ -157,7 +157,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_unregister_from_institution(self):
         """unregister_from_institution should removes the user from all institution groups"""
-        self.login_as_manager()
+        self.login_as_admin()
         self.edit_form()
         # Add the user to all institution groups
         api.group.add_user(groupname=self.members_group_id, username="testuser")
@@ -181,7 +181,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_get_all_institution_users(self):
         """get_all_institution_users returns all users in the institution"""
-        self.login_as_manager()
+        self.login_as_admin()
         self.portal.acl_users._doAddUser("testuser1", "password", [], [])
         self.portal.acl_users._doAddUser("testuser2", "password", [], [])
         self.listing_view()
@@ -209,7 +209,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_edit_form_updateWidgets(self):
         """updateWidgets should correctly fill the form widgets"""
-        self.login_as_manager()
+        self.login_as_admin()
 
         # Set up a member with properties
         member = api.user.get(username="testuser")
@@ -299,7 +299,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
 
     def test_user_form_handleSave(self):
         """ManageCreateUserForm.handleSave should correctly create a new user with the provided properties and group memberships"""
-        self.login_as_manager()
+        self.login_as_admin()
 
         new_username = "newuser"
         new_email = "newuser@example.com"

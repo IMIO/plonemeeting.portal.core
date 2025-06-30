@@ -73,7 +73,7 @@ class IManageUserForm(Interface):
         description=_(
             "help_full_name_creation", default="Enter full name, e.g. John Smith."
         ),
-        required=False,
+        required=True,
     )
     directives.widget("user_groups", CheckBoxFieldWidget, multiple="multiple")
     user_groups = schema.List(
