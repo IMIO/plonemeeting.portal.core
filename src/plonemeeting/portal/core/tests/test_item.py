@@ -45,7 +45,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertSetEqual({"previous_item", "next_item"}, set(next_prev_infos.keys()))
 
         self.assertSetEqual(
-            {"id", "title", "description", "portal_type", "url"}, set(next_prev_infos["next_item"].keys())
+            {"id", "title", "description", "portal_type", "url", "obj"}, set(next_prev_infos["next_item"].keys())
         )
 
         # Moving item should not change the last item number and the next/previous items
