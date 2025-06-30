@@ -7,7 +7,7 @@ class TestMeetingView(PmPortalDemoFunctionalTestCase):
     def test_call_meeting_view_as_manager(self):
         meeting = self.portal["belleville"].decisions.listFolderContents(
             {"portal_type": "Meeting"})[0]
-        self.login_as_manager()
+        self.login_as_admin()
         request = self.portal.REQUEST
         view = meeting.restrictedTraverse("@@view")
         request.set('PUBLISHED', view)

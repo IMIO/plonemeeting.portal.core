@@ -24,7 +24,6 @@ class PortalCatalogSiteMap(CatalogSiteMap):
         # begin change by plonemeeting.portal.core
         queryBuilder = PortalSitemapQueryBuilder(context)
         # end change by plonemeeting.portal.core
-
         query = queryBuilder()
         strategy = getMultiAdapter((context, self), INavtreeStrategy)
 

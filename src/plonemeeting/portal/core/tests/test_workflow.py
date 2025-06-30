@@ -20,7 +20,7 @@ WF = "meeting_workflow"
 class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
-        self.login_as_manager()
+        self.login_as_admin()
         api.user.create(
             username="member",
             email="noreply@pm.portal",
@@ -53,7 +53,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         )
 
     def tearDown(self):
-        self.login_as_manager()
+        self.login_as_admin()
         api.content.delete(obj=self.meeting)
         super().tearDown()
 
@@ -437,7 +437,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(ModifyPortalContent, self.item))
 
     def testAddContent(self):
-        self.login_as_manager()
+        self.login_as_admin()
         self.assertTrue(checkPerm(AddPortalContent, self.institution))
         self.assertTrue(checkPerm(AddPortalContent, self.decisions))
         self.assertTrue(checkPerm(AddPortalContent, self.meeting))
@@ -459,7 +459,7 @@ class TestMeetingWorkflow(PmPortalDemoFunctionalTestCase):
         self.assertTrue(checkPerm(AddPortalContent, self.publications))
 
     def testRemoveContent(self):
-        self.login_as_manager()
+        self.login_as_admin()
         self.assertTrue(checkPerm(DeleteObjects, self.institution))
         self.assertTrue(checkPerm(DeleteObjects, self.decisions))
         self.assertTrue(checkPerm(DeleteObjects, self.meeting))

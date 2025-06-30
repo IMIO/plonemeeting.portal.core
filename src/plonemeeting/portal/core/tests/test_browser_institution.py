@@ -21,7 +21,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         return translate(invalid.args[0], context=self.portal.REQUEST)
 
     def test_not_fetch_category_on_view(self):
-        self.login_as_manager()
+        self.login_as_admin()
         institution_view = self.belleville.restrictedTraverse("@@view")
         # context is overridden while traversing
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
@@ -31,7 +31,7 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         self.assertFalse(hasattr(self.belleville, "delib_categories"))
 
     def test_fetch_category_only_once_on_edit(self):
-        self.login_as_manager()
+        self.login_as_admin()
         institution_edit_form = self.belleville.restrictedTraverse("@@edit")
         # context is overridden while traversing
         request = self.portal.REQUEST

@@ -1,6 +1,4 @@
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission, getToolByName
-from Products.statusmessages.interfaces import IStatusMessage
+from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.workflow import get_state_infos
 from imio.pyutils.utils import sort_by_indexes
 from plone import api
@@ -9,10 +7,16 @@ from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.dexterity.events import EditCancelledEvent
 from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.utils import getToolByName
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
+
 
 FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
 ADMIN_FIELDSETS = ["settings"]
@@ -39,6 +43,16 @@ class PublicationAdd(DefaultAddView):
 class EditForm(DefaultEditForm):
     """Override to reorder and filter out fieldsets."""
 
+    def render(self):
+        """Override to warn about timestamped content.
+        We plug ourself here to avoid displaying the warning after the submit."""
+        handler = ITimeStamper(self.context)
+        if handler.is_timestamped():
+            IStatusMessage(self.request).addStatusMessage(
+                _("msg_editing_timestamped_content"), "warning"
+            )
+        return super().render()
+
     @button.buttonAndHandler(_("Save"), name="save")
     def handleApply(self, action):
         data, errors = self.extractData()
@@ -52,6 +66,12 @@ class EditForm(DefaultEditForm):
         IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
         self.request.response.redirect(self.nextURL())
         notify(EditFinishedEvent(self.context))
+
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
+    def handleCancel(self, action):
+        IStatusMessage(self.request).addStatusMessage(_("Edit cancelled"), "info")
+        self.request.response.redirect(self.nextURL())
+        notify(EditCancelledEvent(self.context))
 
     def updateFields(self):
         super(EditForm, self).updateFields()

@@ -16,7 +16,7 @@ class TestRestViews(PmPortalDemoFunctionalTestCase):
         # Institutions with imaginary name are ignored
         self.assertDictEqual({}, json.loads(render))
 
-        self.login_as_manager()
+        self.login_as_admin()
         namur = api.content.create(container=self.portal, type="Institution", id="namur", title="Namur")
         liege = api.content.create(container=self.portal, type="Institution", id="liege", title="Liège")
         view = portal.unrestrictedTraverse("@@institution-locations")

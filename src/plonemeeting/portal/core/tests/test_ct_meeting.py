@@ -33,7 +33,7 @@ class MeetingIntegrationTest(PmPortalTestCase):
         )
 
     def test_ct_meeting_adding(self):
-        self.login_as_manager()
+        self.login_as_admin()
         decisions = self.institution.decisions
         obj = api.content.create(container=decisions, type="Meeting", id="meeting")
 
@@ -48,12 +48,12 @@ class MeetingIntegrationTest(PmPortalTestCase):
         self.assertNotIn("meeting", decisions.objectIds())
 
     def test_ct_meeting_globally_not_addable(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Meeting")
         self.assertFalse(fti.global_allow, u"{0} is globally addable!".format(fti.id))
 
     def test_ct_meeting_filter_content_type_true(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Meeting")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
