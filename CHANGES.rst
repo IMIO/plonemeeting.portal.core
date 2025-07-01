@@ -8,6 +8,14 @@ Changelog
   [aduchene]
 - DELIBE-245: timestamp invalidation overhaul.
   [aduchene]
+- Change the map center offset to be more centered on the institution.
+  [aduchene]
+- Make the PDF Viewer displaying pages in full width by default.
+  [aduchene]
+- Remove the the `get_resource` patch.
+  [aduchene]
+- DELIBE-249: Allow to directly publish a publication in private state with an effective date.
+  [aduchene]
 
 2.1.10 (2025-06-19)
 -------------------

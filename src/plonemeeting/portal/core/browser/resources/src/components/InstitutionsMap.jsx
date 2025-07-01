@@ -21,7 +21,7 @@ const InstitutionsMap = (props) => {
     const [defaultZoom, setDefaultZoom] = useState(9);
 
     const height = window.innerWidth < 1000 ? "400px" : "750px";
-    const center = [50.15, 4.8];
+    const center = [50.16, 4.65];
     const maxBounds = [
         [54, 10],
         [46, 0],

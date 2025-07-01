@@ -159,9 +159,7 @@ class Publication(Container, File):
         )
 
     def may_publish(self):
-        """May publish if able to modify and
-        a "publication date" (effectiveDate) is NOT defined.
-        When "unpublished" check that time stamp  was not modified."""
+        """May publish if able to modify."""
         return _checkPermission(ModifyPortalContent, self)
 
 
