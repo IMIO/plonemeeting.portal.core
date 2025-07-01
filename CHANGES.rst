@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.12 (unreleased)
+2.1.12 (2025-07-01)
 -------------------
 
 - DELIBE-245: timestamp invalidation overhaul.
