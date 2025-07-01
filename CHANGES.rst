@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.11 (unreleased)
+2.1.11 (2025-07-01)
 -------------------
 
 - Fix an issue with `publication.EditForm`.
