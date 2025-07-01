@@ -4,14 +4,6 @@ Changelog
 2.1.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
-
-2.1.11 (2025-07-01)
--------------------
-
-- Fix an issue with `publication.EditForm`.
-  [aduchene]
 - DELIBE-245: timestamp invalidation overhaul.
   [aduchene]
 - Change the map center offset to be more centered on the institution.
@@ -21,6 +13,12 @@ Changelog
 - Remove the the `get_resource` patch.
   [aduchene]
 - DELIBE-249: Allow to directly publish a publication in private state with an effective date.
+  [aduchene]
+
+2.1.11 (2025-07-01)
+-------------------
+
+- Fix an issue with `publication.EditForm`.
   [aduchene]
 
 2.1.10 (2025-06-19)
