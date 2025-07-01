@@ -6,6 +6,8 @@ Changelog
 
 - Fix an issue with `publication.EditForm`.
   [aduchene]
+- DELIBE-245: timestamp invalidation overhaul.
+  [aduchene]
 
 2.1.10 (2025-06-19)
 -------------------
