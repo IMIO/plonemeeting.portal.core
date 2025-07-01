@@ -1,10 +1,13 @@
+from datetime import datetime, timedelta
 from unittest import mock
 
-import Testing
+from plone.testing.zope import Browser
+
+import pytz
 import transaction
-from zExceptions import Unauthorized, Redirect
-from collective.timestamp.interfaces import ITimeStamper
 from DateTime import DateTime
+from Products.CMFCore.WorkflowCore import WorkflowException
+from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.content import uuidToCatalogBrain
 from plone import api
 from plone.dexterity.events import EditCancelledEvent
@@ -12,9 +15,10 @@ from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from zExceptions import Unauthorized, Redirect
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from plone.testing.zope import Browser
+
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
@@ -23,8 +27,8 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.private_publication = self.institution.publications["publication-28"]
         self.planned_publication = self.institution.publications["publication-30"]
         self.published_publication = self.institution.publications["publication-1"]
-        self.published_publication.timestamp = NamedBlobFile(data=b"dummy", filename="timestamp.tsr")
         self.unpublished_publication = self.institution.publications["publication-27"]
+        self.published_publication.timestamp = NamedBlobFile(data=b"dummy", filename="timestamp.tsr")
         self.login_as_test()
 
     def test_publication_add_form(self):
@@ -212,7 +216,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
         self.login_as_admin()
         # Manager should be able to edit timestamped publication
-        pub.restrictedTraverse('@@edit')
+        pub.restrictedTraverse("@@edit")
         # But it'll invalidate the timestamp
         notify(ObjectModifiedEvent(pub))
         self.assertFalse(timestamper.is_timestamped())
@@ -262,7 +266,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
             type="File",
             id="new_file.txt",
             title="New File",
-            file=NamedBlobFile(data=b"New file content", filename="new_file.txt")
+            file=NamedBlobFile(data=b"New file content", filename="new_file.txt"),
         )
         self.assertFalse(timestamper.is_timestamped())
         self.assertIsNone(pub.timestamp)
@@ -276,7 +280,6 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         notify(ObjectModifiedEvent(pub["new_file.txt"]))
         self.assertFalse(timestamper.is_timestamped())
         self.assertIsNone(pub.timestamp)
-
 
     def test_remove_publication(self):
         self.login_as_decisions_manager()
@@ -298,8 +301,10 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         form = pub.restrictedTraverse("@@edit")
         form.update()
 
-        with (mock.patch("plonemeeting.portal.core.browser.publication.IStatusMessage") as status_cls,
-              mock.patch("plonemeeting.portal.core.browser.publication.notify") as notify):
+        with (
+            mock.patch("plonemeeting.portal.core.browser.publication.IStatusMessage") as status_cls,
+            mock.patch("plonemeeting.portal.core.browser.publication.notify") as notify,
+        ):
             form.handleApply(form, action=None)
 
         status_cls.return_value.addStatusMessage.assert_called_once()
@@ -315,33 +320,75 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         browser = Browser(self.layer["app"])
         browser.addHeader("Authorization", f"Basic {PM_ADMIN_USER}:{PM_USER_PASSWORD}")
         browser.open(f"{self.private_publication.absolute_url()}/@@edit")
-        browser.getControl(name="form.widgets.IBasic.title").value = (
-            "MyTitle"
-        )
+        browser.getControl(name="form.widgets.IBasic.title").value = "MyTitle"
         browser.getControl("Save").click()
         self.assertTrue(browser.url.endswith(self.private_publication.absolute_url()))
         self.assertTrue("MyTitle" in browser.contents)
 
-    def test_handle_cancel_flashes_and_fires_event(self):
+    def test_edit_cancel_publication(self):
         self.login_as_publications_manager()
         pub = self.private_publication
         form = pub.restrictedTraverse("@@edit")
         form.update()
 
-        with mock.patch(
-            "plonemeeting.portal.core.browser.publication.IStatusMessage"
-        ) as status_cls, mock.patch(
-            "plonemeeting.portal.core.browser.publication.notify"
-        ) as notify:
+        with (
+            mock.patch("plonemeeting.portal.core.browser.publication.IStatusMessage") as status_cls,
+            mock.patch("plonemeeting.portal.core.browser.publication.notify") as notify,
+        ):
             form.handleCancel(form, action=None)
 
-        status_cls.return_value.addStatusMessage.assert_called_once_with(
-            "Edit cancelled", "info"
-        )
-        self.assertEqual(
-            form.request.response.getHeader("location"), pub.absolute_url()
-        )
+        status_cls.return_value.addStatusMessage.assert_called_once_with("Edit cancelled", "info")
+        self.assertEqual(form.request.response.getHeader("location"), pub.absolute_url())
 
         dispatched = notify.call_args[0][0]
         self.assertIsInstance(dispatched, EditCancelledEvent)
         self.assertIs(dispatched.object, pub)
+
+    def test_publication_can_be_published_directly_from_private(self):
+        self.login_as_publications_manager()
+        # Given a private publication with a future effective date
+        future_pub = self.private_publication
+        future_pub.setEffectiveDate(DateTime("2099/01/01"))
+        # When we try to publish it
+        self.workflow.doActionFor(future_pub, "publish")
+        self.assertEqual(api.content.get_state(future_pub), "published")
+        self.assertIsNotNone(future_pub.effective_date)
+        # The effective date is set to now
+        self.assertAlmostEqual(future_pub.effective().asdatetime(), datetime.now(pytz.UTC), delta=timedelta(seconds=10))
+
+        # Given a past publication
+        past_pub = api.content.create(
+            container=self.institution.publications,
+            type="Publication",
+            title="Test Publication",
+            enable_timestamping=True,
+            effective_date=DateTime("1901/01/01"),
+        )
+        # planning it shouldn't be possible
+        with self.assertRaises(WorkflowException):
+            self.workflow.doActionFor(past_pub, "plan")
+
+        # when we try to publish it
+        self.workflow.doActionFor(past_pub, "publish")
+        self.assertEqual(api.content.get_state(past_pub), "published")
+        self.assertIsNotNone(past_pub.effective_date)
+        # The effective date is set to now
+        self.assertAlmostEqual(past_pub.effective().asdatetime(), datetime.now(pytz.UTC), delta=timedelta(seconds=10))
+
+        # Given a past publication without timestamping enabled
+        past_pub_no_ts = api.content.create(
+            container=self.institution.publications,
+            type="Publication",
+            title="Test Publication No Timestamping",
+            enable_timestamping=False,
+            effective_date=DateTime("1901/01/01"),
+        )
+        # planning it shouldn't be possible
+        with self.assertRaises(WorkflowException):
+            self.workflow.doActionFor(past_pub_no_ts, "plan")
+        # when we try to publish it
+        self.workflow.doActionFor(past_pub_no_ts, "publish")
+        self.assertEqual(api.content.get_state(past_pub_no_ts), "published")
+        self.assertIsNotNone(past_pub_no_ts.effective_date)
+        # The effective date is kept
+        self.assertEqual(past_pub_no_ts.effective_date, DateTime("1901/01/01"))
