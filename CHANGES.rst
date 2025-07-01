@@ -21,7 +21,7 @@ Changelog
 - DELIBE-249: Allow to directly publish a publication in private state with an effective date.
   [aduchene]
 
-2.1.11 (2025-07-01)
+2.1.11 (2025-06-19)
 -------------------
 
 - Fix an issue with `publication.EditForm`.
