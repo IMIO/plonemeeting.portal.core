@@ -9,6 +9,7 @@
   <metal:block define-macro="content-core" i18n:domain="plonemeeting.portal.core">
     <div tal:define="
       folderContents folderContents | python:context.getFolderContents();
+      utils_view nocall:context/@@utils_view;
       Batch python:modules['Products.CMFPlone'].Batch;
       b_start python:request.get('b_start', 0);
       batch python:isinstance(folderContents, Batch) and folderContents or Batch(folderContents, 100, int(b_start), orphan=2);
@@ -20,7 +21,8 @@
           <div class="btn-group btn-group-delib" tal:condition="not: isAnon">
             <a tal:condition="python: checkPermission('plonemeeting.portal.core: Add Publication', context)"
                class="btn-delib btn-delib-icon-text"
-               href="${string:${context/absolute_url}/++add++Publication}">
+               tal:define="url string:${context/absolute_url}/++add++Publication"
+               tal:attributes="href python: utils_view.protect_url(url)">
               <i class="bi bi-plus-lg"></i>
               <span i18n:translate="">Add a publication</span>
             </a>
@@ -43,12 +45,12 @@
               "/>
           </tal:entry>
         </tal:entries>
-        <span tal:condition="not: batch/sequence_length"
-          class="table_faceted_no_results"
-           i18n:domain="plone"
-           i18n:translate="description_no_results_found">No results were found.</span>
       </div>
-
+      <span tal:condition="not: batch/sequence_length"
+        class="table_faceted_no_results"
+         i18n:domain="plone"
+         i18n:translate="description_no_results_found">No results were found.
+      </span>
       <div metal:use-macro="context/batch_macros/macros/navigation" />
     </div>
   </metal:block>

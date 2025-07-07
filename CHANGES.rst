@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.2.0 (unreleased)
+------------------
+
+- Integrate collective.documentgenerator to generate a documents from content types.
+  [aduchene]
+- Add default templates for `Publication` to be used by collective.documentgenerator.
+  [aduchene]
+- Add missing plone.icons to content types.
+  [aduchene]
+
 2.1.11 (unreleased)
 -------------------
 

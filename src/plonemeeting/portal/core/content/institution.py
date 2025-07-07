@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Products.CMFCore.utils import getToolByName
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from copy import deepcopy
@@ -18,7 +18,7 @@ from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
-from plonemeeting.portal.core.utils import default_translator
+from plonemeeting.portal.core.utils import default_translator, get_members_group_id
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
@@ -399,6 +399,25 @@ class IInstitution(model.Schema):
         categories_mappings_invariant(data)
         representatives_mappings_invariant(data)
 
+    # Documents fieldset
+    model.fieldset(
+        "documents",
+        label=_("Documents"),
+        fields=[
+            "enabled_templates",
+            "documents_logo",
+        ],
+    )
+    enabled_templates = schema.List(
+        title=_(u"Activated templates"),
+        description=_(u"enabled_templates_description"),
+        value_type=schema.Choice(
+            vocabulary="plonemeeting.portal.institution_templates_vocabulary"),
+        required=True,
+        default=[],
+    )
+    documents_logo = NamedBlobImage(title=_(u"Document logo"), required=False)
+
 
 def categories_mappings_invariant(data):
     mapped_local_category_id = []
@@ -498,3 +517,18 @@ class Institution(Container):
     def is_representatives_mapping_used(self):
         """Check if this config is using the representatives in charge feature"""
         return bool(self.representatives_mappings)
+
+    def get_all_institution_users(self):
+        """Return members belonging to any group whose name starts with institution_id."""
+        group_tool = getToolByName(self, "portal_groups")
+        membership_tool = getToolByName(self, "portal_membership")
+
+        group_id = get_members_group_id(self)
+        group = group_tool.getGroupById(group_id)
+        if not group:
+            # The group doesn't exist, it shouldn't happen
+            return []
+
+        user_ids = [user.id for user in group.getGroupMembers()]
+        members = [membership_tool.getMemberById(uid) for uid in user_ids if membership_tool.getMemberById(uid)]
+        return sorted(members, key=lambda x: x.id)

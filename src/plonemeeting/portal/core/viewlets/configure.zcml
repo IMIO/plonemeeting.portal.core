@@ -1,30 +1,51 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:zcml="http://namespaces.zope.org/zcml">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:zcml="http://namespaces.zope.org/zcml">
 
   <browser:viewlet
-      name="plone.logo"
-      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-      class=".logo.PMLogoViewlet"
-      permission="zope2.View"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    name="plone.logo"
+    manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+    class=".logo.PMLogoViewlet"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
 
   <browser:viewlet
-      name="plone.documentbyline"
+    name="plone.documentbyline"
+    manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+    class=".overrides.PMDocumentBylineViewlet"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:viewlet
+    name="plone.analytics"
+    manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+    class=".overrides.PMAnalyticsViewlet"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <!-- Disable the default document generation link viewlet because we'll use our own -->
+  <unconfigure package="collective.documentgenerator">
+    <browser:viewlet
+      for="*"
+      name="document-generation-link"
       manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
-      class=".overrides.PMDocumentBylineViewlet"
+      class="collective.documentgenerator.viewlets.generationlinks.DocumentGeneratorLinksViewlet"
+      template="viewlets/generationlinks.pt"
       permission="zope2.View"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    />
+  </unconfigure>
 
   <browser:viewlet
-      name="plone.analytics"
-      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
-      class=".overrides.PMAnalyticsViewlet"
-      permission="zope2.View"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      />
+    for="*"
+    name="document-generation-link"
+    manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+    class="plonemeeting.portal.core.viewlets.generationlinks.PMDocumentGeneratorLinksViewlet"
+    template="generationlinks.pt"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    permission="zope2.View"/>
 
 </configure>

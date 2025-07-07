@@ -14,7 +14,7 @@
 
   <property name="allow_discussion">False</property>
   <property name="factory">Publication</property>
-  <property name="icon_expr"></property>
+  <property name="icon_expr">string:contenttype/publication</property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->

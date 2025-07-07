@@ -1,11 +1,11 @@
+import zipfile
+from io import BytesIO
+
 from collective.timestamp.adapters import ITimeStamper
 from collective.timestamp.adapters import TimeStamper
 from imio.helpers.content import object_values
-from io import BytesIO
 from plone.namedfile.file import NamedBlobFile
 from zope.interface import implementer
-
-import zipfile
 
 
 @implementer(ITimeStamper)

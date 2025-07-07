@@ -207,4 +207,12 @@
       import_steps="workflow"
       run_deps="True"/>
   </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2200"
+    description=""
+    source="2101"
+    destination="2200"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2200.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

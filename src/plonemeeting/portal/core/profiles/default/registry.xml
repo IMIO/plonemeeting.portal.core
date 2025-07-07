@@ -186,6 +186,32 @@
     <value>unpublish</value>
   </record>
 
+  <!-- Content types icons -->
+  <record name="plone.icon.contenttype/institution">
+    <field type="plone.registry.field.TextLine">
+      <title>Institution</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/building.svg</value>
+  </record>
+  <record name="plone.icon.contenttype/meeting">
+    <field type="plone.registry.field.TextLine">
+      <title>Meeting</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/calendar-event.svg</value>
+  </record>
+  <record name="plone.icon.contenttype/item">
+    <field type="plone.registry.field.TextLine">
+      <title>Item</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/card-text.svg</value>
+  </record>
+  <record name="plone.icon.contenttype/publication">
+    <field type="plone.registry.field.TextLine">
+      <title>Publication</title>
+    </field>
+    <value key="resource">++plone++bootstrap-icons/card-heading.svg</value>
+  </record>
+
   <!--Products.CMFPlone.interfaces.IBundleRegistry (Theming) -->
   <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">

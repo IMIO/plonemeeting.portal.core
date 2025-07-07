@@ -29,24 +29,9 @@ class ManageUsersListingView(BrowserView):
     description = _("desc_manage_users")
 
     def __call__(self):
-        self.users = self.get_all_institution_users(self.context.id)
+        self.users = self.context.get_all_institution_users()
         self.unregister_url = addTokenToUrl(f"{self.context.absolute_url()}/@@manage-edit-user?unregister=1")
         return self.index()
-
-    def get_all_institution_users(self, institution_id):
-        """Return members belonging to any group whose name starts with institution_id."""
-        group_tool = getToolByName(self.context, "portal_groups")
-        membership_tool = getToolByName(self.context, "portal_membership")
-
-        group_id = get_members_group_id(self.context)
-        group = group_tool.getGroupById(group_id)
-        if not group:
-            # The group doesn't exist, it shouldn't happen
-            return []
-
-        user_ids = [user.id for user in group.getGroupMembers()]
-        members = [membership_tool.getMemberById(uid) for uid in user_ids if membership_tool.getMemberById(uid)]
-        return sorted(members, key=lambda x: x.id)
 
 
 class IManageUserForm(Interface):
@@ -70,9 +55,7 @@ class IManageUserForm(Interface):
     )
     fullname = ProtectedTextLine(
         title=_("label_fullname", default="Full Name"),
-        description=_(
-            "help_full_name_creation", default="Enter full name, e.g. John Smith."
-        ),
+        description=_("help_full_name_creation", default="Enter full name, e.g. John Smith."),
         required=False,
     )
     directives.widget("user_groups", CheckBoxFieldWidget, multiple="multiple")
@@ -155,6 +138,7 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
         """Cancel editing/creating and return to listing."""
         self.request.response.redirect("manage-users-listing")
 
+
 class ManageCreateUserForm(BaseManageUserForm):
     schema = IManageUserForm
     ignoreContext = True
@@ -179,7 +163,7 @@ class ManageCreateUserForm(BaseManageUserForm):
         try:
             password = self.registration.generatePassword()
             self.registration.addMember(
-                username, password, ['Member'], properties={"email": email, "username": username, "fullname": fullname}
+                username, password, ["Member"], properties={"email": email, "username": username, "fullname": fullname}
             )
             self.join_institution(username)
             self.update_user_groups(username, groups_to_assign)
@@ -192,7 +176,9 @@ class ManageCreateUserForm(BaseManageUserForm):
         self.request.response.redirect("manage-users-listing")
         return
 
+
 ManageCreateUserFormView = wrap_form(ManageCreateUserForm)
+
 
 class ManageEditUsersForm(BaseManageUserForm):
     """
@@ -253,7 +239,7 @@ class ManageEditUsersForm(BaseManageUserForm):
             if member:
                 member.setMemberProperties(mapping={"email": email, "fullname": fullname})
                 self.update_user_groups(username, groups_to_assign)
-                self.messages.add("msg_user_updated", type="info")
+                self.messages.add(_("msg_user_updated"), type="info")
         else:
             try:
                 password = self.registration.generatePassword()
@@ -268,13 +254,16 @@ class ManageEditUsersForm(BaseManageUserForm):
 
         self.request.response.redirect("manage-users-listing")
 
+
 ManageEditUserFormView = wrap_form(ManageEditUsersForm)
+
 
 class InviteUserForm(BaseManageUserForm):
     """
     z3c.form class to create/update/delete Plone users,
     with group membership (instead of roles).
     """
+
     schema = IInviteUserForm
     ignoreContext = True
     label = _("label_invite_user")

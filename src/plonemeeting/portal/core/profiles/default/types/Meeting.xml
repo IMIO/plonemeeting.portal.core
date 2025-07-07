@@ -15,7 +15,7 @@
 
   <property name="allow_discussion">False</property>
   <property name="factory">Meeting</property>
-  <property name="icon_expr"></property>
+  <property name="icon_expr">string:contenttype/meeting</property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
