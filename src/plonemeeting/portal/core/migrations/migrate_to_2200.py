@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from imio.migrator.migrator import Migrator
+from plone import api
+from plone.base.interfaces import IBundleRegistry
 from plone.base.utils import get_installer
+from plone.registry.interfaces import IRegistry
 from plonemeeting.portal.core.config import DEFAULT_DOCUMENTGENERATOR_TEMPLATES
-from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
 from plonemeeting.portal.core.setuphandlers import create_or_update_default_template
-from plonemeeting.portal.core.utils import create_templates_folder
+from plonemeeting.portal.core.utils import get_managers_group_id, create_templates_folder
+from plonemeeting.portal.core.utils import get_members_group_id
 from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
-from zope.interface import alsoProvides
+from zope.component import getUtility
 
 import logging
 
@@ -37,26 +40,24 @@ class MigrateTo2200(Migrator):
             create_or_update_default_template(templates_folder, key, **template)
 
         # Then make the templates folder in each institution
-        institutions = [obj for obj in self.portal.objectValues() if obj.portal_type == "Institution"]
+        institutions = [obj for obj in self.portal.objectValues()
+                        if obj.portal_type == "Institution"]
         for institution in institutions:
             if "templates" not in institution.objectIds():
                 create_templates_folder(institution)
         logger.info("Configured collective.documentgenerator.")
 
-    def _configure_pm_config_folder_view(self):
-        """Set an interface on the config folder to have a specific view."""
-        config_folder = self.portal.get("config")
-        alsoProvides(config_folder, IPlonemeetingPortalConfigFolder)
-        logger.info("Configured plonemeeting portal config folder view.")
-
     def run(self):
         logger.info("Migrating to plonemeeting.portal.core 2200")
-        self.ps.runImportStepFromProfile("profile-plonemeeting.portal.core:default", "plone.app.registry")
-        self.ps.runImportStepFromProfile("profile-plonemeeting.portal.core:default", "typeinfo")
-        self.ps.runImportStepFromProfile("profile-plonemeeting.portal.core:default", "controlpanel")
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "plone.app.registry"
+        )
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "typeinfo")
+        self.ps.runImportStepFromProfile(
+            "profile-plonemeeting.portal.core:default", "controlpanel")
         self._configure_collective_documentgenerator()
-        self._configure_pm_config_folder_view()
-        logger.info("Migration to plonemeeting.portal.core 2200 done.")
+        logger.info("Done.")
 
 
 def migrate(context):
