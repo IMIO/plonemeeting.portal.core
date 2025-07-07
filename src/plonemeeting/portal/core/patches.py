@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
-
-from Products.CMFPlone.resources import utils
-from Products.CMFPlone.resources.utils import get_resource
-from Products.PortalTransforms.transforms import safe_html
-from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
-from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.z3cform.widgets import contentbrowser
 from plone.base.navigationroot import get_navigation_root_object
@@ -13,8 +6,16 @@ from plone.base.utils import get_top_site_from_url
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
+from Products.CMFPlone.resources import utils
+from Products.CMFPlone.resources.utils import get_resource
+from Products.PortalTransforms.transforms import safe_html
+from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
+from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
+
+import logging
+
 
 original_hasScript = safe_html.hasScript
 
@@ -34,22 +35,6 @@ def hasScript(s):
 safe_html.hasScript = hasScript
 logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)")
 
-
-original_get_resource = get_resource
-
-
-def get_resource(*args, **kwargs):
-    """Override to disable useless verbose logger when getting a resource."""
-    logger = logging.getLogger("Products.CMFPlone.resources.utils")
-    logger.disabled = True
-    try:
-        return original_get_resource(*args, **kwargs)
-    finally:
-        logger.disabled = False
-
-
-utils.get_resource = get_resource
-logger.info("Patching Products.CMFPlone.resources.utils (get_resource)")
 
 contentbrowser._original_get_contentbrowser_options = contentbrowser.get_contentbrowser_options
 

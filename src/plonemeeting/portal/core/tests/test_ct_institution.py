@@ -38,7 +38,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         )
 
     def test_ct_institution_adding(self):
-        self.login_as_manager()
+        self.login_as_admin()
         institution = api.content.create(
             container=self.portal, type="Institution", id="institution"
         )
@@ -76,14 +76,14 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertIsNone(api.group.get(group_id))
 
     def test_ct_institution_globally_addable(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Institution")
         self.assertTrue(
             fti.global_allow, u"{0} is not globally addable!".format(fti.id)
         )
 
     def test_ct_institution_filter_content_type_true(self):
-        self.login_as_manager()
+        self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Institution")
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
@@ -145,7 +145,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(meeting), 'private')
 
     def test_ct_institution_modified(self):
-        self.login_as_manager()
+        self.login_as_admin()
 
         self.portal.portal_setup.runAllImportStepsFromProfile("profile-plonemeeting.portal.core:demo")
         institution = api.content.create(

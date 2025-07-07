@@ -34,3 +34,15 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(len(result["items"]), len(vocabulary_values.items()))
         for value in result["items"]:
             self.assertEqual(value["title"], vocabulary_values[value["token"]])
+
+    def test_sitemap_view(self):
+        """ Test if the sitemap view is accessible and returns a 200 status code"""
+        portal = api.portal.get()
+        app = self.layer["app"]
+        browser = Browser(app)
+        browser.open(portal.absolute_url() + "/sitemap")
+
+        self.assertEqual(
+            "200 OK",
+            browser.headers.get('status')
+        )

@@ -88,7 +88,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         )
         self.assertEqual(4, results.get("created"))
         self.assertListEqual(item_external_uids, [item.plonemeeting_uid for item in meeting.values()])
-        self.login_as_manager()
+        self.login_as_admin()
         api.content.delete(objects=meeting.values())
         self.login_as_decisions_manager()
         # all items

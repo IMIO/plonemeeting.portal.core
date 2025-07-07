@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-06-19 13:21+0000\n"
+"POT-Creation-Date: 2025-06-27 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,11 +53,11 @@ msgstr ""
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:84
+#: ../content/publication.py:78
 msgid "Authority"
 msgstr ""
 
-#: ../content/publication.py:98
+#: ../content/publication.py:92
 msgid "Authority date"
 msgstr ""
 
@@ -66,6 +66,7 @@ msgid "Back to my institution"
 msgstr ""
 
 #: ../browser/institution.py:97
+#: ../browser/publication.py:67
 #: ../browser/sync.py:248
 msgid "Cancel"
 msgstr ""
@@ -153,6 +154,7 @@ msgid "Edit"
 msgstr ""
 
 #: ../browser/institution.py:99
+#: ../browser/publication.py:69
 msgid "Edit cancelled"
 msgstr ""
 
@@ -172,7 +174,7 @@ msgstr ""
 msgid "Entry date"
 msgstr ""
 
-#: ../content/publication.py:104
+#: ../content/publication.py:98
 msgid "Expired authority date"
 msgstr ""
 
@@ -238,7 +240,7 @@ msgstr ""
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:64
+#: ../content/publication.py:63
 msgid "Hour and place of consultation"
 msgstr ""
 
@@ -534,7 +536,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:82
-#: ../browser/publication.py:41
+#: ../browser/publication.py:53
 msgid "Save"
 msgstr ""
 
@@ -558,7 +560,7 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
-#: ../content/publication.py:92
+#: ../content/publication.py:86
 msgid "Subject to authority?"
 msgstr ""
 
@@ -582,7 +584,7 @@ msgstr ""
 msgid "Séance publique du Conseil de Zone"
 msgstr ""
 
-#: ../content/publication.py:69
+#: ../content/publication.py:66
 msgid "Text"
 msgstr ""
 
@@ -594,11 +596,7 @@ msgstr ""
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
 
-#: ../events/publication.py:32
-msgid "Timestamp information has been removed since the data has changed"
-msgstr ""
-
-#: ../browser/publication.py:74
+#: ../browser/publication.py:90
 msgid "Timestamping is disabled for this element!"
 msgstr ""
 
@@ -683,7 +681,7 @@ msgstr ""
 msgid "You can't remove items from a decided meeting."
 msgstr ""
 
-#: ../events/publication.py:59
+#: ../events/publication.py:69
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
@@ -703,7 +701,7 @@ msgstr ""
 msgid "activate to sort column descending"
 msgstr ""
 
-#: ../content/publication.py:99
+#: ../content/publication.py:93
 msgid "authority_date_description"
 msgstr ""
 
@@ -752,7 +750,7 @@ msgstr ""
 msgid "description_manage_users"
 msgstr ""
 
-#: ../browser/publication.py:77
+#: ../browser/publication.py:97
 msgid "effective_date_in_past_msg"
 msgstr ""
 
@@ -761,7 +759,7 @@ msgstr ""
 msgid "enableAutopublishing"
 msgstr ""
 
-#: ../content/publication.py:105
+#: ../content/publication.py:99
 msgid "expired_authority_date_description"
 msgstr ""
 
@@ -880,17 +878,25 @@ msgstr ""
 msgid "meeting_imported"
 msgstr ""
 
+#: ../browser/publication.py:49
+msgid "msg_editing_timestamped_content"
+msgstr ""
+
 #: ../browser/manage_users.py:177
 msgid "msg_existing_user_error"
 msgstr ""
 
-#: ../browser/publication.py:49
+#: ../browser/publication.py:57
 msgid "msg_missing_effective_date"
 msgstr ""
 
 #. Default: "No users found."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
+msgstr ""
+
+#: ../events/publication.py:23
+msgid "msg_timestamp_removed"
 msgstr ""
 
 #: ../browser/manage_users.py:267

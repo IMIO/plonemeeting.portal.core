@@ -12,7 +12,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def setUp(self):
         super().setUp()
         self.belleville = self.portal["belleville"]
-        self.login_as_manager()
+        self.login_as_admin()
 
     def tearDown(self):
         if "test-faceted" in self.portal:

@@ -8,7 +8,7 @@ const PdfViewer = ({ file }) => {
     const [page, setPage] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [scale, setScale] = useState(1);
-    const [fullWidth, setFullWidth] = useState(false);
+    const [fullWidth, setFullWidth] = useState(true);
     const [fullScreen, setfullScreen] = useState(false);
     const [scrollingOver, setScrollingOver] = useState(false);
     const canvasRef = useRef(null);

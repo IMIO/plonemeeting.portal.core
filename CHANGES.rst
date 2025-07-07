@@ -1,6 +1,7 @@
 Changelog
 =========
 
+
 2.2.0 (unreleased)
 ------------------
 
@@ -11,7 +12,21 @@ Changelog
 - Add missing plone.icons to content types.
   [aduchene]
 
-2.1.11 (unreleased)
+2.1.12 (2025-07-01)
+-------------------
+
+- DELIBE-245: timestamp invalidation overhaul.
+  [aduchene]
+- Change the map center offset to be more centered on the institution.
+  [aduchene]
+- Make the PDF Viewer displaying pages in full width by default.
+  [aduchene]
+- Remove the the `get_resource` patch.
+  [aduchene]
+- DELIBE-249: Allow to directly publish a publication in private state with an effective date.
+  [aduchene]
+
+2.1.11 (2025-06-19)
 -------------------
 
 - Fix an issue with `publication.EditForm`.

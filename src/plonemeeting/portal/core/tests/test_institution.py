@@ -20,7 +20,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
 
     def test_call_institution_view_as_manager(self):
         institution = self.portal["belleville"]
-        self.login_as_manager()
+        self.login_as_admin()
         request = self.portal.REQUEST
         view = institution.restrictedTraverse("@@manage-settings")
         request.set("PUBLISHED", view)
@@ -49,7 +49,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         institution_constraints = ISelectableConstrainTypes(self.institution)
         decisions_constraints = ISelectableConstrainTypes(self.institution.decisions)
         publications_constraints = ISelectableConstrainTypes(self.institution.publications)
-        self.login_as_manager()
+        self.login_as_admin()
         self.assertListEqual(["Folder"], institution_constraints.getLocallyAllowedTypes())
         self.assertListEqual(["Meeting"], decisions_constraints.getLocallyAllowedTypes())
         self.assertListEqual(["Publication"], publications_constraints.getLocallyAllowedTypes())
@@ -131,7 +131,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         verify(requests, times=1).get(url_cat, auth=auth, headers=headers)
 
         # edit the institution, only fetched one time
-        self.login_as_manager()
+        self.login_as_admin()
         institution_edit_form = belleville.restrictedTraverse("@@edit")
         request = self.portal.REQUEST
         request.set("PUBLISHED", institution_edit_form)
@@ -228,7 +228,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         verify(requests, times=1).get(url_rpz, auth=auth, headers=headers)
 
         # edit the institution, only fetched one time
-        self.login_as_manager()
+        self.login_as_admin()
         institution_edit_form = belleville.restrictedTraverse("@@edit")
         request = self.portal.REQUEST
         request.set("PUBLISHED", institution_edit_form)
@@ -269,7 +269,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(api.content.get_state(inst), "published")
         self.assertTrue(compileThemeTransform(rules=rules))
         self.assertTrue("Anonymous" in rolesForPermissionOn(AccessContentsInformation, inst))
-        self.login_as_manager()
+        self.login_as_admin()
         api.content.transition(inst, to_state="private")
         self.logout()
         # when institution "private"

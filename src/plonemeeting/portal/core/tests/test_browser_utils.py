@@ -27,7 +27,7 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         # Also works with empty meeting.
         meeting = self.create_object("Meeting")
         request.set("seance[]", meeting.UID())
-        self.login_as_manager()
+        self.login_as_admin()
         utils_view = self.portal.restrictedTraverse("@@utils_view")
         self.assertEqual(meeting, utils_view.get_linked_meeting())
 
