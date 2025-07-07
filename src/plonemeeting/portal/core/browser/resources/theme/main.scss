@@ -50,7 +50,7 @@ x-tooltip > div[slot="content"] {
     background: $grey-100;
     padding: 10px;
     border-bottom: 1px solid $grey-200;
-    border-radius:  $rounded-md $rounded-md 0 0 !important;
+    border-radius: $rounded-md $rounded-md 0 0 !important;
     font-weight: 700;
     margin: -0.75rem -0.75rem 0.75rem -0.75rem;
   }
@@ -80,9 +80,27 @@ x-tooltip > div[slot="content"] {
 .react-tooltip__place-left .react-tooltip-arrow {
   right: -9px !important;
 }
+
 .react-tooltip__place-bottom .react-tooltip-arrow {
   top: -9px !important;
 }
+
 .react-tooltip__place-top .react-tooltip-arrow {
   bottom: -9px !important;
+}
+
+
+.card-outline {
+  box-shadow: none;
+  border: 1px solid $grey-200;
+  border-radius: $rounded-md;
+
+  .card-header {
+    background-color: $white;
+    border: 0;
+  }
+
+  .card-body {
+    background: $grey-100;
+  }
 }

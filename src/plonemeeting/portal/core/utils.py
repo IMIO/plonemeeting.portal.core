@@ -7,7 +7,7 @@ from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
+from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN, DOCUMENTGENENATOR_USED_CONTENT_TYPES
 from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
@@ -295,6 +295,13 @@ def get_api_url_for_representatives(institution):
         return
 
 
+def set_constrain_types(obj, portal_type_ids, mode=1):
+    behavior = ISelectableConstrainTypes(obj)
+    behavior.setConstrainTypesMode(mode)
+    behavior.setImmediatelyAddableTypes(portal_type_ids)
+    behavior.setLocallyAllowedTypes(portal_type_ids)
+
+
 def create_faceted_folder(container, title, id):
     folder = api.content.create(
         type="Folder", title=title, container=container, id=id
@@ -305,11 +312,17 @@ def create_faceted_folder(container, title, id):
     return folder
 
 
-def set_constrain_types(obj, portal_type_ids, mode=1):
-    behavior = ISelectableConstrainTypes(obj)
-    behavior.setConstrainTypesMode(mode)
-    behavior.setImmediatelyAddableTypes(portal_type_ids)
-    behavior.setLocallyAllowedTypes(portal_type_ids)
+def create_templates_folder(container):
+    current_lang = api.portal.get_default_language()[:2]
+    templates_folder = api.content.create(
+        type="Folder",
+        id="templates",
+        title=translate(_("Templates"), target_language=current_lang),
+        container=container,
+    )
+    templates_folder.exclude_from_nav = True
+    set_constrain_types(templates_folder, list(DOCUMENTGENENATOR_USED_CONTENT_TYPES))
+    templates_folder.reindexObject()
 
 
 def cleanup_contents():

@@ -56,16 +56,14 @@ class EditForm(DefaultEditForm):
     @button.buttonAndHandler(_("Save"), name="save")
     def handleApply(self, action):
         data, errors = self.extractData()
-        if api.content.get_state(self.context) == "planned" and not data.get("IPublication.effective"):
+        if api.content.get_state(self.context) in ("planned", "published") and not data.get("IPublication.effective"):
             IStatusMessage(self.request).addStatusMessage(_("msg_missing_effective_date"), "error")
             return
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
-        self.request.response.redirect(self.nextURL())
-        notify(EditFinishedEvent(self.context))
+        super(EditForm, self).handleApply(self, action)
+
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
+    def handleCancel(self, action):
+        super(EditForm, self).handleCancel(self, action)
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
