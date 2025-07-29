@@ -43,6 +43,16 @@ class PMDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
                 generable_templates.append(template)
         return generable_templates
 
+    def get_actions(self):
+        if hasattr(self.view, "_actions"):
+            return self.view._actions
+        return {}
+
+    def get_navigation_links(self):
+        if hasattr(self.view, "_navigation_links"):
+            return self.view._navigation_links
+        return {}
+
     def pretty_file_icon(self, output_format):
         mimetype = mimetypes.types_map.get(f".{output_format}", "application/octet-stream")
         return pretty_file_icon(mimetype)
