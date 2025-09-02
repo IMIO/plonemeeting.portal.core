@@ -32,12 +32,15 @@
   },
   "document_types": {
     "acte-delegation": "Acte de délégation",
+    "annonce-projet": "Annonce de projet",
     "arrete-police": "Arrêté de police",
     "avis": "Avis de décision",
     "avis-enquete-publique": "Avis d'enquête publique",
     "avis-reunion-information": "Avis de réunion d'information",
     "budget-comptes": "Budget et Comptes",
     "contrat-gestion-asbl": "Contrat de gestion - ASBL",
+    "decision-explicite": "Décision explicite",
+    "decision-implicite": "Décision implicite",
     "declaration-politique-generale": "Déclaration de politique générale",
     "ordonnance-police": "Ordonnance de police",
     "ordonnance-police-administrative": "Ordonnance de police administrative",
@@ -54,7 +57,8 @@
   "legislative_authorities": {
     "bourgmestre": "Bourgmestre",
     "college-communal": "Collège communal",
-    "conseil-communal": "Conseil communal"
+    "conseil-communal": "Conseil communal",
+    "gouvernement-wallon": "Gouvernement wallon"
   },
   "institutions": [
     {
