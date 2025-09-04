@@ -274,14 +274,6 @@
   />
 
   <browser:page
-    for="plonemeeting.portal.core.interfaces.IPlonemeetingPortalConfigFolder"
-    name="plonemeeting-config-view"
-    class=".config.PlonemeetingConfigView"
-    template="templates/config.pt"
-    permission="cmf.ModifyPortalContent"
-  />
-
-  <browser:page
     for="*"
     name="document-generation-helper-view"
     class=".docgen.PMDocumentGenerationHelperView"
