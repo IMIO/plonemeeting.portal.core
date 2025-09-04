@@ -9,6 +9,10 @@ class IPlonemeetingPortalCoreLayer(IPloneFormLayer):
     """Marker interface that defines a browser layer."""
 
 
+class IPlonemeetingPortalConfigFolder(Interface):
+    """Marker interface for Plonemeeting config folder"""
+
+
 class IMeetingsFolder(IFacetedNavigable):
     """Marker interface for Meetings folder"""
 
@@ -19,10 +23,11 @@ class IPublicationsFolder(IFacetedNavigable):
 
 class IInstitutionSettingsView(Interface):
     """Marker interface for Institution settings view"""
-    pass
+
 
 class IUtilsView(Interface):
     """"""
+
     def is_institution(self):
         pass
 

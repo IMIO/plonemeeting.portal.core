@@ -11,6 +11,7 @@ from plone.testing.zope import INTEGRATION_TESTING
 from plone.testing.zope import makeTestRequest
 from plone.testing.zope import WSGI_SERVER
 
+import collective.documentgenerator
 import plonemeeting.portal.core
 import transaction
 
@@ -29,6 +30,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         import plone.restapi
 
         self.loadZCML(package=plone.restapi)
+        self.loadZCML(package=collective.documentgenerator)
         self.loadZCML(package=plonemeeting.portal.core)
 
         # Patch collective.fingerpointing
@@ -39,6 +41,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         fp_utils.getRequest = patched_getRequest
 
     def setUpPloneSite(self, portal):
+        applyProfile(portal, "collective.documentgenerator:default")
         applyProfile(portal, "plonemeeting.portal.core:default")
         transaction.commit()
 

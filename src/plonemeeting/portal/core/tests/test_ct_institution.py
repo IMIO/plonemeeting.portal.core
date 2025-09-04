@@ -34,38 +34,62 @@ class InstitutionIntegrationTest(PmPortalTestCase):
 
         self.assertTrue(
             IInstitution.providedBy(obj),
-            u"IInstitution not provided by {0}!".format(obj),
+            "IInstitution not provided by {0}!".format(obj),
         )
 
     def test_ct_institution_adding(self):
         self.login_as_admin()
-        institution = api.content.create(
-            container=self.portal, type="Institution", id="institution"
-        )
+        institution = api.content.create(container=self.portal, type="Institution", id="institution")
         self.assertTrue(
             IInstitution.providedBy(institution),
-            u"IInstitution not provided by {0}!".format(institution.id),
+            "IInstitution not provided by {0}!".format(institution.id),
         )
 
-        for group_id in (get_decisions_managers_group_id(institution),
-                         get_publications_managers_group_id(institution)):
+        for group_id in (get_decisions_managers_group_id(institution), get_publications_managers_group_id(institution)):
             roles = api.group.get_roles(groupname=group_id)
             self.assertEqual(roles, ["Authenticated"])
             self.assertTupleEqual(
                 institution.get_local_roles_for_userid(group_id),
-                ("Reader", ),
+                ("Reader",),
             )
 
-        faceted_folders = institution.listFolderContents()
-        self.assertEqual(len(faceted_folders), 2)
-        meetings = faceted_folders[0]
+        institution_folders = institution.listFolderContents()
+        self.assertEqual(len(institution_folders), 3)
+        meetings = institution_folders[0]
+        self.assertEqual(meetings.getId(), DEC_FOLDER_ID)
         constraints = ISelectableConstrainTypes(meetings)
         self.assertListEqual(["Meeting"], constraints.getLocallyAllowedTypes())
 
+        publications = institution_folders[1]
+        self.assertEqual(publications.getId(), PUB_FOLDER_ID)
+        constraints = ISelectableConstrainTypes(publications)
+        self.assertListEqual(["Publication"], constraints.getLocallyAllowedTypes())
+
+        templates = institution_folders[2]
+        self.assertEqual(templates.getId(), "templates")
+        constraints = ISelectableConstrainTypes(templates)
+        self.assertListEqual(
+            ["PODTemplate", "ConfigurablePODTemplate", "StyleTemplate", "SubTemplate"],
+            constraints.getLocallyAllowedTypes(),
+        )
+
         agenda = api.content.create(institution, "Folder", "agenda")
         constraints = ISelectableConstrainTypes(agenda)
-        self.assertListEqual(['Document', 'Folder', 'File', 'Image', 'Meeting', 'Publication'],
-                             constraints.getLocallyAllowedTypes())
+        self.assertSetEqual(
+            {
+                "Document",
+                "Folder",
+                "File",
+                "Image",
+                "Meeting",
+                "Publication",
+                "PODTemplate",
+                "ConfigurablePODTemplate",
+                "StyleTemplate",
+                "SubTemplate",
+            },
+            set(constraints.getLocallyAllowedTypes()),
+        )
 
         # check that deleting the object works too
         parent = institution.__parent__
@@ -78,79 +102,69 @@ class InstitutionIntegrationTest(PmPortalTestCase):
     def test_ct_institution_globally_addable(self):
         self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Institution")
-        self.assertTrue(
-            fti.global_allow, u"{0} is not globally addable!".format(fti.id)
-        )
+        self.assertTrue(fti.global_allow, "{0} is not globally addable!".format(fti.id))
 
     def test_ct_institution_filter_content_type_true(self):
         self.login_as_admin()
         fti = queryUtility(IDexterityFTI, name="Institution")
         portal_types = self.portal.portal_types
-        parent_id = portal_types.constructContent(
-            fti.id, self.portal, "institution_id", title="Institution container"
-        )
+        parent_id = portal_types.constructContent(fti.id, self.portal, "institution_id", title="Institution container")
         parent = self.portal[parent_id]
         with self.assertRaises(InvalidParameterError):
             api.content.create(container=parent, type="Document", title="My Content")
 
     def test_ct_institution_transition_apply_to_children(self):
-        institution = api.content.create(
-            container=self.portal, type="Institution", id="test"
-        )
+        institution = api.content.create(container=self.portal, type="Institution", id="test")
 
-        self.assertEqual(get_state(institution), 'private')
+        self.assertEqual(get_state(institution), "private")
         decisions = institution.decisions
-        meeting = api.content.create(
-            container=decisions, type="Meeting", id="test-meeting"
-        )
-        self.assertEqual(get_state(meeting), 'private')
+        meeting = api.content.create(container=decisions, type="Meeting", id="test-meeting")
+        self.assertEqual(get_state(meeting), "private")
 
-        self.assertEqual(institution.listFolderContents({"portal_type": "Folder"}),
-                         [institution[DEC_FOLDER_ID], institution[PUB_FOLDER_ID]])
+        self.assertEqual(
+            institution.listFolderContents({"portal_type": "Folder"}),
+            [institution[DEC_FOLDER_ID], institution[PUB_FOLDER_ID], institution["templates"]],
+        )
         decisions_folder = institution.decisions
         publications_folder = institution.publications
-        self.assertEqual(get_state(decisions_folder), 'private')
-        self.assertEqual(get_state(publications_folder), 'private')
+        self.assertEqual(get_state(decisions_folder), "private")
+        self.assertEqual(get_state(publications_folder), "private")
         self.assertEqual(institution.enabled_tabs, [DEC_FOLDER_ID, PUB_FOLDER_ID])
 
-        api.content.transition(institution, to_state='published')
-        self.assertEqual(get_state(institution), 'published')
-        self.assertEqual(get_state(decisions_folder), 'published')
-        self.assertEqual(get_state(meeting), 'private')
-        self.assertEqual(get_state(publications_folder), 'published')
+        api.content.transition(institution, to_state="published")
+        self.assertEqual(get_state(institution), "published")
+        self.assertEqual(get_state(decisions_folder), "published")
+        self.assertEqual(get_state(meeting), "private")
+        self.assertEqual(get_state(publications_folder), "published")
 
-        api.content.transition(institution, to_state='private')
-        self.assertEqual(get_state(institution), 'private')
-        self.assertEqual(get_state(decisions_folder), 'private')
-        self.assertEqual(get_state(meeting), 'private')
-        self.assertEqual(get_state(publications_folder), 'private')
+        api.content.transition(institution, to_state="private")
+        self.assertEqual(get_state(institution), "private")
+        self.assertEqual(get_state(decisions_folder), "private")
+        self.assertEqual(get_state(meeting), "private")
+        self.assertEqual(get_state(publications_folder), "private")
 
-        agenda_folder = api.content.create(type="Folder",
-                                           title="Agenda",
-                                           container=institution)
+        agenda_folder = api.content.create(type="Folder", title="Agenda", container=institution)
         # meeting are ignored when publishing the institution
         # but put back to private if the institution goes back in private
-        api.content.transition(institution, to_state='published')
-        self.assertEqual(get_state(institution), 'published')
-        self.assertEqual(get_state(decisions_folder), 'published')
-        self.assertEqual(get_state(agenda_folder), 'published')
-        self.assertEqual(get_state(meeting), 'private')
-        self.assertEqual(get_state(publications_folder), 'published')
+        api.content.transition(institution, to_state="published")
+        self.assertEqual(get_state(institution), "published")
+        self.assertEqual(get_state(decisions_folder), "published")
+        self.assertEqual(get_state(agenda_folder), "published")
+        self.assertEqual(get_state(meeting), "private")
+        self.assertEqual(get_state(publications_folder), "published")
 
-        api.content.transition(meeting, to_state='decision')
-        api.content.transition(institution, to_state='private')
-        self.assertEqual(get_state(institution), 'private')
-        self.assertEqual(get_state(decisions_folder), 'private')
-        self.assertEqual(get_state(agenda_folder), 'private')
-        self.assertEqual(get_state(meeting), 'private')
+        api.content.transition(meeting, to_state="decision")
+        api.content.transition(institution, to_state="private")
+        self.assertEqual(get_state(institution), "private")
+        self.assertEqual(get_state(decisions_folder), "private")
+        self.assertEqual(get_state(agenda_folder), "private")
+        self.assertEqual(get_state(meeting), "private")
 
     def test_ct_institution_modified(self):
         self.login_as_admin()
 
         self.portal.portal_setup.runAllImportStepsFromProfile("profile-plonemeeting.portal.core:demo")
-        institution = api.content.create(
-            container=self.portal, type="Institution", id="institution"
-        )
+        institution = api.content.create(container=self.portal, type="Institution", id="institution")
         self.assertFalse(hasattr(institution, "delib_categories"))
         self.assertIsNone(institution.categories_mappings)
 
@@ -160,30 +174,50 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             institution.delib_categories[cat_id] = global_categories[cat_id]
         notify(ObjectModifiedEvent(institution))
         self.assertEqual(len(institution.categories_mappings), len(institution.delib_categories))
-        self.assertListEqual(institution.categories_mappings,
-                             [{"local_category_id": cat, "global_category_id": cat}
-                              for cat in global_categories])
+        self.assertListEqual(
+            institution.categories_mappings,
+            [{"local_category_id": cat, "global_category_id": cat} for cat in global_categories],
+        )
         # if categories_mappings is already initialized it is not overridden
-        institution.delib_categories = {"administration": "Cat1", "animaux": "Cat2",
-                                        "cultes": "Cat3", "finances": "Cat4"}
+        institution.delib_categories = {
+            "administration": "Cat1",
+            "animaux": "Cat2",
+            "cultes": "Cat3",
+            "finances": "Cat4",
+        }
         notify(ObjectModifiedEvent(institution))
-        self.assertListEqual(institution.categories_mappings,
-                             [{"local_category_id": cat, "global_category_id": cat}
-                              for cat in global_categories])
+        self.assertListEqual(
+            institution.categories_mappings,
+            [{"local_category_id": cat, "global_category_id": cat} for cat in global_categories],
+        )
         # now categories_mappings will be initialized with the new value
         institution.categories_mappings = []
         notify(ObjectModifiedEvent(institution))
-        self.assertListEqual(institution.categories_mappings,
-                             [{"local_category_id": "administration", "global_category_id": "administration"},
-                              {"local_category_id": "animaux", "global_category_id": "animaux"},
-                              {"local_category_id": "cultes", "global_category_id": "cultes"},
-                              {"local_category_id": "finances", "global_category_id": "finances"}])
+        self.assertListEqual(
+            institution.categories_mappings,
+            [
+                {"local_category_id": "administration", "global_category_id": "administration"},
+                {"local_category_id": "animaux", "global_category_id": "animaux"},
+                {"local_category_id": "cultes", "global_category_id": "cultes"},
+                {"local_category_id": "finances", "global_category_id": "finances"},
+            ],
+        )
         # only matching ids are kept
-        institution.delib_categories = {"massa": "quis", "vitae": "vel", "animaux": "Cat2",
-                                        "tortor": "eros", "condimentum": "donec",
-                                        "cultes": "Cat3", "lacinia": "ac"}
+        institution.delib_categories = {
+            "massa": "quis",
+            "vitae": "vel",
+            "animaux": "Cat2",
+            "tortor": "eros",
+            "condimentum": "donec",
+            "cultes": "Cat3",
+            "lacinia": "ac",
+        }
         institution.categories_mappings = []
         notify(ObjectModifiedEvent(institution))
-        self.assertListEqual(institution.categories_mappings,
-                             [{"local_category_id": "animaux", "global_category_id": "animaux"},
-                              {"local_category_id": "cultes", "global_category_id": "cultes"}])
+        self.assertListEqual(
+            institution.categories_mappings,
+            [
+                {"local_category_id": "animaux", "global_category_id": "animaux"},
+                {"local_category_id": "cultes", "global_category_id": "cultes"},
+            ],
+        )

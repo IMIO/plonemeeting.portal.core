@@ -16,10 +16,6 @@
 </metal:custom_title>
 
 <metal:custom_desc fill-slot="content-description">
-<!--?  <div class="documentDescription"-->
-<!--?     i18n:translate="description_manage_institution">-->
-<!--?    Here you can manage your institution.-->
-<!--?  </div>-->
 </metal:custom_desc>
 
 <metal:main fill-slot="content-core">

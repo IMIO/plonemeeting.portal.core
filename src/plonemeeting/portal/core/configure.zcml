@@ -1,66 +1,66 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="plonemeeting.portal.core">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="plonemeeting.portal.core">
 
-  <i18n:registerTranslations directory="locales" />
+  <i18n:registerTranslations directory="locales"/>
 
-  <include package="collective.z3cform.datagridfield" />
-  <include package="collective.fingerpointing" />
-  <include package="collective.timestamp" />
-  <include package="collective.autopublishing" />
-  <include package="eea.facetednavigation" />
-  <include package="plone.formwidget.hcaptcha" />
+  <include package="collective.z3cform.datagridfield"/>
+  <include package="collective.fingerpointing"/>
+  <include package="collective.timestamp"/>
+  <include package="collective.autopublishing"/>
+  <include package="eea.facetednavigation"/>
+  <include package="plone.formwidget.hcaptcha"/>
 
-  <include file="adapters.zcml" />
-  <include file="permissions.zcml" />
+  <include file="adapters.zcml"/>
+  <include file="permissions.zcml"/>
 
-  <include package=".behaviors" />
-  <include package=".browser" />
-  <include package=".content" />
-  <include package=".events" />
-  <include package=".faceted" />
-  <include package=".filters" />
-  <include package=".migrations" />
-  <include package=".rest" />
-  <include package=".viewlets" />
-  <include package=".widgets" />
+  <include package=".behaviors"/>
+  <include package=".browser"/>
+  <include package=".content"/>
+  <include package=".events"/>
+  <include package=".faceted"/>
+  <include package=".filters"/>
+  <include package=".migrations"/>
+  <include package=".rest"/>
+  <include package=".viewlets"/>
+  <include package=".widgets"/>
 
   <!-- Profiles -->
 
   <genericsetup:registerProfile
-      name="default"
-      title="plonemeeting.portal.core"
-      directory="profiles/default"
-      description="Installs the plonemeeting.portal.core add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
-      />
+    name="default"
+    title="plonemeeting.portal.core"
+    directory="profiles/default"
+    description="Installs the plonemeeting.portal.core add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.post_install"
+  />
 
   <genericsetup:registerProfile
-      name="demo"
-      title="plonemeeting.portal.core (demo)"
-      directory="profiles/demo"
-      description="Demo profile for the plonemeeting.portal.core add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.create_demo_content"
-      />
+    name="demo"
+    title="plonemeeting.portal.core (demo)"
+    directory="profiles/demo"
+    description="Demo profile for the plonemeeting.portal.core add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.create_demo_content"
+  />
 
   <genericsetup:registerProfile
-      name="uninstall"
-      title="plonemeeting.portal.core (uninstall)"
-      directory="profiles/uninstall"
-      description="Uninstalls the plonemeeting.portal.core add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.uninstall"
-      />
+    name="uninstall"
+    title="plonemeeting.portal.core (uninstall)"
+    directory="profiles/uninstall"
+    description="Uninstalls the plonemeeting.portal.core add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.uninstall"
+  />
 
   <utility
-      factory=".setuphandlers.HiddenProfiles"
-      name="plonemeeting.portal.core-hiddenprofiles"
-      />
+    factory=".setuphandlers.HiddenProfiles"
+    name="plonemeeting.portal.core-hiddenprofiles"
+  />
 
   <!-- Vocabularies -->
 
@@ -68,95 +68,119 @@
     component=".vocabularies.EnabledTabsVocabulary"
     name="plonemeeting.portal.vocabularies.enabled_tabs"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.PublicationsPowerUsersVocabulary"
     name="plonemeeting.portal.vocabularies.publications_power_users"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.GlobalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.global_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.LocalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.local_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.DocumentTypesVocabulary"
     name="plonemeeting.portal.vocabularies.document_types"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.LegislativeAuthoritiesVocabulary"
     name="plonemeeting.portal.vocabularies.legislative_authorities"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.MeetingDateVocabulary"
     name="plonemeeting.portal.vocabularies.meeting_dates"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.RepresentativeVocabulary"
     name="plonemeeting.portal.vocabularies.representatives"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.LongRepresentativeVocabulary"
     name="plonemeeting.portal.vocabularies.long_representatives"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.EditableRepresentativeVocabulary"
     name="plonemeeting.portal.vocabularies.editable_representative"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.RemoteMeetingsVocabulary"
     name="plonemeeting.portal.vocabularies.remote_meetings"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.DelibCategoryMappingFieldsVocabulary"
     name="plonemeeting.portal.vocabularies.delib_category_fields"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.InstitutionTypesVocabulary"
     name="plonemeeting.portal.vocabularies.institution_types"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.MeetingTypesVocabulary"
     name="plonemeeting.portal.vocabularies.meeting_types"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.PublicationReviewStatesVocabulary"
     name="plonemeeting.portal.vocabularies.publication_review_states"
     provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  />
 
   <utility
     component=".vocabularies.InstitutionManageableGroupsVocabulary"
     name="plonemeeting.portal.institution_manageable_groups_vocabulary"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.TemplatesContentTypesVocabulary"
+    name="collective.documentgenerator.PortalTypes"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.InstitutionTemplatesVocabulary"
+    name="plonemeeting.portal.institution_templates_vocabulary"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.InstitutionAllAndTemplatesVocabulary"
+    name="plonemeeting.portal.institution_all_and_templates_vocabulary"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.InstitutionTemplateSettingsVocabulary"
+    name="plonemeeting.portal.institution_template_settings_vocabulary"
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 

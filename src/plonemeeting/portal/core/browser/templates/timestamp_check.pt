@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="en"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+   tal:define="utils_view nocall:context/@@utils_view;"
+>
+<body>
+
+<metal:custom_title fill-slot="content-title">
+  <h1 className="fw-bold text-dark mb-3">
+    Validation d'un document ASiC avec horodatage
+  </h1>
+</metal:custom_title>
+
+<metal:custom_desc fill-slot="content-description">
+</metal:custom_desc>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+    <div className="text-center mb-5">
+      <p className="lead text-muted mb-0">
+        Vérification cryptographique de documents ASiC horodatés
+      </p>
+    </div>
+    <x-timestamp-check></x-timestamp-check>
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>

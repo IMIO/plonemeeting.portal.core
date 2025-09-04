@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <metadata>
-  <version>2101</version>
+  <version>2200</version>
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
@@ -10,5 +10,6 @@
     <dependency>profile-plone.formwidget.hcaptcha:default</dependency>
     <dependency>profile-collective.timestamp:default</dependency>
     <dependency>profile-collective.autopublishing:default</dependency>
+    <dependency>profile-collective.documentgenerator:default</dependency>
   </dependencies>
 </metadata>

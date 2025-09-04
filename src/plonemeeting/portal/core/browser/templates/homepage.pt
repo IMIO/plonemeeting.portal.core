@@ -25,7 +25,7 @@
         <rect width="100%" height="100%" stroke-width="0" fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"/>
       </svg>
       <div class="container">
-      <div class="row">
+        <div class="row">
           <div class="col-lg-4">
             <div class="hero-img-wrapper">
               <img src="++plone++plonemeeting.portal.core/assets/delibe.svg" alt="">
@@ -57,47 +57,47 @@
 
     <section id="institutions-map" class="row mb-3">
 
-        <h2>Couverture géographique</h2>
-        <x-institution-map></x-institution-map>
+      <h2>Couverture géographique</h2>
+      <x-institution-map></x-institution-map>
 
     </section>
 
-<!--?    <section id="news-sections" class="row">-->
-<!--?      <h2>Nouveautés</h2>-->
-<!--?      <div class="news-items">-->
-<!--?        <div class="news-item">-->
-<!--?          <h3 class="news-title">-->
-<!--?            Lorem Ipsum-->
-<!--?          </h3>-->
-<!--?          <div class="news-description">-->
-<!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
-<!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
-<!--?            suscipit.-->
-<!--?          </div>-->
-<!--?        </div>-->
-<!--?        <div class="news-item">-->
-<!--?          <h3 class="news-title">-->
-<!--?            Lorem Ipsum-->
-<!--?          </h3>-->
-<!--?          <div class="news-description">-->
-<!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
-<!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
-<!--?            suscipit.-->
-<!--?          </div>-->
-<!--?        </div>-->
-<!--?        <div class="news-item">-->
-<!--?          <h3 class="news-title">-->
-<!--?            Lorem Ipsum-->
-<!--?          </h3>-->
-<!--?          <div class="news-description">-->
-<!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
-<!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
-<!--?            suscipit.-->
-<!--?          </div>-->
-<!--?        </div>-->
-<!--?      </div>-->
+    <!--?    <section id="news-sections" class="row">-->
+    <!--?      <h2>Nouveautés</h2>-->
+    <!--?      <div class="news-items">-->
+    <!--?        <div class="news-item">-->
+    <!--?          <h3 class="news-title">-->
+    <!--?            Lorem Ipsum-->
+    <!--?          </h3>-->
+    <!--?          <div class="news-description">-->
+    <!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
+    <!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
+    <!--?            suscipit.-->
+    <!--?          </div>-->
+    <!--?        </div>-->
+    <!--?        <div class="news-item">-->
+    <!--?          <h3 class="news-title">-->
+    <!--?            Lorem Ipsum-->
+    <!--?          </h3>-->
+    <!--?          <div class="news-description">-->
+    <!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
+    <!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
+    <!--?            suscipit.-->
+    <!--?          </div>-->
+    <!--?        </div>-->
+    <!--?        <div class="news-item">-->
+    <!--?          <h3 class="news-title">-->
+    <!--?            Lorem Ipsum-->
+    <!--?          </h3>-->
+    <!--?          <div class="news-description">-->
+    <!--?            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias animi architecto blanditiis consequatur-->
+    <!--?            corporis cum doloremque dolorum ea, ipsa iste minima minus modi nemo, nulla praesentium quas, sapiente sint-->
+    <!--?            suscipit.-->
+    <!--?          </div>-->
+    <!--?        </div>-->
+    <!--?      </div>-->
 
-<!--?    </section>-->
+    <!--?    </section>-->
 
     <section class="faq-section">
       <h2>Foire aux questions</h2>

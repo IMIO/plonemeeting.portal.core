@@ -1,0 +1,58 @@
+<div id="action-bar"
+     class="action-bar row"
+      tal:define="icons nocall:context/@@iconresolver;"
+      tal:condition="view/available"
+>
+<!--?  <div class="action-section" tal:define="acts python:view.get_actions().values();" tal:condition="acts">-->
+<!--?    <h2>-->
+<!--?      <tal:icon tal:replace="structure python:icons.tag('lightning', tag_class='icon-x1 mb-1')" />-->
+<!--?      <tal:title tal:content="string:Actions" />-->
+<!--?    </h2>-->
+<!--?    <ul class="action-bar-actions">-->
+<!--?      <li tal:repeat="act acts">-->
+<!--?        <a class="btn btn-light"-->
+<!--?           tal:define="url act/url; icon act/icon; title act/title"-->
+<!--?           tal:attributes="href url; title string:${title}"-->
+<!--?           target="_blank">-->
+<!--?          <tal:icon tal:replace="structure python:icons.tag(icon, tag_class='icon-x1 mb-1')" />-->
+<!--?          <tal:title tal:content="title" />-->
+<!--?        </a>-->
+<!--?      </li>-->
+<!--?    </ul>-->
+<!--?  </div>-->
+  <div class="action-section" tal:define="infos view/get_links_info; titles python:infos.keys();" tal:condition="infos">
+    <h2>
+      <tal:icon tal:replace="structure python:icons.tag('files', tag_class='icon-x1 mb-1')" />
+      <tal:title tal:content="string:Génération de documents" />
+    </h2>
+    <ul
+      class="action-bar-actions d-flex align-items-center justify-content-start w-100">
+      <li tal:repeat="title titles" class="template-link">
+        <div class="dropdown" tal:condition="python: len(infos[title]) > 1">
+          <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            <tal:title tal:content="title" />
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li tal:repeat="link python: infos[title]">
+              <a
+                class="dropdown-item" tal:define="pretty_file python:view.pretty_file_icon(link['output_format']);" tal:attributes="href link/link; title string:${link/output_format_title};"
+                target="_blank">
+                <i tal:attributes="class pretty_file/icon"></i>
+                <tal:title tal:content="link/output_format_title" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a
+          class="btn btn-light" tal:condition="python: len(infos[title]) == 1" tal:define="link python:infos[title][0]; pretty_file python:view.pretty_file_icon(infos[title][0]['output_format']);" tal:attributes="href link/link; title string:${link/output_format_title}"
+          target="_blank"
+          role="button">
+          <i tal:attributes="class pretty_file/icon"></i>
+          <tal:title tal:content="title" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+

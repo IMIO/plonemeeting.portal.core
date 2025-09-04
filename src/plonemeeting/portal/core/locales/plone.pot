@@ -78,6 +78,15 @@ msgstr ""
 msgid "Plan"
 msgstr ""
 
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Proposed"
+msgstr "Proposé"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Propose"
+msgstr "Proposer"
+
 #. Default: "Allowed types: ${accepted_types}."
 #: To be removed when managed in plone.app.locales
 msgid "namedfile_accepted_types"

@@ -3,6 +3,8 @@ import { useState, useContext, useMemo } from "preact/hooks";
 import loadable from "@loadable/component";
 import { components, createFilter } from "react-select";
 const Select = loadable(() => import("react-select"));
+import pickBy from "lodash/pickBy";
+import isEmpty from "lodash/isEmpty";
 
 /**
  * A filter context (shared state between a parent component and his children).
@@ -84,7 +86,7 @@ const FilterSelect = ({ filters: filtersProp, ...props }) => {
     const [filters, setFilters] = useState(filtersProp);
 
     const isAllDeselected = useMemo(
-        () => _.isEmpty(_.pickBy(filters, (filter) => filter.checked)),
+        () => isEmpty(pickBy(filters, (filter) => filter.checked)),
         [filters]
     );
 

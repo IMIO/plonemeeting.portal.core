@@ -75,6 +75,14 @@ msgstr "Dépublier"
 msgid "Unpublished"
 msgstr "Dépublié"
 
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Proposed"
+msgstr "Proposé"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Propose"
+msgstr "Proposer"
+
 #. Default: "Help effective date"
 #: Overrided by plonemeeting.portal.core
 msgid "help_effective_date"
