@@ -69,10 +69,6 @@ class EditForm(DefaultEditForm):
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
-        super(EditForm, self).handleCancel(self, action)
-
-    @button.buttonAndHandler(_("Cancel"), name="cancel")
-    def handleCancel(self, action):
         IStatusMessage(self.request).addStatusMessage(_("Edit cancelled"), "info")
         self.request.response.redirect(self.nextURL())
         notify(EditCancelledEvent(self.context))

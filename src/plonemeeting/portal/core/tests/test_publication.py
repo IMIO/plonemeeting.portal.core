@@ -120,6 +120,13 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         view = self.published_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
 
+        # Testing some getters
+        self.published_publication.authority_date = DateTime("2025/09/04")
+        self.published_publication.expired_authority_date = DateTime("2025/10/04")
+        view = self.published_publication.restrictedTraverse("@@view")
+        self.assertEqual(view.get_authority_date(), "2025/09/04")
+        self.assertEqual(view.get_expired_authority_date(), "2025/10/04")
+
     def test_unpublished_publication_view(self):
         self.assertEqual(api.content.get_state(self.unpublished_publication), "unpublished")
         self.logout()
@@ -273,6 +280,22 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         )
         self.assertNotIn(response.getStatus(), (301, 302, 401, 403), "Anonymous should be allowed to download")
         self.assertIsNone(response.getHeader("location"), "Should not redirect")
+
+        with self.assertRaises(Unauthorized):
+            view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+            view()
+
+        self.login_as_publications_manager()
+        self.unpublished_publication.enable_timestamping = False
+        self.unpublished_publication.timestamp = None
+        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+        self.assertEqual(view(), "Missing required files for ASiC generation.")
+
+        self.unpublished_publication.enable_timestamping = True
+        self.unpublished_publication.timestamp = NamedBlobFile(data=b"fake", filename="timestamp.tsr")
+        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+        with self.assertRaises(ValueError):
+            view()
 
     def test_timestamp_invalidation(self):
         self.login_as_publications_manager()
