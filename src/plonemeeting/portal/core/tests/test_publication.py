@@ -124,8 +124,8 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.published_publication.authority_date = DateTime("2025/09/04")
         self.published_publication.expired_authority_date = DateTime("2025/10/04")
         view = self.published_publication.restrictedTraverse("@@view")
-        self.assertEqual(view.get_authority_date(), "2025/09/04")
-        self.assertEqual(view.get_expired_authority_date(), "2025/10/04")
+        self.assertEqual(view.get_authority_date(), "04/09/2025")
+        self.assertEqual(view.get_expired_authority_date(), "04/10/2025")
 
     def test_unpublished_publication_view(self):
         self.assertEqual(api.content.get_state(self.unpublished_publication), "unpublished")
