@@ -186,14 +186,14 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
         self.portal.acl_users._doAddUser("testuser2", "password", [], [])
         self.listing_view()
         # Initially there should be some users in the institution (from the demo setup)
-        initial_users = self.listing_view.get_all_institution_users(self.institution.id)
+        initial_users = self.institution.get_all_institution_users()
         initial_count = len(initial_users)
 
         # Add testuser1 to the institution
         api.group.add_user(groupname=self.members_group_id, username="testuser1")
 
         # Check that testuser1 is now in the list
-        users = self.listing_view.get_all_institution_users(self.institution.id)
+        users = self.institution.get_all_institution_users()
         self.assertEqual(initial_count + 1, len(users))
         self.assertIn("testuser1", [user.getId() for user in users])
 
@@ -201,7 +201,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
         api.group.add_user(groupname=self.members_group_id, username="testuser2")
 
         # Check that both users are now in the list
-        users = self.listing_view.get_all_institution_users(self.institution.id)
+        users = self.institution.get_all_institution_users()
         self.assertEqual(initial_count + 2, len(users))
         user_ids = [user.getId() for user in users]
         self.assertIn("testuser1", user_ids)
