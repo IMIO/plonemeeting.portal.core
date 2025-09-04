@@ -1,8 +1,10 @@
-import { Fragment } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import {Fragment} from "preact";
+import {useState, useEffect} from "preact/hooks";
 import RightArrowSVG from "../../../assets/arrow-right.svg";
-import { theme as imioTheme, style as imioStyle } from "./theme";
-import _ from "lodash";
+import {theme as imioTheme, style as imioStyle} from "./theme";
+import omitBy from "lodash/omitBy";
+import isEmpty from "lodash/isEmpty";
+import findIndex from "lodash/findIndex";
 import FilterSelect from "./FilterSelect.jsx";
 
 /**
@@ -39,16 +41,16 @@ const InstitutionsSelect = (props) => {
 
         Object.entries(institutions).forEach(([key, institution]) => {
             const type = institution.institution_type;
-            groupedOptions[_.findIndex(groupedOptions, { label: type.title })].options.push({
+            groupedOptions[findIndex(groupedOptions, {label: type.title})].options.push({
                 value: key,
                 label: institution.title,
                 type: type.token,
             });
         });
 
-        filters = _.omitBy(filters, (filter) => {
+        filters = omitBy(filters, (filter) => {
             return (
-                groupedOptions[_.findIndex(groupedOptions, { label: filter.label })].options
+                groupedOptions[findIndex(groupedOptions, {label: filter.label})].options
                     .length === 0
             );
         });
@@ -72,7 +74,7 @@ const InstitutionsSelect = (props) => {
     return (
         <Fragment>
             <div className="institution-select-input">
-                {!_.isEmpty(filters) && !_.isEmpty(groupedOptions) && (
+                {!isEmpty(filters) && !isEmpty(groupedOptions) && (
                     <FilterSelect
                         isSearchable
                         options={groupedOptions}
@@ -91,9 +93,9 @@ const InstitutionsSelect = (props) => {
                 className="btn btn-pink"
                 href={selected["@id"]}
                 role="button"
-                aria-disabled={_.isEmpty(selected)}
+                aria-disabled={isEmpty(selected)}
             >
-                <RightArrowSVG />
+                <RightArrowSVG/>
             </a>
         </Fragment>
     );

@@ -12,7 +12,7 @@
         category="Products"
         condition_expr=""
         url_expr="string:${portal_url}/config/folder_contents"
-        icon_expr="string:${portal_url}/++resource++imio.webspellchecker/controlpanel-icon.png"
+        icon_expr="string:gear-wide-connected"
         visible="True"
         i18n:attributes="title">
             <permission>Manage portal</permission>

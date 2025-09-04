@@ -292,13 +292,48 @@ class InstitutionTemplatesVocabularyFactory:
         """
         portal = api.portal.get()
         institution = api.portal.get_navigation_root(context)
-        global_templates_folder = portal.restrictedTraverse("config/templates")
+        common_templates_folder = portal.restrictedTraverse("config/templates")
         institution_templates_folder = getattr(institution, "templates", {})
         vocabulary = []
-        for template in global_templates_folder.values():
-            vocabulary.append(SimpleTerm(value=template.UID(), title="Global - " + template.Title()))
+        for template in common_templates_folder.values():
+            vocabulary.append(SimpleTerm(value=template.getId(), title=template.Title()))
         for template in institution_templates_folder.values():
-            vocabulary.append(SimpleTerm(value=template.UID(), title="Institution - " + template.Title()))
+            vocabulary.append(
+                SimpleTerm(
+                    value=f"{institution.getId()}__{template.getId()}", title="Institution - " + template.Title()
+                )
+            )
         return SimpleVocabulary(vocabulary)
 
+
 InstitutionTemplatesVocabulary = InstitutionTemplatesVocabularyFactory()
+
+
+class InstitutionAllAndTemplatesVocabularyFactory(InstitutionTemplatesVocabularyFactory):
+    def __call__(self, context):
+        """
+        Return a vocabulary of templates for the current institution with an 'All' entry.
+        """
+        if context is None:
+            context = get_context_from_request()
+        vocabulary = super(InstitutionAllAndTemplatesVocabularyFactory, self).__call__(context)
+        all_term = SimpleTerm(value="__all__", title=_("All templates"))
+        terms = [all_term] + list(vocabulary)
+        return SimpleVocabulary(terms)
+
+
+InstitutionAllAndTemplatesVocabulary = InstitutionAllAndTemplatesVocabularyFactory()
+
+
+class InstitutionTemplateSettingsVocabularyFactory:
+    def __call__(self, context):
+        template_settings = copy.deepcopy(
+            api.portal.get_registry_record(name="plonemeeting.portal.core.template_settings")
+        )
+        vocabulary = []
+        for key, value in template_settings.items():
+            vocabulary.append(SimpleTerm(value=key, title=f"{value} [{key}]"))
+        return SimpleVocabulary(vocabulary)
+
+
+InstitutionTemplateSettingsVocabulary = InstitutionTemplateSettingsVocabularyFactory()

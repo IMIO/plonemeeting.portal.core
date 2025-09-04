@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
+from collective.z3cform.datagridfield.blockdatagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
 from copy import deepcopy
@@ -18,10 +19,11 @@ from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
-from plonemeeting.portal.core.utils import default_translator, get_members_group_id
+from plonemeeting.portal.core.utils import default_translator, get_members_group_id, get_publication_reviewers_group_id
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
+from plonemeeting.portal.core.widgets.image import PMNamedImageFieldWidget
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import implementer
@@ -32,20 +34,19 @@ from zope.schema import ValidationError
 
 import re
 import requests
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 
 class InvalidUrlParameters(ValidationError):
     """Exception for invalid url parameters"""
 
-    __doc__ = _(u"Invalid url parameters, the value should start with '&'")
+    __doc__ = _("Invalid url parameters, the value should start with '&'")
 
 
 class InvalidColorParameters(ValidationError):
     """Exception for invalid url parameters"""
 
-    __doc__ = _(
-        u"Invalid color parameter, the value should be a correct hexadecimal color"
-    )
+    __doc__ = _("Invalid color parameter, the value should be a correct hexadecimal color")
 
 
 def validate_url_parameters(value):
@@ -66,114 +67,128 @@ def validate_color_parameters(value):
 
 class ICategoryMappingRowSchema(Interface):
     local_category_id = schema.Choice(
-        title=_(u"Local category id"),
+        title=_("Local category id"),
         vocabulary="plonemeeting.portal.vocabularies.local_categories",
         required=True,
     )
     global_category_id = schema.Choice(
-        title=_(u"Global category"),
+        title=_("Global category"),
         vocabulary="plonemeeting.portal.vocabularies.global_categories",
         required=True,
     )
 
 
 class IUrlParameterRowSchema(Interface):
-    parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='extra_include'
-    )
+    parameter = schema.TextLine(title=_("Parameter"), required=True, default="extra_include")
     value = schema.TextLine(
-        title=_(u"Value"),
+        title=_("Value"),
         required=True,
     )
 
 
 class IUrlMeetingFilterParameterRowSchema(Interface):
-    parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='review_state'
-    )
+    parameter = schema.TextLine(title=_("Parameter"), required=True, default="review_state")
     value = schema.TextLine(
-        title=_(u"Value"),
+        title=_("Value"),
         required=True,
     )
 
 
 class IUrlItemFilterParameterRowSchema(Interface):
-    parameter = schema.TextLine(
-        title=_(u"Parameter"),
-        required=True,
-        default='listType'
-    )
+    parameter = schema.TextLine(title=_("Parameter"), required=True, default="listType")
     value = schema.TextLine(
-        title=_(u"Value"),
+        title=_("Value"),
         required=True,
     )
 
 
 class IRepresentativeMappingRowSchema(Interface):
-    representative_key = schema.Choice(title=_(u"Representative key"),
-                                       vocabulary="plonemeeting.portal.vocabularies.editable_representative",
-                                       required=True)
-    representative_value = schema.TextLine(title=_(u"Representative value"),
-                                           description=_(u"representative_value_description"),
-                                           required=True)
-    representative_long_value = schema.TextLine(title=_(u"Representative long values"),
-                                                description=_(u"representative_long_value_description"),
-                                                required=True)
-    active = schema.Bool(title=_(u"Active"), default=True, required=False)
+    representative_key = schema.Choice(
+        title=_("Representative key"),
+        vocabulary="plonemeeting.portal.vocabularies.editable_representative",
+        required=True,
+    )
+    representative_value = schema.TextLine(
+        title=_("Representative value"), description=_("representative_value_description"), required=True
+    )
+    representative_long_value = schema.TextLine(
+        title=_("Representative long values"), description=_("representative_long_value_description"), required=True
+    )
+    active = schema.Bool(title=_("Active"), default=True, required=False)
+
+
+class ITemplateSettingsRowSchema(Interface):
+    template = schema.Choice(
+        title=_("Template"),
+        vocabulary="plonemeeting.portal.institution_all_and_templates_vocabulary",
+        required=True,
+    )
+    setting = schema.Choice(
+        title=_("Setting"),
+        description=_("Setting to configure. The value between brackets is the technical name used in the templates."),
+        vocabulary="plonemeeting.portal.institution_template_settings_vocabulary",
+        required=True,
+    )
+    expression = schema.TextLine(
+        title=_("TAL expression"),
+        description=_(
+            "Enter a TAL expression that once evaluated will return the setting's value. Elements context, request, view, template, utils, portal, site_url, user are available for the expression."
+        ),
+        required=False,
+        default="",
+    )
 
 
 class IInstitution(model.Schema):
-    """ Marker interface and Dexterity Python Schema for Institution
-    """
+    """Marker interface and Dexterity Python Schema for Institution"""
+
     institution_type = schema.Choice(
-        title=_(u"Institution Type"),
+        title=_("Institution Type"),
         vocabulary="plonemeeting.portal.vocabularies.institution_types",
         required=True,
-        default="commune"
+        default="commune",
     )
 
-    directives.widget("enabled_tabs", CheckBoxFieldWidget, multiple='multiple')
+    directives.widget("enabled_tabs", CheckBoxFieldWidget, multiple="multiple")
     enabled_tabs = schema.List(
-        title=_(u"Enabled tabs"),
-        value_type=schema.Choice(
-            vocabulary="plonemeeting.portal.vocabularies.enabled_tabs"),
+        title=_("Enabled tabs"),
+        value_type=schema.Choice(vocabulary="plonemeeting.portal.vocabularies.enabled_tabs"),
         required=True,
         default=[DEC_FOLDER_ID, PUB_FOLDER_ID],
     )
 
     meeting_type = schema.Choice(
-        title=_(u"Meeting Type"),
+        title=_("Meeting Type"),
         vocabulary="plonemeeting.portal.vocabularies.meeting_types",
         required=True,
-        default="council"
+        default="council",
     )
 
-    plonemeeting_url = schema.URI(title=_(u"Plonemeeting URL"), required=False)
+    plonemeeting_url = schema.URI(title=_("Plonemeeting URL"), required=False)
 
-    username = schema.TextLine(title=_(u"Username"), required=False)
+    username = schema.TextLine(title=_("Username"), required=False)
 
-    password = schema.TextLine(title=_(u"Password"), required=False)
+    password = schema.TextLine(title=_("Password"), required=False)
 
-    meeting_config_id = schema.TextLine(title=_(u"Meeting config ID"), required=True, default='meeting-config-council')
+    meeting_config_id = schema.TextLine(title=_("Meeting config ID"), required=True, default="meeting-config-council")
 
     directives.widget(
         "meeting_filter_query",
         DataGridFieldFactory,
         allow_reorder=True,
         auto_append=False,
-        display_table_css_class="table table-bordered table-striped")
+        display_table_css_class="table table-bordered table-striped",
+    )
     meeting_filter_query = schema.List(
-        title=_(u"Meeting query filter for list"),
-        description=_(u"meeting_filter_query_description"),
+        title=_("Meeting query filter for list"),
+        description=_("meeting_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
-        default=[{'parameter': 'review_state', 'value': 'created'},
-                 {'parameter': 'review_state', 'value': 'frozen'},
-                 {'parameter': 'review_state', 'value': 'decided'}]
+        value_type=DictRow(title="Parameter name", schema=IUrlMeetingFilterParameterRowSchema),
+        default=[
+            {"parameter": "review_state", "value": "created"},
+            {"parameter": "review_state", "value": "frozen"},
+            {"parameter": "review_state", "value": "decided"},
+        ],
     )
 
     directives.widget(
@@ -181,14 +196,14 @@ class IInstitution(model.Schema):
         DataGridFieldFactory,
         allow_reorder=True,
         auto_append=False,
-        display_table_css_class="table table-bordered table-striped")
+        display_table_css_class="table table-bordered table-striped",
+    )
     item_filter_query = schema.List(
-        title=_(u"Published Items query filter"),
-        description=_(u"item_filter_query_description"),
+        title=_("Published Items query filter"),
+        description=_("item_filter_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlItemFilterParameterRowSchema),
-        default=[{'parameter': 'listType', 'value': 'normal'},
-                 {'parameter': 'listType', 'value': 'late'}]
+        value_type=DictRow(title="Parameter name", schema=IUrlItemFilterParameterRowSchema),
+        default=[{"parameter": "listType", "value": "normal"}, {"parameter": "listType", "value": "late"}],
     )
 
     directives.widget(
@@ -196,18 +211,19 @@ class IInstitution(model.Schema):
         DataGridFieldFactory,
         allow_reorder=True,
         auto_append=False,
-        display_table_css_class="table table-bordered table-striped")
+        display_table_css_class="table table-bordered table-striped",
+    )
     item_content_query = schema.List(
-        title=_(u"Published Items content query"),
-        description=_(u"item_content_query_description"),
+        title=_("Published Items content query"),
+        description=_("item_content_query_description"),
         required=True,
-        value_type=DictRow(title=u"Parameter name", schema=IUrlParameterRowSchema),
-        default=[{'parameter': 'extra_include', 'value': 'public_deliberation'}]
+        value_type=DictRow(title="Parameter name", schema=IUrlParameterRowSchema),
+        default=[{"parameter": "extra_include", "value": "public_deliberation"}],
     )
     # Formatting fieldset
     model.fieldset(
         "formatting",
-        label=_(u"Formatting"),
+        label=_("Formatting"),
         fields=[
             "project_decision_disclaimer",
             "item_title_formatting_tal",
@@ -218,40 +234,33 @@ class IInstitution(model.Schema):
     )
 
     url_rgpd = schema.TextLine(
-        title=_(u"Custom page for GDPR text"),
-        description=_(u"The url visitors should be redirected to when clicking a GDPR masked text"),
-        required=False
+        title=_("Custom page for GDPR text"),
+        description=_("The url visitors should be redirected to when clicking a GDPR masked text"),
+        required=False,
     )
 
     project_decision_disclaimer = RichText(
-        title=_(u"Project decision disclaimer"),
+        title=_("Project decision disclaimer"),
         required=False,
-        defaultFactory=default_translator(
-            _(u"default_in_project_disclaimer", default="")
-        ),
+        defaultFactory=default_translator(_("default_in_project_disclaimer", default="")),
     )
 
     item_title_formatting_tal = schema.TextLine(
-        title=_(
-            u"Item title formatting tal expression. "
-            u"If empty the default title will be used"
-        ),
+        title=_("Item title formatting tal expression. " "If empty the default title will be used"),
         required=False,
     )
 
     item_decision_formatting_tal = schema.TextLine(
-        title=_(u"Item decision formatting tal expression"),
+        title=_("Item decision formatting tal expression"),
         required=True,
         default="python: json['extra_include_deliberation']['public_deliberation']",
     )
 
     item_additional_data_formatting_tal = schema.TextLine(
-        title=_(u"Item additional data formatting tal expression"), required=False
+        title=_("Item additional data formatting tal expression"), required=False
     )
 
-    info_annex_formatting_tal = schema.TextLine(
-        title=_(u"Info annex formatting tal expression"), required=False
-    )
+    info_annex_formatting_tal = schema.TextLine(title=_("Info annex formatting tal expression"), required=False)
 
     webstats_js = schema.SourceText(
         title=_("JavaScript integrations"),
@@ -269,7 +278,7 @@ class IInstitution(model.Schema):
     # Mapping fieldset
     model.fieldset(
         "mapping",
-        label=_(u"Mapping"),
+        label=_("Mapping"),
         fields=[
             "delib_category_field",
             "categories_mappings",
@@ -277,10 +286,10 @@ class IInstitution(model.Schema):
         ],
     )
     delib_category_field = schema.Choice(
-        title=_(u"iA.Delib field to use for category mapping"),
+        title=_("iA.Delib field to use for category mapping"),
         vocabulary="plonemeeting.portal.vocabularies.delib_category_fields",
         required=True,
-        default=DEFAULT_CATEGORY_IA_DELIB_FIELD
+        default=DEFAULT_CATEGORY_IA_DELIB_FIELD,
     )
 
     directives.widget(
@@ -288,11 +297,12 @@ class IInstitution(model.Schema):
         DataGridFieldFactory,
         allow_reorder=True,
         auto_append=False,
-        display_table_css_class="table table-bordered table-striped")
+        display_table_css_class="table table-bordered table-striped",
+    )
     categories_mappings = schema.List(
-        title=_(u"Categories mappings"),
-        description=_(u"categories_mappings_description"),
-        value_type=DictRow(title=u"Category mapping", schema=ICategoryMappingRowSchema),
+        title=_("Categories mappings"),
+        description=_("categories_mappings_description"),
+        value_type=DictRow(title="Category mapping", schema=ICategoryMappingRowSchema),
         required=False,
     )
 
@@ -301,38 +311,36 @@ class IInstitution(model.Schema):
         DataGridFieldFactory,
         allow_reorder=True,
         auto_append=False,
-        display_table_css_class="table table-bordered table-striped")
+        display_table_css_class="table table-bordered table-striped",
+    )
     representatives_mappings = schema.List(
-        title=_(u"Representatives mappings"),
-        description=_(u"representatives_mappings_description"),
-        value_type=DictRow(
-            title=u"Representative mapping", schema=IRepresentativeMappingRowSchema
-        ),
+        title=_("Representatives mappings"),
+        description=_("representatives_mappings_description"),
+        value_type=DictRow(title="Representative mapping", schema=IRepresentativeMappingRowSchema),
         required=False,
     )
 
     # Publications fieldset
     model.fieldset(
         "publications",
-        label=_(u"Publications"),
+        label=_("Publications"),
         fields=[
             "publications_power_users",
         ],
     )
 
-    directives.widget("publications_power_users", CheckBoxFieldWidget, multiple='multiple')
+    directives.widget("publications_power_users", CheckBoxFieldWidget, multiple="multiple")
     publications_power_users = schema.List(
-        title=_(u"Power users"),
+        title=_("Power users"),
         description=_("power_users_description"),
-        value_type=schema.Choice(
-            vocabulary="plonemeeting.portal.vocabularies.publications_power_users"),
+        value_type=schema.Choice(vocabulary="plonemeeting.portal.vocabularies.publications_power_users"),
         required=True,
     )
 
     # Styling fieldset
     model.fieldset(
         "style",
-        label=_(u"Styling"),
+        label=_("Styling"),
         fields=[
             "logo",
             "header_color",
@@ -343,8 +351,8 @@ class IInstitution(model.Schema):
             "footer_text_color",
         ],
     )
-
-    logo = NamedBlobImage(title=_(u"Logo"), required=False)
+    directives.widget("logo", PMNamedImageFieldWidget)
+    logo = NamedBlobImage(title=_("Logo"), required=False)
 
     directives.widget("header_color", ColorSelectFieldWidget)
     header_color = schema.TextLine(
@@ -401,22 +409,39 @@ class IInstitution(model.Schema):
 
     # Documents fieldset
     model.fieldset(
-        "documents",
-        label=_("Documents"),
+        "templates",
+        label=_("Templates"),
         fields=[
             "enabled_templates",
-            "documents_logo",
+            "template_logo",
+            "template_settings",
         ],
     )
     enabled_templates = schema.List(
-        title=_(u"Activated templates"),
-        description=_(u"enabled_templates_description"),
-        value_type=schema.Choice(
-            vocabulary="plonemeeting.portal.institution_templates_vocabulary"),
-        required=True,
+        title=_("Activated templates"),
+        description=_("enabled_templates_description"),
+        value_type=schema.Choice(vocabulary="plonemeeting.portal.institution_templates_vocabulary"),
+        required=False,
         default=[],
     )
-    documents_logo = NamedBlobImage(title=_(u"Document logo"), required=False)
+    directives.widget("template_logo", PMNamedImageFieldWidget)
+    template_logo = NamedBlobImage(title=_("Template logo"), required=False)
+
+    directives.widget(
+        "template_settings",
+        BlockDataGridFieldFactory,
+        allow_reorder=True,
+        auto_append=False,
+        display_table_css_class="table table-bordered table-striped",
+    )
+    template_settings = schema.List(
+        title=_("Template settings"),
+        description=_("Template settings used to customize templates. Leave empty to use default values."),
+        value_type=DictRow(
+            title="tablerow",
+            schema=ITemplateSettingsRowSchema,
+        ),
+    )
 
 
 def categories_mappings_invariant(data):
@@ -424,18 +449,22 @@ def categories_mappings_invariant(data):
     local_category_id_errors = set()
     if data.categories_mappings:
         for row in data.categories_mappings:
-            if row['local_category_id'] in mapped_local_category_id:
-                local_category_id_errors.add(row['local_category_id'])
+            if row["local_category_id"] in mapped_local_category_id:
+                local_category_id_errors.add(row["local_category_id"])
             else:
-                mapped_local_category_id.append(row['local_category_id'])
+                mapped_local_category_id.append(row["local_category_id"])
         if local_category_id_errors:
             local_category_errors = []
             local_categories = get_vocab(data.__context__, "plonemeeting.portal.vocabularies.local_categories")
             for cat_id in local_category_id_errors:
                 local_category_errors.append(local_categories.by_value[cat_id].title)
             local_category_errors = sorted(local_category_errors)
-            raise Invalid(_(u'Categories mappings - iA.Delib category mapped more than once : ${categories_title}',
-                            mapping={'categories_title': ', '.join(local_category_errors)}))
+            raise Invalid(
+                _(
+                    "Categories mappings - iA.Delib category mapped more than once : ${categories_title}",
+                    mapping={"categories_title": ", ".join(local_category_errors)},
+                )
+            )
 
 
 def representatives_mappings_invariant(data):
@@ -447,49 +476,53 @@ def representatives_mappings_invariant(data):
     missing_uids = {}
     changes = {}
     for rpz in new_representatives:
-        changes[rpz['representative_key']] = rpz['representative_value']
+        changes[rpz["representative_key"]] = rpz["representative_value"]
     if data.__context__ and data.__context__.representatives_mappings:
         for rpz in data.__context__.representatives_mappings:
-            rpz_uid = rpz['representative_key']
+            rpz_uid = rpz["representative_key"]
             if rpz_uid not in changes and rpz_uid not in missing_uids:
-                brains = api.content.find(portal_type='Item', context=data.__context__, getGroupInCharge=rpz_uid)
+                brains = api.content.find(portal_type="Item", context=data.__context__, getGroupInCharge=rpz_uid)
                 if brains:
-                    missing_uids[rpz_uid] = rpz['representative_value']
+                    missing_uids[rpz_uid] = rpz["representative_value"]
     if missing_uids:
-        raise Invalid(_("Representatives mappings - Removing representatives linked to "
-                        "items is not allowed : ${representatives}",
-                        mapping={"representatives": ", ".join(missing_uids.values())}))
+        raise Invalid(
+            _(
+                "Representatives mappings - Removing representatives linked to "
+                "items is not allowed : ${representatives}",
+                mapping={"representatives": ", ".join(missing_uids.values())},
+            )
+        )
 
 
 @implementer(IInstitution)
 class Institution(Container):
-    """
-    """
+    """ """
+
     def fetch_delib_categories(self):
         delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]
         url = get_api_url_for_categories(self, delib_config_category_field)
-        categories = self._fetch_external_data_for_vocabulary('delib_categories',
-                                                              url,
-                                                              delib_config_category_field,
-                                                              'id',
-                                                              'title')
+        categories = self._fetch_external_data_for_vocabulary(
+            "delib_categories", url, delib_config_category_field, "id", "title"
+        )
         self.delib_categories = categories
 
     def fetch_delib_representatives(self):
-        representatives = self._fetch_external_data_for_vocabulary('delib_representatives',
-                                                                   get_api_url_for_representatives(self),
-                                                                   REPRESENTATIVE_IA_DELIB_FIELD,
-                                                                   'UID',
-                                                                   'title')
+        representatives = self._fetch_external_data_for_vocabulary(
+            "delib_representatives",
+            get_api_url_for_representatives(self),
+            REPRESENTATIVE_IA_DELIB_FIELD,
+            "UID",
+            "title",
+        )
 
         representatives_mappings = self.representatives_mappings or []
         if len(representatives_mappings or []) == 0:
             logger.warning(f"No representatives mappings found for {self.title}")
 
         for row in representatives_mappings:
-            key = row['representative_key']
+            key = row["representative_key"]
             if key not in representatives:  # keep history
-                representatives[key] = _('Unknown value: ${key}', mapping={'key': key})
+                representatives[key] = _("Unknown value: ${key}", mapping={"key": key})
         self.delib_representatives = representatives
 
     def _fetch_external_data_for_vocabulary(self, attr_name, url, url_extra_include, json_voc_value, json_voc_title):
@@ -532,3 +565,12 @@ class Institution(Container):
         user_ids = [user.id for user in group.getGroupMembers()]
         members = [membership_tool.getMemberById(uid) for uid in user_ids if membership_tool.getMemberById(uid)]
         return sorted(members, key=lambda x: x.id)
+
+    def has_publications_reviewers(self):
+        """Check if the institution has at least one publication validator."""
+        group_tool = getToolByName(self, "portal_groups")
+        group_id = get_publication_reviewers_group_id(self)
+        group = group_tool.getGroupById(group_id)
+        if not group:
+            return False
+        return bool(group.getGroupMembers())

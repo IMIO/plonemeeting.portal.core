@@ -236,7 +236,7 @@
     <metal:use use-macro="context/@@pm_macros/annexes-section"/>
     <section class="row legal-section mb-3">
       <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
-        <div class="alert with-icon alert-light"
+        <div tal:condition="context/consultation_text" class="alert with-icon alert-light"
              role="alert"
              style="margin: 0 !important;"
 
@@ -280,11 +280,8 @@
             <div class="my-1">
               <div class="col d-flex justify-content-start flex-wrap">
                 <a class="btn btn-outline-secondary my-1 me-2" style="width: 135px"
-                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamped_file/${context/timestamped_file/filename}">Archive
+                   target="_blank" tal:attributes="href string:${context/absolute_url}/asic-archive">Archive
                   <i class="bi bi-file-zip-fill" style="font-size: 1em"></i></a>
-                <a class="btn btn-outline-secondary my-1 me-2" style="width: 135px"
-                   target="_blank" tal:attributes="href string:${context/absolute_url}/@@download/timestamp/${context/timestamp/filename}">Signature
-                  <i class="bi bi-file-earmark-binary-fill" style="font-size: 1em"></i></a>
                 <a class="btn btn-outline-info my-1" data-bs-toggle="collapse" href="#collapse-timestamping-more-info"
                    role="button"
                    title="En savoir plus"

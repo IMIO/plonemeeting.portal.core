@@ -28,18 +28,18 @@ class PMDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
     def get_generable_templates(self):
         utils_view = self.context.restrictedTraverse("@@utils_view")
         if not utils_view.is_in_institution():
-            return super(self, PMDocumentGeneratorLinksViewlet).get_generable_templates()
+            return super().get_generable_templates()
 
         generable_templates = []
         portal = api.portal.get()
         institution = api.portal.get_navigation_root(self.context)
-        global_templates_folder = portal.restrictedTraverse("config/templates")
+        common_templates_folder = portal.unrestrictedTraverse("config/templates")
         institution_templates_folder = getattr(institution, "templates", {})
-        for template in global_templates_folder.values():
-            if template.UID() in institution.enabled_templates and template.can_be_generated(self.context):
+        for template in common_templates_folder.values():
+            if template.getId() in institution.enabled_templates and template.can_be_generated(self.context):
                 generable_templates.append(template)
         for template in institution_templates_folder.values():
-            if template.UID() in institution.enabled_templates and template.can_be_generated(self.context):
+            if f"{institution.getId()}__{template.getId()}" in institution.enabled_templates and template.can_be_generated(self.context):
                 generable_templates.append(template)
         return generable_templates
 

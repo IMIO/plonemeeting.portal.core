@@ -1,0 +1,76 @@
+<div class="pm-named-image-widget card p-0 mb-2 ${view/klass}"
+     id=""
+   tal:define="
+    value view/value;
+      exists python:value is not None;
+    "
+   tal:attributes="
+    id view/id;
+    style view/style;
+    title view/title;
+    lang view/lang;
+    onclick view/onclick;
+    ondblclick view/ondblclick;
+    onmousedown view/onmousedown;
+    onmouseup view/onmouseup;
+    onmouseover view/onmouseover;
+    onmousemove view/onmousemove;
+    onmouseout view/onmouseout;
+    onkeypress view/onkeypress;
+    onkeydown view/onkeydown;
+    onkeyup view/onkeyup;
+    "
+   i18n:domain="plone"
+>
+  <div class="card-body">
+  <img tal:define="
+    fieldname view/field/__name__ | nothing;
+      filename view/filename;
+        filename_encoded view/filename_encoded;
+          width view/width;
+            height view/height;
+              alt view/alt;
+    "
+     tal:condition="python:exists and fieldname"
+     tal:attributes="
+      src view/download_url;
+      height view/height;
+      width view/width;
+      alt view/alt;
+      "
+      class="col-3 border-1 rounded-1"
+    />
+      <span class="no-image"
+     tal:condition="not:exists"
+     i18n:translate="no_image"
+
+  >
+    No image
+  </span>
+  </div>
+
+  <div class="image-meta discreet"
+     tal:define="
+      fieldname view/field/__name__ | nothing;
+        filename view/filename;
+          filename_encoded view/filename_encoded;
+            width view/width;
+              height view/height;
+                alt view/alt;
+      "
+  >
+    <a
+      class="image-meta__link"
+      target="_blank"
+       tal:attributes="href view/download_url"
+        tal:condition="exists"
+    >
+      <span tal:condition="filename" tal:content="filename">filename.jpg
+      </span>
+    </a>
+    <span tal:condition="python:filename and (width and height)">—</span>
+    <span tal:condition="python:width and height"
+       tal:content="string:${width} × ${height}px">1200 × 800px</span>
+
+  </div>
+</div>

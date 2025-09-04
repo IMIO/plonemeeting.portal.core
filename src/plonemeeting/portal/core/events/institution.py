@@ -21,6 +21,8 @@ from plonemeeting.portal.core.utils import create_faceted_folder, create_templat
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_managers_group_id
 from plonemeeting.portal.core.utils import get_members_group_id
+from plonemeeting.portal.core.utils import get_publication_reviewers_group_id
+from plonemeeting.portal.core.utils import get_publication_creators_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
 from zope.globalrequest import getRequest
@@ -73,11 +75,26 @@ def handle_institution_creation(obj, event):
     obj.manage_setLocalRoles(group_id, ["Reader"])
     obj.get(DEC_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Contributor", "Editor"])
     # Publications
+    # Publications managers
     group_id = get_publications_managers_group_id(obj)
     group_title = "{0} Publications Managers".format(institution_title)
     api.group.create(groupname=group_id, title=group_title)
     obj.manage_setLocalRoles(group_id, ["Reader"])
+    obj.get(PUB_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Contributor", "Editor", "Reviewer"])
+    obj.reindexObjectSecurity()
+    # Publications creators
+    group_id = get_publication_creators_group_id(obj)
+    group_title = "{0} Publications Creators".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    obj.manage_setLocalRoles(group_id, ["Reader"])
     obj.get(PUB_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Contributor", "Editor"])
+    obj.reindexObjectSecurity()
+    # Publications reviewers
+    group_id = get_publication_reviewers_group_id(obj)
+    group_title = "{0} Publications Reviewers".format(institution_title)
+    api.group.create(groupname=group_id, title=group_title)
+    obj.manage_setLocalRoles(group_id, ["Reader"])
+    obj.get(PUB_FOLDER_ID).manage_setLocalRoles(group_id, ["Reader", "Reviewer", "Editor"])
     obj.reindexObjectSecurity()
     # Templates
     create_templates_folder(obj)

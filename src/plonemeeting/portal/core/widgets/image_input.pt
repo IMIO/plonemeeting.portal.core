@@ -1,0 +1,36 @@
+<span tal:define="
+  download_url view/download_url;
+  exists python: view.value is not None;
+  action view/action;
+  allow_nochange view/allow_nochange;
+  doc_type view/file_content_type;
+  icon view/file_icon;
+  filename view/filename;
+  "
+   tal:attributes="
+  id view/id;
+  class view/klass;
+  style view/style;
+  title view/title;
+  lang view/lang;
+  onclick view/onclick;
+  ondblclick view/ondblclick;
+  onmousedown view/onmousedown;
+  onmouseup view/onmouseup;
+  onmouseover view/onmouseover;
+  onmousemove view/onmousemove;
+  onmouseout view/onmouseout;
+  onkeypress view/onkeypress;
+  onkeydown view/onkeydown;
+  onkeyup view/onkeyup;
+  onfocus view/onfocus;
+  onblur view/onblur;
+  onchange view/onchange;
+  readonly view/readonly;
+  accesskey view/accesskey;
+  onselect view/onselect;
+  "
+   i18n:domain="plone"
+>
+<p>Hello</p>
+</span>

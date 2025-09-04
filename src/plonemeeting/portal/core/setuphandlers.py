@@ -15,6 +15,7 @@ from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
+from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
 from plonemeeting.portal.core.utils import cleanup_contents, set_constrain_types, create_templates_folder
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
@@ -24,7 +25,7 @@ from plonemeeting.portal.core.utils import remove_right_portlets
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtility
 from zope.i18n import translate
-from zope.interface import implementer
+from zope.interface import implementer, alsoProvides
 from zope.traversing.interfaces import BeforeTraverseEvent
 
 import dateutil.parser
@@ -59,6 +60,7 @@ def post_install(context):
         title=translate(_(u"Configuration folder"), target_language=current_lang),
         id=CONFIG_FOLDER_ID,
     )
+    alsoProvides(config_folder, IPlonemeetingPortalConfigFolder)
     config_folder.exclude_from_nav = True
 
     # Create global meetings and publications faceted folders

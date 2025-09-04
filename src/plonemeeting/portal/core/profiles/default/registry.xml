@@ -119,6 +119,43 @@
     </value>
   </record>
 
+  <record name="plonemeeting.portal.core.template_settings">
+    <field type="plone.registry.field.Dict">
+      <title i18n:translate="">Template settings</title>
+      <key_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Template setting id</title>
+      </key_type>
+      <value_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Template setting title</title>
+      </value_type>
+    </field>
+    <value purge="false">
+      <element key="include_publication_text" i18n:translate="">Inclure le texte de la publication</element>
+      <element key="include_context_link" i18n:translate="">Inclure un lien vers l'élément</element>
+      <element key="include_qr_code" i18n:translate="">Inclure un code QR</element>
+      <element key="include_expiration_date" i18n:translate="">Inclure la date d'expiration</element>
+    </value>
+  </record>
+
+  <record name="plonemeeting.portal.core.template_default_settings">
+    <field type="plone.registry.field.Dict">
+      <title i18n:translate="">Template default settings</title>
+      <key_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Template setting id</title>
+      </key_type>
+      <value_type type="plone.registry.field.TextLine">
+        <title i18n:translate="">Template setting value</title>
+      </value_type>
+    </field>
+    <value purge="false">
+      <element key="include_publication_text">True</element>
+      <element key="include_qr_code">True</element>
+      <element key="include_expiration_date">True</element>
+      <element key="include_context_link">True</element>
+    </value>
+  </record>
+
+
   <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">
     <value key="timestamping_service_url">https://freetsa.org/tsr</value>

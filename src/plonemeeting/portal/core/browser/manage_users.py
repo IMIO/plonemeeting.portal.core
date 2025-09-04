@@ -9,6 +9,7 @@ from plone.protect.utils import addTokenToUrl
 from plone.z3cform.layout import wrap_form
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import get_members_group_id
+# from plonemeeting.portal.core.utils import get_manageable_groups_for_user
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -111,7 +112,6 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
             # Keep only groups that are institution-related
             if any(suffix in group_id for suffix in manageable_institution_suffixes):
                 user_manageable_groups.append(group_id)
-
         return user_manageable_groups
 
     def update_user_groups(self, username, selected_groups):

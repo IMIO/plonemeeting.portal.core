@@ -15,8 +15,8 @@ from zope.event import notify
 
 
 class InstitutionView(DefaultView):
-    """
-    """
+    """ """
+
     def __call__(self):
         # redirect to "DEC_FOLDER_ID" if enabled, to "PUB_FOLDER_ID" if not
         # and to home page if nothing enabled
@@ -31,13 +31,34 @@ class InstitutionView(DefaultView):
 
 
 class InstitutionSettingsView(DefaultView):
-    """
-    """
+    """ """
+
+    _actions = {
+        "edit": {
+            "title": _("Edit"),
+            "url": "${context}/edit",
+            "icon": "pencil",
+            "condition": "python: ",
+        },
+    }
+
+    _navigation_links = {
+        "manage-users": {
+            "title": _("label_manage_users"),
+            "url": "@@manage-users",
+            "icon": "people",
+        },
+        "manage-templates": {
+            "title": _("label_manage_templates"),
+            "url": "@@manage-templates",
+            "icon": "file-text",
+        },
+    }
 
     def _update(self):
         super(InstitutionSettingsView, self)._update()
-        if 'password' in self.w:
-            self.w['password'].value = self.context.password and '********************' or '-'
+        if "password" in self.w:
+            self.w["password"].value = self.context.password and "********************" or "-"
 
     def updateWidgets(self, prefix=None):
         super(InstitutionSettingsView, self).updateWidgets(prefix)
@@ -64,7 +85,7 @@ class EditForm(DefaultEditForm):
         """ """
         # initializing form, we only have the _authenticator in request.form
         form_keys = tuple(self.request.form.keys())
-        if not form_keys or form_keys == ('_authenticator',):
+        if not form_keys or form_keys == ("_authenticator",):
             self.context.fetch_delib_categories()
             self.context.fetch_delib_representatives()
         return super(EditForm, self).__call__()
@@ -93,10 +114,8 @@ class EditForm(DefaultEditForm):
         self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-settings")
         notify(EditFinishedEvent(self.context))
 
-
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
         IStatusMessage(self.request).addStatusMessage(_("Edit cancelled"), "info")
         self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-settings")
         notify(EditCancelledEvent(self.context))
-

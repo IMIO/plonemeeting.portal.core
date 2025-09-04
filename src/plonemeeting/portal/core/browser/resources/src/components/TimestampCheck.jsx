@@ -6,9 +6,6 @@ import * as asn1js from "asn1js";
 import {ContentInfo, SignedData, TSTInfo} from "pkijs";
 import {useCallback} from "preact/hooks";
 
-// ────────────────────────────────────────────────────────────
-// Helper maps & utils
-// ────────────────────────────────────────────────────────────
 const HASH_OID_TO_NAME = {
     "1.3.14.3.2.26": "SHA‑1",
     "2.16.840.1.101.3.4.2.1": "SHA‑256",
@@ -41,6 +38,10 @@ const getAttr = (rdn, oid) => {
     return tv ? tv.value.valueBlock.value : "";
 };
 
+const getCN = (rdn) => {
+    return getAttr(rdn, "2.5.4.3");
+};
+
 const fmtBytes = (bytes) => {
     if (bytes === 0) return '0 o';
     const k = 1024;
@@ -49,13 +50,7 @@ const fmtBytes = (bytes) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 
-// Extract CN from pkijs RDN
-const getCN = (rdn) => {
-    const cn = rdn.typesAndValues.find((tv) => tv.type === "2.5.4.3");
-    return cn ? cn.value.valueBlock.value : "";
-};
-
-
+// Sub-component to display the certificate table
 const CertTable = ({certs}) => (
     <div className="table-responsive">
         <table className="table table-sm mb-0">
@@ -85,7 +80,7 @@ const CertTable = ({certs}) => (
     </div>
 );
 
-
+// Sub-component to display the embedded files in a scrollable table
 const EmbeddedTable = ({files}) => (
     <div className="table-responsive" style={{fontSize: "0.9rem", maxHeight: "250px", overflowY: "auto"}}>
         <table className="table table-sm mb-0">
@@ -102,45 +97,27 @@ const EmbeddedTable = ({files}) => (
                     <td className="font-monospace small">{fmtBytes(file.size)}</td>
                 </tr>
             ))}
-            <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-                        <tr>
-                <td className="font-monospace small">TOTO</td>
-                <td className="font-monospace small">25</td>
-            </tr>
-
             </tbody>
         </table>
     </div>
 );
 
+// Sub-component to display the status of the verification
+const CheckStatus = ({status, children}) => {
+    const statusClass = classNames(status === "valid" ? "status-valid" : "status-invalid");
+    const iconClass = classNames(status === "valid" ? "bi-check-circle" : "bi-x-circle");
+    return (
+        <div className={`alert card text-white border-0 mb-0 ${statusClass}`} role="alert">
+            <div className="d-flex align-items-center">
+                <i className={`bi bi-patch-check-fill me-3 fs-2 ${iconClass}`}></i>
+                {children}
+            </div>
+            <i className="icon-bg bi bi-watch fs-1"></i>
+        </div>
+    )
+}
 
+// Main component for timestamp verification
 const TimestampCheck = () => {
     const [status, setStatus] = useState(null); // "valid" | "invalid" | null
     const [details, setDetails] = useState(null); // full report
@@ -160,17 +137,17 @@ const TimestampCheck = () => {
             const outerZip = await JSZip.loadAsync(file);
 
             const tstEntry = outerZip.file("META-INF/timestamp.tst");
-            if (!tstEntry) throw new Error("META-INF/timestamp.tst not found");
+            if (!tstEntry) throw new Error("Le fichier META-INF/timestamp.tst n'est pas présent.");
 
             const manifestEntry = outerZip.file(/META-INF\/ASiCManifest.*\.xml/)[0];
-            if (!manifestEntry) throw new Error("ASiCManifest not found");
+            if (!manifestEntry) throw new Error("Le fichier ASiCManifest n'est pas présent.");
             const manifestText = await manifestEntry.async("text");
             const payloadName = /DataObjectReference\s+URI="([^"]+)"/.exec(
                 manifestText
             )[1];
 
             const payloadEntry = outerZip.file(payloadName);
-            if (!payloadEntry) throw new Error(`Payload ${payloadName} not found`);
+            if (!payloadEntry) throw new Error(`Le fichier ${payloadName} est manquant alors qu'il est référencé dans le manifeste.`);
 
             const [payloadBuffer, tstBuffer] = await Promise.all([
                 payloadEntry.async("arraybuffer"),
@@ -201,16 +178,16 @@ const TimestampCheck = () => {
 
             // Parse the TST file
             const asn1Resp = asn1js.fromBER(tstBuffer);
-            if (asn1Resp.offset === -1) throw new Error("Cannot decode ASN.1");
+            if (asn1Resp.offset === -1) throw new Error("Impossible de décoder le fichier TST.");
             const cms = new ContentInfo({schema: asn1Resp.result});
             const signedData = new SignedData({schema: cms.content});
             const eContentBuffer = signedData.encapContentInfo?.eContent?.valueBlock?.valueHex;
-            if (!eContentBuffer) throw new Error("Timestamp token missing content");
+            if (!eContentBuffer) throw new Error("Le fichier TST ne contient pas de données encapsulées.");
             const tstASN1 = asn1js.fromBER(eContentBuffer);
             const tstInfo = new TSTInfo({schema: tstASN1.result});
 
             const signerCert = signedData.certificates?.[0];
-            if (!signerCert) throw new Error("No certificate embedded in TST");
+            if (!signerCert) throw new Error("Le fichier TST ne contient aucun certificat.");
 
             // Verify the signature
             // TODO: Don't blindly trust the certificates
@@ -223,7 +200,7 @@ const TimestampCheck = () => {
                 extendedMode: true,
             });
             if (!verifyResult || verifyResult.signatureVerified !== true)
-                throw new Error("Timestamp signature verification failed");
+                throw new Error("La vérification de l'horodatage a échoué.");
 
             // Build the certificates chain
             const certsChain = (signedData.certificates || []).map((c, i) => ({
@@ -318,11 +295,11 @@ const TimestampCheck = () => {
     });
 
     return (
-        <div className="container my-5">
+        <div className="container">
             {/* File Upload Section */}
-            <div className="row justify-content-center mb-4">
-                <div className="col-lg-8">
-                    <div className="card ">
+            <div className="row justify-content-center">
+                <div className="col-lg-8 mb-4">
+                    <div className="card">
                         <div className="card-header py-3">
                             <div className="mb-0 d-flex align-items-center fs-6 fw-light">
                                 <i className="bi bi-file-earmark-zip me-2"></i>
@@ -330,7 +307,6 @@ const TimestampCheck = () => {
                             </div>
                         </div>
                         <div className="card-body p-4">
-                            {/* Upload zone handled by react‑dropzone */}
                             <div
                                 {...getRootProps()}
                                 className={classNames(
@@ -346,24 +322,25 @@ const TimestampCheck = () => {
                                 {/* Hidden input that triggers the native file picker */}
                                 <input {...getInputProps()} />
 
-                                <div className="mb-3">
+                                <div className="mb-4">
                                     <i
                                         className="bi bi-file-earmark-arrow-up text-muted"
                                         style={{fontSize: "2rem"}}
                                     ></i>
                                 </div>
 
-                                <div className="mb-3">
-                                    <p className="form-label fw-semibold mb-0 fs-5">
+                                <div className="mb-4">
+                                    <p className="form-label fw-light mb-0 fs-5">
                                         {isDragActive
-                                            ? "Déposez votre fichier ici"
-                                            : "Glissez-déposez un fichier ASiC ou cliquez pour sélectionner"}
+                                            ? (<span>Déposez votre fichier ici</span>)
+                                            : (<span>Glissez-déposez un fichier ASiC <small>ou</small>  cliquez pour sélectionner</span>)}
                                     </p>
-                                    {acceptedFiles.length > 0 && (
-                                        <small className="text-success">
+                                    {acceptedFiles.length > 0 && (<div className="mt-2">
+                                        <span>Fichier: </span>
+                                        <strong className="text-success">
                                             {acceptedFiles[0].name}
-                                        </small>
-                                    )}
+                                        </strong>
+                                    </div>)}
                                 </div>
 
                                 <div className="text-muted fw-light">
@@ -376,266 +353,259 @@ const TimestampCheck = () => {
                 </div>
             </div>
 
-            {/* Loading State */}
+            {/* Loading */}
             {loading && (
-                <div className="row justify-content-center mb-4">
-                    <div className="col-lg-8">
-                        <div className="alert status-loading text-white border-0" role="alert">
-                            <div className="d-flex align-items-center">
-                                <div className="spinner-border spinner-border-sm me-3" role="status">
-                                    <span className="visually-hidden">Loading...</span>
-                                </div>
-                                <div>
-                                    <strong>Verifying timestamp signature...</strong>
-                                    <div className="small opacity-75">Processing cryptographic validation</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Error State */}
-            {status === "invalid" && (
-                <div className="row justify-content-center mb-4">
-                    <div className="col-lg-12">
-                        <div className="alert status-invalid text-white border-0" role="alert">
-                            <div className="d-flex align-items-start">
-                                <i className="bi bi-exclamation-triangle-fill me-3 fs-2"></i>
-                                <div>
-                                    <strong>Timestamp verification failed</strong>
-                                    <div className="small opacity-75 mt-1">{error}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Success State */}
-            {status === "valid" && details && (
                 <div className="row justify-content-center">
-                    <div className="col-12">
-                        <div className="alert card status-valid text-white border-0 mb-3" role="alert">
-                            <div className="d-flex align-items-center">
-                                <i className="bi bi-patch-check-fill me-3 fs-2"></i>
+                    <div className="col-lg-12 mb-4">
+                        <div className="d-flex align-items-center justify-content-center text-muted">
+                            <div className="spinner-border spinner-border-sm me-3" role="status">
+                                <span className="visually-hidden">Chargement...</span>
+                            </div>
+                            <div className="text-center">
+                                <strong>Traitement en cours...</strong>
+                                <div className="small opacity-75">Vérification de l'horodatage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Error */}
+            {status === "invalid" && (
+                <CheckStatus status="invalid">
+                    <div>
+                        La vérification du fichier a échoué.
+                        <div className="small opacity-75 mt-1">{error}</div>
+                    </div>
+                </CheckStatus>
+            )}
+
+            {/* Success */}
+            {status === "valid" && details && (<>
+                    <div className="row justify-content-center">
+                        <div className="col-12 mb-4">
+                            <CheckStatus status="valid" details={details} error={error}>
                                 <div>
                                     Le document est valide et a été horodaté en date du <strong
-                                    className="fs-5">{details.tst.localStr}</strong>
+                                    className="fs-5 d-inline-block">{details?.tst.localStr}</strong>
                                     <div className="small opacity-75 mt-1">
                                         L'authenticité et l'intégrité du document ont été confirmées
                                     </div>
                                 </div>
-                            </div>
-                            <i className="icon-bg bi bi-watch fs-1"></i>
+                            </CheckStatus>
                         </div>
-                        <div className="row mb-4">
-                            <div className="col-xl-7 mb-3 mb-xl-0">
-                                {/* TSA Information */}
-                                <div className="card mb-3 h-100">
-                                    <div className="card-header bg-secondary text-white section-header py-3">
-                                        <div className="mb-0 d-flex align-items-center fs-6 fw-light">
-                                            <i className="bi bi-building me-2"></i>
-                                            Authorité d'horodatage (TSA)
+                    </div>
+
+                    {/* TSA Information and Timestamp Token */}
+                    <div className="row">
+                        <div className="col-xl-7 mb-4">
+                            {/* TSA Information */}
+                            <div className="card h-100">
+                                <div className="card-header bg-secondary text-white section-header py-3">
+                                    <div className="mb-0 d-flex align-items-center fs-6 fw-light">
+                                        <i className="bi bi-building me-2"></i>
+                                        Authorité d'horodatage (TSA)
+                                    </div>
+                                </div>
+                                <div className="card-body p-4">
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Nom commun (CN)</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <span className="info-value">{details.tsa.cn || "—"}</span>
                                         </div>
                                     </div>
-                                    <div className="card-body p-4">
+                                    {details.tsa.o && (
                                         <div className="row mb-3">
                                             <div className="col-sm-3 border-end">
-                                                <span className="info-label">Nom commun (CN)</span>
+                                                <span className="info-label">Organisation (O)</span>
                                             </div>
                                             <div className="col-sm-9">
-                                                <span className="info-value">{details.tsa.cn || "—"}</span>
+                                                <span className="info-value">{details.tsa.o}</span>
                                             </div>
                                         </div>
-                                        {details.tsa.o && (
-                                            <div className="row mb-3">
-                                                <div className="col-sm-3 border-end">
-                                                    <span className="info-label">Organisation (O)</span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="info-value">{details.tsa.o}</span>
-                                                </div>
-                                            </div>
-                                        )}
-                                        {details.tsa.ou && (
-                                            <div className="row mb-3">
-                                                <div className="col-sm-3 border-end">
-                                                    <span className="info-label">Unité d'organisation (OU)</span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="info-value">{details.tsa.ou}</span>
-                                                </div>
-                                            </div>
-                                        )}
+                                    )}
+                                    {details.tsa.ou && (
                                         <div className="row mb-3">
                                             <div className="col-sm-3 border-end">
-                                                <span className="info-label">Localisation (L)</span>
+                                                <span className="info-label">Unité d'organisation (OU)</span>
                                             </div>
                                             <div className="col-sm-9">
+                                                <span className="info-value">{details.tsa.ou}</span>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Localisation (L)</span>
+                                        </div>
+                                        <div className="col-sm-9">
                                             <span className="info-value">
                                                 {[details.tsa.locality, details.tsa.state, details.tsa.country]
                                                     .filter(Boolean)
                                                     .join(", ")}
                                             </span>
-                                            </div>
                                         </div>
-                                        <div className="row mb-3">
-                                            <div className="col-sm-3 border-end">
+                                    </div>
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
                                                     <span
                                                         className="info-label">Numéro de série<br/>du certificat</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <div className="hash-display">
-                                                    {details.tsa.serial}
-                                                </div>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <div className="hash-display">
+                                                {details.tsa.serial}
                                             </div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Validité du certificat</span>
-                                            </div>
-                                            <div className="col-sm-9">
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Validité du certificat</span>
+                                        </div>
+                                        <div className="col-sm-9">
                                             <span className="info-value">
                                                 {details.tsa.validFrom} → {details.tsa.validTo}
                                             </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-xl-5">
-                                {/* Timestamp Token */}
-                                <div className="card mb-4 h-100">
-                                    <div className="card-header  bg-secondary text-white section-header py-3">
-                                        <div className="mb-0 d-flex align-items-center fs-6 fw-light">
-                                            <i className="bi bi-clock me-2"></i>
-                                            Jeton d'horodatage
-                                        </div>
-                                    </div>
-                                    <div className="card-body p-4">
-                                        <div className="row mb-3">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Date de création</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <span className="info-value">{details.tst.localStr}</span>
-                                            </div>
-                                        </div>
-                                        <div className="row mb-3">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Algorithme <br/> de hash</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <span className="badge badge-subtle">{details.tst.imprintAlg}</span>
-                                            </div>
-                                        </div>
-                                        <div className="row mb-3">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Hash</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <div className="hash-display">
-                                                    {details.tst.imprintHash}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-sm-3 border-end">
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <a
-                                                    href={details.tst.url}
-                                                    download="timestamp.tst"
-                                                    className="btn btn-outline-secondary btn-sm"
-                                                >
-                                                    <i className="bi bi-download me-1"/> Télécharger le jeton .tst
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        {/* Certificate Chain */}
-                        <div className="card pb-2 mb-4">
-                            <div className="card-header section-header py-3">
-                                <div className="mb-0 d-flex align-items-center fs-6 fw-light">
-                                    <i className="bi bi-award me-2"></i>
-                                    Chaîne de certificats
-                                </div>
-                            </div>
-                            <div className="card-body p-0">
-                                <CertTable certs={details.certificates}/>
                             </div>
                         </div>
-
-                        <div className="row">
-                            <div className="col-xl-4 mb-4 mb-xl-0">
-                                {/* File Information */}
-                                <div className="card h-100 mb-4">
-                                    <div className="card-header section-header py-3">
-                                        <div className="mb-0 d-flex align-items-center small fw-light">
-                                            <i className="bi bi-file-text me-2"></i>
-                                            Informations du fichier ASiC
+                        <div className="col-xl-5 mb-4">
+                            {/* Timestamp Token */}
+                            <div className="card mb-4 h-100">
+                                <div className="card-header  bg-secondary text-white section-header py-3">
+                                    <div className="mb-0 d-flex align-items-center fs-6 fw-light">
+                                        <i className="bi bi-clock me-2"></i>
+                                        Jeton d'horodatage
+                                    </div>
+                                </div>
+                                <div className="card-body p-4">
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Date de création</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <span className="info-value">{details.tst.localStr}</span>
                                         </div>
                                     </div>
-                                    <div className="card-body p-4">
-                                        <div className="row mb-3">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Nom</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <span className="info-value">{details.file.name}</span>
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Algorithme <br/> de hash</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <span className="badge badge-subtle">{details.tst.imprintAlg}</span>
+                                        </div>
+                                    </div>
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Hash</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <div className="hash-display">
+                                                {details.tst.imprintHash}
                                             </div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-sm-3 border-end">
-                                                <span className="info-label">Taille</span>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <span className="info-value">{fmtBytes(details.file.size)}</span>
-                                            </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-3 border-end">
                                         </div>
-                                        <div className="row mt-3">
-                                            <div className="col-sm-3 border-end">
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <a
-                                                    href={details.payload.url}
-                                                    download={details.payload.name}
-                                                    className="btn btn-outline-secondary btn-sm"
-                                                >
-                                                    <i className="bi bi-download me-1"/> Télécharger le contenu .zip
-                                                </a>
-                                            </div>
+                                        <div className="col-sm-9">
+                                            <a
+                                                href={details.tst.url}
+                                                download="timestamp.tst"
+                                                className="btn btn-outline-secondary btn-sm"
+                                            >
+                                                <i className="bi bi-download me-1"/> Télécharger le jeton .tst
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="col-xl-8">
-                                {/* Embedded Files */}
-                                {details.embeddedFiles && (
-                                    <div className="card h-100 pb-2 mb-4">
-                                        <div className="card-header section-header py-3">
-                                            <div className="mb-0 d-flex align-items-center small fw-light">
-                                                <i className="bi bi-folder2-open me-2"></i>
-                                                Contenu de l'archive
-                                            </div>
-                                        </div>
-                                        <div className="card-body p-0">
-                                            <EmbeddedTable files={details.embeddedFiles}/>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                    {/* Certificate Chain */}
+                    <div class="row justify-content-center">
+                        <div class="col-12 mb-4">
+                            <div className="card pb-2">
+                                <div className="card-header section-header py-3">
+                                    <div className="mb-0 d-flex align-items-center fs-6 fw-light">
+                                        <i className="bi bi-award me-2"></i>
+                                        Chaîne de certificats
+                                    </div>
+                                </div>
+                                <div className="card-body p-0">
+                                    <CertTable certs={details.certificates}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* File and Embedded Files Information */}
+                    <div className="row justify-content-center">
+                        <div className="col-xl-4 mb-4">
+                            {/* File Information */}
+                            <div className="card h-100 mb-4">
+                                <div className="card-header section-header py-3">
+                                    <div className="mb-0 d-flex align-items-center small fw-light">
+                                        <i className="bi bi-file-text me-2"></i>
+                                        Informations du fichier ASiC
+                                    </div>
+                                </div>
+                                <div className="card-body p-4">
+                                    <div className="row mb-3">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Nom</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <span className="info-value">{details.file.name}</span>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-3 border-end">
+                                            <span className="info-label">Taille</span>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <span className="info-value">{fmtBytes(details.file.size)}</span>
+                                        </div>
+                                    </div>
+                                    <div className="row mt-3">
+                                        <div className="col-sm-3 border-end">
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <a
+                                                href={details.payload.url}
+                                                download={details.payload.name}
+                                                className="btn btn-outline-secondary btn-sm"
+                                            >
+                                                <i className="bi bi-download me-1"/> Télécharger le contenu .zip
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-8 mb-4">
+                            {/* Embedded Files */}
+                            {details.embeddedFiles && (
+                                <div className="card h-100 pb-2 mb-4">
+                                    <div className="card-header section-header py-3">
+                                        <div className="mb-0 d-flex align-items-center small fw-light">
+                                            <i className="bi bi-folder2-open me-2"></i>
+                                            Contenu de l'archive
+                                        </div>
+                                    </div>
+                                    <div className="card-body p-0">
+                                        <EmbeddedTable files={details.embeddedFiles}/>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </>
             )}
         </div>
     );

@@ -97,6 +97,21 @@
   />
 
   <browser:page
+    name="asic-archive"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationASiCFileView"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    name="check-timestamp"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".publication.TimestampCheckView"
+    template="templates/timestamp_check.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="description"
     for="plonemeeting.portal.core.content.publication.IPublication"
     template="templates/description.pt"
@@ -233,7 +248,7 @@
     name="manage-users-listing"
     class=".manage_users.ManageUsersListingView"
     template="templates/manage_users_listing.pt"
-    permission="plone.restapi.UseRESTAPI"
+    permission="cmf.ModifyPortalContent"
 
   />
 
@@ -255,6 +270,14 @@
     for="plonemeeting.portal.core.content.institution.IInstitution"
     name="manage-invite-user"
     class=".manage_users.InviteUserFormView"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+    for="plonemeeting.portal.core.interfaces.IPlonemeetingPortalConfigFolder"
+    name="plonemeeting-config-view"
+    class=".config.PlonemeetingConfigView"
+    template="templates/config.pt"
     permission="cmf.ModifyPortalContent"
   />
 
