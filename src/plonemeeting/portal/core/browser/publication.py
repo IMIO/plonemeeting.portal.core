@@ -219,8 +219,6 @@ class PublicationASiCFileView(BrowserView):
             # META-INF/timestamp.tst (converted from .tsr)
             z.write(converted_tst_path, arcname="META-INF/timestamp.tst", compress_type=zipfile.ZIP_DEFLATED)
 
-        print(f"✓ Created {out_asice}")
-
 
 class PublicationContentStatusModifyView(ContentStatusModifyView):
     """Override to not set a publication date automatically."""
