@@ -21,7 +21,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       mode === "production" && new CleanWebpackPlugin(),
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
       new PreactRefreshPlugin(),
       new CopyPlugin({
         patterns: [{from: "assets", to: "assets"}],

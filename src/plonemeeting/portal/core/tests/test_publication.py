@@ -197,12 +197,10 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         view = self.published_publication.restrictedTraverse("@@asic-archive")
         tmp_fp = view()  # expected: file-like object (e.g., _io.FileIO) pointing at a temp .asice
         try:
-            # Basic shape checks
+            # Basic checks
             self.assertTrue(hasattr(tmp_fp, "read"), "Returned object must be file-like")
             readable = getattr(tmp_fp, "readable", lambda: True)()
             self.assertTrue(readable, "Returned file-like must be readable")
-
-            # Name/mode sanity
             fname = getattr(tmp_fp, "name", "")
             self.assertTrue(str(fname), "Temporary file should have a name")
             self.assertTrue(str(fname).endswith(".asice"), f"Expected '.asice' file, got {fname!r}")
@@ -253,7 +251,6 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
             try:
                 tmp_fp.close()
             except Exception:
-                # Don't let cleanup failures mask assertions
                 pass
 
         # Response header checks (content-type/disposition) set by the view

@@ -78,7 +78,22 @@ class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
 
         return getSiteLogo()
 
-
+    def get_manageable_groups_for_user(self, username):
+        """
+        Return only 'institution groups' for this user, i.e.,
+        groups that match typical institution naming patterns.
+        """
+        all_user_groups = api.group.get_groups(username=username)
+        # We'll say any group ID that ends (or contains) these strings is an 'institution group'
+        # Adjust to match your actual naming convention.
+        manageable_institution_suffixes = ("decisions_managers", "publications_managers", "managers")
+        user_manageable_groups = []
+        for group in all_user_groups:
+            group_id = group.getId()
+            # Keep only groups that are institution-related
+            if any(suffix in group_id for suffix in manageable_institution_suffixes):
+                user_manageable_groups.append(api.group.get(group_id))
+        return user_manageable_groups
 
 class PMDocumentGenerationView(DocumentGenerationView):
     """Redefine the DocumentGenerationView to extend context available in the template

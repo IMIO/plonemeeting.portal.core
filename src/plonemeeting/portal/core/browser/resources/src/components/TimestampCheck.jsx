@@ -107,7 +107,7 @@ const CheckStatus = ({status, children}) => {
     const statusClass = classNames(status === "valid" ? "status-valid" : "status-invalid");
     const iconClass = classNames(status === "valid" ? "bi-check-circle" : "bi-x-circle");
     return (
-        <div className={`alert card text-white border-0 mb-0 ${statusClass}`} role="alert">
+        <div id="timestamp-status" className={`alert card text-white border-0 mb-0 ${statusClass}`} role="alert">
             <div className="d-flex align-items-center">
                 <i className={`bi bi-patch-check-fill me-3 fs-2 ${iconClass}`}></i>
                 {children}
@@ -310,10 +310,10 @@ const TimestampCheck = () => {
                             <div
                                 {...getRootProps()}
                                 className={classNames(
-                                    "upload-zone p-4 text-center border rounded",
+                                    "upload-zone p-4 text-center rounded",
                                     {
                                         "bg-light": isDragActive,
-                                        "border-success": isDragActive,
+                                        "border-light-subtle": isDragActive,
                                         "border-2": isDragActive
                                     }
                                 )}
