@@ -1,4 +1,6 @@
+import zipfile
 from datetime import datetime, timedelta
+from pathlib import Path
 from unittest import mock
 
 from plone.testing.zope import Browser
@@ -15,6 +17,7 @@ from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+import xml.etree.ElementTree as ET
 from zExceptions import Unauthorized, Redirect
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -28,7 +31,9 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.planned_publication = self.institution.publications["publication-30"]
         self.published_publication = self.institution.publications["publication-1"]
         self.unpublished_publication = self.institution.publications["publication-27"]
-        self.published_publication.timestamp = NamedBlobFile(data=b"dummy", filename="timestamp.tsr")
+        mock_tsr_path = Path(__file__).parent / "resources/mock_tsr_file.tsr"
+        with open(mock_tsr_path, "rb") as f:
+            self.published_publication.timestamp = NamedBlobFile(data=f.read(), filename="timestamp.tsr")
         self.login_as_test()
 
     def test_publication_add_form(self):
