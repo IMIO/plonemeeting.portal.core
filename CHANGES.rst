@@ -8,6 +8,8 @@ Changelog
   [aduchene]
 - DELIBE-228: Add a new JS form to validate the new publication timestamping format.
   [aduchene]
+- Adapt `publication.pt` to include new timestamping format.
+  [aduchene]
 
 2.1.12 (2025-07-01)
 -------------------
