@@ -97,6 +97,21 @@
   />
 
   <browser:page
+    name="asic-archive"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.PublicationASiCFileView"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    name="check-timestamp"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".publication.TimestampCheckView"
+    template="templates/timestamp_check.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="description"
     for="plonemeeting.portal.core.content.publication.IPublication"
     template="templates/description.pt"

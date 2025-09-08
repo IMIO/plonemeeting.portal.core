@@ -1,11 +1,13 @@
 Changelog
 =========
 
-2.1.13 (unreleased)
--------------------
+2.2.0 (unreleased)
+------------------
 
-- Nothing changed yet.
-
+- DELIBE-251: New timestamping format (ASiC) for publications, combining the archive and the timestamp in a single file.
+  [aduchene]
+- DELIBE-228: Add a new JS form to validate the new publication timestamping format.
+  [aduchene]
 
 2.1.12 (2025-07-01)
 -------------------

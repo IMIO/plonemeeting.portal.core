@@ -105,6 +105,7 @@ const PdfViewer = ({ file }) => {
                                 className="btn"
                                 disabled={page === 1}
                                 onClick={() => setPage(page - 1)}
+                                key={page - 1}
                                 title="Page précédente"
                             >
                                 <i class="bi bi-chevron-left"></i>
@@ -118,6 +119,7 @@ const PdfViewer = ({ file }) => {
                                 className="btn"
                                 disabled={page === pdfDocument.numPages}
                                 onClick={() => setPage(page + 1)}
+                                key={page + 1}
                                 title="Page suivante"
                             >
                                 <i class="bi bi-chevron-right"></i>
@@ -223,5 +225,7 @@ const PdfViewer = ({ file }) => {
         </>
     );
 };
+
+
 
 export default PdfViewer;
