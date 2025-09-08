@@ -1,8 +1,15 @@
+import os
+import pathlib
+import tempfile
+import zipfile
+
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from ZPublisher.Iterators import filestream_iterator
+from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.workflow import get_state_infos
 from imio.pyutils.utils import sort_by_indexes
@@ -176,12 +183,13 @@ class PublicationASiCFileView(BrowserView):
             dor,
             "{%s}DigestMethod" % self.NS["asic"],
             Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"
-            )
+        )
         self.ET.SubElement(dor, "{%s}DigestValue" % self.NS["asic"]).text = self.base64.b64encode(digest_val).decode()
         return self.ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
     def tsr_to_tst(self, tsr_path: str, tst_path: str) -> None:
-        tsr = tsp.TimeStampResp.load(open(tsr_path, "rb").read())
+        with open(tsr_path, "rb") as f:
+            tsr = tsp.TimeStampResp.load(f.read())
         status = tsr["status"]["status"].native
         if status not in ("granted", "granted_with_mods"):
             raise ValueError(f"TSR not granted (status={status})")
@@ -190,7 +198,8 @@ class PublicationASiCFileView(BrowserView):
 
     def make_asice(self, archive_zip: str, tst_file_or_tsr: str, out_asice: str) -> None:
         payload_name = pathlib.Path(archive_zip).name
-        sha256 = self.hashlib.sha256(open(archive_zip, "rb").read()).digest()
+        with open(archive_zip, "rb") as f:
+            sha256 = self.hashlib.sha256(f.read()).digest()
         manifest_xml = self.make_manifest(payload_name, sha256)
 
         with tempfile.NamedTemporaryFile(suffix=".tst", delete=False) as tmp_tst:
