@@ -300,6 +300,9 @@
             <li>
               <a href="/faq/verifier-un-horodatage" target="_blank" class="help-link">Comment vérifier un horodatage ?</a>
             </li>
+            <li>
+              <a href="/check-timestamp" target="_blank" class="help-link">Outil de vérification</a>
+            </li>
           </ul>
         </div>
       </div>

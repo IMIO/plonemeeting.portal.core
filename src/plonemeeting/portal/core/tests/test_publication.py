@@ -17,6 +17,7 @@ from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+import xml.etree.ElementTree as ET
 from zExceptions import Unauthorized, Redirect
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -253,6 +254,110 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
                 tmp_fp.close()
             except Exception:
                 # Don't let cleanup failures mask assertions
+                pass
+
+        # Response header checks (content-type/disposition) set by the view
+        response = request.RESPONSE
+        ctype = response.getHeader("Content-Type")
+        # Allow a few common types seen for ASiC containers
+        self.assertIn(
+            ctype,
+            (
+                "application/vnd.etsi.asic-e+zip",
+                "application/vnd.etsi.asic-e",
+                "application/zip",
+                "application/octet-stream",
+            ),
+            f"Unexpected Content-Type: {ctype!r}",
+        )
+
+        disp = response.getHeader("Content-Disposition")
+        self.assertIsNotNone(disp, "Content-Disposition should be set for download")
+        self.assertIn("attachment", disp.lower(), "Download should be served as attachment")
+        self.assertRegex(
+            disp,
+            r'filename="?[^"]+\.asice"?',
+            f"Content-Disposition should specify an .asice filename, got {disp!r}",
+        )
+        self.assertNotIn(response.getStatus(), (301, 302, 401, 403), "Anonymous should be allowed to download")
+        self.assertIsNone(response.getHeader("location"), "Should not redirect")
+
+        with self.assertRaises(Unauthorized):
+            view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+            view()
+
+        self.login_as_publications_manager()
+        self.unpublished_publication.enable_timestamping = False
+        self.unpublished_publication.timestamp = None
+        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+        self.assertEqual(view(), "Missing required files for ASiC generation.")
+
+        self.unpublished_publication.enable_timestamping = True
+        self.unpublished_publication.timestamp = NamedBlobFile(data=b"fake", filename="timestamp.tsr")
+        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
+        with self.assertRaises(ValueError):
+            view()
+
+    def test_timestamp_asic_file(self):
+        self.logout()
+        request = getattr(self, "request", None) or getattr(self.portal, "REQUEST")
+        view = self.published_publication.restrictedTraverse("@@asic-archive")
+        tmp_fp = view()  # expected: file-like object (e.g., _io.FileIO) pointing at a temp .asice
+        try:
+            # Basic checks
+            self.assertTrue(hasattr(tmp_fp, "read"), "Returned object must be file-like")
+            readable = getattr(tmp_fp, "readable", lambda: True)()
+            self.assertTrue(readable, "Returned file-like must be readable")
+            fname = getattr(tmp_fp, "name", "")
+            self.assertTrue(str(fname), "Temporary file should have a name")
+            self.assertTrue(str(fname).endswith(".asice"), f"Expected '.asice' file, got {fname!r}")
+            mode = getattr(tmp_fp, "mode", "rb")
+            self.assertIn("b", mode, "Temp file should be opened in binary mode")
+
+            # Validate it opens as a ZIP and has ASiC structure
+            with zipfile.ZipFile(tmp_fp) as zf:
+                names = zf.namelist()
+                self.assertTrue(names, "ASiC container should contain at least one entry")
+                # ASiC containers typically include a META-INF directory with signature data
+                self.assertTrue(
+                    any(n.startswith("META-INF/") for n in names),
+                    "ASiC container should include META-INF/",
+                )
+                # Ensure no corrupt members
+                self.assertIsNone(zf.testzip(), "ZIP members should not be corrupted")
+
+                self.assertIn("META-INF/ASiCManifest001.xml", names)
+                self.assertIn("META-INF/timestamp.tst", names)
+
+                manifest_bytes = zf.read("META-INF/ASiCManifest001.xml")
+                self.assertGreater(len(manifest_bytes), 50, "Manifest should not be tiny")
+                try:
+                    root = ET.fromstring(manifest_bytes)
+                except ET.ParseError as e:
+                    self.fail(f"ASiC manifest is not well-formed XML: {e}")
+
+                uris = {el.get("URI") for el in root.iter() if "URI" in el.attrib}
+                self.assertTrue(uris, "Manifest should contain at least one URI reference")
+                self.assertTrue(
+                    any(u and (u.endswith("archive.zip") or u.endswith("mimetype")) for u in uris),
+                    "Manifest should reference payload objects (archive.zip and/or mimetype).",
+                )
+                ts_bytes = zf.read("META-INF/timestamp.tst")
+                self.assertGreater(len(ts_bytes), 120, "Timestamp token should be non-trivial in size")
+
+                # Should be binary (DER), not decodable as UTF-8 text
+                with self.assertRaises(UnicodeDecodeError):
+                    ts_bytes.decode("utf-8")
+
+                # DER-encoded CMS should start with ASN.1 SEQUENCE (0x30)
+                self.assertEqual(
+                    ts_bytes[0], 0x30, "timestamp.tst should be DER: first byte must be ASN.1 SEQUENCE (0x30)"
+                )
+
+        finally:
+            try:
+                tmp_fp.close()
+            except Exception:
                 pass
 
         # Response header checks (content-type/disposition) set by the view

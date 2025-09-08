@@ -3,7 +3,11 @@ import pathlib
 import tempfile
 import zipfile
 
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from ZPublisher.Iterators import filestream_iterator
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
@@ -18,13 +22,8 @@ from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.utils import getToolByName
-from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
-
 
 FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
 ADMIN_FIELDSETS = ["settings"]
@@ -44,7 +43,6 @@ class AddForm(DefaultAddForm):
 
 
 class PublicationAdd(DefaultAddView):
-
     form = AddForm
 
 
@@ -173,12 +171,17 @@ class PublicationASiCFileView(BrowserView):
         root = self.ET.Element("{%s}ASiCManifest" % self.NS["asic"])
         doi = self.ET.SubElement(root, "{%s}DataObjectInfo" % self.NS["asic"])
         dor = self.ET.SubElement(doi, "{%s}DataObjectReference" % self.NS["asic"], URI=payload_name)
-        self.ET.SubElement(dor, "{%s}DigestMethod" % self.NS["asic"], Algorithm="http://www.w3.org/2001/04/xmlenc#sha256")
+        self.ET.SubElement(
+            dor,
+            "{%s}DigestMethod" % self.NS["asic"],
+            Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"
+        )
         self.ET.SubElement(dor, "{%s}DigestValue" % self.NS["asic"]).text = self.base64.b64encode(digest_val).decode()
         return self.ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
     def tsr_to_tst(self, tsr_path: str, tst_path: str) -> None:
-        tsr = tsp.TimeStampResp.load(open(tsr_path, "rb").read())
+        with open(tsr_path, "rb") as f:
+            tsr = tsp.TimeStampResp.load(f.read())
         status = tsr["status"]["status"].native
         if status not in ("granted", "granted_with_mods"):
             raise ValueError(f"TSR not granted (status={status})")
@@ -187,7 +190,8 @@ class PublicationASiCFileView(BrowserView):
 
     def make_asice(self, archive_zip: str, tst_file_or_tsr: str, out_asice: str) -> None:
         payload_name = pathlib.Path(archive_zip).name
-        sha256 = self.hashlib.sha256(open(archive_zip, "rb").read()).digest()
+        with open(archive_zip, "rb") as f:
+            sha256 = self.hashlib.sha256(f.read()).digest()
         manifest_xml = self.make_manifest(payload_name, sha256)
 
         with tempfile.NamedTemporaryFile(suffix=".tst", delete=False) as tmp_tst:
@@ -207,8 +211,6 @@ class PublicationASiCFileView(BrowserView):
             # META-INF/timestamp.tst (converted from .tsr)
             z.write(converted_tst_path, arcname="META-INF/timestamp.tst", compress_type=zipfile.ZIP_DEFLATED)
 
-        print(f"✓ Created {out_asice}")
-
 
 class PublicationContentStatusModifyView(ContentStatusModifyView):
     """Override to not set a publication date automatically."""
@@ -217,6 +219,7 @@ class PublicationContentStatusModifyView(ContentStatusModifyView):
         """Override to bypass setting effective_date and
         expiration_date upon any workflow transition."""
         return
+
 
 class TimestampCheckView(BrowserView):
     """A view to validate the publication."""

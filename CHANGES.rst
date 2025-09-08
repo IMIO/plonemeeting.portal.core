@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.2.1 (unreleased)
+------------------
+
 
 2.2.0 (unreleased)
 ------------------
@@ -10,6 +13,16 @@ Changelog
 - Add default templates for `Publication` to be used by collective.documentgenerator.
   [aduchene]
 - Add missing plone.icons to content types.
+  [aduchene]
+
+2.2.0 (2025-09-08)
+------------------
+
+- DELIBE-251: New timestamping format (ASiC) for publications, combining the archive and the timestamp in a single file.
+  [aduchene]
+- DELIBE-228: Add a new JS form to validate the new publication timestamping format.
+  [aduchene]
+- Adapt `publication.pt` to include new timestamping format.
   [aduchene]
 
 2.1.12 (2025-07-01)
