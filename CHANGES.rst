@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.0 (unreleased)
+2.2.0 (2025-09-08)
 ------------------
 
 - DELIBE-251: New timestamping format (ASiC) for publications, combining the archive and the timestamp in a single file.
