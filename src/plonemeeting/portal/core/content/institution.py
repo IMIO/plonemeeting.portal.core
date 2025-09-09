@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from collective.z3cform.datagridfield.blockdatagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.row import DictRow
@@ -19,11 +18,14 @@ from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import DEFAULT_CATEGORY_IA_DELIB_FIELD
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD
-from plonemeeting.portal.core.utils import default_translator, get_members_group_id, get_publication_reviewers_group_id
+from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives
+from plonemeeting.portal.core.utils import get_members_group_id
+from plonemeeting.portal.core.utils import get_publication_reviewers_group_id
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from plonemeeting.portal.core.widgets.image import PMNamedImageFieldWidget
+from Products.CMFCore.utils import getToolByName
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import implementer
@@ -31,10 +33,11 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema import ValidationError
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 import re
 import requests
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 
 class InvalidUrlParameters(ValidationError):

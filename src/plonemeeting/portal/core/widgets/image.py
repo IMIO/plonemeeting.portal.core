@@ -1,11 +1,14 @@
 from plone.formwidget.namedfile import NamedImageWidget
 from plone.formwidget.namedfile.interfaces import INamedImageWidget
 from plone.namedfile.interfaces import INamedImageField
-from z3c.form.interfaces import IFieldWidget, IWidget
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
+from z3c.form.interfaces import IWidget
 from z3c.form.widget import FieldWidget
 from zope.component import adapter
-from zope.interface import implementer_only, implementer
-from z3c.form.interfaces import IFormLayer
+from zope.interface import implementer
+from zope.interface import implementer_only
+
 
 class IPMNamedImageWidget(INamedImageWidget):
     """Marker interface"""

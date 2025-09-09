@@ -7,7 +7,8 @@ from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN, DOCUMENTGENENATOR_USED_CONTENT_TYPES
+from plonemeeting.portal.core.config import CONTENTS_TO_CLEAN
+from plonemeeting.portal.core.config import DOCUMENTGENENATOR_USED_CONTENT_TYPES
 from plonemeeting.portal.core.config import PLONEMEETING_API_ITEM_TYPE
 from plonemeeting.portal.core.config import PLONEMEETING_API_MEETING_TYPE
 from plonemeeting.portal.core.config import REPRESENTATIVE_IA_DELIB_FIELD

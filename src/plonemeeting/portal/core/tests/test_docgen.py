@@ -1,13 +1,9 @@
-from unittest.mock import patch
-from types import SimpleNamespace
-
 from AccessControl import Unauthorized
-
 from plonemeeting.portal.core.browser.docgen import PMDocumentGenerationView
-from plonemeeting.portal.core.tests.portal_test_case import (
-    PmPortalTestCase,
-    PmPortalDemoFunctionalTestCase,
-)
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
+from types import SimpleNamespace
+from unittest.mock import patch
 
 
 class TestPMDocumentGenerationHelperView(PmPortalTestCase):

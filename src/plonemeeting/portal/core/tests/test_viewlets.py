@@ -1,10 +1,9 @@
-from unittest import mock
-
 from plone import api
 from plone.namedfile.field import NamedBlobImage
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.viewlets.generationlinks import PMDocumentGeneratorLinksViewlet
 from plonemeeting.portal.core.viewlets.logo import PMLogoViewlet
+from unittest import mock
 
 
 class DummyView:

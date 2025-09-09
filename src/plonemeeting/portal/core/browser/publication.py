@@ -1,14 +1,3 @@
-import os
-import pathlib
-import tempfile
-import zipfile
-
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
-from ZPublisher.Iterators import filestream_iterator
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.workflow import get_state_infos
@@ -22,8 +11,20 @@ from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
+from ZPublisher.Iterators import filestream_iterator
+
+import os
+import pathlib
+import tempfile
+import zipfile
+
 
 FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
 ADMIN_FIELDSETS = ["settings"]
@@ -123,7 +124,9 @@ class PublicationView(DefaultView):
 class PublicationASiCFileView(BrowserView):
     """View to download the ASiC file of a publication."""
 
-    import base64, hashlib, xml.etree.ElementTree as ET
+    import base64
+    import hashlib
+    import xml.etree.ElementTree as ET
 
     NS = {
         "asic": "http://uri.etsi.org/02918/v1.2.1#",

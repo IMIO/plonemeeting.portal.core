@@ -6,26 +6,32 @@ from plone.api import content
 from plone.app.contenttypes.interfaces import IPloneAppContenttypesLayer
 from plone.browserlayer.layer import mark_layer
 from plone.i18n.normalizer.interfaces import IIDNormalizer
-from plone.namedfile.file import NamedFile, NamedBlobFile
+from plone.namedfile.file import NamedBlobFile
+from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
-from plonemeeting.portal.core.config import CONFIG_FOLDER_ID, DOCUMENTGENENATOR_USED_CONTENT_TYPES, DEFAULT_DOCUMENTGENERATOR_TEMPLATES
+from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import DEFAULT_DOCUMENTGENERATOR_TEMPLATES
+from plonemeeting.portal.core.config import DOCUMENTGENENATOR_USED_CONTENT_TYPES
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
-from plonemeeting.portal.core.utils import cleanup_contents, set_constrain_types, create_templates_folder
+from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import create_templates_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
+from plonemeeting.portal.core.utils import set_constrain_types
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtility
 from zope.i18n import translate
-from zope.interface import implementer, alsoProvides
+from zope.interface import alsoProvides
+from zope.interface import implementer
 from zope.traversing.interfaces import BeforeTraverseEvent
 
 import dateutil.parser

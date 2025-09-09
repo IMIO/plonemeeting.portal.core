@@ -1,27 +1,28 @@
-import zipfile
-from datetime import datetime, timedelta
-from pathlib import Path
-from unittest import mock
-
-from plone.testing.zope import Browser
-
-import pytz
-import transaction
-from DateTime import DateTime
-from Products.CMFCore.WorkflowCore import WorkflowException
 from collective.timestamp.interfaces import ITimeStamper
+from datetime import datetime
+from datetime import timedelta
+from DateTime import DateTime
 from imio.helpers.content import uuidToCatalogBrain
+from pathlib import Path
 from plone import api
 from plone.dexterity.events import EditCancelledEvent
 from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
-from plonemeeting.portal.core.tests import PM_ADMIN_USER, PM_USER_PASSWORD
+from plone.testing.zope import Browser
+from plonemeeting.portal.core.tests import PM_ADMIN_USER
+from plonemeeting.portal.core.tests import PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
-import xml.etree.ElementTree as ET
-from zExceptions import Unauthorized, Redirect
+from Products.CMFCore.WorkflowCore import WorkflowException
+from unittest import mock
+from zExceptions import Redirect
+from zExceptions import Unauthorized
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
+
+import pytz
+import transaction
 import xml.etree.ElementTree as ET
+import zipfile
 
 
 class TestPublicationView(PmPortalDemoFunctionalTestCase):

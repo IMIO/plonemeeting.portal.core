@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-import copy
-import json
-
-import requests
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import plone_
-from plonemeeting.portal.core.config import API_HEADERS, DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
+from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
@@ -16,6 +13,10 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+import copy
+import json
+import requests
 
 
 class EnabledTabsVocabularyFactory:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import mimetypes
 from collections import OrderedDict
-from collective.documentgenerator.config import POD_FORMATS, VIEWLET_TYPES
+from collective.documentgenerator.config import POD_FORMATS
+from collective.documentgenerator.config import VIEWLET_TYPES
 from collective.documentgenerator.interfaces import IGenerablePODTemplates
 from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
 from plone import api
@@ -11,6 +11,8 @@ from plonemeeting.portal.core.browser.utils import pretty_file_icon
 from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from z3c.form.form import EditForm
 from zope.component import getAdapter
+
+import mimetypes
 
 
 class PMDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):

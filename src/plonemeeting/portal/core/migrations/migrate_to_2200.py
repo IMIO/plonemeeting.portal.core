@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-import logging
-
-from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from imio.migrator.migrator import Migrator
 from plone.base.utils import get_installer
 from plonemeeting.portal.core.config import DEFAULT_DOCUMENTGENERATOR_TEMPLATES
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
 from plonemeeting.portal.core.setuphandlers import create_or_update_default_template
 from plonemeeting.portal.core.utils import create_templates_folder
+from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from zope.interface import alsoProvides
+
+import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

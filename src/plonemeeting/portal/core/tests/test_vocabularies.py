@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-import json
-
-import requests
+from mockito import mock
+from mockito import unstub
+from mockito import verify
+from mockito import when
 from plone import api
-from plonemeeting.portal.core.config import (
-    DOCUMENTGENENATOR_USED_CONTENT_TYPES,
-    DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES,
-    API_HEADERS,
-)
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import DOCUMENTGENENATOR_USED_CONTENT_TYPES
+from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
-from mockito import mock
-from mockito import unstub
-from mockito import verify
-from mockito import when
+
+import json
+import requests
+
 
 class TestVocabularies(PmPortalDemoFunctionalTestCase):
     def setUp(self):
