@@ -56,6 +56,21 @@ class TestPMDocumentGeneratorLinksViewlet(PmPortalDemoFunctionalTestCase):
             generable = viewlet.get_generable_templates()
         self.assertListEqual([common_template, institution_template], generable)
 
+    def test_pretty_file_icon(self):
+        viewlet = self._viewlet(self.item)
+        self.assertDictEqual(
+            {"icon": "bi bi-file-earmark-pdf", "color": "bg-red"},
+            viewlet.pretty_file_icon("pdf"),
+        )
+        self.assertEqual(
+            {"icon": "bi bi-file-earmark-word", "color": "bg-blue"},
+            viewlet.pretty_file_icon("docx"),
+        )
+        self.assertEqual(
+            {"icon": "bi bi-file", "color": "bg-grey"},
+            viewlet.pretty_file_icon("toto"),
+        )
+
 
 class TestPMLogoViewlet(PmPortalDemoFunctionalTestCase):
 
