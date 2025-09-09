@@ -1,8 +1,10 @@
 from unittest import mock
 
 from plone import api
+from plone.namedfile.field import NamedBlobImage
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.viewlets.generationlinks import PMDocumentGeneratorLinksViewlet
+from plonemeeting.portal.core.viewlets.logo import PMLogoViewlet
 
 
 class DummyView:
@@ -16,15 +18,11 @@ class TestPMDocumentGeneratorLinksViewlet(PmPortalDemoFunctionalTestCase):
 
     def test_available_requires_authenticated_user_and_templates(self):
         viewlet = self._viewlet(self.item)
-        with mock.patch.object(
-            PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]
-        ):
+        with mock.patch.object(PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]):
             self.assertTrue(viewlet.available())
         self.logout()
         viewlet = self._viewlet(self.item)
-        with mock.patch.object(
-            PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]
-        ):
+        with mock.patch.object(PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]):
             self.assertFalse(viewlet.available())
 
     def test_get_generable_templates_returns_enabled_templates(self):
@@ -57,3 +55,25 @@ class TestPMDocumentGeneratorLinksViewlet(PmPortalDemoFunctionalTestCase):
             viewlet = self._viewlet(self.item)
             generable = viewlet.get_generable_templates()
         self.assertListEqual([common_template, institution_template], generable)
+
+
+class TestPMLogoViewlet(PmPortalDemoFunctionalTestCase):
+
+    def _viewlet(self):
+        request = self.portal.REQUEST
+        return PMLogoViewlet(self.institution, request, DummyView(), None)
+
+    def test_render(self):
+        viewlet = self._viewlet()
+        viewlet.update()
+        self.assertIn(
+            """<img alt="Plone site" src="http://nohost/plone/++resource++plone-logo.svg" title="Plone site" />""",
+            viewlet.index(),
+        )
+        self.institution.logo = NamedBlobImage(title="A Nice Logo", required=False)
+        viewlet = self._viewlet()
+        viewlet.update()
+        self.assertIn(
+            """<img alt="Amityville" src="http://nohost/plone/amityville/@@images/logo" title="Amityville" />""",
+            viewlet.index(),
+        )
