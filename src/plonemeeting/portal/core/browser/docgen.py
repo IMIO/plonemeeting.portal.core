@@ -1,9 +1,4 @@
 from AccessControl import Unauthorized
-from asn1crypto import cms
-from asn1crypto import tsp
-from asn1crypto import x509
-from base64 import b64decode
-from collective.behavior.talcondition.utils import evaluateExpressionFor
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
 from collective.documentgenerator.helper import DocumentGenerationHelperView
@@ -13,12 +8,9 @@ from imio.helpers.barcode import generate_barcode
 from io import BytesIO
 from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
-from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from Products.CMFCore.Expression import createExprContext
 from Products.CMFCore.Expression import Expression
-from Products.CMFPlone.utils import getSiteLogo
-from zope.i18n import translate
 
 import copy
 

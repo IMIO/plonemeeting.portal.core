@@ -9,7 +9,6 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
-from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
