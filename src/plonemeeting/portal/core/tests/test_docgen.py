@@ -26,6 +26,8 @@ class TestPMDocumentGenerationHelperView(PmPortalTestCase):
         item = self.create_object("File")
         expected = f"{self.portal.absolute_url()}/resolveuid/{item.UID()}"
         self.assertEqual(expected, self.helper.uid_url(item))
+        helper = item.restrictedTraverse("@@document-generation-helper-view")
+        self.assertEqual(expected, helper.uid_url())
 
     def test_qr_code_calls_barcode(self):
         with patch(
