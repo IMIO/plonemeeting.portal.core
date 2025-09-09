@@ -132,7 +132,7 @@ class PMDocumentGenerationView(DocumentGenerationView):
             api.portal.get_registry_record(name="plonemeeting.portal.core.template_default_settings")
         )
         # First, we'll merge the institution settings with the defaults
-        if "institution" in settings:
+        if "institution" in gen_context:
             institution_settings = gen_context["institution"].template_settings
             for row in institution_settings:
                 if row["template"] == "__all__" or row["template"] == pod_template.getId():
