@@ -39,7 +39,7 @@ logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)
 contentbrowser._original_get_contentbrowser_options = contentbrowser.get_contentbrowser_options
 
 
-def get_contentbrowser_options(*args, **kwargs):
+def get_contentbrowser_options(*args, **kwargs):  # pragma: no cover
     """If we are in an institution, we need to set the rootPath to the institution"""
     res = contentbrowser._original_get_contentbrowser_options(*args, **kwargs)
     context = args[0] if args else kwargs.get("context")
