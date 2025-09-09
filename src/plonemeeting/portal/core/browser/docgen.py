@@ -152,10 +152,10 @@ class PMDocumentGenerationView(DocumentGenerationView):
         if utils_view.is_in_institution():
             specific_context["institution"] = utils_view.get_current_institution()
 
-        settings = self._prepare_settings(pod_template, specific_context)
-        specific_context["settings"] = settings
-
         if ITimestampableDocument.providedBy(self.context):
             specific_context["timestamp_utils"] = self.context.restrictedTraverse("@@timestamp-info")
+
+        settings = self._prepare_settings(pod_template, specific_context)
+        specific_context["settings"] = settings
 
         return specific_context
