@@ -96,9 +96,22 @@ class TestPMDocumentGenerationView(PmPortalTestCase):
                 self.template_settings = [
                     {"template": "__all__", "setting": "include_qr_code", "expression": "False"},
                     {"template": "__all__", "setting": "include_context_link", "expression": "python:  dummy['foo']"},
-                    {"template": "__all__", "setting": "include_expiration_date", "expression": "python: 'lorem ipsum'"},
+                    {
+                        "template": "__all__",
+                        "setting": "include_expiration_date",
+                        "expression": "python: 'lorem ipsum'",
+                    },
+                    {
+                        "template": "__all__",
+                        "setting": "im_broken",
+                        "expression": "pythn: f'14",
+                    },
+                    {
+                        "template": "__all__",
+                        "setting": "im_broken_too",
+                        "expression": "python: 1 / 0",
+                    },
                 ]
-
 
         gen_context = {
             "dummy": {"foo": "bar"},
@@ -117,7 +130,8 @@ class TestPMDocumentGenerationView(PmPortalTestCase):
         self.assertEqual(settings["include_qr_code"], False)
         self.assertEqual(settings["include_context_link"], "bar")
         self.assertEqual(settings["include_expiration_date"], 'lorem ipsum')
-
+        self.assertIsNone(settings["im_broken"])
+        self.assertIsNone(settings["im_broken_too"])
 
 class TestPMDocumentGenerationViewContext(PmPortalDemoFunctionalTestCase):
     def test_get_generation_context(self):

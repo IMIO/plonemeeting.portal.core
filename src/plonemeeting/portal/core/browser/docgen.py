@@ -64,20 +64,6 @@ class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
             return BytesIO(data)
         return None
 
-    def template_logo_size(self):
-        """Return the institution logo size as a tuple (width, height)."""
-        if self.utils_view.is_in_institution():
-            institution = self.utils_view.get_current_institution()
-            if institution.template_logo:
-                # todo clamp to a max template logo size
-                pass
-        site_logo = api.portal.get_registry_record("plone.site_logo")
-        if site_logo:
-            filename, data = b64decode_file(site_logo)
-            return BytesIO(data)
-
-        return getSiteLogo()
-
     def get_manageable_groups_for_user(self, username):
         """
         Return only 'institution groups' for this user, i.e.,
