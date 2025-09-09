@@ -1,0 +1,59 @@
+from unittest import mock
+
+from plone import api
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.viewlets.generationlinks import PMDocumentGeneratorLinksViewlet
+
+
+class DummyView:
+    """Simple view used to instantiate the viewlet."""
+
+
+class TestPMDocumentGeneratorLinksViewlet(PmPortalDemoFunctionalTestCase):
+    def _viewlet(self, context):
+        request = self.portal.REQUEST
+        return PMDocumentGeneratorLinksViewlet(context, request, DummyView(), None)
+
+    def test_available_requires_authenticated_user_and_templates(self):
+        viewlet = self._viewlet(self.item)
+        with mock.patch.object(
+            PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]
+        ):
+            self.assertTrue(viewlet.available())
+        self.logout()
+        viewlet = self._viewlet(self.item)
+        with mock.patch.object(
+            PMDocumentGeneratorLinksViewlet, "get_generable_templates", return_value=[object()]
+        ):
+            self.assertFalse(viewlet.available())
+
+    def test_get_generable_templates_returns_enabled_templates(self):
+        # create a common and an institution template
+        self.login_as_admin()
+        common_folder = self.portal["config"]["templates"]
+        institution_folder = self.institution["templates"]
+        common_template = api.content.create(
+            container=common_folder,
+            type="PODTemplate",
+            id="common-template",
+            title="Common template",
+        )
+        institution_template = api.content.create(
+            container=institution_folder,
+            type="PODTemplate",
+            id="institution-template",
+            title="Institution template",
+        )
+        self.login_as_decisions_manager()
+        common_template.can_be_generated = mock.Mock(return_value=True)
+        institution_template.can_be_generated = mock.Mock(return_value=True)
+        self.institution.enabled_templates = [
+            common_template.getId(),
+            f"{self.institution.getId()}__{institution_template.getId()}",
+        ]
+        utils_view = mock.Mock()
+        utils_view.is_in_institution.return_value = True
+        with mock.patch.object(self.item, "restrictedTraverse", return_value=utils_view):
+            viewlet = self._viewlet(self.item)
+            generable = viewlet.get_generable_templates()
+        self.assertListEqual([common_template, institution_template], generable)

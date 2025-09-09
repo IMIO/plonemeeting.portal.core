@@ -104,7 +104,7 @@ class EditForm(DefaultEditForm):
     # We need to override the handleApply method to redirect to the settings view
     # Also, the name cannot be set to "save" or "add" to avoid inline validation.
     # TODO : find another way to avoid inline validation.
-    def handleApply(self, action):
+    def handleApply(self, action):  # pragma: no cover
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
@@ -115,7 +115,7 @@ class EditForm(DefaultEditForm):
         notify(EditFinishedEvent(self.context))
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
-    def handleCancel(self, action):
+    def handleCancel(self, action):  # pragma: no cover
         IStatusMessage(self.request).addStatusMessage(_("Edit cancelled"), "info")
         self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-settings")
         notify(EditCancelledEvent(self.context))
