@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.1 (unreleased)
+2.2.1 (2025-09-10)
 ------------------
 
 - Integrate collective.documentgenerator to generate a documents from content types.
