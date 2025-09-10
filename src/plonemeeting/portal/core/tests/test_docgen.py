@@ -1,3 +1,5 @@
+from io import BytesIO
+
 from AccessControl import Unauthorized
 from plonemeeting.portal.core.browser.docgen import PMDocumentGenerationView
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
@@ -68,6 +70,26 @@ class TestPMDocumentGenerationHelperView(PmPortalTestCase):
             ],
         )
 
+    def test_fit_image_size(self):
+        tests = [
+            ("not_svg", BytesIO(b"PNG"), 2, None),
+            ("invalid_svg", BytesIO(b"<svg><rect></svg>"), 1.5, (1.5, 1.5)),
+            (
+                "viewbox",
+                BytesIO(b'<svg viewBox="0 0 100 50"></svg>'),
+                10,
+                (10.0, 5.0),
+            ),
+            (
+                "width_height",
+                BytesIO(b'<svg width="200" height="100"></svg>'),
+                10,
+                (10.0, 5.0),
+            ),
+        ]
+        for name, img, box, expected in tests:
+            with self.subTest(name):
+                self.assertEqual(expected, self.helper.fit_image_size(img, box))
 
 class TestPMDocumentGenerationView(PmPortalTestCase):
     def setUp(self):
