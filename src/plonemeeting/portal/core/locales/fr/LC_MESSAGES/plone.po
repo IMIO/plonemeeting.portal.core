@@ -51,6 +51,14 @@ msgstr "Planifié"
 msgid "Private"
 msgstr "Privé"
 
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Propose"
+msgstr "Proposer"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Proposed"
+msgstr "Proposé"
+
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Publish"
 msgstr "Publier"
@@ -74,14 +82,6 @@ msgstr "Dépublier"
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Unpublished"
 msgstr "Dépublié"
-
-#: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Proposed"
-msgstr "Proposé"
-
-#: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Propose"
-msgstr "Proposer"
 
 #. Default: "Help effective date"
 #: Overrided by plonemeeting.portal.core

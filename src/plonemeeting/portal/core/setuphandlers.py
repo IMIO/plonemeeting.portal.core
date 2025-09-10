@@ -119,11 +119,12 @@ def create_or_update_default_template(container, template_id, title="", odt_file
     """
     current_dir = os.path.abspath(os.path.dirname(__file__))
     file_path = os.path.join(current_dir, "profiles/default/templates/", odt_file)
+    i18n_title = translate(title, target_language=api.portal.get_default_language()[:2])
     with open(file_path, "rb") as fd:
         data = fd.read()
     if template_id in container.objectIds():
         template = container[template_id]
-        template.title = title
+        template.title = i18n_title
         template.odt_file = NamedBlobFile(
             data=data,
             contentType=mimetypes.guess_type(odt_file)[0],
@@ -137,7 +138,7 @@ def create_or_update_default_template(container, template_id, title="", odt_file
         api.content.create(
             type="ConfigurablePODTemplate",
             id=template_id,
-            title=title,
+            title=i18n_title,
             odt_file=NamedBlobFile(
                 data=data,
                 contentType=mimetypes.guess_type(odt_file)[0],

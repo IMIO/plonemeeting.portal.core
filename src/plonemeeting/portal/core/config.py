@@ -21,7 +21,7 @@ PLONEMEETING_API_ITEM_TYPE = "item"
 API_HEADERS = {"Content-type": "application/json", "Accept": "application/json"}
 
 # keep those ids in translations files
-REVIEW_STATES_IDS = [_("private"), _("in_project"), _("decision"), _("proposed")]
+REVIEW_STATES_IDS = [_("private"), _("in_project"), _("decision")]
 
 DEFAULT_CATEGORY_IA_DELIB_FIELD = "category"
 CATEGORY_IA_DELIB_FIELDS = (
@@ -48,17 +48,29 @@ FACETED_PUB_MANAGER_CRITERIA = ["annexes", "etat"]
 DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES = ["Meeting", "Institution", "Item", "Publication", "Folder"]
 DOCUMENTGENENATOR_USED_CONTENT_TYPES = ["ConfigurablePODTemplate", "PODTemplate", "StyleTemplate", "SubTemplate"]
 DEFAULT_DOCUMENTGENERATOR_TEMPLATES = {
-    "publication_summary": {
-        "title": _("Publication summary"),
-        "odt_file": "publication_summary.odt",
+    "publication_notice": {
+        "title": _("Publication notice"),
+        "odt_file": "publication_notice.odt",
         "pod_formats": ["pdf"],
         "pod_portal_types": ["Publication"],
     },
-    "publication_public_notice": {
-        "title": _("Publication public notice"),
+    "publication_poster": {
+        "title": _("Publication poster"),
         "odt_file": "publication_public_notice.odt",
-        "pod_formats": ["pdf"],
+        "pod_formats": ["pdf", "odt", "docx"],
         "pod_portal_types": ["Publication"],
+    },
+    "users_groups_summary_ods": {
+        "title": _("Users and groups summary"),
+        "odt_file": "users_groups_summary.ods",
+        "pod_formats": ["ods", "xlsx"],
+        "pod_portal_types": ["Institution"],
+    },
+    "users_groups_summary_odt": {
+        "title": _("Users and groups summary"),
+        "odt_file": "users_groups_summary.odt",
+        "pod_formats": ["pdf", "odt", "docx"],
+        "pod_portal_types": ["Institution"],
     },
 }
 

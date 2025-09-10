@@ -1,3 +1,5 @@
+import re
+
 from AccessControl import Unauthorized
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
@@ -6,6 +8,8 @@ from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from html import escape
 from imio.helpers.barcode import generate_barcode
 from io import BytesIO
+
+from lxml.etree import fromstring
 from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
 from plonemeeting.portal.core import logger
@@ -58,6 +62,58 @@ class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
             filename, data = b64decode_file(site_logo)
             return BytesIO(data)
         return None
+
+    def fit_image_size(self, image: BytesIO, box_size_cm):
+        """
+        If logo is SVG: return (width_cm, height_cm) that fits in a box_size_cm cm square
+        with aspect ratio preserved. If not SVG, return None. Appy.pod can handle PNG/JPG.
+        """
+        data = image.getvalue() if hasattr(image, "getvalue") else image.read()
+        if not data:
+            return None
+
+        # Quick SVG check
+        head = data[:512].lower().lstrip()
+        if b"<svg" not in head:
+            return None
+
+        try:
+            root = fromstring(data)
+        except Exception:
+            # If parsing fails, just return a square 1.5cm box
+            return (box_size_cm, box_size_cm)
+
+        # Check viewBox attribute first
+        vb = root.attrib.get("viewBox") or root.attrib.get("viewbox")
+        aw = ah = None
+        if vb:
+            parts = re.split(r"[,\s]+", vb.strip())
+            if len(parts) == 4:
+                try:
+                    aw, ah = float(parts[2]), float(parts[3])
+                except ValueError:
+                    pass
+
+        # Fallback to width/height attributes
+        def num(attr):
+            val = root.attrib.get(attr)
+            if not val:
+                return None
+            m = re.match(r"([0-9]*\.?[0-9]+)", val.strip())
+            return float(m.group(1)) if m else None
+
+        if not aw or not ah or aw <= 0 or ah <= 0:
+            w_attr, h_attr = num("width"), num("height")
+            if w_attr and h_attr and w_attr > 0 and h_attr > 0:
+                aw, ah = w_attr, h_attr
+
+        # If it's undefined or invalid, return a square box
+        if not aw or not ah or aw <= 0 or ah <= 0:
+            return (box_size_cm, box_size_cm)
+
+        # Fit into box_size_cm square
+        scale = min(box_size_cm / aw, box_size_cm / ah)
+        return (round(aw * scale, 2), round(ah * scale, 2))
 
     def get_manageable_groups_for_user(self, username):
         """

@@ -130,6 +130,7 @@
       </value_type>
     </field>
     <value purge="false">
+      <element key="include_publication_description" i18n:translate="">Inclure la description de la publication</element>
       <element key="include_publication_text" i18n:translate="">Inclure le texte de la publication</element>
       <element key="include_context_link" i18n:translate="">Inclure un lien vers l'élément</element>
       <element key="include_qr_code" i18n:translate="">Inclure un code QR</element>
@@ -148,10 +149,11 @@
       </value_type>
     </field>
     <value purge="false">
+      <element key="include_publication_description">True</element>
       <element key="include_publication_text">True</element>
+      <element key="include_context_link">True</element>
       <element key="include_qr_code">True</element>
       <element key="include_expiration_date">True</element>
-      <element key="include_context_link">True</element>
     </value>
   </record>
 

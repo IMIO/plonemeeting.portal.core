@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-08-26 14:29+0000\n"
+"POT-Creation-Date: 2025-09-10 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,15 +14,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../vocabularies.py:150
+#: ../vocabularies.py:151
 msgid "(Passed term of office) ${representative_value}"
 msgstr "(Ancien mandat) ${representative_value}"
 
-#: ../content/institution.py:420
+#: ../content/institution.py:424
 msgid "Activated templates"
 msgstr "Modèles de document activés"
 
-#: ../content/institution.py:116
+#: ../content/institution.py:120
 msgid "Active"
 msgstr "Actif"
 
@@ -38,7 +38,7 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../vocabularies.py:316
+#: ../vocabularies.py:321
 msgid "All templates"
 msgstr "Tous les modèles de document"
 
@@ -71,16 +71,16 @@ msgid "Back to my institution"
 msgstr "Retourner vers mon institution"
 
 #: ../browser/institution.py:117
-#: ../browser/publication.py:70
+#: ../browser/publication.py:68
 #: ../browser/sync.py:248
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../content/institution.py:302
+#: ../content/institution.py:306
 msgid "Categories mappings"
 msgstr "Correspondances des matières"
 
-#: ../content/institution.py:461
+#: ../content/institution.py:466
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
@@ -107,7 +107,7 @@ msgid "Choose the meeting you want to import in the portal."
 msgstr "Choisissez la séance que vous souhaitez importer dans le portail."
 
 #: ../profiles/default/controlpanel.xml
-#: ../setuphandlers.py:59
+#: ../setuphandlers.py:66
 msgid "Configuration folder"
 msgstr "Dossier de configuration"
 
@@ -116,7 +116,7 @@ msgstr "Dossier de configuration"
 msgid "Custom info"
 msgstr "Informations complémentaires"
 
-#: ../content/institution.py:236
+#: ../content/institution.py:240
 msgid "Custom page for GDPR text"
 msgstr "Url de redirection pour les portions de texte anonymisées"
 
@@ -128,7 +128,7 @@ msgstr "Décision"
 msgid "Decision date"
 msgstr "Date de décision"
 
-#: ../events/institution.py:37
+#: ../events/institution.py:40
 #: ../migrations/migrate_to_2000.py:116
 msgid "Decisions"
 msgstr "Décisions"
@@ -160,7 +160,7 @@ msgid "Edit"
 msgstr "Éditer"
 
 #: ../browser/institution.py:119
-#: ../browser/publication.py:76
+#: ../browser/publication.py:70
 msgid "Edit cancelled"
 msgstr "Édition annulée"
 
@@ -172,11 +172,11 @@ msgstr "Modifier la séance"
 msgid "Edit this institution"
 msgstr "Modifier"
 
-#: ../content/institution.py:153
+#: ../content/institution.py:157
 msgid "Enabled tabs"
 msgstr "Onglets activés"
 
-#: ../content/institution.py:133
+#: ../content/institution.py:137
 msgid "Enter a TAL expression that once evaluated will return the setting's value. Elements context, request, view, template, utils, portal, site_url, user are available for the expression."
 msgstr "Entrez une expression TAL qui, une fois évaluée, renverra la valeur du paramètre. Les contextes éléments, request, view, template, utils, portal, site_url, user sont disponibles pour l'expression."
 
@@ -189,7 +189,7 @@ msgid "Expired authority date"
 msgstr "Exécutoire en date du (expiration délai tutelle)"
 
 #: ../migrations/migrate_to_2000.py:76
-#: ../setuphandlers.py:66
+#: ../setuphandlers.py:74
 msgid "Faceted decisions"
 msgstr "Facettes décisions"
 
@@ -198,7 +198,7 @@ msgid "Faceted meeting preview"
 msgstr "Vue facettes Séance"
 
 #: ../migrations/migrate_to_2000.py:182
-#: ../setuphandlers.py:67
+#: ../setuphandlers.py:75
 msgid "Faceted publications"
 msgstr "Facettes publications"
 
@@ -206,15 +206,15 @@ msgstr "Facettes publications"
 msgid "Faceted publications preview"
 msgstr "Prévisualisation des publications"
 
-#: ../content/institution.py:390
+#: ../content/institution.py:394
 msgid "Footer color"
 msgstr "Couleur du pied de page"
 
-#: ../content/institution.py:398
+#: ../content/institution.py:402
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
 
-#: ../content/institution.py:266
+#: ../content/institution.py:270
 msgid "For enabling third-party JavaScript integrations from external providers (e.g. Google Analytics). Paste the provided code snippet here. It will be rendered as entered near the end of the page."
 msgstr "Pour activer les intégrations JavaScript tierces provenant de fournisseurs externes (par exemple Google Analytics). Collez le code fourni ici. Il sera rendu tel quel près de la fin de la page."
 
@@ -222,7 +222,7 @@ msgstr "Pour activer les intégrations JavaScript tierces provenant de fournisse
 msgid "Force reimport this meeting"
 msgstr "Réimporter toute cette séance (plus lent)"
 
-#: ../content/institution.py:225
+#: ../content/institution.py:229
 msgid "Formatting"
 msgstr "Formatage"
 
@@ -230,7 +230,7 @@ msgstr "Formatage"
 msgid "Global categories"
 msgstr "Matières globales"
 
-#: ../content/institution.py:74
+#: ../content/institution.py:78
 msgid "Global category"
 msgstr "Matière globale"
 
@@ -246,7 +246,7 @@ msgstr "Titre de matière globale"
 msgid "Groups in charge"
 msgstr "Groupes en charge"
 
-#: ../content/institution.py:358
+#: ../content/institution.py:362
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
@@ -273,6 +273,10 @@ msgid "Inclure la date d'expiration"
 msgstr ""
 
 #: ../profiles/default/registry.xml
+msgid "Inclure la description de la publication"
+msgstr ""
+
+#: ../profiles/default/registry.xml
 msgid "Inclure le texte de la publication"
 msgstr ""
 
@@ -280,7 +284,11 @@ msgstr ""
 msgid "Inclure un code QR"
 msgstr ""
 
-#: ../content/institution.py:262
+#: ../profiles/default/registry.xml
+msgid "Inclure un lien vers l'élément"
+msgstr ""
+
+#: ../content/institution.py:266
 msgid "Info annex formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des annexes"
 
@@ -292,7 +300,7 @@ msgstr "Installe le module plonemeeting.portal.core."
 msgid "Institution"
 msgstr "Institution"
 
-#: ../content/institution.py:145
+#: ../content/institution.py:149
 msgid "Institution Type"
 msgstr "Type d'institution"
 
@@ -308,11 +316,11 @@ msgstr "Intercommunale"
 msgid "Internal redirect path for GDPR masked text links from site root"
 msgstr "Redirection interne par défaut pour les portions de texte anonymisées"
 
-#: ../content/institution.py:48
+#: ../content/institution.py:52
 msgid "Invalid color parameter, the value should be a correct hexadecimal color"
 msgstr "Paramètre couleur incorrect, la valeur doit être une couleur hexadecimale correcte"
 
-#: ../content/institution.py:42
+#: ../content/institution.py:46
 msgid "Invalid url parameters, the value should start with '&'"
 msgstr "Paramètres de l'URL invalides, la valeeur doit commencer par '&'"
 
@@ -320,11 +328,11 @@ msgstr "Paramètres de l'URL invalides, la valeeur doit commencer par '&'"
 msgid "Item"
 msgstr "Point"
 
-#: ../content/institution.py:259
+#: ../content/institution.py:263
 msgid "Item additional data formatting tal expression"
 msgstr "Expression TAL pour le formatage du contenu additionnel des points"
 
-#: ../content/institution.py:253
+#: ../content/institution.py:257
 msgid "Item decision formatting tal expression"
 msgstr "Expression TAL pour le formatage des informations des points"
 
@@ -334,7 +342,7 @@ msgstr "Expression TAL pour le formatage des informations des points"
 msgid "Item number"
 msgstr "Numéro du point"
 
-#: ../content/institution.py:248
+#: ../content/institution.py:252
 msgid "Item title formatting tal expression. If empty the default title will be used"
 msgstr "Expression TAL pour le formatage du titre du point. Si laissé vide, le titre du point dans iA.Délib sera utilisé"
 
@@ -342,7 +350,7 @@ msgstr "Expression TAL pour le formatage du titre du point. Si laissé vide, le 
 msgid "Items sort order"
 msgstr "Ordre de tri des points"
 
-#: ../content/institution.py:265
+#: ../content/institution.py:269
 msgid "JavaScript integrations"
 msgstr "Intégrations JavaScript"
 
@@ -372,19 +380,19 @@ msgstr "Identifiant"
 msgid "Legislative authority title"
 msgstr "Titre"
 
-#: ../content/institution.py:382
+#: ../content/institution.py:386
 msgid "Links text color"
 msgstr "Couleur des liens"
 
-#: ../content/institution.py:69
+#: ../content/institution.py:73
 msgid "Local category id"
 msgstr "Matière dans iA.Délib"
 
-#: ../content/institution.py:354
+#: ../content/institution.py:358
 msgid "Logo"
 msgstr "Logo"
 
-#: ../content/institution.py:280
+#: ../content/institution.py:284
 msgid "Mapping"
 msgstr "Correspondances"
 
@@ -394,11 +402,11 @@ msgstr "Correspondances"
 msgid "Meeting"
 msgstr "Séance"
 
-#: ../content/institution.py:160
+#: ../content/institution.py:164
 msgid "Meeting Type"
 msgstr "Type de séance"
 
-#: ../content/institution.py:172
+#: ../content/institution.py:176
 msgid "Meeting config ID"
 msgstr "Identifiant de la \"Configuration de séance\" dans iA.Délib"
 
@@ -418,7 +426,7 @@ msgstr "Rapport d'importation"
 msgid "Meeting pre sync form"
 msgstr "Rapport de synchronisation"
 
-#: ../content/institution.py:182
+#: ../content/institution.py:186
 msgid "Meeting query filter for list"
 msgstr "Paramètres pour obtenir la liste des Séances à importer"
 
@@ -442,11 +450,11 @@ msgstr "Modifié"
 msgid "Modified at"
 msgstr "Modifié le"
 
-#: ../content/institution.py:366
+#: ../content/institution.py:370
 msgid "Navigation bar color"
 msgstr "Couleur de la barre de navigation"
 
-#: ../content/institution.py:374
+#: ../content/institution.py:378
 msgid "Navigation bar text color"
 msgstr "Couleur du texte de la barre de navigation"
 
@@ -466,11 +474,11 @@ msgstr "Publication automatique d'une Publication \"Planifiée\""
 msgid "PM autopublishing for Managers and True by default"
 msgstr "Active la publication automatique par défaut et la restreint aux Managers"
 
-#: ../content/institution.py:81
+#: ../content/institution.py:85
 msgid "Parameter"
 msgstr "Paramètre"
 
-#: ../content/institution.py:170
+#: ../content/institution.py:174
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -478,15 +486,15 @@ msgstr "Mot de passe"
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr "Texte à afficher pour les portions de texte anonymisées"
 
-#: ../content/institution.py:166
+#: ../content/institution.py:170
 msgid "Plonemeeting URL"
 msgstr "URL iA.Délib"
 
-#: ../content/institution.py:333
+#: ../content/institution.py:337
 msgid "Power users"
 msgstr "Super-utilisateurs"
 
-#: ../content/institution.py:242
+#: ../content/institution.py:246
 msgid "Project decision disclaimer"
 msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 
@@ -498,25 +506,25 @@ msgstr "Province"
 msgid "Publication"
 msgstr "Publication"
 
-#: ../config.py:58
-msgid "Publication public notice"
-msgstr ""
-
 #: ../config.py:52
-msgid "Publication summary"
-msgstr ""
+msgid "Publication notice"
+msgstr "Attestation de publication"
 
-#: ../content/institution.py:325
-#: ../events/institution.py:49
+#: ../config.py:58
+msgid "Publication poster"
+msgstr "Affiche de publication"
+
+#: ../content/institution.py:329
+#: ../events/institution.py:52
 #: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
 msgstr "Publications"
 
-#: ../content/institution.py:216
+#: ../content/institution.py:220
 msgid "Published Items content query"
 msgstr "Paramètres pour obtenir les champs des Points à importer"
 
-#: ../content/institution.py:201
+#: ../content/institution.py:205
 msgid "Published Items query filter"
 msgstr "Paramètres pour obtenir la liste des Points à importer"
 
@@ -541,23 +549,23 @@ msgstr "Mandataire"
 msgid "Representative group in charge"
 msgstr "Mandataire"
 
-#: ../content/institution.py:106
+#: ../content/institution.py:110
 msgid "Representative key"
 msgstr "Mandataire dans iA.Délib"
 
-#: ../content/institution.py:114
+#: ../content/institution.py:118
 msgid "Representative long values"
 msgstr "Valeur longue de mandataire"
 
-#: ../content/institution.py:111
+#: ../content/institution.py:115
 msgid "Representative value"
 msgstr "Valeur de mandataire"
 
-#: ../content/institution.py:316
+#: ../content/institution.py:320
 msgid "Representatives mappings"
 msgstr "Correspondances des mandataires"
 
-#: ../content/institution.py:487
+#: ../content/institution.py:492
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
@@ -566,7 +574,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:103
-#: ../browser/publication.py:62
+#: ../browser/publication.py:60
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -574,11 +582,11 @@ msgstr "Enregistrer"
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../content/institution.py:126
+#: ../content/institution.py:130
 msgid "Setting"
 msgstr "Paramètre"
 
-#: ../content/institution.py:127
+#: ../content/institution.py:131
 msgid "Setting to configure. The value between brackets is the technical name used in the templates."
 msgstr "Paramètre à configurer. La valeur entre crochets est le nom technique utilisé dans les modèles de document."
 
@@ -594,7 +602,7 @@ msgstr "Numéro triable du point"
 msgid "Status"
 msgstr "Statut"
 
-#: ../content/institution.py:342
+#: ../content/institution.py:346
 msgid "Styling"
 msgstr "Styles"
 
@@ -622,11 +630,11 @@ msgstr "Séance publique du Conseil de Police"
 msgid "Séance publique du Conseil de Zone"
 msgstr "Séance publique du Conseil de Zone"
 
-#: ../content/institution.py:132
+#: ../content/institution.py:136
 msgid "TAL expression"
 msgstr "Expression TAL"
 
-#: ../content/institution.py:121
+#: ../content/institution.py:125
 msgid "Template"
 msgstr "Modèle de document"
 
@@ -634,7 +642,7 @@ msgstr "Modèle de document"
 msgid "Template default settings"
 msgstr "Paramètres par défaut des modèles de document"
 
-#: ../content/institution.py:426
+#: ../content/institution.py:431
 msgid "Template logo"
 msgstr "Logo utilisé dans les modèles de document"
 
@@ -650,17 +658,17 @@ msgstr "Titre du paramètre du modèle de document"
 msgid "Template setting value"
 msgstr "Valeur du paramètre du modèle de document"
 
-#: ../content/institution.py:436
+#: ../content/institution.py:441
 #: ../profiles/default/registry.xml
 msgid "Template settings"
 msgstr "Paramètres des modèles de document"
 
-#: ../content/institution.py:437
+#: ../content/institution.py:442
 msgid "Template settings used to customize templates. Leave empty to use default values."
 msgstr "Paramètres des modèles de document utilisés pour personnaliser les modèles. Laisser vide pour utiliser les valeurs par défaut."
 
-#: ../content/institution.py:412
-#: ../utils.py:329
+#: ../content/institution.py:416
+#: ../utils.py:328
 msgid "Templates"
 msgstr "Modèles de document"
 
@@ -672,11 +680,11 @@ msgstr "Texte"
 msgid "The CAPTCHA validation was unsuccessful. Please retry by carefully following the instructions."
 msgstr "La validation CAPTCHA a échoué. Veuillez réessayer en suivant attentivement les instructions fournies."
 
-#: ../content/institution.py:237
+#: ../content/institution.py:241
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
 
-#: ../browser/publication.py:97
+#: ../browser/publication.py:91
 msgid "Timestamping is disabled for this element!"
 msgstr "L'horodatage est désactivé pour cet élément!"
 
@@ -705,7 +713,7 @@ msgstr "Une annexe non publiable a été trouvée dans la réponse du web servic
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
-#: ../content/institution.py:523
+#: ../content/institution.py:528
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
@@ -714,15 +722,19 @@ msgstr "Valeur inconnue: ${key}"
 msgid "Update meeting"
 msgstr "Synchroniser cette séance"
 
-#: ../content/institution.py:168
+#: ../content/institution.py:172
 msgid "Username"
 msgstr "Nom d'utilisateur"
+
+#: ../config.py:64
+msgid "Users and groups summary"
+msgstr "Récapitulatif des utilisateurs et groupes"
 
 #: ../browser/templates/manage_institution.pt:39
 msgid "Users management"
 msgstr "Gestion des utilisateurs"
 
-#: ../content/institution.py:83
+#: ../content/institution.py:87
 msgid "Value"
 msgstr "Valeur"
 
@@ -753,7 +765,7 @@ msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:545
+#: ../content/institution.py:550
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
@@ -785,7 +797,7 @@ msgstr "activer pour trier la colonne par ordre décroissant"
 msgid "authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
-#: ../content/institution.py:303
+#: ../content/institution.py:307
 msgid "categories_mappings_description"
 msgstr "Les points pour lesquels aucune correspondance de matière ne sera trouvée seront ignorés."
 
@@ -805,19 +817,19 @@ msgstr "Confidentiel"
 msgid "decision"
 msgstr "Décision"
 
-#: ../content/institution.py:244
+#: ../content/institution.py:248
 msgid "default_in_project_disclaimer"
 msgstr "<p>Ce <em><strong>projet de délibération</strong></em> est un document préparatoire <strong>ayant vocation de permettre aux membres du Conseil communal d'examiner la décision soumise à son approbation.</strong></p> <p>Ce document est par nature <strong>évolutif et susceptible d'être modifié. Ce texte <span style='text-decoration: underline;'>n'a pas encore été adopté</span> par l'autorité communale.</strong></p>"
 
-#: ../browser/manage_users.py:256
+#: ../browser/manage_users.py:270
 msgid "desc_invite_user"
 msgstr "Vous pouvez inviter un utilisateur existant à rejoindre votre institution. Attention, veuillez vérifier avec l'utilisateur qu'il possède bien ce compte."
 
-#: ../browser/manage_users.py:132
+#: ../browser/manage_users.py:146
 msgid "desc_manage_create_user"
 msgstr "Créer un nouvel utilisateur"
 
-#: ../browser/manage_users.py:177
+#: ../browser/manage_users.py:191
 msgid "desc_manage_edit_user"
 msgstr "Modifier l'utilisateur"
 
@@ -830,7 +842,7 @@ msgstr ""
 msgid "description_manage_users"
 msgstr "Ici, vous pouvez gérer les utilisateurs de votre institution. Si, lors de la création d'un nouvel utilisateur, son identifiant est déjà utilisé, vous pouvez l'inviter à rejoindre votre institution, à condition d'avoir vérifié avec l'utilisateur qu'il possédait bien ce compte. Sinon, vous pouvez simplement créer un nouvel utilisateur avec un autre identifiant. Attention, un identifiant ne peut être utilisé qu'une seule fois dans le système et ne peut être changé par la suite."
 
-#: ../browser/publication.py:104
+#: ../browser/publication.py:98
 msgid "effective_date_in_past_msg"
 msgstr "Cet élément ne peut pas être publié car sa date de publication est dans le passé. Pour publier maintenant, supprimez la date. Pour planifier une publication, choisissez une date future."
 
@@ -839,7 +851,7 @@ msgstr "Cet élément ne peut pas être publié car sa date de publication est d
 msgid "enableAutopublishing"
 msgstr "Activer l'auto-publication"
 
-#: ../content/institution.py:421
+#: ../content/institution.py:425
 msgid "enabled_templates_description"
 msgstr "Modèles de document activés pour cette institution. Un modèle de document doit être activé pour pouvoir être utilisé afin de générer des documents."
 
@@ -861,7 +873,7 @@ msgstr "Si un utilisateur est gestionnaire de décisions il pourra importer/sync
 msgid "help_user_name_creation_casesensitive"
 msgstr "Introduisez un nom d'utilisateur, habituellement quelque chose comme 'jdupont'. Pas d'espaces ou de caractères spéciaux. Les noms d'utilisateur et les mots de passe sont sensibles à la casse, assurez-vous que la touche majuscule n'est pas activée. C'est le nom utilisé pour se connecter."
 
-#: ../content/institution.py:288
+#: ../content/institution.py:292
 msgid "iA.Delib field to use for category mapping"
 msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 
@@ -877,11 +889,11 @@ msgstr ""
 msgid "institution type title"
 msgstr ""
 
-#: ../content/institution.py:217
+#: ../content/institution.py:221
 msgid "item_content_query_description"
 msgstr "Paramètres URL servant à obtenir le contenu des points à importer"
 
-#: ../content/institution.py:202
+#: ../content/institution.py:206
 msgid "item_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des points à importer."
 
@@ -912,7 +924,7 @@ msgstr "Adresse e-mail"
 msgid "label_fullname"
 msgstr "Nom complet"
 
-#: ../browser/manage_users.py:258
+#: ../browser/manage_users.py:272
 msgid "label_invite_button"
 msgstr "Inviter"
 
@@ -921,15 +933,15 @@ msgstr "Inviter"
 msgid "label_invite_existing_user"
 msgstr "Inviter un utilisateur existant"
 
-#: ../browser/manage_users.py:255
+#: ../browser/manage_users.py:269
 msgid "label_invite_user"
 msgstr "Inviter un utilisateur existant"
 
-#: ../browser/manage_users.py:131
+#: ../browser/manage_users.py:145
 msgid "label_manage_create_user"
 msgstr "Créer un nouvel utilisateur"
 
-#: ../browser/manage_users.py:176
+#: ../browser/manage_users.py:190
 msgid "label_manage_edit_user"
 msgstr "Modifier l'utilisateur"
 
@@ -958,7 +970,7 @@ msgstr "Envoyer"
 msgid "label_unregister"
 msgstr "Enlever"
 
-#: ../content/institution.py:183
+#: ../content/institution.py:187
 msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
@@ -967,15 +979,15 @@ msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
-#: ../browser/publication.py:59
+#: ../browser/publication.py:57
 msgid "msg_editing_timestamped_content"
 msgstr "Vous êtes en train de modifier un contenu horodaté! Si vous enregistrez, l'horodatage et la date de publication seront mis à jour. Si vous souhaitez conserver l'horodatage, veuillez cliquer sur annuler."
 
-#: ../browser/manage_users.py:147
+#: ../browser/manage_users.py:161
 msgid "msg_existing_user_error"
 msgstr "Un utilisateur ayant cet identifiant existe déjà. Veuillez en choisir un autre."
 
-#: ../browser/publication.py:66
+#: ../browser/publication.py:64
 msgid "msg_missing_effective_date"
 msgstr "La date de publication est obligatoire dans cet état du workflow."
 
@@ -988,19 +1000,19 @@ msgstr "Aucun utilisateur trouvé."
 msgid "msg_timestamp_removed"
 msgstr "L'horodatage a été supprimé car le contenu a été modifié."
 
-#: ../browser/manage_users.py:239
+#: ../browser/manage_users.py:253
 msgid "msg_user_create_failed"
 msgstr "Échec de la création de l'utilisateur"
 
-#: ../browser/manage_users.py:159
+#: ../browser/manage_users.py:173
 msgid "msg_user_create_failed: {}"
 msgstr "La création de l'utilisateur a échoué: {}"
 
-#: ../browser/manage_users.py:157
+#: ../browser/manage_users.py:171
 msgid "msg_user_created"
 msgstr "Utilisateur créé"
 
-#: ../browser/manage_users.py:228
+#: ../browser/manage_users.py:242
 msgid "msg_user_updated"
 msgstr "Utilisateur mis à jour"
 
@@ -1016,7 +1028,7 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../content/institution.py:334
+#: ../content/institution.py:338
 msgid "power_users_description"
 msgstr "Sélectionnez les utilisateurs qui pourront dépublier manuellement ou supprimer une publication \"privée\" ou \"dépubliée\".  Ne sélectionnez aucun utilisateur si tous les gestionnaires de publications doivent pouvoir effectuer ces actions."
 
@@ -1024,14 +1036,18 @@ msgstr "Sélectionnez les utilisateurs qui pourront dépublier manuellement ou s
 msgid "private"
 msgstr "Privé"
 
-#: ../content/institution.py:114
+#: ../config.py:24
+msgid "proposed"
+msgstr "Proposé"
+
+#: ../content/institution.py:118
 msgid "representative_long_value_description"
 msgstr "Affichée sur les pages des points"
 
-#: ../content/institution.py:111
+#: ../content/institution.py:115
 msgid "representative_value_description"
 msgstr "Affichée dans les filtres et dans les listes de points"
 
-#: ../content/institution.py:317
+#: ../content/institution.py:321
 msgid "representatives_mappings_description"
 msgstr "Si des correspondances de mandataires sont renseignées ci-dessous, les points pour lesquels aucune correspondance ne sera trouvée seront ignorés."
