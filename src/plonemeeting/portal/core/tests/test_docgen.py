@@ -91,6 +91,47 @@ class TestPMDocumentGenerationHelperView(PmPortalTestCase):
             with self.subTest(name):
                 self.assertEqual(expected, self.helper.fit_image_size(img, box))
 
+    def test_template_logo(self):
+        # 1. Institution logo if inside institution and defined
+        institution = SimpleNamespace(
+            template_logo=SimpleNamespace(data=b"INSTITUTION")
+        )
+        with patch.object(
+            self.helper.utils_view, "is_in_institution", return_value=True
+        ), patch.object(
+            self.helper.utils_view, "get_current_institution", return_value=institution
+        ):
+            logo = self.helper.template_logo()
+        self.assertIsInstance(logo, BytesIO)
+        self.assertEqual(logo.getvalue(), b"INSTITUTION")
+
+        # 2. Site logo from registry if no institution logo for template
+        institution = SimpleNamespace(template_logo=None)
+        with patch.object(
+            self.helper.utils_view, "is_in_institution", return_value=True
+        ), patch.object(
+            self.helper.utils_view, "get_current_institution", return_value=institution
+        ), patch(
+            "plonemeeting.portal.core.browser.docgen.api.portal.get_registry_record",
+            return_value="dummy",
+        ), patch(
+            "plonemeeting.portal.core.browser.docgen.b64decode_file",
+            return_value=("logo.png", b"SITE"),
+        ):
+            logo = self.helper.template_logo()
+        self.assertIsInstance(logo, BytesIO)
+        self.assertEqual(logo.getvalue(), b"SITE")
+
+        # 3. Site logo from registry if not in institution
+        with patch.object(
+            self.helper.utils_view, "is_in_institution", return_value=False
+        ), patch(
+            "plonemeeting.portal.core.browser.docgen.api.portal.get_registry_record",
+            return_value=None,
+        ):
+            logo = self.helper.template_logo()
+        self.assertIsNone(logo)
+
 class TestPMDocumentGenerationView(PmPortalTestCase):
     def setUp(self):
         super().setUp()
