@@ -4,10 +4,6 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-
-2.2.0 (unreleased)
-------------------
-
 - Integrate collective.documentgenerator to generate a documents from content types.
   [aduchene]
 - Add default templates for `Publication` to be used by collective.documentgenerator.
