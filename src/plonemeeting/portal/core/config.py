@@ -56,7 +56,7 @@ DEFAULT_DOCUMENTGENERATOR_TEMPLATES = {
     },
     "publication_poster": {
         "title": _("Publication poster"),
-        "odt_file": "publication_public_notice.odt",
+        "odt_file": "publication_poster.odt",
         "pod_formats": ["pdf", "odt", "docx"],
         "pod_portal_types": ["Publication"],
     },
