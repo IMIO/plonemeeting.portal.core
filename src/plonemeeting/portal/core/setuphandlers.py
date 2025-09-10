@@ -6,24 +6,31 @@ from plone.api import content
 from plone.app.contenttypes.interfaces import IPloneAppContenttypesLayer
 from plone.browserlayer.layer import mark_layer
 from plone.i18n.normalizer.interfaces import IIDNormalizer
+from plone.namedfile.file import NamedBlobFile
 from plone.namedfile.file import NamedFile
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
+from plonemeeting.portal.core.config import DEFAULT_DOCUMENTGENERATOR_TEMPLATES
+from plonemeeting.portal.core.config import DOCUMENTGENENATOR_USED_CONTENT_TYPES
 from plonemeeting.portal.core.config import FACETED_DEC_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_DEC_XML_PATH
 from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
+from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
 from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
+from plonemeeting.portal.core.utils import create_templates_folder
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import remove_left_portlets
 from plonemeeting.portal.core.utils import remove_right_portlets
+from plonemeeting.portal.core.utils import set_constrain_types
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtility
 from zope.i18n import translate
+from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.traversing.interfaces import BeforeTraverseEvent
 
@@ -59,6 +66,7 @@ def post_install(context):
         title=translate(_(u"Configuration folder"), target_language=current_lang),
         id=CONFIG_FOLDER_ID,
     )
+    alsoProvides(config_folder, IPlonemeetingPortalConfigFolder)
     config_folder.exclude_from_nav = True
 
     # Create global meetings and publications faceted folders
@@ -77,6 +85,15 @@ def post_install(context):
                 import_file=faceted_config
             )
 
+    # Create the global templates folder
+    if not config_folder.get("templates"):
+        create_templates_folder(config_folder)
+    templates_folder = config_folder.get("templates")
+
+    # Add default templates to it
+    for key, template in DEFAULT_DOCUMENTGENERATOR_TEMPLATES.items():
+        logger.info(f"Adding default template {key} to templates folder")
+        create_or_update_default_template(templates_folder, key, **template)
 
 def uninstall(context):
     """Uninstall script"""
@@ -94,6 +111,44 @@ def create_file(container, filename):
             file_obj.file = NamedFile(
                 data=fd, filename=title, contentType=content_type
             )
+
+
+def create_or_update_default_template(container, template_id, title="", odt_file=None, pod_formats=None, pod_portal_types=None):
+    """
+    Create or update a default template in the templates folder.
+    """
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+    file_path = os.path.join(current_dir, "profiles/default/templates/", odt_file)
+    i18n_title = translate(title, target_language=api.portal.get_default_language()[:2])
+    with open(file_path, "rb") as fd:
+        data = fd.read()
+    if template_id in container.objectIds():
+        template = container[template_id]
+        template.title = i18n_title
+        template.odt_file = NamedBlobFile(
+            data=data,
+            contentType=mimetypes.guess_type(odt_file)[0],
+            filename=template_id,
+        )
+        if pod_formats is not None:
+            template.pod_formats = pod_formats
+        if pod_portal_types is not None:
+            template.pod_portal_types = pod_portal_types
+    else:
+        api.content.create(
+            type="ConfigurablePODTemplate",
+            id=template_id,
+            title=i18n_title,
+            odt_file=NamedBlobFile(
+                data=data,
+                contentType=mimetypes.guess_type(odt_file)[0],
+                filename=template_id,
+            ),
+            pod_formats=pod_formats,
+            pod_portal_types=pod_portal_types,
+            container=container,
+            exclude_from_nav=True,
+        )
 
 
 def create_demo_content(context):

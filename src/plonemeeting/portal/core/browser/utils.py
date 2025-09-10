@@ -23,8 +23,7 @@ import plone
 
 
 class UtilsView(BrowserView):
-    """
-    """
+    """ """
 
     def get_current_institution(self):
         if ICatalogBrain.providedBy(self.context):
@@ -57,16 +56,12 @@ class UtilsView(BrowserView):
                 self.context.plonemeeting_last_modified.hour == 0
                 and self.context.plonemeeting_last_modified.minute == 0
             ):
-                return self.context.plonemeeting_last_modified.strftime(
-                    "%d/%m/%Y %H:%M:%S"
-                )
+                return self.context.plonemeeting_last_modified.strftime("%d/%m/%Y %H:%M:%S")
 
     @mutually_exclusive_parameters("meeting", "UID")
     def get_meeting_url(self, meeting=None, UID=None):
         institution = self.get_current_institution()
-        meeting_folder_brains = api.content.find(
-            context=institution, object_provides=IMeetingsFolder.__identifier__
-        )
+        meeting_folder_brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
         if not meeting_folder_brains:
             return
         meeting_uid = UID or (meeting and meeting.UID())
@@ -78,28 +73,24 @@ class UtilsView(BrowserView):
 
     def get_publications_url(self):
         institution = self.get_current_institution()
-        return api.content.find(
-            context=institution, object_provides=IPublicationsFolder.__identifier__
-        )[0].getURL()
+        return api.content.find(context=institution, object_provides=IPublicationsFolder.__identifier__)[0].getURL()
 
     def get_settings_url(self):
         institution = self.get_current_institution()
         return f"{institution.absolute_url()}/@@manage-settings"
 
     def show_settings_tab(self):
-        portal_membership = getToolByName(self.context, 'portal_membership')
+        portal_membership = getToolByName(self.context, "portal_membership")
         if portal_membership.isAnonymousUser() or not self.is_in_institution():
             return False
-        return portal_membership.checkPermission('Modify portal content', self.get_current_institution())
+        return portal_membership.checkPermission("Modify portal content", self.get_current_institution())
 
     @staticmethod
     def get_state(obj):
         return api.content.get_state(obj)
 
     def get_categories_mappings_value(self, key):
-        factory = queryUtility(
-            IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories"
-        )
+        factory = queryUtility(IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories")
         vocab = factory(self.context)
         return vocab.getTerm(key).title
 
@@ -131,9 +122,9 @@ class UtilsView(BrowserView):
         return get_term_title(self.get_current_institution(), "institution_type")
 
     def get_watermark(self, state):
-        if state == 'in_project':
+        if state == "in_project":
             return translate(state, domain="plonemeeting.portal.core", context=self.request)
-        elif state == 'private':
+        elif state == "private":
             return _("confidential")
         return ""
 
@@ -141,17 +132,17 @@ class UtilsView(BrowserView):
         return meeting.get_items(objects=False)[-1].number
 
     def get_files_infos(self):
-        brains = api.content.find(
-            portal_type="File", context=self.context, sort_on="getObjPositionInParent"
-        )
+        brains = api.content.find(portal_type="File", context=self.context, sort_on="getObjPositionInParent")
         res = []
         for brain in brains:
             file = brain.getObject()
-            res.append({
-                "file": file,
-                "size": pretty_file_size(int(file.get_size())),
-                "icon_infos": pretty_file_icon(file.content_type()),
-            })
+            res.append(
+                {
+                    "file": file,
+                    "size": pretty_file_size(int(file.get_size())),
+                    "icon_infos": pretty_file_icon(file.content_type()),
+                }
+            )
         return res
 
 
@@ -177,5 +168,6 @@ def pretty_file_icon(mimetype):
     :param mimetype: The MIME type to look up.
     :return: A dictionary with 'icon' and 'color' keys.
     """
-    default_icon = {'icon': 'bi bi-file', 'color': 'bg-grey'}  # Default icon and color for unknown MIME types
+    # Default icon and color for unknown MIME types
+    default_icon = {"icon": "bi bi-file", "color": "bg-grey"}
     return MIMETYPE_TO_ICON.get(mimetype, default_icon)

@@ -5,6 +5,7 @@ from plone.base.navigationroot import get_navigation_root_object
 from plone.base.utils import get_top_site_from_url
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
+from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
 from Products.CMFPlone.resources import utils
 from Products.CMFPlone.resources.utils import get_resource
 from Products.PortalTransforms.transforms import safe_html
@@ -38,12 +39,15 @@ logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)
 contentbrowser._original_get_contentbrowser_options = contentbrowser.get_contentbrowser_options
 
 
-def get_contentbrowser_options(*args, **kwargs):
+def get_contentbrowser_options(*args, **kwargs):  # pragma: no cover
     """If we are in an institution, we need to set the rootPath to the institution"""
     res = contentbrowser._original_get_contentbrowser_options(*args, **kwargs)
     context = args[0] if args else kwargs.get("context")
     if IForm.providedBy(context):  # Sometimes context is a form
         context = context.context
+    if not IPlonemeetingPortalCoreLayer.implementedBy(context):
+        # Don't break if plonemeeting.portal.core is not installed
+        return res
     request = getRequest()
     site = get_top_site_from_url(context, request)
     nav_root = get_navigation_root_object(context, site)

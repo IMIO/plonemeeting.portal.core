@@ -59,11 +59,11 @@
   />
 
   <browser:page
-      name="pm_macros"
-      for="*"
-      layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-      template="templates/macros.pt"
-      permission="zope.Public"
+    name="pm_macros"
+    for="*"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+    template="templates/macros.pt"
+    permission="zope.Public"
   />
 
   <adapter
@@ -249,6 +249,7 @@
     class=".manage_users.ManageUsersListingView"
     template="templates/manage_users_listing.pt"
     permission="cmf.ModifyPortalContent"
+
   />
 
   <browser:page
@@ -271,5 +272,18 @@
     class=".manage_users.InviteUserFormView"
     permission="cmf.ModifyPortalContent"
   />
+
+  <browser:page
+    for="*"
+    name="document-generation-helper-view"
+    class=".docgen.PMDocumentGenerationHelperView"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    for="plone.dexterity.interfaces.IDexterityContainer"
+    name="document-generation"
+    class=".docgen.PMDocumentGenerationView"
+    permission="zope2.View"/>
 
 </configure>

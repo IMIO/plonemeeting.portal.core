@@ -236,7 +236,7 @@
     <metal:use use-macro="context/@@pm_macros/annexes-section"/>
     <section class="row legal-section mb-3">
       <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
-        <div class="alert with-icon alert-light"
+        <div tal:condition="context/consultation_text" class="alert with-icon alert-light"
              role="alert"
              style="margin: 0 !important;"
 

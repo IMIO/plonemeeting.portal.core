@@ -1,14 +1,3 @@
-import os
-import pathlib
-import tempfile
-import zipfile
-
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
-from ZPublisher.Iterators import filestream_iterator
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.workflow import get_state_infos
@@ -20,10 +9,21 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
-from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
+from ZPublisher.Iterators import filestream_iterator
+
+import os
+import pathlib
+import tempfile
+import zipfile
+
 
 FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
 ADMIN_FIELDSETS = ["settings"]
@@ -54,24 +54,16 @@ class EditForm(DefaultEditForm):
         We plug ourself here to avoid displaying the warning after the submit."""
         handler = ITimeStamper(self.context)
         if handler.is_timestamped():
-            IStatusMessage(self.request).addStatusMessage(
-                _("msg_editing_timestamped_content"), "warning"
-            )
+            IStatusMessage(self.request).addStatusMessage(_("msg_editing_timestamped_content"), "warning")
         return super().render()
 
     @button.buttonAndHandler(_("Save"), name="save")
     def handleApply(self, action):
         data, errors = self.extractData()
-        if api.content.get_state(self.context) == "planned" and not data.get("IPublication.effective"):
+        if api.content.get_state(self.context) in ("planned", "published") and not data.get("IPublication.effective"):
             IStatusMessage(self.request).addStatusMessage(_("msg_missing_effective_date"), "error")
             return
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
-        self.request.response.redirect(self.nextURL())
-        notify(EditFinishedEvent(self.context))
+        super(EditForm, self).handleApply(self, action)
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
@@ -131,7 +123,9 @@ class PublicationView(DefaultView):
 class PublicationASiCFileView(BrowserView):
     """View to download the ASiC file of a publication."""
 
-    import base64, hashlib, xml.etree.ElementTree as ET
+    import base64
+    import hashlib
+    import xml.etree.ElementTree as ET
 
     NS = {
         "asic": "http://uri.etsi.org/02918/v1.2.1#",

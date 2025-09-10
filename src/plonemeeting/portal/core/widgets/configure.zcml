@@ -21,4 +21,24 @@
     layer="z3c.form.interfaces.IFormLayer"
     template="colorselect.pt"/>
 
+
+  <class class=".image.PMNamedImageWidget">
+    <require
+      permission="zope.Public"
+      interface="plone.formwidget.namedfile.interfaces.INamedImageWidget"/>
+  </class>
+
+
+  <z3c:widgetTemplate
+    mode="display"
+    widget=".image.IPMNamedImageWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="image_display.pt"/>
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget=".image.IPMNamedImageWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="image_input.pt"/>
+
 </configure>

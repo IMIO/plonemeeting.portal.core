@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plonemeeting.portal.core"
+        purge="True">
+
+
+    <configlet
+        title="Configuration folder"
+        action_id="plonemeeting.portal.core.settings_folder"
+        appId="plonemeeting.portal.core"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/config/folder_contents"
+        icon_expr="string:gear-wide-connected"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

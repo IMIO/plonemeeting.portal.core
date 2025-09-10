@@ -106,46 +106,47 @@ x-tooltip > div[slot="content"] {
 }
 
 
-.status-valid {
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-  border: 2px solid #27ae60;
+#timestamp-status {
   border-radius: 0.375rem;
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
 
-  i.icon-bg {
-    color: #27ae60
+  &.status-valid {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    border: 2px solid #27ae60;
+
+    i.icon-bg {
+      color: #27ae60
+    }
   }
-}
 
-.icon-bg {
-  position: absolute;
-  right: 1rem;
-  font-size: 7rem;
-  opacity: 0.75;
-  z-index: 1;
-  transform: translateY(-33%) rotate(15deg);
-}
-
-@media (max-width: 1024px) {
   .icon-bg {
-    display: none;
+    position: absolute;
+    right: 1rem;
+    font-size: 7rem;
+    opacity: 0.75;
+    z-index: 1;
+    transform: translateY(-33%) rotate(15deg);
   }
+
+  @media (max-width: 1024px) {
+    .icon-bg {
+      display: none;
+    }
+  }
+
+  &.status-invalid {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: 2px solid #e74c3c;
+
+    i.icon-bg {
+      color: #e74c3c
+    }
+  }
+
 }
 
-.status-invalid {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  border: 2px solid #e74c3c;
-  border-radius: 0.375rem;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 0;
-
-  i.icon-bg {
-    color: #e74c3c
-  }
-}
 
 .hash-display {
   background: #f8f9fa;

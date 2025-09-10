@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
+from mockito import mock
+from mockito import unstub
+from mockito import verify
+from mockito import when
 from plone import api
+from plonemeeting.portal.core.config import API_HEADERS
+from plonemeeting.portal.core.config import DOCUMENTGENENATOR_USED_CONTENT_TYPES
+from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
+
+import json
+import requests
 
 
 class TestVocabularies(PmPortalDemoFunctionalTestCase):
@@ -89,6 +100,51 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
                               'Mr Wara, Échevin du tourisme',
                               'Mr Bara, Échevin du Développement économique'])
 
+    def testRemoteMeetingsVocabulary(self):
+        vocab = queryUtility(
+            IVocabularyFactory, "plonemeeting.portal.vocabularies.remote_meetings"
+        )
+        url = get_api_url_for_meetings(self.institution)
+        meetings = {
+            "items": [
+                {"UID": "uid1", "title": "Meeting 1"},
+                {"UID": "uid2", "title": "Meeting 2"},
+            ]
+        }
+        when(requests).get(
+            url,
+            auth=(self.institution.username, self.institution.password),
+            headers=API_HEADERS,
+        ).thenReturn(mock({"status_code": 200, "text": json.dumps(meetings)}))
+
+        values = vocab(self.institution)
+        titles = [term.title for term in values]
+        self.assertListEqual(titles, ["Meeting 1", "Meeting 2"])
+        verify(requests, times=1).get(
+            url,
+            auth=(self.institution.username, self.institution.password),
+            headers=API_HEADERS,
+        )
+
+    def testRemoteMeetingsVocabularyAPIFailure(self):
+        vocab = queryUtility(
+            IVocabularyFactory, "plonemeeting.portal.vocabularies.remote_meetings"
+        )
+        url = get_api_url_for_meetings(self.institution)
+        when(requests).get(
+            url,
+            auth=(self.institution.username, self.institution.password),
+            headers=API_HEADERS,
+        ).thenReturn(mock({"status_code": 404, "text": ""}))
+
+        values = vocab(self.institution)
+        self.assertEqual(len(values), 0)
+        verify(requests, times=1).get(
+            url,
+            auth=(self.institution.username, self.institution.password),
+            headers=API_HEADERS,
+        )
+
     def testMeetingDatesVocabulary(self):
         vocab = queryUtility(
             IVocabularyFactory, "plonemeeting.portal.vocabularies.meeting_dates"
@@ -98,3 +154,11 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         self.assertEqual(terms[0].title, "13 March 2020 (18:00) — decision")
         self.assertEqual(terms[1].title, "13 March 2019 (18:00) — decision")
         self.assertEqual(terms[2].title, "20 December 2018 (18:25) — decision")
+
+    def testPodTemplatesTypesVocabulary(self):
+        vocab = queryUtility(
+            IVocabularyFactory, "collective.documentgenerator.PortalTypes"
+        )
+        values = vocab(self.item)
+        titles = [term.title for term in values]
+        self.assertListEqual(titles, DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES)
