@@ -8,7 +8,7 @@ from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_INTEGRATIO
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 from plonemeeting.portal.core.tests import PM_ADMIN_USER
 from plonemeeting.portal.core.tests import PM_USER_PASSWORD
-from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id, get_managers_group_id
 
 import unittest
 
@@ -81,6 +81,11 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
         self.portal.acl_users._doAddUser("amityville-decisions-manager2", PM_USER_PASSWORD, [], [])
         group = api.group.get(get_decisions_managers_group_id(self.institution))
         group.addMember("amityville-decisions-manager2")
+
+        self.portal.acl_users._doAddUser("amityville-manager", PM_USER_PASSWORD, [], [])
+        group = api.group.get(get_managers_group_id(self.institution))
+        group.addMember("amityville-manager")
+
         self.meeting = api.content.find(self.institution, portal_type="Meeting")[0].getObject()
         self.item = api.content.find(self.meeting, portal_type="Item")[0].getObject()
         self.login_as_decisions_manager()
@@ -95,4 +100,4 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
         login(self.portal, "amityville-publications-manager")
 
     def login_as_institution_manager(self):
-        login(self.portal, "belleville-decisions-manager")
+        login(self.portal, "amityville-manager")

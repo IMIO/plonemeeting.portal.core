@@ -4,8 +4,10 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix an issue in `InstitutionTemplatesVocabularyFactory`.
+  [aduchene]
+- Fix an issue in `event.check_publication_timestamp`.
+  [aduchene]
 
 2.2.1 (2025-09-10)
 ------------------

@@ -29,8 +29,8 @@ def publication_modified(publication, event):
 
 def check_publication_timestamp(obj, event):
     obj = parent(obj)
-    if not ITimestampableDocument.providedBy(obj):
-        return
+    if not ITimestampableDocument.providedBy(obj) or not obj.timestamped_file:
+        return # nothing to do
     handler = ITimeStamper(obj)
     if not handler.file_has_changed(obj, event):
         return

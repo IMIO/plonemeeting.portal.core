@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
+
+from AccessControl import Unauthorized
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.institution import representatives_mappings_invariant
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
@@ -129,3 +131,11 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
 
         data.__context__.representatives_mappings = None # Could be None in Plone 6
         representatives_mappings_invariant(data)
+
+    def test_manager_may_access_institution(self):
+        self.login_as_institution_manager()
+        view = self.amityville.restrictedTraverse("@@manage-settings")
+        view()
+        with self.assertRaises(Unauthorized):
+            view = self.belleville.restrictedTraverse("@@manage-settings")
+            view()

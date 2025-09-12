@@ -293,7 +293,7 @@ class InstitutionTemplatesVocabularyFactory:
         """
         portal = api.portal.get()
         institution = api.portal.get_navigation_root(context)
-        common_templates_folder = portal.restrictedTraverse("config/templates")
+        common_templates_folder = portal.unrestrictedTraverse("config/templates")
         institution_templates_folder = getattr(institution, "templates", {})
         vocabulary = []
         for template in common_templates_folder.values():
