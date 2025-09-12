@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.2 (unreleased)
+2.2.2 (2025-09-12)
 ------------------
 
 - Fix an issue in `InstitutionTemplatesVocabularyFactory`.
