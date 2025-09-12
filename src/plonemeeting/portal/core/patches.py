@@ -45,10 +45,10 @@ def get_contentbrowser_options(*args, **kwargs):  # pragma: no cover
     context = args[0] if args else kwargs.get("context")
     if IForm.providedBy(context):  # Sometimes context is a form
         context = context.context
-    if not IPlonemeetingPortalCoreLayer.implementedBy(context):
+    request = getRequest()
+    if not IPlonemeetingPortalCoreLayer.providedBy(request):
         # Don't break if plonemeeting.portal.core is not installed
         return res
-    request = getRequest()
     site = get_top_site_from_url(context, request)
     nav_root = get_navigation_root_object(context, site)
     utils_view = context.unrestrictedTraverse("@@utils_view")

@@ -4,8 +4,8 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix an issue with `get_contentbrowser_options`.
+  [aduchene]
 
 2.2.2 (2025-09-12)
 ------------------
