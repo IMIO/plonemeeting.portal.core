@@ -464,3 +464,8 @@ def get_context_from_request():
         if parent.__class__.__name__ != "Application":
             context = parent.context
     return context
+
+def user_has_any_role(roles, context):
+    """Check if the user has at least one of the given roles in the given context."""
+    user = api.user.get_current()
+    return set(user.getRolesInContext(context)).intersection(set(roles))

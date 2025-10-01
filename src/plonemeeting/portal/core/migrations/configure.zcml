@@ -215,12 +215,4 @@
     destination="2200"
     handler="plonemeeting.portal.core.migrations.migrate_to_2200.migrate"
     profile="plonemeeting.portal.core:default"/>
-
-  <genericsetup:upgradeStep
-    title="Go to portal 2201"
-    description=""
-    source="2200"
-    destination="2201"
-    handler="plonemeeting.portal.core.migrations.migrate_to_2201.migrate"
-    profile="plonemeeting.portal.core:default"/>
 </configure>

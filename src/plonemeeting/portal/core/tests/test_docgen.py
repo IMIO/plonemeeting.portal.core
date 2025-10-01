@@ -1,6 +1,5 @@
-from io import BytesIO
-
 from AccessControl import Unauthorized
+from io import BytesIO
 from plonemeeting.portal.core.browser.docgen import PMDocumentGenerationView
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase

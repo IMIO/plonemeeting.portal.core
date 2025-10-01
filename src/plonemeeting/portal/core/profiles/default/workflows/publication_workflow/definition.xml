@@ -166,7 +166,43 @@
       Visible to everyone, not editable by the Editors.
     </description>
     <exit-transition transition_id="unpublish"/>
-    <exit-transition transition_id="back_to_private"/>
+    <exit-transition transition_id="archive"/>
+
+    <permission-map acquired="False" name="Access contents information">
+      <permission-role>Anonymous</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="Delete objects">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="Modify portal content">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="plone.app.contenttypes: Add Image">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="plone.app.contenttypes: Add File">
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="Review portal content">
+      <permission-role>Manager</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False" name="View">
+      <permission-role>Anonymous</permission-role>
+    </permission-map>
+  </state>
+
+  <state state_id="archived" title="Archived" i18n:attributes="title">
+    <description i18n:translate="">
+      Visible to everyone, not editable by anyone but marked as archived.
+    </description>
+    <exit-transition transition_id="unpublish"/>
+    <exit-transition transition_id="publish"/>
 
     <permission-map acquired="False" name="Access contents information">
       <permission-role>Anonymous</permission-role>
@@ -202,6 +238,7 @@
       Can only be seen and edited by the Editors.
     </description>
     <exit-transition transition_id="publish"/>
+    <exit-transition transition_id="archive"/>
     <exit-transition transition_id="back_to_private"/>
 
     <permission-map acquired="False" name="Access contents information">
@@ -313,6 +350,20 @@
     <guard>
       <guard-role>Manager</guard-role>
       <guard-role>Editor</guard-role>
+    </guard>
+  </transition>
+
+  <transition after_script="" before_script=""
+              new_state="archived" title="Archive"
+              transition_id="archive" trigger="USER"
+              i18n:attributes="title">
+    <description i18n:translate="">Archive the publication.</description>
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=archive"
+            i18n:translate="">Archive
+    </action>
+    <guard>
+      <guard-expression>python:here.may_archive()</guard-expression>
     </guard>
   </transition>
 

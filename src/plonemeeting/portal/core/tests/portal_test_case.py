@@ -8,7 +8,8 @@ from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_CORE_INTEGRATIO
 from plonemeeting.portal.core.testing import PLONEMEETING_PORTAL_DEMO_FUNCTIONAL_TESTING
 from plonemeeting.portal.core.tests import PM_ADMIN_USER
 from plonemeeting.portal.core.tests import PM_USER_PASSWORD
-from plonemeeting.portal.core.utils import get_decisions_managers_group_id, get_managers_group_id
+from plonemeeting.portal.core.utils import get_decisions_managers_group_id
+from plonemeeting.portal.core.utils import get_managers_group_id
 
 import unittest
 import plonemeeting.portal.core.tests.patches
