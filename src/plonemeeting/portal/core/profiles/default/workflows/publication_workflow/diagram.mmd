@@ -1,0 +1,65 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Private
+    state "Private" as Private
+    note right of Private
+        Can only be seen and edited
+        by Publications Editors
+        and Publications Managers.
+    end note
+    state "Proposed" as Proposed
+    note right of Proposed
+        Proposed for review, not yet public.
+        Visible to Editors and Reviewers.
+    end note
+    state "Planned" as Planned
+    note right of Planned
+        Planned to be auto-published.
+        Can't be edited and not visible to the public.
+    end note
+    state "Published" as Published
+    note right of Published
+        Visible to everyone
+        Not editable by anyone.
+    end note
+    state "Unpublished" as Unpublished
+    note right of Unpublished
+        Hidden to the public.
+        Can be published again but will be re-timestamped.
+    end note
+    state "Archived" as Archived
+    note right of Archived
+        Visible to everyone but marked as archived.
+        Not editable by anyone.
+    end note
+%% Transitions
+    Private --> Proposed: Propose
+    Private --> Planned: Plan
+    Private --> Published: Publish
+    Proposed --> Planned: Plan
+    Proposed --> Published: Publish
+    Proposed --> Private: Back to private
+    Planned --> Published: Publish
+    Planned --> Private: Back to private
+    Published --> Unpublished: Unpublish
+    Published --> Private: Back to private
+    Published --> Archived: Archive
+    Archived --> Unpublished: To unpublished
+    Archived --> Published: Publish
+    Unpublished --> Published: Publish
+    Unpublished --> Archived: Archive
+    Unpublished --> Private: Back to private
+%% Styling
+    classDef private fill: #fdd, stroke: #900, stroke-width: 2px, color: #900;
+    classDef proposed fill: #ffd, stroke: #990, stroke-width: 2px, color: #660;
+    classDef planned fill: #eee, stroke: #666, stroke-width: 2px, color: #333;
+    classDef published fill: #dfd, stroke: #090, stroke-width: 2px, color: #060;
+    classDef unpublished fill: #aaa, stroke: #888, stroke-width: 2px, color: #999;
+    classDef archived fill: #eee, stroke: #666, stroke-width: 2px, color: #333;
+
+    class Private private
+    class Proposed proposed
+    class Planned planned
+    class Published published
+    class Unpublished unpublished
+    class Archived archived

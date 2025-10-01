@@ -1,5 +1,3 @@
-import re
-
 from AccessControl import Unauthorized
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
@@ -8,7 +6,6 @@ from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from html import escape
 from imio.helpers.barcode import generate_barcode
 from io import BytesIO
-
 from lxml.etree import fromstring
 from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
@@ -17,6 +14,7 @@ from Products.CMFCore.Expression import createExprContext
 from Products.CMFCore.Expression import Expression
 
 import copy
+import re
 
 
 class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
