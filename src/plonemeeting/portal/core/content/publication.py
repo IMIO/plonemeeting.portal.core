@@ -19,8 +19,10 @@ from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.utils import user_has_any_role
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.permissions import ReviewPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission
 from zope import schema
@@ -146,21 +148,39 @@ class Publication(Container, File):
         if api.content.get_state(self) == "planned":
             # Editor can't edit it directly, but can put it back to private to edit it.
             return user.has_role("Editor", object=self) or _checkPermission(ManagePortal, self)
+        if api.content.get_state(self) == "proposed":
+            # Reviewers can put it back to private.
+            return _checkPermission(ReviewPortalContent, self)
         else:
             return _checkPermission(ManagePortal, self)
 
     def may_plan(self):
-        """May plan if able to modify and
+        """May plan if able to review and
         a "publication date" (effectiveDate) is defined."""
-        return (
-            _checkPermission(ModifyPortalContent, self)
-            and self.effective_date is not None
-            and self.effective_date > DateTime()
-        )
+        if self.effective_date is None or self.effective_date <= DateTime():
+            # Can't plan if no effective date or effective date in the past
+            return False
+        return self.may_publish() # Same guard as may_publish
 
     def may_publish(self):
         """May publish if able to modify."""
-        return _checkPermission(ModifyPortalContent, self)
+        state = api.content.get_state(self)
+        if user_has_any_role(["Manager", "Reviewer"], self):
+            # Managers and Reviewers can publish directly.
+            return True
+        if state == "private" and self._get_institution().has_publications_reviewers():
+            # Needs to be proposed first
+            return False
+        return _checkPermission(ReviewPortalContent, self)
+
+    def may_propose(self):
+        """May propose if able to modify and if validators are defined."""
+        institution = self._get_institution()
+        return institution.has_publications_reviewers() and _checkPermission(ReviewPortalContent, self)
+
+    def may_archive(self):
+        """May archive if manager."""
+        return user_has_any_role(["Manager"], self)
 
 
 @indexer(IPublication)

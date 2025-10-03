@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from copy import deepcopy
-
 from AccessControl import Unauthorized
+from copy import deepcopy
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.content.institution import representatives_mappings_invariant
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase

@@ -21,7 +21,7 @@ PLONEMEETING_API_ITEM_TYPE = "item"
 API_HEADERS = {"Content-type": "application/json", "Accept": "application/json"}
 
 # keep those ids in translations files
-REVIEW_STATES_IDS = [_("private"), _("in_project"), _("decision")]
+REVIEW_STATES_IDS = [_("private"), _("in_project"), _("decision"), _("proposed")]
 
 DEFAULT_CATEGORY_IA_DELIB_FIELD = "category"
 CATEGORY_IA_DELIB_FIELDS = (
