@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.4 (unreleased)
+2.2.4 (2025-10-21)
 ------------------
 
 - Inherit of `DXDocumentGenerationHelperView` instead of `DocumentGenerationHelperView`
