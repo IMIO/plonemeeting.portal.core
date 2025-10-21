@@ -4,8 +4,9 @@ Changelog
 2.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Inherit of `DXDocumentGenerationHelperView` instead of `DocumentGenerationHelperView`
+  in `docgen.PMDocumentGenerationHelperView`.
+  [aduchene]
 
 2.2.3 (2025-09-12)
 ------------------
