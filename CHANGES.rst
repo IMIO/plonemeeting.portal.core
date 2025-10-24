@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.5 (unreleased)
+2.2.5 (2025-10-24)
 ------------------
 
 - Remove `x-twitter` in `site_socials` actions.
