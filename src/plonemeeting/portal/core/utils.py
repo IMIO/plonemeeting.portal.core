@@ -305,6 +305,16 @@ def get_api_url_for_representatives(institution):
         return
 
 
+def create_faceted_folder(container, title, id):
+    folder = api.content.create(
+        type="Folder", title=title, container=container, id=id
+    )
+    alsoProvides(folder, IPossibleFacetedNavigable)
+    subtyper = getMultiAdapter((folder, folder.REQUEST), name=u'faceted_subtyper')
+    subtyper.enable()
+    return folder
+
+
 def set_constrain_types(obj, portal_type_ids, mode=1):
     behavior = ISelectableConstrainTypes(obj)
     behavior.setConstrainTypesMode(mode)
@@ -454,3 +464,8 @@ def get_context_from_request():
         if parent.__class__.__name__ != "Application":
             context = parent.context
     return context
+
+def user_has_any_role(roles, context):
+    """Check if the user has at least one of the given roles in the given context."""
+    user = api.user.get_current()
+    return set(user.getRolesInContext(context)).intersection(set(roles))

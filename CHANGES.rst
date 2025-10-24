@@ -33,6 +33,7 @@ Changelog
   [aduchene]
 
 2.2.1 (2025-09-10)
+2.2.0 (unreleased)
 ------------------
 
 - Integrate collective.documentgenerator to generate a documents from content types.
@@ -67,6 +68,7 @@ Changelog
   [aduchene]
 
 2.1.11 (2025-06-19)
+2.1.11 (unreleased)
 -------------------
 
 - Fix an issue with `publication.EditForm`.
