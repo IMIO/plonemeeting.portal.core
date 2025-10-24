@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from natsort import humansorted
 from plone import api
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import plone_
@@ -13,7 +14,6 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
 import copy
 import json
 import requests
@@ -54,10 +54,11 @@ class GlobalCategoryVocabularyFactory:
 
         copy_of_categories = global_categories.copy()
         return SimpleVocabulary(
-            [
-                SimpleTerm(value=category_id, title=category_title)
-                for category_id, category_title in copy_of_categories.items()
-            ]
+            humansorted(
+                [
+                    SimpleTerm(value=category_id, title=category_title)
+                    for category_id, category_title in copy_of_categories.items()], key=lambda term: term.title
+            )
         )
 
 
@@ -91,10 +92,12 @@ class DocumentTypesVocabularyFactory:
             return SimpleVocabulary([])
 
         return SimpleVocabulary(
-            [
-                SimpleTerm(value=doc_type_id, title=doc_type_title)
-                for doc_type_id, doc_type_title in document_types.copy().items()
-            ]
+            humansorted(
+                [
+                    SimpleTerm(value=doc_type_id, title=doc_type_title)
+                    for doc_type_id, doc_type_title in document_types.copy().items()
+                ], key=lambda term: term.title
+            )
         )
 
 

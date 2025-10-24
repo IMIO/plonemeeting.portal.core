@@ -4,8 +4,12 @@ Changelog
 2.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Remove `x-twitter` in `site_socials` actions.
+  [aduchene]
+- SUP-48246: Human sort `global_categories` and `document_types` vocabularies.
+  [aduchene]
+- Add a new values for `document_types` vocabulary.
+  [aduchene]
 
 2.2.4 (2025-10-21)
 ------------------

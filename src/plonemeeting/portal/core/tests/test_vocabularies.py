@@ -49,8 +49,12 @@ class TestVocabularies(PmPortalDemoFunctionalTestCase):
         vocab = queryUtility(
             IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories"
         )
-        values = vocab(self.item)
-        self.assertEqual(len(values), 29)
+        voc = vocab(self.item)
+        vocab_titles = [term.title for term in voc._terms]
+        records = api.portal.get_registry_record("plonemeeting.portal.core.global_categories")
+        records_values = list(records.values())
+        self.assertListEqual(vocab_titles, records_values)  # Should be human sorted
+        self.assertEqual(len(voc), 29)
 
     def testRepresentativesVocabulary(self):
         vocab = queryUtility(
