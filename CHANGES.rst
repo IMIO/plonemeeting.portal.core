@@ -4,8 +4,8 @@ Changelog
 2.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger when getting a resource.
+  [aduchene]
 
 2.2.5 (2025-10-24)
 ------------------

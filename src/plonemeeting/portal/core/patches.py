@@ -36,6 +36,22 @@ safe_html.hasScript = hasScript
 logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)")
 
 
+orignal_get_resource = get_resource
+
+
+def get_resource(*args, **kwargs):
+    """Override to disable useless verbose logger when getting a resource."""
+    logger = logging.getLogger("Products.CMFPlone.resources.utils")
+    logger.disabled = True
+    try:
+        return orignal_get_resource(*args, **kwargs)
+    finally:
+        logger.disabled = False
+
+
+logger.info("Patching Products.CMFPlone.resources.utils (get_resource)")
+utils.get_resource = get_resource
+
 contentbrowser._original_get_contentbrowser_options = contentbrowser.get_contentbrowser_options
 
 
