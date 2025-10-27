@@ -128,15 +128,9 @@
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">
-                <span tal:condition="python: review_state == 'private'"
-                   i18n:translate=""
-                   tal:attributes="class string:badge state-badge state-${review_state}">Private</span>
-              <span tal:condition="python: review_state == 'in_project'"
+              <span tal:content="review_state"
                  i18n:translate=""
-                 tal:attributes="class string:badge state-badge state-${review_state}">In project</span>
-              <span tal:condition="python: review_state == 'decision'"
-                 i18n:translate=""
-                 tal:attributes="class string:badge state-badge state-${review_state}">Decision</span>
+                 tal:attributes="class string:badge state-badge state-${review_state}">State</span>
             </div>
           </div>
           <div class="content-metadata-row">

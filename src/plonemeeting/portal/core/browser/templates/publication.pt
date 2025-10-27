@@ -15,6 +15,7 @@
 >
 <body>
 <metal:content-core fill-slot="content-core">
+<!--?  <x-table-of-content></x-table-of-content>-->
   <metal:content-core define-macro="content-core"
      tal:define="
     file python: context.file;
@@ -23,7 +24,7 @@
     "
   >
 
-    <section class="row metadatas-section mb-3">
+    <section class="row metadatas-section mb-3" data-toc="Metadonnées" id="metadatas">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
           <div class="content-metadata-col header"
@@ -237,8 +238,8 @@
     <section class="row legal-section mb-3">
       <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
         <div tal:condition="context/consultation_text" class="alert with-icon alert-light"
-             role="alert"
-             style="margin: 0 !important;"
+                                                       role="alert"
+                                                       style="margin: 0 !important;"
 
         >
           <div class="alert-icon">
@@ -266,7 +267,9 @@
                   <h4>Horodatage qualifié</h4>
                 </div>
                 <div class="tooltip-content">
-                  <p>Un horodatage qualifié garantit la date et l'heure exactes de publication d'un document numérique, conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du document.</p>
+                  <p>Un horodatage qualifié garantit la date et l'heure exactes de publication d'un document numérique,
+                    conformément à la législation européenne (eIDAS). Il assure l'intégrité et la validité juridique du
+                    document.</p>
                 </div>
 
               </div>
@@ -295,16 +298,77 @@
         <div class="collapse alert-collapse" id="collapse-timestamping-more-info">
           <ul class="text-muted">
             <li>
-              <a href="/faq/quest-ce-que-l-horodatage" target="_blank" class="help-link">Qu'est-ce que l'horodatage qualifié ?</a>
+              <a href="/faq/quest-ce-que-l-horodatage" target="_blank" class="help-link">Qu'est-ce que l'horodatage
+                qualifié ?</a>
             </li>
             <li>
-              <a href="/faq/verifier-un-horodatage" target="_blank" class="help-link">Comment vérifier un horodatage ?</a>
+              <a href="/faq/verifier-un-horodatage" target="_blank" class="help-link">Comment vérifier un horodatage
+                ?</a>
             </li>
             <li>
               <a href="/check-timestamp" target="_blank" class="help-link">Outil de vérification</a>
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+    <section class="row links-section mb-3" data-toc="Liens" id="liens">
+      <h2>Liens</h2>
+      <div class="col-lg-12">
+        <section class="py-0">
+          <ul class="timeline">
+            <tal:item repeat="item view/timeline">
+              <li class="${python: item['current'] and 'timeline-item current' or 'timeline-item'}">
+                <a tal:attributes="href item/url" class="timeline-link">
+                  <div class="fw-bold timeline-date" tal:content="item/effective">11/11/2025</div>
+                  <header class="timeline-header">
+                    <h4 class="text-muted fw-bold d-inline" tal:content="item/title">Title</h4>
+                    <div class="timeline-state">
+                    <span tal:condition="python:repeat.item.end"
+                      class="badge state-badge bg-secondary ms-2"
+                       i18n:translate="">Dernière version
+                    </span>
+                      <span tal:content="item/review_state"
+                         i18n:translate=""
+                         tal:attributes="class string:badge state-badge state-${item/review_state}">State</span>
+                    </div>
+                  </header>
+                  <p class="text-muted pt-2 mb-0" tal:condition="item/description"
+                     tal:content="item/description">Description
+                  </p>
+                </a>
+              </li>
+            </tal:item>
+          </ul>
+        </section>
+      </div>
+      <div class="col-lg-6">
+        <h3>Éléments connexes</h3>
+        <tal:list condition="view/has_related_items">
+          <ul class="supersede-list">
+            <tal:item repeat="item view/related_items">
+              <li class="supersede-item contenttype"
+                 tal:attributes="class string:supersede-item contenttype-${item/portal_type} state-${item/review_state}">
+                <a tal:attributes="href item/url">
+                  <span class="item-title" tal:content="item/title">Title</span>
+                </a>
+                <!--?                <small class="muted">-->
+                <!--?                  <tal:state condition="item/review_state">-->
+                <!--?<span class="label label-state"-->
+                <!--?   tal:content="item/review_state">published</span>-->
+                <!--?                  </tal:state>-->
+                <!--?                  <tal:mod condition="item/effective">-->
+                <!--?                    &nbsp;·&nbsp;<span tal:content="item/effective">2025-01-01</span>-->
+                <!--?                  </tal:mod>-->
+                <!--?                </small>-->
+                <div class="item-description"
+                   tal:condition="item/description"
+                   tal:content="item/description">Description
+                </div>
+              </li>
+            </tal:item>
+          </ul>
+        </tal:list>
       </div>
     </section>
   </metal:content-core>

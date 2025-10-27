@@ -3,7 +3,7 @@ import re
 from AccessControl import Unauthorized
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
-from collective.documentgenerator.helper import DXDocumentGenerationHelperView
+from collective.documentgenerator.helper import DocumentGenerationHelperView, DXDocumentGenerationHelperView
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from html import escape
 from imio.helpers.barcode import generate_barcode
@@ -17,6 +17,7 @@ from Products.CMFCore.Expression import createExprContext
 from Products.CMFCore.Expression import Expression
 
 import copy
+import re
 
 
 class PMDocumentGenerationHelperView(DXDocumentGenerationHelperView):

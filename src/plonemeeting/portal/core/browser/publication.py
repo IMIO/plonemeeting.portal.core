@@ -3,12 +3,14 @@ from collective.timestamp.interfaces import ITimeStamper
 from imio.helpers.workflow import get_state_infos
 from imio.pyutils.utils import sort_by_indexes
 from plone import api
+from plone.api.validation import mutually_exclusive_parameters
 from plone.app.content.browser.content_status_modify import ContentStatusModifyView
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
+from plone.memoize.view import memoize
 from plonemeeting.portal.core import _
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
@@ -24,8 +26,7 @@ import pathlib
 import tempfile
 import zipfile
 
-
-FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
+FIELDSETS_ORDER = ["authority", "dates", "timestamp", "relationships", "categorization", "settings"]
 ADMIN_FIELDSETS = ["settings"]
 
 
@@ -118,6 +119,138 @@ class PublicationView(DefaultView):
 
     def get_state_title(self):
         return get_state_infos(self.context)["state_title"]
+
+    def get_linked_items(self, relationship, reverse=False):
+        if reverse:
+            relations = api.relation.get(target=self.context, relationship=relationship, unrestricted=False)
+        else:
+            relations = api.relation.get(source=self.context, relationship=relationship, unrestricted=False)
+        results = []
+        for rel in relations:
+            if reverse:
+                obj = rel.from_object
+            else:
+                obj = rel.to_object
+            try:
+                url = obj.absolute_url()
+            except Exception:
+                continue
+            try:
+                title = obj.Title()
+            except Exception:
+                title = getattr(obj, "title", url)
+
+            # Dates: context.toLocalizedTime accepts strings or DateTime
+            modified = getattr(obj, "ModificationDate", None)
+            if callable(modified):
+                modified = modified()
+
+            try:
+                description = obj.Description() or ""
+            except Exception:
+                description = getattr(obj, "description", "") or ""
+
+            try:
+                review_state = api.content.get_state(obj=obj)
+            except Exception:
+                review_state = None
+
+            results.append(
+                {
+                    "title": title,
+                    "url": url,
+                    "description": description,
+                    "portal_type": getattr(obj, "portal_type", ""),
+                    "modified": self.context.toLocalizedTime(modified, long_format=True)
+                    if modified
+                    else "",
+                    "review_state": review_state or "",
+                }
+            )
+        return results
+
+    def get_linked_publication_infos(self, reverse=False):
+        """Return the full chain of linked items through the given relationship.
+        """
+        chain = self.context.superseded_publications() if reverse else self.context.superseding_publications()
+        results = []
+        for obj in chain:
+            try:
+                url = obj.absolute_url()
+            except Exception:
+                continue
+
+            try:
+                title = obj.Title()
+            except Exception:
+                title = getattr(obj, "title", url)
+
+            effective = obj.effective()
+
+            try:
+                description = obj.Description() or ""
+            except Exception:
+                description = getattr(obj, "description", "") or ""
+
+            try:
+                review_state = api.content.get_state(obj=obj)
+            except Exception:
+                review_state = None
+
+            results.append(
+                {
+                    "title": title,
+                    "url": url,
+                    "description": description,
+                    "portal_type": getattr(obj, "portal_type", ""),
+                    "current": False,
+                    "effective": self.context.toLocalizedTime(effective, long_format=False)
+                    if effective
+                    else "",
+                    "review_state": review_state or "",
+                }
+            )
+        return results
+
+    @memoize
+    def superseded_items(self):
+        """Return list of dicts ready for the template."""
+        return self.get_linked_publication_infos(reverse=False)
+
+    def has_superseded_items(self):
+        return bool(self.superseded_items())
+
+    @memoize
+    def superseding_items(self):
+        """Return list of dicts ready for the template."""
+        return self.get_linked_items_chain("supersede", reverse=True)
+
+    def has_superseding_items(self):
+        return bool(self.superseding_items())
+
+    def timeline(self):
+        superseded_items = self.superseded_items()
+        superseding_items = self.superseding_items()
+        current_item = {"title": self.context.Title(),
+                        "url": self.context.absolute_url(),
+                        "description": self.context.Description() or "",
+                        "portal_type": getattr(self.context, "portal_type", ""),
+                        "current": True,
+                        "effective": self.context.toLocalizedTime(
+                            self.context.effective(),
+                            long_format=False
+                        )
+                        if self.context.effective() else "",
+                        "review_state": api.content.get_state(obj=self.context) or ""}
+        return list(reversed(superseded_items)) + [current_item] + list(superseding_items)
+
+    @memoize
+    def related_items(self):
+        """Return list of dicts ready for the template."""
+        return self.get_linked_items("relatedItems", reverse=False)
+
+    def has_related_items(self):
+        return bool(self.related_items())
 
 
 class PublicationASiCFileView(BrowserView):
