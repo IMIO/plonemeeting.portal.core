@@ -9,7 +9,9 @@ from plone.app.contenttypes.content import File
 from plone.app.contenttypes.interfaces import IFile
 from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
+from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
 from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
+from plone.memoize.instance import memoize
 from plone.autoform.directives import order_after
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
@@ -19,17 +21,23 @@ from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.utils import user_has_any_role
+from plonemeeting.portal.core.utils import user_has_any_role, get_linked_items_chain
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.permissions import ReviewPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission
+from z3c.relationfield import RelationChoice, RelationList
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
+
+def validate_no_already_superseded(value):
+    """Validator to prevent to supersede a publication already superseded."""
+    import pdb; pdb.set_trace() # TODO: REMOVE BEFORE FLIGHT ---------------------------------------------------
+    return True
 
 class IPublication(model.Schema, IFile, ITimestampableDocument):
     """Marker interface and Dexterity Python Schema for Publication"""
@@ -74,7 +82,7 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
     model.primary("file")
     file = NamedBlobFile(title="File", accept=("application/pdf",), required=False)
 
-    # Styling fieldset
+    # Authority fieldset
     model.fieldset(
         "authority",
         label=_("Authority"),
@@ -110,6 +118,26 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
     write_permission(timestamped_file="cmf.ManagePortal")
     timestamped_file = NamedBlobFile(title="Timestamped file", accept=("application/zip",), required=False)
 
+    model.fieldset(
+        "categorization",
+        fields=["supersede"],
+    )
+    widget(
+        "supersede",
+        ContentBrowserFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "recentlyUsed": True
+        },
+    )
+    supersede = RelationChoice(
+        title=_("Supersede"),
+        default=[],
+        vocabulary="plone.app.vocabularies.Catalog",
+        required=False,
+        constraint=validate_no_already_superseded,
+    )
+
     # Making sure timestamp file is accessible to anonymous.
     # By default it has a custom permission
     read_permission(timestamp="zope2.View")
@@ -141,6 +169,24 @@ class Publication(Container, File):
     def is_timestamped(self):
         return ITimeStamper(self).is_timestamped()
 
+    @memoize
+    def superseded_publications(self):
+        """Return list of previous publications."""
+        return get_linked_items_chain(self, "supersede", reverse=False)
+
+    def has_superseded_publications(self):
+        return bool(self.superseded_publications())
+
+    @memoize
+    def superseding_publications(self):
+        """Return list of dicts ready for the template."""
+        return get_linked_items_chain(self, "supersede", reverse=True)
+
+    def has_superseding_publications(self):
+        return bool(self.superseding_publications())
+
+    # Worflow related methods
+
     def may_back_to_private(self):
         """Only Manager may back to private except if
         current review_state is "planned"."""
@@ -160,7 +206,7 @@ class Publication(Container, File):
         if self.effective_date is None or self.effective_date <= DateTime():
             # Can't plan if no effective date or effective date in the past
             return False
-        return self.may_publish() # Same guard as may_publish
+        return self.may_publish()  # Same guard as may_publish
 
     def may_publish(self):
         """May publish if able to modify."""

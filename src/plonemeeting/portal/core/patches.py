@@ -7,15 +7,13 @@ from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
 from Products.CMFPlone.resources import utils
-from Products.CMFPlone.resources.utils import get_resource
 from Products.PortalTransforms.transforms import safe_html
 from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
 from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
-
+from Products.CMFPlone.resources.utils import get_resource
 import logging
-
 
 original_hasScript = safe_html.hasScript
 
@@ -32,9 +30,24 @@ def hasScript(s):
     return False
 
 
-safe_html.hasScript = hasScript
 logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)")
+safe_html.hasScript = hasScript
 
+orignal_get_resource = get_resource
+
+
+def get_resource(*args, **kwargs):
+    """Override to disable useless verbose logger when getting a resource."""
+    logger = logging.getLogger("Products.CMFPlone.resources.utils")
+    logger.disabled = True
+    try:
+        return orignal_get_resource(*args, **kwargs)
+    finally:
+        logger.disabled = False
+
+
+logger.info("Patching Products.CMFPlone.resources.utils (get_resource)")
+utils.get_resource = get_resource
 
 orignal_get_resource = get_resource
 
@@ -74,8 +87,8 @@ def get_contentbrowser_options(*args, **kwargs):  # pragma: no cover
     return res
 
 
-contentbrowser.get_contentbrowser_options = get_contentbrowser_options
 logger.info("Patching plone.app.z3cform.widgets import contentbrowser (get_contentbrowser_options)")
+contentbrowser.get_contentbrowser_options = get_contentbrowser_options
 
 
 def remove_behavior_field_fieldset(interface, fieldname):
@@ -91,7 +104,7 @@ def remove_behavior_field_fieldset(interface, fieldname):
             break
 
 
-remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")
 logger.info(
     "Patching plone.app.contenttypes.behaviors.tableofcontents to move ITableOfContents.table_of_contents field"
 )
+remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")

@@ -19,21 +19,9 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
         <div i18n:translate="" tal:condition="python:brain.is_timestamped"
           class="badge timestamp-badge info animated"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
         </div>
-        <div tal:condition="python: review_state == 'private'" i18n:translate=""
+        <div tal:content="review_state" i18n:translate=""
            tal:attributes="class string:state-${review_state} badge state-badge ms-2">
-          Private
-        </div>
-        <div tal:condition="python: review_state == 'published'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
-          Published
-        </div>
-        <div tal:condition="python: review_state == 'unpublished'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
-          Unpublished
-        </div>
-        <div tal:condition="python: review_state == 'planned'" i18n:translate=""
-           tal:attributes="class string:state-${review_state} badge state-badge ms-2">
-          Planned
+          State
         </div>
       </div>
     </div>
