@@ -465,7 +465,41 @@ def get_context_from_request():
             context = parent.context
     return context
 
+
 def user_has_any_role(roles, context):
     """Check if the user has at least one of the given roles in the given context."""
     user = api.user.get_current()
     return set(user.getRolesInContext(context)).intersection(set(roles))
+
+
+def get_linked_items_chain(context, relationship, reverse=False):
+    """Return the full chain of linked items through the given relationship.
+
+    Example:
+        A -> B -> C
+        get_linked_items(A, 'supersede') -> [B, C]
+        get_linked_items(C, 'supersede', reverse=True) -> [B, A]
+    """
+    visited = set()
+    chain = []
+    stack = [context]
+
+    while stack:
+        current = stack.pop()
+        if current in visited:
+            continue
+        visited.add(current)
+
+        if reverse:
+            rels = api.relation.get(target=current, relationship=relationship, unrestricted=False)
+        else:
+            rels = api.relation.get(source=current, relationship=relationship, unrestricted=False)
+
+        for rel in rels:
+            next_obj = rel.from_object if reverse else rel.to_object
+            if not next_obj or next_obj in visited:
+                continue
+            chain.append(next_obj)
+            stack.append(next_obj)
+
+    return chain

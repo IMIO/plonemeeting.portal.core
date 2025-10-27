@@ -1,7 +1,7 @@
 from AccessControl import Unauthorized
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
-from collective.documentgenerator.helper import DocumentGenerationHelperView
+from collective.documentgenerator.helper import DocumentGenerationHelperView, DXDocumentGenerationHelperView
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from html import escape
 from imio.helpers.barcode import generate_barcode
@@ -17,7 +17,7 @@ import copy
 import re
 
 
-class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
+class PMDocumentGenerationHelperView(DXDocumentGenerationHelperView):
     """Helper view for document generation."""
 
     def __init__(self, context, request):
@@ -54,6 +54,7 @@ class PMDocumentGenerationHelperView(DocumentGenerationHelperView):
             institution = self.utils_view.get_current_institution()
             if institution.template_logo:
                 return BytesIO(institution.template_logo.data)
+
         # 2) Site logo from registry if no institution logo for template
         site_logo = api.portal.get_registry_record("plone.site_logo")
         if site_logo:

@@ -9,12 +9,17 @@ import DarkModeToggle from "./components/DarkModeToggle";
 import LayoutSelect from "./components/LayoutSelect";
 import MeetingAgenda from "./components/MeetingAgenda";
 import Tooltip from "./components/Tooltip";
+import TableOfContent from "./components/TableOfContent";
+
+
+import registry from "@patternslib/patternslib/src/core/registry";
+
 
 // Loadable components, for code-splitting and lazy loading
 const TimestampCheck = loadable(() => import('./components/TimestampCheck'))
 const PdfViewer = loadable(() => import('./components/PdfViewer'));
-const InstitutionsMap = loadable(() => import('./components/InstitutionsMap'));
 
+const InstitutionsMap = loadable(() => import('./components/InstitutionsMap'));
 import "../theme/main.scss";
 
 register(CheckboxSelector, "x-checkbox-selector", ["scope", "checked"]);
@@ -27,6 +32,8 @@ register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
 register(InstitutionsMap, "x-institution-map", []);
 register(PdfViewer, "x-pdf-viewer", ["file"]);
 register(TimestampCheck, "x-timestamp-check", []);
+register(TableOfContent, "x-table-of-content", []);
+
 
 function setUpEnvironmentLabel() {
   let hostname = document.location.hostname;
@@ -45,7 +52,6 @@ function setUpEnvironmentLabel() {
   body.appendChild(span);
 }
 
-
 function displayInSettingsPath() {
   let settingsTab = document.body.querySelector(".institution_settings");
   if (settingsTab && document.body.className.includes("portaltype-institution")) {
@@ -59,3 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // As the tooltip accepts slots we need to use shadow dom and register it after DOMContentLoaded
   register(Tooltip, "x-tooltip", ["target-selector", "position"], {shadow: false});
 });
+
+
+const rootElement = document.documentElement;
+rootElement.addEventListener("turbo:render", (e) => {
+  // window.__patternslib_registry_initialized = false
+  //  window.__patternslib_registry = null
+  // if (window.Faceted) {
+  //   window.Faceted.Load();
+  //   console.log("FACETED REFRESH")
+  //   console.log(window.Faceted);
+  // }
+})
