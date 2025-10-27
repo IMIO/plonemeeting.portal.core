@@ -1,11 +1,28 @@
 Changelog
 =========
 
-2.2.4 (unreleased)
+2.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger when getting a resource.
+  [aduchene]
 
+2.2.5 (2025-10-24)
+------------------
+
+- Remove `x-twitter` in `site_socials` actions.
+  [aduchene]
+- SUP-48246: Human sort `global_categories` and `document_types` vocabularies.
+  [aduchene]
+- Add a new values for `document_types` vocabulary.
+  [aduchene]
+
+2.2.4 (2025-10-21)
+------------------
+
+- Inherit of `DXDocumentGenerationHelperView` instead of `DocumentGenerationHelperView`
+  in `docgen.PMDocumentGenerationHelperView`.
+  [aduchene]
 
 2.2.3 (2025-09-12)
 ------------------
