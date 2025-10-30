@@ -62,6 +62,8 @@ class MigrateTo2200(Migrator):
 def migrate(context):
     """
     This migration function will:
+        1) Configure collective.documentgenerator;
+        2) Configure plonemeeting portal config folder view.
     """
     migrator = MigrateTo2200(context)
     migrator.run()

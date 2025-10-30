@@ -6,6 +6,10 @@ Changelog
 
 - DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger when getting a resource.
   [aduchene]
+- DELIBE-58: Order global categories on faceted views too.
+  [aduchene]
+- Add a base `PlonemeetingMigrator` class to ease future migrations.
+  [aduchene]
 
 2.2.5 (2025-10-24)
 ------------------

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collections import namedtuple
+
 from plonemeeting.portal.core import _
 
 
@@ -8,6 +10,13 @@ FACETED_DEC_XML_PATH = "faceted/config/decisions.xml"
 
 FACETED_PUB_FOLDER_ID = "faceted_publications"
 FACETED_PUB_XML_PATH = "faceted/config/publications.xml"
+
+FacetedConfig = namedtuple('FacetedItem', ['folder_id', 'xml_path'])
+
+FACETED_CONFIGS = [
+    FacetedConfig(FACETED_DEC_FOLDER_ID, FACETED_DEC_XML_PATH),
+    FacetedConfig(FACETED_PUB_FOLDER_ID, FACETED_PUB_XML_PATH)
+]
 
 # appears in the URL so use french
 DEC_FOLDER_ID = "decisions"
