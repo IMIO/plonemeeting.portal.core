@@ -7,7 +7,8 @@
    i18n:domain="plonemeeting.portal.core"
    tal:define="utils_view nocall:context/@@utils_view;
   meeting nocall:context/aq_parent;
-  review_state python: utils_view.get_state(meeting);
+  state_infos python: utils_view.get_state_infos(meeting);
+  review_state state_infos/state_name;
   is_anon context/@@plone_portal_state/anonymous;">
 <body>
 
@@ -95,7 +96,7 @@
 
             </div>
           </x-tooltip>
-          <div class="card meeting-card">
+          <div class="card card-link" id="meeting-card">
             <a href="" class="filled-link"
                tal:attributes="href python: utils_view.get_meeting_url(meeting=meeting)">
             </a>
@@ -123,20 +124,15 @@
         <div class="col-lg-6 content-metadatas mb-3 mb-lg-0">
           <div class="content-metadata-row">
             <div class="content-metadata-col header">
-              <tal:state i18n:domain="plone" i18n:translate="">State</tal:state>
-              <!--?              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>-->
+              <tal:state i18n:translate="plone">State</tal:state>
+              <i id="state-tooltip" class="bi bi-question-circle help-icon" tal:condition="not: is_anon"></i>
             </div>
             <div class="content-metadata-col"
                i18n:domain="plone">
-                <span tal:condition="python: review_state == 'private'"
-                   i18n:translate=""
-                   tal:attributes="class string:badge state-badge state-${review_state}">Private</span>
-              <span tal:condition="python: review_state == 'in_project'"
+              <span tal:content="state_infos/state_title"
                  i18n:translate=""
-                 tal:attributes="class string:badge state-badge state-${review_state}">In project</span>
-              <span tal:condition="python: review_state == 'decision'"
-                 i18n:translate=""
-                 tal:attributes="class string:badge state-badge state-${review_state}">Decision</span>
+                 i18n:domain="plone"
+                 tal:attributes="class string:badge state-badge state-${review_state}">State</span>
             </div>
           </div>
           <div class="content-metadata-row">

@@ -32,9 +32,8 @@ def hasScript(s):
     return False
 
 
-safe_html.hasScript = hasScript
 logger.info("Patching Products.PortalTransforms.transforms.safe_html (hasScript)")
-
+safe_html.hasScript = hasScript
 
 orignal_get_resource = get_resource
 
@@ -51,6 +50,7 @@ def get_resource(*args, **kwargs):
 
 logger.info("Patching Products.CMFPlone.resources.utils (get_resource)")
 utils.get_resource = get_resource
+
 
 contentbrowser._original_get_contentbrowser_options = contentbrowser.get_contentbrowser_options
 
@@ -74,8 +74,8 @@ def get_contentbrowser_options(*args, **kwargs):  # pragma: no cover
     return res
 
 
-contentbrowser.get_contentbrowser_options = get_contentbrowser_options
 logger.info("Patching plone.app.z3cform.widgets import contentbrowser (get_contentbrowser_options)")
+contentbrowser.get_contentbrowser_options = get_contentbrowser_options
 
 
 def remove_behavior_field_fieldset(interface, fieldname):
@@ -91,7 +91,7 @@ def remove_behavior_field_fieldset(interface, fieldname):
             break
 
 
-remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")
 logger.info(
     "Patching plone.app.contenttypes.behaviors.tableofcontents to move ITableOfContents.table_of_contents field"
 )
+remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")

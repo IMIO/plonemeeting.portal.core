@@ -1,14 +1,46 @@
 Changelog
 =========
 
-2.2.6 (unreleased)
+2.3.0 (unreleased)
 ------------------
 
-- DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger when getting a resource.
+- DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger
+  when getting a resource.
+  [aduchene]
+- DELIBE-152: Add new state `archived` to `publication_workflow` and allow institution manager to archive publications.
+  [aduchene]
+- DELIBE-152: Add 2 new groups `*-publications-creators` and `*-publications-reviewer`
+  for each institution to manage publication creation and review.
+  [aduchene]
+- DELIBE-152: Add new state `proposed` to `publication_workflow` and allow creators to propose publications for review.
+  [aduchene]
+- DELIBE-152: Add new `Supersede` behavior to `Publication` content type to manage publication versions.
+  [aduchene]
+- Reorder fiels and fieldsets on `Institution`.
+  [aduchene]
+- New overridable translations to keep them when updating the translations to ease navigation on the page.
+  [aduchene]
+- Begin implementation of a generic table of contents for publications.
+  [aduchene]
+- Refactor how review_state is displayed and translated across the package.
+  [aduchene]
+- Refactor forms to use the same `BaseAddForm` and `BaseEditForm` for content types.
+  Allowing to sort fieldsets and to hide some fieldsets to non plone site administrators.
+  [aduchene]
+- Add 2 configurable default texts on `Institution` to be used on when a new publication is created:
+  `default_publication_consultation_text`, `default_publication_text`.
+  [aduchene]
+- Add new field `archived_publication_warning_text` on `Institution` to display
+  a warning message on archived publications.
+  [aduchene]
+- Add a configurable default text on `Institution` to be used on when a new meeting is imported:
+  `default_meeting_custom_info`.
   [aduchene]
 - DELIBE-58: Order global categories on faceted views too.
   [aduchene]
 - Add a base `PlonemeetingMigrator` class to ease future migrations.
+  [aduchene]
+- Improve login page.
   [aduchene]
 
 2.2.5 (2025-10-24)

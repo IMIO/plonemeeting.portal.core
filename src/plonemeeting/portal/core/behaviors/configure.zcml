@@ -1,19 +1,28 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="plonemeeting.portal.core">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="plonemeeting.portal.core">
 
   <include
-      package="plone.behavior"
-      file="meta.zcml" />
+    package="plone.behavior"
+    file="meta.zcml"/>
 
   <plone:behavior
-      name="pm.autopublishing"
-      title="PM Autopublishing"
-      description="PM autopublishing for Managers and True by default"
-      provides=".autopublish.IPMAutoPublishing"
-      for="plone.dexterity.interfaces.IDexterityContent" />
+    name="pm.autopublishing"
+    title="PM Autopublishing"
+    description="PM autopublishing for Managers and True by default"
+    provides=".autopublish.IPMAutoPublishing"
+    for="plone.dexterity.interfaces.IDexterityContent"/>
+
+  <plone:behavior
+    title="Supersede"
+    name="pm.supersede"
+    description="This behavior adds supersede functionality to a content type."
+    marker=".supersede.ISupersede"
+    provides=".supersede.ISupersede"
+    for="plone.dexterity.interfaces.IDexterityContent"
+  />
 
 </configure>

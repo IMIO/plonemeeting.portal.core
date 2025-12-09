@@ -3,6 +3,7 @@
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from plone import api
 from plone.app.textfield.value import IRichTextValue
+from plone.app.textfield.value import RichTextValue
 from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
@@ -72,14 +73,20 @@ def get_text_from_richtext(field):  # pragma: no cover
         return safe_unicode(text)
 
 
-def default_translator(msgstring, **replacements):  # pragma: no cover
+def default_translator(msgstring, html=False, **replacements):  # pragma: no cover
     @provider(IContextAwareDefaultFactory)
     def context_provider(context):
         value = translate(msgstring, context=getRequest())
         if replacements:
             value = value.format(**replacements)
+        if html:
+            return RichTextValue(
+                raw=value,
+                mimeType='text/html',
+                outputMimeType='text/html',
+                encoding='utf-8'
+            )
         return value
-
     return context_provider
 
 
@@ -305,6 +312,16 @@ def get_api_url_for_representatives(institution):
         return
 
 
+def create_faceted_folder(container, title, id):
+    folder = api.content.create(
+        type="Folder", title=title, container=container, id=id
+    )
+    alsoProvides(folder, IPossibleFacetedNavigable)
+    subtyper = getMultiAdapter((folder, folder.REQUEST), name=u'faceted_subtyper')
+    subtyper.enable()
+    return folder
+
+
 def set_constrain_types(obj, portal_type_ids, mode=1):
     behavior = ISelectableConstrainTypes(obj)
     behavior.setConstrainTypesMode(mode)
@@ -454,3 +471,42 @@ def get_context_from_request():
         if parent.__class__.__name__ != "Application":
             context = parent.context
     return context
+
+
+def user_has_any_role(roles, context):
+    """Check if the user has at least one of the given roles in the given context."""
+    user = api.user.get_current()
+    return set(user.getRolesInContext(context)).intersection(set(roles))
+
+
+def get_linked_items_chain(context, relationship, reverse=False, unrestricted=False):
+    """Return the full chain of linked items through the given relationship.
+
+    Example:
+        A -> B -> C
+        get_linked_items(A, 'supersede') -> [B, C]
+        get_linked_items(C, 'supersede', reverse=True) -> [B, A]
+    """
+    visited = set()
+    chain = []
+    stack = [context]
+
+    while stack:
+        current = stack.pop()
+        if current in visited:
+            continue
+        visited.add(current)
+
+        if reverse:
+            rels = api.relation.get(target=current, relationship=relationship, unrestricted=unrestricted)
+        else:
+            rels = api.relation.get(source=current, relationship=relationship, unrestricted=unrestricted)
+
+        for rel in rels:
+            next_obj = rel.from_object if reverse else rel.to_object
+            if not next_obj or next_obj in visited:
+                continue
+            chain.append(next_obj)
+            stack.append(next_obj)
+
+    return chain

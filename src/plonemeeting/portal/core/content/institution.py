@@ -160,13 +160,44 @@ class IInstitution(model.Schema):
         default=[DEC_FOLDER_ID, PUB_FOLDER_ID],
     )
 
-    meeting_type = schema.Choice(
-        title=_("Meeting Type"),
-        vocabulary="plonemeeting.portal.vocabularies.meeting_types",
-        required=True,
-        default="council",
+    webstats_js = schema.SourceText(
+        title=_("JavaScript integrations"),
+        description=_(
+            "For enabling third-party JavaScript integrations "
+            "from external providers (e.g. Google "
+            "Analytics). Paste the provided code snippet here. "
+            "It will be rendered as "
+            "entered near the end of the page."
+        ),
+        default="",
+        required=False,
     )
 
+    url_rgpd = schema.TextLine(
+        title=_("Custom page for GDPR text"),
+        description=_("The url visitors should be redirected to when clicking a GDPR masked text"),
+        required=False,
+    )
+
+    # iA.Delib integration fieldset
+    model.fieldset(
+        "iadelib",
+        label=_("iA.Délib"),
+        fields=[
+            "plonemeeting_url",
+            "username",
+            "password",
+            "meeting_config_id",
+            "meeting_type",
+            "meeting_filter_query",
+            "item_filter_query",
+            "item_content_query",
+            "item_title_formatting_tal",
+            "item_decision_formatting_tal",
+            "item_additional_data_formatting_tal",
+            "info_annex_formatting_tal",
+        ]
+    )
     plonemeeting_url = schema.URI(title=_("Plonemeeting URL"), required=False)
 
     username = schema.TextLine(title=_("Username"), required=False)
@@ -174,6 +205,13 @@ class IInstitution(model.Schema):
     password = schema.TextLine(title=_("Password"), required=False)
 
     meeting_config_id = schema.TextLine(title=_("Meeting config ID"), required=True, default="meeting-config-council")
+
+    meeting_type = schema.Choice(
+        title=_("Meeting Type"),
+        vocabulary="plonemeeting.portal.vocabularies.meeting_types",
+        required=True,
+        default="council",
+    )
 
     directives.widget(
         "meeting_filter_query",
@@ -223,30 +261,6 @@ class IInstitution(model.Schema):
         value_type=DictRow(title="Parameter name", schema=IUrlParameterRowSchema),
         default=[{"parameter": "extra_include", "value": "public_deliberation"}],
     )
-    # Formatting fieldset
-    model.fieldset(
-        "formatting",
-        label=_("Formatting"),
-        fields=[
-            "project_decision_disclaimer",
-            "item_title_formatting_tal",
-            "item_decision_formatting_tal",
-            "item_additional_data_formatting_tal",
-            "info_annex_formatting_tal",
-        ],
-    )
-
-    url_rgpd = schema.TextLine(
-        title=_("Custom page for GDPR text"),
-        description=_("The url visitors should be redirected to when clicking a GDPR masked text"),
-        required=False,
-    )
-
-    project_decision_disclaimer = RichText(
-        title=_("Project decision disclaimer"),
-        required=False,
-        defaultFactory=default_translator(_("default_in_project_disclaimer", default="")),
-    )
 
     item_title_formatting_tal = schema.TextLine(
         title=_("Item title formatting tal expression. " "If empty the default title will be used"),
@@ -264,19 +278,6 @@ class IInstitution(model.Schema):
     )
 
     info_annex_formatting_tal = schema.TextLine(title=_("Info annex formatting tal expression"), required=False)
-
-    webstats_js = schema.SourceText(
-        title=_("JavaScript integrations"),
-        description=_(
-            "For enabling third-party JavaScript integrations "
-            "from external providers (e.g. Google "
-            "Analytics). Paste the provided code snippet here. "
-            "It will be rendered as "
-            "entered near the end of the page."
-        ),
-        default="",
-        required=False,
-    )
 
     # Mapping fieldset
     model.fieldset(
@@ -323,21 +324,56 @@ class IInstitution(model.Schema):
         required=False,
     )
 
+    # Decisions fieldset
+    model.fieldset(
+        "decisions",
+        label=_("Decisions"),
+        fields=[
+            "project_decision_disclaimer",
+            "default_meeting_custom_info"
+        ],
+    )
+
+    project_decision_disclaimer = RichText(
+        title=_("Project decision disclaimer"),
+        required=False,
+        defaultFactory=default_translator(_("default_in_project_disclaimer", default="")),
+    )
+
+    default_meeting_custom_info = RichText(
+        title=_("Default meeting custom info"),
+        description=_("default_meeting_custom_info_description"),
+        required=False
+    )
+
     # Publications fieldset
     model.fieldset(
         "publications",
         label=_("Publications"),
         fields=[
-            "publications_power_users",
+            "default_publication_text",
+            "default_publication_consultation_text",
+            "archived_publication_warning_text"
         ],
     )
 
-    directives.widget("publications_power_users", CheckBoxFieldWidget, multiple="multiple")
-    publications_power_users = schema.List(
-        title=_("Power users"),
-        description=_("power_users_description"),
-        value_type=schema.Choice(vocabulary="plonemeeting.portal.vocabularies.publications_power_users"),
-        required=True,
+    default_publication_text = RichText(
+        title=_("Default publication text"),
+        description=_("default_publication_text_description"),
+        required=False
+    )
+
+    default_publication_consultation_text = RichText(
+        title=_("Default publication consultation text"),
+        description=_("default_publication_consultation_text_description"),
+        required=False
+    )
+
+    archived_publication_warning_text = RichText(
+        title=_("Archived publication warning text"),
+        description=_("archived_publication_warning_text_description"),
+        defaultFactory=default_translator(_("default_archived_publication_warning_text", default=""), html=True),
+        required=False
     )
 
     # Styling fieldset

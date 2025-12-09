@@ -49,6 +49,10 @@ def publication_state_changed(publication, event):
         return
 
     if event.new_state.id == 'published':
+        if event.old_state.id == "archived":
+            # Don't regenerate timestamp if publication is archived, because it was still
+            # accessible to the public. Shouldn't be very much used anyway.
+            return
         if publication.enable_timestamping:
             timestamper = ITimeStamper(publication)
             if timestamper.is_timestamped():

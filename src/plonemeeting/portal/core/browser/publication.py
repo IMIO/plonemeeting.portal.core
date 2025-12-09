@@ -1,52 +1,49 @@
-from asn1crypto import tsp
-from collective.timestamp.interfaces import ITimeStamper
-from imio.helpers.workflow import get_state_infos
-from imio.pyutils.utils import sort_by_indexes
-from plone import api
-from plone.app.content.browser.content_status_modify import ContentStatusModifyView
-from plone.dexterity.browser.add import DefaultAddForm
-from plone.dexterity.browser.add import DefaultAddView
-from plone.dexterity.browser.edit import DefaultEditForm
-from plone.dexterity.browser.view import DefaultView
-from plone.dexterity.events import EditCancelledEvent
-from plonemeeting.portal.core import _
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
-from z3c.form import button
-from zope.event import notify
-from ZPublisher.Iterators import filestream_iterator
-
+import copy
 import os
 import pathlib
 import tempfile
 import zipfile
 
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from ZPublisher.Iterators import filestream_iterator
+from asn1crypto import tsp
+from collective.timestamp.interfaces import ITimeStamper
+from plone import api
+from plone.app.content.browser.content_status_modify import ContentStatusModifyView
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.view import DefaultView
+from plone.dexterity.events import EditCancelledEvent
+from plone.memoize.view import memoize
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
+from plonemeeting.portal.core.browser import BaseAddForm
+from plonemeeting.portal.core.browser import BaseEditForm
+from z3c.form import button
+from zope.event import notify
 
-FIELDSETS_ORDER = ["authority", "dates", "timestamp", "categorization", "settings"]
-ADMIN_FIELDSETS = ["settings"]
+
+class PublicationForm:
+    zope_admin_fieldsets = ["settings"]
+    fieldsets_order = ["dates", "authority", "timestamp", "relationships", "categorization", "settings"]
 
 
-class AddForm(DefaultAddForm):
+class AddForm(PublicationForm, BaseAddForm):
     """Override to reorder and filter out fieldsets."""
 
-    def updateFields(self):
-        super(AddForm, self).updateFields()
-        indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
-        groups = sort_by_indexes(self.groups, indexes)
-        pm = getToolByName(self.context, "portal_membership")
-        if not pm.checkPermission("Manage portal", self.context):
-            groups = filter(lambda g: g.__name__ not in ADMIN_FIELDSETS, groups)
-        self.groups = groups
+    def updateWidgets(self):
+        super().updateWidgets()
+        self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
+        self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
 
 
 class PublicationAdd(DefaultAddView):
     form = AddForm
 
 
-class EditForm(DefaultEditForm):
+class EditForm(PublicationForm, BaseEditForm):
     """Override to reorder and filter out fieldsets."""
 
     def render(self):
@@ -70,15 +67,6 @@ class EditForm(DefaultEditForm):
         IStatusMessage(self.request).addStatusMessage(_("Edit cancelled"), "info")
         self.request.response.redirect(self.nextURL())
         notify(EditCancelledEvent(self.context))
-
-    def updateFields(self):
-        super(EditForm, self).updateFields()
-        indexes = [FIELDSETS_ORDER.index(group.__name__) for group in self.groups]
-        groups = sort_by_indexes(self.groups, indexes)
-        pm = getToolByName(self.context, "portal_membership")
-        if not pm.checkPermission("Manage portal", self.context):
-            groups = filter(lambda g: g.__name__ not in ADMIN_FIELDSETS, groups)
-        self.groups = groups
 
 
 class PublicationView(DefaultView):
@@ -116,8 +104,67 @@ class PublicationView(DefaultView):
     def get_entry_date(self):
         return self.context.entry_date.strftime("%d/%m/%Y") if self.context.entry_date else "-"
 
-    def get_state_title(self):
-        return get_state_infos(self.context)["state_title"]
+    def _get_linked_obj_infos(self, obj):
+        url = obj.absolute_url()
+        try:
+            title = obj.Title()
+        except Exception:
+            title = getattr(obj, "title", url)
+
+        effective = obj.effective()
+
+        try:
+            description = obj.Description() or ""
+        except Exception:
+            description = getattr(obj, "description", "") or ""
+
+        try:
+            review_state = api.content.get_state(obj=obj)
+        except Exception:
+            review_state = None
+
+        portal_type = getattr(obj, "portal_type", "")
+        if portal_type == "Item":
+            portal_type = "Decision"
+
+        return {
+            "title": title,
+            "url": url,
+            "description": description,
+            "portal_type": portal_type,
+            "current": self.context == obj,
+            "effective": self.context.toLocalizedTime(effective, long_format=False)
+            if effective
+            else "",
+            "review_state": review_state or "",
+        }
+
+    @memoize
+    def timeline(self):
+        supersede_adapter = SupersedeAdapter(self.context)
+        superseding_items = supersede_adapter.superseded_by_items()
+        current_item = self.context
+        superseded_items = supersede_adapter.supersedes_items()
+        objs_timeline = list(reversed(superseding_items)) + [current_item] + superseded_items
+        results = []
+        for obj in objs_timeline:
+            if not api.user.has_permission('View', obj=obj):
+                continue
+            results.append(
+                self._get_linked_obj_infos(obj)
+            )
+        return results
+
+    def has_timeline(self):
+        return bool(self.timeline())
+
+    @memoize
+    def related_items(self):
+        """Return list of related items."""
+        return [self._get_linked_obj_infos(rel.to_object) for rel in api.relation.get(source=self.context, relationship="relatedItems")]
+
+    def has_related_items(self):
+        return bool(self.related_items())
 
 
 class PublicationASiCFileView(BrowserView):

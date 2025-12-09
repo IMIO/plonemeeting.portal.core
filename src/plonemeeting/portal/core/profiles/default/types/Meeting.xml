@@ -2,7 +2,7 @@
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     name="Meeting"
     meta_type="Dexterity FTI"
-    i18n:domain="plonemeeting.portal.core">
+    i18n:domain="plone">
 
   <!-- Basic properties -->
   <property

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from imio.helpers.content import richtextval
 from imio.migrator.utils import end_time
 from plone import api
@@ -17,6 +16,7 @@ from Products.CMFCore.Expression import Expression
 from Products.CMFCore.Expression import getExprContext
 from zope.i18n import translate
 
+import copy
 import dateutil.parser
 import json
 import pytz
@@ -295,6 +295,8 @@ def sync_meeting_data(institution, meeting_data):
                 container=decisions, type="Meeting", title=meeting_title
             )
         meeting.plonemeeting_uid = meeting_uid
+        if institution.default_meeting_custom_info:
+            meeting.custom_infos = institution.default_meeting_custom_info
     else:
         meeting = brains[0].getObject()
     # XXX compatibility, with DX there is no more "modification_date"
@@ -337,6 +339,9 @@ def sync_meeting(institution, meeting_external_uid, force=False, with_annexes=Tr
                               force=force,
                               with_annexes=with_annexes,
                               item_external_uids=item_external_uids)
+
+    if institution.default_meeting_custom_info and not meeting.custom_info:
+        meeting.custom_info = copy.deepcopy(institution.default_meeting_custom_info)
 
     status_msg = _(
         u"meeting_imported",

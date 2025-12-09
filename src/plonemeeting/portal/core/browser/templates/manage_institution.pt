@@ -52,7 +52,7 @@
                   data-bs-target="#pills-general"
                   type="button"
                   role="tab"
-                  aria-controls="pills-general" i18n:translate="label_general">
+                  aria-controls="pills-general" i18n:domain="plone" i18n:translate="">
             General
           </button>
         </li>

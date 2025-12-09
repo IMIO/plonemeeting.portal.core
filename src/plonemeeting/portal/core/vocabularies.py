@@ -14,6 +14,7 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
 import copy
 import json
 import requests
@@ -30,19 +31,6 @@ class EnabledTabsVocabularyFactory:
 
 
 EnabledTabsVocabulary = EnabledTabsVocabularyFactory()
-
-
-class PublicationsPowerUsersVocabularyFactory:
-    def __call__(self, context):
-        return SimpleVocabulary(
-            (
-                SimpleTerm(value="gbastien", title="Gauthier Bastien"),
-                SimpleTerm(value="gbastien2", title="Gauthier Bastien2"),
-            ),
-        )
-
-
-PublicationsPowerUsersVocabulary = PublicationsPowerUsersVocabularyFactory()
 
 
 class GlobalCategoryVocabularyFactory:
