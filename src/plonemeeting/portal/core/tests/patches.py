@@ -1,5 +1,6 @@
 from collective.documentgenerator import utils as dg_utils
 
+
 old_clean_notes = dg_utils.clean_notes
 
 

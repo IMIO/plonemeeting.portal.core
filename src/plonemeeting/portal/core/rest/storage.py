@@ -1,12 +1,11 @@
-from Products.CMFCore.utils import getToolByName
-import sys
-import pickle
-import logging
-from ZODB.blob import Blob
 from plone.namedfile.interfaces import INamed
 from plone.restapi.services import Service
+from plonemeeting.portal.core import logger
+from Products.CMFCore.utils import getToolByName
+from ZODB.blob import Blob
 
-logger = logging.getLogger("my.package.restapi.base_stats")
+import pickle
+import sys
 
 
 class BaseContentStatsService:

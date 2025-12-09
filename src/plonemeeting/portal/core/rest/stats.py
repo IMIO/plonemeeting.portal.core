@@ -1,13 +1,11 @@
-# my/package/restapi/fields_usage_stats.py
-import random
-import logging
-from plone.restapi.services import Service
-from Products.CMFCore.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import getAdditionalSchemata
+from plone.restapi.services import Service
+from plonemeeting.portal.core import logger
+from Products.CMFCore.utils import getToolByName
 from zope.schema import getFieldsInOrder
 
-logger = logging.getLogger("my.package.fields_usage_stats")
+import random
 
 
 class FieldsUsageStatsGet(Service):

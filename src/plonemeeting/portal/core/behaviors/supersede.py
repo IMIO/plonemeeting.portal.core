@@ -2,13 +2,12 @@ from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
 from plone.autoform.directives import widget
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
+from plonemeeting.portal.core import _
 from plonemeeting.portal.core.utils import get_linked_items_chain
 from z3c.relationfield import RelationChoice
-from zope.interface import provider, implementer
-
-from plonemeeting.portal.core import _
-
+from zope.interface import implementer
 from zope.interface import Invalid
+from zope.interface import provider
 
 
 def validate_no_already_superseded(value):

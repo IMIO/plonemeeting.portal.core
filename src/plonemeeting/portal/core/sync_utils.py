@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import copy
-
 from imio.helpers.content import richtextval
 from imio.migrator.utils import end_time
 from plone import api
@@ -18,6 +16,7 @@ from Products.CMFCore.Expression import Expression
 from Products.CMFCore.Expression import getExprContext
 from zope.i18n import translate
 
+import copy
 import dateutil.parser
 import json
 import pytz

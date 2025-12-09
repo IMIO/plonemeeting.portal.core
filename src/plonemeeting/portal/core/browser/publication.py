@@ -1,5 +1,3 @@
-import copy
-
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from plone import api
@@ -9,16 +7,18 @@ from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.memoize.view import memoize
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
+from plonemeeting.portal.core.browser import BaseAddForm
+from plonemeeting.portal.core.browser import BaseEditForm
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
-from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
-from plonemeeting.portal.core.browser import BaseAddForm, BaseEditForm
 from z3c.form import button
 from zope.event import notify
 from ZPublisher.Iterators import filestream_iterator
 
+import copy
 import os
 import pathlib
 import tempfile

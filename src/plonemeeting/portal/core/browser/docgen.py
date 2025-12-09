@@ -1,14 +1,12 @@
-import re
-
 from AccessControl import Unauthorized
 from collective.behavior.talcondition.utils import WRONG_TAL_CONDITION
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
-from collective.documentgenerator.helper import DocumentGenerationHelperView, DXDocumentGenerationHelperView
+from collective.documentgenerator.helper import DocumentGenerationHelperView
+from collective.documentgenerator.helper import DXDocumentGenerationHelperView
 from collective.timestamp.behaviors.timestamp import ITimestampableDocument
 from html import escape
 from imio.helpers.barcode import generate_barcode
 from io import BytesIO
-
 from lxml.etree import fromstring
 from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file

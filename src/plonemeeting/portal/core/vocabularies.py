@@ -14,6 +14,7 @@ from plonemeeting.portal.core.utils import get_api_url_for_meetings
 from plonemeeting.portal.core.utils import get_context_from_request
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
 import copy
 import json
 import requests

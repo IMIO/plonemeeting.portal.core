@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from plone.dexterity.browser.view import DefaultView
-from plonemeeting.portal.core.browser import BaseAddForm, BaseEditForm
+from plonemeeting.portal.core import _
+from plonemeeting.portal.core.browser import BaseAddForm
+from plonemeeting.portal.core.browser import BaseEditForm
 from plonemeeting.portal.core.browser.utils import path_to_dx_default_template
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
-from zope.browserpage import ViewPageTemplateFile
 from z3c.form import button
-from plonemeeting.portal.core import _
+from zope.browserpage import ViewPageTemplateFile
 
 
 class MeetingForm:
