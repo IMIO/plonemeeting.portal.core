@@ -29,6 +29,31 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <plone:service
+    name="fields-usage-stats"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    method="GET"
+    factory=".stats.FieldsUsageStatsGet"
+    permission="cmf.ManagePortal"
+  />
+
+  <plone:service
+    name="db-size-stats"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    method="GET"
+    factory=".storage.DBSizeStatsGet"
+    permission="cmf.ManagePortal"
+  />
+
+  <plone:service
+    name="content-count-stats"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    method="GET"
+    factory=".storage.ContentCountStatsGet"
+    permission="cmf.ManagePortal"
+  />
+
+
   <!-- Serializers -->
   <adapter factory=".serializers.InstitutionSerializerToJson"/>
   <adapter factory=".serializers.MeetingSerializerToJson"/>

@@ -50,6 +50,28 @@
     permission="zope2.View"
   />
 
+  <adapter
+    for="Products.CMFCore.interfaces.IFolderish
+           plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+    provides="zope.publisher.interfaces.browser.IBrowserPage"
+    factory=".meeting.MeetingAddForm"
+    name="Meeting"
+  />
+
+  <class class=".meeting.MeetingAddForm">
+    <require
+      permission="cmf.AddPortalContent"
+      interface="zope.publisher.interfaces.browser.IBrowserPage"/>
+  </class>
+
+  <browser:page
+    for="plonemeeting.portal.core.content.meeting.IMeeting"
+    name="edit"
+    class=".meeting.MeetingEditForm"
+    permission="cmf.ModifyPortalContent"
+  />
+
   <browser:page
     name="view"
     for="plonemeeting.portal.core.content.item.IItem"

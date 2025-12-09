@@ -8,7 +8,10 @@
 
 domain=plonemeeting.portal.core
 i18ndude rebuild-pot --pot $domain.pot --create $domain ../
+i18ndude merge --p $domain.pot -m $domain-overrides.pot
 i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po
 
 domain=plone
+i18ndude rebuild-pot --pot $domain.pot --create $domain ../profiles/default
+i18ndude merge --p $domain.pot -m $domain-overrides.pot
 i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po

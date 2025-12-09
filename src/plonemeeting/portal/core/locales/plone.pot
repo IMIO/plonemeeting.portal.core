@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-12-18 14:08+0000\n"
+"POT-Creation-Date: 2025-12-09 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,20 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Archive"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Archive the publication."
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Archived"
+msgstr ""
+
 #: ../profiles/default/workflows/institution_workflow/definition.xml
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Back to private"
 msgstr ""
@@ -26,27 +39,132 @@ msgstr ""
 msgid "Back to project"
 msgstr ""
 
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Can only be seen and edited by the Editors."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+msgid "Can only be seen and edited by the Manager."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Comment about the last transition"
+msgstr ""
+
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Decision"
+msgstr ""
+
+#: ../profiles/default/types/Institution.xml
+#: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
+msgid "Edit"
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+msgid "Folder workflow useable only by Managers."
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Github"
 msgstr ""
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "In project"
 msgstr ""
 
+#: ../profiles/default/types/Institution.xml
+msgid "Institution"
+msgstr ""
+
 #: ../profiles/default/workflows/institution_workflow/definition.xml
 msgid "Institution Workflow"
+msgstr ""
+
+#: ../profiles/default/types/Item.xml
+msgid "Item"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "LinkedIn"
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+msgid "Making an item private means that it will not be visible to anyone but the Manager."
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Making an item private."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+msgid "Manager workflow for Folders"
+msgstr ""
+
+#: ../profiles/default/types/Meeting.xml
+msgid "Meeting"
 msgstr ""
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Meeting Workflow"
 msgstr ""
 
-#: ../profiles/default/workflows/institution_workflow/definition.xml
-msgid "Private"
+#: ../profiles/default/registry.xml
+msgid "Metadata"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Move item to proposed state for review."
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Plan"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Planned"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Planned to be auto-published."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Previous transition"
 msgstr ""
 
 #: ../profiles/default/workflows/institution_workflow/definition.xml
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/meeting_workflow/definition.xml
+msgid "Private"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Propose"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Proposed"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Proposed for review; visible to Editors and Publication Reviewer, not yet public."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Provides access to workflow history"
+msgstr ""
+
+#: ../profiles/default/types/Publication.xml
+msgid "Publication"
+msgstr ""
+
+#: ../profiles/default/workflows/institution_workflow/definition.xml
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Publish"
 msgstr ""
 
@@ -55,11 +173,27 @@ msgid "Publish decision"
 msgstr ""
 
 #: ../profiles/default/workflows/institution_workflow/definition.xml
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Published"
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Publishing the item makes it visible to other users."
 msgstr ""
 
 #: ../profiles/default/workflows/meeting_workflow/definition.xml
 msgid "Send to project"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Site web"
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "The ID of the user who performed the last transition"
 msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
@@ -71,33 +205,41 @@ msgid "Unpublished"
 msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Planned"
+msgid "Unpublishing an item will hide it, it can be published again."
+msgstr ""
+
+#: ../profiles/default/types/Institution.xml
+#: ../profiles/default/types/Item.xml
+#: ../profiles/default/types/Meeting.xml
+msgid "View"
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+msgid "Visible to everyone, editable by the Manager."
 msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Plan"
+msgid "Visible to everyone, not editable by anyone but marked as archived."
 msgstr ""
-
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Proposed"
-msgstr "Proposé"
+msgid "Visible to everyone, not editable by the Editors."
+msgstr ""
+
+#: ../profiles/default/workflows/manager_folder_workflow/definition.xml
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "When the previous transition was performed"
+msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
-msgid "Propose"
-msgstr "Proposer"
-
-#. Default: "Allowed types: ${accepted_types}."
-#: To be removed when managed in plone.app.locales
-msgid "namedfile_accepted_types"
+msgid "Workflow for Publications"
 msgstr ""
 
-#. Default: "Help effective date"
-#: Overrided by plonemeeting.portal.core
-msgid "help_effective_date"
+#: ../profiles/default/actions.xml
+msgid "Youtube"
 msgstr ""
 
-#. Default: "Help expiration date"
-#: Overrided by plonemeeting.portal.core
-msgid "help_expiration_date"
+#. Default: "Related Items"
+#: plone.app.relationfield/plone/app/relationfield/behavior.py:17
+msgid "label_related_items"
 msgstr ""

@@ -27,6 +27,24 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <browser:viewlet
+    name="plone.relateditems"
+    for="plonemeeting.portal.core.content.item.IItem"
+    manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+    class=".overrides.HiddenViewlet"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:viewlet
+    name="plone.relateditems"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+    class=".overrides.HiddenViewlet"
+    permission="zope2.View"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
   <!-- Disable the default document generation link viewlet because we'll use our own -->
   <unconfigure package="collective.documentgenerator">
     <browser:viewlet

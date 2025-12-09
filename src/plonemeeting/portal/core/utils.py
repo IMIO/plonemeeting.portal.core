@@ -2,7 +2,7 @@
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from plone import api
-from plone.app.textfield.value import IRichTextValue
+from plone.app.textfield.value import IRichTextValue, RichTextValue
 from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
@@ -72,14 +72,20 @@ def get_text_from_richtext(field):  # pragma: no cover
         return safe_unicode(text)
 
 
-def default_translator(msgstring, **replacements):  # pragma: no cover
+def default_translator(msgstring, html=False, **replacements):  # pragma: no cover
     @provider(IContextAwareDefaultFactory)
     def context_provider(context):
         value = translate(msgstring, context=getRequest())
         if replacements:
             value = value.format(**replacements)
+        if html:
+            return RichTextValue(
+                raw=value,
+                mimeType='text/html',
+                outputMimeType='text/html',
+                encoding='utf-8'
+            )
         return value
-
     return context_provider
 
 
@@ -472,7 +478,7 @@ def user_has_any_role(roles, context):
     return set(user.getRolesInContext(context)).intersection(set(roles))
 
 
-def get_linked_items_chain(context, relationship, reverse=False):
+def get_linked_items_chain(context, relationship, reverse=False, unrestricted=False):
     """Return the full chain of linked items through the given relationship.
 
     Example:
@@ -491,9 +497,9 @@ def get_linked_items_chain(context, relationship, reverse=False):
         visited.add(current)
 
         if reverse:
-            rels = api.relation.get(target=current, relationship=relationship, unrestricted=False)
+            rels = api.relation.get(target=current, relationship=relationship, unrestricted=unrestricted)
         else:
-            rels = api.relation.get(source=current, relationship=relationship, unrestricted=False)
+            rels = api.relation.get(source=current, relationship=relationship, unrestricted=unrestricted)
 
         for rel in rels:
             next_obj = rel.from_object if reverse else rel.to_object

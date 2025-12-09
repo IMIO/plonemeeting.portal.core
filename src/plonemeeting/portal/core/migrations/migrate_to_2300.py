@@ -39,6 +39,7 @@ class MigrateTo2300(Migrator):
             )
 
             group_id = get_publication_creators_group_id(institution)
+            # Check group exists
             group_title = "{0} Publications Creators".format(institution.title)
             api.group.create(groupname=group_id, title=group_title)
             institution.manage_setLocalRoles(group_id, ["Reader"])

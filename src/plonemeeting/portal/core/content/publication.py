@@ -10,12 +10,15 @@ from plone.app.contenttypes.interfaces import IFile
 from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
 from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
+from plone.app.z3cform.widgets.datetime import DatetimeFieldWidget
 from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
 from plone.memoize.instance import memoize
 from plone.autoform.directives import order_after
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
+from plone.autoform.directives import omitted
+from plone.autoform.directives import no_omit
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.namedfile.field import NamedBlobFile
@@ -27,17 +30,14 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.permissions import ReviewPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission
+from z3c.form.interfaces import IEditForm, IAddForm
 from z3c.relationfield import RelationChoice, RelationList
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
-
-def validate_no_already_superseded(value):
-    """Validator to prevent to supersede a publication already superseded."""
-    import pdb; pdb.set_trace() # TODO: REMOVE BEFORE FLIGHT ---------------------------------------------------
-    return True
+from zope.schema import Datetime
 
 class IPublication(model.Schema, IFile, ITimestampableDocument):
     """Marker interface and Dexterity Python Schema for Publication"""
@@ -110,6 +110,24 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
         required=False,
     )
 
+    # Dates fieldset
+    # model.fieldset(
+    #     "dates",
+    #     label=_("Dates"),
+    #     fields=[
+    #         "is_archived_on_expiration_date"
+    #     ],
+    # )
+
+    # order_after(is_archived_on_expiration_date="IPublication.expires")
+    # # Let's put this after Plone's IPublication behavior's "expires" field
+    # is_archived_on_expiration_date = schema.Bool(
+    #     title=_("Archived on expiration date"),
+    #     description=_("is_archived_on_expiration_date_description"),
+    #     required=False,
+    #     default=False,
+    # )
+
     # Timestamping fieldset
     model.fieldset(
         "timestamp",
@@ -117,26 +135,6 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
     )
     write_permission(timestamped_file="cmf.ManagePortal")
     timestamped_file = NamedBlobFile(title="Timestamped file", accept=("application/zip",), required=False)
-
-    model.fieldset(
-        "categorization",
-        fields=["supersede"],
-    )
-    widget(
-        "supersede",
-        ContentBrowserFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "recentlyUsed": True
-        },
-    )
-    supersede = RelationChoice(
-        title=_("Supersede"),
-        default=[],
-        vocabulary="plone.app.vocabularies.Catalog",
-        required=False,
-        constraint=validate_no_already_superseded,
-    )
 
     # Making sure timestamp file is accessible to anonymous.
     # By default it has a custom permission
@@ -169,23 +167,7 @@ class Publication(Container, File):
     def is_timestamped(self):
         return ITimeStamper(self).is_timestamped()
 
-    @memoize
-    def superseded_publications(self):
-        """Return list of previous publications."""
-        return get_linked_items_chain(self, "supersede", reverse=False)
-
-    def has_superseded_publications(self):
-        return bool(self.superseded_publications())
-
-    @memoize
-    def superseding_publications(self):
-        """Return list of dicts ready for the template."""
-        return get_linked_items_chain(self, "supersede", reverse=True)
-
-    def has_superseding_publications(self):
-        return bool(self.superseding_publications())
-
-    # Worflow related methods
+    # Workflow related methods
 
     def may_back_to_private(self):
         """Only Manager may back to private except if
