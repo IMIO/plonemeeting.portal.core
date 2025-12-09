@@ -33,19 +33,6 @@ class EnabledTabsVocabularyFactory:
 EnabledTabsVocabulary = EnabledTabsVocabularyFactory()
 
 
-class PublicationsPowerUsersVocabularyFactory:
-    def __call__(self, context):
-        return SimpleVocabulary(
-            (
-                SimpleTerm(value="gbastien", title="Gauthier Bastien"),
-                SimpleTerm(value="gbastien2", title="Gauthier Bastien2"),
-            ),
-        )
-
-
-PublicationsPowerUsersVocabulary = PublicationsPowerUsersVocabularyFactory()
-
-
 class GlobalCategoryVocabularyFactory:
     def __call__(self, context):
         # use .copy() to make sure to return a copy of the record

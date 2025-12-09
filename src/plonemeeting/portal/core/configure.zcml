@@ -71,12 +71,6 @@
   />
 
   <utility
-    component=".vocabularies.PublicationsPowerUsersVocabulary"
-    name="plonemeeting.portal.vocabularies.publications_power_users"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
-
-  <utility
     component=".vocabularies.GlobalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.global_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"
