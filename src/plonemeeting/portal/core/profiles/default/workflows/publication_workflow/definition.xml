@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-             description="Workflow for Publications."
+             description="Workflow for Publications"
              initial_state="private"
              state_variable="review_state"
              title="Workflow for Publications"
@@ -314,7 +314,7 @@
               new_state="planned" title="Plan"
               transition_id="plan" trigger="USER"
               i18n:attributes="title">
-    <description i18n:translate="">Planned to be auto published.</description>
+    <description i18n:translate="">Planned to be auto-published.</description>
     <action category="workflow"
             url="%(content_url)s/content_status_modify?workflow_action=plan"
             i18n:translate="">Plan

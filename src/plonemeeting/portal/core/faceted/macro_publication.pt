@@ -19,14 +19,14 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
         <div i18n:translate="" tal:condition="python:brain.is_timestamped"
           class="badge timestamp-badge info animated"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
         </div>
-        <div tal:content="review_state" i18n:translate=""
+        <div tal:content="python: review_state.capitalize().replace('_', ' ')" i18n:translate=""
            tal:attributes="class string:state-${review_state} badge state-badge ms-2">
           State
         </div>
       </div>
     </div>
     <div id="title-row" class="row">
-      <h3 tal:content="python:brain.Title"></h3>
+      <h3 class="card-title" tal:content="python:brain.Title"></h3>
     </div>
     <div id="description-row" class="row" tal:condition="python:brain.Description">
       <p tal:content="structure python:brain.Description.replace('\n', '<br>')"></p>
@@ -39,7 +39,9 @@ from collective.timestamp.indexers import is_timestampedpaste.httpheaders import
           <span tal:content="python:context.toLocalizedTime(brain.modified)" />
         </div>
         <div class="item-metadata-row">
-          <div class="item-metadata-label" i18n:domain="plone" i18n:translate="label_effective_date">label_effective_date</div>
+          <div class="item-metadata-label" i18n:domain="plone" i18n:translate="label_effective_date">
+            label_effective_date
+          </div>
           <span tal:content="python:context.toLocalizedTime(brain.EffectiveDate)" />
         </div>
         <div class="item-metadata-row" tal:condition='not: isAnon'>

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from imio.helpers.workflow import get_state_infos
 from plone import api
 from plone.api.validation import mutually_exclusive_parameters
 from plone.app.textfield import RichTextValue
@@ -88,6 +89,14 @@ class UtilsView(BrowserView):
     @staticmethod
     def get_state(obj):
         return api.content.get_state(obj)
+
+    @staticmethod
+    def get_state_infos(obj):
+        """Return the state infos as a dict with state_name and state_title."""
+        return get_state_infos(obj)
+
+    def brain_state_title(obj):
+        pass
 
     def get_categories_mappings_value(self, key):
         factory = queryUtility(IVocabularyFactory, "plonemeeting.portal.vocabularies.global_categories")

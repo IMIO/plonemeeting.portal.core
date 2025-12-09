@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone.app.layout.analytics.view import AnalyticsViewlet
+from plone.app.layout.viewlets import ViewletBase
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.utils import is_decisions_manager
@@ -22,6 +23,7 @@ class PMDocumentBylineViewlet(DocumentBylineViewlet):
         """Show modified no matter it was published, useful for Publication."""
         return True
 
+
 class PMAnalyticsViewlet(AnalyticsViewlet):
 
     @property
@@ -34,3 +36,8 @@ class PMAnalyticsViewlet(AnalyticsViewlet):
             if hasattr(institution, 'webstats_js') and institution.webstats_js:
                 webstats += institution.webstats_js
         return webstats
+
+
+class HiddenViewlet(ViewletBase):
+    def render(self):
+        return ""

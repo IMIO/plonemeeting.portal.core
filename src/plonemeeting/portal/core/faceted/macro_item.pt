@@ -15,9 +15,9 @@
     <a href="" class="filled-link"
        tal:attributes="href brain/getURL">
     </a>
-    <div id="state-row" class="row" i18n:domain="plone">
+    <div id="state-row" class="row">
       <div class="col d-flex justify-content-end mb-2">
-        <div tal:content="review_state" i18n:translate=""
+        <div tal:content="python: review_state.capitalize().replace('_', ' ')" i18n:domain="plone" i18n:translate=""
            tal:attributes="class string:state-${review_state} badge state-badge">
           State
         </div>
@@ -36,7 +36,6 @@
              tal:define="utils_view nocall:context/@@utils_view;"
              tal:attributes="href python: utils_view.get_meeting_url(UID=brain.linkedMeetingUID)"
           >
-<!--?            <span class="public-meeting" tal:content="meeting_type">Meeting type</span> &nbsp;/&nbsp;-->
             <span class="meeting-title" tal:content="brain/linkedMeetingTitle"></span>
             <i class="bi bi-chevron-right"></i>
           </a>

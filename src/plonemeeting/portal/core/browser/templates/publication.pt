@@ -8,22 +8,48 @@
    tal:define="
   portal_url context/@@plone_portal_state/portal_url;
   utils_view nocall:context/@@utils_view;
-  review_state python: utils_view.get_state(context);
+  state_infos python: utils_view.get_state_infos(context);
+  institution utils_view/get_current_institution;
+  normalizeString nocall:context/@@plone/normalizeString;
+  review_state state_infos/state_name;
   is_anon context/@@plone_portal_state/anonymous;
   "
    i18n:domain="plonemeeting.portal.core"
 >
 <body>
-<metal:content-core fill-slot="content-core">
-<!--?  <x-table-of-content></x-table-of-content>-->
+<metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core"
      tal:define="
     file python: context.file;
     toLocalizedTime nocall:context/@@plone/toLocalizedTime;
     toc python:  getattr(context, 'table_of_contents', False);
+    timeline view/timeline;
     "
   >
-
+    <section id="alert-section" class="row mb-3">
+      <div class="col-12 alerts">
+        <div id="archived-alert" class="alert with-icon alert-warning" role="alert" tal:condition="python: review_state=='archived' and institution.archived_publication_warning_text">
+          <div class="alert-icon">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+          </div>
+          <div class="alert-content" tal:content="structure institution/archived_publication_warning_text/output"></div>
+        </div>
+        <div id=superseded_by-alert" class="alert with-icon alert-info" role="0lert" tal:condition="python: timeline and timeline[0]['current'] is False">
+          <div class="alert-icon">
+            <i class="bi bi-info-circle"></i>
+          </div>
+          <div class="alert-content">
+            <p i18n:translate="">
+              You are viewing an old version of this publication.
+              For the most up-to-date information, please refer to the latest version.
+            </p>
+            <a class="alert-link" tal:attributes="href python: timeline[0]['url']"> <i class="bi bi-chevron-double-right"></i>
+              <tal:text i18n:translate="">See latest version</tal:text>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="row metadatas-section mb-3" data-toc="Metadonnées" id="metadatas">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
@@ -156,7 +182,6 @@
                   <div i18n:translate=""
                     class="badge timestamp-badge info"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
                   </div>
-                  .</p>
                 </li>
                 <li><span class="badge state-badge state-unpublished">Dépublié</span>
                   <p>La publication n'est plus accessible aux citoyens.</p>
@@ -176,7 +201,8 @@
               <span i18n:translate="" tal:condition="context/is_timestamped"
                 class="badge timestamp-badge info me-2"><i class="bi bi-clock-fill"></i><span>Horodatage qualifié</span>
               </span>
-              <span tal:content="view/get_state_title"
+              <span tal:content="state_infos/state_title"
+                 i18n:translate=""
                  tal:attributes="class string:state-${review_state} badge state-badge"></span>
             </div>
           </div>
@@ -312,66 +338,83 @@
         </div>
       </div>
     </section>
-    <section class="row links-section mb-3" data-toc="Liens" id="liens">
-      <h2>Liens</h2>
+    <section class="row timeline-section mb-3" data-toc="Chronologie"
+             id="timeline" tal:condition="python: len(timeline)>1">
       <div class="col-lg-12">
-        <section class="py-0">
-          <ul class="timeline">
-            <tal:item repeat="item view/timeline">
-              <li class="${python: item['current'] and 'timeline-item current' or 'timeline-item'}">
-                <a tal:attributes="href item/url" class="timeline-link">
+        <h2 class="mb-3">Chronologie</h2>
+        <ul class="timeline">
+          <tal:item repeat="item timeline">
+            <li class="${python: item['current'] and 'timeline-item current' or 'timeline-item'}">
+              <a tal:attributes="href item/url" class="timeline-link">
+                <header class="timeline-header">
                   <div class="fw-bold timeline-date" tal:content="item/effective">11/11/2025</div>
-                  <header class="timeline-header">
-                    <h4 class="text-muted fw-bold d-inline" tal:content="item/title">Title</h4>
-                    <div class="timeline-state">
-                    <span tal:condition="python:repeat.item.end"
-                      class="badge state-badge bg-secondary ms-2"
-                       i18n:translate="">Dernière version
+                  <div class="timeline-state">
+                    <span tal:condition="python:repeat.item.start"
+                      class="badge state-badge bg-secondary">
+                      <i class="bi bi-caret-up-fill"></i>
+                      <tal:text i18n:translate="">Last version</tal:text>
                     </span>
-                      <span tal:content="item/review_state"
-                         i18n:translate=""
-                         tal:attributes="class string:badge state-badge state-${item/review_state}">State</span>
-                    </div>
-                  </header>
-                  <p class="text-muted pt-2 mb-0" tal:condition="item/description"
-                     tal:content="item/description">Description
-                  </p>
-                </a>
-              </li>
-            </tal:item>
-          </ul>
-        </section>
-      </div>
-      <div class="col-lg-6">
-        <h3>Éléments connexes</h3>
-        <tal:list condition="view/has_related_items">
-          <ul class="supersede-list">
-            <tal:item repeat="item view/related_items">
-              <li class="supersede-item contenttype"
-                 tal:attributes="class string:supersede-item contenttype-${item/portal_type} state-${item/review_state}">
-                <a tal:attributes="href item/url">
-                  <span class="item-title" tal:content="item/title">Title</span>
-                </a>
-                <!--?                <small class="muted">-->
-                <!--?                  <tal:state condition="item/review_state">-->
-                <!--?<span class="label label-state"-->
-                <!--?   tal:content="item/review_state">published</span>-->
-                <!--?                  </tal:state>-->
-                <!--?                  <tal:mod condition="item/effective">-->
-                <!--?                    &nbsp;·&nbsp;<span tal:content="item/effective">2025-01-01</span>-->
-                <!--?                  </tal:mod>-->
-                <!--?                </small>-->
-                <div class="item-description"
-                   tal:condition="item/description"
+                    <span tal:content="python: item['review_state'].capitalize()"
+                       i18n:domain="plone"
+                       i18n:translate=""
+                       tal:attributes="class string:badge state-badge state-${item/review_state}">State</span>
+                  </div>
+                </header>
+                <h4 class="text-muted fw-bold d-inline" tal:content="item/title">Title</h4>
+                <p class="text-muted pt-2 mb-0" tal:condition="item/description"
                    tal:content="item/description">Description
+                </p>
+              </a>
+            </li>
+          </tal:item>
+        </ul>
+      </div>
+    </section>
+    <section class="row related-items-section mb-3" data-toc="Éléments associés" id="related-items"
+       tal:condition="view/has_related_items">
+      <div class="col-12">
+        <h2 class="mb-3">Éléments associés</h2>
+        <tal:list>
+          <div class="row g-3">
+            <tal:item repeat="item view/related_items">
+              <div class="col-md-12 col-lg-6 col-xl-4"
+                 tal:define="item_portal_type item/portal_type">
+                <div tal:attributes="class string:card card-link h-100 shadow-sm contenttype-${item/portal_type} state-${item/review_state}">
+                  <div class="card-body">
+                    <div class="mt-0 mb-2 d-flex justify-content-between">
+                      <span class="badge bg-secondary me-2"
+                         tal:content="python: item_portal_type.replace('Item', 'Decision')"
+                         i18n:domain="plone"
+                         i18n:translate="">
+                        Type
+                      </span>
+                      <span class="badge state-badge"
+                         tal:content="python: item['review_state'].capitalize().replace('_', ' ')"
+                         i18n:translate=""
+                         i18n:domain="plone"
+                         tal:attributes="class string:badge state-badge state-${item/review_state}">
+                        State
+                      </span>
+                    </div>
+                    <h3 class="card-title fw-bold mb-2 fs-6" tal:content="item/title">Title</h3>
+                    <p class="card-text text-muted small mb-2"
+                       tal:condition="item/description"
+                       tal:content="item/description">
+                      Description
+                    </p>
+                  </div>
+                  <div class="card-bg-icon">
+                    <tal:icon tal:replace="structure python:icons.tag(f'contenttype/{normalizeString(item_portal_type)}')"/>
+                  </div>
+                  <a tal:attributes="href item/url" class="card-link filled-link"></a>
                 </div>
-              </li>
+              </div>
             </tal:item>
-          </ul>
+          </div>
         </tal:list>
       </div>
     </section>
   </metal:content-core>
-</metal:content-core>
+</metal:main>
 </body>
 </html>

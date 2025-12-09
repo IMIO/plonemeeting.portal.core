@@ -3,8 +3,8 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 <metal:annexes define-macro="annexes">
   <div class="annexes" tal:define="files_infos python: files_infos">
-    <div tal:repeat="info files_infos">
-      <div class="annex card-link" tal:define="file nocall:info/file">
+    <tal:annexe tal:repeat="info files_infos">
+      <div class="annex card card-link" tal:define="file nocall:info/file">
         <div class="bg-file-color ${info/icon_infos/color}">
           <i tal:attributes="class info/icon_infos/icon"></i>
         </div>
@@ -23,7 +23,7 @@
         <a class="filled-link" target="_blank"
            tal:attributes="href file/absolute_url"></a>
       </div>
-    </div>
+    </tal:annexe>
   </div>
 </metal:annexes>
 
