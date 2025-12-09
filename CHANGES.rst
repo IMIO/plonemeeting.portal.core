@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.0 (unreleased)
+2.3.0 (2025-12-09)
 ------------------
 
 - DELIBE-256: Patch `Products.CMFPlone.resources.utils.get_resource` to disable useless verbose logger
