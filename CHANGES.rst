@@ -40,6 +40,8 @@ Changelog
   [aduchene]
 - Add a base `PlonemeetingMigrator` class to ease future migrations.
   [aduchene]
+- Improve login page.
+  [aduchene]
 
 2.2.5 (2025-10-24)
 ------------------
