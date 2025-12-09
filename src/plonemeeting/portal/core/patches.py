@@ -7,13 +7,15 @@ from plone.supermodel.interfaces import FIELDSETS_KEY
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalCoreLayer
 from Products.CMFPlone.resources import utils
+from Products.CMFPlone.resources.utils import get_resource
 from Products.PortalTransforms.transforms import safe_html
 from Products.PortalTransforms.transforms.safe_html import CSS_COMMENT
 from Products.PortalTransforms.transforms.safe_html import decode_htmlentities
 from z3c.form.interfaces import IForm
 from zope.globalrequest import getRequest
-from Products.CMFPlone.resources.utils import get_resource
+
 import logging
+
 
 original_hasScript = safe_html.hasScript
 

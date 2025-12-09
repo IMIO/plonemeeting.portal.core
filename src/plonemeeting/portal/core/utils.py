@@ -2,7 +2,8 @@
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from plone import api
-from plone.app.textfield.value import IRichTextValue, RichTextValue
+from plone.app.textfield.value import IRichTextValue
+from plone.app.textfield.value import RichTextValue
 from plone.dexterity.utils import iterSchemata
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager

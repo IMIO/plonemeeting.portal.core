@@ -11,8 +11,9 @@ from plonemeeting.portal.core.tests import PM_USER_PASSWORD
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_managers_group_id
 
-import unittest
 import plonemeeting.portal.core.tests.patches
+import unittest
+
 
 IMG_BASE64_DATA = (
     "data:image/gif;base64,R0lGODlhCgAKAPcAAP////79/f36+/3z8/zy8/rq7Prm6Pnq7P"

@@ -12,32 +12,35 @@ from plone.app.textfield import RichText
 from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
 from plone.app.z3cform.widgets.datetime import DatetimeFieldWidget
 from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
-from plone.memoize.instance import memoize
+from plone.autoform.directives import no_omit
+from plone.autoform.directives import omitted
 from plone.autoform.directives import order_after
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
-from plone.autoform.directives import omitted
-from plone.autoform.directives import no_omit
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from plone.memoize.instance import memoize
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.utils import user_has_any_role, get_linked_items_chain
+from plonemeeting.portal.core.utils import get_linked_items_chain
+from plonemeeting.portal.core.utils import user_has_any_role
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.permissions import ReviewPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import _checkPermission
-from z3c.form.interfaces import IEditForm, IAddForm
-from z3c.relationfield import RelationChoice, RelationList
+from z3c.form.interfaces import IAddForm
+from z3c.form.interfaces import IEditForm
+from z3c.relationfield import RelationChoice
+from z3c.relationfield import RelationList
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
-
 from zope.schema import Datetime
+
 
 class IPublication(model.Schema, IFile, ITimestampableDocument):
     """Marker interface and Dexterity Python Schema for Publication"""

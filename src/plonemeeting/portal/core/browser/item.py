@@ -2,7 +2,8 @@
 from plone import api
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
-from plonemeeting.portal.core.browser import BaseAddForm, BaseEditForm
+from plonemeeting.portal.core.browser import BaseAddForm
+from plonemeeting.portal.core.browser import BaseEditForm
 from plonemeeting.portal.core.browser.nextprevious import NextPrevItemNumber
 
 

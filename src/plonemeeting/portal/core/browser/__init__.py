@@ -1,7 +1,7 @@
-from Products.CMFCore.utils import getToolByName
 from imio.pyutils.utils import sort_by_indexes
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.edit import DefaultEditForm
+from Products.CMFCore.utils import getToolByName
 
 
 class BaseFormMixin:
