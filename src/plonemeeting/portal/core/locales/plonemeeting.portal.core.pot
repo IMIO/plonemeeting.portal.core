@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-12-09 10:37+0000\n"
+"POT-Creation-Date: 2025-12-09 15:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../vocabularies.py:154
+#: ../vocabularies.py:142
 msgid "(Passed term of office) ${representative_value}"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Additional data"
 msgstr ""
 
-#: ../vocabularies.py:324
+#: ../vocabularies.py:312
 msgid "All templates"
 msgstr ""
 
@@ -69,12 +69,12 @@ msgstr ""
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:88
+#: ../content/publication.py:91
 msgid "Authority"
 msgstr ""
 
 #: ../browser/templates/publication.pt:120
-#: ../content/publication.py:102
+#: ../content/publication.py:105
 msgid "Authority date"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Back to my institution"
 msgstr ""
 
 #: ../browser/institution.py:117
-#: ../browser/meeting.py:39
+#: ../browser/meeting.py:40
 #: ../browser/publication.py:65
 msgid "Cancel"
 msgstr ""
@@ -137,7 +137,7 @@ msgid "Decision"
 msgstr ""
 
 #: ../browser/templates/publication.pt:96
-#: ../content/publication.py:64
+#: ../content/publication.py:67
 msgid "Decision date"
 msgstr ""
 
@@ -163,8 +163,12 @@ msgstr ""
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr ""
 
+#: ../browser/templates/publication.pt:255
+msgid "Document"
+msgstr ""
+
 #: ../browser/templates/publication.pt:211
-#: ../content/publication.py:47
+#: ../content/publication.py:50
 msgid "Document type"
 msgstr ""
 
@@ -205,7 +209,7 @@ msgstr ""
 msgid "Enter a TAL expression that once evaluated will return the setting's value. Elements context, request, view, template, utils, portal, site_url, user are available for the expression."
 msgstr ""
 
-#: ../content/publication.py:69
+#: ../content/publication.py:72
 msgid "Entry date"
 msgstr ""
 
@@ -214,7 +218,7 @@ msgid "Entrée en vigueur"
 msgstr ""
 
 #: ../browser/templates/publication.pt:133
-#: ../content/publication.py:108
+#: ../content/publication.py:111
 msgid "Expired authority date"
 msgstr ""
 
@@ -276,7 +280,7 @@ msgstr ""
 msgid "Header color"
 msgstr ""
 
-#: ../content/publication.py:73
+#: ../content/publication.py:76
 msgid "Hour and place of consultation"
 msgstr ""
 
@@ -386,7 +390,7 @@ msgstr ""
 msgid "Last modification in iA.Delib"
 msgstr ""
 
-#: ../browser/templates/publication.pt:355
+#: ../browser/templates/publication.pt:354
 msgid "Last version"
 msgstr ""
 
@@ -395,7 +399,7 @@ msgid "Legislative authorities"
 msgstr ""
 
 #: ../browser/templates/publication.pt:84
-#: ../content/publication.py:59
+#: ../content/publication.py:62
 msgid "Legislative authority"
 msgstr ""
 
@@ -468,6 +472,10 @@ msgstr ""
 msgid "Meeting types"
 msgstr ""
 
+#: ../browser/templates/publication.pt:53
+msgid "Metadatas"
+msgstr ""
+
 #: ../browser/sync.py:277
 msgid "Modified"
 msgstr ""
@@ -512,6 +520,10 @@ msgstr ""
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr ""
 
+#: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
+msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
+msgstr ""
+
 #: ../content/institution.py:201
 msgid "Plonemeeting URL"
 msgstr ""
@@ -524,12 +536,16 @@ msgstr ""
 msgid "Province"
 msgstr ""
 
-#: ../config.py:52
+#: ../config.py:61
 msgid "Publication notice"
 msgstr ""
 
-#: ../config.py:58
+#: ../config.py:67
 msgid "Publication poster"
+msgstr ""
+
+#: ../browser/templates/publication.pt:248
+msgid "Publication text"
 msgstr ""
 
 #: ../content/institution.py:352
@@ -544,6 +560,10 @@ msgstr ""
 
 #: ../content/institution.py:243
 msgid "Published Items query filter"
+msgstr ""
+
+#: ../browser/templates/publication.pt:372
+msgid "Related items"
 msgstr ""
 
 #: ../profiles/default/registry.xml
@@ -592,7 +612,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:103
-#: ../browser/meeting.py:33
+#: ../browser/meeting.py:34
 #: ../browser/publication.py:57
 msgid "Save"
 msgstr ""
@@ -630,17 +650,17 @@ msgid "Styling"
 msgstr ""
 
 #: ../browser/templates/publication.pt:109
-#: ../content/publication.py:96
+#: ../content/publication.py:99
 msgid "Subject to authority?"
 msgstr ""
 
 #: ../behaviors/configure.zcml:26
-#: ../behaviors/supersede.py:46
+#: ../behaviors/supersede.py:45
 msgid "Supersede"
 msgstr ""
 
-#: ../behaviors/supersede.py:47
-msgid "Supersede this publication."
+#: ../behaviors/supersede.py:46
+msgid "Supersede this item."
 msgstr ""
 
 #: ../browser/sync.py:209
@@ -701,11 +721,11 @@ msgid "Template settings used to customize templates. Leave empty to use default
 msgstr ""
 
 #: ../content/institution.py:452
-#: ../utils.py:344
+#: ../utils.py:345
 msgid "Templates"
 msgstr ""
 
-#: ../content/publication.py:76
+#: ../content/publication.py:79
 msgid "Text"
 msgstr ""
 
@@ -719,6 +739,10 @@ msgstr ""
 
 #: ../behaviors/configure.zcml:26
 msgid "This behavior adds supersede functionality to a content type."
+msgstr ""
+
+#: ../browser/templates/publication.pt:340
+msgid "Timeline"
 msgstr ""
 
 #: ../browser/publication.py:79
@@ -763,7 +787,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: ../config.py:64
+#: ../config.py:73
 msgid "Users and groups summary"
 msgstr ""
 
@@ -808,7 +832,7 @@ msgstr ""
 msgid "You can't remove items from a decided meeting."
 msgstr ""
 
-#: ../events/publication.py:71
+#: ../events/publication.py:75
 msgid "You must be publications power user to remove this element!"
 msgstr ""
 
@@ -832,7 +856,7 @@ msgstr ""
 msgid "archived_publication_warning_text_description"
 msgstr ""
 
-#: ../content/publication.py:103
+#: ../content/publication.py:106
 msgid "authority_date_description"
 msgstr ""
 
@@ -840,11 +864,11 @@ msgstr ""
 msgid "categories_mappings_description"
 msgstr ""
 
-#: ../config.py:28
+#: ../config.py:37
 msgid "category"
 msgstr ""
 
-#: ../config.py:29
+#: ../config.py:38
 msgid "classifier"
 msgstr ""
 
@@ -852,7 +876,7 @@ msgstr ""
 msgid "confidential"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "decision"
 msgstr ""
 
@@ -911,11 +935,11 @@ msgid "enabled_templates_description"
 msgstr ""
 
 #. Default: "This item is already superseded by another item and thus cannot be superseded again. Please choose another, non-superseded item."
-#: ../behaviors/supersede.py:19
+#: ../behaviors/supersede.py:18
 msgid "error_already_superseded"
 msgstr ""
 
-#: ../content/publication.py:109
+#: ../content/publication.py:112
 msgid "expired_authority_date_description"
 msgstr ""
 
@@ -941,7 +965,7 @@ msgstr ""
 msgid "iA.Délib"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "in_project"
 msgstr ""
 
@@ -1039,7 +1063,7 @@ msgid "meeting_filter_query_description"
 msgstr ""
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:343
+#: ../sync_utils.py:346
 msgid "meeting_imported"
 msgstr ""
 
@@ -1097,11 +1121,11 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "private"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "proposed"
 msgstr ""
 

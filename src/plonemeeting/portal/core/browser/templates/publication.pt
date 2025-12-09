@@ -34,7 +34,7 @@
           </div>
           <div class="alert-content" tal:content="structure institution/archived_publication_warning_text/output"></div>
         </div>
-        <div id=superseded_by-alert" class="alert with-icon alert-info" role="0lert" tal:condition="python: timeline and timeline[0]['current'] is False">
+        <div id=superseded_by-alert" class="alert with-icon alert-info" role="alert" tal:condition="python: timeline and timeline[0]['current'] is False">
           <div class="alert-icon">
             <i class="bi bi-info-circle"></i>
           </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </section>
-    <section class="row metadatas-section mb-3" data-toc="Metadonnées" id="metadatas">
+    <section id="metadatas-section" class="row mb-3" data-toc="Metadatas" i18n:attributes="data-toc">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">
           <div class="content-metadata-col header"
@@ -245,23 +245,22 @@
         </div>
       </div>
     </section>
-    <section class="row text-section mb-3" tal:condition="context/text">
+    <section id="text-section" class="row mb-3" tal:condition="context/text" data-toc="Publication text" i18n:attributes="data-toc">
       <div class="col-12">
         <div class="${python: toc and 'pat-autotoc card p-4' or 'card p-4'}"
            tal:content="structure python:context.text.output_relative_to(context)">
         </div>
       </div>
     </section>
-    <section class="row pdf-section mb-3"
-       tal:condition="file"
-    >
+    <section id= "pdf-section" class="row mb-3" tal:condition="file"
+             data-toc="Document" i18n:attributes="data-toc">
       <div class="col-12">
-        <h2>Document</h2>
+        <h2 i18n:translate="">Document</h2>
         <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
       </div>
     </section>
     <metal:use use-macro="context/@@pm_macros/annexes-section"/>
-    <section class="row legal-section mb-3">
+    <section id="legal-section" class="row mb-3">
       <div class="${python: context.is_timestamped() and 'col-xl-8' or 'col-xl-12'}">
         <div tal:condition="context/consultation_text" class="alert with-icon alert-light"
                                                        role="alert"
@@ -338,8 +337,8 @@
         </div>
       </div>
     </section>
-    <section class="row timeline-section mb-3" data-toc="Chronologie"
-             id="timeline" tal:condition="python: len(timeline)>1">
+    <section id="timeline-section" class="row mb-3" tal:condition="view/has_timeline"
+             data-toc="Timeline" i18n:attributes="data-toc">
       <div class="col-lg-12">
         <h2 class="mb-3">Chronologie</h2>
         <ul class="timeline">
@@ -370,7 +369,7 @@
         </ul>
       </div>
     </section>
-    <section class="row related-items-section mb-3" data-toc="Éléments associés" id="related-items"
+    <section id="related-items-section" class="row mb-3" data-toc="Related items" i18n:attributes="data-toc"
        tal:condition="view/has_related_items">
       <div class="col-12">
         <h2 class="mb-3">Éléments associés</h2>
@@ -379,7 +378,7 @@
             <tal:item repeat="item view/related_items">
               <div class="col-md-12 col-lg-6 col-xl-4"
                  tal:define="item_portal_type item/portal_type">
-                <div tal:attributes="class string:card card-link h-100 shadow-sm contenttype-${item/portal_type} state-${item/review_state}">
+                <div tal:attributes="class string:card card-link h-100 shadow-sm contenttype-${item/portal_type}">
                   <div class="card-body">
                     <div class="mt-0 mb-2 d-flex justify-content-between">
                       <span class="badge bg-secondary me-2"
@@ -396,7 +395,7 @@
                         State
                       </span>
                     </div>
-                    <h3 class="card-title fw-bold mb-2 fs-6" tal:content="item/title">Title</h3>
+                    <h3 class="card-title fw-bold mb-2" tal:content="item/title">Title</h3>
                     <p class="card-text text-muted small mb-2"
                        tal:condition="item/description"
                        tal:content="item/description">

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-12-09 10:37+0000\n"
+"POT-Creation-Date: 2025-12-09 15:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../vocabularies.py:154
+#: ../vocabularies.py:142
 msgid "(Passed term of office) ${representative_value}"
 msgstr "(Ancien mandat) ${representative_value}"
 
@@ -42,7 +42,7 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../vocabularies.py:324
+#: ../vocabularies.py:312
 msgid "All templates"
 msgstr "Tous les modèles de document"
 
@@ -66,12 +66,12 @@ msgstr "Êtes-vous sûr de vouloir désinscrire cet utilisateur ?"
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:88
+#: ../content/publication.py:91
 msgid "Authority"
 msgstr "Tutelle"
 
 #: ../browser/templates/publication.pt:120
-#: ../content/publication.py:102
+#: ../content/publication.py:105
 msgid "Authority date"
 msgstr "Date approbation tutelle"
 
@@ -80,7 +80,7 @@ msgid "Back to my institution"
 msgstr "Retourner vers mon institution"
 
 #: ../browser/institution.py:117
-#: ../browser/meeting.py:39
+#: ../browser/meeting.py:40
 #: ../browser/publication.py:65
 msgid "Cancel"
 msgstr "Annuler"
@@ -134,7 +134,7 @@ msgid "Decision"
 msgstr "Décision"
 
 #: ../browser/templates/publication.pt:96
-#: ../content/publication.py:64
+#: ../content/publication.py:67
 msgid "Decision date"
 msgstr "Date de décision"
 
@@ -160,8 +160,12 @@ msgstr "Texte par défaut de la publication"
 msgid "Demo profile for the plonemeeting.portal.core add-on."
 msgstr "Profil de démo pour le module plonemeeting.portal.core."
 
+#: ../browser/templates/publication.pt:255
+msgid "Document"
+msgstr ""
+
 #: ../browser/templates/publication.pt:211
-#: ../content/publication.py:47
+#: ../content/publication.py:50
 msgid "Document type"
 msgstr "Nature du document"
 
@@ -202,7 +206,7 @@ msgstr "Onglets activés"
 msgid "Enter a TAL expression that once evaluated will return the setting's value. Elements context, request, view, template, utils, portal, site_url, user are available for the expression."
 msgstr "Entrez une expression TAL qui, une fois évaluée, renverra la valeur du paramètre. Les contextes éléments, request, view, template, utils, portal, site_url, user sont disponibles pour l'expression."
 
-#: ../content/publication.py:69
+#: ../content/publication.py:72
 msgid "Entry date"
 msgstr "Date entrée en vigueur"
 
@@ -211,7 +215,7 @@ msgid "Entrée en vigueur"
 msgstr ""
 
 #: ../browser/templates/publication.pt:133
-#: ../content/publication.py:108
+#: ../content/publication.py:111
 msgid "Expired authority date"
 msgstr "Exécutoire en date du (expiration délai tutelle)"
 
@@ -273,7 +277,7 @@ msgstr "Groupes en charge"
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
-#: ../content/publication.py:73
+#: ../content/publication.py:76
 msgid "Hour and place of consultation"
 msgstr "Lieu et horaires de consultation"
 
@@ -383,7 +387,7 @@ msgstr "Dernière modification"
 msgid "Last modification in iA.Delib"
 msgstr "Dernière modification dans iA.Délib"
 
-#: ../browser/templates/publication.pt:355
+#: ../browser/templates/publication.pt:354
 msgid "Last version"
 msgstr "Dernière version"
 
@@ -392,7 +396,7 @@ msgid "Legislative authorities"
 msgstr "Autorités délibérantes"
 
 #: ../browser/templates/publication.pt:84
-#: ../content/publication.py:59
+#: ../content/publication.py:62
 msgid "Legislative authority"
 msgstr "Autorité délibérante"
 
@@ -465,6 +469,10 @@ msgstr "Titre du type de séance"
 msgid "Meeting types"
 msgstr "Types de séance"
 
+#: ../browser/templates/publication.pt:53
+msgid "Metadatas"
+msgstr ""
+
 #: ../browser/sync.py:277
 msgid "Modified"
 msgstr "Modifié"
@@ -509,6 +517,10 @@ msgstr "Mot de passe"
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr "Texte à afficher pour les portions de texte anonymisées"
 
+#: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
+msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
+msgstr "Veuillez noter que si vous êtes un citoyen souhaitant consulter le site web, vous pouvez le faire sans vous connecter."
+
 #: ../content/institution.py:201
 msgid "Plonemeeting URL"
 msgstr "URL iA.Délib"
@@ -521,13 +533,17 @@ msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 msgid "Province"
 msgstr "Province"
 
-#: ../config.py:52
+#: ../config.py:61
 msgid "Publication notice"
 msgstr "Attestation de publication"
 
-#: ../config.py:58
+#: ../config.py:67
 msgid "Publication poster"
 msgstr "Affiche de publication"
+
+#: ../browser/templates/publication.pt:248
+msgid "Publication text"
+msgstr ""
 
 #: ../content/institution.py:352
 #: ../events/institution.py:52
@@ -542,6 +558,10 @@ msgstr "Paramètres pour obtenir les champs des Points à importer"
 #: ../content/institution.py:243
 msgid "Published Items query filter"
 msgstr "Paramètres pour obtenir la liste des Points à importer"
+
+#: ../browser/templates/publication.pt:372
+msgid "Related items"
+msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Related meeting date"
@@ -589,7 +609,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../browser/institution.py:103
-#: ../browser/meeting.py:33
+#: ../browser/meeting.py:34
 #: ../browser/publication.py:57
 msgid "Save"
 msgstr "Enregistrer"
@@ -627,16 +647,16 @@ msgid "Styling"
 msgstr "Styles"
 
 #: ../browser/templates/publication.pt:109
-#: ../content/publication.py:96
+#: ../content/publication.py:99
 msgid "Subject to authority?"
 msgstr "Soumis à la tutelle?"
 
 #: ../behaviors/configure.zcml:26
-#: ../behaviors/supersede.py:46
+#: ../behaviors/supersede.py:45
 msgid "Supersede"
 msgstr "Remplace"
 
-#: ../behaviors/supersede.py:47
+#: ../behaviors/supersede.py:46
 msgid "Supersede this item."
 msgstr "Élément remplacé."
 
@@ -698,11 +718,11 @@ msgid "Template settings used to customize templates. Leave empty to use default
 msgstr "Paramètres des modèles de document utilisés pour personnaliser les modèles. Laisser vide pour utiliser les valeurs par défaut."
 
 #: ../content/institution.py:452
-#: ../utils.py:344
+#: ../utils.py:345
 msgid "Templates"
 msgstr "Modèles de document"
 
-#: ../content/publication.py:76
+#: ../content/publication.py:79
 msgid "Text"
 msgstr "Texte"
 
@@ -717,6 +737,10 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 #: ../behaviors/configure.zcml:26
 msgid "This behavior adds supersede functionality to a content type."
 msgstr "Ce behavior ajoute la fonctionnalité de remplacement à un type de contenu."
+
+#: ../browser/templates/publication.pt:340
+msgid "Timeline"
+msgstr ""
 
 #: ../browser/publication.py:79
 msgid "Timestamping is disabled for this element!"
@@ -760,7 +784,7 @@ msgstr "Synchroniser cette séance"
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: ../config.py:64
+#: ../config.py:73
 msgid "Users and groups summary"
 msgstr "Récapitulatif des utilisateurs et groupes"
 
@@ -805,7 +829,7 @@ msgstr "Vous consultez une ancienne version de cette publication. Pour les infor
 msgid "You can't remove items from a decided meeting."
 msgstr "Vous ne pouvez pas enlever de points sur une séance déjà décidée."
 
-#: ../events/publication.py:71
+#: ../events/publication.py:75
 msgid "You must be publications power user to remove this element!"
 msgstr "Vous devez avoir le rôle super-utilisateur pour supprimer une publication!"
 
@@ -829,7 +853,7 @@ msgstr "activer pour trier la colonne par ordre décroissant"
 msgid "archived_publication_warning_text_description"
 msgstr "Ce texte sera affiché en haut de chaque publication archivée."
 
-#: ../content/publication.py:103
+#: ../content/publication.py:106
 msgid "authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -837,11 +861,11 @@ msgstr "N'apparaitra pas si laissé vide."
 msgid "categories_mappings_description"
 msgstr "Les points pour lesquels aucune correspondance de matière ne sera trouvée seront ignorés."
 
-#: ../config.py:28
+#: ../config.py:37
 msgid "category"
 msgstr "Catégorie"
 
-#: ../config.py:29
+#: ../config.py:38
 msgid "classifier"
 msgstr "Classificateur"
 
@@ -849,7 +873,7 @@ msgstr "Classificateur"
 msgid "confidential"
 msgstr "Confidentiel"
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "decision"
 msgstr "Décision"
 
@@ -908,11 +932,11 @@ msgid "enabled_templates_description"
 msgstr "Modèles de document activés pour cette institution. Un modèle de document doit être activé pour pouvoir être utilisé afin de générer des documents."
 
 #. Default: "This item is already superseded by another item and thus cannot be superseded again. Please choose another, non-superseded item."
-#: ../behaviors/supersede.py:19
+#: ../behaviors/supersede.py:18
 msgid "error_already_superseded"
 msgstr "Cet élément est déjà remplacé par un autre élément et ne peut donc pas être remplacé à nouveau. Veuillez choisir un autre élément qui n'est pas encore remplacé."
 
-#: ../content/publication.py:109
+#: ../content/publication.py:112
 msgid "expired_authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -938,7 +962,7 @@ msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 msgid "iA.Délib"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "in_project"
 msgstr "Projet de décision"
 
@@ -1036,7 +1060,7 @@ msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."
 
 #. Default: "Meeting imported !  ${created} created items, ${modified} modified items, ${deleted} deleted items."
-#: ../sync_utils.py:343
+#: ../sync_utils.py:346
 msgid "meeting_imported"
 msgstr "Séance importée !  ${created} points créés, ${modified} points modifiés, ${deleted} points supprimés."
 
@@ -1094,11 +1118,11 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "private"
 msgstr "Privé"
 
-#: ../config.py:24
+#: ../config.py:33
 msgid "proposed"
 msgstr "Proposé"
 

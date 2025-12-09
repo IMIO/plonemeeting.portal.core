@@ -1,3 +1,14 @@
+import copy
+import os
+import pathlib
+import tempfile
+import zipfile
+
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from ZPublisher.Iterators import filestream_iterator
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from plone import api
@@ -10,19 +21,8 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
 from plonemeeting.portal.core.browser import BaseAddForm
 from plonemeeting.portal.core.browser import BaseEditForm
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
-from ZPublisher.Iterators import filestream_iterator
-
-import copy
-import os
-import pathlib
-import tempfile
-import zipfile
 
 
 class PublicationForm:
@@ -104,94 +104,42 @@ class PublicationView(DefaultView):
     def get_entry_date(self):
         return self.context.entry_date.strftime("%d/%m/%Y") if self.context.entry_date else "-"
 
-    def get_linked_items(self, relationship, reverse=False):
-        if reverse:
-            relations = api.relation.get(target=self.context, relationship=relationship, unrestricted=False)
-        else:
-            relations = api.relation.get(source=self.context, relationship=relationship, unrestricted=False)
-        results = []
-        for rel in relations:
-            if reverse:
-                obj = rel.from_object
-            else:
-                obj = rel.to_object
-            try:
-                url = obj.absolute_url()
-            except Exception:
-                continue
-            try:
-                title = obj.Title()
-            except Exception:
-                title = getattr(obj, "title", url)
+    def _get_linked_obj_infos(self, obj):
+        url = obj.absolute_url()
+        try:
+            title = obj.Title()
+        except Exception:
+            title = getattr(obj, "title", url)
 
-            # Dates: context.toLocalizedTime accepts strings or DateTime
-            modified = getattr(obj, "ModificationDate", None)
-            if callable(modified):
-                modified = modified()
+        effective = obj.effective()
 
-            try:
-                description = obj.Description() or ""
-            except Exception:
-                description = getattr(obj, "description", "") or ""
+        try:
+            description = obj.Description() or ""
+        except Exception:
+            description = getattr(obj, "description", "") or ""
 
-            try:
-                review_state = api.content.get_state(obj=obj)
-            except Exception:
-                review_state = None
+        try:
+            review_state = api.content.get_state(obj=obj)
+        except Exception:
+            review_state = None
 
-            results.append(
-                {
-                    "title": title,
-                    "url": url,
-                    "description": description,
-                    "portal_type": getattr(obj, "portal_type", ""),
-                    "modified": self.context.toLocalizedTime(modified, long_format=True)
-                    if modified
-                    else "",
-                    "review_state": review_state or "",
-                }
-            )
-        return results
+        portal_type = getattr(obj, "portal_type", "")
+        if portal_type == "Item":
+            portal_type = "Decision"
 
-    def get_linked_publication_infos(self, reverse=False):
-        """Return the full chain of linked items through the given relationship.
-        """
-        chain = self.context.superseded_publications() if reverse else self.context.superseding_publications()
-        results = []
-        for obj in chain:
-            url = obj.absolute_url()
-            try:
-                title = obj.Title()
-            except Exception:
-                title = getattr(obj, "title", url)
+        return {
+            "title": title,
+            "url": url,
+            "description": description,
+            "portal_type": portal_type,
+            "current": self.context == obj,
+            "effective": self.context.toLocalizedTime(effective, long_format=False)
+            if effective
+            else "",
+            "review_state": review_state or "",
+        }
 
-            effective = obj.effective()
-
-            try:
-                description = obj.Description() or ""
-            except Exception:
-                description = getattr(obj, "description", "") or ""
-
-            try:
-                review_state = api.content.get_state(obj=obj)
-            except Exception:
-                review_state = None
-
-            results.append(
-                {
-                    "title": title,
-                    "url": url,
-                    "description": description,
-                    "portal_type": getattr(obj, "portal_type", ""),
-                    "current": False,
-                    "effective": self.context.toLocalizedTime(effective, long_format=False)
-                    if effective
-                    else "",
-                    "review_state": review_state or "",
-                }
-            )
-        return results
-
+    @memoize
     def timeline(self):
         supersede_adapter = SupersedeAdapter(self.context)
         superseding_items = supersede_adapter.superseded_by_items()
@@ -202,44 +150,18 @@ class PublicationView(DefaultView):
         for obj in objs_timeline:
             if not api.user.has_permission('View', obj=obj):
                 continue
-
-            url = obj.absolute_url()
-            try:
-                title = obj.Title()
-            except Exception:
-                title = getattr(obj, "title", url)
-
-            effective = obj.effective()
-
-            try:
-                description = obj.Description() or ""
-            except Exception:
-                description = getattr(obj, "description", "") or ""
-
-            try:
-                review_state = api.content.get_state(obj=obj)
-            except Exception:
-                review_state = None
-
             results.append(
-                {
-                    "title": title,
-                    "url": url,
-                    "description": description,
-                    "portal_type": getattr(obj, "portal_type", ""),
-                    "current": self.context == obj,
-                    "effective": self.context.toLocalizedTime(effective, long_format=False)
-                    if effective
-                    else "",
-                    "review_state": review_state or "",
-                }
+                self._get_linked_obj_infos(obj)
             )
         return results
 
+    def has_timeline(self):
+        return bool(self.timeline())
+
     @memoize
     def related_items(self):
-        """Return list of dicts ready for the template."""
-        return self.get_linked_items("relatedItems", reverse=False)
+        """Return list of related items."""
+        return [self._get_linked_obj_infos(rel.to_object) for rel in api.relation.get(source=self.context, relationship="relatedItems")]
 
     def has_related_items(self):
         return bool(self.related_items())
