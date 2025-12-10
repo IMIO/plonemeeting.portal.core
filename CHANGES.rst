@@ -4,7 +4,7 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Fix`publication_workflow` perms and guards.
+- Fix `publication_workflow` perms and guards.
   [aduchene]
 - Fix upgrade step to 2300.
   [aduchene]
