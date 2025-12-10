@@ -1,14 +1,3 @@
-import copy
-import os
-import pathlib
-import tempfile
-import zipfile
-
-from Products.CMFCore.permissions import ModifyPortalContent
-from Products.CMFCore.utils import _checkPermission
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
-from ZPublisher.Iterators import filestream_iterator
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from plone import api
@@ -21,8 +10,19 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
 from plonemeeting.portal.core.browser import BaseAddForm
 from plonemeeting.portal.core.browser import BaseEditForm
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import _checkPermission
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.event import notify
+from ZPublisher.Iterators import filestream_iterator
+
+import copy
+import os
+import pathlib
+import tempfile
+import zipfile
 
 
 class PublicationForm:
@@ -39,7 +39,7 @@ class AddForm(PublicationForm, BaseAddForm):
         self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
 
 
-class PublicationAdd(DefaultAddView):
+class PublicationAdd(PublicationForm, DefaultAddView):
     form = AddForm
 
 
@@ -156,7 +156,7 @@ class PublicationView(DefaultView):
         return results
 
     def has_timeline(self):
-        return bool(self.timeline())
+        return len(self.timeline()) > 1
 
     @memoize
     def related_items(self):

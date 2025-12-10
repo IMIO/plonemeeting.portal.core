@@ -8,8 +8,8 @@ from plone.base import PloneMessageFactory as _plone
 from plone.protect.utils import addTokenToUrl
 from plone.z3cform.layout import wrap_form
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
 from plonemeeting.portal.core.utils import get_members_group_id
-# from plonemeeting.portal.core.utils import get_manageable_groups_for_user
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -105,12 +105,11 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
         all_user_groups = api.group.get_groups(username=username)
         # We'll say any group ID that ends (or contains) these strings is an 'institution group'
         # Adjust to match your actual naming convention.
-        manageable_institution_suffixes = ("decisions_managers", "publications_managers", "managers")
         user_manageable_groups = []
         for group in all_user_groups:
             group_id = group.getId()
             # Keep only groups that are institution-related
-            if any(suffix in group_id for suffix in manageable_institution_suffixes):
+            if any(suffix in group_id for suffix in MANAGEABLE_INSTITUTION_SUFFIXES):
                 user_manageable_groups.append(group_id)
         return user_manageable_groups
 

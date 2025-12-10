@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
-from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.dexterity.events import EditFinishedEvent
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core.browser import BaseAddForm
+from plonemeeting.portal.core.browser import BaseEditForm
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
 from Products.statusmessages.interfaces import IStatusMessage
@@ -64,7 +64,11 @@ class InstitutionSettingsView(DefaultView):
         super(InstitutionSettingsView, self).updateWidgets(prefix)
 
 
-class AddForm(DefaultAddForm):
+class InstitutionForm:
+    zope_admin_fieldsets = ["settings", "ownership", "dates", "categorization"]
+
+
+class AddForm(InstitutionForm, BaseAddForm):
     portal_type = "Institution"
 
     def updateFields(self):
@@ -78,7 +82,7 @@ class AddView(DefaultAddView):
     form = AddForm
 
 
-class EditForm(DefaultEditForm):
+class EditForm(InstitutionForm, BaseEditForm):
     portal_type = "Institution"
 
     def __call__(self):

@@ -18,51 +18,56 @@
 
   <state state_id="private" title="Private" i18n:attributes="title">
     <description i18n:translate="">
-      Can only be seen and edited by the Editors.
+      Can only be seen and edited by the Contributors.
     </description>
     <exit-transition transition_id="propose"/>
     <exit-transition transition_id="plan"/>
     <exit-transition transition_id="publish"/>
 
     <permission-map acquired="False" name="Access contents information">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Delete objects">
-      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Modify portal content">
-      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add Image">
-      <permission-role>Manager</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add File">
-      <permission-role>Manager</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
-      <permission-role>Contributors</permission-role>
-      <permission-role>Reviewer</permission-role>
+      <permission-role>Contributor</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
   </state>
@@ -76,43 +81,48 @@
     <exit-transition transition_id="back_to_private"/>
 
     <permission-map acquired="False" name="Access contents information">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Delete objects">
+      <permission-role>Editor</permission-role>
       <permission-role>Manager</permission-role>
-      <permission-role>Reviewer</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Modify portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add Image">
-      <permission-role>Manager</permission-role>
       <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add File">
-      <permission-role>Manager</permission-role>
       <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
-      <permission-role>Reviewer</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
   </state>
@@ -123,12 +133,14 @@
     </description>
     <exit-transition transition_id="publish"/>
     <exit-transition transition_id="back_to_private"/>
+    <exit-transition transition_id="back_to_proposed"/>
 
     <permission-map acquired="False" name="Access contents information">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Delete objects">
@@ -148,15 +160,17 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
+      <permission-role>Reviewer</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
   </state>
@@ -188,8 +202,8 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
@@ -224,8 +238,8 @@
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
@@ -242,42 +256,44 @@
     <exit-transition transition_id="back_to_private"/>
 
     <permission-map acquired="False" name="Access contents information">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Delete objects">
-      <permission-role>Manager</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Modify portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add Image">
-      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
       <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="plone.app.contenttypes: Add File">
-      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
       <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="Review portal content">
-      <permission-role>Manager</permission-role>
       <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
     <permission-map acquired="False" name="View">
-      <permission-role>Manager</permission-role>
-      <permission-role>Editor</permission-role>
       <permission-role>Reader</permission-role>
       <permission-role>Contributor</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
       <permission-role>Site Administrator</permission-role>
     </permission-map>
   </state>
@@ -293,6 +309,20 @@
     </action>
     <guard>
       <guard-expression>python:here.may_back_to_private()</guard-expression>
+    </guard>
+  </transition>
+
+  <transition after_script="" before_script=""
+              new_state="proposed" title="Back to proposed"
+              transition_id="back_to_proposed" trigger="USER"
+              i18n:attributes="title">
+    <description i18n:translate="">Making an item proposed.</description>
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=back_to_proposed"
+            i18n:translate="">Back to proposed
+    </action>
+    <guard>
+      <guard-expression>python:here.may_back_to_proposed()</guard-expression>
     </guard>
   </transition>
 
@@ -348,8 +378,7 @@
             i18n:translate="">Unpublish
     </action>
     <guard>
-      <guard-role>Manager</guard-role>
-      <guard-role>Editor</guard-role>
+      <guard-permission>Review portal content</guard-permission>
     </guard>
   </transition>
 
@@ -363,7 +392,7 @@
             i18n:translate="">Archive
     </action>
     <guard>
-      <guard-expression>python:here.may_archive()</guard-expression>
+      <guard-permission>Review portal content</guard-permission>
     </guard>
   </transition>
 

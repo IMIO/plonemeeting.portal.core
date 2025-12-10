@@ -42,7 +42,7 @@
     <element value="plone.tableofcontents"/>
     <element value="plone.locking" />
     <element value="pm.autopublishing" />
-    <element value="pm.superseed" />
+    <element value="pm.supersede" />
   </property>
 
   <!-- View information -->

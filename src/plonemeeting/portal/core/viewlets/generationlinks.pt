@@ -21,7 +21,7 @@
 <!--?    </ul>-->
 <!--?  </div>-->
   <div class="action-section" tal:define="infos view/get_links_info; titles python:infos.keys();" tal:condition="infos">
-    <h2>
+    <h2 class="fs-6">
       <tal:icon tal:replace="structure python:icons.tag('files', tag_class='icon-x1 mb-1')" />
       <tal:title tal:content="string:Génération de documents" />
     </h2>

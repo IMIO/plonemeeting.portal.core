@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from collections import namedtuple
-
 from plonemeeting.portal.core import _
 
 
@@ -23,6 +22,14 @@ DEC_FOLDER_ID = "decisions"
 PUB_FOLDER_ID = "publications"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]
+
+MANAGEABLE_INSTITUTION_SUFFIXES = (
+    "decisions_managers",
+    "publications_managers",
+    "publications_reviewers",
+    "publications_creators",
+    "managers"
+)
 
 PLONEMEETING_API_MEETING_TYPE = "meeting"
 PLONEMEETING_API_ITEM_TYPE = "item"

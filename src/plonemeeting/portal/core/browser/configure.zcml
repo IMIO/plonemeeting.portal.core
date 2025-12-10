@@ -81,6 +81,13 @@
   />
 
   <browser:page
+    for="plonemeeting.portal.core.content.item.IItem"
+    name="edit"
+    class=".item.ItemEditForm"
+    permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
     name="pm_macros"
     for="*"
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
@@ -255,7 +262,7 @@
       permission="zope.Public"/>
   </configure>
 
-  <!-- institution management views -->
+  <!-- Institution management views -->
   <browser:page
     for="plonemeeting.portal.core.content.institution.IInstitution"
     name="manage-settings"
@@ -294,6 +301,8 @@
     class=".manage_users.InviteUserFormView"
     permission="cmf.ModifyPortalContent"
   />
+
+  <!-- Document generation views -->
 
   <browser:page
     for="*"

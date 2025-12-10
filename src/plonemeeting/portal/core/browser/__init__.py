@@ -25,7 +25,7 @@ class BaseFormMixin:
         """
         pm = getToolByName(self.context, "portal_membership")
         if not pm.checkPermission("Manage portal", self.context):
-            self.groups = filter(lambda g: g.__name__ not in self.zope_admin_fieldsets, self.groups)
+            self.groups = list(filter(lambda g: g.__name__ not in self.zope_admin_fieldsets, self.groups))
 
 
 class BaseAddForm(DefaultAddForm, BaseFormMixin):

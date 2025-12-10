@@ -4,8 +4,10 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix `publication_workflow` perms and guards.
+  [aduchene]
+- Fix upgrade step to 2300.
+  [aduchene]
 
 2.3.0 (2025-12-09)
 ------------------

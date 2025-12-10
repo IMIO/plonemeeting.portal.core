@@ -67,11 +67,3 @@ def publication_state_changed(publication, event):
         if publication.EffectiveDate() == "None":
             publication.setEffectiveDate(DateTime())
             publication.reindexObject(idxs=["effective", "effectiveRange"])
-
-
-def publication_will_be_removed(publication, event):
-    """Raise if current user can not."""
-    if not publication.is_power_user():
-        api.portal.show_message(_("You must be publications power user to remove this element!"),
-                                request=publication.REQUEST, type="error")
-        raise Redirect(publication.REQUEST.get('HTTP_REFERER'))
