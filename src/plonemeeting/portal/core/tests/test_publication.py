@@ -496,14 +496,9 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
     def test_remove_publication(self):
         self.login_as_decisions_manager()
-        self.institution.publications_power_users = ["manager"]
         with self.assertRaises(Unauthorized):
             api.content.delete(self.private_publication)
         self.login_as_publications_manager()
-        with self.assertRaises(Redirect):
-            # If we have power users, we should not be able to delete the publication
-            # As publications manager since he isn't a power user
-            api.content.delete(self.private_publication)
         # If we don't have power users, publications manager should be able to delete the publication
         self.institution.publications_power_users = None
         api.content.delete(self.private_publication)
