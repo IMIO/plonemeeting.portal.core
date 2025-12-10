@@ -39,7 +39,7 @@ class AddForm(PublicationForm, BaseAddForm):
         self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
 
 
-class PublicationAdd(DefaultAddView):
+class PublicationAdd(PublicationForm, DefaultAddView):
     form = AddForm
 
 
@@ -156,7 +156,7 @@ class PublicationView(DefaultView):
         return results
 
     def has_timeline(self):
-        return bool(self.timeline())
+        return len(self.timeline()) > 1
 
     @memoize
     def related_items(self):

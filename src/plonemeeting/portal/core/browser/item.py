@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
 from plonemeeting.portal.core.browser import BaseAddForm
 from plonemeeting.portal.core.browser import BaseEditForm
@@ -11,15 +10,7 @@ class ItemForm:
     zope_admin_fieldsets = ["settings", "ownership", "dates", "categorization"]
 
 
-class AddForm(ItemForm, BaseAddForm):
-    pass
-
-
-class PublicationAdd(DefaultAddView):
-    form = AddForm
-
-
-class EditForm(ItemForm, BaseEditForm):
+class ItemEditForm(ItemForm, BaseEditForm):
     """Override to reorder and filter out fieldsets."""
     pass
 

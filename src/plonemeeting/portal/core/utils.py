@@ -34,11 +34,11 @@ def get_members_group_id(institution):
 
 
 def get_publication_creators_group_id(institution):
-    return "{0}-publication_creators".format(institution.getId())
+    return "{0}-publications_creators".format(institution.getId())
 
 
 def get_publication_reviewers_group_id(institution):
-    return "{0}-publication_reviewers".format(institution.getId())
+    return "{0}-publications_reviewers".format(institution.getId())
 
 
 def get_decisions_managers_group_id(institution):

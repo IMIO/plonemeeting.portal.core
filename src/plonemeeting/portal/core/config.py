@@ -24,6 +24,14 @@ PUB_FOLDER_ID = "publications"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]
 
+MANAGEABLE_INSTITUTION_SUFFIXES = (
+    "decisions_managers",
+    "publications_managers",
+    "publications_reviewers",
+    "publications_reviewers",
+    "managers"
+)
+
 PLONEMEETING_API_MEETING_TYPE = "meeting"
 PLONEMEETING_API_ITEM_TYPE = "item"
 

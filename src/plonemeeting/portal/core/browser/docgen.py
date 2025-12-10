@@ -10,11 +10,13 @@ from lxml.etree import fromstring
 from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
 from plonemeeting.portal.core import logger
+from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
 from Products.CMFCore.Expression import createExprContext
 from Products.CMFCore.Expression import Expression
 
 import copy
 import re
+
 
 
 class PMDocumentGenerationHelperView(DXDocumentGenerationHelperView):
@@ -121,12 +123,11 @@ class PMDocumentGenerationHelperView(DXDocumentGenerationHelperView):
         all_user_groups = api.group.get_groups(username=username)
         # We'll say any group ID that ends (or contains) these strings is an 'institution group'
         # Adjust to match your actual naming convention.
-        manageable_institution_suffixes = ("decisions_managers", "publications_managers", "managers")
         user_manageable_groups = []
         for group in all_user_groups:
             group_id = group.getId()
             # Keep only groups that are institution-related
-            if any(suffix in group_id for suffix in manageable_institution_suffixes):
+            if any(suffix in group_id for suffix in MANAGEABLE_INSTITUTION_SUFFIXES):
                 user_manageable_groups.append(api.group.get(group_id))
         return user_manageable_groups
 
