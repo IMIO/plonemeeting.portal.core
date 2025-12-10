@@ -24,7 +24,8 @@ from plone.memoize.instance import memoize
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plonemeeting.portal.core import _
-from plonemeeting.portal.core.utils import get_linked_items_chain, is_publications_manager
+from plonemeeting.portal.core.utils import get_linked_items_chain
+from plonemeeting.portal.core.utils import is_publications_manager
 from plonemeeting.portal.core.utils import user_has_any_role
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.permissions import ModifyPortalContent

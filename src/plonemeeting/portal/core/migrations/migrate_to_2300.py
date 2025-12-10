@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
-
-from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
 from plone import api
 from plone.base.utils import get_installer
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
@@ -9,6 +6,10 @@ from plonemeeting.portal.core.migrations import PlonemeetingMigrator
 from plonemeeting.portal.core.utils import get_publication_creators_group_id
 from plonemeeting.portal.core.utils import get_publication_reviewers_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
+from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
+
+import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

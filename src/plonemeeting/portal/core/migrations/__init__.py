@@ -1,4 +1,3 @@
-from Products.ZCatalog.ProgressHandler import ZLogHandler
 from imio.helpers.workflow import update_role_mappings_for
 from imio.migrator.migrator import Migrator
 from pathlib import Path
@@ -7,8 +6,10 @@ from plone.base.utils import get_installer
 from plonemeeting.portal.core.config import CONFIG_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_CONFIGS
 from Products.CMFPlone.controlpanel.browser.quickinstaller import InstallerView
+from Products.ZCatalog.ProgressHandler import ZLogHandler
 
 import logging
+
 
 logger = logging.getLogger("plonemeeting.portal.core")
 

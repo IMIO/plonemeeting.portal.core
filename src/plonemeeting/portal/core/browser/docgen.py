@@ -18,7 +18,6 @@ import copy
 import re
 
 
-
 class PMDocumentGenerationHelperView(DXDocumentGenerationHelperView):
     """Helper view for document generation."""
 
