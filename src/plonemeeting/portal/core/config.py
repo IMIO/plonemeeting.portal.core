@@ -27,7 +27,7 @@ MANAGEABLE_INSTITUTION_SUFFIXES = (
     "decisions_managers",
     "publications_managers",
     "publications_reviewers",
-    "publications_reviewers",
+    "publications_creators",
     "managers"
 )
 
