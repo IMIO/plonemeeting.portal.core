@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.1 (unreleased)
+2.3.1 (2025-12-10)
 ------------------
 
 - Fix `publication_workflow` perms and guards.
