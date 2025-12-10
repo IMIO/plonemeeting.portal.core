@@ -22,7 +22,7 @@ from plonemeeting.portal.core.utils import default_translator
 from plonemeeting.portal.core.utils import get_api_url_for_categories
 from plonemeeting.portal.core.utils import get_api_url_for_representatives
 from plonemeeting.portal.core.utils import get_members_group_id
-from plonemeeting.portal.core.utils import get_publication_reviewers_group_id
+from plonemeeting.portal.core.utils import get_publications_reviewers_group_id
 from plonemeeting.portal.core.widgets.colorselect import ColorSelectFieldWidget
 from plonemeeting.portal.core.widgets.image import PMNamedImageFieldWidget
 from Products.CMFCore.utils import getToolByName
@@ -608,7 +608,7 @@ class Institution(Container):
     def has_publications_reviewers(self):
         """Check if the institution has at least one publication validator."""
         group_tool = getToolByName(self, "portal_groups")
-        group_id = get_publication_reviewers_group_id(self)
+        group_id = get_publications_reviewers_group_id(self)
         group = group_tool.getGroupById(group_id)
         if not group:
             return False

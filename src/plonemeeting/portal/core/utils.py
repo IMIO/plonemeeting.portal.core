@@ -33,11 +33,11 @@ def get_members_group_id(institution):
     return "{0}-members".format(institution.getId())
 
 
-def get_publication_creators_group_id(institution):
+def get_publications_creators_group_id(institution):
     return "{0}-publications_creators".format(institution.getId())
 
 
-def get_publication_reviewers_group_id(institution):
+def get_publications_reviewers_group_id(institution):
     return "{0}-publications_reviewers".format(institution.getId())
 
 
@@ -58,11 +58,11 @@ def is_publications_manager(institution):
 
 
 def is_publication_creator(institution):
-    return get_publication_creators_group_id(institution) in api.user.get_current().getGroups()
+    return get_publications_creators_group_id(institution) in api.user.get_current().getGroups()
 
 
 def is_publication_reviewer(institution):
-    return get_publication_reviewers_group_id(institution) in api.user.get_current().getGroups()
+    return get_publications_reviewers_group_id(institution) in api.user.get_current().getGroups()
 
 
 def get_text_from_richtext(field):  # pragma: no cover
