@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.2.6 (unreleased)
+------------------
+
+- Sort publications on effective date and sortable_title on faceted view.
+  [aduchene]
+
 2.2.5 (2025-10-24)
 ------------------
 

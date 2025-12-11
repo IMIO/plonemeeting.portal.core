@@ -5,16 +5,21 @@
   <faceted:widget
     factory=".root_path.NavigationRootPathWidget"
     schema=".root_path.INavigationRootPathSchema"
-    />
+  />
 
   <faceted:widget
     factory=".sort.ItemsSortWidget"
     schema=".sort.IItemsSortSchema"
-    />
+  />
 
   <faceted:widget
     factory=".select.SelectMeetingWidget"
     schema=".select.ISelectMeetingSchema"
-    />
+  />
+
+  <faceted:widget
+    factory=".sort.PublicationsSortWidget"
+    schema=".sort.IPublicationsSortSchema"
+  />
 
 </configure>
