@@ -6,7 +6,6 @@ Changelog
 
 - Nothing changed yet.
 
-
 2.3.1 (2025-12-10)
 ------------------
 
@@ -55,6 +54,11 @@ Changelog
 - Add a base `PlonemeetingMigrator` class to ease future migrations.
   [aduchene]
 - Improve login page.
+
+2.2.6 (2025-12-11)
+------------------
+
+- Sort publications on effective date and sortable_title on faceted view.
   [aduchene]
 
 2.2.5 (2025-10-24)

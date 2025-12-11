@@ -151,11 +151,8 @@
   </criterion>
 
   <criterion name="tri">
-   <property name="widget">sorting</property>
-   <property name="title">Tri</property>
-   <property name="hidden">True</property>
-   <property name="vocabulary"></property>
-   <property name="default">effective(reverse)</property>
+   <property name="widget">publications_sort</property>
+   <property name="title">Tri des publications (par date de publication, puis par titre)</property>
   </criterion>
 
  </criteria>

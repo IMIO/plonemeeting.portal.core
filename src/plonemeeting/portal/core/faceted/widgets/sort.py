@@ -46,3 +46,28 @@ class ItemsSortWidget(Widget):
                 "sort_order": ["descending", "ascending"],
             }
         return query
+
+
+
+class IPublicationsSortSchema(ISchema):
+    """
+    """
+
+class PublicationsSortWidget(Widget):
+    """ Sort items with custom (multiple) sort orders
+    """
+
+    widget_type = "publications_sort"
+    widget_label = _("Publications sort order")
+    groups = (DefaultSchemata,)
+
+    index = ViewPageTemplateFile("sort.pt")
+
+    def query(self, form):
+        """ Sort publications by publication date (desc) and by sortable_title (asc)
+        """
+        query = {
+            "sort_on": ["effective", "sortable_title"],
+            "sort_order": ["descending", "ascending"],
+        }
+        return query
