@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.6 (unreleased)
+2.2.6 (2025-12-11)
 ------------------
 
 - Sort publications on effective date and sortable_title on faceted view.
