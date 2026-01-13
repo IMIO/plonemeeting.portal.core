@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
+from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.z3cform.widgets import contentbrowser
 from plone.base.navigationroot import get_navigation_root_object
 from plone.base.utils import get_top_site_from_url
@@ -95,3 +96,4 @@ logger.info(
     "Patching plone.app.contenttypes.behaviors.tableofcontents to move ITableOfContents.table_of_contents field"
 )
 remove_behavior_field_fieldset(ITableOfContents, "table_of_contents")
+remove_behavior_field_fieldset(IRelatedItems, "relatedItems")

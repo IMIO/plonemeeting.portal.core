@@ -1,11 +1,16 @@
+from ZODB.blob import Blob
 from asn1crypto import tsp
 from collective.timestamp.interfaces import ITimeStamper
 from plone import api
 from plone.app.content.browser.content_status_modify import ContentStatusModifyView
+from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.memoize.view import memoize
+from plone.namedfile import NamedBlobFile
+from plone.namedfile.field import NamedBlobImage, NamedImage, NamedFile
+from plone.namedfile.interfaces import INamedFileField, INamedImageField
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
 from plonemeeting.portal.core.browser import BaseAddForm
@@ -14,7 +19,10 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from plonemeeting.portal.core.content.publication import IPublication
 from z3c.form import button
+from z3c.form.interfaces import IDataManager, IDataConverter
+from zope.component import getMultiAdapter, getUtility
 from zope.event import notify
 from ZPublisher.Iterators import filestream_iterator
 
@@ -23,6 +31,8 @@ import os
 import pathlib
 import tempfile
 import zipfile
+
+from zope.interface import Interface
 
 
 class PublicationForm:
@@ -33,10 +43,154 @@ class PublicationForm:
 class AddForm(PublicationForm, BaseAddForm):
     """Override to reorder and filter out fieldsets."""
 
-    def updateWidgets(self):
-        super().updateWidgets()
-        self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
-        self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
+    COPY_BLACKLIST = {
+        "id",
+        "decision_date",
+        "IPublication.effective",
+        "IPublication.expires",
+        "timestamp",
+        "timestamped_file",
+        "ISupersede.supersede"
+    }
+
+    def _is_cloning(self):
+        return "_copy_from" in self.request.form
+
+    def _apply_copy_blacklist(self):
+        for widget in self._iter_all_widgets():
+            field = getattr(widget, "field", None)
+            if field is None:
+                continue
+            field_name = widget.__name__
+            print(field_name)
+            if field_name in self.COPY_BLACKLIST:
+                # Clear the value so it behaves like a normal add form
+                widget.value = field.missing_value
+
+    def update(self):
+        super().update()
+        if self._is_cloning() and self.request.get("REQUEST_METHOD") == "GET":
+            self._apply_copy_blacklist()
+            return
+        # Set default texts from institution
+        if self.request.get("REQUEST_METHOD") == "GET":
+            self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
+            self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
+
+    def getContent(self):
+        if not self._is_cloning():
+            return super().getContent()
+        copy_uid = self.request.get("_copy_from")
+        source = uuidToObject(copy_uid) if copy_uid else None
+        # We'll trick Plone into thinking we're in a different context like the edit form does.
+        self.ignoreContext = False
+        return source
+
+    #
+    # def update(self):
+    #     super().update()
+    #     if "_copy_from" in self.request and "_copy_from" not in self.request.form:
+    #         self.request.form["_copy_from"] = self.request.get("_copy_from")
+    #     source_uid = self.request.get("_copy_from")
+    #     if not source_uid:
+    #         return
+    #     source = uuidToObject(source_uid)
+    #     if not source:
+    #         return
+    #
+    #     self._prefill_widgets_from(source)
+    #
+    # def create(self, data):
+    #     import pdb; pdb.set_trace() # TODO: REMOVE BEFORE FLIGHT ---------------------------------------------------
+    #     source_uid = self.request.get("_copy_from")
+    #     source = uuidToObject(source_uid) if source_uid else None
+    #
+    #     if source:
+    #         for f in self.fields.values():
+    #             name = f.__name__
+    #             field = f.field
+    #
+    #             if not (INamedFileField.providedBy(field) or INamedImageField.providedBy(field)):
+    #                 continue
+    #
+    #             src_val = getattr(source, name, None)
+    #             if not src_val:
+    #                 continue
+    #
+    #             current = data.get(name, field.missing_value)
+    #
+    #             # If the user did NOT upload a replacement, keep the source file by copying it
+    #             if current in (None, field.missing_value):
+    #                 data[name] = self.clone_namedfile(src_val)
+    #
+    #     return super().create(data)
+    #
+    # @staticmethod
+    # def clone_namedfile(value):
+    #     """Make a real copy (new instance) of a Named(File|Image|Blob*)."""
+    #     if value is None:
+    #         return None
+    #
+    #     # NOTE: value.data reads into memory; for very large blobs you may prefer streaming.
+    #     data = value.data
+    #     filename = getattr(value, "filename", None)
+    #     contentType = getattr(value, "contentType", None)
+    #
+    #     if isinstance(value, NamedBlobImage):
+    #         return NamedBlobImage(data=data, filename=filename, contentType=contentType)
+    #     if isinstance(value, NamedImage):
+    #         return NamedImage(data=data, filename=filename, contentType=contentType)
+    #     if isinstance(value, NamedBlobFile):
+    #         return NamedBlobFile(data=data, filename=filename, contentType=contentType)
+    #     if isinstance(value, NamedFile):
+    #         return NamedFile(data=data, filename=filename, contentType=contentType)
+    #
+    #     # Fallback: try same class signature
+    #     return value.__class__(data=data, filename=filename, contentType=contentType)
+    #
+    # def _iter_all_widgets(self):
+    #     # main fieldset
+    #     for w in getattr(self, "widgets", {}).values():
+    #         yield w
+    #     # groups/fieldsets created by behaviors / form extenders
+    #     for group in self.groups:
+    #         for w in group.widgets.values():
+    #             yield w
+    #
+    # def _prefill_widgets_from(self, source):
+    #     for widget in self._iter_all_widgets():
+    #         field = getattr(widget, "field", None)
+    #         if field is None:
+    #             continue
+    #
+    #         # Skip invisible / non-input widgets (usually safe)
+    #         if getattr(widget, "mode", None) != "input":
+    #             continue
+    #
+    #         # If the user already submitted something once (validation error),
+    #         if widget.name in self.request.form:
+    #             continue
+    #
+    #         if getattr(field, "readonly", False):
+    #             continue
+    #
+    #         # A stable way to identify a field is its full dotted name if available,
+    #         # otherwise fall back to widget.__name__ (field name in the schema).
+    #         field_id = getattr(field, "__name__", None) or widget.__name__
+    #
+    #         if field_id in self.COPY_BLACKLIST or widget.__name__ in self.COPY_BLACKLIST:
+    #             continue
+    #
+    #         # Read the python value from the source using Plone’s normal storage rules
+    #         dm = getMultiAdapter((source, field), IDataManager)
+    #         value = dm.get()
+    #
+    #         if value == field.missing_value:
+    #             continue
+    #
+    #         # Convert python value -> widget value (handles richtext, relations, dates, etc.)
+    #         converter = IDataConverter(widget)
+    #         widget.value = converter.toWidgetValue(value)
 
 
 class PublicationAdd(PublicationForm, DefaultAddView):
@@ -161,7 +315,8 @@ class PublicationView(DefaultView):
     @memoize
     def related_items(self):
         """Return list of related items."""
-        return [self._get_linked_obj_infos(rel.to_object) for rel in api.relation.get(source=self.context, relationship="relatedItems")]
+        return [self._get_linked_obj_infos(rel.to_object) for rel in
+                api.relation.get(source=self.context, relationship="relatedItems")]
 
     def has_related_items(self):
         return bool(self.related_items())

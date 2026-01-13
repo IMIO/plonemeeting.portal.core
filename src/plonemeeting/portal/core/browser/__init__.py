@@ -27,6 +27,15 @@ class BaseFormMixin:
         if not pm.checkPermission("Manage portal", self.context):
             self.groups = list(filter(lambda g: g.__name__ not in self.zope_admin_fieldsets, self.groups))
 
+    def _iter_all_widgets(self):
+        # main fieldset
+        for w in getattr(self, "widgets", {}).values():
+            yield w
+        # groups/fieldsets created by behaviors / form extenders
+        for group in self.groups:
+            for w in group.widgets.values():
+                yield w
+
 
 class BaseAddForm(DefaultAddForm, BaseFormMixin):
 
