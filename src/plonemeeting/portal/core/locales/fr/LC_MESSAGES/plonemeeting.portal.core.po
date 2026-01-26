@@ -73,7 +73,7 @@ msgstr "Tutelle"
 #: ../browser/templates/publication.pt:120
 #: ../content/publication.py:105
 msgid "Authority date"
-msgstr "Date approbation tutelle"
+msgstr "Date d'approbation de la tutelle"
 
 #: ../browser/templates/manage_users_listing.pt:36
 msgid "Back to my institution"
@@ -649,7 +649,7 @@ msgstr "Styles"
 #: ../browser/templates/publication.pt:109
 #: ../content/publication.py:99
 msgid "Subject to authority?"
-msgstr "Soumis à la tutelle?"
+msgstr "Soumis à la tutelle spéciale d’approbation?"
 
 #: ../behaviors/configure.zcml:26
 #: ../behaviors/supersede.py:45
