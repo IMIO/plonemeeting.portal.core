@@ -340,7 +340,7 @@
     <section id="timeline-section" class="row mb-3" tal:condition="view/has_timeline"
              data-toc="Timeline" i18n:attributes="data-toc">
       <div class="col-lg-12">
-        <h2 class="mb-3">Chronologie</h2>
+        <h2 class="mb-3" i18n:translate="">Previous versions</h2>
         <ul class="timeline">
           <tal:item repeat="item timeline">
             <li class="${python: item['current'] and 'timeline-item current' or 'timeline-item'}">
@@ -359,7 +359,7 @@
                        tal:attributes="class string:badge state-badge state-${item/review_state}">State</span>
                   </div>
                 </header>
-                <h4 class="text-muted fw-bold d-inline" tal:content="item/title">Title</h4>
+                <h4 class="text-muted d-inline" tal:content="item/title">Title</h4>
                 <p class="text-muted pt-2 mb-0" tal:condition="item/description"
                    tal:content="item/description">Description
                 </p>
@@ -395,7 +395,7 @@
                         State
                       </span>
                     </div>
-                    <h3 class="card-title fw-bold mb-2" tal:content="item/title">Title</h3>
+                    <h3 class="card-title fw-bold mb-2 fs-6" tal:content="item/title">Title</h3>
                     <p class="card-text text-muted small mb-2"
                        tal:condition="item/description"
                        tal:content="item/description">

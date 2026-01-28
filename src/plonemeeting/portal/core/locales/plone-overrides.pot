@@ -14,3 +14,8 @@ msgstr ""
 #: plone.app.relationfield/plone/app/relationfield/behavior.py:17
 msgid "label_related_items"
 msgstr ""
+
+#: plone.app.dexterity/plone/app/dexterity/behaviors/configure.zcml:32
+#: plone.app.relationfield/plone/app/relationfield/behavior.py:33
+msgid "Categorization"
+msgstr ""

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-12-09 15:22+0000\n"
+"POT-Creation-Date: 2026-01-26 14:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +40,24 @@ msgid "Back to project"
 msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Back to proposed"
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Can only be seen and edited by the Contributors."
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Can only be seen and edited by the Editors."
 msgstr ""
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml
 msgid "Can only be seen and edited by the Manager."
+msgstr ""
+
+#: plone.app.dexterity/plone/app/dexterity/behaviors/configure.zcml:32
+#: plone.app.relationfield/plone/app/relationfield/behavior.py:33
+msgid "Categorization"
 msgstr ""
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml
@@ -96,6 +109,10 @@ msgstr ""
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Making an item private."
+msgstr ""
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Making an item proposed."
 msgstr ""
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml

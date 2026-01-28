@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-12-09 15:22+0000\n"
+"POT-Creation-Date: 2026-01-26 14:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,20 +66,20 @@ msgstr "Êtes-vous sûr de vouloir désinscrire cet utilisateur ?"
 msgid "Assemblée générale"
 msgstr ""
 
-#: ../content/publication.py:91
+#: ../content/publication.py:92
 msgid "Authority"
 msgstr "Tutelle"
 
 #: ../browser/templates/publication.pt:120
-#: ../content/publication.py:105
+#: ../content/publication.py:107
 msgid "Authority date"
-msgstr "Date approbation tutelle"
+msgstr "Date approbation de la tutelle spéciale d'approbation"
 
 #: ../browser/templates/manage_users_listing.pt:36
 msgid "Back to my institution"
 msgstr "Retourner vers mon institution"
 
-#: ../browser/institution.py:117
+#: ../browser/institution.py:121
 #: ../browser/meeting.py:40
 #: ../browser/publication.py:65
 msgid "Cancel"
@@ -134,7 +134,7 @@ msgid "Decision"
 msgstr "Décision"
 
 #: ../browser/templates/publication.pt:96
-#: ../content/publication.py:67
+#: ../content/publication.py:68
 msgid "Decision date"
 msgstr "Date de décision"
 
@@ -165,7 +165,7 @@ msgid "Document"
 msgstr ""
 
 #: ../browser/templates/publication.pt:211
-#: ../content/publication.py:50
+#: ../content/publication.py:51
 msgid "Document type"
 msgstr "Nature du document"
 
@@ -185,7 +185,7 @@ msgstr "Natures des documents"
 msgid "Edit"
 msgstr "Éditer"
 
-#: ../browser/institution.py:119
+#: ../browser/institution.py:123
 #: ../browser/publication.py:67
 msgid "Edit cancelled"
 msgstr "Édition annulée"
@@ -206,7 +206,7 @@ msgstr "Onglets activés"
 msgid "Enter a TAL expression that once evaluated will return the setting's value. Elements context, request, view, template, utils, portal, site_url, user are available for the expression."
 msgstr "Entrez une expression TAL qui, une fois évaluée, renverra la valeur du paramètre. Les contextes éléments, request, view, template, utils, portal, site_url, user sont disponibles pour l'expression."
 
-#: ../content/publication.py:72
+#: ../content/publication.py:73
 msgid "Entry date"
 msgstr "Date entrée en vigueur"
 
@@ -215,7 +215,7 @@ msgid "Entrée en vigueur"
 msgstr ""
 
 #: ../browser/templates/publication.pt:133
-#: ../content/publication.py:111
+#: ../content/publication.py:113
 msgid "Expired authority date"
 msgstr "Exécutoire en date du (expiration délai tutelle)"
 
@@ -277,7 +277,7 @@ msgstr "Groupes en charge"
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
-#: ../content/publication.py:76
+#: ../content/publication.py:77
 msgid "Hour and place of consultation"
 msgstr "Lieu et horaires de consultation"
 
@@ -396,7 +396,7 @@ msgid "Legislative authorities"
 msgstr "Autorités délibérantes"
 
 #: ../browser/templates/publication.pt:84
-#: ../content/publication.py:62
+#: ../content/publication.py:63
 msgid "Legislative authority"
 msgstr "Autorité délibérante"
 
@@ -525,6 +525,10 @@ msgstr "Veuillez noter que si vous êtes un citoyen souhaitant consulter le site
 msgid "Plonemeeting URL"
 msgstr "URL iA.Délib"
 
+#: ../browser/templates/publication.pt:343
+msgid "Previous versions"
+msgstr "Versions antérieures"
+
 #: ../content/institution.py:338
 msgid "Project decision disclaimer"
 msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
@@ -533,11 +537,11 @@ msgstr "Avertissement à afficher sur les points en \"Projet de décision\""
 msgid "Province"
 msgstr "Province"
 
-#: ../config.py:61
+#: ../config.py:68
 msgid "Publication notice"
 msgstr "Attestation de publication"
 
-#: ../config.py:67
+#: ../config.py:74
 msgid "Publication poster"
 msgstr "Affiche de publication"
 
@@ -550,6 +554,10 @@ msgstr ""
 #: ../migrations/migrate_to_2000.py:202
 msgid "Publications"
 msgstr "Publications"
+
+#: ../faceted/widgets/sort.py:61
+msgid "Publications sort order"
+msgstr ""
 
 #: ../content/institution.py:258
 msgid "Published Items content query"
@@ -608,7 +616,7 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
-#: ../browser/institution.py:103
+#: ../browser/institution.py:107
 #: ../browser/meeting.py:34
 #: ../browser/publication.py:57
 msgid "Save"
@@ -647,9 +655,9 @@ msgid "Styling"
 msgstr "Styles"
 
 #: ../browser/templates/publication.pt:109
-#: ../content/publication.py:99
+#: ../content/publication.py:100
 msgid "Subject to authority?"
-msgstr "Soumis à la tutelle?"
+msgstr "Soumis à la tutelle spéciale d’approbation?"
 
 #: ../behaviors/configure.zcml:26
 #: ../behaviors/supersede.py:45
@@ -658,7 +666,7 @@ msgstr "Remplace"
 
 #: ../behaviors/supersede.py:46
 msgid "Supersede this item."
-msgstr "Élément remplacé."
+msgstr "Sélectionner l'élément qui va être remplacé. Lorsqu'un élément en remplace un autre, un message d'avertissement est affiché sur l'élément remplacé. Une ligne du temps des anciens éléments remplacés est également affichée."
 
 #: ../browser/sync.py:209
 msgid "Sync"
@@ -722,7 +730,7 @@ msgstr "Paramètres des modèles de document utilisés pour personnaliser les mo
 msgid "Templates"
 msgstr "Modèles de document"
 
-#: ../content/publication.py:79
+#: ../content/publication.py:80
 msgid "Text"
 msgstr "Texte"
 
@@ -784,7 +792,7 @@ msgstr "Synchroniser cette séance"
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: ../config.py:73
+#: ../config.py:80
 msgid "Users and groups summary"
 msgstr "Récapitulatif des utilisateurs et groupes"
 
@@ -829,10 +837,6 @@ msgstr "Vous consultez une ancienne version de cette publication. Pour les infor
 msgid "You can't remove items from a decided meeting."
 msgstr "Vous ne pouvez pas enlever de points sur une séance déjà décidée."
 
-#: ../events/publication.py:75
-msgid "You must be publications power user to remove this element!"
-msgstr "Vous devez avoir le rôle super-utilisateur pour supprimer une publication!"
-
 #: ../profiles/default/registry.xml
 msgid "Zone de Police"
 msgstr "Zone de Police"
@@ -853,7 +857,7 @@ msgstr "activer pour trier la colonne par ordre décroissant"
 msgid "archived_publication_warning_text_description"
 msgstr "Ce texte sera affiché en haut de chaque publication archivée."
 
-#: ../content/publication.py:106
+#: ../content/publication.py:108
 msgid "authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -861,11 +865,11 @@ msgstr "N'apparaitra pas si laissé vide."
 msgid "categories_mappings_description"
 msgstr "Les points pour lesquels aucune correspondance de matière ne sera trouvée seront ignorés."
 
-#: ../config.py:37
+#: ../config.py:44
 msgid "category"
 msgstr "Catégorie"
 
-#: ../config.py:38
+#: ../config.py:45
 msgid "classifier"
 msgstr "Classificateur"
 
@@ -873,7 +877,7 @@ msgstr "Classificateur"
 msgid "confidential"
 msgstr "Confidentiel"
 
-#: ../config.py:33
+#: ../config.py:40
 msgid "decision"
 msgstr "Décision"
 
@@ -897,15 +901,15 @@ msgstr "Ce texte sera utilisé afin de pré-remplir le champ 'Lieu et horaires d
 msgid "default_publication_text_description"
 msgstr "Ce texte sera utilisé afin de pré-remplir le champ 'Texte' lors de la création d'une nouvelle publication."
 
-#: ../browser/manage_users.py:270
+#: ../browser/manage_users.py:269
 msgid "desc_invite_user"
 msgstr "Vous pouvez inviter un utilisateur existant à rejoindre votre institution. Attention, veuillez vérifier avec l'utilisateur qu'il possède bien ce compte."
 
-#: ../browser/manage_users.py:146
+#: ../browser/manage_users.py:145
 msgid "desc_manage_create_user"
 msgstr "Créer un nouvel utilisateur"
 
-#: ../browser/manage_users.py:191
+#: ../browser/manage_users.py:190
 msgid "desc_manage_edit_user"
 msgstr "Modifier l'utilisateur"
 
@@ -936,7 +940,7 @@ msgstr "Modèles de document activés pour cette institution. Un modèle de docu
 msgid "error_already_superseded"
 msgstr "Cet élément est déjà remplacé par un autre élément et ne peut donc pas être remplacé à nouveau. Veuillez choisir un autre élément qui n'est pas encore remplacé."
 
-#: ../content/publication.py:112
+#: ../content/publication.py:114
 msgid "expired_authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
 
@@ -962,7 +966,7 @@ msgstr "Champ iA.Délib à utiliser pour la correspondance des matières"
 msgid "iA.Délib"
 msgstr ""
 
-#: ../config.py:33
+#: ../config.py:40
 msgid "in_project"
 msgstr "Projet de décision"
 
@@ -1009,7 +1013,7 @@ msgstr "Adresse e-mail"
 msgid "label_fullname"
 msgstr "Nom complet"
 
-#: ../browser/manage_users.py:272
+#: ../browser/manage_users.py:271
 msgid "label_invite_button"
 msgstr "Inviter"
 
@@ -1018,15 +1022,15 @@ msgstr "Inviter"
 msgid "label_invite_existing_user"
 msgstr "Inviter un utilisateur existant"
 
-#: ../browser/manage_users.py:269
+#: ../browser/manage_users.py:268
 msgid "label_invite_user"
 msgstr "Inviter un utilisateur existant"
 
-#: ../browser/manage_users.py:145
+#: ../browser/manage_users.py:144
 msgid "label_manage_create_user"
 msgstr "Créer un nouvel utilisateur"
 
-#: ../browser/manage_users.py:190
+#: ../browser/manage_users.py:189
 msgid "label_manage_edit_user"
 msgstr "Modifier l'utilisateur"
 
@@ -1068,7 +1072,7 @@ msgstr "Séance importée !  ${created} points créés, ${modified} points modif
 msgid "msg_editing_timestamped_content"
 msgstr "Vous êtes en train de modifier un contenu horodaté! Si vous enregistrez, l'horodatage et la date de publication seront mis à jour. Si vous souhaitez conserver l'horodatage, veuillez cliquer sur annuler."
 
-#: ../browser/manage_users.py:161
+#: ../browser/manage_users.py:160
 msgid "msg_existing_user_error"
 msgstr "Un utilisateur ayant cet identifiant existe déjà. Veuillez en choisir un autre."
 
@@ -1085,19 +1089,19 @@ msgstr "Aucun utilisateur trouvé."
 msgid "msg_timestamp_removed"
 msgstr "L'horodatage a été supprimé car le contenu a été modifié."
 
-#: ../browser/manage_users.py:253
+#: ../browser/manage_users.py:252
 msgid "msg_user_create_failed"
 msgstr "Échec de la création de l'utilisateur"
 
-#: ../browser/manage_users.py:173
+#: ../browser/manage_users.py:172
 msgid "msg_user_create_failed: {}"
 msgstr "La création de l'utilisateur a échoué: {}"
 
-#: ../browser/manage_users.py:171
+#: ../browser/manage_users.py:170
 msgid "msg_user_created"
 msgstr "Utilisateur créé"
 
-#: ../browser/manage_users.py:242
+#: ../browser/manage_users.py:241
 msgid "msg_user_updated"
 msgstr "Utilisateur mis à jour"
 
@@ -1118,11 +1122,11 @@ msgstr ""
 msgid "plonemeeting.portal.core (uninstall)"
 msgstr ""
 
-#: ../config.py:33
+#: ../config.py:40
 msgid "private"
 msgstr "Privé"
 
-#: ../config.py:33
+#: ../config.py:40
 msgid "proposed"
 msgstr "Proposé"
 
@@ -1137,3 +1141,7 @@ msgstr "Affichée dans les filtres et dans les listes de points"
 #: ../content/institution.py:322
 msgid "representatives_mappings_description"
 msgstr "Si des correspondances de mandataires sont renseignées ci-dessous, les points pour lesquels aucune correspondance ne sera trouvée seront ignorés."
+
+#: ../content/publication.py:101
+msgid "subject_to_authority_description"
+msgstr "Cocher cette case si la publication est soumise à la tutelle spéciale d’approbation. Normalement, une seule des deux dates doit être remplie, ci-dessous."
