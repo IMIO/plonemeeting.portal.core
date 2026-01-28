@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.2 (unreleased)
+2.3.2 (2026-01-28)
 ------------------
 
 - DELIBE-152: Improve i18n translations.
