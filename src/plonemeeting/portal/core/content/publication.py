@@ -98,6 +98,7 @@ class IPublication(model.Schema, IFile, ITimestampableDocument):
     )
     subject_to_authority = schema.Bool(
         title=_("Subject to authority?"),
+        description=_("subject_to_authority_description"),
         required=False,
         default=True,
     )

@@ -4,7 +4,8 @@ Changelog
 2.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-152: Improve i18n translations.
+  [aduchene]
 
 2.3.1 (2025-12-10)
 ------------------

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-12-09 15:22+0000\n"
+"POT-Creation-Date: 2026-01-26 14:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,12 +37,25 @@ msgid "Back to project"
 msgstr "Retour en projet"
 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Back to proposed"
+msgstr "Retour en proposé"
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Can only be seen and edited by the Contributors."
+msgstr "Peut seulement être vu et édité par les Contributeurs."
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Can only be seen and edited by the Editors."
 msgstr "Peut seulement être vu et édité par les Éditeurs."
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml
 msgid "Can only be seen and edited by the Manager."
 msgstr "Peut seulement être vu et édité par le Gestionnaire."
+
+#: plone.app.dexterity/plone/app/dexterity/behaviors/configure.zcml:32
+#: plone.app.relationfield/plone/app/relationfield/behavior.py:33
+msgid "Categorization"
+msgstr "Liens"
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml
 #: ../profiles/default/workflows/publication_workflow/definition.xml
@@ -94,6 +107,10 @@ msgstr "Mettre un élément en privé signifie qu'il ne sera visible que par le 
 #: ../profiles/default/workflows/publication_workflow/definition.xml
 msgid "Making an item private."
 msgstr "Mettre un élément en privé."
+
+#: ../profiles/default/workflows/publication_workflow/definition.xml
+msgid "Making an item proposed."
+msgstr "Mettre un élément en proposé."
 
 #: ../profiles/default/workflows/manager_folder_workflow/definition.xml
 msgid "Manager workflow for Folders"
