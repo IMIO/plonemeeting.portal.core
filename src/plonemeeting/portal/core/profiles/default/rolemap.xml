@@ -46,6 +46,14 @@
       <role name="Site Administrator"/>
     </permission>
 
+    <permission name="imio.omnia.core: Access Omnia OpenAI proxy" acquire="False">
+      <!-- Allow Anonymous so the assistant widget works on public publication pages.
+           The AssistantAdapter.is_available() check is the real security gate. -->
+      <role name="Anonymous"/>
+      <role name="Member"/>
+      <role name="Manager"/>
+    </permission>
+
   </permissions>
 
 </rolemap>

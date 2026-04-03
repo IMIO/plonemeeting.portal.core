@@ -7,4 +7,17 @@
       for="plonemeeting.portal.core.content.publication.IPublication"
       />
 
+  <adapter
+      factory=".adapters.AssistantAdapter"
+      provides="imio.omnia.assistant.interfaces.IOmniaAssistantAdapter"
+      for="*
+           zope.publisher.interfaces.browser.IBrowserRequest"
+      />
+
+  <adapter
+      factory=".adapters.OrganizationIDProvider"
+      provides="imio.omnia.core.interfaces.IOrganizationIDProvider"
+      for="*"
+      />
+
 </configure>

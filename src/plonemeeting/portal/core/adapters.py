@@ -3,7 +3,14 @@ from collective.timestamp.adapters import TimeStamper
 from hashlib import md5
 from imio.helpers.content import object_values
 from io import BytesIO
+
+from imio.omnia.core.interfaces import IOrganizationIDProvider
+from imio.omnia.core.adapters import OrganizationIDProvider as OmniaOrganizationIDProvider
+from imio.omnia.assistant.interfaces import IOmniaAssistantAdapter
+from imio.omnia.assistant.adapters import OmniaAssistantAdapter
+from plone import api
 from plone.namedfile.file import NamedBlobFile
+from plonemeeting.portal.core.content.publication import IPublication
 from zope.interface import implementer
 
 import zipfile
@@ -68,3 +75,29 @@ class PublicationTimeStamper(TimeStamper):
         formatted_date = timestamp_date.astimezone().strftime("%Y%m%d-%H%M%S")
         filename = f"archive_{formatted_date}.zip"
         self.context.timestamped_file = NamedBlobFile(data=data, filename=filename)
+
+@implementer(IOmniaAssistantAdapter)
+class AssistantAdapter(OmniaAssistantAdapter):
+
+    def _get_institution(self):
+        return api.portal.get_navigation_root(self.context)
+
+    def is_available(self):
+        if not IPublication.providedBy(self.context):
+            return False
+        institution = self._get_institution()
+        return bool(getattr(institution, "enable_ai_assistant", False))
+
+    def get_system_prompt(self):
+        base = super().get_system_prompt()
+        institution = self._get_institution()
+        custom = getattr(institution, "ai_assistant_system_prompt", None)
+        return custom if custom else base
+
+
+@implementer(IOrganizationIDProvider)
+class OrganizationIDProvider(OmniaOrganizationIDProvider):
+
+    def __call__(self):
+        institution = api.portal.get_navigation_root(self.context)
+        return institution.id

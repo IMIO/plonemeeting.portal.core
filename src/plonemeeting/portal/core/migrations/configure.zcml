@@ -231,4 +231,12 @@
     destination="2300"
     handler="plonemeeting.portal.core.migrations.migrate_to_2300.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2400"
+    description="Install imio.omnia.* packages and add AI assistant fields to Institution."
+    source="2300"
+    destination="2400"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2400.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

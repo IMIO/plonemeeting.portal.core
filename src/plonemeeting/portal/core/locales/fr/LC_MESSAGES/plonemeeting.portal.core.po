@@ -1145,3 +1145,23 @@ msgstr "Si des correspondances de mandataires sont renseignées ci-dessous, les 
 #: ../content/publication.py:101
 msgid "subject_to_authority_description"
 msgstr "Cocher cette case si la publication est soumise à la tutelle spéciale d’approbation. Normalement, une seule des deux dates doit être remplie, ci-dessous."
+
+#: ../content/institution.py
+msgid "AI"
+msgstr "IA"
+
+#: ../content/institution.py
+msgid "Enable AI assistant"
+msgstr "Activer l’assistant IA"
+
+#: ../content/institution.py
+msgid "Experimental feature: do not enable this unless you have contacted iMio support first."
+msgstr "Fonctionnalité expérimentale: ne pas activer sans avoir préalablement contacté le support iMio."
+
+#: ../content/institution.py
+msgid "AI assistant system prompt"
+msgstr "Prompt système de l’assistant IA"
+
+#: ../content/institution.py
+msgid "Custom system prompt injected server-side for this institution. Leave empty to use the global default."
+msgstr "Prompt système injecté côté serveur pour cette institution. Laisser vide pour utiliser la valeur globale par défaut."

@@ -376,6 +376,31 @@ class IInstitution(model.Schema):
         required=False
     )
 
+    # AI Assistant fieldset
+    model.fieldset(
+        "ai",
+        label=_("AI"),
+        fields=["enable_ai_assistant", "ai_assistant_system_prompt"],
+    )
+
+    enable_ai_assistant = schema.Bool(
+        title=_("Enable AI assistant"),
+        description=_(
+            "Experimental feature: do not enable this unless you have contacted iMio support first."
+        ),
+        default=False,
+        required=False,
+    )
+
+    ai_assistant_system_prompt = schema.Text(
+        title=_("AI assistant system prompt"),
+        description=_(
+            "Custom system prompt injected server-side for this institution. "
+            "Leave empty to use the global default."
+        ),
+        required=False,
+    )
+
     # Styling fieldset
     model.fieldset(
         "style",
