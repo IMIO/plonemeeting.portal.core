@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.4.0 (unreleased)
+2.4.0 (2026-04-03)
 ------------------
 
 - Integrate ``imio.omnia.core``, ``imio.omnia.assistant`` and ``imio.omnia.tinymce`` as dependencies.
