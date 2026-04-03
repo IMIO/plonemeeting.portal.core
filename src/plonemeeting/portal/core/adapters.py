@@ -10,6 +10,7 @@ from imio.omnia.assistant.interfaces import IOmniaAssistantAdapter
 from imio.omnia.assistant.adapters import OmniaAssistantAdapter
 from plone import api
 from plone.namedfile.file import NamedBlobFile
+from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.content.publication import IPublication
 from zope.interface import implementer
 
@@ -83,7 +84,7 @@ class AssistantAdapter(OmniaAssistantAdapter):
         return api.portal.get_navigation_root(self.context)
 
     def is_available(self):
-        if not IPublication.providedBy(self.context):
+        if not IPublication.providedBy(self.context) and not IItem.providedBy(self.context):
             return False
         institution = self._get_institution()
         return bool(getattr(institution, "enable_ai_assistant", False))

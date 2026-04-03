@@ -4,7 +4,8 @@ Changelog
 2.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enable AI assistant on ``Item`` (Decision) content type in addition to ``Publication``.
+  [aduchene]
 
 
 2.4.0 (2026-04-03)
