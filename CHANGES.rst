@@ -4,7 +4,27 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
+  ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
+  dependency chain resolves under the test fixture (``z3c.autoinclude`` is
+  disabled there).
+  [aduchene]
+- Remove dead ``get_api_url_for_meeting_item`` (singular) helper from
+  ``utils.py`` — orphaned since 2021 with no callers.
+  [aduchene]
+- Tighten ``.coveragerc`` ``include`` pattern so it matches regardless of
+  the cwd from which coverage is invoked.
+  [aduchene]
+- Add tests for ``PreSyncReportForm._reconcile_items`` /
+  ``_reconcile_annexes``, ``ImportMeetingForm`` / ``PreSyncReportForm`` /
+  ``PreImportReportForm`` button handlers, the ``sync_meeting``
+  orchestrator, ``MeetingAddForm.updateFields``,
+  ``MeetingEditForm.handleApply`` / ``handleCancel``, the
+  ``validate_no_already_superseded`` schema validator and
+  ``SupersedeAdapter.supersedes_items`` / ``has_supersedes_items``, plus
+  ``get_api_url_for_presync_meeting_items``. Suite goes 182 → 204 tests;
+  application-code coverage 87% → 94%.
+  [aduchene]
 
 
 2.4.1 (2026-04-03)

@@ -9,6 +9,8 @@ from plone.dexterity.events import EditCancelledEvent
 from plone.locking.interfaces import ILockable
 from plone.namedfile.file import NamedBlobFile
 from plone.testing.zope import Browser
+from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
+from plonemeeting.portal.core.behaviors.supersede import validate_no_already_superseded
 from plonemeeting.portal.core.tests import PM_ADMIN_USER
 from plonemeeting.portal.core.tests import PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
@@ -17,6 +19,7 @@ from unittest import mock
 from zExceptions import Redirect
 from zExceptions import Unauthorized
 from zope.event import notify
+from zope.interface import Invalid
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import pytz
@@ -600,3 +603,21 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertIsNotNone(past_pub_no_ts.effective_date)
         # The effective date is kept
         self.assertEqual(past_pub_no_ts.effective_date, DateTime("1901/01/01"))
+
+    def test_validate_no_already_superseded(self):
+        self.login_as_publications_manager()
+        # pub_b supersedes pub_a; pub_a is now already superseded.
+        api.relation.create(
+            source=self.unpublished_publication,
+            target=self.published_publication,
+            relationship="supersede",
+        )
+        # A publication that has not been superseded yet validates fine.
+        self.assertTrue(validate_no_already_superseded(self.private_publication))
+        # The already-superseded publication can no longer be a supersede target.
+        with self.assertRaises(Invalid):
+            validate_no_already_superseded(self.published_publication)
+        # And the inverse: pub_b reports that it supersedes pub_a.
+        adapter = SupersedeAdapter(self.unpublished_publication)
+        self.assertTrue(adapter.has_supersedes_items())
+        self.assertEqual(adapter.supersedes_items(), [self.published_publication])
