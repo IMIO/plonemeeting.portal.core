@@ -242,52 +242,6 @@ def get_api_url_for_meeting_items(institution, meeting_external_uid, item_extern
     return url
 
 
-def get_api_url_for_meeting_item(institution, meeting_item_uids):
-    if not institution.plonemeeting_url or not institution.meeting_config_id:
-        return
-    category_filter = _get_category_filter_url(institution)
-    representatives_filter = _get_representatives_filter_url(institution)
-    item_filter_query = _datagrid_to_url_param(institution.item_filter_query)
-    item_content_query = _datagrid_to_url_param(institution.item_content_query)
-    url = (
-        "{0}/@search?"
-        "type={1}"
-        "&sort_on=getItemNumber"
-        "&privacy=public"
-        "&privacy=public_heading"
-        "&b_size=9999"
-        "&additional_values=formatted_itemNumber"
-        "&config_id={2}"
-        "&uid={3}"
-        "&meeting_uid={3}"
-        "&fullobjects=True"
-        # by default fullobjects return everything, here we include nothing
-        # so by default only base data (id, title, UID, ...) are returned
-        "&include_all=false"
-        # field required by application
-        "&metadata_fields=itemNumber"
-        # field required by application
-        "&metadata_fields=groupsInCharge"
-        # field required by application, will be "category" or "classifier"
-        "&metadata_fields={4}"
-        "{5}"
-        "{6}"
-        "{7}"
-        "{8}".format(
-            institution.plonemeeting_url.rstrip("/"),
-            PLONEMEETING_API_ITEM_TYPE,
-            institution.meeting_config_id,
-            "&uid={3}".join(meeting_item_uids),
-            institution.delib_category_field,
-            item_filter_query,
-            item_content_query,
-            category_filter,
-            representatives_filter,
-        )
-    )
-    return url
-
-
 def get_api_url_for_categories(institution, delib_config_category_field):
     if institution.plonemeeting_url and institution.meeting_config_id:
         url = "{plonemeeting_url}/@config?config_id={meeting_config_id}&extra_include={delib_category_field}".format(

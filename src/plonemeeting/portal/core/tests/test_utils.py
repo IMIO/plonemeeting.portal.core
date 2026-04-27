@@ -73,6 +73,40 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
             url,
         )
 
+    def test_get_api_url_for_presync_meeting_items(self):
+        self.belleville.categories_mappings = None
+        url = utils.get_api_url_for_presync_meeting_items(self.belleville, "foo")
+        self.assertEqual(
+            "https://demo-pm.imio.be/@search?"
+            "type=item"
+            "&sort_on=getItemNumber"
+            "&privacy=public"
+            "&privacy=public_heading"
+            "&b_size=9999"
+            "&additional_values=formatted_itemNumber"
+            "&config_id=meeting-config-college"
+            "&linkedMeetingUID=foo"
+            "&meeting_uid=foo"
+            "&fullobjects=True"
+            "&include_all=false"
+            "&metadata_fields=itemNumber"
+            "&metadata_fields=groupsInCharge"
+            "&metadata_fields=category"
+            "&review_state=itemfrozen"
+            "&review_state=accepted"
+            "&review_state=accepted_but_modified"
+            "&getCategory=VOID"
+            "&getGroupsInCharge=7a82fee367a0416f8d7e8f4a382db0d1"
+            "&getGroupsInCharge=a2396143f11f4e2292f12ee3b3447739"
+            "&getGroupsInCharge=bf5fccd9bc9048e9957680c7ab5576b4"
+            "&getGroupsInCharge=f3f9e7808ddb4e56946b2dba6370eb9b"
+            "&extra_include=annexes"
+            "&extra_include_annexes_fullobjects"
+            "&extra_include_annexes_include_all=false"
+            "&extra_include_annexes_publishable=true",
+            url,
+        )
+
     def test_get_api_url_for_meeting_items(self):
         # test empty category_mappings
         self.belleville.categories_mappings = None

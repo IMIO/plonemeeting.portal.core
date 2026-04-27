@@ -10,10 +10,12 @@ from plone.app.testing import logout
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
+from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import get_formatted_data_from_json
 from plonemeeting.portal.core.sync_utils import sync_annexes_data
 from plonemeeting.portal.core.sync_utils import sync_items_data
 from plonemeeting.portal.core.sync_utils import sync_items_number
+from plonemeeting.portal.core.sync_utils import sync_meeting
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from unittest.mock import patch
@@ -520,3 +522,338 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(len(meeting.items()), 1)
         self.assertIn("statusmessages", self.portal.REQUEST.response.cookies.keys())
 
+    def test_import_meeting_form_handle_select_redirects(self):
+        login(self.portal, "manager")
+        form = self.institution.decisions.restrictedTraverse("@@import_meeting")
+        with patch.object(form, "extractData", return_value=({"meeting": "EXT-UID"}, [])):
+            form.handle_select(form, None)
+        self.assertEqual(self.portal.REQUEST.response.status, 302)
+        self.assertEqual(
+            self.portal.REQUEST.response.headers["location"],
+            self.institution.decisions.absolute_url()
+            + "/@@pre_import_report_form?external_meeting_uid=EXT-UID",
+        )
+
+    def test_import_meeting_form_handle_select_with_errors(self):
+        login(self.portal, "manager")
+        form = self.institution.decisions.restrictedTraverse("@@import_meeting")
+        with patch.object(form, "extractData", return_value=({}, ["error"])):
+            form.handle_select(form, None)
+        self.assertEqual(form.status, form.formErrorsMessage)
+
+    def test_import_meeting_form_handle_cancel_redirects(self):
+        login(self.portal, "manager")
+        form = self.institution.decisions.restrictedTraverse("@@import_meeting")
+        form.handle_cancel(form, None)
+        self.assertEqual(self.portal.REQUEST.response.status, 302)
+        self.assertEqual(
+            self.portal.REQUEST.response.headers["location"],
+            self.institution.decisions.absolute_url(),
+        )
+
+    def test_import_meeting_form_update_handles_connection_error(self):
+        login(self.portal, "manager")
+        form = self.institution.decisions.restrictedTraverse("@@import_meeting")
+        # Make the underlying super().update() raise — this exercises the
+        # try/except wrapper and the _notify_error_and_cancel → handle_cancel chain.
+        from plone.autoform.form import AutoExtensibleForm
+        with patch.object(
+            AutoExtensibleForm, "update", side_effect=requests.exceptions.ConnectionError("boom")
+        ):
+            form.update()
+        self.assertEqual(self.portal.REQUEST.response.status, 302)
+        self.assertEqual(
+            self.portal.REQUEST.response.headers["location"],
+            self.institution.decisions.absolute_url(),
+        )
+
+    @patch("plonemeeting.portal.core.browser.sync._sync_meeting")
+    def test_pre_sync_handle_sync_calls_sync_meeting(self, _sync_meeting):
+        login(self.portal, "manager")
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        pre_sync_view = meeting.restrictedTraverse("@@pre_sync_report_form")
+        pre_sync_view.institution = self.institution
+        pre_sync_view.external_meeting_uid = "EXT-UID"
+
+        self.portal.REQUEST.form["item_uid__abc"] = True
+        self.portal.REQUEST.form["item_uid__def"] = True
+        pre_sync_view.handle_sync(pre_sync_view, "sync")
+
+        _sync_meeting.assert_called_once()
+        kwargs = _sync_meeting.call_args.kwargs
+        self.assertCountEqual(kwargs["item_external_uids"], ["abc", "def"])
+
+    def test_pre_sync_handle_cancel_redirects(self):
+        login(self.portal, "manager")
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        pre_sync_view = meeting.restrictedTraverse("@@pre_sync_report_form")
+        pre_sync_view.institution = self.institution
+
+        pre_sync_view.handle_cancel(pre_sync_view, None)
+        self.assertEqual(self.portal.REQUEST.response.status, 302)
+        self.assertEqual(
+            self.portal.REQUEST.response.headers["location"],
+            f"{self.institution.absolute_url()}/decisions/#seance={meeting.UID()}",
+        )
+
+    @patch("plonemeeting.portal.core.browser.sync._sync_meeting")
+    def test_pre_import_handle_import_calls_sync_meeting(self, _sync_meeting):
+        login(self.portal, "manager")
+        decisions = self.institution.decisions
+        pre_import_view = decisions.restrictedTraverse("@@pre_import_report_form")
+        pre_import_view.institution = self.institution
+        pre_import_view.external_meeting_uid = "EXT-UID"
+
+        self.portal.REQUEST.form["item_uid__abc"] = True
+        self.portal.REQUEST.form["item_uid__def"] = True
+        pre_import_view.handle_import(pre_import_view, "import")
+
+        _sync_meeting.assert_called_once()
+        kwargs = _sync_meeting.call_args.kwargs
+        self.assertCountEqual(kwargs["item_external_uids"], ["abc", "def"])
+
+    def test_pre_import_handle_cancel_redirects(self):
+        login(self.portal, "manager")
+        decisions = self.institution.decisions
+        pre_import_view = decisions.restrictedTraverse("@@pre_import_report_form")
+
+        pre_import_view.handle_cancel(pre_import_view, None)
+        self.assertEqual(self.portal.REQUEST.response.status, 302)
+        self.assertEqual(
+            self.portal.REQUEST.response.headers["location"],
+            decisions.absolute_url() + "/@@import_meeting",
+        )
+
+    @patch("plonemeeting.portal.core.sync_utils._call_delib_rest_api")
+    def test_sync_meeting(self, _call_api):
+        login(self.portal, "manager")
+        meeting_response = mock({"text": json.dumps(self.json_meeting)})
+        items_response = mock({"text": json.dumps(self.json_meeting_items)})
+        _call_api.side_effect = [meeting_response, items_response]
+
+        meeting_external_uid = self.json_meeting["items"][0]["UID"]
+        status, uid = sync_meeting(self.institution, meeting_external_uid, with_annexes=False)
+
+        self.assertEqual(_call_api.call_count, 2)
+        self.assertIsNotNone(uid)
+        self.assertIn("Meeting imported", status)
+        # The meeting now exists under the institution's decisions folder.
+        brains = api.content.find(
+            context=self.institution.decisions, plonemeeting_uid=meeting_external_uid
+        )
+        self.assertEqual(len(brains), 1)
+
+    @patch("plonemeeting.portal.core.sync_utils._call_delib_rest_api")
+    def test_sync_meeting_unexpected_count(self, _call_api):
+        login(self.portal, "manager")
+        bogus_payload = copy.deepcopy(self.json_meeting)
+        bogus_payload["items_total"] = 0
+        _call_api.return_value = mock({"text": json.dumps(bogus_payload)})
+
+        with self.assertRaises(ValueError):
+            sync_meeting(self.institution, "anything")
+
+    # --- _reconcile_items / _reconcile_annexes helpers and tests ----------
+    # Inputs are constructed inline so each scenario stays explicit; the
+    # reconcile methods are pure functions of (api payload, local content)
+    # so no REST mocking is needed here.
+
+    def _make_reconcile_view(self):
+        login(self.portal, "manager")
+        meeting = api.content.create(
+            container=self.institution.decisions,
+            type="Meeting",
+            id="reconcile-meeting",
+            title="Reconcile Meeting",
+        )
+        view = meeting.restrictedTraverse("@@pre_sync_report_form")
+        view.institution = self.institution
+        return meeting, view
+
+    @staticmethod
+    def _make_local_item(meeting, uid, modified_iso, number, item_id=None, with_annex_titles=()):
+        item = api.content.create(
+            container=meeting,
+            type="Item",
+            id=item_id or "item-" + uid,
+            title="Local " + uid,
+            plonemeeting_uid=uid,
+        )
+        item.plonemeeting_last_modified = _json_date_to_datetime(modified_iso)
+        item.number = number
+        for title in with_annex_titles:
+            api.content.create(container=item, type="File", id=title, title=title)
+        return item
+
+    @staticmethod
+    def _api_item(uid, modified_iso, number, annexes=()):
+        return {
+            "UID": uid,
+            "modified": modified_iso,
+            "formatted_itemNumber": number,
+            "category": {"title": "cat"},
+            "classifier": {"title": "cls"},
+            "representatives_in_charge": "-",
+            "extra_include_annexes": list(annexes),
+        }
+
+    @staticmethod
+    def _index_by_uid(reconciled):
+        return {item["UID"]: item for item in reconciled["items"]}
+
+    def test_reconcile_items_unchanged(self):
+        meeting, view = self._make_reconcile_view()
+        modified = "2024-01-01T10:00:00+00:00"
+        self._make_local_item(meeting, "uid-1", modified, "1")
+        api_items = {"items": [self._api_item("uid-1", modified, "1")]}
+
+        reconciled = view._reconcile_items(api_items, list(meeting.objectValues()))
+
+        item = self._index_by_uid(reconciled)["uid-1"]
+        self.assertEqual(item["status"], "unchanged")
+        self.assertEqual(item["annexes_status"], {})
+
+    def test_reconcile_items_modified_when_date_differs(self):
+        meeting, view = self._make_reconcile_view()
+        local_modified = "2024-01-01T10:00:00+00:00"
+        api_modified = "2024-02-01T10:00:00+00:00"
+        self._make_local_item(meeting, "uid-1", local_modified, "1")
+        api_items = {"items": [self._api_item("uid-1", api_modified, "1")]}
+
+        reconciled = view._reconcile_items(api_items, list(meeting.objectValues()))
+
+        item = self._index_by_uid(reconciled)["uid-1"]
+        self.assertEqual(item["status"], "modified")
+
+    def test_reconcile_items_modified_when_number_differs(self):
+        meeting, view = self._make_reconcile_view()
+        modified = "2024-01-01T10:00:00+00:00"
+        self._make_local_item(meeting, "uid-1", modified, "1")
+        api_items = {"items": [self._api_item("uid-1", modified, "2")]}
+
+        reconciled = view._reconcile_items(api_items, list(meeting.objectValues()))
+
+        item = self._index_by_uid(reconciled)["uid-1"]
+        self.assertEqual(item["status"], "modified")
+
+    def test_reconcile_items_added_with_and_without_annexes(self):
+        _meeting, view = self._make_reconcile_view()
+        api_items = {
+            "items": [
+                self._api_item("uid-new-no-annex", "2024-03-01T10:00:00+00:00", "1"),
+                self._api_item(
+                    "uid-new-with-annex",
+                    "2024-03-01T10:00:00+00:00",
+                    "2",
+                    annexes=[
+                        {"UID": "a1", "title": "annex one", "modified": "2024-03-01T10:00:00+00:00"},
+                        {"UID": "a2", "title": "annex two", "modified": "2024-03-01T10:00:00+00:00"},
+                    ],
+                ),
+            ],
+        }
+
+        reconciled = view._reconcile_items(api_items, [])
+        by_uid = self._index_by_uid(reconciled)
+
+        no_annex = by_uid["uid-new-no-annex"]
+        self.assertEqual(no_annex["status"], "added")
+        self.assertEqual(no_annex["local_last_modified"], "-")
+        self.assertEqual(no_annex["annexes_status"], {})
+
+        with_annex = by_uid["uid-new-with-annex"]
+        self.assertEqual(with_annex["status"], "added")
+        self.assertEqual(with_annex["annexes_status"]["added"]["count"], 2)
+        self.assertEqual(
+            with_annex["annexes_status"]["added"]["titles"],
+            ["annex one", "annex two"],
+        )
+
+    def test_reconcile_items_removed_with_and_without_annexes(self):
+        meeting, view = self._make_reconcile_view()
+        modified = "2024-01-01T10:00:00+00:00"
+        self._make_local_item(meeting, "uid-gone-empty", modified, "9", item_id="gone-empty")
+        self._make_local_item(
+            meeting,
+            "uid-gone-with-annex",
+            modified,
+            "10",
+            item_id="gone-with-annex",
+            with_annex_titles=("annex-x", "annex-y"),
+        )
+
+        reconciled = view._reconcile_items({"items": []}, list(meeting.objectValues()))
+        by_uid = self._index_by_uid(reconciled)
+
+        empty = by_uid["uid-gone-empty"]
+        self.assertEqual(empty["status"], "removed")
+        self.assertEqual(empty["annexes_status"], {})
+
+        with_annex = by_uid["uid-gone-with-annex"]
+        self.assertEqual(with_annex["status"], "removed")
+        self.assertEqual(with_annex["annexes_status"]["removed"]["count"], 2)
+        self.assertEqual(
+            sorted(with_annex["annexes_status"]["removed"]["titles"]),
+            ["annex-x", "annex-y"],
+        )
+
+    def test_reconcile_annexes_all_statuses(self):
+        meeting, view = self._make_reconcile_view()
+        modified = "2024-01-01T10:00:00+00:00"
+        local_item = self._make_local_item(meeting, "uid-1", modified, "1")
+        # Three local annexes: one will match unchanged, one modified, one removed.
+        unchanged_annex = api.content.create(
+            container=local_item, type="File", id="a-unchanged", title="Unchanged annex"
+        )
+        unchanged_annex.plonemeeting_uid = "annex-unchanged"
+        unchanged_annex.plonemeeting_last_modified = _json_date_to_datetime(modified)
+
+        modified_annex = api.content.create(
+            container=local_item, type="File", id="a-modified", title="Modified annex"
+        )
+        modified_annex.plonemeeting_uid = "annex-modified"
+        modified_annex.plonemeeting_last_modified = _json_date_to_datetime(modified)
+
+        removed_annex = api.content.create(
+            container=local_item, type="File", id="a-removed", title="Removed annex"
+        )
+        removed_annex.plonemeeting_uid = "annex-removed"
+        removed_annex.plonemeeting_last_modified = _json_date_to_datetime(modified)
+
+        api_annexes = [
+            {"UID": "annex-unchanged", "title": "Unchanged annex", "modified": modified},
+            {"UID": "annex-modified", "title": "Modified annex",
+             "modified": "2024-06-01T10:00:00+00:00"},
+            {"UID": "annex-added", "title": "Added annex", "modified": modified},
+        ]
+
+        result = view._reconcile_annexes(api_annexes, local_item.objectValues())
+
+        self.assertEqual(set(result.keys()), {"added", "unchanged", "modified", "removed"})
+        self.assertEqual(result["added"]["count"], 1)
+        self.assertEqual(result["added"]["titles"], ["Added annex"])
+        self.assertEqual(result["unchanged"]["count"], 1)
+        self.assertEqual(result["unchanged"]["titles"], ["Unchanged annex"])
+        self.assertEqual(result["modified"]["count"], 1)
+        self.assertEqual(result["modified"]["titles"], ["Modified annex"])
+        self.assertEqual(result["removed"]["count"], 1)
+        self.assertEqual(result["removed"]["titles"], ["Removed annex"])
+
+    def test_reconcile_annexes_strips_empty_buckets(self):
+        meeting, view = self._make_reconcile_view()
+        modified = "2024-01-01T10:00:00+00:00"
+        local_item = self._make_local_item(meeting, "uid-1", modified, "1")
+        annex = api.content.create(
+            container=local_item, type="File", id="a-unchanged", title="Annex"
+        )
+        annex.plonemeeting_uid = "annex-unchanged"
+        annex.plonemeeting_last_modified = _json_date_to_datetime(modified)
+
+        api_annexes = [
+            {"UID": "annex-unchanged", "title": "Annex", "modified": modified},
+        ]
+
+        result = view._reconcile_annexes(api_annexes, local_item.objectValues())
+
+        self.assertEqual(set(result.keys()), {"unchanged"})
+        self.assertEqual(result["unchanged"]["count"], 1)
