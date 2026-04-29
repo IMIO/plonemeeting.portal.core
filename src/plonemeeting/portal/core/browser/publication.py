@@ -6,6 +6,7 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.memoize.view import memoize
+from plone.namedfile.interfaces import INamedFile
 from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
@@ -15,8 +16,12 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from plone.dexterity.interfaces import IDexterityFTI
 from z3c.form import button
+from z3c.form.interfaces import IDataConverter
 from zExceptions import Unauthorized
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.event import notify
 from zope.interface import alsoProvides
 from ZPublisher.Iterators import filestream_iterator
@@ -26,6 +31,25 @@ import os
 import pathlib
 import tempfile
 import zipfile
+
+
+# Widget names excluded from duplication.
+# Timestamps and publication dates per ticket DELIBE-285.
+# Supersede is handled separately (set to the original).
+# Short name/ID must not be copied (Plone assigns a new one from title).
+_DUPLICATE_EXCLUDED = frozenset({
+    'timestamped_file',
+    'timestamp',
+    'ITimestampableDocument.timestamp',
+    'IPublication.effective',
+    'IPublication.expires',
+    'ISupersede.supersede',
+    'supersede',
+    'IRelatedItems.relatedItems',
+    'relatedItems',
+    'id',
+    'IShortName.id',
+})
 
 
 class PublicationForm:
@@ -51,10 +75,55 @@ class AddForm(PublicationForm, BaseAddForm):
         super().update()
         self._expires_description()
 
+    @property
+    def label(self):
+        if self.request.get("duplicate_of"):
+            fti = getUtility(IDexterityFTI, name=self.portal_type)
+            return _("Duplicate ${name}", mapping={"name": fti.Title()})
+        return super().label
+
     def updateWidgets(self):
         super().updateWidgets()
+        duplicate_of = self.request.get("duplicate_of")
+        if duplicate_of:
+            original = api.content.get(UID=duplicate_of)
+            if original is not None and original.portal_type == "Publication":
+                self._prefill_from_original(original)
+                return
         self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
-        self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
+        self.widgets['consultation_text'].value = copy.deepcopy(
+            self.institution.default_publication_consultation_text
+        )
+
+    def _prefill_from_original(self, original):
+        """Pre-fill form widgets from an existing publication (duplication flow)."""
+        for widget_name, widget in self.widgets.items():
+            if widget_name in _DUPLICATE_EXCLUDED:
+                continue
+            field_attr = widget_name.split('.')[-1]
+            value = getattr(original, field_attr, None)
+            if value is None:
+                continue
+            if hasattr(value, 'output'):  # RichTextValue
+                widget.value = copy.deepcopy(value)
+            elif INamedFile.providedBy(value):
+                widget.value = value
+            else:
+                try:
+                    field = getattr(widget, 'field', None)
+                    if field is not None:
+                        converter = getMultiAdapter((field, widget), IDataConverter)
+                        widget.value = converter.toWidgetValue(value)
+                except Exception:
+                    pass
+
+        # Set supersede to the original — new publication supersedes/replaces it.
+        for name in ('ISupersede.supersede', 'supersede'):
+            if name in self.widgets:
+                uid = api.content.get_uuid(obj=original)
+                if uid:
+                    self.widgets[name].value = uid
+                break
 
 
 class PublicationAdd(PublicationForm, DefaultAddView):
@@ -93,6 +162,19 @@ class EditForm(PublicationForm, BaseEditForm):
 
 class PublicationView(DefaultView):
     """ """
+
+    def can_duplicate(self):
+        """Return True if the current user can add a new publication (to allow duplication)."""
+        if api.user.is_anonymous():
+            return False
+        return _checkPermission(ModifyPortalContent, self.context)
+
+    def get_duplicate_url(self):
+        """Return the add-form URL pre-pointed at this publication as the duplicate source."""
+        uid = api.content.get_uuid(obj=self.context)
+        return "{}/++add++Publication?duplicate_of={}".format(
+            self.context.aq_parent.absolute_url(), uid
+        )
 
     def __call__(self):
         if api.content.get_state(self.context) == "private" and _checkPermission(ModifyPortalContent, self.context):

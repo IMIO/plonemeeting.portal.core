@@ -50,6 +50,15 @@
         </div>
       </div>
     </section>
+    <section id="actions-section" class="row mb-2" tal:condition="view/can_duplicate">
+      <div class="col-12 d-flex justify-content-end">
+        <a class="btn btn-outline-secondary btn-sm"
+           tal:attributes="href view/get_duplicate_url"
+           i18n:translate="label_duplicate_publication">
+          Duplicate
+        </a>
+      </div>
+    </section>
     <section id="metadatas-section" class="row mb-3" data-toc="Metadatas" i18n:attributes="data-toc">
       <div id="publication-dates" class="col-lg-6 content-metadatas order-last order-lg-first">
         <div class="content-metadata-row">

@@ -48,6 +48,43 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(add_form.form_instance.portal_type, "Publication")
         add_form()  # should not raise an exception
 
+    def test_duplicate_button_shown_for_publications_manager(self):
+        self.login_as_publications_manager()
+        view = self.private_publication.restrictedTraverse("@@view")
+        self.assertTrue(view.can_duplicate())
+        self.assertIn("duplicate_of=", view.get_duplicate_url())
+        self.assertIn(api.content.get_uuid(obj=self.private_publication), view.get_duplicate_url())
+
+    def test_duplicate_button_not_shown_for_anonymous(self):
+        self.logout()
+        view = self.published_publication.restrictedTraverse("@@view")
+        self.assertFalse(view.can_duplicate())
+
+    def test_add_form_with_duplicate_of_prefills_supersede(self):
+        self.login_as_publications_manager()
+        original = self.private_publication
+        uid = api.content.get_uuid(obj=original)
+        self.portal.REQUEST.form["duplicate_of"] = uid
+        add_form = self.institution.publications.restrictedTraverse("++add++Publication")
+        add_form()  # should not raise
+        form = add_form.form_instance
+        # Supersede widget must point to the original publication
+        for name in ("ISupersede.supersede", "supersede"):
+            if name in form.widgets:
+                self.assertEqual(form.widgets[name].value, uid)
+                break
+        # Publication dates must NOT be pre-filled from original
+        effective_widget = form.widgets.get("IPublication.effective")
+        if effective_widget and original.effective_date:
+            # Effective date widget should be empty, not the original's date
+            self.assertNotEqual(effective_widget.value, str(original.effective_date))
+
+    def test_add_form_without_duplicate_of_renders_normally(self):
+        self.login_as_publications_manager()
+        self.portal.REQUEST.form.pop("duplicate_of", None)
+        add_form = self.institution.publications.restrictedTraverse("++add++Publication")
+        add_form()  # should not raise
+
     def test_private_publication_view(self):
         self.assertEqual(api.content.get_state(self.private_publication), "private")
         self.logout()
