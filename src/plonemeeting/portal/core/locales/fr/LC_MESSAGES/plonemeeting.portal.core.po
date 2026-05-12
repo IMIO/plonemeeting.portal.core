@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-01-26 14:28+0000\n"
+"POT-Creation-Date: 2026-05-12 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../vocabularies.py:142
+#: ../vocabularies.py:155
 msgid "(Passed term of office) ${representative_value}"
 msgstr "(Ancien mandat) ${representative_value}"
 
@@ -22,7 +22,15 @@ msgstr "(Ancien mandat) ${representative_value}"
 msgid "<i class=\"bi bi-clock-fill\"></i><span>Horodatage qualifié</span>"
 msgstr ""
 
-#: ../content/institution.py:460
+#: ../content/institution.py:382
+msgid "AI"
+msgstr "IA"
+
+#: ../content/institution.py:396
+msgid "AI assistant system prompt"
+msgstr "Prompt système de l’assistant IA"
+
+#: ../content/institution.py:505
 msgid "Activated templates"
 msgstr "Modèles de document activés"
 
@@ -42,7 +50,7 @@ msgstr "Ajouté"
 msgid "Additional data"
 msgstr "Contenu additionnel"
 
-#: ../vocabularies.py:312
+#: ../vocabularies.py:325
 msgid "All templates"
 msgstr "Tous les modèles de document"
 
@@ -65,6 +73,14 @@ msgstr "Êtes-vous sûr de vouloir désinscrire cet utilisateur ?"
 #: ../profiles/default/registry.xml
 msgid "Assemblée générale"
 msgstr ""
+
+#: ../content/institution.py:407
+msgid "Authentication"
+msgstr "Authentification"
+
+#: ../content/institution.py:412
+msgid "Authentication method"
+msgstr "Méthode d'authentification"
 
 #: ../content/publication.py:92
 msgid "Authority"
@@ -89,7 +105,7 @@ msgstr "Annuler"
 msgid "Categories mappings"
 msgstr "Correspondances des matières"
 
-#: ../content/institution.py:502
+#: ../content/institution.py:547
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr "Correspondances des matières - Catégorie(s) iA.Delib renseignée(s) plusieurs fois : ${categories_title}"
 
@@ -136,6 +152,10 @@ msgstr "Dupliquer ${name}"
 #: ../profiles/default/actions.xml
 msgid "Duplicate"
 msgstr "Dupliquer"
+
+#: ../content/institution.py:397
+msgid "Custom system prompt injected server-side for this institution. Leave empty to use the global default."
+msgstr "Prompt système injecté côté serveur pour cette institution. Laisser vide pour utiliser la valeur globale par défaut."
 
 #: ../content/item.py:59
 msgid "Decision"
@@ -206,6 +226,10 @@ msgstr "Modifier la séance"
 msgid "Edit this institution"
 msgstr "Modifier"
 
+#: ../content/institution.py:387
+msgid "Enable AI assistant"
+msgstr "Activer l’assistant IA"
+
 #: ../content/institution.py:157
 msgid "Enabled tabs"
 msgstr "Onglets activés"
@@ -221,6 +245,10 @@ msgstr "Date entrée en vigueur"
 #: ../browser/templates/publication.pt:235
 msgid "Entrée en vigueur"
 msgstr ""
+
+#: ../content/institution.py:388
+msgid "Experimental feature: do not enable this unless you have contacted iMio support first."
+msgstr "Fonctionnalité expérimentale: ne pas activer sans avoir préalablement contacté le support iMio."
 
 #: ../browser/templates/publication.pt:133
 #: ../content/publication.py:113
@@ -245,11 +273,11 @@ msgstr "Facettes publications"
 msgid "Faceted publications preview"
 msgstr "Prévisualisation des publications"
 
-#: ../content/institution.py:430
+#: ../content/institution.py:475
 msgid "Footer color"
 msgstr "Couleur du pied de page"
 
-#: ../content/institution.py:438
+#: ../content/institution.py:483
 msgid "Footer text color"
 msgstr "Couleur de texte du pied de page"
 
@@ -281,7 +309,7 @@ msgstr "Titre de matière globale"
 msgid "Groups in charge"
 msgstr "Groupes en charge"
 
-#: ../content/institution.py:398
+#: ../content/institution.py:443
 msgid "Header color"
 msgstr "Couleur de l'en-tête"
 
@@ -385,6 +413,10 @@ msgstr "Ordre de tri des points"
 msgid "JavaScript integrations"
 msgstr "Intégrations JavaScript"
 
+#: ../content/institution.py:420
+msgid "Keycloak realm used for SSO authentication."
+msgstr "Royaume Keycloak utilisé pour l'authentification SSO."
+
 #: ../faceted/macro_item.pt:56
 msgid "Last modification"
 msgstr "Dernière modification"
@@ -416,7 +448,7 @@ msgstr "Identifiant"
 msgid "Legislative authority title"
 msgstr "Titre"
 
-#: ../content/institution.py:422
+#: ../content/institution.py:467
 msgid "Links text color"
 msgstr "Couleur des liens"
 
@@ -424,7 +456,7 @@ msgstr "Couleur des liens"
 msgid "Local category id"
 msgstr "Matière dans iA.Délib"
 
-#: ../content/institution.py:394
+#: ../content/institution.py:439
 msgid "Logo"
 msgstr "Logo"
 
@@ -489,11 +521,11 @@ msgstr "Modifié"
 msgid "Modified at"
 msgstr "Modifié le"
 
-#: ../content/institution.py:406
+#: ../content/institution.py:451
 msgid "Navigation bar color"
 msgstr "Couleur de la barre de navigation"
 
-#: ../content/institution.py:414
+#: ../content/institution.py:459
 msgid "Navigation bar text color"
 msgstr "Couleur du texte de la barre de navigation"
 
@@ -504,6 +536,10 @@ msgstr "Chemin de la racine de navigation"
 #: ../browser/sync.py:162
 msgid "No data available in table"
 msgstr "Aucun élément"
+
+#: ../vocabularies.py:41
+msgid "OIDC/Keycloak"
+msgstr "OIDC/Keycloak"
 
 #: ../behaviors/configure.zcml:17
 msgid "PM Autopublishing"
@@ -553,6 +589,10 @@ msgstr "Statistiques Plausible"
 #: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
 msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
 msgstr "Veuillez noter que si vous êtes un citoyen souhaitant consulter le site web, vous pouvez le faire sans vous connecter."
+
+#: ../vocabularies.py:40
+msgid "Plone"
+msgstr "Plone"
 
 #: ../content/institution.py:201
 msgid "Plonemeeting URL"
@@ -645,7 +685,7 @@ msgstr "Valeur de mandataire"
 msgid "Representatives mappings"
 msgstr "Correspondances des mandataires"
 
-#: ../content/institution.py:528
+#: ../content/institution.py:573
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associé à des points n'est pas autorisé"
 
@@ -656,6 +696,10 @@ msgstr ""
 #: ../events/institution.py:53
 msgid "Institution website"
 msgstr "Site internet"
+
+#: ../content/institution.py:419
+msgid "SSO realm ID"
+msgstr "Identifiant du royaume SSO"
 
 #: ../browser/institution.py:107
 #: ../browser/meeting.py:34
@@ -696,7 +740,7 @@ msgstr "Statistiques"
 msgid "Status"
 msgstr "Statut"
 
-#: ../content/institution.py:382
+#: ../content/institution.py:427
 msgid "Styling"
 msgstr "Styles"
 
@@ -746,7 +790,7 @@ msgstr "Modèle de document"
 msgid "Template default settings"
 msgstr "Paramètres par défaut des modèles de document"
 
-#: ../content/institution.py:467
+#: ../content/institution.py:512
 msgid "Template logo"
 msgstr "Logo utilisé dans les modèles de document"
 
@@ -762,17 +806,17 @@ msgstr "Titre du paramètre du modèle de document"
 msgid "Template setting value"
 msgstr "Valeur du paramètre du modèle de document"
 
-#: ../content/institution.py:477
+#: ../content/institution.py:522
 #: ../profiles/default/registry.xml
 msgid "Template settings"
 msgstr "Paramètres des modèles de document"
 
-#: ../content/institution.py:478
+#: ../content/institution.py:523
 msgid "Template settings used to customize templates. Leave empty to use default values."
 msgstr "Paramètres des modèles de document utilisés pour personnaliser les modèles. Laisser vide pour utiliser les valeurs par défaut."
 
-#: ../content/institution.py:452
-#: ../utils.py:345
+#: ../content/institution.py:497
+#: ../utils.py:299
 msgid "Templates"
 msgstr "Modèles de document"
 
@@ -837,7 +881,7 @@ msgstr "Une annexe non publiable a été trouvée dans la réponse du web servic
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr "Désinstalle le module plonemeeting.portal.core."
 
-#: ../content/institution.py:564
+#: ../content/institution.py:609
 msgid "Unknown value: ${key}"
 msgstr "Valeur inconnue: ${key}"
 
@@ -887,7 +931,7 @@ msgid "Web service connection error !"
 msgstr "Erreur de connexion au service web !"
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:586
+#: ../content/institution.py:631
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
 
@@ -997,7 +1041,7 @@ msgstr "Cet élément ne peut pas être publié car sa date de publication est d
 msgid "enableAutopublishing"
 msgstr "Activer l'auto-publication"
 
-#: ../content/institution.py:461
+#: ../content/institution.py:506
 msgid "enabled_templates_description"
 msgstr "Modèles de document activés pour cette institution. Un modèle de document doit être activé pour pouvoir être utilisé afin de générer des documents."
 
@@ -1219,23 +1263,3 @@ msgstr "Si des correspondances de mandataires sont renseignées ci-dessous, les 
 #: ../content/publication.py:101
 msgid "subject_to_authority_description"
 msgstr "Cocher cette case si la publication est soumise à la tutelle spéciale d’approbation. Normalement, une seule des deux dates doit être remplie, ci-dessous."
-
-#: ../content/institution.py
-msgid "AI"
-msgstr "IA"
-
-#: ../content/institution.py
-msgid "Enable AI assistant"
-msgstr "Activer l’assistant IA"
-
-#: ../content/institution.py
-msgid "Experimental feature: do not enable this unless you have contacted iMio support first."
-msgstr "Fonctionnalité expérimentale: ne pas activer sans avoir préalablement contacté le support iMio."
-
-#: ../content/institution.py
-msgid "AI assistant system prompt"
-msgstr "Prompt système de l’assistant IA"
-
-#: ../content/institution.py
-msgid "Custom system prompt injected server-side for this institution. Leave empty to use the global default."
-msgstr "Prompt système injecté côté serveur pour cette institution. Laisser vide pour utiliser la valeur globale par défaut."

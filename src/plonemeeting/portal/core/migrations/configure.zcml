@@ -312,4 +312,11 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_2406.migrate"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeStep
+    title="Go to portal 2500"
+    description="Add authentication fieldset (authentication + sso_realm_id) to Institution."
+    source="2406"
+    destination="2500"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2500.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

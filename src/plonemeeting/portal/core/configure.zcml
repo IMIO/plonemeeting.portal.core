@@ -71,6 +71,12 @@
   />
 
   <utility
+    component=".vocabularies.AuthenticationMethodsVocabulary"
+    name="plonemeeting.portal.vocabularies.authentication_methods"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
     component=".vocabularies.GlobalCategoryVocabulary"
     name="plonemeeting.portal.vocabularies.global_categories"
     provides="zope.schema.interfaces.IVocabularyFactory"

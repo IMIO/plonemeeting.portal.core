@@ -1,13 +1,19 @@
 Changelog
 =========
 
-2.4.5 (unreleased)
+2.5.0 (unreleased)
 ------------------
 
 - Warn managers viewing an unpublished publication that re-publishing it will
   lose the existing qualified timestamp, and advise recreating it through the
   supersede ("remplacé par") archiving system.
   [DELIBE-317]
+- Add ``authentication`` (Choice: Plone / OIDC-Keycloak, defaults to
+  Plone) and ``sso_realm_id`` (TextLine) fields to ``Institution``,
+  grouped in a new "Authentification" fieldset, to allow per-institution
+  SSO/Keycloak configuration. Schema only — login wiring is a follow-up.
+  (DELIBE-297)
+  [aduchene]
 
 
 2.4.4 (2026-07-09)
@@ -78,6 +84,14 @@ Changelog
   (``sync_website_link``) instead of a property setter, so it no longer
   crashes when the field is set before the institution is added to the
   portal, and clearing the URL removes the link.
+2.5.0 (unreleased)
+------------------
+
+- Add ``authentication`` (Choice: Plone / OIDC-Keycloak, defaults to
+  Plone) and ``sso_realm_id`` (TextLine) fields to ``Institution``,
+  grouped in a new "Authentification" fieldset, to allow per-institution
+  SSO/Keycloak configuration. Schema only — login wiring is a follow-up.
+  (DELIBE-297)
   [aduchene]
 - Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
   ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
