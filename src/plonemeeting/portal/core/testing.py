@@ -38,6 +38,10 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         self.loadZCML(package=imio.omnia.assistant)
         self.loadZCML(package=imio.omnia.tinymce)
         self.loadZCML(package=plonemeeting.portal.core)
+        # plone.autoinclude is disabled in the Plone fixture; load our
+        # overrides.zcml the same way Products.CMFPlone does at runtime
+        # (autoIncludePluginsOverrides target="plone").
+        self.loadZCML(name="overrides.zcml", package=plonemeeting.portal.core)
 
         # Patch collective.fingerpointing
 

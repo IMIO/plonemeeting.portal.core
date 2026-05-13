@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <!-- DELIBE-287: gate @@historyview on the "View History" permission
+       instead of "Modify portal content", so non-editors with the Reader
+       role can still inspect the workflow/version history of an object
+       in states where they cannot modify it (e.g. published, archived). -->
+  <browser:page
+      name="historyview"
+      for="*"
+      class="plone.app.layout.viewlets.content.HistoryByLineView"
+      permission="zope2.ViewHistory"
+      />
+
+</configure>
