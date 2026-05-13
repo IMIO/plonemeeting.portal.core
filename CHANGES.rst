@@ -4,6 +4,15 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Fix workflow/version history visibility for non-editor users
+  (DELIBE-287): the ``history`` toolbar action and the ``@@historyview``
+  page are now gated by the ``View History`` permission instead of
+  ``Modify portal content``. ``View History`` is granted to ``Reader``
+  (and ``Contributor``/``Reviewer``/``Editor``/``Manager``/
+  ``Site Administrator``) at the portal root via ``rolemap.xml`` and
+  flows down to every institution content type by acquisition. Existing
+  sites pick up the change via the 2500 upgrade step.
+  [aduchene]
 - Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
   ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
   dependency chain resolves under the test fixture (``z3c.autoinclude`` is

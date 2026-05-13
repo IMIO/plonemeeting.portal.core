@@ -41,7 +41,7 @@
   <object name="object" meta_type="CMF Action Category">
     <object name="history" meta_type="CMF Action">
       <property name="permissions">
-        <element value="Modify portal content"/>
+        <element value="View History"/>
       </property>
     </object>
     <object name="local_roles" meta_type="CMF Action">

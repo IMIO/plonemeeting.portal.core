@@ -54,6 +54,20 @@
       <role name="Manager"/>
     </permission>
 
+    <permission name="View History" acquire="True">
+      <!-- DELIBE-287: let users with the Reader local role (publications
+           managers/creators/reviewers, decisions managers, etc.) see the
+           workflow/version history of institution content in every workflow
+           state. Flows down to all workflowed content via acquisition since
+           no workflow declares View History in its <permission> header. -->
+      <role name="Reader"/>
+      <role name="Contributor"/>
+      <role name="Reviewer"/>
+      <role name="Editor"/>
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+    </permission>
+
   </permissions>
 
 </rolemap>

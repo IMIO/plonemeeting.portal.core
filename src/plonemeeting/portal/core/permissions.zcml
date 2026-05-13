@@ -20,6 +20,10 @@
         id="plonemeeting.portal.core.AddPublication"
         title="plonemeeting.portal.core: Add Publication"
     />
+    <permission
+        id="zope2.ViewHistory"
+        title="View History"
+    />
   </configure>
 
 </configure>

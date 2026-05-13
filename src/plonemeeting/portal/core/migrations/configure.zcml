@@ -239,4 +239,12 @@
     destination="2400"
     handler="plonemeeting.portal.core.migrations.migrate_to_2400.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2500"
+    description="Gate the 'history' action and @@historyview on the 'View History' permission so publication managers can see history in 'published' and 'archived' states."
+    source="2400"
+    destination="2500"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2500.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

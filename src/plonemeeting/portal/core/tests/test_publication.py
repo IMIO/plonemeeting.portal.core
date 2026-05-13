@@ -157,6 +157,44 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         view = self.unpublished_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
 
+    def test_publication_history_visibility_for_publication_manager(self):
+        # A publication manager (Reader local-role) must be able to reach
+        # @@historyview and see the 'history' toolbar action in every
+        # workflow state, including 'published' and 'archived' where they
+        # don't have 'Modify portal content'.
+        self.login_as_publications_manager()
+        cases = [
+            ("private", self.private_publication),
+            ("planned", self.planned_publication),
+            ("unpublished", self.unpublished_publication),
+            ("published", self.published_publication),
+        ]
+        for state, pub in cases:
+            self.assertEqual(api.content.get_state(pub), state)
+            try:
+                pub.restrictedTraverse("@@historyview")
+            except Unauthorized:
+                self.fail("@@historyview not accessible in state '%s'" % state)
+            actions = self.portal.portal_actions.listFilteredActionsFor(pub)
+            history_actions = [a for a in actions.get("object", []) if a["id"] == "history"]
+            self.assertTrue(
+                history_actions,
+                "'history' action not visible in state '%s'" % state,
+            )
+
+        # Archive the published one and re-check as the same user.
+        self.login_as_admin()
+        self.workflow.doActionFor(self.published_publication, "archive")
+        self.assertEqual(api.content.get_state(self.published_publication), "archived")
+        self.login_as_publications_manager()
+        try:
+            self.published_publication.restrictedTraverse("@@historyview")
+        except Unauthorized:
+            self.fail("@@historyview not accessible in state 'archived'")
+        actions = self.portal.portal_actions.listFilteredActionsFor(self.published_publication)
+        history_actions = [a for a in actions.get("object", []) if a["id"] == "history"]
+        self.assertTrue(history_actions, "'history' action not visible in state 'archived'")
+
     def test_published_publication_is_timestamped(self):
         self.login_as_publications_manager()
         pub = self.private_publication
