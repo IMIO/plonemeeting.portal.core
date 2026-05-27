@@ -20,6 +20,7 @@ from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import Interface
 
+# ================================ Local Users =================================
 
 class ManageUsersListingView(BrowserView):
     """
@@ -284,3 +285,95 @@ class InviteUserForm(BaseManageUserForm):
 
 
 InviteUserFormView = wrap_form(InviteUserForm)
+
+
+# ================================= Keycloak SSO =================================
+
+class ManageSSOUsersListingView(BrowserView):
+    """
+    Shows a manageable listing of the institution's users.
+    """
+
+    label = _("label_manage_users")
+    description = _("desc_manage_users")
+
+    def __call__(self):
+        self.users = self.context.get_all_institution_users()
+        self.unregister_url = addTokenToUrl(f"{self.context.absolute_url()}/@@manage-edit-user?unregister=1")
+        return self.index()
+
+    def sync_users_from_keycloak(self):
+        pass
+
+
+class IManageSSOUserForm(Interface):
+
+    email = ProtectedEmail(
+        title=_("label_email", default="Email"),
+        description=_("We will use this address if you need to recover your password"),
+        required=True,
+        constraint=checkEmailAddress,
+    )
+
+    fullname = ProtectedTextLine(
+        title=_("label_fullname", default="Full Name"),
+        description=_("help_full_name_creation", default="Enter full name, e.g. John Smith."),
+        required=False,
+    )
+
+    directives.widget("user_groups", CheckBoxFieldWidget, multiple="multiple")
+    user_groups = schema.List(
+        title="label_groups",
+        description=_("help_select_groups"),
+        value_type=schema.Choice(vocabulary="plonemeeting.portal.institution_manageable_groups_vocabulary"),
+        required=False,
+    )
+
+
+class ManageEditSSOUserForm(BaseManageUserForm):
+    schema = IManageSSOUserForm
+    ignoreContext = True
+    label = _("label_manage_edit_user")
+    description = _("desc_manage_edit_user")
+
+    def updateWidgets(self, prefix=None):
+        super().updateWidgets(prefix)
+        username = self.request.form.get("username", self.request.form.get("form.widgets.username", None))
+        if not username:
+            return
+
+        # We have a username; let's populate the widgets if the user exists
+        user_obj = self.acl_users.getUserById(username)
+        if not user_obj:
+            return
+
+        member = self.portal_membership.getMemberById(username)
+        if not member:
+            return
+
+        # Pre-fill user info, almost all will be readonly as keycloak is managing those
+        # We only manage permissions
+        self.widgets["email"].value = member.getProperty("email", "")
+        self.widgets["email"].readonly = "readonly"
+        self.widgets["fullname"].value = member.getProperty("fullname", "")
+        self.widgets["fullname"].readonly = "readonly"
+        self.widgets["user_groups"].value = self.get_manageable_groups_for_user(username)
+
+    @button.buttonAndHandler(_plone("save"), name="save")
+    def handleSave(self, action):
+        """Create or update user, then update their group membership."""
+        data, errors = self.extractData()
+        username = data["username"].strip()
+        groups_to_assign = data.get("user_groups", [])
+        existing_user = self.acl_users.getUserById(username)
+        member = self.portal_membership.getMemberById(username)
+        if not existing_user or not member:
+            self.messages.add(_("msg_user_error"), type="error")
+            self.request.response.redirect("manage-users-listing")
+            return
+        self.update_user_groups(username, groups_to_assign)
+        self.messages.add(_("msg_user_updated"), type="info")
+        self.request.response.redirect("manage-users-listing")
+
+
+ManageEditSSOUserFormView = wrap_form(ManageEditSSOUserForm)
