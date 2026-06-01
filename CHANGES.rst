@@ -4,6 +4,14 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Adopt Ruff for Python linting/formatting (``pyproject.toml`` ``[tool.ruff]``,
+  ``line-length = 120``) and ``zpretty`` for templates/ZCML/XML; drop the old
+  ``.flake8`` / ``.isort.cfg`` / ``setup.cfg``. Run on demand via ``make lint``
+  (``ruff check``) and ``make format`` (``ruff`` + ``zpretty``) — no pre-commit,
+  tox or CI. The codebase is intentionally not reformatted here; run
+  ``make format`` to apply it as a dedicated change. [DELIBE-291]
+  [aduchene]
+
 - Add a configurable ``website_url`` field on ``Institution`` that keeps a
   published ``Link`` (``website-url``) to the communal website in sync. The
   link is managed from the add/modify event subscribers

@@ -113,17 +113,22 @@ to :8080 directly will not show your changes).
 
 ## Code style
 
-- **flake8**: `max-line-length = 120`, ignored: `E501,W503,E203,Q000,C812,C819`,
-  `max-complexity = 15` (see `.flake8` and `setup.cfg`).
-- **isort**: alphabetical, one import per line, two blank lines after
-  imports, line length 200 (see `.isort.cfg`).
+Two tools, run on demand (no pre-commit, no tox, no CI hooks). Install them
+however you like — `pipx install ruff zpretty`, `uvx`, or your editor.
+
+- **Ruff** for Python — config in `pyproject.toml` `[tool.ruff]`.
+  `line-length = 120` (kept from the old flake8 setting); rules `F,E,W,UP,I`;
+  `E501`/`E203` ignored; isort: `from-first`, `no-sections`, one import per
+  line, two blank lines after imports.
+- **zpretty** for templates / ZCML / XML (`.pt`, `.zcml`, `.xml`).
+- `make lint` → `ruff check .` (report-only). `make format` → `ruff format` +
+  `ruff check --fix` + `zpretty`. The repo is **not** reformatted yet, so
+  `make format` is the deliberate one-time reformat (large diff); after zpretty
+  runs, don't assert exact attribute order in tests.
 - File header: `# -*- coding: utf-8 -*-` is conventional across the
   package — keep it on new modules for consistency.
 - Translations: import `_` from `plonemeeting.portal.core` (and
   `plone_` for the `plone` domain). Wrap user-visible strings.
-
-The repo-root `.flake8` is more restrictive (line 80) but **this
-package's own `.flake8` takes precedence** when working inside it.
 
 ## Adding things
 

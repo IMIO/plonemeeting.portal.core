@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68.2,<80", "wheel"]
+
+[tool.ruff]
+target-version = "py311"
+# Keep the project's historical max line length (flake8 was 120).
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    # pyflakes
+    "F",
+    # pycodestyle
+    "E",
+    "W",
+    # pyupgrade
+    "UP",
+    # isort
+    "I",
+]
+ignore = [
+    # line too long (formatter handles this)
+    "E501",
+    # whitespace before ':' (formatter handles slicing)
+    "E203",
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+from-first = true
+lines-after-imports = 2
+lines-between-types = 1
+no-sections = true
+order-by-type = false
