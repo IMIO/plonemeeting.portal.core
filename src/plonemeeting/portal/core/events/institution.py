@@ -32,6 +32,17 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 
 
+def _website_url_was_modified(event):
+    """True only if the modification actually touched ``website_url``.
+
+    The edit form fires ``ObjectModifiedEvent`` with ``descriptions`` listing
+    the changed field names. Institutions are only ever edited by managers, so
+    we simply react when ``website_url`` is among the changed fields.
+    """
+    descriptions = getattr(event, "descriptions", None) or ()
+    return any("website_url" in (getattr(d, "attributes", ()) or ()) for d in descriptions)
+
+
 def sync_website_link(institution):
     """Keep a published Link to the communal website in sync with website_url.
 
@@ -164,7 +175,8 @@ def handle_institution_modified(institution, event):
         if tab and api.content.get_state(tab) != new_state_id:
             api.content.transition(obj=tab, to_state=new_state_id)
 
-    sync_website_link(institution)
+    if _website_url_was_modified(event):
+        sync_website_link(institution)
 
 
 def institution_state_changed(institution, event):
