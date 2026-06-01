@@ -32,42 +32,34 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 
 
-def _website_url_was_modified(event):
-    """True only if the modification actually touched ``website_url``.
-
-    The edit form fires ``ObjectModifiedEvent`` with ``descriptions`` listing
-    the changed field names. Institutions are only ever edited by managers, so
-    we simply react when ``website_url`` is among the changed fields.
-    """
-    descriptions = getattr(event, "descriptions", None) or ()
-    return any("website_url" in (getattr(d, "attributes", ()) or ()) for d in descriptions)
-
-
 def sync_website_link(institution):
     """Keep a published Link to the communal website in sync with website_url.
 
-    Done from event handlers (add/modify) rather than a property setter so the
-    institution is always already located in the portal.
+    Maintained from the add/modify event subscribers (so the institution is
+    always located) and with Manager rights: institution editors who change
+    website_url hold only the ``Editor`` role and cannot themselves publish the
+    Link or block its local-role acquisition.
     """
     value = getattr(institution, "website_url", None)
-    has_link = WEBSITE_LINK_ID in institution.objectIds()
-    if not value:
-        if has_link:
-            api.content.delete(institution[WEBSITE_LINK_ID])
-        return
-    if not has_link:
-        current_lang = api.portal.get_default_language()[:2]
-        api.content.create(
-            container=institution,
-            type="Link",
-            id=WEBSITE_LINK_ID,
-            title=translate(_("Return to the institution website"), target_language=current_lang),
-        )
-    link = institution[WEBSITE_LINK_ID]
-    api.content.disable_roles_acquisition(obj=link)
-    link.remoteUrl = value
-    if api.content.get_state(obj=link) == "private":
-        api.content.transition(obj=link, transition="publish")
+    with api.env.adopt_roles(["Manager"]):
+        has_link = WEBSITE_LINK_ID in institution.objectIds()
+        if not value:
+            if has_link:
+                api.content.delete(institution[WEBSITE_LINK_ID])
+            return
+        if not has_link:
+            current_lang = api.portal.get_default_language()[:2]
+            api.content.create(
+                container=institution,
+                type="Link",
+                id=WEBSITE_LINK_ID,
+                title=translate(_("Return to the institution website"), target_language=current_lang),
+            )
+        link = institution[WEBSITE_LINK_ID]
+        api.content.disable_roles_acquisition(obj=link)
+        link.remoteUrl = value
+        if api.content.get_state(obj=link) == "private":
+            api.content.transition(obj=link, transition="publish")
 
 
 def handle_institution_creation(obj, event):
@@ -175,8 +167,7 @@ def handle_institution_modified(institution, event):
         if tab and api.content.get_state(tab) != new_state_id:
             api.content.transition(obj=tab, to_state=new_state_id)
 
-    if _website_url_was_modified(event):
-        sync_website_link(institution)
+    sync_website_link(institution)
 
 
 def institution_state_changed(institution, event):

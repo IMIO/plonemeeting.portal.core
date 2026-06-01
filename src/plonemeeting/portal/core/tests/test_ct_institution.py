@@ -15,7 +15,6 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import createObject
 from zope.component import queryUtility
 from zope.event import notify
-from zope.lifecycleevent import Attributes
 from zope.lifecycleevent import ObjectModifiedEvent
 
 
@@ -185,7 +184,7 @@ class InstitutionIntegrationTest(PmPortalTestCase):
             container=self.portal, type="Institution", id="institution", website_url="https://old.example.be"
         )
         institution.website_url = "https://new.example.be"
-        notify(ObjectModifiedEvent(institution, Attributes(IInstitution, "website_url")))
+        notify(ObjectModifiedEvent(institution))
         self.assertEqual(institution.objectIds().count(WEBSITE_LINK_ID), 1)
         self.assertEqual(institution[WEBSITE_LINK_ID].remoteUrl, "https://new.example.be")
 
@@ -197,19 +196,8 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertIn(WEBSITE_LINK_ID, institution.objectIds())
 
         institution.website_url = None
-        notify(ObjectModifiedEvent(institution, Attributes(IInstitution, "website_url")))
+        notify(ObjectModifiedEvent(institution))
         self.assertNotIn(WEBSITE_LINK_ID, institution.objectIds())
-
-    def test_unrelated_modification_leaves_link_untouched(self):
-        self.login_as_admin()
-        institution = api.content.create(
-            container=self.portal, type="Institution", id="institution", website_url="https://www.example.be"
-        )
-        link = institution[WEBSITE_LINK_ID]
-        link.remoteUrl = "https://untouched.example.be"
-        # a change that does not concern website_url must not re-sync the link
-        notify(ObjectModifiedEvent(institution, Attributes(IInstitution, "header_color")))
-        self.assertEqual(link.remoteUrl, "https://untouched.example.be")
 
     def test_ct_institution_modified(self):
         self.login_as_admin()

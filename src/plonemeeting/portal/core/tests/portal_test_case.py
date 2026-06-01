@@ -103,3 +103,13 @@ class PmPortalDemoFunctionalTestCase(PmPortalTestCase):
 
     def login_as_institution_manager(self):
         login(self.portal, "amityville-manager")
+
+    def login_as_manager(self):
+        """Log in as a manager of ``self.institution`` (Editor on the institution)."""
+        username = "{}-manager".format(self.institution.id)
+        if self.portal.acl_users.getUserById(username) is None:
+            self.portal.acl_users._doAddUser(username, PM_USER_PASSWORD, [], [])
+            self.portal.acl_users.source_groups.addPrincipalToGroup(
+                username, get_managers_group_id(self.institution)
+            )
+        login(self.portal, username)
