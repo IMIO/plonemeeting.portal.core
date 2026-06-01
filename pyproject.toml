@@ -2,7 +2,7 @@
 requires = ["setuptools>=68.2,<80", "wheel"]
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
 # Keep the project's historical max line length (flake8 was 120).
 line-length = 120
 

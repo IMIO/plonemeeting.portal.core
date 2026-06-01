@@ -17,7 +17,7 @@ here go upstream — they do **not** belong to the buildout repo.
 ## Stack
 
 - **Plone**: 6.1.x (classic, not Volto)
-- **Python**: 3.11 / 3.12 (`python_requires=">=3.11"`)
+- **Python**: 3.12 (`python_requires=">=3.12"`)
 - **Content types**: Dexterity
 - **Listings**: `eea.facetednavigation`
 - **Frontend bundle**: webpack + pnpm (see `browser/resources/`)

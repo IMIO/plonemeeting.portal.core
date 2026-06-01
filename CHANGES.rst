@@ -4,6 +4,10 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Drop support for Python 3.11; require Python >= 3.12 (``python_requires``,
+  classifiers and Ruff ``target-version`` updated accordingly).
+  [aduchene]
+
 - Adopt Ruff for Python linting/formatting (``pyproject.toml`` ``[tool.ruff]``,
   ``line-length = 120``) and ``zpretty`` for templates/ZCML/XML; drop the old
   ``.flake8`` / ``.isort.cfg`` / ``setup.cfg``. Run on demand via ``make lint``
