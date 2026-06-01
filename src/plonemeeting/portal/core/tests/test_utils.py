@@ -307,7 +307,7 @@ class TestUtils(PmPortalDemoFunctionalTestCase):
     def test_set_constrain_types(self):
         constraints = ISelectableConstrainTypes(self.belleville)
         self.assertListEqual(
-            sorted(["Folder"]), sorted(constraints.getLocallyAllowedTypes())
+            sorted(["Folder", "Link"]), sorted(constraints.getLocallyAllowedTypes())
         )
         utils.set_constrain_types(self.belleville, [])
         self.assertListEqual([], constraints.getLocallyAllowedTypes())
