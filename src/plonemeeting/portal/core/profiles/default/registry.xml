@@ -25,6 +25,14 @@
     <value key="group" i18n:domain="plone" i18n:translate="">Metadata</value>
   </records>
 
+  <record name="plone.displayed_types"
+          interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="displayed_types">
+    <value purge="true">
+      <element>Folder</element>
+      <element>Link</element>
+    </value>
+  </record>
+
   <!-- plonemeeting.portal.core -->
   <record name="plonemeeting.portal.core.global_categories">
     <field type="plone.registry.field.Dict">
