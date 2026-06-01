@@ -37,6 +37,16 @@ test:
 	bin/pip install -U mockito # for dev ide env
 	if test -z "$(args)" ;then bin/test;else bin/test -t $(args);fi
 
+.PHONY: lint
+lint:  ## Lint Python with ruff (report-only). Needs `ruff` on PATH (pipx install ruff / uvx ruff).
+	ruff check .
+
+.PHONY: format
+format:  ## Format: ruff (Python) + zpretty (templates/zcml/xml). Needs `ruff` & `zpretty` on PATH.
+	ruff format .
+	ruff check --fix .
+	zpretty -i src/**/*.pt src/**/*.zcml src/**/*.xml
+
 .PHONY: resources
 resources:  ## Compile resources
 	pnpm run build
