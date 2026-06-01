@@ -192,6 +192,7 @@ def create_demo_content(context):
                 type="Institution",
                 id=institution_id,
                 title=institution["title"],
+                website_url=institution["website_url"],
                 categories_mappings=institution["categories_mappings"],
                 representatives_mappings=institution["representatives_mappings"],
                 plonemeeting_url=institution["plonemeeting_url"],

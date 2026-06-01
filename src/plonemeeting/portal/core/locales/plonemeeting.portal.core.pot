@@ -619,6 +619,10 @@ msgstr ""
 msgid "Régie Communale Autonome"
 msgstr ""
 
+#: ../events/institution.py:53
+msgid "Return to the institution website"
+msgstr ""
+
 #: ../browser/institution.py:107
 #: ../browser/meeting.py:34
 #: ../browser/publication.py:57
@@ -830,6 +834,10 @@ msgstr ""
 #: ../browser/sync.py:89
 #: ../content/institution.py:586
 msgid "Webservice connection error !"
+msgstr ""
+
+#: ../content/institution.py:216
+msgid "Website URL"
 msgstr ""
 
 #: ../browser/templates/publication.pt:42

@@ -213,6 +213,8 @@ class IInstitution(model.Schema):
         default="council",
     )
 
+    website_url = schema.URI(title=_(u"Website URL"), required=False, default=None)
+
     directives.widget(
         "meeting_filter_query",
         DataGridFieldFactory,

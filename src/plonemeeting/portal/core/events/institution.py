@@ -15,6 +15,7 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
+from plonemeeting.portal.core.config import WEBSITE_LINK_ID
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.interfaces import IPublicationsFolder
 from plonemeeting.portal.core.utils import create_faceted_folder
@@ -29,6 +30,36 @@ from plonemeeting.portal.core.utils import set_constrain_types
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import alsoProvides
+
+
+def sync_website_link(institution):
+    """Keep a published Link to the communal website in sync with website_url.
+
+    Maintained from the add/modify event subscribers (so the institution is
+    always located) and with Manager rights: institution editors who change
+    website_url hold only the ``Editor`` role and cannot themselves publish the
+    Link or block its local-role acquisition.
+    """
+    value = getattr(institution, "website_url", None)
+    with api.env.adopt_roles(["Manager"]):
+        has_link = WEBSITE_LINK_ID in institution.objectIds()
+        if not value:
+            if has_link:
+                api.content.delete(institution[WEBSITE_LINK_ID])
+            return
+        if not has_link:
+            current_lang = api.portal.get_default_language()[:2]
+            api.content.create(
+                container=institution,
+                type="Link",
+                id=WEBSITE_LINK_ID,
+                title=translate(_("Return to the institution website"), target_language=current_lang),
+            )
+        link = institution[WEBSITE_LINK_ID]
+        api.content.disable_roles_acquisition(obj=link)
+        link.remoteUrl = value
+        if api.content.get_state(obj=link) == "private":
+            api.content.transition(obj=link, transition="publish")
 
 
 def handle_institution_creation(obj, event):
@@ -100,6 +131,8 @@ def handle_institution_creation(obj, event):
     # Templates
     create_templates_folder(obj)
 
+    sync_website_link(obj)
+
     request = getRequest()
     if request:  # Request can be `None` during test setup
         request.response.redirect(addTokenToUrl(obj.absolute_url()))
@@ -133,6 +166,8 @@ def handle_institution_modified(institution, event):
         # this test could be removed when migrated to 2000
         if tab and api.content.get_state(tab) != new_state_id:
             api.content.transition(obj=tab, to_state=new_state_id)
+
+    sync_website_link(institution)
 
 
 def institution_state_changed(institution, event):

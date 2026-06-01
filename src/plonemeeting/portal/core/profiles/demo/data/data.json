@@ -68,6 +68,7 @@
   "institutions": [
     {
       "title": "Amityville",
+      "website_url": "https://www.amityville.be",
       "plonemeeting_url": "https://demo-pm.imio.be",
       "username": "dgen",
       "password": "meeting",
@@ -381,6 +382,7 @@
     },
     {
       "title": "Belleville",
+      "website_url": "https://www.belleville.be",
       "plonemeeting_url": "https://demo-pm.imio.be",
       "username": "dgen",
       "password": "meeting",

@@ -4,6 +4,14 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Add a configurable ``website_url`` field on ``Institution`` that keeps a
+  published ``Link`` (``website-url``) to the communal website in sync. The
+  link is managed from the add/modify event subscribers
+  (``sync_website_link``) instead of a property setter, so it no longer
+  crashes when the field is set before the institution is added to the
+  portal, and clearing the URL removes the link. [DELIBE-112]
+  [aduchene]
+
 - Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
   ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
   dependency chain resolves under the test fixture (``z3c.autoinclude`` is

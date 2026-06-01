@@ -44,6 +44,8 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         browser.open(self._get_css_absolute_url())
         old_custom_colors_css = browser.contents
 
+        # institutions are only ever edited by managers
+        self.login_as_manager()
         self.institution.header_color = "#ABABAB"
         self._fire_event(self.institution, "modified")
 

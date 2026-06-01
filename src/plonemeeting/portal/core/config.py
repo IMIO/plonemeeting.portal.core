@@ -20,6 +20,7 @@ FACETED_CONFIGS = [
 # appears in the URL so use french
 DEC_FOLDER_ID = "decisions"
 PUB_FOLDER_ID = "publications"
+WEBSITE_LINK_ID = "website-url"
 
 CONTENTS_TO_CLEAN = ["Members", "events", "news"]
 
