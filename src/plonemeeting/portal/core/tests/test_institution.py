@@ -37,6 +37,14 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(view.request.response.status, 302)
         self.assertDictEqual(view.request.response.headers, {"location": "http://nohost/plone/belleville/decisions"})
 
+    def test_demo_institution_has_website_link(self):
+        belleville = self.portal["belleville"]
+        self.assertEqual(belleville.website_url, "https://www.belleville.be")
+        link = belleville["website-url"]
+        self.assertEqual(link.portal_type, "Link")
+        self.assertEqual(link.remoteUrl, "https://www.belleville.be")
+        self.assertEqual(api.content.get_state(link), "published")
+
     def test_validate_color_parameters(self):
         self.assertTrue(validate_color_parameters("#FFF"))
         self.assertTrue(validate_color_parameters("#00ab44"))
@@ -50,7 +58,7 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         decisions_constraints = ISelectableConstrainTypes(self.institution.decisions)
         publications_constraints = ISelectableConstrainTypes(self.institution.publications)
         self.login_as_admin()
-        self.assertListEqual(["Folder"], institution_constraints.getLocallyAllowedTypes())
+        self.assertListEqual(["Folder", "Link"], institution_constraints.getLocallyAllowedTypes())
         self.assertListEqual(["Meeting"], decisions_constraints.getLocallyAllowedTypes())
         self.assertListEqual(["Publication"], publications_constraints.getLocallyAllowedTypes())
         self.login_as_test()

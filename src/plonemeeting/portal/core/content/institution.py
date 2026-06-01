@@ -39,7 +39,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 import re
 import requests
 
-WEBSITE_LINK_ID = 'website-url'
 
 class InvalidUrlParameters(ValidationError):
     """Exception for invalid url parameters"""
@@ -214,7 +213,7 @@ class IInstitution(model.Schema):
         default="council",
     )
 
-    website_url = schema.URI(title=_(u"Website URL"), required=False)
+    website_url = schema.URI(title=_(u"Website URL"), required=False, default=None)
 
     directives.widget(
         "meeting_filter_query",
@@ -564,26 +563,6 @@ def representatives_mappings_invariant(data):
 @implementer(IInstitution)
 class Institution(Container):
     """ """
-
-    @property
-    def website_url(self):
-        return self.__dict__.get('website_url', None)
-
-    @website_url.setter
-    def website_url(self, value):
-        institution = api.portal.get().get(self.id)  # Weird hack to make acquisition work
-        if not value and WEBSITE_LINK_ID in institution.objectIds():
-            api.content.delete(institution[WEBSITE_LINK_ID])
-
-        self.__dict__['website_url'] = value
-
-        if WEBSITE_LINK_ID not in self.objectIds():
-            api.content.create(container=institution, type="Link", id=WEBSITE_LINK_ID, title=_("Website"))
-        link = institution[WEBSITE_LINK_ID]
-        api.content.disable_roles_acquisition(obj=link)
-        link.remoteUrl = value
-        if api.content.get_state(obj=link) == "private":
-            api.content.transition(obj=link, transition='publish')
 
     def fetch_delib_categories(self):
         delib_config_category_field = CATEGORY_IA_DELIB_FIELDS_MAPPING_EXTRA_INCLUDE[self.delib_category_field]

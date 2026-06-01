@@ -6,6 +6,7 @@ from plone.api.portal import get_registry_record
 from plone.dexterity.interfaces import IDexterityFTI
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
+from plonemeeting.portal.core.config import WEBSITE_LINK_ID
 from plonemeeting.portal.core.content.institution import IInstitution
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalTestCase
 from plonemeeting.portal.core.utils import get_decisions_managers_group_id
@@ -159,6 +160,44 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         self.assertEqual(get_state(decisions_folder), "private")
         self.assertEqual(get_state(agenda_folder), "private")
         self.assertEqual(get_state(meeting), "private")
+
+    def test_website_url_creates_published_link_on_add(self):
+        self.login_as_admin()
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution", website_url="https://www.example.be"
+        )
+        link = institution[WEBSITE_LINK_ID]
+        self.assertEqual(link.portal_type, "Link")
+        self.assertEqual(link.remoteUrl, "https://www.example.be")
+        self.assertEqual(get_state(link), "published")
+        # local roles are not acquired so the link stays visible regardless of context
+        self.assertTrue(link.__ac_local_roles_block__)
+
+    def test_website_url_without_value_creates_no_link(self):
+        self.login_as_admin()
+        institution = api.content.create(container=self.portal, type="Institution", id="institution")
+        self.assertNotIn(WEBSITE_LINK_ID, institution.objectIds())
+
+    def test_website_url_update_reuses_same_link(self):
+        self.login_as_admin()
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution", website_url="https://old.example.be"
+        )
+        institution.website_url = "https://new.example.be"
+        notify(ObjectModifiedEvent(institution))
+        self.assertEqual(institution.objectIds().count(WEBSITE_LINK_ID), 1)
+        self.assertEqual(institution[WEBSITE_LINK_ID].remoteUrl, "https://new.example.be")
+
+    def test_website_url_clearing_removes_link(self):
+        self.login_as_admin()
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution", website_url="https://www.example.be"
+        )
+        self.assertIn(WEBSITE_LINK_ID, institution.objectIds())
+
+        institution.website_url = None
+        notify(ObjectModifiedEvent(institution))
+        self.assertNotIn(WEBSITE_LINK_ID, institution.objectIds())
 
     def test_ct_institution_modified(self):
         self.login_as_admin()

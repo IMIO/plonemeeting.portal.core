@@ -616,6 +616,10 @@ msgstr "Correspondances des mandataires - Supprimer un mandataires déjà associ
 msgid "Régie Communale Autonome"
 msgstr ""
 
+#: ../events/institution.py:53
+msgid "Return to the institution website"
+msgstr "Retourner sur le site internet"
+
 #: ../browser/institution.py:107
 #: ../browser/meeting.py:34
 #: ../browser/publication.py:57
@@ -828,6 +832,10 @@ msgstr "Erreur de connexion au service web !"
 #: ../content/institution.py:586
 msgid "Webservice connection error !"
 msgstr "Erreur de connexion au web service !"
+
+#: ../content/institution.py:216
+msgid "Website URL"
+msgstr "URL du site internet"
 
 #: ../browser/templates/publication.pt:42
 msgid "You are viewing an old version of this publication. For the most up-to-date information, please refer to the latest version."
