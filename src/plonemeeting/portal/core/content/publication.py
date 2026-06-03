@@ -164,6 +164,12 @@ class Publication(Container, File):
     def is_timestamped(self):
         return ITimeStamper(self).is_timestamped()
 
+    def may_remove_expiration_date(self):
+        """Whether the current user may remove this publication's expiration
+        date (publications managers and site administrators). Used by the
+        "remove-expiration-date" object action and its view guard."""
+        return is_publications_manager(self._get_institution()) or _checkPermission(ManagePortal, self)
+
     # Workflow related methods
 
     def may_back_to_private(self):

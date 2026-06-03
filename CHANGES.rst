@@ -4,6 +4,13 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Add a "Remove expiration date" action (object button) on publications,
+  reserved to publications managers and site administrators, available in any
+  workflow state. It clears ``expiration_date`` and reindexes without notifying
+  an ``ObjectModifiedEvent``, so the qualified timestamp is preserved. Also
+  clarify the help text of the expiration date field. [DELIBE-305]
+  [aduchene]
+
 - Drop support for Python 3.11; require Python >= 3.12 (``python_requires``,
   classifiers and Ruff ``target-version`` updated accordingly).
   [aduchene]

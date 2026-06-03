@@ -133,6 +133,13 @@
   />
 
   <browser:page
+    name="remove-expiration-date"
+    for="plonemeeting.portal.core.content.publication.IPublication"
+    class=".publication.RemoveExpirationDateView"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="check-timestamp"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".publication.TimestampCheckView"

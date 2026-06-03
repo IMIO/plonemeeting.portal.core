@@ -72,6 +72,12 @@
       </property>
       <property name="visible">True</property>
     </object>
+    <object name="remove_expiration_date" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
+      <property name="title" i18n:translate="">Remove expiration date</property>
+      <property name="url_expr">string:$object_url/@@remove-expiration-date</property>
+      <property name="available_expr">python:context.portal_type == "Publication" and context.expiration_date and context.may_remove_expiration_date()</property>
+      <property name="visible">True</property>
+    </object>
     <object name="reimport_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
       <property name="title" i18n:translate="">Force reimport this meeting</property>
       <property name="url_expr">string:$object_url/@@force_reimport_meeting</property>
