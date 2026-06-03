@@ -6,6 +6,7 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.memoize.view import memoize
+from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
 from plonemeeting.portal.core.browser import BaseAddForm
@@ -15,7 +16,9 @@ from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
+from zExceptions import Unauthorized
 from zope.event import notify
+from zope.interface import alsoProvides
 from ZPublisher.Iterators import filestream_iterator
 
 import copy
@@ -29,9 +32,24 @@ class PublicationForm:
     zope_admin_fieldsets = ["settings"]
     fieldsets_order = ["dates", "authority", "timestamp", "relationships", "categorization", "settings"]
 
+    def _clarify_expires_description(self):
+        """Clarify the help text of the "expiration date" field, which comes
+        from the plone.publication behavior (in the "dates" fieldset group).
+        Work on a copy of the field to avoid mutating the shared behavior
+        field."""
+        for widgets in [self.widgets] + [group.widgets for group in self.groups]:
+            widget = widgets.get("IPublication.expires")
+            if widget is not None:
+                widget.field = copy.copy(widget.field)
+                widget.field.description = _("expiration_date_description")
+
 
 class AddForm(PublicationForm, BaseAddForm):
     """Override to reorder and filter out fieldsets."""
+
+    def update(self):
+        super().update()
+        self._clarify_expires_description()
 
     def updateWidgets(self):
         super().updateWidgets()
@@ -45,6 +63,10 @@ class PublicationAdd(PublicationForm, DefaultAddView):
 
 class EditForm(PublicationForm, BaseEditForm):
     """Override to reorder and filter out fieldsets."""
+
+    def update(self):
+        super().update()
+        self._clarify_expires_description()
 
     def render(self):
         """Override to warn about timestamped content.
@@ -268,6 +290,34 @@ class PublicationContentStatusModifyView(ContentStatusModifyView):
         """Override to bypass setting effective_date and
         expiration_date upon any workflow transition."""
         return
+
+
+class RemoveExpirationDateView(BrowserView):
+    """Remove a publication's expiration date.
+
+    Reserved to publications managers (and site administrators). Works in any
+    workflow state.
+
+    ⚠️ Must NOT notify an ObjectModifiedEvent: ``publication_modified``
+    (events/publication.py) clears the qualified timestamp unconditionally on
+    modify. We therefore assign the attribute directly and reindex."""
+
+    def __call__(self):
+        if not self.context.may_remove_expiration_date():
+            raise Unauthorized
+        # Intentional, permission-guarded write reached over a GET (Plone object
+        # action link): opt out of plone.protect's confirmation interstitial.
+        alsoProvides(self.request, IDisableCSRFProtection)
+        if self.context.expiration_date is not None:
+            self.context.expiration_date = None
+            # Reindex the field that actually changed: the "expires" DateIndex
+            # and the "effectiveRange" DateRangeIndex (effective_date is
+            # untouched). Keeping "expires" fresh also prevents
+            # collective.autopublishing from re-retracting the publication.
+            self.context.reindexObject(idxs=["expires", "effectiveRange"])
+            IStatusMessage(self.request).addStatusMessage(_("msg_expiration_date_removed"), "info")
+        self.request.response.redirect(self.context.absolute_url())
+        return ""
 
 
 class TimestampCheckView(BrowserView):

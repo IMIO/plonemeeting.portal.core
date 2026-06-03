@@ -562,6 +562,10 @@ msgstr ""
 msgid "Publications sort order"
 msgstr ""
 
+#: ../profiles/default/actions.xml
+msgid "Remove expiration date"
+msgstr ""
+
 #: ../content/institution.py:258
 msgid "Published Items content query"
 msgstr ""
@@ -951,6 +955,10 @@ msgstr ""
 msgid "error_already_superseded"
 msgstr ""
 
+#: ../browser/publication.py:51
+msgid "expiration_date_description"
+msgstr ""
+
 #: ../content/publication.py:114
 msgid "expired_authority_date_description"
 msgstr ""
@@ -1094,6 +1102,10 @@ msgstr ""
 #. Default: "No users found."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
+msgstr ""
+
+#: ../browser/publication.py:267
+msgid "msg_expiration_date_removed"
 msgstr ""
 
 #: ../events/publication.py:25

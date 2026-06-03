@@ -559,6 +559,10 @@ msgstr "Publications"
 msgid "Publications sort order"
 msgstr ""
 
+#: ../profiles/default/actions.xml
+msgid "Remove expiration date"
+msgstr "Enlever la date d'expiration"
+
 #: ../content/institution.py:258
 msgid "Published Items content query"
 msgstr "Paramètres pour obtenir les champs des Points à importer"
@@ -948,6 +952,10 @@ msgstr "Modèles de document activés pour cette institution. Un modèle de docu
 msgid "error_already_superseded"
 msgstr "Cet élément est déjà remplacé par un autre élément et ne peut donc pas être remplacé à nouveau. Veuillez choisir un autre élément qui n'est pas encore remplacé."
 
+#: ../browser/publication.py:51
+msgid "expiration_date_description"
+msgstr "Champ optionnel. Si une date est renseignée, la publication sera automatiquement dépubliée à cette date et ne sera plus visible par les citoyens. Laissez vide pour une publication sans échéance."
+
 #: ../content/publication.py:114
 msgid "expired_authority_date_description"
 msgstr "N'apparaitra pas si laissé vide."
@@ -1092,6 +1100,10 @@ msgstr "La date de publication est obligatoire dans cet état du workflow."
 #: ../browser/templates/manage_users_listing.pt:44
 msgid "msg_no_users_found"
 msgstr "Aucun utilisateur trouvé."
+
+#: ../browser/publication.py:267
+msgid "msg_expiration_date_removed"
+msgstr "La date d'expiration a été enlevée."
 
 #: ../events/publication.py:25
 msgid "msg_timestamp_removed"

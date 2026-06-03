@@ -258,4 +258,14 @@
       run_deps="True"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeDepends
+    title="Re-apply actions profile step to add the 'Remove expiration date' publication action"
+    description=""
+    source="2401"
+    destination="2402"
+    import_profile="plonemeeting.portal.core:default"
+    import_steps="actions"
+    run_deps="False"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>

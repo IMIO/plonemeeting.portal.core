@@ -15,6 +15,7 @@ from plonemeeting.portal.core.tests import PM_ADMIN_USER
 from plonemeeting.portal.core.tests import PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
 from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.statusmessages.interfaces import IStatusMessage
 from unittest import mock
 from zExceptions import Redirect
 from zExceptions import Unauthorized
@@ -496,6 +497,99 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         notify(ObjectModifiedEvent(pub["new_file.txt"]))
         self.assertFalse(timestamper.is_timestamped())
         self.assertIsNone(pub.timestamp)
+
+    def test_remove_expiration_date_guard(self):
+        """Only publications managers (and site admins) may remove the date."""
+        pub = self.published_publication
+        pub.expiration_date = DateTime() + 30
+        pub.reindexObject(idxs=["effective", "effectiveRange"])
+
+        # Anonymous may not
+        self.logout()
+        with self.assertRaises(Unauthorized):
+            pub.restrictedTraverse("@@remove-expiration-date")()
+
+        # A decisions manager is not a publications manager
+        self.login_as_decisions_manager()
+        self.assertFalse(pub.may_remove_expiration_date())
+        with self.assertRaises(Unauthorized):
+            pub.restrictedTraverse("@@remove-expiration-date")()
+        self.assertIsNotNone(pub.expiration_date)
+
+        # A publications manager may
+        self.login_as_publications_manager()
+        self.assertTrue(pub.may_remove_expiration_date())
+        pub.restrictedTraverse("@@remove-expiration-date")()
+        self.assertIsNone(pub.expiration_date)
+
+        # A site admin (Manager) may as well
+        pub.expiration_date = DateTime() + 30
+        self.login_as_admin()
+        self.assertTrue(pub.may_remove_expiration_date())
+        pub.restrictedTraverse("@@remove-expiration-date")()
+        self.assertIsNone(pub.expiration_date)
+
+    def test_remove_expiration_date_clears_and_reindexes(self):
+        """The action clears the date, reindexes the catalog and confirms."""
+        self.login_as_publications_manager()
+        pub = self.published_publication
+        uid = pub.UID()
+        # An expired publication is excluded from an effectiveRange "now" query,
+        # and matches an "expires <= now" query.
+        pub.expiration_date = DateTime() - 1
+        pub.reindexObject(idxs=["expires", "effectiveRange"])
+        self.assertEqual(len(self.catalog(UID=uid, effectiveRange=DateTime())), 0)
+        self.assertEqual(len(self.catalog(UID=uid, expires={"query": DateTime(), "range": "max"})), 1)
+
+        pub.restrictedTraverse("@@remove-expiration-date")()
+
+        self.assertIsNone(pub.expiration_date)
+        # effectiveRange has been reindexed: the publication is effective again
+        self.assertEqual(len(self.catalog(UID=uid, effectiveRange=DateTime())), 1)
+        # the "expires" DateIndex has been reindexed too: no longer "expired"
+        self.assertEqual(len(self.catalog(UID=uid, expires={"query": DateTime(), "range": "max"})), 0)
+        # a confirmation message has been shown
+        messages = IStatusMessage(pub.REQUEST).show()
+        self.assertEqual([m.message for m in messages], ["msg_expiration_date_removed"])
+
+    def test_remove_expiration_date_keeps_timestamp(self):
+        """Removing the expiration date must NOT invalidate the qualified
+        timestamp (covers the publication_modified trap)."""
+        self.login_as_publications_manager()
+        pub = self.published_publication
+        timestamper = ITimeStamper(pub)
+        self.assertTrue(timestamper.is_timestamped())
+        pub.expiration_date = DateTime() + 30
+        pub.reindexObject(idxs=["effective", "effectiveRange"])
+        timestamp_before = pub.timestamp
+        timestamped_file_before = pub.timestamped_file
+
+        pub.restrictedTraverse("@@remove-expiration-date")()
+
+        self.assertIsNone(pub.expiration_date)
+        self.assertTrue(timestamper.is_timestamped())
+        self.assertIs(pub.timestamp, timestamp_before)
+        self.assertIs(pub.timestamped_file, timestamped_file_before)
+
+    def test_remove_expiration_date_noop_when_already_empty(self):
+        """Calling the action with no date set is a harmless no-op redirect."""
+        self.login_as_publications_manager()
+        pub = self.published_publication
+        pub.expiration_date = None
+        pub.restrictedTraverse("@@remove-expiration-date")()
+        self.assertIsNone(pub.expiration_date)
+
+    def test_expiration_date_description_overridden(self):
+        """The expiration date field shows our clarified help text."""
+        self.login_as_publications_manager()
+        form = self.private_publication.restrictedTraverse("@@edit")
+        form.update()
+        widget = None
+        for widgets in [form.widgets] + [group.widgets for group in form.groups]:
+            if "IPublication.expires" in widgets:
+                widget = widgets["IPublication.expires"]
+        self.assertIsNotNone(widget)
+        self.assertEqual(widget.field.description, "expiration_date_description")
 
     def test_remove_publication(self):
         self.login_as_decisions_manager()
