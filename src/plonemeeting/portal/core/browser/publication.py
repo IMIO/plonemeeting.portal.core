@@ -32,8 +32,8 @@ class PublicationForm:
     zope_admin_fieldsets = ["settings"]
     fieldsets_order = ["dates", "authority", "timestamp", "relationships", "categorization", "settings"]
 
-    def _clarify_expires_description(self):
-        """Clarify the help text of the "expiration date" field, which comes
+    def _expires_description(self):
+        """Change the help text of the "expiration date" field, which comes
         from the plone.publication behavior (in the "dates" fieldset group).
         Work on a copy of the field to avoid mutating the shared behavior
         field."""
@@ -41,7 +41,7 @@ class PublicationForm:
             widget = widgets.get("IPublication.expires")
             if widget is not None:
                 widget.field = copy.copy(widget.field)
-                widget.field.description = _("expiration_date_description")
+                widget.field.description = _("publication_expiration_date_description")
 
 
 class AddForm(PublicationForm, BaseAddForm):
@@ -49,7 +49,7 @@ class AddForm(PublicationForm, BaseAddForm):
 
     def update(self):
         super().update()
-        self._clarify_expires_description()
+        self._expires_description()
 
     def updateWidgets(self):
         super().updateWidgets()
@@ -66,7 +66,7 @@ class EditForm(PublicationForm, BaseEditForm):
 
     def update(self):
         super().update()
-        self._clarify_expires_description()
+        self._expires_description()
 
     def render(self):
         """Override to warn about timestamped content.

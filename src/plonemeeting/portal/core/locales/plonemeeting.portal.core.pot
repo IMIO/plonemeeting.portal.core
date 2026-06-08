@@ -956,7 +956,7 @@ msgid "error_already_superseded"
 msgstr ""
 
 #: ../browser/publication.py:51
-msgid "expiration_date_description"
+msgid "publication_expiration_date_description"
 msgstr ""
 
 #: ../content/publication.py:114
