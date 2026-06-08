@@ -953,8 +953,8 @@ msgid "error_already_superseded"
 msgstr "Cet élément est déjà remplacé par un autre élément et ne peut donc pas être remplacé à nouveau. Veuillez choisir un autre élément qui n'est pas encore remplacé."
 
 #: ../browser/publication.py:51
-msgid "expiration_date_description"
-msgstr "Champ optionnel. Si une date est renseignée, la publication sera automatiquement dépubliée à cette date et ne sera plus visible par les citoyens. Laissez vide pour une publication sans échéance."
+msgid "publication_expiration_date_description"
+msgstr "<strong>Champ optionnel.</strong> Si une date est renseignée, la publication sera <strong>automatiquement dépubliée</strong> à cette date et ne sera plus visible par les citoyens. Laissez vide pour une publication sans échéance."
 
 #: ../content/publication.py:114
 msgid "expired_authority_date_description"

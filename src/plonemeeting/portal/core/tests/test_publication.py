@@ -580,7 +580,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertIsNone(pub.expiration_date)
 
     def test_expiration_date_description_overridden(self):
-        """The expiration date field shows our clarified help text."""
+        """The expiration date field shows our own help text."""
         self.login_as_publications_manager()
         form = self.private_publication.restrictedTraverse("@@edit")
         form.update()
@@ -589,7 +589,7 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
             if "IPublication.expires" in widgets:
                 widget = widgets["IPublication.expires"]
         self.assertIsNotNone(widget)
-        self.assertEqual(widget.field.description, "expiration_date_description")
+        self.assertEqual(widget.field.description, "publication_expiration_date_description")
 
     def test_remove_publication(self):
         self.login_as_decisions_manager()
