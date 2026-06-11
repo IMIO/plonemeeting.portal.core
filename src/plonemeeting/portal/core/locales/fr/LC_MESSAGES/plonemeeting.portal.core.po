@@ -517,6 +517,31 @@ msgstr "Mot de passe"
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr "Texte à afficher pour les portions de texte anonymisées"
 
+#: ../profiles/default/registry.xml
+msgid "Plausible API key"
+msgstr "Clé API Plausible"
+
+#: ../profiles/default/registry.xml
+msgid "Plausible base URL"
+msgstr "URL de base de Plausible"
+
+#: ../content/institution.py
+msgid "Plausible shared link token"
+msgstr "Jeton de lien de partage Plausible"
+
+#: ../profiles/default/registry.xml
+msgid "Plausible shared link token for the whole portal"
+msgstr "Jeton de lien de partage Plausible pour l'ensemble du portail"
+
+#: ../profiles/default/registry.xml
+msgid "Plausible site domain"
+msgstr "Domaine du site Plausible"
+
+#: ../browser/statistics.py
+#: ../profiles/default/controlpanel.xml
+msgid "Plausible statistics"
+msgstr "Statistiques Plausible"
+
 #: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
 msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
 msgstr "Veuillez noter que si vous êtes un citoyen souhaitant consulter le site web, vous pouvez le faire sans vous connecter."
@@ -654,6 +679,11 @@ msgstr "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
 msgid "Sortable Item number"
 msgstr "Numéro triable du point"
 
+#: ../browser/statistics.py
+#: ../browser/templates/manage_institution.pt
+msgid "Statistics"
+msgstr "Statistiques"
+
 #: ../browser/templates/items_datatable.pt:14
 msgid "Status"
 msgstr "Statut"
@@ -746,6 +776,10 @@ msgstr "Texte"
 msgid "The CAPTCHA validation was unsuccessful. Please retry by carefully following the instructions."
 msgstr "La validation CAPTCHA a échoué. Veuillez réessayer en suivant attentivement les instructions fournies."
 
+#: ../browser/statistics.py
+msgid "The Plausible API key is not configured. Statistics cannot be displayed."
+msgstr "La clé API Plausible n'est pas configurée. Les statistiques ne peuvent pas être affichées."
+
 #: ../content/institution.py:178
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur les portions de texte anonymisées"
@@ -770,6 +804,10 @@ msgstr "Titre"
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
 msgstr "UID iA.Délib"
+
+#: ../browser/statistics.py
+msgid "Unable to retrieve statistics from Plausible. Please try again later."
+msgstr "Impossible de récupérer les statistiques depuis Plausible. Veuillez réessayer plus tard."
 
 #: ../browser/sync.py:274
 msgid "Unchanged"

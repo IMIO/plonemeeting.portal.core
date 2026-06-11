@@ -18,4 +18,17 @@
             <permission>Manage portal</permission>
     </configlet>
 
+    <configlet
+        title="Plausible statistics"
+        action_id="plausible-statistics"
+        appId="plonemeeting.portal.core"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@plausible-statistics"
+        icon_expr="string:graph-up"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
 </object>

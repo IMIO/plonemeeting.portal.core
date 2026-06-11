@@ -7,6 +7,7 @@ from collective.documentgenerator.viewlets.generationlinks import DocumentGenera
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 from plone.memoize.view import memoize
+from plonemeeting.portal.core.browser.statistics import InstitutionStatisticsView
 from plonemeeting.portal.core.browser.utils import pretty_file_icon
 from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from z3c.form.form import EditForm
@@ -22,7 +23,7 @@ class PMDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         """Overrided to make sure the viewlet is only available for logged-in users."""
         return (
             not api.user.is_anonymous()
-            and not isinstance(self.view, EditForm)
+            and not isinstance(self.view, (EditForm, InstitutionStatisticsView))
             and self.context.portal_type in DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
             and bool(self.get_generable_templates())
         )

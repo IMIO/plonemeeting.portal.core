@@ -309,6 +309,25 @@
     permission="cmf.ModifyPortalContent"
   />
 
+  <!-- Plausible statistics views -->
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="statistics"
+    class=".statistics.InstitutionStatisticsView"
+    template="templates/statistics.pt"
+    permission="cmf.ModifyPortalContent"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="plausible-statistics"
+    class=".statistics.PlausibleStatisticsControlPanelView"
+    template="templates/statistics_controlpanel.pt"
+    permission="cmf.ManagePortal"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
   <!-- Document generation views -->
 
   <browser:page

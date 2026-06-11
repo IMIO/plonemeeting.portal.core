@@ -268,4 +268,22 @@
     run_deps="False"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeSteps
+    source="2402"
+    destination="2403"
+    profile="plonemeeting.portal.core:default">
+    <genericsetup:upgradeDepends
+      title="Re-apply registry profile step to add the Plausible statistics settings"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="plone.app.registry"
+      run_deps="False"/>
+    <genericsetup:upgradeDepends
+      title="Re-apply controlpanel profile step to add the Plausible statistics configlet"
+      description=""
+      import_profile="plonemeeting.portal.core:default"
+      import_steps="controlpanel"
+      run_deps="False"/>
+  </genericsetup:upgradeSteps>
+
 </configure>

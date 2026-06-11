@@ -179,6 +179,14 @@ class IInstitution(model.Schema):
         required=False,
     )
 
+    # Plausible shared link auth token, provisioned by the @@statistics view
+    # on first access. Never shown nor edited through forms.
+    directives.omitted("plausible_shared_link_token")
+    plausible_shared_link_token = schema.TextLine(
+        title=_("Plausible shared link token"),
+        required=False,
+    )
+
     # iA.Delib integration fieldset
     model.fieldset(
         "iadelib",

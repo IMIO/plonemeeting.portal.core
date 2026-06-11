@@ -9,6 +9,24 @@ Changelog
   revalidate when colors change. [DELIBE-306]
   [aduchene]
 
+- Add Plausible web statistics dashboards: a ``@@statistics`` view on each
+  institution (linked from the institution settings, with a "Back to my
+  institution" button and the document generation viewlet hidden) and a
+  global "Statistiques Plausible" configlet rendered with the standard
+  control panel layout. On first access the Plausible site and a shared
+  link are provisioned through the Plausible Sites API and the shared link
+  auth token is cached (in a new hidden ``plausible_shared_link_token``
+  field on the institution, resp. in the
+  ``plonemeeting.portal.core.plausible_shared_link_token`` registry
+  record); the dashboard is then embedded as an iframe, with custom styles
+  injected through Plausible's embed scripts so it spans the full content
+  width. The token caching write is CSRF-exempted so the first visit does
+  not trigger the plone.protect confirmation page. The Plausible base URL,
+  Sites API key and site domain are configurable in the registry. All API
+  calls degrade gracefully with an explicit message when the API key is
+  missing or Plausible is unreachable. [DELIBE-307]
+  [aduchene]
+
 - Add a "Remove expiration date" action (object button) on publications,
   reserved to publications managers and site administrators, available in any
   workflow state. It clears ``expiration_date`` and reindexes without notifying
