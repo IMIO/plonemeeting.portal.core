@@ -33,6 +33,13 @@
     </value>
   </record>
 
+  <!-- Syndication: RSS/Atom feeds are enabled per folder (institution
+       decisions and publications), make sure they are allowed site-wide -->
+  <record name="plone.base.interfaces.syndication.ISiteSyndicationSettings.allowed"
+          interface="plone.base.interfaces.syndication.ISiteSyndicationSettings" field="allowed">
+    <value>True</value>
+  </record>
+
   <!-- plonemeeting.portal.core -->
   <record name="plonemeeting.portal.core.global_categories">
     <field type="plone.registry.field.Dict">

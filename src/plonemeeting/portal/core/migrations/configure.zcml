@@ -286,4 +286,12 @@
       run_deps="False"/>
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeStep
+    title="Enable RSS/Atom feeds on institution decisions and publications folders"
+    description="Re-import the registry and actions profile steps and enable syndication on the decisions/publications folders of every institution."
+    source="2403"
+    destination="2404"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2404.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>
