@@ -624,7 +624,7 @@ msgid "Régie Communale Autonome"
 msgstr ""
 
 #: ../events/institution.py:53
-msgid "Return to the institution website"
+msgid "Institution website"
 msgstr ""
 
 #: ../browser/institution.py:107
