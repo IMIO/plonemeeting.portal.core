@@ -12,6 +12,7 @@ from plone import api
 from plone.namedfile.file import NamedBlobFile
 from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.content.publication import IPublication
+from Products.CMFPlone.browser.syndication.adapters import FolderFeed
 from zope.interface import implementer
 
 import zipfile
@@ -102,3 +103,21 @@ class OrganizationIDProvider(OmniaOrganizationIDProvider):
     def __call__(self):
         institution = api.portal.get_navigation_root(self.context)
         return institution.id
+
+
+class LatestItemsFolderFeed(FolderFeed):
+    """RSS/Atom feed for the institution decisions/publications folders.
+
+    The stock FolderFeed queries the catalog unsorted, which yields the
+    oldest content first: sort on the effective date instead so the feed
+    exposes the latest published items.
+    """
+
+    def _brains(self):
+        catalog = api.portal.get_tool("portal_catalog")
+        return catalog(
+            path={"query": "/".join(self.context.getPhysicalPath()), "depth": 1},
+            sort_on="effective",
+            sort_order="descending",
+            sort_limit=self.limit,
+        )[: self.limit]

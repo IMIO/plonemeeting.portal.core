@@ -20,4 +20,16 @@
       for="*"
       />
 
+  <adapter
+      factory=".adapters.LatestItemsFolderFeed"
+      provides="plone.base.interfaces.syndication.IFeed"
+      for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+      />
+
+  <adapter
+      factory=".adapters.LatestItemsFolderFeed"
+      provides="plone.base.interfaces.syndication.IFeed"
+      for="plonemeeting.portal.core.interfaces.IPublicationsFolder"
+      />
+
 </configure>

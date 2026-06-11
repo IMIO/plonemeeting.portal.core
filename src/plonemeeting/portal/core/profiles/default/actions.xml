@@ -129,8 +129,10 @@
   </object>
 
   <object name="document_actions" meta_type="CMF Action Category">
+    <!-- Show the "RSS feed" link on syndication-enabled folders
+         (institution decisions and publications) [DELIBE-255] -->
     <object name="rss" meta_type="CMF Action">
-      <property name="visible">False</property>
+      <property name="visible">True</property>
     </object>
     <object name="print" meta_type="CMF Action">
       <property name="visible">False</property>

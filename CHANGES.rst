@@ -27,6 +27,18 @@ Changelog
   missing or Plausible is unreachable. [DELIBE-307]
   [aduchene]
 
+- Offer RSS/Atom feeds of the latest decisions and publications to citizens:
+  syndication is now enabled on the decisions and publications folders of
+  every institution (at creation time, and through an upgrade step for
+  existing institutions), the "RSS feed" document action is made visible
+  (it only shows on syndication-enabled folders) and a custom feed adapter
+  sorts the feed on the effective date so it lists the latest published
+  items first instead of the catalog order. The install profile explicitly
+  allows syndication site-wide. Feeds are served on the standard Plone
+  endpoints, e.g. ``/<institution>/publications/rss.xml`` (also ``RSS`` and
+  ``atom.xml``). [DELIBE-255]
+  [aduchene]
+
 - Add a "Remove expiration date" action (object button) on publications,
   reserved to publications managers and site administrators, available in any
   workflow state. It clears ``expiration_date`` and reindexes without notifying

@@ -10,6 +10,7 @@ from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
 from plone.api.exc import CannotGetPortalError
 from plone.api.portal import get_registry_record
+from plone.base.interfaces.syndication import IFeedSettings
 from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
@@ -76,6 +77,8 @@ def handle_institution_creation(obj, event):
 
     IFacetedLayout(decisions).update_layout("faceted-preview-meeting")
     set_constrain_types(decisions, ["Meeting"])
+    # Citizens can follow the latest decisions through RSS/Atom feeds
+    IFeedSettings(decisions).enabled = True
 
     # Create publications faceted folder
     publications = create_faceted_folder(
@@ -87,6 +90,8 @@ def handle_institution_creation(obj, event):
     alsoProvides(publications, IPublicationsFolder)
     IFacetedLayout(publications).update_layout("faceted-preview-publications")
     set_constrain_types(publications, ["Publication"])
+    # Citizens can follow the latest publications through RSS/Atom feeds
+    IFeedSettings(publications).enabled = True
 
     # Create managers groups and configure local permissions
     institution_title = obj.title
