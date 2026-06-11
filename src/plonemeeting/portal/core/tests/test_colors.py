@@ -59,6 +59,31 @@ class TestColorCSSView(PmPortalDemoFunctionalTestCase):
         self.assertNotEqual(old_custom_colors_css, new_custom_colors_css)
         self.assertIn("--header-color: #ABABAB", new_custom_colors_css)
 
+    def test_last_modified_header_reflects_institutions(self):
+        """ The view exposes a Last-Modified header based on the most recent
+        institution modification date, and it advances when an institution
+        is edited."""
+        portal = api.portal.get()
+        view = portal.unrestrictedTraverse("@@custom_colors.css")
+        view()
+        first = portal.REQUEST.response.getHeader("Last-Modified")
+        self.assertIsNotNone(first)
+        first_epoch = view._get_last_modified(view._get_institutions())
+        self.assertIsNotNone(first_epoch)
+
+        # institutions are only ever edited by managers
+        self.login_as_manager()
+        self.institution.header_color = "#ABABAB"
+        self.institution.setModificationDate()  # bump modified()
+        self._fire_event(self.institution, "modified")
+
+        view = portal.unrestrictedTraverse("@@custom_colors.css")
+        view()
+        second = portal.REQUEST.response.getHeader("Last-Modified")
+        self.assertIsNotNone(second)
+        second_epoch = view._get_last_modified(view._get_institutions())
+        self.assertGreaterEqual(second_epoch, first_epoch)
+
     def test_color_select_widget_render(self):
         """ Test if the color select widget render a correct input type """
         header_color_field = getFields(IInstitution)["header_color"]
