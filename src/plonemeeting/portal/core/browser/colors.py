@@ -21,17 +21,29 @@ class ColorsCSSView(BrowserView):
 """
 
     def __call__(self, *args, **kwargs):
+        institutions = self._get_institutions()
         self.request.response.setHeader("Content-type", "text/css")
-        # self.request.response.setHeader("Last-Modified", rfc1123_date(float(scripts_timestamp)))
+        last_modified = self._get_last_modified(institutions)
+        if last_modified is not None:
+            self.request.response.setHeader("Last-Modified", rfc1123_date(last_modified))
         self.request.response.setHeader("Cache-Control", "max-age=31536000, public")
-        return self.render()
+        return self.render(institutions)
 
-    def render(self):
+    def _get_institutions(self):
+        portal = api.portal.get()
+        return [obj for obj in portal.objectValues() if obj.portal_type == "Institution"]
+
+    def _get_last_modified(self, institutions):
+        """Most recent institution modification date, as epoch seconds, or None"""
+        times = [inst.modified().timeTime() for inst in institutions if inst.modified()]
+        return max(times) if times else None
+
+    def render(self, institutions=None):
         """
         Render the css with the institution colors
         """
-        portal = api.portal.get()
-        institutions = [obj for obj in portal.objectValues() if obj.portal_type == "Institution"]
+        if institutions is None:
+            institutions = self._get_institutions()
         css = " "
         for institution in institutions:
             css += self.CSS_TEMPLATE.format(

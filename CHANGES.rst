@@ -4,6 +4,11 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Restore the ``Last-Modified`` header on the ``@@custom_colors.css`` view,
+  based on the most recent modification date of the institutions, so caches
+  revalidate when colors change. [DELIBE-306]
+  [aduchene]
+
 - Add a "Remove expiration date" action (object button) on publications,
   reserved to publications managers and site administrators, available in any
   workflow state. It clears ``expiration_date`` and reindexes without notifying
