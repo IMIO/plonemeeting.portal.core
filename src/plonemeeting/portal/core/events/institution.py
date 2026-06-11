@@ -53,7 +53,7 @@ def sync_website_link(institution):
                 container=institution,
                 type="Link",
                 id=WEBSITE_LINK_ID,
-                title=translate(_("Return to the institution website"), target_language=current_lang),
+                title=translate(_("Institution website"), target_language=current_lang),
             )
         link = institution[WEBSITE_LINK_ID]
         api.content.disable_roles_acquisition(obj=link)
