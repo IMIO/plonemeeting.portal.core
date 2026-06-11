@@ -166,6 +166,39 @@
   </record>
 
 
+  <!-- Plausible analytics (DELIBE-307) -->
+  <record name="plonemeeting.portal.core.plausible_base_url">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Plausible base URL</title>
+      <description i18n:translate="">Base URL of the Plausible instance used for web statistics.</description>
+      <required>False</required>
+    </field>
+    <value purge="false">https://plausible.imio.be</value>
+  </record>
+  <record name="plonemeeting.portal.core.plausible_api_key">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Plausible API key</title>
+      <description i18n:translate="">Sites API key used to provision Plausible sites and shared links.</description>
+      <required>False</required>
+    </field>
+    <value purge="false"></value>
+  </record>
+  <record name="plonemeeting.portal.core.plausible_site_domain">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Plausible site domain</title>
+      <description i18n:translate="">Plausible site id of the whole portal. Institution site ids are "domain/institution-id".</description>
+      <required>False</required>
+    </field>
+    <value purge="false">deliberations.be</value>
+  </record>
+  <record name="plonemeeting.portal.core.plausible_shared_link_token">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Plausible shared link token for the whole portal</title>
+      <required>False</required>
+    </field>
+    <value purge="false"></value>
+  </record>
+
   <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">
     <value key="timestamping_service_url">https://freetsa.org/tsr</value>

@@ -520,6 +520,31 @@ msgstr ""
 msgid "Placeholder for GDPR masked text links from site root"
 msgstr ""
 
+#: ../profiles/default/registry.xml
+msgid "Plausible API key"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Plausible base URL"
+msgstr ""
+
+#: ../content/institution.py
+msgid "Plausible shared link token"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Plausible shared link token for the whole portal"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Plausible site domain"
+msgstr ""
+
+#: ../browser/statistics.py
+#: ../profiles/default/controlpanel.xml
+msgid "Plausible statistics"
+msgstr ""
+
 #: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
 msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
 msgstr ""
@@ -657,6 +682,11 @@ msgstr ""
 msgid "Sortable Item number"
 msgstr ""
 
+#: ../browser/statistics.py
+#: ../browser/templates/manage_institution.pt
+msgid "Statistics"
+msgstr ""
+
 #: ../browser/templates/items_datatable.pt:14
 msgid "Status"
 msgstr ""
@@ -749,6 +779,10 @@ msgstr ""
 msgid "The CAPTCHA validation was unsuccessful. Please retry by carefully following the instructions."
 msgstr ""
 
+#: ../browser/statistics.py
+msgid "The Plausible API key is not configured. Statistics cannot be displayed."
+msgstr ""
+
 #: ../content/institution.py:178
 msgid "The url visitors should be redirected to when clicking a GDPR masked text"
 msgstr ""
@@ -772,6 +806,10 @@ msgstr ""
 #: ../content/item.py:33
 #: ../content/meeting.py:24
 msgid "UID Plonemeeting"
+msgstr ""
+
+#: ../browser/statistics.py
+msgid "Unable to retrieve statistics from Plausible. Please try again later."
 msgstr ""
 
 #: ../browser/sync.py:274

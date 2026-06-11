@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="en"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+>
+<body>
+
+<metal:custom_title fill-slot="content-title">
+  <h1 class="documentFirstHeading"
+      tal:content="view/label">Statistics</h1>
+</metal:custom_title>
+
+<metal:custom_desc fill-slot="content-description">
+</metal:custom_desc>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+    <div class="row my-3">
+      <div class="col-lg-4">
+        <div class="btn-group btn-group-delib btn-group-delib-vertical">
+          <a class="btn-delib btn-delib-icon-text"
+             tal:attributes="href string:${context/absolute_url}/@@manage-settings"
+             title="Back to my institution"
+             i18n:attributes="title">
+            <i class="bi bi-chevron-left"></i>
+            <span i18n:translate=''>Back to my institution</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-warning my-3" role="alert"
+         tal:condition="view/error_message"
+         tal:content="view/error_message">
+      Error message
+    </div>
+    <tal:embed condition="view/embed_url">
+      <!-- The styles attribute is injected by Plausible's embed scripts into
+           the iframe document: lift the dashboard's internal max-width so it
+           fills the iframe instead of capping itself. The dashboard wrapper
+           is #stats-react-container / [data-site-domain] on current
+           self-hosted versions, .container on newer ones. -->
+      <iframe plausible-embed=""
+              styles=".container, [data-site-domain], #stats-react-container { max-width: none !important; }"
+              scrolling="no"
+              frameborder="0"
+              loading="lazy"
+              style="width: 1px; min-width: 100%; height: 1600px;"
+              tal:attributes="src view/embed_url"></iframe>
+      <script async="async"
+              tal:attributes="src view/embed_script_url"></script>
+    </tal:embed>
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
