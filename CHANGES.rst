@@ -4,7 +4,8 @@ Changelog
 2.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix typo.
+  [aduchene]
 
 
 2.4.2 (2026-06-15)

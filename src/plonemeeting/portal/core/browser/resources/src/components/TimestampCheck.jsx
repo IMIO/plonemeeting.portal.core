@@ -404,7 +404,7 @@ const TimestampCheck = () => {
                                 <div className="card-header bg-secondary text-white section-header py-3">
                                     <div className="mb-0 d-flex align-items-center fs-6 fw-light">
                                         <i className="bi bi-building me-2"></i>
-                                        Authorité d'horodatage (TSA)
+                                        Autorité d'horodatage (TSA)
                                     </div>
                                 </div>
                                 <div className="card-body p-4">
