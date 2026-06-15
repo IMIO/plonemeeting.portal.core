@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
-from plone import api
-from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core import plausible
 from Products.Five.browser import BrowserView
-from zope.interface import alsoProvides
 
 import requests
 
 
-PLAUSIBLE_TOKEN_REGISTRY_KEY = "plonemeeting.portal.core.plausible_shared_link_token"
-
-
 class BaseStatisticsView(BrowserView):
-    """Embed a Plausible shared dashboard, provisioning the shared link
-    (and the Plausible site itself) on first access. The auth token is
-    cached by subclasses so later accesses don't hit the Plausible API."""
+    """Embed a Plausible shared dashboard.
+
+    The shared link (and the Plausible site itself) is (re)provisioned on
+    every access through Plausible's idempotent "find or create" API. We do
+    not cache the auth token: the dashboard is a cross-origin iframe, so the
+    server can never tell that an embedded link went stale. Re-provisioning
+    each time always yields a currently valid token and lets the dashboard
+    self-heal when a link is deleted, rotated or invalidated on Plausible's
+    side (e.g. after a domain change)."""
 
     label = _("Statistics")
     error_message = None
@@ -24,12 +24,6 @@ class BaseStatisticsView(BrowserView):
 
     @property
     def site_id(self):
-        raise NotImplementedError
-
-    def get_stored_token(self):
-        raise NotImplementedError
-
-    def store_token(self, token):
         raise NotImplementedError
 
     @property
@@ -42,20 +36,11 @@ class BaseStatisticsView(BrowserView):
         if not plausible.is_plausible_configured():
             self.error_message = _("The Plausible API key is not configured. Statistics cannot be displayed.")
             return self.index()
-        token = self.get_stored_token()
-        if not token:
-            try:
-                token = plausible.fetch_shared_link_token(self.site_id)
-                # Caching the token writes to the database on a GET request:
-                # tell plone.protect this write is intentional, otherwise the
-                # first visit triggers the CSRF confirmation page.
-                alsoProvides(self.request, IDisableCSRFProtection)
-                self.store_token(token)
-            except (requests.exceptions.RequestException, plausible.PlausibleError):
-                logger.exception("Unable to set up the Plausible shared link for %s", self.site_id)
-        if token:
+        try:
+            token = plausible.fetch_shared_link_token(self.site_id)
             self.embed_url = plausible.build_embed_url(self.site_id, token)
-        else:
+        except (requests.exceptions.RequestException, plausible.PlausibleError):
+            logger.exception("Unable to set up the Plausible shared link for %s", self.site_id)
             self.error_message = _("Unable to retrieve statistics from Plausible. Please try again later.")
         return self.index()
 
@@ -67,12 +52,6 @@ class InstitutionStatisticsView(BaseStatisticsView):
     def site_id(self):
         return f"{plausible.get_plausible_site_domain()}/{self.context.getId()}"
 
-    def get_stored_token(self):
-        return getattr(self.context, "plausible_shared_link_token", None)
-
-    def store_token(self, token):
-        self.context.plausible_shared_link_token = token
-
 
 class PlausibleStatisticsControlPanelView(BaseStatisticsView):
     """Global Plausible dashboard of the whole portal, for administrators."""
@@ -82,9 +61,3 @@ class PlausibleStatisticsControlPanelView(BaseStatisticsView):
     @property
     def site_id(self):
         return plausible.get_plausible_site_domain()
-
-    def get_stored_token(self):
-        return api.portal.get_registry_record(PLAUSIBLE_TOKEN_REGISTRY_KEY, default=None)
-
-    def store_token(self, token):
-        api.portal.set_registry_record(PLAUSIBLE_TOKEN_REGISTRY_KEY, token)
