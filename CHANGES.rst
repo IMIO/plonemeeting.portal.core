@@ -4,46 +4,31 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
-- Restore the ``Last-Modified`` header on the ``@@custom_colors.css`` view,
-  based on the most recent modification date of the institutions, so caches
-  revalidate when colors change. [DELIBE-306]
+- Send the ``Last-Modified`` header again on the ``@@custom_colors.css``
+  view, so browsers refresh the CSS when an institution changes its colors.
+  [DELIBE-306]
   [aduchene]
 
 - Add Plausible web statistics dashboards: a ``@@statistics`` view on each
-  institution (linked from the institution settings, with a "Back to my
-  institution" button and the document generation viewlet hidden) and a
-  global "Statistiques Plausible" configlet rendered with the standard
-  control panel layout. On first access the Plausible site and a shared
-  link are provisioned through the Plausible Sites API and the shared link
-  auth token is cached (in a new hidden ``plausible_shared_link_token``
-  field on the institution, resp. in the
-  ``plonemeeting.portal.core.plausible_shared_link_token`` registry
-  record); the dashboard is then embedded as an iframe, with custom styles
-  injected through Plausible's embed scripts so it spans the full content
-  width. The token caching write is CSRF-exempted so the first visit does
-  not trigger the plone.protect confirmation page. The Plausible base URL,
-  Sites API key and site domain are configurable in the registry. All API
-  calls degrade gracefully with an explicit message when the API key is
-  missing or Plausible is unreachable. [DELIBE-307]
+  institution and a global control panel. The dashboard is shown in an
+  iframe; the Plausible site and its shared link are created (or refreshed)
+  on each visit, so the dashboard keeps working even if the link is deleted
+  or changed on the Plausible side. The Plausible URL, API key and site
+  domain are set in the registry, and a clear message is shown when Plausible
+  is not reachable. [DELIBE-307]
   [aduchene]
 
-- Offer RSS/Atom feeds of the latest decisions and publications to citizens:
-  syndication is now enabled on the decisions and publications folders of
-  every institution (at creation time, and through an upgrade step for
-  existing institutions), the "RSS feed" document action is made visible
-  (it only shows on syndication-enabled folders) and a custom feed adapter
-  sorts the feed on the effective date so it lists the latest published
-  items first instead of the catalog order. The install profile explicitly
-  allows syndication site-wide. Feeds are served on the standard Plone
-  endpoints, e.g. ``/<institution>/publications/rss.xml`` (also ``RSS`` and
-  ``atom.xml``). [DELIBE-255]
+- Add RSS/Atom feeds of the latest decisions and publications. Feeds are
+  available on the usual Plone URLs, e.g.
+  ``/<institution>/publications/rss.xml``, and list the most recent
+  published items first. An upgrade step turns them on for existing
+  institutions. [DELIBE-255]
   [aduchene]
 
-- Add a "Remove expiration date" action (object button) on publications,
-  reserved to publications managers and site administrators, available in any
-  workflow state. It clears ``expiration_date`` and reindexes without notifying
-  an ``ObjectModifiedEvent``, so the qualified timestamp is preserved. Also
-  clarify the help text of the expiration date field. [DELIBE-305]
+- Add a "Remove expiration date" action on publications, for publications
+  managers and site administrators. It clears the expiration date while
+  keeping the qualified timestamp. Also improve the help text of the
+  expiration date field. [DELIBE-305]
   [aduchene]
 
 - Drop support for Python 3.11; require Python >= 3.12 (``python_requires``,

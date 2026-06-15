@@ -198,13 +198,6 @@
     </field>
     <value purge="false">deliberations.be</value>
   </record>
-  <record name="plonemeeting.portal.core.plausible_shared_link_token">
-    <field type="plone.registry.field.TextLine">
-      <title i18n:translate="">Plausible shared link token for the whole portal</title>
-      <required>False</required>
-    </field>
-    <value purge="false"></value>
-  </record>
 
   <!-- collective.timestamp -->
   <records interface="collective.timestamp.interfaces.ITimestampingSettings">

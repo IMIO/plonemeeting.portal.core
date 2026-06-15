@@ -5,8 +5,10 @@ The portal embeds Plausible dashboards through *shared links*
 (https://plausible.io/docs/shared-links): one per institution on the
 ``@@statistics`` view and a global one in the "Plausible statistics"
 control panel. The Plausible base URL and Sites API key live in the
-registry; shared link auth tokens are cached (on the institution or in
-the registry) so the API is only hit on first access.
+registry. Auth tokens are not cached: every view re-provisions the shared
+link through Plausible's idempotent "find or create" API, so the dashboard
+always gets a currently valid token and self-heals if the link is deleted
+or invalidated on Plausible's side.
 """
 from plone import api
 from plonemeeting.portal.core import logger
@@ -81,9 +83,18 @@ def get_shared_link_token(site_id, name):
 
 
 def fetch_shared_link_token(site_id):
-    """Provision the Plausible site if needed and return a shared link token."""
-    create_site(site_id)
-    return get_shared_link_token(site_id, f"Statistiques {site_id}")
+    """Return a shared link token, provisioning the site if needed.
+
+    Tries the idempotent shared-link call first so the common case (the site
+    already exists) is a single request; if the site is missing — never
+    created yet, or deleted on Plausible's side — creates it and retries once.
+    """
+    name = f"Statistiques {site_id}"
+    try:
+        return get_shared_link_token(site_id, name)
+    except PlausibleError:
+        create_site(site_id)
+        return get_shared_link_token(site_id, name)
 
 
 def build_embed_url(site_id, token):
