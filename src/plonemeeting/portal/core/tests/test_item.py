@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from imio.helpers.content import richtextval
 from plone import api
+from plone.app.testing import logout
 from plonemeeting.portal.core.config import MIMETYPE_TO_ICON
 from plonemeeting.portal.core.content.item import get_pretty_representatives
 from plonemeeting.portal.core.tests.portal_test_case import IMG_BASE64_DATA
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from zExceptions import Unauthorized
 
 
 class TestItemView(PmPortalDemoFunctionalTestCase):
@@ -31,6 +33,37 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         # project disclaimer message displayed
         self.assertTrue("alert-content" in view())
+
+    def test_anonymous_unauthorized_item_view(self):
+        # decision, should be viewable to anonymous
+        self.assertEqual(api.content.get_state(self.meeting), "decision")
+        logout()
+        view = self.item.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.item.restrictedTraverse("@@edit")
+
+        # in_project, should be still viewable to anonymous
+        self.login_as_admin()
+        api.content.transition(self.meeting, to_state="in_project")
+        logout()
+        view = self.item.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            self.item.restrictedTraverse("@@edit")
+
+        # private, shouldn't be viewable to anonymous but the view shouldn't fail
+        self.login_as_admin()
+        api.content.transition(self.meeting, to_state="private")
+        logout()
+        view = self.item.restrictedTraverse("@@view")
+        self.assertTrue(view())
+        with self.assertRaises(Unauthorized):
+            # Weird hack to force traversal on meeting
+            # since it's holding the private state/perms
+            self.item.aq_parent.restrictedTraverse(self.item.getId())
+        with self.assertRaises(Unauthorized):
+            self.item.restrictedTraverse("@@edit")
 
     def test_next_previous_infos_items_view(self):
         self.logout()
