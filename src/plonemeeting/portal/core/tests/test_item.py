@@ -59,7 +59,9 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         view = self.item.restrictedTraverse("@@view")
         self.assertTrue(view())
         with self.assertRaises(Unauthorized):
-            self.item.restrictedTraverse("@@view")
+            # Weird hack to force traversal on meeting
+            # since it's holding the private state/perms
+            self.item.aq_parent.restrictedTraverse(self.item.getId())
         with self.assertRaises(Unauthorized):
             self.item.restrictedTraverse("@@edit")
 
