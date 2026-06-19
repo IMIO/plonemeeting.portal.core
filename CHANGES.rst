@@ -4,8 +4,9 @@ Changelog
 2.4.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- DELIBE-312: Fix an issue when an anonymous user was trying to access a private decision.
+  Add a new comprehensive unit test `test_anonymous_unauthorized_item_view`.
+  [aduchene]
 
 2.4.3 (2026-06-15)
 ------------------
@@ -13,57 +14,48 @@ Changelog
 - Fix typo.
   [aduchene]
 
-
 2.4.2 (2026-06-15)
 ------------------
 
-- Send the ``Last-Modified`` header again on the ``@@custom_colors.css``
+- DELIBE-306: Send the ``Last-Modified`` header again on the ``@@custom_colors.css``
   view, so browsers refresh the CSS when an institution changes its colors.
-  [DELIBE-306]
   [aduchene]
-
-- Add Plausible web statistics dashboards: a ``@@statistics`` view on each
+- DELIBE-307: Add Plausible web statistics dashboards: a ``@@statistics`` view on each
   institution and a global control panel. The dashboard is shown in an
   iframe; the Plausible site and its shared link are created (or refreshed)
   on each visit, so the dashboard keeps working even if the link is deleted
   or changed on the Plausible side. The Plausible URL, API key and site
   domain are set in the registry, and a clear message is shown when Plausible
-  is not reachable. [DELIBE-307]
+  is not reachable.
   [aduchene]
-
-- Add RSS/Atom feeds of the latest decisions and publications. Feeds are
+- DELIBE-255: Add RSS/Atom feeds of the latest decisions and publications. Feeds are
   available on the usual Plone URLs, e.g.
   ``/<institution>/publications/rss.xml``, and list the most recent
   published items first. An upgrade step turns them on for existing
-  institutions. [DELIBE-255]
+  institutions.
   [aduchene]
-
-- Add a "Remove expiration date" action on publications, for publications
+- DELIBE-305: Add a "Remove expiration date" action on publications, for publications
   managers and site administrators. It clears the expiration date while
   keeping the qualified timestamp. Also improve the help text of the
-  expiration date field. [DELIBE-305]
+  expiration date field.
   [aduchene]
-
 - Drop support for Python 3.11; require Python >= 3.12 (``python_requires``,
   classifiers and Ruff ``target-version`` updated accordingly).
   [aduchene]
-
-- Adopt Ruff for Python linting/formatting (``pyproject.toml`` ``[tool.ruff]``,
+- DELIBE-291: Adopt Ruff for Python linting/formatting (``pyproject.toml`` ``[tool.ruff]``,
   ``line-length = 120``) and ``zpretty`` for templates/ZCML/XML; drop the old
   ``.flake8`` / ``.isort.cfg`` / ``setup.cfg``. Run on demand via ``make lint``
   (``ruff check``) and ``make format`` (``ruff`` + ``zpretty``) — no pre-commit,
   tox or CI. The codebase is intentionally not reformatted here; run
-  ``make format`` to apply it as a dedicated change. [DELIBE-291]
+  ``make format`` to apply it as a dedicated change.
   [aduchene]
-
-- Add a configurable ``website_url`` field on ``Institution`` that keeps a
+- DELIBE-112: Add a configurable ``website_url`` field on ``Institution`` that keeps a
   published ``Link`` (``website-url``) to the communal website in sync. The
   link is managed from the add/modify event subscribers
   (``sync_website_link``) instead of a property setter, so it no longer
   crashes when the field is set before the institution is added to the
-  portal, and clearing the URL removes the link. [DELIBE-112]
+  portal, and clearing the URL removes the link.
   [aduchene]
-
 - Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
   ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
   dependency chain resolves under the test fixture (``z3c.autoinclude`` is
@@ -86,13 +78,11 @@ Changelog
   application-code coverage 87% → 94%.
   [aduchene]
 
-
 2.4.1 (2026-04-03)
 ------------------
 
 - Enable AI assistant on ``Item`` (Decision) content type in addition to ``Publication``.
   [aduchene]
-
 
 2.4.0 (2026-04-03)
 ------------------
@@ -113,7 +103,6 @@ Changelog
 - Add upgrade step to 2400: installs the three omnia add-ons and re-imports ``typeinfo``
   and ``rolemap``.
   [aduchene]
-
 
 2.3.2 (2026-01-28)
 ------------------
