@@ -60,6 +60,7 @@ class TestItemView(PmPortalDemoFunctionalTestCase):
         self.assertTrue(view())
         with self.assertRaises(Unauthorized):
             self.item.restrictedTraverse("@@view")
+        with self.assertRaises(Unauthorized):
             self.item.restrictedTraverse("@@edit")
 
     def test_next_previous_infos_items_view(self):

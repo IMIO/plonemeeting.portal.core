@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.dexterity.browser.view import DefaultView
-from plonemeeting.portal.core.browser import BaseAddForm
 from plonemeeting.portal.core.browser import BaseEditForm
 from plonemeeting.portal.core.browser.nextprevious import NextPrevItemNumber
-from plonemeeting.portal.core.cache import item_meeting_modified_cachekey
+from plonemeeting.portal.core.cache import meeting_modified_cachekey
+from plonemeeting.portal.core.cache import item_next_prev_infos_cachekey
 from plone.memoize import ram
 
 
@@ -27,7 +27,7 @@ class ItemView(DefaultView):
         """
         return self.context.aq_parent
 
-    @ram.cache(item_meeting_modified_cachekey)
+    @ram.cache(item_next_prev_infos_cachekey)
     def get_next_prev_infos(self):
         """
         Get the previous and next items in the meeting. This is based on Plone's
@@ -46,7 +46,7 @@ class ItemView(DefaultView):
             res.update({"previous_item": {}, "next_item": {}})
         return res
 
-    @ram.cache(item_meeting_modified_cachekey)
+    @ram.cache(meeting_modified_cachekey)
     def get_last_item_number(self):
         items = self.get_meeting().get_items(objects=False)
         # We need to be careful here, user might be an anonymous loading the page
