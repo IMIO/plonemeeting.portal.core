@@ -129,6 +129,14 @@ msgstr "Informations complémentaires"
 msgid "Custom page for GDPR text"
 msgstr "Url de redirection pour les portions de texte anonymisées"
 
+#: ../browser/publication.py
+msgid "Duplicate ${name}"
+msgstr "Dupliquer ${name}"
+
+#: ../profiles/default/actions.xml
+msgid "Duplicate"
+msgstr "Dupliquer"
+
 #: ../content/item.py:59
 msgid "Decision"
 msgstr "Décision"

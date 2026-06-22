@@ -6,6 +6,7 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.events import EditCancelledEvent
 from plone.memoize.view import memoize
+from plone.namedfile.interfaces import INamedFile
 from plone.protect.interfaces import IDisableCSRFProtection
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
@@ -15,17 +16,44 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from plone.dexterity.interfaces import IDexterityFTI
 from z3c.form import button
+from z3c.form.interfaces import IDataConverter
 from zExceptions import Unauthorized
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.event import notify
 from zope.interface import alsoProvides
 from ZPublisher.Iterators import filestream_iterator
 
 import copy
+import logging
 import os
 import pathlib
 import tempfile
 import zipfile
+
+
+logger = logging.getLogger("plonemeeting.portal.core")
+
+
+# Widget names excluded from duplication.
+# Timestamps and publication dates per ticket DELIBE-285.
+# Supersede is handled separately (set to the original).
+# Short name/ID must not be copied (Plone assigns a new one from title).
+_DUPLICATE_EXCLUDED = frozenset({
+    'timestamped_file',
+    'timestamp',
+    'ITimestampableDocument.timestamp',
+    'IPublication.effective',
+    'IPublication.expires',
+    'ISupersede.supersede',
+    'supersede',
+    'IRelatedItems.relatedItems',
+    'relatedItems',
+    'id',
+    'IShortName.id',
+})
 
 
 class PublicationForm:
@@ -51,10 +79,60 @@ class AddForm(PublicationForm, BaseAddForm):
         super().update()
         self._expires_description()
 
+    @property
+    def label(self):
+        if self.request.get("duplicate_of"):
+            fti = getUtility(IDexterityFTI, name=self.portal_type)
+            return _("Duplicate ${name}", mapping={"name": fti.Title()})
+        return super().label
+
     def updateWidgets(self):
         super().updateWidgets()
+        duplicate_of = self.request.get("duplicate_of")
+        if duplicate_of:
+            original = api.content.get(UID=duplicate_of)
+            if original is not None and original.portal_type == "Publication":
+                self._prefill_from_original(original)
+                return
         self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
-        self.widgets['consultation_text'].value = copy.deepcopy(self.institution.default_publication_consultation_text)
+        self.widgets['consultation_text'].value = copy.deepcopy(
+            self.institution.default_publication_consultation_text
+        )
+
+    def _prefill_from_original(self, original):
+        """Pre-fill form widgets from an existing publication (duplication flow)."""
+        for widget_name, widget in self.widgets.items():
+            if widget_name in _DUPLICATE_EXCLUDED:
+                continue
+            field_attr = widget_name.split('.')[-1]
+            value = getattr(original, field_attr, None)
+            if value is None:
+                continue
+            if hasattr(value, 'output'):  # RichTextValue
+                widget.value = copy.deepcopy(value)
+            elif INamedFile.providedBy(value):
+                widget.value = value
+            else:
+                field = getattr(widget, 'field', None)
+                if field is not None:
+                    try:
+                        converter = getMultiAdapter((field, widget), IDataConverter)
+                        widget.value = converter.toWidgetValue(value)
+                    except Exception as e:
+                        logger.warning(
+                            "Could not pre-fill widget %r (field %r) when duplicating "
+                            "publication %r: %s",
+                            widget_name, field.__name__, original.absolute_url(), e,
+                            exc_info=True,
+                        )
+
+        # Set supersede to the original — new publication supersedes/replaces it.
+        for name in ('ISupersede.supersede', 'supersede'):
+            if name in self.widgets:
+                uid = api.content.get_uuid(obj=original)
+                if uid:
+                    self.widgets[name].value = uid
+                break
 
 
 class PublicationAdd(PublicationForm, DefaultAddView):

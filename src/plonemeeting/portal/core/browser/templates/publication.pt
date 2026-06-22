@@ -34,7 +34,7 @@
           </div>
           <div class="alert-content" tal:content="structure institution/archived_publication_warning_text/output"></div>
         </div>
-        <div id=superseded_by-alert" class="alert with-icon alert-info" role="alert" tal:condition="python: timeline and timeline[0]['current'] is False">
+        <div id="superseded_by-alert" class="alert with-icon alert-info" role="alert" tal:condition="python: timeline and timeline[0]['current'] is False">
           <div class="alert-icon">
             <i class="bi bi-info-circle"></i>
           </div>

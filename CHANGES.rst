@@ -4,6 +4,10 @@ Changelog
 2.4.4 (unreleased)
 ------------------
 
+- DELIBE-285: Add a "Duplicate" publication action that opens the add form
+  pre-filled from the original (except timestamps and publication dates) and
+  sets the new publication to supersede the original.
+  [aduchene]
 - DELIBE-312: Fix an issue when an anonymous user was trying to access a private decision.
   Add a new comprehensive unit test `test_anonymous_unauthorized_item_view`.
   [aduchene]

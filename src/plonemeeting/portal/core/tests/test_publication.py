@@ -48,6 +48,51 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(add_form.form_instance.portal_type, "Publication")
         add_form()  # should not raise an exception
 
+    def _object_button_actions(self, obj):
+        """Return the available 'object_buttons' actions for obj, keyed by id."""
+        actions_tool = api.portal.get_tool("portal_actions")
+        available = actions_tool.listFilteredActionsFor(obj)
+        return {action["id"]: action for action in available.get("object_buttons", [])}
+
+    def test_duplicate_action_shown_for_publications_manager(self):
+        self.login_as_publications_manager()
+        actions = self._object_button_actions(self.private_publication)
+        self.assertIn("duplicate_publication", actions)
+        url = actions["duplicate_publication"]["url"]
+        self.assertIn("++add++Publication", url)
+        self.assertIn("duplicate_of=", url)
+        self.assertIn(api.content.get_uuid(obj=self.private_publication), url)
+
+    def test_duplicate_action_not_shown_for_anonymous(self):
+        self.logout()
+        actions = self._object_button_actions(self.published_publication)
+        self.assertNotIn("duplicate_publication", actions)
+
+    def test_add_form_with_duplicate_of_prefills_supersede(self):
+        self.login_as_publications_manager()
+        original = self.private_publication
+        uid = api.content.get_uuid(obj=original)
+        self.portal.REQUEST.form["duplicate_of"] = uid
+        add_form = self.institution.publications.restrictedTraverse("++add++Publication")
+        add_form()  # should not raise
+        form = add_form.form_instance
+        # Supersede widget must point to the original publication
+        for name in ("ISupersede.supersede", "supersede"):
+            if name in form.widgets:
+                self.assertEqual(form.widgets[name].value, uid)
+                break
+        # Publication dates must NOT be pre-filled from original
+        effective_widget = form.widgets.get("IPublication.effective")
+        if effective_widget and original.effective_date:
+            # Effective date widget should be empty, not the original's date
+            self.assertNotEqual(effective_widget.value, str(original.effective_date))
+
+    def test_add_form_without_duplicate_of_renders_normally(self):
+        self.login_as_publications_manager()
+        self.portal.REQUEST.form.pop("duplicate_of", None)
+        add_form = self.institution.publications.restrictedTraverse("++add++Publication")
+        add_form()  # should not raise
+
     def test_private_publication_view(self):
         self.assertEqual(api.content.get_state(self.private_publication), "private")
         self.logout()
@@ -195,110 +240,6 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         pub.setEffectiveDate(DateTime("1999/01/01"))
         self.workflow.doActionFor(pub, "publish")
         self.assertIn("1999-01-01", pub.EffectiveDate())
-
-    def test_timestamp_asic_file(self):
-        self.logout()
-        request = getattr(self, "request", None) or getattr(self.portal, "REQUEST")
-        view = self.published_publication.restrictedTraverse("@@asic-archive")
-        tmp_fp = view()  # expected: file-like object (e.g., _io.FileIO) pointing at a temp .asice
-        try:
-            # Basic checks
-            self.assertTrue(hasattr(tmp_fp, "read"), "Returned object must be file-like")
-            readable = getattr(tmp_fp, "readable", lambda: True)()
-            self.assertTrue(readable, "Returned file-like must be readable")
-            fname = getattr(tmp_fp, "name", "")
-            self.assertTrue(str(fname), "Temporary file should have a name")
-            self.assertTrue(str(fname).endswith(".asice"), f"Expected '.asice' file, got {fname!r}")
-            mode = getattr(tmp_fp, "mode", "rb")
-            self.assertIn("b", mode, "Temp file should be opened in binary mode")
-
-            # Validate it opens as a ZIP and has ASiC structure
-            with zipfile.ZipFile(tmp_fp) as zf:
-                names = zf.namelist()
-                self.assertTrue(names, "ASiC container should contain at least one entry")
-                # ASiC containers typically include a META-INF directory with signature data
-                self.assertTrue(
-                    any(n.startswith("META-INF/") for n in names),
-                    "ASiC container should include META-INF/",
-                )
-                # Ensure no corrupt members
-                self.assertIsNone(zf.testzip(), "ZIP members should not be corrupted")
-
-                self.assertIn("META-INF/ASiCManifest001.xml", names)
-                self.assertIn("META-INF/timestamp.tst", names)
-
-                manifest_bytes = zf.read("META-INF/ASiCManifest001.xml")
-                self.assertGreater(len(manifest_bytes), 50, "Manifest should not be tiny")
-                try:
-                    root = ET.fromstring(manifest_bytes)
-                except ET.ParseError as e:
-                    self.fail(f"ASiC manifest is not well-formed XML: {e}")
-
-                uris = {el.get("URI") for el in root.iter() if "URI" in el.attrib}
-                self.assertTrue(uris, "Manifest should contain at least one URI reference")
-                self.assertTrue(
-                    any(u and (u.endswith("archive.zip") or u.endswith("mimetype")) for u in uris),
-                    "Manifest should reference payload objects (archive.zip and/or mimetype).",
-                )
-                ts_bytes = zf.read("META-INF/timestamp.tst")
-                self.assertGreater(len(ts_bytes), 120, "Timestamp token should be non-trivial in size")
-
-                # Should be binary (DER), not decodable as UTF-8 text
-                with self.assertRaises(UnicodeDecodeError):
-                    ts_bytes.decode("utf-8")
-
-                # DER-encoded CMS should start with ASN.1 SEQUENCE (0x30)
-                self.assertEqual(
-                    ts_bytes[0], 0x30, "timestamp.tst should be DER: first byte must be ASN.1 SEQUENCE (0x30)"
-                )
-
-        finally:
-            try:
-                tmp_fp.close()
-            except Exception:
-                pass
-
-        # Response header checks (content-type/disposition) set by the view
-        response = request.RESPONSE
-        ctype = response.getHeader("Content-Type")
-        # Allow a few common types seen for ASiC containers
-        self.assertIn(
-            ctype,
-            (
-                "application/vnd.etsi.asic-e+zip",
-                "application/vnd.etsi.asic-e",
-                "application/zip",
-                "application/octet-stream",
-            ),
-            f"Unexpected Content-Type: {ctype!r}",
-        )
-
-        disp = response.getHeader("Content-Disposition")
-        self.assertIsNotNone(disp, "Content-Disposition should be set for download")
-        self.assertIn("attachment", disp.lower(), "Download should be served as attachment")
-        self.assertRegex(
-            disp,
-            r'filename="?[^"]+\.asice"?',
-            f"Content-Disposition should specify an .asice filename, got {disp!r}",
-        )
-        self.assertNotIn(response.getStatus(), (301, 302, 401, 403), "Anonymous should be allowed to download")
-        self.assertIsNone(response.getHeader("location"), "Should not redirect")
-
-        with self.assertRaises(Unauthorized):
-            view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
-            view()
-
-        self.login_as_publications_manager()
-        self.unpublished_publication.enable_timestamping = False
-        self.unpublished_publication.timestamp = None
-        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
-        self.assertEqual(view(), "Missing required files for ASiC generation.")
-
-        self.unpublished_publication.enable_timestamping = True
-        self.unpublished_publication.timestamp = NamedBlobFile(data=b"fake", filename="timestamp.tsr")
-        view = self.unpublished_publication.restrictedTraverse("@@asic-archive")
-        with self.assertRaises(ValueError):
-            view()
 
     def test_timestamp_asic_file(self):
         self.logout()
