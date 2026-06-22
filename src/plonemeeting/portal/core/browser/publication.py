@@ -27,10 +27,14 @@ from zope.interface import alsoProvides
 from ZPublisher.Iterators import filestream_iterator
 
 import copy
+import logging
 import os
 import pathlib
 import tempfile
 import zipfile
+
+
+logger = logging.getLogger("plonemeeting.portal.core")
 
 
 # Widget names excluded from duplication.
@@ -109,13 +113,18 @@ class AddForm(PublicationForm, BaseAddForm):
             elif INamedFile.providedBy(value):
                 widget.value = value
             else:
-                try:
-                    field = getattr(widget, 'field', None)
-                    if field is not None:
+                field = getattr(widget, 'field', None)
+                if field is not None:
+                    try:
                         converter = getMultiAdapter((field, widget), IDataConverter)
                         widget.value = converter.toWidgetValue(value)
-                except Exception:
-                    pass
+                    except Exception as e:
+                        logger.warning(
+                            "Could not pre-fill widget %r (field %r) when duplicating "
+                            "publication %r: %s",
+                            widget_name, field.__name__, original.absolute_url(), e,
+                            exc_info=True,
+                        )
 
         # Set supersede to the original — new publication supersedes/replaces it.
         for name in ('ISupersede.supersede', 'supersede'):
