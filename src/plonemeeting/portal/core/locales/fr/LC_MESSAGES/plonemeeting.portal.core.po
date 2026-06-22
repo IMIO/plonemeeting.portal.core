@@ -133,8 +133,8 @@ msgstr "Url de redirection pour les portions de texte anonymisées"
 msgid "Duplicate ${name}"
 msgstr "Dupliquer ${name}"
 
-#: ../browser/templates/publication.pt
-msgid "label_duplicate_publication"
+#: ../profiles/default/actions.xml
+msgid "Duplicate"
 msgstr "Dupliquer"
 
 #: ../content/item.py:59

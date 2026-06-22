@@ -48,17 +48,25 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.assertEqual(add_form.form_instance.portal_type, "Publication")
         add_form()  # should not raise an exception
 
-    def test_duplicate_button_shown_for_publications_manager(self):
-        self.login_as_publications_manager()
-        view = self.private_publication.restrictedTraverse("@@view")
-        self.assertTrue(view.can_duplicate())
-        self.assertIn("duplicate_of=", view.get_duplicate_url())
-        self.assertIn(api.content.get_uuid(obj=self.private_publication), view.get_duplicate_url())
+    def _object_button_actions(self, obj):
+        """Return the available 'object_buttons' actions for obj, keyed by id."""
+        actions_tool = api.portal.get_tool("portal_actions")
+        available = actions_tool.listFilteredActionsFor(obj)
+        return {action["id"]: action for action in available.get("object_buttons", [])}
 
-    def test_duplicate_button_not_shown_for_anonymous(self):
+    def test_duplicate_action_shown_for_publications_manager(self):
+        self.login_as_publications_manager()
+        actions = self._object_button_actions(self.private_publication)
+        self.assertIn("duplicate_publication", actions)
+        url = actions["duplicate_publication"]["url"]
+        self.assertIn("++add++Publication", url)
+        self.assertIn("duplicate_of=", url)
+        self.assertIn(api.content.get_uuid(obj=self.private_publication), url)
+
+    def test_duplicate_action_not_shown_for_anonymous(self):
         self.logout()
-        view = self.published_publication.restrictedTraverse("@@view")
-        self.assertFalse(view.can_duplicate())
+        actions = self._object_button_actions(self.published_publication)
+        self.assertNotIn("duplicate_publication", actions)
 
     def test_add_form_with_duplicate_of_prefills_supersede(self):
         self.login_as_publications_manager()

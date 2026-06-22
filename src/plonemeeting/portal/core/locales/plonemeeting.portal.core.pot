@@ -588,6 +588,10 @@ msgid "Publications sort order"
 msgstr ""
 
 #: ../profiles/default/actions.xml
+msgid "Duplicate"
+msgstr ""
+
+#: ../profiles/default/actions.xml
 msgid "Remove expiration date"
 msgstr ""
 

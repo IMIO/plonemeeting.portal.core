@@ -294,4 +294,14 @@
     handler="plonemeeting.portal.core.migrations.migrate_to_2404.migrate"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeDepends
+    title="Re-apply actions profile step to add the 'Duplicate' publication action"
+    description=""
+    source="2404"
+    destination="2405"
+    import_profile="plonemeeting.portal.core:default"
+    import_steps="actions"
+    run_deps="False"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>

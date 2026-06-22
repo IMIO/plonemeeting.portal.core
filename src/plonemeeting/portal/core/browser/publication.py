@@ -163,19 +163,6 @@ class EditForm(PublicationForm, BaseEditForm):
 class PublicationView(DefaultView):
     """ """
 
-    def can_duplicate(self):
-        """Return True if the current user can add a new publication (to allow duplication)."""
-        if api.user.is_anonymous():
-            return False
-        return _checkPermission(ModifyPortalContent, self.context)
-
-    def get_duplicate_url(self):
-        """Return the add-form URL pre-pointed at this publication as the duplicate source."""
-        uid = api.content.get_uuid(obj=self.context)
-        return "{}/++add++Publication?duplicate_of={}".format(
-            self.context.aq_parent.absolute_url(), uid
-        )
-
     def __call__(self):
         if api.content.get_state(self.context) == "private" and _checkPermission(ModifyPortalContent, self.context):
             if self.context.enable_timestamping is False:

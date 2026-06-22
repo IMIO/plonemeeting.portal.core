@@ -79,6 +79,16 @@
       <property name="available_expr">python:context.portal_type == "Publication" and context.expiration_date and getattr(context, "may_remove_expiration_date", lambda: False)()</property>
       <property name="visible">True</property>
     </object>
+    <object name="duplicate_publication" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
+      <property name="title" i18n:translate="">Duplicate</property>
+      <property name="url_expr">python:object_url.rsplit("/", 1)[0] + "/++add++Publication?duplicate_of=" + context.UID()</property>
+      <property name="icon_expr">string:files</property>
+      <property name="available_expr">python:context.portal_type == "Publication"</property>
+      <property name="permissions">
+        <element value="Modify portal content"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
     <object name="reimport_meeting" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
       <property name="title" i18n:translate="">Force reimport this meeting</property>
       <property name="url_expr">string:$object_url/@@force_reimport_meeting</property>
