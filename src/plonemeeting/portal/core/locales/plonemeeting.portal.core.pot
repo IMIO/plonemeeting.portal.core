@@ -1210,3 +1210,30 @@ msgstr ""
 #: ../content/publication.py:101
 msgid "subject_to_authority_description"
 msgstr ""
+
+#. Default: "Retour à l'accueil de ${title}"
+#: ../browser/exceptions.py
+#: ../browser/templates/notfound.pt
+msgid "notfound_back_to_institution"
+msgstr ""
+
+#. Default: "Retour à l'accueil"
+#: ../browser/exceptions.py
+#: ../browser/templates/notfound.pt
+msgid "notfound_back_to_home"
+msgstr ""
+
+#. Default: "Cette page n'existe pas ou plus"
+#: ../browser/templates/notfound.pt
+msgid "notfound_heading"
+msgstr ""
+
+#. Default: "La page que vous cherchez est introuvable."
+#: ../browser/templates/notfound.pt
+msgid "notfound_lead"
+msgstr ""
+
+#. Default: "Le contenu demandé n'existe pas, a peut-être été déplacé, ou n'est plus publié. Si vous avez suivi un lien, il est sans doute obsolète ; si vous avez saisi l'adresse manuellement, vérifiez qu'elle est correcte."
+#: ../browser/templates/notfound.pt
+msgid "notfound_explanation"
+msgstr ""

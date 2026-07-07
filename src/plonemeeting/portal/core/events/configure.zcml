@@ -63,4 +63,9 @@
        for="collective.timedevents.interfaces.IIntervalTicks15Event"
        handler="collective.autopublishing.eventhandler.autopublish_handler" />
 
+    <!-- DELIBE-313: anonymous Unauthorized -> 404 (instead of login redirect) -->
+    <subscriber
+        for="ZPublisher.interfaces.IPubBeforeAbort"
+        handler=".exceptions.unauthorized_to_notfound" />
+
 </configure>

@@ -1231,3 +1231,30 @@ msgstr "Prompt système de l’assistant IA"
 #: ../content/institution.py
 msgid "Custom system prompt injected server-side for this institution. Leave empty to use the global default."
 msgstr "Prompt système injecté côté serveur pour cette institution. Laisser vide pour utiliser la valeur globale par défaut."
+
+#. Default: "Retour à l'accueil de ${title}"
+#: ../browser/exceptions.py
+#: ../browser/templates/notfound.pt
+msgid "notfound_back_to_institution"
+msgstr "Retour à l'accueil de ${title}"
+
+#. Default: "Retour à l'accueil"
+#: ../browser/exceptions.py
+#: ../browser/templates/notfound.pt
+msgid "notfound_back_to_home"
+msgstr "Retour à l'accueil"
+
+#. Default: "Cette page n'existe pas ou plus"
+#: ../browser/templates/notfound.pt
+msgid "notfound_heading"
+msgstr "Cette page n'existe pas ou plus"
+
+#. Default: "La page que vous cherchez est introuvable."
+#: ../browser/templates/notfound.pt
+msgid "notfound_lead"
+msgstr "La page que vous cherchez est introuvable."
+
+#. Default: "Le contenu demandé n'existe pas, a peut-être été déplacé, ou n'est plus publié. Si vous avez suivi un lien, il est sans doute obsolète ; si vous avez saisi l'adresse manuellement, vérifiez qu'elle est correcte."
+#: ../browser/templates/notfound.pt
+msgid "notfound_explanation"
+msgstr "Le contenu demandé n'existe pas, a peut-être été déplacé, ou n'est plus publié. Si vous avez suivi un lien, il est sans doute obsolète ; si vous avez saisi l'adresse manuellement, vérifiez qu'elle est correcte."

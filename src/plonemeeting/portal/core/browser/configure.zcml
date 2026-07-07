@@ -343,4 +343,38 @@
     class=".docgen.PMDocumentGenerationView"
     permission="zope2.View"/>
 
+  <!-- DELIBE-313: themed 404 page. -->
+  <!-- Standalone view, also rendered programmatically by the anonymous
+       Unauthorized -> 404 subscriber (see events.exceptions). -->
+  <browser:page
+    name="notfound"
+    for="*"
+    class=".exceptions.NotFoundView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <!-- Override Plone's default 'index.html' exception view for NotFound only,
+       on our browser layer (INotFound covers both zExceptions.NotFound and
+       zope.publisher NotFound). -->
+  <browser:page
+    name="index.html"
+    for="zope.publisher.interfaces.INotFound"
+    class=".exceptions.NotFoundExceptionView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <!-- DELIBE-313: render the same themed 404 page for Unauthorized, so the
+       anonymous Unauthorized -> 404 subscriber (events.exceptions) has a themed
+       body in place before the transform chain runs. Authenticated users are
+       redirected to insufficient-privileges as usual, discarding this body. -->
+  <browser:page
+    name="index.html"
+    for="zExceptions.Unauthorized"
+    class=".exceptions.NotFoundExceptionView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
 </configure>

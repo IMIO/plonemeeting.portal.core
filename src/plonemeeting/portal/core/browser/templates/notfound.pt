@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="fr"
+      lang="fr"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+>
+<body>
+
+<metal:title fill-slot="content-title">
+  <h1 class="documentFirstHeading"
+      i18n:translate="notfound_heading">Cette page n'existe pas ou plus</h1>
+</metal:title>
+
+<metal:desc fill-slot="content-description">
+</metal:desc>
+
+<metal:main fill-slot="content-core">
+  <div id="content-core" class="notfound-page">
+
+    <p class="lead"
+       i18n:translate="notfound_lead">La page que vous cherchez est introuvable.</p>
+
+    <p i18n:translate="notfound_explanation">
+      Le contenu demandé n'existe pas, a peut-être été déplacé, ou n'est plus
+      publié. Si vous avez suivi un lien, il est sans doute obsolète&nbsp;; si
+      vous avez saisi l'adresse manuellement, vérifiez qu'elle est correcte.
+    </p>
+
+    <div class="notfound-actions my-4">
+      <a class="btn-delib btn-delib-icon-text"
+         tal:condition="not:view/is_in_institution"
+         tal:attributes="href view/back_url">
+        <i class="bi bi-house"></i>
+        <span i18n:translate="notfound_back_to_home">Retour à l'accueil</span>
+      </a>
+
+      <a class="btn-delib btn-delib-icon-text"
+         tal:condition="view/is_in_institution"
+         tal:define="institution view/get_institution"
+         tal:attributes="href view/back_url">
+        <i class="bi bi-house"></i>
+        <span i18n:translate="notfound_back_to_institution">Retour à l'accueil de
+          <span i18n:name="title"
+                tal:content="institution/Title">Institution</span></span>
+      </a>
+    </div>
+
+  </div>
+</metal:main>
+
+</body>
+</html>

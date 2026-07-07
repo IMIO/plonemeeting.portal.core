@@ -235,6 +235,7 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
         app = self.layer['app']
         browser = Browser(app)
         browser.handleErrors = True
+        browser.raiseHttpErrors = False
 
         # Views to test
         views = [
@@ -244,12 +245,14 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
             "manage-invite-user",
         ]
 
-        # Test access for anonymous users (should be denied)
+        # Test access for anonymous users (should be denied). DELIBE-313:
+        # anonymous users get a 404 instead of being redirected to the login
+        # form, so we don't leak the existence of these management views.
         for view in views:
             url = f"{self.institution.absolute_url()}/{view}"
             browser.open(url)
-            # User should be redirected to login page
-            self.assertIn(f"login?came_from=/plone/{self.institution.getId()}/{view}", browser.url)
+            self.assertEqual("404 Not Found", browser.headers.get("status"))
+            self.assertNotIn("login", browser.url)
 
         # Create a new user with no special permissions at first
         self.portal.acl_users._doAddUser("perm-testuser", "password", [], [])
