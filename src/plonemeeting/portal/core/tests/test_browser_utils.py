@@ -43,9 +43,10 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         )
 
     def test_meeting_type_falls_back_to_institution(self):
+        self.login_as_admin()
         meeting = self.decisions["16-novembre-2018-08-30"]
-        # demo meetings predate the field: no stored value
-        self.assertIsNone(getattr(meeting, "meeting_type", None))
+        # force an empty value to exercise the institution fallback
+        meeting.meeting_type = None
         utils_view = meeting.restrictedTraverse("@@utils_view")
         institution = self.portal["belleville"]
         self.assertEqual(
