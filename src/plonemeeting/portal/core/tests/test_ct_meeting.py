@@ -19,6 +19,15 @@ class MeetingIntegrationTest(PmPortalTestCase):
         schema = fti.lookupSchema()
         self.assertEqual(IMeeting, schema)
 
+    def test_ct_meeting_has_meeting_type_field(self):
+        self.assertIn("meeting_type", IMeeting)
+        field = IMeeting["meeting_type"]
+        self.assertEqual(field.default, "council")
+        self.assertEqual(
+            field.vocabularyName,
+            "plonemeeting.portal.vocabularies.meeting_types",
+        )
+
     def test_ct_meeting_fti(self):
         fti = queryUtility(IDexterityFTI, name="Meeting")
         self.assertTrue(fti)

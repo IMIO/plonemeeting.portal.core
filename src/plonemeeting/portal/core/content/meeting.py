@@ -37,6 +37,14 @@ class IMeeting(model.Schema):
 
     plonemeeting_last_modified = schema.Datetime(title=_("Last modification in iA.Delib"), required=True, readonly=True)
 
+    model.fieldset("settings", fields=["meeting_type"])
+    meeting_type = schema.Choice(
+        title=_("Meeting Type"),
+        vocabulary="plonemeeting.portal.vocabularies.meeting_types",
+        required=True,
+        default="council",
+    )
+
 
 @implementer(IMeeting)
 class Meeting(Container):
