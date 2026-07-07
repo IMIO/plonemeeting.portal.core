@@ -7,6 +7,7 @@ from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.config import MIMETYPE_TO_ICON
 from plonemeeting.portal.core.content.institution import IInstitution
+from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
 from plonemeeting.portal.core.interfaces import IPublicationsFolder
@@ -124,7 +125,20 @@ class UtilsView(BrowserView):
     def protect_url(self, url):
         return addTokenToUrl(url)
 
-    def meeting_type(self):
+    def get_current_meeting(self):
+        """Resolve the meeting the current context relates to, or None."""
+        if self.is_meeting():
+            return self.context
+        if IItem.providedBy(self.context):
+            return self.context.aq_parent
+        return self.get_linked_meeting()
+
+    def meeting_type(self, meeting=None):
+        """Meeting type label, read from the meeting, falling back to the institution."""
+        if meeting is None:
+            meeting = self.get_current_meeting()
+        if meeting is not None and getattr(meeting, "meeting_type", None):
+            return get_term_title(meeting, "meeting_type")
         return get_term_title(self.get_current_institution(), "meeting_type")
 
     def institution_type(self):

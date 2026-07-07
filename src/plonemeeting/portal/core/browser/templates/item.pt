@@ -107,7 +107,7 @@
                 </i>
               </div>
               <div class="meeting-infos">
-                <div class="meeting-type" i18n:translate="" tal:content="utils_view/meeting_type">Public meeting</div>
+                <div class="meeting-type" i18n:translate="" tal:content="python:utils_view.meeting_type(meeting)">Public meeting</div>
                 <span href="" class="meeting-title"
                    tal:content="meeting/title"
                 >
