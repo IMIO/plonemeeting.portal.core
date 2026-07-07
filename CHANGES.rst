@@ -4,6 +4,12 @@ Changelog
 2.4.4 (unreleased)
 ------------------
 
+- DELIBE-318: Store the ``meeting_type`` on each meeting instead of reading it
+  from the institution. The value is copied from the institution at import time,
+  views read it from the meeting (falling back to the institution), and an
+  upgrade step backfills existing meetings. First step toward decoupling the
+  iA.Délib configuration.
+  [aduchene]
 - DELIBE-285: Add a "Duplicate" publication action that opens the add form
   pre-filled from the original (except timestamps and publication dates) and
   sets the new publication to supersede the original.
