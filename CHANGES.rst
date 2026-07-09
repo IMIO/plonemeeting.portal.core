@@ -17,6 +17,10 @@ Changelog
 - DELIBE-312: Fix an issue when an anonymous user was trying to access a private decision.
   Add a new comprehensive unit test `test_anonymous_unauthorized_item_view`.
   [aduchene]
+- DELIBE-319: Be more defensive in `_fetch_external_data_for_vocabulary`: when a meeting
+  config is disabled in iA.Delib, the `extra_include_*` key is missing from the response,
+  which raised a `KeyError`. Now log a warning and keep the previously saved values.
+  [aduchene]
 
 2.4.3 (2026-06-15)
 ------------------
