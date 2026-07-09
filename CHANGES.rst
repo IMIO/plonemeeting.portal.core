@@ -4,7 +4,10 @@ Changelog
 2.4.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Warn managers viewing an unpublished publication that re-publishing it will
+  lose the existing qualified timestamp, and advise recreating it through the
+  supersede ("remplacé par") archiving system.
+  [DELIBE-317]
 
 
 2.4.4 (2026-07-09)

@@ -34,6 +34,19 @@
           </div>
           <div class="alert-content" tal:content="structure institution/archived_publication_warning_text/output"></div>
         </div>
+        <div id="unpublished-alert" class="alert with-icon alert-warning" role="alert" tal:condition="python: not is_anon and review_state == 'unpublished'">
+          <div class="alert-icon">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+          </div>
+          <div class="alert-content">
+            <p i18n:translate="">
+              This publication has been unpublished. If you publish it again, the existing qualified timestamp will be lost and the publication will be timestamped anew.
+            </p>
+            <p i18n:translate="">
+              We advise you to move this publication to the "archived" state (which does not invalidate the timestamp), to create a new publication and to use the "superseded by" field to link it to the new one.
+            </p>
+          </div>
+        </div>
         <div id="superseded_by-alert" class="alert with-icon alert-info" role="alert" tal:condition="python: timeline and timeline[0]['current'] is False">
           <div class="alert-icon">
             <i class="bi bi-info-circle"></i>

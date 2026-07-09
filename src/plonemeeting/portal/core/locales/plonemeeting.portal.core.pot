@@ -795,6 +795,10 @@ msgstr ""
 msgid "This behavior adds supersede functionality to a content type."
 msgstr ""
 
+#: ../browser/templates/publication.pt:38
+msgid "This publication has been unpublished. If you publish it again, the existing qualified timestamp will be lost and the publication will be timestamped anew."
+msgstr ""
+
 #: ../browser/templates/publication.pt:340
 msgid "Timeline"
 msgstr ""
@@ -867,6 +871,10 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Ville/Commune"
+msgstr ""
+
+#: ../browser/templates/publication.pt:42
+msgid "We advise you to move this publication to the \"archived\" state (which does not invalidate the timestamp), to create a new publication and to use the \"superseded by\" field to link it to the new one."
 msgstr ""
 
 #: ../browser/manage_users.py:53
