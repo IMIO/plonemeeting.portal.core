@@ -177,6 +177,19 @@ class TestInstitutionView(PmPortalDemoFunctionalTestCase):
         self.assertDictEqual(belleville.delib_categories, {})
         unstub()
 
+        # DELIBE-319: when the meeting config is disabled in iA.Delib, the response
+        # is a 200 but the extra_include key is missing. We must not raise a KeyError
+        # and gracefully keep the previously saved delib_categories.
+        belleville.delib_category_field = "category"
+        url = "https://demo-pm.imio.be/@config?config_id=meeting-config-college&extra_include=categories"
+        when(requests).get(url, auth=auth, headers=headers).thenReturn(
+            mock({"status_code": 200, "json": lambda: {}})
+        )
+        setattr(belleville, "delib_categories", {"admin": "Administrative", "political": "Political"})
+        belleville.fetch_delib_categories()
+        self.assertDictEqual({"admin": "Administrative", "political": "Political"}, belleville.delib_categories)
+        unstub()
+
     def test_load_representatives_from_delib(self):
         belleville = self.portal["belleville"]
         belleville.representatives_mappings = []

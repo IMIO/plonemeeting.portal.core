@@ -600,12 +600,23 @@ class Institution(Container):
                 try:
                     response = requests.get(url, auth=(self.username, self.password), headers=API_HEADERS)
                     if response.status_code in (200, 201):
-                        res = {}
                         json = response.json()
-                        values_json = json["extra_include_{}".format(url_extra_include)]
-                        for value in values_json:
-                            res[value[json_voc_value]] = value[json_voc_title]
-                        logger.info("Fetching {} for {} [End]".format(attr_name, self.title))
+                        extra_include_key = "extra_include_{}".format(url_extra_include)
+                        values_json = json.get(extra_include_key)
+                        if values_json is None:
+                            # The meeting config may be disabled in iA.Delib, in which case the
+                            # extra_include key is missing. Keep the previously saved values.
+                            logger.warning(
+                                "Missing '{}' while fetching {} for {}, "
+                                "keeping previously saved values [End]".format(
+                                    extra_include_key, attr_name, self.title
+                                )
+                            )
+                        else:
+                            res = {}
+                            for value in values_json:
+                                res[value[json_voc_value]] = value[json_voc_title]
+                            logger.info("Fetching {} for {} [End]".format(attr_name, self.title))
                     else:
                         logger.error("Unable to fetch {}, error is {} [End]".format(attr_name, response.content))
                 except requests.exceptions.ConnectionError as err:
