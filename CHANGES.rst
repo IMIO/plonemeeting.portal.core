@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.4.4 (unreleased)
+2.4.4 (2026-07-09)
 ------------------
 
 - DELIBE-318: Store the ``meeting_type`` on each meeting instead of reading it
