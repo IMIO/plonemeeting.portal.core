@@ -192,7 +192,12 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
 
         self.login_as_publications_manager()
         view = self.unpublished_publication.restrictedTraverse("@@view")
-        self.assertTrue(view())
+        rendered = view()
+        self.assertTrue(rendered)
+        # The unpublished warning is shown to managers, but not on a published publication
+        self.assertIn("unpublished-alert", rendered)
+        published_rendered = self.published_publication.restrictedTraverse("@@view")()
+        self.assertNotIn("unpublished-alert", published_rendered)
         view = self.unpublished_publication.restrictedTraverse("@@edit")
         self.assertTrue(view())
         ILockable(self.unpublished_publication).unlock()

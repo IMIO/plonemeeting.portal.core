@@ -796,6 +796,10 @@ msgstr "Page vers laquelle les visiteurs seront redirigé quand ils cliquent sur
 msgid "This behavior adds supersede functionality to a content type."
 msgstr "Ce behavior ajoute la fonctionnalité de remplacement à un type de contenu."
 
+#: ../browser/templates/publication.pt:38
+msgid "This publication has been unpublished. If you publish it again, the existing qualified timestamp will be lost and the publication will be timestamped anew."
+msgstr "Cette publication a été dépubliée. Si vous la publiez de nouveau, l'horodatage qualifié existant sera perdu et la publication sera horodatée à nouveau."
+
 #: ../browser/templates/publication.pt:340
 msgid "Timeline"
 msgstr ""
@@ -869,6 +873,10 @@ msgstr "Voir la séance"
 #: ../profiles/default/registry.xml
 msgid "Ville/Commune"
 msgstr "Ville/Commune"
+
+#: ../browser/templates/publication.pt:42
+msgid "We advise you to move this publication to the \"archived\" state (which does not invalidate the timestamp), to create a new publication and to use the \"superseded by\" field to link it to the new one."
+msgstr "Il est conseillé de passer cette publication à l'état « archivé » (ce qui n'invalide pas l'horodatage), de recréer une nouvelle publication et d'utiliser le champ « remplacé par » pour la lier à la nouvelle."
 
 #: ../browser/manage_users.py:53
 msgid "We will use this address if you need to recover your password"
