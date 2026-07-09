@@ -199,11 +199,6 @@
     <value purge="false">deliberations.be</value>
   </record>
 
-  <!-- collective.timestamp -->
-  <records interface="collective.timestamp.interfaces.ITimestampingSettings">
-    <value key="timestamping_service_url">https://freetsa.org/tsr</value>
-  </records>
-
   <!-- collective.autopublishing -->
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema.clear_expiration_on_publish"
