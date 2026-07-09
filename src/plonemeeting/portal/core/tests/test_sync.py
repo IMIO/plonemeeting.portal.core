@@ -73,6 +73,10 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         date_time = date_time.astimezone(pytz.timezone(timezone))
         self.assertEqual(meeting.date_time, date_time)
 
+    def test_sync_meeting_data_stores_meeting_type(self):
+        meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
+        self.assertEqual(meeting.meeting_type, self.institution.meeting_type)
+
     def test_sync_meeting_items(self):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         # only a few picked items

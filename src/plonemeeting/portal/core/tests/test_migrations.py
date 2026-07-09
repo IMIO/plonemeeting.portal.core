@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+from plonemeeting.portal.core.migrations.migrate_to_2406 import MigrateTo2406
+from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+
+
+class TestMigrateTo2406(PmPortalDemoFunctionalTestCase):
+    def test_backfills_meeting_type_from_institution(self):
+        # set a value differing from the institution to prove the backfill overwrites it
+        self.meeting.meeting_type = "general-assembly"
+        self.assertNotEqual(self.meeting.meeting_type, self.institution.meeting_type)
+        migrator = MigrateTo2406(self.portal.portal_setup)
+        migrator.run()
+        self.assertEqual(self.meeting.meeting_type, self.institution.meeting_type)

@@ -2,6 +2,7 @@
 
 from plone.api.exc import InvalidParameterError
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from plonemeeting.portal.core.utils import get_term_title
 
 
 class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
@@ -30,6 +31,44 @@ class TestBrowserUtils(PmPortalDemoFunctionalTestCase):
         self.login_as_admin()
         utils_view = self.portal.restrictedTraverse("@@utils_view")
         self.assertEqual(meeting, utils_view.get_linked_meeting())
+
+    def test_get_current_meeting(self):
+        meeting = self.decisions["16-novembre-2018-08-30"]
+        item = meeting["approbation-du-pv-du-xxx"]
+        self.assertEqual(
+            meeting.restrictedTraverse("@@utils_view").get_current_meeting(), meeting
+        )
+        self.assertEqual(
+            item.restrictedTraverse("@@utils_view").get_current_meeting(), meeting
+        )
+
+    def test_meeting_type_falls_back_to_institution(self):
+        self.login_as_admin()
+        meeting = self.decisions["16-novembre-2018-08-30"]
+        # force an empty value to exercise the institution fallback
+        meeting.meeting_type = None
+        utils_view = meeting.restrictedTraverse("@@utils_view")
+        institution = self.portal["belleville"]
+        self.assertEqual(
+            utils_view.meeting_type(meeting),
+            get_term_title(institution, "meeting_type"),
+        )
+
+    def test_meeting_type_reads_from_meeting(self):
+        self.login_as_admin()
+        meeting = self.decisions["16-novembre-2018-08-30"]
+        meeting.meeting_type = "general-assembly"
+        utils_view = meeting.restrictedTraverse("@@utils_view")
+        self.assertEqual(
+            utils_view.meeting_type(meeting),
+            get_term_title(meeting, "meeting_type"),
+        )
+        # differs from the institution's default ("council")
+        institution = self.portal["belleville"]
+        self.assertNotEqual(
+            utils_view.meeting_type(meeting),
+            get_term_title(institution, "meeting_type"),
+        )
 
     def test_get_plonemeeting_last_modified_on_item(self):
         item = self.decisions["16-novembre-2018-08-30"]["approbation-du-pv-du-xxx"]

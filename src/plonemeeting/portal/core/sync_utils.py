@@ -306,6 +306,7 @@ def sync_meeting_data(institution, meeting_data):
     )
     meeting.title = meeting_title
     meeting.date_time = _json_date_to_datetime(meeting_data.get("date"))
+    meeting.meeting_type = institution.meeting_type
     meeting.reindexObject()
     return meeting
 

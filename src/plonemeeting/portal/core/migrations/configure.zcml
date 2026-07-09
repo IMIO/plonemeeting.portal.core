@@ -304,4 +304,12 @@
     run_deps="False"
     profile="plonemeeting.portal.core:default"/>
 
+  <genericsetup:upgradeStep
+    title="Store meeting_type on existing meetings"
+    description="Backfill the new Meeting.meeting_type field from each meeting's institution."
+    source="2405"
+    destination="2406"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2406.migrate"
+    profile="plonemeeting.portal.core:default"/>
+
 </configure>
