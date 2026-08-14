@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="portal_memberdata" meta_type="Plone Member Data Tool">
+  <!-- Flags how an account authenticates: "sso" for Keycloak-provisioned
+       accounts (set by the Keycloak sync), empty for local accounts. -->
+  <property name="account_type" type="string"></property>
+</object>

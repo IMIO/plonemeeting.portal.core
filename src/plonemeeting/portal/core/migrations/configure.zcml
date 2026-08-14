@@ -314,7 +314,7 @@
 
   <genericsetup:upgradeStep
     title="Go to portal 2500"
-    description="Add authentication fieldset (authentication + sso_realm_id) to Institution."
+    description="Add authentication fieldset (authentication + sso_realm_id) to Institution and register/backfill the account_type memberdata property."
     source="2406"
     destination="2500"
     handler="plonemeeting.portal.core.migrations.migrate_to_2500.migrate"

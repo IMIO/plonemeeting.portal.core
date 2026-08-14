@@ -53,6 +53,13 @@
     </field>
     <value purge="false"/>
   </record>
+  <record name="plonemeeting.portal.core.sso_management_url">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">SSO user management URL</title>
+      <description i18n:translate="">External URL (opened in a new tab) where institution managers add SSO users, shown on the users listing for OIDC institutions.</description>
+    </field>
+    <value>https://my.imio.be</value>
+  </record>
   <record name="plonemeeting.portal.core.document_types">
     <field type="plone.registry.field.Dict">
       <title i18n:translate="">Document types</title>

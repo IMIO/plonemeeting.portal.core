@@ -330,17 +330,17 @@
   <!-- SSO users management views -->
   <browser:page
     for="plonemeeting.portal.core.content.institution.IInstitution"
-    name="manage-sso-users-listing"
-    class=".manage_users.ManageSSOUsersListingView"
-    template="templates/manage_sso_users_listing.pt"
+    name="manage-edit-sso-user"
+    class=".manage_users.ManageEditSSOUserFormView"
     permission="cmf.ModifyPortalContent"
   />
 
   <browser:page
     for="plonemeeting.portal.core.content.institution.IInstitution"
-    name="manage-edit-sso-user"
-    class=".manage_users.ManageEditSSOUserFormView"
-    permission="cmf.ModifyPortalContent"
+    name="migrate-institution-users"
+    class=".manage_users.MigrateInstitutionUsersView"
+    template="templates/migrate_institution_users.pt"
+    permission="cmf.ManagePortal"
   />
 
   <!-- Document generation views -->

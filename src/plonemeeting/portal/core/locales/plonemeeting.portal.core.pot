@@ -1172,6 +1172,84 @@ msgstr ""
 msgid "label_unregister"
 msgstr ""
 
+#. Default: "Account type"
+#: ../browser/templates/manage_users_listing.pt:57
+msgid "label_account_type"
+msgstr ""
+
+#. Default: "Local"
+#: ../browser/templates/manage_users_listing.pt:71
+msgid "label_account_type_local"
+msgstr ""
+
+#. Default: "SSO"
+#: ../browser/templates/manage_users_listing.pt:68
+msgid "label_account_type_sso"
+msgstr ""
+
+#. Default: "Add users on myiMio"
+#: ../browser/templates/manage_users_listing.pt:150
+msgid "label_add_users_myimio"
+msgstr ""
+
+#. Default: "Migrate users to SSO"
+msgid "Migrate users to SSO"
+msgstr ""
+
+#. Default: "Migrate users to SSO"
+msgid "label_migrate_users"
+msgstr ""
+
+msgid "msg_migrate_users_warning"
+msgstr ""
+
+msgid "msg_no_local_users"
+msgstr ""
+
+msgid "label_local_account"
+msgstr ""
+
+msgid "label_sso_target"
+msgstr ""
+
+msgid "label_content_items"
+msgstr ""
+
+msgid "label_status"
+msgstr ""
+
+msgid "label_will_migrate"
+msgstr ""
+
+#. Default: "No SSO account – skipped"
+msgid "label_no_sso_account"
+msgstr ""
+
+msgid "label_cancel"
+msgstr ""
+
+msgid "label_confirm_migration"
+msgstr ""
+
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}."
+msgid "msg_users_migrated"
+msgstr ""
+
+#. Default: "The SSO server could not be reached, so the user list may be out of date."
+#: ../browser/templates/manage_users_listing.pt:43
+msgid "msg_sso_sync_failed"
+msgstr ""
+
+#. Default: "The username, email address and full name of this user are managed by your identity provider (SSO) and cannot be changed here. You can only manage this user's roles within your institution."
+#: ../browser/manage_users.py:469
+msgid "desc_manage_edit_sso_user"
+msgstr ""
+
+#. Default: "This field is managed by your identity provider (SSO) and cannot be changed here."
+#: ../browser/manage_users.py:430
+msgid "help_sso_managed_field"
+msgstr ""
+
 #: ../content/institution.py:225
 msgid "meeting_filter_query_description"
 msgstr ""

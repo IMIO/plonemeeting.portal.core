@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="en"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+>
+<body>
+
+<metal:custom_title fill-slot="content-title">
+  <h1 class="documentFirstHeading"
+     i18n:translate="label_migrate_users">Migrate users to SSO</h1>
+</metal:custom_title>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core"
+     tal:define="rows view/local_users">
+
+    <div class="alert alert-warning" i18n:translate="msg_migrate_users_warning">
+      This will move each local account's group memberships and content to its
+      matching SSO account, then delete the local account. This cannot be undone.
+    </div>
+
+    <tal:block tal:condition="python: not rows">
+      <div class="alert alert-info" i18n:translate="msg_no_local_users">
+        No local accounts to migrate.
+      </div>
+    </tal:block>
+
+    <tal:block tal:condition="rows">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col" i18n:translate="label_local_account">Local account</th>
+          <th scope="col" i18n:translate="label_sso_target">SSO target</th>
+          <th scope="col" i18n:translate="label_content_items">Content items</th>
+          <th scope="col" i18n:translate="label_status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr tal:repeat="row rows">
+          <td tal:content="row/id"></td>
+          <td tal:content="row/email"></td>
+          <td tal:content="row/content_count"></td>
+          <td>
+            <span tal:condition="row/ready"
+                  class="badge rounded-pill text-bg-success"
+                  i18n:translate="label_will_migrate">Will migrate</span>
+            <span tal:condition="not:row/ready"
+                  class="badge rounded-pill text-bg-secondary"
+                  i18n:translate="label_no_sso_account">No SSO account &ndash; skipped</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </tal:block>
+
+    <form method="post"
+          tal:attributes="action string:${context/absolute_url}/@@migrate-institution-users">
+      <span tal:replace="structure context/@@authenticator/authenticator" />
+      <a class="btn btn-secondary"
+         tal:attributes="href string:${context/absolute_url}/@@manage-users-listing"
+         i18n:translate="label_cancel">Cancel</a>
+      <button type="submit"
+              class="btn btn-danger"
+              tal:condition="python: any(r['ready'] for r in rows)"
+              i18n:translate="label_confirm_migration">Confirm migration</button>
+    </form>
+
+  </metal:content-core>
+</metal:main>
+</body>
+</html>

@@ -65,7 +65,7 @@ class InstitutionSettingsView(DefaultView):
 
 
 class InstitutionForm:
-    zope_admin_fieldsets = ["settings", "ownership", "dates", "categorization"]
+    zope_admin_fieldsets = ["settings", "authentification", "ownership", "dates", "categorization"]
 
 
 class AddForm(InstitutionForm, BaseAddForm):

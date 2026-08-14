@@ -1173,6 +1173,84 @@ msgstr "Envoyer"
 msgid "label_unregister"
 msgstr "Enlever"
 
+#. Default: "Account type"
+#: ../browser/templates/manage_users_listing.pt:57
+msgid "label_account_type"
+msgstr "Type de compte"
+
+#. Default: "Local"
+#: ../browser/templates/manage_users_listing.pt:71
+msgid "label_account_type_local"
+msgstr "Local"
+
+#. Default: "SSO"
+#: ../browser/templates/manage_users_listing.pt:68
+msgid "label_account_type_sso"
+msgstr "SSO"
+
+#. Default: "Add users on myiMio"
+#: ../browser/templates/manage_users_listing.pt:150
+msgid "label_add_users_myimio"
+msgstr "Ajouter des utilisateurs sur myiMio"
+
+#. Default: "Migrate users to SSO"
+msgid "Migrate users to SSO"
+msgstr "Migrer les utilisateurs vers le SSO"
+
+#. Default: "Migrate users to SSO"
+msgid "label_migrate_users"
+msgstr "Migrer les utilisateurs vers le SSO"
+
+msgid "msg_migrate_users_warning"
+msgstr "Cette opération déplacera les groupes et le contenu de chaque compte local vers son compte SSO correspondant, puis supprimera le compte local. Cette action est irréversible."
+
+msgid "msg_no_local_users"
+msgstr "Aucun compte local à migrer."
+
+msgid "label_local_account"
+msgstr "Compte local"
+
+msgid "label_sso_target"
+msgstr "Compte SSO cible"
+
+msgid "label_content_items"
+msgstr "Contenus"
+
+msgid "label_status"
+msgstr "Statut"
+
+msgid "label_will_migrate"
+msgstr "Sera migré"
+
+#. Default: "No SSO account – skipped"
+msgid "label_no_sso_account"
+msgstr "Pas de compte SSO – ignoré"
+
+msgid "label_cancel"
+msgstr "Annuler"
+
+msgid "label_confirm_migration"
+msgstr "Confirmer la migration"
+
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}."
+msgid "msg_users_migrated"
+msgstr "${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s), ${skipped} ignoré(s)."
+
+#. Default: "The SSO server could not be reached, so the user list may be out of date."
+#: ../browser/templates/manage_users_listing.pt:43
+msgid "msg_sso_sync_failed"
+msgstr "Le serveur SSO est injoignable, la liste des utilisateurs peut être obsolète."
+
+#. Default: "The username, email address and full name of this user are managed by your identity provider (SSO) and cannot be changed here. You can only manage this user's roles within your institution."
+#: ../browser/manage_users.py:469
+msgid "desc_manage_edit_sso_user"
+msgstr "L'identifiant, l'adresse e-mail et le nom complet de cet utilisateur sont gérés par votre fournisseur d'identité (SSO) et ne peuvent pas être modifiés ici. Vous pouvez uniquement gérer les rôles de cet utilisateur au sein de votre institution."
+
+#. Default: "This field is managed by your identity provider (SSO) and cannot be changed here."
+#: ../browser/manage_users.py:430
+msgid "help_sso_managed_field"
+msgstr "Ce champ est géré par votre fournisseur d'identité (SSO) et ne peut pas être modifié ici."
+
 #: ../content/institution.py:225
 msgid "meeting_filter_query_description"
 msgstr "Paramètres URL servant à obtenir la liste des séances à importer."

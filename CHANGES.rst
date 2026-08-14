@@ -15,6 +15,23 @@ Changelog
   (DELIBE-297)
   [aduchene]
 
+- Unify SSO and local user management into a single "Users management"
+  view. Added an "Account type" column (Local / SSO pill); SSO accounts
+  get a read-only edit popup and no unregister button, local accounts
+  keep the editable popup and unregister. SSO institutions reconcile with
+  Keycloak on every load (removed the throttle and the manual "Refresh
+  Users" button) and surface a warning when Keycloak is unreachable.
+  Accounts provisioned by Keycloak are flagged with a new ``account_type``
+  memberdata property, so the sync only reconciles SSO-managed accounts
+  and never purges local ones. The 2500 upgrade also fuzzy-fills each
+  institution's ``sso_realm_id`` from the available Keycloak realms.
+  For SSO institutions the listing shows an "Add users on myiMio" button
+  linking (new tab) to the ``plonemeeting.portal.core.sso_management_url``
+  registry record (default ``https://my.imio.be``). The SSO edit popup now
+  states that the username, email address and full name are managed by the
+  identity provider (SSO) and cannot be changed there, instead of reusing the
+  local form's misleading password-recovery wording. (DELIBE-297)
+  [aduchene]
 
 2.4.4 (2026-07-09)
 ------------------
@@ -84,14 +101,6 @@ Changelog
   (``sync_website_link``) instead of a property setter, so it no longer
   crashes when the field is set before the institution is added to the
   portal, and clearing the URL removes the link.
-2.5.0 (unreleased)
-------------------
-
-- Add ``authentication`` (Choice: Plone / OIDC-Keycloak, defaults to
-  Plone) and ``sso_realm_id`` (TextLine) fields to ``Institution``,
-  grouped in a new "Authentification" fieldset, to allow per-institution
-  SSO/Keycloak configuration. Schema only — login wiring is a follow-up.
-  (DELIBE-297)
   [aduchene]
 - Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
   ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile

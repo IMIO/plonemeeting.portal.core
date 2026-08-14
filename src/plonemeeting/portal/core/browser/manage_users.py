@@ -5,10 +5,13 @@ from plone.app.users.schema import ProtectedTextLine
 from plone.autoform import directives
 from plone.autoform.form import AutoExtensibleForm
 from plone.base import PloneMessageFactory as _plone
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.protect.utils import addTokenToUrl
 from plone.z3cform.layout import wrap_form
 from plonemeeting.portal.core import _
+from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
+from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users
 from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
@@ -18,22 +21,73 @@ from z3c.form import button
 from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
+from zope.interface import alsoProvides
 from zope.interface import Interface
+
+
+# Values of the ``account_type`` member property: SSO for Keycloak-provisioned
+# accounts (set by the sync), local for accounts managed inside Plone.
+SSO_ACCOUNT_TYPE = "sso"
+LOCAL_ACCOUNT_TYPE = "local"
+
+
+def get_user_manageable_institution_groups(username):
+    """Return institution-related group ids a Plone user currently belongs to."""
+    return [
+        group.getId()
+        for group in api.group.get_groups(username=username)
+        if any(suffix in group.getId() for suffix in MANAGEABLE_INSTITUTION_SUFFIXES)
+    ]
+
+
+def unregister_user_from_institution(institution, username, group_tool=None):
+    """Remove ``username`` from the institution's members and manageable groups.
+
+    The Plone user account is left intact so historical authorship is preserved.
+    """
+    if group_tool is None:
+        group_tool = getToolByName(institution, "portal_groups")
+    for group_id in get_user_manageable_institution_groups(username):
+        group_tool.removePrincipalFromGroup(username, group_id)
+    group_tool.removePrincipalFromGroup(username, get_members_group_id(institution))
+
 
 # ================================ Local Users =================================
 
 class ManageUsersListingView(BrowserView):
-    """
-    Shows a manageable listing of the institution's users.
+    """Unified listing of the institution's users (local and SSO).
+
+    For SSO institutions (``authentication == 'oidc'``) the members are
+    reconciled with Keycloak on every load; a sync failure is surfaced as
+    an error (``sso_sync_failed``) rather than shown as a stale or
+    misclassified list.
     """
 
     label = _("label_manage_users")
     description = _("desc_manage_users")
 
     def __call__(self):
+        self.is_sso_institution = getattr(self.context, "authentication", "plone") == "oidc"
+        self.sso_sync_failed = False
+        if self.is_sso_institution:
+            # The sync performs ZODB writes (creating users, group
+            # membership) on a GET request; opt out of plone.protect's
+            # auto-CSRF check.
+            alsoProvides(self.request, IDisableCSRFProtection)
+            self.sso_sync_failed = sync_institution_keycloak_users(self.context) is None
         self.users = self.context.get_all_institution_users()
         self.unregister_url = addTokenToUrl(f"{self.context.absolute_url()}/@@manage-edit-user?unregister=1")
         return self.index()
+
+    def is_sso_user(self, user):
+        """Whether ``user`` is an SSO-provisioned (Keycloak) account."""
+        return user.getProperty("account_type", "") == SSO_ACCOUNT_TYPE
+
+    def sso_management_url(self):
+        """External URL (myiMio) where SSO users are added, from the registry."""
+        return api.portal.get_registry_record(
+            "plonemeeting.portal.core.sso_management_url", default=""
+        )
 
 
 class IManageUserForm(Interface):
@@ -128,10 +182,8 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
         self.group_tool.addPrincipalToGroup(username, get_members_group_id(self.context))
 
     def unregister_from_institution(self, username):
-        """Remove the user from the group."""
-        for groups_id in self.get_manageable_groups_for_user(username):
-            self.group_tool.removePrincipalFromGroup(username, groups_id)
-        self.group_tool.removePrincipalFromGroup(username, get_members_group_id(self.context))
+        """Remove the user from the institution's members + manageable groups."""
+        unregister_user_from_institution(self.context, username, group_tool=self.group_tool)
 
     @button.buttonAndHandler("label_cancel_button", name="cancel")
     def handleCancel(self, action):
@@ -289,35 +341,116 @@ InviteUserFormView = wrap_form(InviteUserForm)
 
 # ================================= Keycloak SSO =================================
 
-class ManageSSOUsersListingView(BrowserView):
+
+def sync_institution_keycloak_users(institution):
+    """Reconcile Plone members of ``institution`` with the institution's
+    Keycloak realm membership (filtered by the configured group).
+
+    Returns a ``(created, updated, removed)`` counters tuple. Returns
+    ``None`` and logs a warning when Keycloak is not reachable or not
+    configured for this institution — callers should surface that as a
+    sync failure rather than a silent empty reconciliation.
     """
-    Shows a manageable listing of the institution's users.
-    """
+    keycloak_users = fetch_institution_keycloak_users(institution)
+    if keycloak_users is None:
+        return None
 
-    label = _("label_manage_users")
-    description = _("desc_manage_users")
+    acl_users = getToolByName(institution, "acl_users")
+    registration = getToolByName(institution, "portal_registration")
+    portal_membership = getToolByName(institution, "portal_membership")
+    group_tool = getToolByName(institution, "portal_groups")
+    members_group_id = get_members_group_id(institution)
 
-    def __call__(self):
-        self.users = self.context.get_all_institution_users()
-        self.unregister_url = addTokenToUrl(f"{self.context.absolute_url()}/@@manage-edit-user?unregister=1")
-        return self.index()
+    created = 0
+    updated = 0
+    keycloak_user_ids = set()
+    for kc_user in keycloak_users:
+        email = (kc_user.get("email") or "").strip()
+        if not email:
+            continue
+        if kc_user.get("enabled") is False:
+            continue
 
-    def sync_users_from_keycloak(self):
-        pass
+        userid = email
+        keycloak_user_ids.add(userid)
+        fullname = "{0} {1}".format(
+            kc_user.get("firstName") or "", kc_user.get("lastName") or ""
+        ).strip()
+        properties = {"email": email, "username": userid, "fullname": fullname}
+
+        existing_user = acl_users.getUserById(userid)
+        if existing_user is None:
+            password = registration.generatePassword()
+            registration.addMember(userid, password, ["Member"], properties=properties)
+            created += 1
+        else:
+            member = portal_membership.getMemberById(userid)
+            if member is not None:
+                current = {
+                    "email": member.getProperty("email", ""),
+                    "fullname": member.getProperty("fullname", ""),
+                }
+                if current["email"] != email or current["fullname"] != fullname:
+                    member.setMemberProperties(mapping={"email": email, "fullname": fullname})
+                    updated += 1
+
+        # Flag the account as SSO-managed (idempotent; also backfills users
+        # provisioned before this marker existed).
+        member = portal_membership.getMemberById(userid)
+        if member is not None and member.getProperty("account_type", "") != SSO_ACCOUNT_TYPE:
+            member.setMemberProperties(mapping={"account_type": SSO_ACCOUNT_TYPE})
+
+        group_tool.addPrincipalToGroup(userid, members_group_id)
+
+    removed = 0
+    members_group = group_tool.getGroupById(members_group_id)
+    if members_group is not None:
+        # Only reconcile SSO-managed accounts: a member flagged as SSO that is
+        # no longer enabled/present in Keycloak loses access (its Plone account
+        # is kept for authorship history). Local accounts are never touched.
+        for member in list(members_group.getGroupMembers()):
+            userid = member.id
+            if userid in keycloak_user_ids:
+                continue
+            if member.getProperty("account_type", "") != SSO_ACCOUNT_TYPE:
+                continue
+            unregister_user_from_institution(
+                institution, userid, group_tool=group_tool
+            )
+            removed += 1
+
+    logger.info(
+        "Keycloak SSO sync for {0}: created={1} updated={2} removed={3}".format(
+            institution.getId(), created, updated, removed
+        )
+    )
+    return (created, updated, removed)
+
+
+_SSO_MANAGED_FIELD = _(
+    "help_sso_managed_field",
+    default="This field is managed by your identity provider (SSO) and cannot be changed here.",
+)
 
 
 class IManageSSOUserForm(Interface):
 
+    username = schema.ASCIILine(
+        title=_plone("label_user_name", default="User Name"),
+        description=_SSO_MANAGED_FIELD,
+        required=False,
+    )
+
     email = ProtectedEmail(
         title=_("label_email", default="Email"),
-        description=_("We will use this address if you need to recover your password"),
+        description=_SSO_MANAGED_FIELD,
         required=True,
         constraint=checkEmailAddress,
     )
 
     fullname = ProtectedTextLine(
         title=_("label_fullname", default="Full Name"),
-        description=_("help_full_name_creation", default="Enter full name, e.g. John Smith."),
+        description=_SSO_MANAGED_FIELD,
         required=False,
     )
 
@@ -334,15 +467,21 @@ class ManageEditSSOUserForm(BaseManageUserForm):
     schema = IManageSSOUserForm
     ignoreContext = True
     label = _("label_manage_edit_user")
-    description = _("desc_manage_edit_user")
+    description = _(
+        "desc_manage_edit_sso_user",
+        default="The username, email address and full name of this user are managed by your "
+        "identity provider (SSO) and cannot be changed here. You can only manage this user's "
+        "roles within your institution.",
+    )
 
     def updateWidgets(self, prefix=None):
         super().updateWidgets(prefix)
-        username = self.request.form.get("username", self.request.form.get("form.widgets.username", None))
+        username = self.request.form.get(
+            "username", self.request.form.get("form.widgets.username", None)
+        )
         if not username:
             return
 
-        # We have a username; let's populate the widgets if the user exists
         user_obj = self.acl_users.getUserById(username)
         if not user_obj:
             return
@@ -351,8 +490,9 @@ class ManageEditSSOUserForm(BaseManageUserForm):
         if not member:
             return
 
-        # Pre-fill user info, almost all will be readonly as keycloak is managing those
-        # We only manage permissions
+        # Keycloak owns identity fields; the form only manages permissions.
+        self.widgets["username"].value = username
+        self.widgets["username"].readonly = "readonly"
         self.widgets["email"].value = member.getProperty("email", "")
         self.widgets["email"].readonly = "readonly"
         self.widgets["fullname"].value = member.getProperty("fullname", "")
@@ -361,12 +501,12 @@ class ManageEditSSOUserForm(BaseManageUserForm):
 
     @button.buttonAndHandler(_plone("save"), name="save")
     def handleSave(self, action):
-        """Create or update user, then update their group membership."""
+        """Update the SSO user's group membership (Keycloak owns the rest)."""
         data, errors = self.extractData()
-        username = data["username"].strip()
+        username = (data.get("username") or "").strip()
         groups_to_assign = data.get("user_groups", [])
-        existing_user = self.acl_users.getUserById(username)
-        member = self.portal_membership.getMemberById(username)
+        existing_user = username and self.acl_users.getUserById(username)
+        member = username and self.portal_membership.getMemberById(username)
         if not existing_user or not member:
             self.messages.add(_("msg_user_error"), type="error")
             self.request.response.redirect("manage-users-listing")
@@ -377,3 +517,109 @@ class ManageEditSSOUserForm(BaseManageUserForm):
 
 
 ManageEditSSOUserFormView = wrap_form(ManageEditSSOUserForm)
+
+
+# ========================= Local -> SSO account migration =====================
+
+
+def _reassign_content_ownership(catalog, institution_path, old_id, new_user):
+    """Reassign every object under ``institution_path`` created by ``old_id``
+    to ``new_user`` (Zope owner + Owner local role + Creator), and reindex.
+    Returns the number of objects reassigned."""
+    new_id = new_user.getId()
+    count = 0
+    for brain in catalog.unrestrictedSearchResults(path=institution_path, Creator=old_id):
+        obj = brain.getObject()
+        obj.changeOwnership(new_user, recursive=False)
+        roles = obj.get_local_roles_for_userid(old_id)
+        if roles:
+            obj.manage_delLocalRoles([old_id])
+            obj.manage_addLocalRoles(new_id, list(roles))
+        obj.creators = tuple(new_id if creator == old_id else creator for creator in (obj.creators or ()))
+        obj.reindexObject(idxs=["Creator", "listCreators"])
+        obj.reindexObjectSecurity()
+        count += 1
+    return count
+
+
+def migrate_institution_local_users(institution):
+    """Migrate the institution's local accounts to their SSO identity.
+
+    For each local member whose email matches an existing SSO account (whose
+    userid is that email): copy its group memberships to the SSO account,
+    reassign the content it owns in the institution, then delete the local
+    account. Returns a summary dict with ``migrated`` (list of (old, new)),
+    ``skipped`` (list of old ids without a matching SSO account) and
+    ``content`` (number of reassigned objects).
+    """
+    catalog = getToolByName(institution, "portal_catalog")
+    group_tool = getToolByName(institution, "portal_groups")
+    institution_path = "/".join(institution.getPhysicalPath())
+    summary = {"migrated": [], "skipped": [], "content": 0}
+    for member in institution.get_all_institution_users():
+        old_id = member.getId()
+        if member.getProperty("account_type", "") == SSO_ACCOUNT_TYPE:
+            continue
+        email = (member.getProperty("email", "") or "").strip()
+        new_member = api.user.get(userid=email) if email else None
+        if not email or email == old_id or new_member is None:
+            summary["skipped"].append(old_id)
+            continue
+        for group in api.group.get_groups(username=old_id):
+            if group.getId() != "AuthenticatedUsers":
+                group_tool.addPrincipalToGroup(email, group.getId())
+        summary["content"] += _reassign_content_ownership(
+            catalog, institution_path, old_id, new_member.getUser()
+        )
+        api.user.delete(username=old_id)
+        summary["migrated"].append((old_id, email))
+    return summary
+
+
+class MigrateInstitutionUsersView(BrowserView):
+    """Admin-only (cmf.ManagePortal): migrate an institution's local accounts
+    to their SSO identity, after a confirmation page."""
+
+    label = _("label_migrate_users")
+
+    def local_users(self):
+        """Local members with their SSO target and owned-content count."""
+        catalog = getToolByName(self.context, "portal_catalog")
+        institution_path = "/".join(self.context.getPhysicalPath())
+        rows = []
+        for member in self.context.get_all_institution_users():
+            old_id = member.getId()
+            if member.getProperty("account_type", "") == SSO_ACCOUNT_TYPE:
+                continue
+            email = (member.getProperty("email", "") or "").strip()
+            rows.append(
+                {
+                    "id": old_id,
+                    "email": email,
+                    "ready": bool(email) and email != old_id and api.user.get(userid=email) is not None,
+                    "content_count": len(
+                        catalog.unrestrictedSearchResults(path=institution_path, Creator=old_id)
+                    ),
+                }
+            )
+        return rows
+
+    def __call__(self):
+        if self.request.method == "POST":
+            summary = migrate_institution_local_users(self.context)
+            IStatusMessage(self.request).addStatusMessage(
+                _(
+                    "msg_users_migrated",
+                    default="Migrated ${migrated} account(s), reassigned ${content} "
+                    "content item(s), skipped ${skipped}.",
+                    mapping={
+                        "migrated": len(summary["migrated"]),
+                        "content": summary["content"],
+                        "skipped": len(summary["skipped"]),
+                    },
+                ),
+                type="info",
+            )
+            self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-users-listing")
+            return ""
+        return self.index()

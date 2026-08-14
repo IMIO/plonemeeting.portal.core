@@ -39,6 +39,13 @@
       </div>
     </div>
 
+    <!-- Keycloak sync failure notice (SSO institutions) -->
+    <tal:block tal:condition="python: view.is_sso_institution and view.sso_sync_failed">
+      <div class="alert alert-warning" i18n:translate="msg_sso_sync_failed">
+        The SSO server could not be reached, so the user list may be out of date.
+      </div>
+    </tal:block>
+
     <!-- "No users found" notice -->
     <tal:block tal:condition="python:not view.users">
       <div class="alert alert-warning" i18n:translate="msg_no_users_found">
@@ -54,6 +61,7 @@
           <th scope="col" i18n:domain="plone" i18n:translate="label_user_name">User Name</th>
           <th scope="col" i18n:translate="label_fullname">Full Name</th>
           <th scope="col" i18n:translate="label_email">Email</th>
+          <th scope="col" i18n:translate="label_account_type">Account type</th>
           <th scope="col" class="text-end" i18n:translate="label_actions">Actions</th>
         </tr>
         </thead>
@@ -62,10 +70,18 @@
           <td tal:content="user/id"></td>
           <td tal:content="python:user.getProperty('fullname')"></td>
           <td tal:content="python:user.getProperty('email')"></td>
+          <td>
+            <span tal:condition="python: view.is_sso_user(user)"
+                  class="badge rounded-pill text-bg-info"
+                  i18n:translate="label_account_type_sso">SSO</span>
+            <span tal:condition="python: not view.is_sso_user(user)"
+                  class="badge rounded-pill text-bg-secondary"
+                  i18n:translate="label_account_type_local">Local</span>
+          </td>
           <td class="text-end">
-            <!-- "Edit" link: also opens the same form in a modal, passing user_id -->
+            <!-- "Edit" link: opens the type-specific form in a modal -->
             <a class="btn btn-sm btn-secondary pat-plone-modal pat-inject"
-               tal:attributes="href string:@@manage-edit-user?username=${user/id}"
+               tal:attributes="href python: ('@@manage-edit-sso-user' if view.is_sso_user(user) else '@@manage-edit-user') + '?username=' + user.id"
                data-pat-inject='{
                            "target": "#myModal .modal-body",
                            "source": "el.href",
@@ -81,8 +97,9 @@
               <span i18n:translate="label_edit">Edit</span>
             </a>
 
-            <!-- "Delete" link: direct GET with confirm -->
-            <a class="btn btn-sm btn-danger"
+            <!-- "Unregister" link (local accounts only): direct GET with confirm -->
+            <a tal:condition="python: not view.is_sso_user(user)"
+               class="btn btn-sm btn-danger"
                tal:attributes="href python: view.unregister_url + '&username=' + user.id"
                confirm-message="Are you sure you want to unregister this user?"
                i18n:attributes="value; confirm-message"
@@ -97,7 +114,8 @@
     </tal:block>
 
 
-    <div class="row">
+    <!-- Create/Invite: local (non-SSO) institutions only -->
+    <div class="row" tal:condition="not:view/is_sso_institution">
       <div class="col-lg-12 d-flex flex-row-reverse">
 
         <a class="btn btn-primary mb-3 pat-plone-modal pat-inject ms-2"
@@ -133,6 +151,20 @@
            role="button">
           <i class="bi bi-person-plus-fill me-1"></i>
           <span i18n:translate="label_invite_existing_user">Invite an existing user</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SSO institutions: add users on the external myiMio portal -->
+    <div class="row" tal:condition="python: view.is_sso_institution and view.sso_management_url()">
+      <div class="col-lg-12 d-flex flex-row-reverse">
+        <a class="btn btn-primary mb-3"
+           tal:attributes="href view/sso_management_url"
+           target="_blank"
+           rel="noopener noreferrer"
+           role="button">
+          <i class="bi bi-box-arrow-up-right me-1"></i>
+          <span i18n:translate="label_add_users_myimio">Add users on myiMio</span>
         </a>
       </div>
     </div>
