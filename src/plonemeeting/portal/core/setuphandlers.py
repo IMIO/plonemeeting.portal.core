@@ -20,6 +20,7 @@ from plonemeeting.portal.core.config import FACETED_PUB_FOLDER_ID
 from plonemeeting.portal.core.config import FACETED_PUB_XML_PATH
 from plonemeeting.portal.core.interfaces import IPlonemeetingPortalConfigFolder
 from plonemeeting.portal.core.oidc import disable_oidc_challenge_if_unconfigured
+from plonemeeting.portal.core.oidc import setup_oidc_plugin
 from plonemeeting.portal.core.utils import cleanup_contents
 from plonemeeting.portal.core.utils import create_faceted_folder
 from plonemeeting.portal.core.utils import create_templates_folder
@@ -54,8 +55,12 @@ def post_install(context):
     current_lang = api.portal.get_default_language()[:2]
 
     # Runs before the early return below: the pas.plugins.oidc dependency
-    # profile installs a site-wide challenge plugin on every (re)install.
-    disable_oidc_challenge_if_unconfigured()
+    # profile installs a site-wide challenge plugin on every (re)install, with
+    # no issuer. Configure it from the environment first -- otherwise a fresh
+    # install never gets SSO, even with a complete keycloak_* environment --
+    # and only neutralise its challenge when the environment is incomplete.
+    if setup_oidc_plugin() is None:
+        disable_oidc_challenge_if_unconfigured()
 
     if "config" in portal.objectIds():
         return

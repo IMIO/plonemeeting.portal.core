@@ -34,12 +34,21 @@ SSO_ACCOUNT_TYPE = "sso"
 LOCAL_ACCOUNT_TYPE = "local"
 
 
-def get_user_manageable_institution_groups(username):
-    """Return institution-related group ids a Plone user currently belongs to."""
+def get_user_manageable_institution_groups(username, institution):
+    """Return the manageable group ids of ``institution`` that ``username`` is in.
+
+    Institution groups are named ``{institution_id}-{suffix}``. Matching on the
+    suffix alone would also return the groups of every *other* institution, so
+    unregistering a user here would revoke their access everywhere.
+    """
+    prefix = "{0}-".format(institution.getId())
+    manageable = {
+        "{0}{1}".format(prefix, suffix) for suffix in MANAGEABLE_INSTITUTION_SUFFIXES
+    }
     return [
         group.getId()
         for group in api.group.get_groups(username=username)
-        if any(suffix in group.getId() for suffix in MANAGEABLE_INSTITUTION_SUFFIXES)
+        if group.getId() in manageable
     ]
 
 
@@ -50,7 +59,7 @@ def unregister_user_from_institution(institution, username, group_tool=None):
     """
     if group_tool is None:
         group_tool = getToolByName(institution, "portal_groups")
-    for group_id in get_user_manageable_institution_groups(username):
+    for group_id in get_user_manageable_institution_groups(username, institution):
         group_tool.removePrincipalFromGroup(username, group_id)
     group_tool.removePrincipalFromGroup(username, get_members_group_id(institution))
 
@@ -173,20 +182,24 @@ class BaseManageUserForm(AutoExtensibleForm, form.Form):
         super().update()
 
     def get_manageable_groups_for_user(self, username):
+        """The manageable groups of *this* institution that ``username`` is in.
+
+        Scoped to ``self.context``: the widget vocabulary only offers this
+        institution's groups, so returning another one's would be a value the
+        checkbox widget cannot render.
         """
-        Return only 'institution groups' for this user, i.e.,
-        groups that match typical institution naming patterns.
+        return get_user_manageable_institution_groups(username, self.context)
+
+    def is_institution_member(self, username):
+        """Whether ``username`` already belongs to this institution.
+
+        The edit forms post the username back in a readonly widget, so it is
+        client-controlled: without this check a manager could point the form at
+        any portal account and attach it to this institution's groups. Joining
+        a new account is what ``InviteUserForm`` is for.
         """
-        all_user_groups = api.group.get_groups(username=username)
-        # We'll say any group ID that ends (or contains) these strings is an 'institution group'
-        # Adjust to match your actual naming convention.
-        user_manageable_groups = []
-        for group in all_user_groups:
-            group_id = group.getId()
-            # Keep only groups that are institution-related
-            if any(suffix in group_id for suffix in MANAGEABLE_INSTITUTION_SUFFIXES):
-                user_manageable_groups.append(group_id)
-        return user_manageable_groups
+        group = self.group_tool.getGroupById(get_members_group_id(self.context))
+        return group is not None and username in group.getGroupMemberIds()
 
     def update_user_groups(self, username, selected_groups):
         vocabulary = InstitutionManageableGroupsVocabulary(self.context)
@@ -300,12 +313,21 @@ class ManageEditUsersForm(BaseManageUserForm):
     def handleSave(self, action):
         """Create or update user, then update their group membership."""
         data, errors = self.extractData()
+        if errors:
+            self.messages.add(self.formErrorsMessage, type="error")
+            return
         username = data["username"].strip()
         email = data.get("email", "").strip()
         fullname = data.get("fullname", "").strip()
         groups_to_assign = data.get("user_groups", [])
         existing_user = self.acl_users.getUserById(username)
         if existing_user:
+            # The username is posted back by a readonly widget, so editing is
+            # restricted to accounts this institution already has.
+            if not self.is_institution_member(username):
+                self.messages.add(_("msg_user_error"), type="error")
+                self.request.response.redirect("manage-users-listing")
+                return
             # Update existing user
             member = self.portal_membership.getMemberById(username)
             if member:
@@ -321,7 +343,7 @@ class ManageEditUsersForm(BaseManageUserForm):
                 self.update_user_groups(username, groups_to_assign)
                 self.registration.registeredNotify(username)
                 self.messages.add(_("msg_user_created"), type="info")
-            except Exception as e:
+            except Exception:
                 self.messages.add(_("msg_user_create_failed"), type="error")
 
         self.request.response.redirect("manage-users-listing")
@@ -523,11 +545,14 @@ class ManageEditSSOUserForm(BaseManageUserForm):
     def handleSave(self, action):
         """Update the SSO user's group membership (Keycloak owns the rest)."""
         data, errors = self.extractData()
+        if errors:
+            self.messages.add(self.formErrorsMessage, type="error")
+            return
         username = (data.get("username") or "").strip()
         groups_to_assign = data.get("user_groups", [])
         existing_user = username and self.acl_users.getUserById(username)
         member = username and self.portal_membership.getMemberById(username)
-        if not existing_user or not member:
+        if not existing_user or not member or not self.is_institution_member(username):
             self.messages.add(_("msg_user_error"), type="error")
             self.request.response.redirect("manage-users-listing")
             return

@@ -11,6 +11,18 @@ ADMIN_API_TIMEOUT = 30
 ADMIN_API_MAX_USERS = 1000
 
 
+class KeycloakUnavailable(Exception):
+    """A Keycloak admin-API call did not produce a usable answer.
+
+    Raised for transport errors, non-200 responses and unparsable bodies —
+    i.e. whenever the *state* of the realm is unknown. It must stay distinct
+    from a successful call that legitimately reports "no such group" or "no
+    members": ``sync_institution_keycloak_users`` unregisters the accounts it
+    does not find, so returning an empty answer for a failed call would drop
+    every SSO member of the institution.
+    """
+
+
 def get_allowed_groups():
     """Keycloak groups whose members may use the portal, as a tuple.
 
@@ -110,11 +122,13 @@ def get_keycloak_realms(token):
 def get_keycloak_group_id(realm, group_name, token):
     """Resolve the id of the Keycloak group named ``group_name`` in ``realm``.
 
-    Returns the group id of the first exact-name match, or None.
+    Returns the group id of the first exact-name match, or None when the realm
+    genuinely has no such group. Raises :class:`KeycloakUnavailable` when the
+    lookup itself failed, so callers do not read "unknown" as "absent".
     """
     base_url = _keycloak_base_url()
     if not base_url:
-        return None
+        raise KeycloakUnavailable("keycloak_url is not configured")
     url = "{0}/admin/realms/{1}/groups".format(base_url, realm)
     headers = {"Authorization": "Bearer {0}".format(token)}
     try:
@@ -123,17 +137,17 @@ def get_keycloak_group_id(realm, group_name, token):
         )
     except requests.RequestException as exc:
         logger.error("Keycloak group lookup failed for realm {0}: {1}".format(realm, exc))
-        return None
+        raise KeycloakUnavailable(exc)
     if resp.status_code != 200:
         logger.error(
             "Keycloak group lookup HTTP {0} for realm {1}".format(resp.status_code, realm)
         )
-        return None
+        raise KeycloakUnavailable("HTTP {0}".format(resp.status_code))
     try:
         groups = resp.json()
     except ValueError:
         logger.error("Keycloak group lookup response is not JSON for realm {0}".format(realm))
-        return None
+        raise KeycloakUnavailable("response is not JSON")
     for group in groups:
         if group.get("name") == group_name:
             return group.get("id")
@@ -144,10 +158,15 @@ def get_keycloak_group_id(realm, group_name, token):
 
 
 def get_keycloak_group_members(realm, group_id, token):
-    """Return the list of user dicts that belong to ``group_id`` in ``realm``."""
+    """Return the list of user dicts that belong to ``group_id`` in ``realm``.
+
+    An empty list means the group is empty. A failed request raises
+    :class:`KeycloakUnavailable` rather than returning ``[]``, which the sync
+    would otherwise act on by unregistering every member.
+    """
     base_url = _keycloak_base_url()
     if not base_url:
-        return []
+        raise KeycloakUnavailable("keycloak_url is not configured")
     url = "{0}/admin/realms/{1}/groups/{2}/members".format(base_url, realm, group_id)
     headers = {"Authorization": "Bearer {0}".format(token)}
     try:
@@ -158,17 +177,17 @@ def get_keycloak_group_members(realm, group_id, token):
         logger.error(
             "Keycloak group members request failed for realm {0}: {1}".format(realm, exc)
         )
-        return []
+        raise KeycloakUnavailable(exc)
     if resp.status_code != 200:
         logger.error(
             "Keycloak group members HTTP {0} for realm {1}".format(resp.status_code, realm)
         )
-        return []
+        raise KeycloakUnavailable("HTTP {0}".format(resp.status_code))
     try:
         return resp.json()
     except ValueError:
         logger.error("Keycloak group members response is not JSON for realm {0}".format(realm))
-        return []
+        raise KeycloakUnavailable("response is not JSON")
 
 
 def fetch_institution_keycloak_users(institution):
@@ -205,11 +224,23 @@ def fetch_institution_keycloak_users(institution):
     users = {}
     resolved = 0
     for group_name in allowed_groups:
-        group_id = get_keycloak_group_id(realm, group_name, token)
-        if not group_id:
-            continue
+        # Any failed call leaves the realm membership unknown. Bail out on the
+        # whole sync instead of continuing with a partial set: a group that is
+        # merely unreachable would otherwise look like a group everyone left.
+        try:
+            group_id = get_keycloak_group_id(realm, group_name, token)
+            if not group_id:
+                continue
+            members = get_keycloak_group_members(realm, group_id, token)
+        except KeycloakUnavailable as exc:
+            logger.error(
+                "Keycloak sync aborted for {0}: group {1!r} is unavailable ({2})".format(
+                    institution.getId(), group_name, exc
+                )
+            )
+            return None
         resolved += 1
-        for user in get_keycloak_group_members(realm, group_id, token):
+        for user in members:
             # Union across groups: a user in two allowed groups is one user.
             email = (user.get("email") or "").strip()
             if email:
