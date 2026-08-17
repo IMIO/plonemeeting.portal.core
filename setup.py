@@ -58,6 +58,7 @@ setup(
         "collective.z3cform.datagridfield>=3.0.2",
         "eea.facetednavigation>=16.2",
         "natsort",
+        "pas.plugins.oidc>=2.0.0",
         "plone.api>=2.1.0",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.3",

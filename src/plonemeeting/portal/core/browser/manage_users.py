@@ -17,12 +17,15 @@ from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVoc
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from urllib.parse import quote
 from z3c.form import button
 from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import Interface
+
+import os
 
 
 # Values of the ``account_type`` member property: SSO for Keycloak-provisioned
@@ -83,11 +86,28 @@ class ManageUsersListingView(BrowserView):
         """Whether ``user`` is an SSO-provisioned (Keycloak) account."""
         return user.getProperty("account_type", "") == SSO_ACCOUNT_TYPE
 
-    def sso_management_url(self):
-        """External URL (myiMio) where SSO users are added, from the registry."""
-        return api.portal.get_registry_record(
-            "plonemeeting.portal.core.sso_management_url", default=""
-        )
+    def _quoted_user_id(self, user):
+        """Query-string-safe user id.
+
+        SSO user ids are email addresses, so they may contain characters
+        (``+``, ``&``, ``#``) that would otherwise be mangled or truncated when
+        the URL is parsed back into a form value. ``@`` is left as-is: it is
+        legal unencoded in a query string and keeps the URLs readable.
+        """
+        return quote(user.getId(), safe="@")
+
+    def edit_url(self, user):
+        """Type-specific edit URL with a safely encoded username."""
+        view_name = "@@manage-edit-sso-user" if self.is_sso_user(user) else "@@manage-edit-user"
+        return "{0}?username={1}".format(view_name, self._quoted_user_id(user))
+
+    def unregister_user_url(self, user):
+        """CSRF-tokened unregister URL with a safely encoded username."""
+        return "{0}&username={1}".format(self.unregister_url, self._quoted_user_id(user))
+
+    def keycloak_add_user_url(self):
+        """External URL where institution managers add SSO users."""
+        return os.environ.get("keycloak_add_user_url", "")
 
 
 class IManageUserForm(Interface):
@@ -551,7 +571,13 @@ def migrate_institution_local_users(institution):
     account. Returns a summary dict with ``migrated`` (list of (old, new)),
     ``skipped`` (list of old ids without a matching SSO account) and
     ``content`` (number of reassigned objects).
+
+    The institution's Keycloak accounts are synced first, so freshly
+    provisioned SSO identities are matchable; when that sync fails nothing
+    is migrated and ``None`` is returned.
     """
+    if sync_institution_keycloak_users(institution) is None:
+        return None
     catalog = getToolByName(institution, "portal_catalog")
     group_tool = getToolByName(institution, "portal_groups")
     institution_path = "/".join(institution.getPhysicalPath())
@@ -607,19 +633,28 @@ class MigrateInstitutionUsersView(BrowserView):
     def __call__(self):
         if self.request.method == "POST":
             summary = migrate_institution_local_users(self.context)
-            IStatusMessage(self.request).addStatusMessage(
-                _(
-                    "msg_users_migrated",
-                    default="Migrated ${migrated} account(s), reassigned ${content} "
-                    "content item(s), skipped ${skipped}.",
-                    mapping={
-                        "migrated": len(summary["migrated"]),
-                        "content": summary["content"],
-                        "skipped": len(summary["skipped"]),
-                    },
-                ),
-                type="info",
-            )
+            if summary is None:
+                IStatusMessage(self.request).addStatusMessage(
+                    _(
+                        "msg_migration_sync_failed",
+                        default="The SSO server could not be reached; nothing was migrated.",
+                    ),
+                    type="error",
+                )
+            else:
+                IStatusMessage(self.request).addStatusMessage(
+                    _(
+                        "msg_users_migrated",
+                        default="Migrated ${migrated} account(s), reassigned ${content} "
+                        "content item(s), skipped ${skipped}.",
+                        mapping={
+                            "migrated": len(summary["migrated"]),
+                            "content": summary["content"],
+                            "skipped": len(summary["skipped"]),
+                        },
+                    ),
+                    type="info",
+                )
             self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-users-listing")
             return ""
         return self.index()

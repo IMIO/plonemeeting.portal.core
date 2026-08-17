@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plonemeeting.portal.core import logger
 
+import json
 import os
 import requests
 
@@ -8,6 +9,29 @@ import requests
 ADMIN_TOKEN_TIMEOUT = 10
 ADMIN_API_TIMEOUT = 30
 ADMIN_API_MAX_USERS = 1000
+
+
+def get_allowed_groups():
+    """Keycloak groups whose members may use the portal, as a tuple.
+
+    Read from ``keycloak_allowed_groups``, a JSON list (e.g.
+    ``["délibérations.be"]``).  A bare string is accepted as a single group so
+    a malformed value degrades to something usable rather than to nothing.
+
+    The same value gates login -- it is copied to the OIDC plugin's
+    ``allowed_groups`` property, which ``user_can_login()`` checks against the
+    user's ``groups`` claim -- and scopes the admin-API sync below.
+    """
+    raw = os.environ.get("keycloak_allowed_groups", "").strip()
+    if not raw:
+        return ()
+    try:
+        groups = json.loads(raw)
+    except ValueError:
+        return (raw,)
+    if isinstance(groups, str):
+        return (groups,)
+    return tuple(group for group in groups if group)
 
 
 def _keycloak_base_url():
@@ -148,11 +172,13 @@ def get_keycloak_group_members(realm, group_id, token):
 
 
 def fetch_institution_keycloak_users(institution):
-    """Return the Keycloak users of ``institution``'s realm filtered by the
-    configured group, or None when prerequisites are missing.
+    """Return the Keycloak users of ``institution``'s realm that belong to one
+    of the allowed groups, or None when prerequisites are missing.
 
     A None return is the signal to callers to skip the sync — they should
-    keep rendering the existing Plone-side data without raising.
+    keep rendering the existing Plone-side data without raising.  An empty
+    list, by contrast, means "the groups exist and nobody is in them", which
+    the sync is allowed to act on.
     """
     realm = getattr(institution, "sso_realm_id", None)
     if not realm:
@@ -163,10 +189,10 @@ def fetch_institution_keycloak_users(institution):
         )
         return None
 
-    group_name = os.environ.get("keycloak_delib_group_name")
-    if not group_name:
+    allowed_groups = get_allowed_groups()
+    if not allowed_groups:
         logger.warning(
-            "keycloak_delib_group_name not set, skipping Keycloak sync for {0}".format(
+            "keycloak_allowed_groups is not set, skipping Keycloak sync for {0}".format(
                 institution.getId()
             )
         )
@@ -176,8 +202,21 @@ def fetch_institution_keycloak_users(institution):
     if not token:
         return None
 
-    group_id = get_keycloak_group_id(realm, group_name, token)
-    if not group_id:
+    users = {}
+    resolved = 0
+    for group_name in allowed_groups:
+        group_id = get_keycloak_group_id(realm, group_name, token)
+        if not group_id:
+            continue
+        resolved += 1
+        for user in get_keycloak_group_members(realm, group_id, token):
+            # Union across groups: a user in two allowed groups is one user.
+            email = (user.get("email") or "").strip()
+            if email:
+                users[email] = user
+    if not resolved:
+        # None of the configured groups exist in this realm -- a
+        # misconfiguration, not an empty group. Do not let the sync read that
+        # as "every member left" and unregister them all.
         return None
-
-    return get_keycloak_group_members(realm, group_id, token)
+    return list(users.values())

@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.registry.field import TextLine
-from plone.registry.interfaces import IRegistry
-from plone.registry.record import Record
 from plonemeeting.portal.core.browser.manage_users import LOCAL_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import get_admin_access_token
 from plonemeeting.portal.core.keycloak import get_keycloak_realms
 from plonemeeting.portal.core.migrations import PlonemeetingMigrator
+from plonemeeting.portal.core.oidc import disable_oidc_challenge_if_unconfigured
+from plonemeeting.portal.core.oidc import setup_oidc_plugin
 from plonemeeting.portal.core.utils import get_members_group_id
-from zope.component import getUtility
 
 import difflib
 import logging
@@ -48,40 +46,52 @@ class MigrateTo2500(PlonemeetingMigrator):
                 logger.warning("No matching Keycloak realm for %s", institution.getId())
 
     def _backfill_account_types(self):
-        """Flag every existing institution member as a local account.
+        """Flag institution members that predate ``account_type`` as local.
 
-        SSO accounts get promoted to 'sso' automatically the next time the
-        Keycloak sync runs on the users listing.
+        Only members with no value yet are touched: the step is re-runnable,
+        and an account already promoted to 'sso' by the Keycloak sync must not
+        be demoted back to local here -- the listing would show it as Local,
+        and it would only recover on the next successful sync.
         """
         for brain in self.catalog(portal_type="Institution"):
             group = api.group.get(get_members_group_id(brain.getObject()))
             if group is None:
                 continue
             for member in group.getGroupMembers():
+                if member.getProperty("account_type", ""):
+                    continue
                 member.setMemberProperties(mapping={"account_type": LOCAL_ACCOUNT_TYPE})
 
-    def _register_sso_management_url(self):
-        """Add the sso_management_url registry record (KISS: just this record,
-        so we don't re-apply the whole registry.xml)."""
-        registry = getUtility(IRegistry)
-        key = "plonemeeting.portal.core.sso_management_url"
-        if key not in registry.records:
-            registry.records[key] = Record(
-                TextLine(title="SSO user management URL"), "https://my.imio.be"
-            )
+    def _setup_oidc_plugin(self):
+        """Install pas.plugins.oidc and configure its site-wide plugin.
+
+        The metadata.xml dependency on pas.plugins.oidc:default only applies
+        on a fresh (re)install of our profile -- upgraded sites must install
+        the add-on here, or acl_users never gets the plugin. When the
+        keycloak_* environment is incomplete the freshly installed plugin is
+        deactivated, as its active challenge would loop on anonymous 401s.
+        """
+        if not self.qi.is_product_installed("pas.plugins.oidc"):
+            self.qi.install_product("pas.plugins.oidc")
+        if setup_oidc_plugin() is None:
+            disable_oidc_challenge_if_unconfigured()
 
     def run(self):
         logger.info("Migrating to plonemeeting.portal.core 2500")
         profile = "profile-plonemeeting.portal.core:default"
         # typeinfo -> authentication fieldset on Institution
-        # memberdata -> account_type property (memberdata_properties.xml)
+        # memberdata-properties -> account_type property. NOT "memberdata":
+        # that is CMFCore's step, which queries an IMemberDataTool utility
+        # that does not exist under Plone 6 and returns silently, so
+        # memberdata_properties.xml is never read. Only CMFPlone's
+        # "memberdata-properties" step applies it to portal_memberdata.
         self.ps.runImportStepFromProfile(profile, "typeinfo")
-        self.ps.runImportStepFromProfile(profile, "memberdata")
+        self.ps.runImportStepFromProfile(profile, "memberdata-properties")
         # actions -> the admin-only "Migrate users to SSO" object button
         self.ps.runImportStepFromProfile(profile, "actions")
-        self._register_sso_management_url()
         self._backfill_sso_realm_ids()
         self._backfill_account_types()
+        self._setup_oidc_plugin()
         logger.info("Migration to plonemeeting.portal.core 2500 done.")
 
 

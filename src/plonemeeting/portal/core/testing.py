@@ -30,6 +30,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         import imio.omnia.assistant
         import imio.omnia.core
         import imio.omnia.tinymce
+        import pas.plugins.oidc
         import plone.restapi
 
         self.loadZCML(package=plone.restapi)
@@ -37,6 +38,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         self.loadZCML(package=imio.omnia.core)
         self.loadZCML(package=imio.omnia.assistant)
         self.loadZCML(package=imio.omnia.tinymce)
+        self.loadZCML(package=pas.plugins.oidc)
         self.loadZCML(package=plonemeeting.portal.core)
 
         # Patch collective.fingerpointing

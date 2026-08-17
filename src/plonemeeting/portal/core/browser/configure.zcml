@@ -259,6 +259,15 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <browser:page
+    name="login-choice"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".login.LoginChoiceView"
+    template="templates/login_choice.pt"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
   <!-- author is called on INavigationRoot -->
   <configure package="Products.CMFPlone.browser">
     <browser:page

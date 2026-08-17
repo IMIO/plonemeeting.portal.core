@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xml:lang="en"
+      lang="en"
+   metal:use-macro="context/@@main_template/macros/master"
+   i18n:domain="plonemeeting.portal.core"
+>
+<body>
+<metal:main fill-slot="main">
+  <metal:main-macro define-macro="main">
+
+    <!-- .template-login wrapper: reuse the /login card styling (the theme
+         scopes it on the login view's body class, which this view lacks). -->
+    <div class="template-login">
+      <div class="login-wrapper">
+
+        <div class="card w-100">
+          <div class="card-header">
+            <i class="bi bi-shield-lock"></i> Authentification
+          </div>
+          <div class="card-img-top">
+            <img alt="Site logo" src="@@site-logo/logo.svg" title="Délibérations.be">
+          </div>
+          <div class="card-body">
+            <h2 class="card-title" i18n:translate="label_login_choice">Authentication method</h2>
+            <div class="d-grid gap-2 login-choice-buttons">
+              <a class="btn btn-wallonie-connect"
+                 title="Log in with Wallonie Connect"
+                 i18n:attributes="title label_login_sso"
+                 tal:attributes="href view/sso_login_url">
+                <img alt="Wallonie Connect"
+                     src="++plone++plonemeeting.portal.core/assets/logo-wallonie-connect-light.svg">
+              </a>
+              <a class="btn btn-outline-secondary fw-bold"
+                 tal:attributes="href view/local_login_url">
+                <i class="bi bi-person-fill"></i>
+                <span i18n:translate="label_login_local">Délibérations.be account</span>
+              </a>
+            </div>
+            <div class="alert alert-info login-choice-info">
+              <i class="bi bi-info-circle-fill"></i>
+              <span i18n:translate="msg_login_choice_migration">
+                User accounts are progressively being migrated to Wallonie Connect.
+                If you cannot log in with Wallonie Connect yet, use your délibérations.be account.
+              </span>
+            </div>
+          </div>
+          <div class="card-footer text-muted" i18n:translate="">
+            Please note, if you are a citizen wanting to consult the website, you can do so without logging in.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </metal:main-macro>
+</metal:main>
+</body>
+</html>

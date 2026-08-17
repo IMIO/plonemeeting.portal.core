@@ -13,7 +13,8 @@ KC_ENV_KEYS = (
     "keycloak_url",
     "keycloak_admin_user",
     "keycloak_admin_password",
-    "keycloak_delib_group_name",
+    "keycloak_allowed_groups",
+    "keycloak_add_user_url",
 )
 
 
@@ -29,7 +30,8 @@ class TestSSOUserSync(PmPortalDemoFunctionalTestCase):
         os.environ["keycloak_url"] = "https://kc.test/"
         os.environ["keycloak_admin_user"] = "admin"
         os.environ["keycloak_admin_password"] = "pw"
-        os.environ["keycloak_delib_group_name"] = "délibérations.be"
+        os.environ["keycloak_allowed_groups"] = '["délibérations.be"]'
+        os.environ["keycloak_add_user_url"] = "https://my-formulaires.imio.be/wca/"
 
     def tearDown(self):
         for key, value in self._env_snapshot.items():
@@ -203,7 +205,13 @@ class TestSSOUserSync(PmPortalDemoFunctionalTestCase):
         pub.reindexObject()
         self.assertTrue(ITimeStamper(pub).is_timestamped())
 
-        summary = migrate_institution_local_users(self.institution)
+        # The migration now syncs the Keycloak accounts first; keep the test
+        # offline and focused on the migration mechanics.
+        with patch(
+            "plonemeeting.portal.core.browser.manage_users.sync_institution_keycloak_users",
+            return_value=(0, 0, 0),
+        ):
+            summary = migrate_institution_local_users(self.institution)
 
         self.assertIn(("jsmith", "j.smith@example.com"), summary["migrated"])
         self.assertIsNone(api.user.get("jsmith"))
@@ -277,7 +285,7 @@ class TestSSOUserSync(PmPortalDemoFunctionalTestCase):
         self.assertNotIn(
             "@@manage-edit-user?username=alice@example.com", html
         )  # no local edit link for an SSO account
-        self.assertIn("https://my.imio.be", html)  # "Add users on myiMio" button
+        self.assertIn("https://my-formulaires.imio.be/wca/", html)  # "Add users" button
 
     @patch("plonemeeting.portal.core.browser.manage_users.fetch_institution_keycloak_users")
     def test_listing_flags_sync_failure(self, fetch_mock):

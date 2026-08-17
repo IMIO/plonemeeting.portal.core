@@ -8,29 +8,34 @@ Changelog
   lose the existing qualified timestamp, and advise recreating it through the
   supersede ("remplacé par") archiving system.
   [DELIBE-317]
-- Add ``authentication`` (Choice: Plone / OIDC-Keycloak, defaults to
-  Plone) and ``sso_realm_id`` (TextLine) fields to ``Institution``,
-  grouped in a new "Authentification" fieldset, to allow per-institution
-  SSO/Keycloak configuration. Schema only — login wiring is a follow-up.
-  (DELIBE-297)
+- DELIBE-297: Integrate Wallonie Connect (Keycloak) SSO through a new
+  ``pas.plugins.oidc`` dependency. A single site-wide ``oidc`` PAS plugin is
+  installed and configured from the ``keycloak_*`` environment variables
+  (issuer, client id/secret, allowed groups) and stays deactivated while
+  unconfigured. Institutions get an "Authentication" fieldset:
+  ``authentication`` (Plone / OIDC-Keycloak) and ``sso_realm_id``, which
+  scopes the Keycloak admin-API user sync.
   [aduchene]
-
-- Unify SSO and local user management into a single "Users management"
-  view. Added an "Account type" column (Local / SSO pill); SSO accounts
-  get a read-only edit popup and no unregister button, local accounts
-  keep the editable popup and unregister. SSO institutions reconcile with
-  Keycloak on every load (removed the throttle and the manual "Refresh
-  Users" button) and surface a warning when Keycloak is unreachable.
-  Accounts provisioned by Keycloak are flagged with a new ``account_type``
-  memberdata property, so the sync only reconciles SSO-managed accounts
-  and never purges local ones. The 2500 upgrade also fuzzy-fills each
-  institution's ``sso_realm_id`` from the available Keycloak realms.
-  For SSO institutions the listing shows an "Add users on myiMio" button
-  linking (new tab) to the ``plonemeeting.portal.core.sso_management_url``
-  registry record (default ``https://my.imio.be``). The SSO edit popup now
-  states that the username, email address and full name are managed by the
-  identity provider (SSO) and cannot be changed there, instead of reusing the
-  local form's misleading password-recovery wording. (DELIBE-297)
+- DELIBE-297: Unify SSO and local user management in a single "Users
+  management" view. Institution members are reconciled with Keycloak on
+  every load (with a warning when it is unreachable); provisioned accounts
+  are flagged with a new ``account_type`` memberdata property and shown
+  with a Local/SSO pill. SSO accounts are read-only (managed by the
+  identity provider) and an "Add users" button links to the
+  ``keycloak_add_user_url`` form.
+  [aduchene]
+- DELIBE-297: Route logins by authentication method. The footer's "Log in"
+  goes straight to the OIDC flow for Keycloak institutions, and on the
+  portal home page to a new ``@@login-choice`` page offering Wallonie
+  Connect or a délibérations.be account.
+  [aduchene]
+- DELIBE-297: Add an admin-only "Migrate users to SSO" action on
+  institutions (``@@migrate-institution-users``, also exposed as ``POST
+  @migrate-users-to-sso`` on the REST API). After a Keycloak sync, each
+  local account whose email matches an SSO account has its group
+  memberships, content ownership and Creator reassigned, then is deleted —
+  without firing any modified event or touching modification dates, so
+  qualified timestamps are preserved.
   [aduchene]
 
 2.4.4 (2026-07-09)

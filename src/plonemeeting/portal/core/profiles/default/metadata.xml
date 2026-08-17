@@ -14,5 +14,6 @@
     <dependency>profile-imio.omnia.core:default</dependency>
     <dependency>profile-imio.omnia.assistant:default</dependency>
     <dependency>profile-imio.omnia.tinymce:default</dependency>
+    <dependency>profile-pas.plugins.oidc:default</dependency>
   </dependencies>
 </metadata>

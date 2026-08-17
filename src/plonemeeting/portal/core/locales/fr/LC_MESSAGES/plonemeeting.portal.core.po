@@ -1190,8 +1190,8 @@ msgstr "SSO"
 
 #. Default: "Add users on myiMio"
 #: ../browser/templates/manage_users_listing.pt:150
-msgid "label_add_users_myimio"
-msgstr "Ajouter des utilisateurs sur myiMio"
+msgid "label_add_users_sso"
+msgstr "Ajouter des utilisateurs"
 
 #. Default: "Migrate users to SSO"
 msgid "Migrate users to SSO"
@@ -1250,6 +1250,31 @@ msgstr "L'identifiant, l'adresse e-mail et le nom complet de cet utilisateur son
 #: ../browser/manage_users.py:430
 msgid "help_sso_managed_field"
 msgstr "Ce champ est géré par votre fournisseur d'identité (SSO) et ne peut pas être modifié ici."
+
+#. Default: "The SSO server could not be reached; nothing was migrated."
+#: ../browser/manage_users.py:625
+msgid "msg_migration_sync_failed"
+msgstr "Le serveur SSO est injoignable, aucune migration n'a été effectuée."
+
+#. Default: "Authentication method"
+#: ../browser/templates/login_choice.pt:52
+msgid "label_login_choice"
+msgstr "Mode d'authentification"
+
+#. Default: "User accounts are progressively being migrated to Wallonie Connect. If you cannot log in with Wallonie Connect yet, use your délibérations.be account."
+#: ../browser/templates/login_choice.pt:53
+msgid "msg_login_choice_migration"
+msgstr "Les comptes utilisateurs sont progressivement migrés vers Wallonie Connect. Si vous ne parvenez pas encore à vous connecter via Wallonie Connect, utilisez votre compte délibérations.be."
+
+#. Default: "Log in with Wallonie Connect"
+#: ../browser/templates/login_choice.pt:58
+msgid "label_login_sso"
+msgstr "Se connecter avec Wallonie Connect"
+
+#. Default: "Délibérations.be account"
+#: ../browser/templates/login_choice.pt:63
+msgid "label_login_local"
+msgstr "Compte délibérations.be"
 
 #: ../content/institution.py:225
 msgid "meeting_filter_query_description"

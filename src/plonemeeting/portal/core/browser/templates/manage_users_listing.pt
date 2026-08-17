@@ -81,7 +81,7 @@
           <td class="text-end">
             <!-- "Edit" link: opens the type-specific form in a modal -->
             <a class="btn btn-sm btn-secondary pat-plone-modal pat-inject"
-               tal:attributes="href python: ('@@manage-edit-sso-user' if view.is_sso_user(user) else '@@manage-edit-user') + '?username=' + user.id"
+               tal:attributes="href python: view.edit_url(user)"
                data-pat-inject='{
                            "target": "#myModal .modal-body",
                            "source": "el.href",
@@ -100,7 +100,7 @@
             <!-- "Unregister" link (local accounts only): direct GET with confirm -->
             <a tal:condition="python: not view.is_sso_user(user)"
                class="btn btn-sm btn-danger"
-               tal:attributes="href python: view.unregister_url + '&username=' + user.id"
+               tal:attributes="href python: view.unregister_user_url(user)"
                confirm-message="Are you sure you want to unregister this user?"
                i18n:attributes="value; confirm-message"
                onclick="return confirm(this.getAttribute('confirm-message'));">
@@ -155,16 +155,16 @@
       </div>
     </div>
 
-    <!-- SSO institutions: add users on the external myiMio portal -->
-    <div class="row" tal:condition="python: view.is_sso_institution and view.sso_management_url()">
+    <!-- SSO institutions: add users on the external identity provider -->
+    <div class="row" tal:condition="python: view.is_sso_institution and view.keycloak_add_user_url()">
       <div class="col-lg-12 d-flex flex-row-reverse">
         <a class="btn btn-primary mb-3"
-           tal:attributes="href view/sso_management_url"
+           tal:attributes="href view/keycloak_add_user_url"
            target="_blank"
            rel="noopener noreferrer"
            role="button">
           <i class="bi bi-box-arrow-up-right me-1"></i>
-          <span i18n:translate="label_add_users_myimio">Add users on myiMio</span>
+          <span i18n:translate="label_add_users_sso">Add users</span>
         </a>
       </div>
     </div>
