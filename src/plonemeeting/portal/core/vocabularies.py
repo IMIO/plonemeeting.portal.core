@@ -33,6 +33,19 @@ class EnabledTabsVocabularyFactory:
 EnabledTabsVocabulary = EnabledTabsVocabularyFactory()
 
 
+class AuthenticationMethodsVocabularyFactory:
+    def __call__(self, context):
+        return SimpleVocabulary(
+            (
+                SimpleTerm(value="plone", title=_("Plone")),
+                SimpleTerm(value="oidc", title=_("OIDC/Keycloak")),
+            ),
+        )
+
+
+AuthenticationMethodsVocabulary = AuthenticationMethodsVocabularyFactory()
+
+
 class GlobalCategoryVocabularyFactory:
     def __call__(self, context):
         # use .copy() to make sure to return a copy of the record

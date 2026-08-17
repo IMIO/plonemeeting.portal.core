@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-01-26 14:28+0000\n"
+"POT-Creation-Date: 2026-05-12 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plonemeeting.portal.core\n"
 
-#: ../vocabularies.py:142
+#: ../vocabularies.py:155
 msgid "(Passed term of office) ${representative_value}"
 msgstr ""
 
@@ -25,7 +25,15 @@ msgstr ""
 msgid "<i class=\"bi bi-clock-fill\"></i><span>Horodatage qualifié</span>"
 msgstr ""
 
-#: ../content/institution.py:460
+#: ../content/institution.py:382
+msgid "AI"
+msgstr ""
+
+#: ../content/institution.py:396
+msgid "AI assistant system prompt"
+msgstr ""
+
+#: ../content/institution.py:505
 msgid "Activated templates"
 msgstr ""
 
@@ -45,7 +53,7 @@ msgstr ""
 msgid "Additional data"
 msgstr ""
 
-#: ../vocabularies.py:312
+#: ../vocabularies.py:325
 msgid "All templates"
 msgstr ""
 
@@ -67,6 +75,14 @@ msgstr ""
 
 #: ../profiles/default/registry.xml
 msgid "Assemblée générale"
+msgstr ""
+
+#: ../content/institution.py:407
+msgid "Authentication"
+msgstr ""
+
+#: ../content/institution.py:412
+msgid "Authentication method"
 msgstr ""
 
 #: ../content/publication.py:92
@@ -92,7 +108,7 @@ msgstr ""
 msgid "Categories mappings"
 msgstr ""
 
-#: ../content/institution.py:502
+#: ../content/institution.py:547
 msgid "Categories mappings - iA.Delib category mapped more than once : ${categories_title}"
 msgstr ""
 
@@ -130,6 +146,10 @@ msgstr ""
 
 #: ../content/institution.py:177
 msgid "Custom page for GDPR text"
+msgstr ""
+
+#: ../content/institution.py:397
+msgid "Custom system prompt injected server-side for this institution. Leave empty to use the global default."
 msgstr ""
 
 #: ../content/item.py:59
@@ -201,6 +221,10 @@ msgstr ""
 msgid "Edit this institution"
 msgstr ""
 
+#: ../content/institution.py:387
+msgid "Enable AI assistant"
+msgstr ""
+
 #: ../content/institution.py:157
 msgid "Enabled tabs"
 msgstr ""
@@ -215,6 +239,10 @@ msgstr ""
 
 #: ../browser/templates/publication.pt:235
 msgid "Entrée en vigueur"
+msgstr ""
+
+#: ../content/institution.py:388
+msgid "Experimental feature: do not enable this unless you have contacted iMio support first."
 msgstr ""
 
 #: ../browser/templates/publication.pt:133
@@ -240,11 +268,11 @@ msgstr ""
 msgid "Faceted publications preview"
 msgstr ""
 
-#: ../content/institution.py:430
+#: ../content/institution.py:475
 msgid "Footer color"
 msgstr ""
 
-#: ../content/institution.py:438
+#: ../content/institution.py:483
 msgid "Footer text color"
 msgstr ""
 
@@ -276,7 +304,7 @@ msgstr ""
 msgid "Groups in charge"
 msgstr ""
 
-#: ../content/institution.py:398
+#: ../content/institution.py:443
 msgid "Header color"
 msgstr ""
 
@@ -380,6 +408,10 @@ msgstr ""
 msgid "JavaScript integrations"
 msgstr ""
 
+#: ../content/institution.py:420
+msgid "Keycloak realm used for SSO authentication."
+msgstr ""
+
 #: ../faceted/macro_item.pt:56
 msgid "Last modification"
 msgstr ""
@@ -411,7 +443,7 @@ msgstr ""
 msgid "Legislative authority title"
 msgstr ""
 
-#: ../content/institution.py:422
+#: ../content/institution.py:467
 msgid "Links text color"
 msgstr ""
 
@@ -419,7 +451,7 @@ msgstr ""
 msgid "Local category id"
 msgstr ""
 
-#: ../content/institution.py:394
+#: ../content/institution.py:439
 msgid "Logo"
 msgstr ""
 
@@ -484,11 +516,11 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
-#: ../content/institution.py:406
+#: ../content/institution.py:451
 msgid "Navigation bar color"
 msgstr ""
 
-#: ../content/institution.py:414
+#: ../content/institution.py:459
 msgid "Navigation bar text color"
 msgstr ""
 
@@ -498,6 +530,10 @@ msgstr ""
 
 #: ../browser/sync.py:162
 msgid "No data available in table"
+msgstr ""
+
+#: ../vocabularies.py:41
+msgid "OIDC/Keycloak"
 msgstr ""
 
 #: ../behaviors/configure.zcml:17
@@ -547,6 +583,10 @@ msgstr ""
 
 #: ../browser/overrides/Products.CMFPlone.browser.login.templates.login.pt:53
 msgid "Please note, if you are a citizen wanting to consult the website, you can do so without logging in."
+msgstr ""
+
+#: ../vocabularies.py:40
+msgid "Plone"
 msgstr ""
 
 #: ../content/institution.py:201
@@ -644,7 +684,7 @@ msgstr ""
 msgid "Representatives mappings"
 msgstr ""
 
-#: ../content/institution.py:528
+#: ../content/institution.py:573
 msgid "Representatives mappings - Removing representatives linked to items is not allowed : ${representatives}"
 msgstr ""
 
@@ -654,6 +694,10 @@ msgstr ""
 
 #: ../events/institution.py:53
 msgid "Institution website"
+msgstr ""
+
+#: ../content/institution.py:419
+msgid "SSO realm ID"
 msgstr ""
 
 #: ../browser/institution.py:107
@@ -695,7 +739,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../content/institution.py:382
+#: ../content/institution.py:427
 msgid "Styling"
 msgstr ""
 
@@ -745,7 +789,7 @@ msgstr ""
 msgid "Template default settings"
 msgstr ""
 
-#: ../content/institution.py:467
+#: ../content/institution.py:512
 msgid "Template logo"
 msgstr ""
 
@@ -761,17 +805,17 @@ msgstr ""
 msgid "Template setting value"
 msgstr ""
 
-#: ../content/institution.py:477
+#: ../content/institution.py:522
 #: ../profiles/default/registry.xml
 msgid "Template settings"
 msgstr ""
 
-#: ../content/institution.py:478
+#: ../content/institution.py:523
 msgid "Template settings used to customize templates. Leave empty to use default values."
 msgstr ""
 
-#: ../content/institution.py:452
-#: ../utils.py:345
+#: ../content/institution.py:497
+#: ../utils.py:299
 msgid "Templates"
 msgstr ""
 
@@ -836,7 +880,7 @@ msgstr ""
 msgid "Uninstalls the plonemeeting.portal.core add-on."
 msgstr ""
 
-#: ../content/institution.py:564
+#: ../content/institution.py:609
 msgid "Unknown value: ${key}"
 msgstr ""
 
@@ -886,7 +930,7 @@ msgid "Web service connection error !"
 msgstr ""
 
 #: ../browser/sync.py:89
-#: ../content/institution.py:586
+#: ../content/institution.py:631
 msgid "Webservice connection error !"
 msgstr ""
 
@@ -996,7 +1040,7 @@ msgstr ""
 msgid "enableAutopublishing"
 msgstr ""
 
-#: ../content/institution.py:461
+#: ../content/institution.py:506
 msgid "enabled_templates_description"
 msgstr ""
 
@@ -1126,6 +1170,109 @@ msgstr ""
 #. Default: "Unregister"
 #: ../browser/templates/manage_users_listing.pt:91
 msgid "label_unregister"
+msgstr ""
+
+#. Default: "Account type"
+#: ../browser/templates/manage_users_listing.pt:57
+msgid "label_account_type"
+msgstr ""
+
+#. Default: "Local"
+#: ../browser/templates/manage_users_listing.pt:71
+msgid "label_account_type_local"
+msgstr ""
+
+#. Default: "SSO"
+#: ../browser/templates/manage_users_listing.pt:68
+msgid "label_account_type_sso"
+msgstr ""
+
+#. Default: "Add users"
+#: ../browser/templates/manage_users_listing.pt:159
+msgid "label_add_users_sso"
+msgstr ""
+
+#. Default: "Migrate users to SSO"
+msgid "Migrate users to SSO"
+msgstr ""
+
+#. Default: "Migrate users to SSO"
+msgid "label_migrate_users"
+msgstr ""
+
+msgid "msg_migrate_users_warning"
+msgstr ""
+
+msgid "msg_no_local_users"
+msgstr ""
+
+msgid "label_local_account"
+msgstr ""
+
+msgid "label_sso_target"
+msgstr ""
+
+msgid "label_content_items"
+msgstr ""
+
+msgid "label_status"
+msgstr ""
+
+msgid "label_will_migrate"
+msgstr ""
+
+#. Default: "No SSO account – skipped"
+msgid "label_no_sso_account"
+msgstr ""
+
+msgid "label_cancel"
+msgstr ""
+
+msgid "label_confirm_migration"
+msgstr ""
+
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}."
+msgid "msg_users_migrated"
+msgstr ""
+
+#. Default: "The SSO server could not be reached, so the user list may be out of date."
+#: ../browser/templates/manage_users_listing.pt:43
+msgid "msg_sso_sync_failed"
+msgstr ""
+
+#. Default: "The username, email address and full name of this user are managed by your identity provider (SSO) and cannot be changed here. You can only manage this user's roles within your institution."
+#: ../browser/manage_users.py:469
+msgid "desc_manage_edit_sso_user"
+msgstr ""
+
+#. Default: "This field is managed by your identity provider (SSO) and cannot be changed here."
+#: ../browser/manage_users.py:430
+msgid "help_sso_managed_field"
+msgstr ""
+
+#. Default: "The SSO server could not be reached; nothing was migrated."
+#: ../browser/manage_users.py:625
+msgid "msg_migration_sync_failed"
+msgstr ""
+
+#. Default: "Authentication method"
+#: ../browser/templates/login_choice.pt:52
+msgid "label_login_choice"
+msgstr ""
+
+#. Default: "User accounts are progressively being migrated to Wallonie Connect. If you cannot log in with Wallonie Connect yet, use your délibérations.be account."
+#: ../browser/templates/login_choice.pt:53
+msgid "msg_login_choice_migration"
+msgstr ""
+
+#. Default: "Log in with Wallonie Connect"
+#: ../browser/templates/login_choice.pt:58
+msgid "label_login_sso"
+msgstr ""
+
+#. Default: "Délibérations.be account"
+#: ../browser/templates/login_choice.pt:63
+msgid "label_login_local"
 msgstr ""
 
 #: ../content/institution.py:225

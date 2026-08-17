@@ -98,6 +98,16 @@
       </property>
       <property name="visible">True</property>
     </object>
+    <object name="migrate_institution_users" meta_type="CMF Action" i18n:domain="plonemeeting.portal.core">
+      <property name="title" i18n:translate="">Migrate users to SSO</property>
+      <property name="url_expr">string:$object_url/@@migrate-institution-users</property>
+      <property name="icon_expr">string:person-gear</property>
+      <property name="available_expr">python:context.portal_type == "Institution"</property>
+      <property name="permissions">
+        <element value="Manage portal"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
     <object name="copy" meta_type="CMF Action">
       <property name="permissions">
         <element value="Manage Portal"/>

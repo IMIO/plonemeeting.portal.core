@@ -403,6 +403,26 @@ class IInstitution(model.Schema):
         required=False,
     )
 
+    # Authentication fieldset
+    model.fieldset(
+        "authentication",
+        label=_("Authentication"),
+        fields=["authentication", "sso_realm_id"],
+    )
+
+    authentication = schema.Choice(
+        title=_("Authentication method"),
+        vocabulary="plonemeeting.portal.vocabularies.authentication_methods",
+        required=True,
+        default="plone",
+    )
+
+    sso_realm_id = schema.TextLine(
+        title=_("SSO realm ID"),
+        description=_("Keycloak realm used for SSO authentication."),
+        required=False,
+    )
+
     # Styling fieldset
     model.fieldset(
         "style",

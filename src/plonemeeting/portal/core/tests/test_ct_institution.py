@@ -199,6 +199,21 @@ class InstitutionIntegrationTest(PmPortalTestCase):
         notify(ObjectModifiedEvent(institution))
         self.assertNotIn(WEBSITE_LINK_ID, institution.objectIds())
 
+    def test_ct_institution_authentication_fields(self):
+        self.login_as_admin()
+        institution = api.content.create(
+            container=self.portal, type="Institution", id="institution"
+        )
+        # Defaults: authentication is "plone", no SSO realm.
+        self.assertEqual(institution.authentication, "plone")
+        self.assertIsNone(getattr(institution, "sso_realm_id", None))
+        # Switch to OIDC/Keycloak with a realm.
+        institution.authentication = "oidc"
+        institution.sso_realm_id = "my-realm"
+        notify(ObjectModifiedEvent(institution))
+        self.assertEqual(institution.authentication, "oidc")
+        self.assertEqual(institution.sso_realm_id, "my-realm")
+
     def test_ct_institution_modified(self):
         self.login_as_admin()
 

@@ -29,6 +29,14 @@
     layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
   />
 
+  <plone:service
+    method="POST"
+    name="@migrate-users-to-sso"
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    factory=".institution.MigrateInstitutionUsersService"
+    permission="cmf.ManagePortal"
+  />
+
   <!-- Serializers -->
   <adapter factory=".serializers.InstitutionSerializerToJson"/>
   <adapter factory=".serializers.MeetingSerializerToJson"/>

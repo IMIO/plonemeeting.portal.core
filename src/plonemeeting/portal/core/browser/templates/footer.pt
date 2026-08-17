@@ -37,7 +37,7 @@
       <div id="portal-anontools" tal:condition="isAnon">
         <i class="bi bi-person-fill"></i>
         <a href=""
-           tal:attributes="href string:${root_url}/login"
+           tal:attributes="href view/login_url"
            i18n:translate="">Log in</a>
       </div>
     </div>

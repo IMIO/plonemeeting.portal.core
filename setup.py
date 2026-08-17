@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.4.5.dev0",
+    version="2.5.0.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     long_description_content_type="text/x-rst",
@@ -58,6 +58,7 @@ setup(
         "collective.z3cform.datagridfield>=3.0.2",
         "eea.facetednavigation>=16.2",
         "natsort",
+        "pas.plugins.oidc>=2.0.0",
         "plone.api>=2.1.0",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.3",

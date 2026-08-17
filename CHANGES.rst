@@ -1,14 +1,42 @@
 Changelog
 =========
 
-2.4.5 (unreleased)
+2.5.0 (unreleased)
 ------------------
 
 - Warn managers viewing an unpublished publication that re-publishing it will
   lose the existing qualified timestamp, and advise recreating it through the
   supersede ("remplacé par") archiving system.
   [DELIBE-317]
-
+- DELIBE-297: Integrate Wallonie Connect (Keycloak) SSO through a new
+  ``pas.plugins.oidc`` dependency. A single site-wide ``oidc`` PAS plugin is
+  installed and configured from the ``keycloak_*`` environment variables
+  (issuer, client id/secret, allowed groups) and stays deactivated while
+  unconfigured. Institutions get an "Authentication" fieldset:
+  ``authentication`` (Plone / OIDC-Keycloak) and ``sso_realm_id``, which
+  scopes the Keycloak admin-API user sync.
+  [aduchene]
+- DELIBE-297: Unify SSO and local user management in a single "Users
+  management" view. Institution members are reconciled with Keycloak on
+  every load (with a warning when it is unreachable); provisioned accounts
+  are flagged with a new ``account_type`` memberdata property and shown
+  with a Local/SSO pill. SSO accounts are read-only (managed by the
+  identity provider) and an "Add users" button links to the
+  ``keycloak_add_user_url`` form.
+  [aduchene]
+- DELIBE-297: Route logins by authentication method. The footer's "Log in"
+  goes straight to the OIDC flow for Keycloak institutions, and on the
+  portal home page to a new ``@@login-choice`` page offering Wallonie
+  Connect or a délibérations.be account.
+  [aduchene]
+- DELIBE-297: Add an admin-only "Migrate users to SSO" action on
+  institutions (``@@migrate-institution-users``, also exposed as ``POST
+  @migrate-users-to-sso`` on the REST API). After a Keycloak sync, each
+  local account whose email matches an SSO account has its group
+  memberships, content ownership and Creator reassigned, then is deleted —
+  without firing any modified event or touching modification dates, so
+  qualified timestamps are preserved.
+  [aduchene]
 
 2.4.4 (2026-07-09)
 ------------------
