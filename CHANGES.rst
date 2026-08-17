@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.5.0 (unreleased)
+2.5.0 (2026-08-17)
 ------------------
 
 - Warn managers viewing an unpublished publication that re-publishing it will
