@@ -1235,6 +1235,38 @@ msgstr ""
 msgid "msg_users_migrated"
 msgstr ""
 
+#. Default: "Migrate a user to another user"
+msgid "label_migrate_user_to_user"
+msgstr ""
+
+#. Default: "Migrate a local account onto another account, for accounts whose email address does not match their SSO identity."
+msgid "desc_migrate_user_to_user"
+msgstr ""
+
+#. Default: "Account migrations"
+msgid "label_user_migrations"
+msgstr ""
+
+#. Default: "Each source account's group memberships and content are moved to the target account, then the source account is deleted. This cannot be undone."
+msgid "desc_user_migrations"
+msgstr ""
+
+#. Default: "Account to migrate"
+msgid "label_migration_source"
+msgstr ""
+
+#. Default: "Target account"
+msgid "label_migration_target"
+msgstr ""
+
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s)."
+msgid "msg_users_migrated_manual"
+msgstr ""
+
+#. Default: "Migrate a user to another user"
+msgid "Migrate a user to another user"
+msgstr ""
+
 #. Default: "The SSO server could not be reached, so the user list may be out of date."
 #: ../browser/templates/manage_users_listing.pt:43
 msgid "msg_sso_sync_failed"

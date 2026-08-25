@@ -352,6 +352,13 @@
     permission="cmf.ManagePortal"
   />
 
+  <browser:page
+    for="plonemeeting.portal.core.content.institution.IInstitution"
+    name="migrate-institution-user"
+    class=".manage_users.MigrateUserToUserFormView"
+    permission="cmf.ManagePortal"
+  />
+
   <!-- Document generation views -->
 
   <browser:page

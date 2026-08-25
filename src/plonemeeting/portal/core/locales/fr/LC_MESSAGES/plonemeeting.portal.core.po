@@ -1236,6 +1236,43 @@ msgstr "Confirmer la migration"
 msgid "msg_users_migrated"
 msgstr "${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s), ${skipped} ignoré(s)."
 
+#. Default: "Migrate a user to another user"
+msgid "label_migrate_user_to_user"
+msgstr "Migrer un utilisateur vers un autre"
+
+#. Default: "Migrate a local account onto another account, for accounts whose email address does not match their SSO identity."
+msgid "desc_migrate_user_to_user"
+msgstr ""
+"Migrer un compte local vers un autre compte, pour les comptes dont l'adresse "
+"e-mail ne correspond pas à leur identité SSO."
+
+#. Default: "Account migrations"
+msgid "label_user_migrations"
+msgstr "Migrations de comptes"
+
+#. Default: "Each source account's group memberships and content are moved to the target account, then the source account is deleted. This cannot be undone."
+msgid "desc_user_migrations"
+msgstr ""
+"Les appartenances aux groupes et le contenu de chaque compte source sont "
+"transférés vers le compte cible, puis le compte source est supprimé. Cette "
+"opération est irréversible."
+
+#. Default: "Account to migrate"
+msgid "label_migration_source"
+msgstr "Compte à migrer"
+
+#. Default: "Target account"
+msgid "label_migration_target"
+msgstr "Compte de destination"
+
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s)."
+msgid "msg_users_migrated_manual"
+msgstr "${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s)."
+
+#. Default: "Migrate a user to another user"
+msgid "Migrate a user to another user"
+msgstr "Migrer un utilisateur vers un autre"
+
 #. Default: "The SSO server could not be reached, so the user list may be out of date."
 #: ../browser/templates/manage_users_listing.pt:43
 msgid "msg_sso_sync_failed"
