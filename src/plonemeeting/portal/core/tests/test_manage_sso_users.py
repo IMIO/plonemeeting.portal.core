@@ -224,6 +224,34 @@ class TestSSOUserSync(PmPortalDemoFunctionalTestCase):
         self.assertIsNotNone(migrated_pub.timestamp)
         self.assertTrue(ITimeStamper(migrated_pub).is_timestamped())
 
+    def test_migrate_user_to_user_with_mismatched_email(self):
+        """Manual migration pairs a local account with an SSO account whose userid
+        is NOT its email (jdupont@ -> jean.dupont@) -- the case the email-based
+        migration cannot match: groups + content move, the source is deleted."""
+        from plonemeeting.portal.core.browser.manage_users import migrate_institution_user
+
+        self.login_as_admin()
+        # Local account whose email does not match the target SSO userid.
+        self.portal.acl_users._doAddUser("jdupont", "pw", [], [])
+        api.user.get("jdupont").setMemberProperties(mapping={"email": "jdupont@example.com"})
+        api.group.add_user(groupname=self.members_group_id, username="jdupont")
+        # SSO account with a different userid.
+        self.portal.acl_users._doAddUser("jean.dupont@example.com", "pw", [], [])
+        pub = api.content.create(
+            container=self.institution.publications, type="Publication", id="pub-y", title="Y"
+        )
+        pub.creators = ("jdupont",)
+        pub.reindexObject()
+
+        count = migrate_institution_user(self.institution, "jdupont", "jean.dupont@example.com")
+
+        self.assertEqual(count, 1)
+        self.assertIsNone(api.user.get("jdupont"))
+        self.assertIn("jean.dupont@example.com", self._members())
+        self.assertEqual(
+            self.institution.publications["pub-y"].creators, ("jean.dupont@example.com",)
+        )
+
     def test_fetch_skips_when_no_admin_credentials(self):
         """Without admin env vars, no HTTP is attempted."""
         from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plonemeeting.portal.core.browser.manage_users import LOCAL_ACCOUNT_TYPE
+from plonemeeting.portal.core.config import LOCAL_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import get_admin_access_token
 from plonemeeting.portal.core.keycloak import get_keycloak_realms
 from plonemeeting.portal.core.migrations import PlonemeetingMigrator
@@ -79,12 +79,6 @@ class MigrateTo2500(PlonemeetingMigrator):
     def run(self):
         logger.info("Migrating to plonemeeting.portal.core 2500")
         profile = "profile-plonemeeting.portal.core:default"
-        # typeinfo -> authentication fieldset on Institution
-        # memberdata-properties -> account_type property. NOT "memberdata":
-        # that is CMFCore's step, which queries an IMemberDataTool utility
-        # that does not exist under Plone 6 and returns silently, so
-        # memberdata_properties.xml is never read. Only CMFPlone's
-        # "memberdata-properties" step applies it to portal_memberdata.
         self.ps.runImportStepFromProfile(profile, "typeinfo")
         self.ps.runImportStepFromProfile(profile, "memberdata-properties")
         # actions -> the admin-only "Migrate users to SSO" object button

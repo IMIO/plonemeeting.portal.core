@@ -1,3 +1,5 @@
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.users.schema import checkEmailAddress
 from plone.app.users.schema import ProtectedEmail
@@ -11,6 +13,7 @@ from plone.z3cform.layout import wrap_form
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
+from plonemeeting.portal.core.config import SSO_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users
 from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
@@ -26,12 +29,6 @@ from zope.interface import alsoProvides
 from zope.interface import Interface
 
 import os
-
-
-# Values of the ``account_type`` member property: SSO for Keycloak-provisioned
-# accounts (set by the sync), local for accounts managed inside Plone.
-SSO_ACCOUNT_TYPE = "sso"
-LOCAL_ACCOUNT_TYPE = "local"
 
 
 def get_user_manageable_institution_groups(username, institution):
@@ -587,6 +584,28 @@ def _reassign_content_ownership(catalog, institution_path, old_id, new_user):
     return count
 
 
+def migrate_institution_user(institution, old_id, new_id, catalog=None, group_tool=None):
+    """Migrate account ``old_id`` onto ``new_id`` within ``institution``.
+
+    Copy the source account's group memberships to the target, reassign the
+    content the source owns in the institution, then delete the source account.
+    Returns the number of content items reassigned.
+    """
+    if catalog is None:
+        catalog = getToolByName(institution, "portal_catalog")
+    if group_tool is None:
+        group_tool = getToolByName(institution, "portal_groups")
+    for group in api.group.get_groups(username=old_id):
+        if group.getId() != "AuthenticatedUsers":
+            group_tool.addPrincipalToGroup(new_id, group.getId())
+    institution_path = "/".join(institution.getPhysicalPath())
+    count = _reassign_content_ownership(
+        catalog, institution_path, old_id, api.user.get(userid=new_id).getUser()
+    )
+    api.user.delete(username=old_id)
+    return count
+
+
 def migrate_institution_local_users(institution):
     """Migrate the institution's local accounts to their SSO identity.
 
@@ -605,7 +624,6 @@ def migrate_institution_local_users(institution):
         return None
     catalog = getToolByName(institution, "portal_catalog")
     group_tool = getToolByName(institution, "portal_groups")
-    institution_path = "/".join(institution.getPhysicalPath())
     summary = {"migrated": [], "skipped": [], "content": 0}
     for member in institution.get_all_institution_users():
         old_id = member.getId()
@@ -616,13 +634,9 @@ def migrate_institution_local_users(institution):
         if not email or email == old_id or new_member is None:
             summary["skipped"].append(old_id)
             continue
-        for group in api.group.get_groups(username=old_id):
-            if group.getId() != "AuthenticatedUsers":
-                group_tool.addPrincipalToGroup(email, group.getId())
-        summary["content"] += _reassign_content_ownership(
-            catalog, institution_path, old_id, new_member.getUser()
+        summary["content"] += migrate_institution_user(
+            institution, old_id, email, catalog=catalog, group_tool=group_tool
         )
-        api.user.delete(username=old_id)
         summary["migrated"].append((old_id, email))
     return summary
 
@@ -683,3 +697,91 @@ class MigrateInstitutionUsersView(BrowserView):
             self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-users-listing")
             return ""
         return self.index()
+
+
+# ==================== Manual user-to-user account migration ===================
+
+
+class IUserMigrationRowSchema(Interface):
+    """One source -> target account pairing in the migration grid."""
+
+    source = schema.Choice(
+        title=_("label_migration_source", default="Account to migrate"),
+        vocabulary="plonemeeting.portal.vocabularies.institution_local_users",
+        required=True,
+    )
+    target = schema.Choice(
+        title=_("label_migration_target", default="Target account"),
+        vocabulary="plonemeeting.portal.vocabularies.institution_sso_users",
+        required=True,
+    )
+
+
+class IMigrateUserToUserForm(Interface):
+
+    directives.widget(
+        "migrations",
+        DataGridFieldFactory,
+        auto_append=True,
+        display_table_css_class="table table-bordered table-striped",
+    )
+    migrations = schema.List(
+        title=_("label_user_migrations", default="Account migrations"),
+        description=_(
+            "desc_user_migrations",
+            default="Each source account's group memberships and content are moved to "
+            "the target account, then the source account is deleted. This cannot be undone.",
+        ),
+        value_type=DictRow(title="Account migration", schema=IUserMigrationRowSchema),
+        required=True,
+    )
+
+
+class MigrateUserToUserForm(BaseManageUserForm):
+    """Admin-only (cmf.ManagePortal): manually migrate local accounts onto another
+    account when their email does not match their SSO identity, so the automatic
+    email-based migration cannot pair them (e.g. jdupont@ -> jean.dupont@)."""
+
+    schema = IMigrateUserToUserForm
+    ignoreContext = True
+    label = _("label_migrate_user_to_user", default="Migrate a user to another user")
+    description = _(
+        "desc_migrate_user_to_user",
+        default="Migrate a local account onto another account, for accounts whose email "
+        "address does not match their SSO identity.",
+    )
+
+    @button.buttonAndHandler(_("label_confirm_migration"), name="migrate")
+    def handleMigrate(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.messages.add(self.formErrorsMessage, type="error")
+            return
+        migrated = 0
+        content = 0
+        for row in data.get("migrations") or []:
+            source = row.get("source")
+            target = row.get("target")
+            # The vocabularies already restrict the choices, but the grid is
+            # client-controlled: only migrate a source that is a member of this
+            # institution onto a distinct, existing target account.
+            if not source or not target or source == target:
+                continue
+            if not self.is_institution_member(source) or api.user.get(userid=target) is None:
+                continue
+            content += migrate_institution_user(
+                self.context, source, target, group_tool=self.group_tool
+            )
+            migrated += 1
+        self.messages.add(
+            _(
+                "msg_users_migrated_manual",
+                default="Migrated ${migrated} account(s), reassigned ${content} content item(s).",
+                mapping={"migrated": migrated, "content": content},
+            ),
+            type="info",
+        )
+        self.request.response.redirect(f"{self.context.absolute_url()}/@@manage-users-listing")
+
+
+MigrateUserToUserFormView = wrap_form(MigrateUserToUserForm)

@@ -161,6 +161,18 @@
   />
 
   <utility
+    component=".vocabularies.InstitutionLocalUsersVocabulary"
+    name="plonemeeting.portal.vocabularies.institution_local_users"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.InstitutionSSOUsersVocabulary"
+    name="plonemeeting.portal.vocabularies.institution_sso_users"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
     component=".vocabularies.TemplatesContentTypesVocabulary"
     name="collective.documentgenerator.PortalTypes"
     provides="zope.schema.interfaces.IVocabularyFactory"

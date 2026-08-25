@@ -32,6 +32,11 @@ MANAGEABLE_INSTITUTION_SUFFIXES = (
     "managers"
 )
 
+# Values of the ``account_type`` member property: SSO for Keycloak-provisioned
+# accounts (set by the sync), local for accounts managed inside Plone.
+SSO_ACCOUNT_TYPE = "sso"
+LOCAL_ACCOUNT_TYPE = "local"
+
 PLONEMEETING_API_MEETING_TYPE = "meeting"
 PLONEMEETING_API_ITEM_TYPE = "item"
 

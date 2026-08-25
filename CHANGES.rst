@@ -4,7 +4,9 @@ Changelog
 2.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-297: Add an admin-only page to manually migrate a user account onto
+  another one, for accounts whose email does not match their SSO identity.
+  [aduchene]
 
 
 2.5.0 (2026-08-17)

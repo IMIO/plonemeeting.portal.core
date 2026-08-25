@@ -8,6 +8,7 @@ from plonemeeting.portal.core.config import CATEGORY_IA_DELIB_FIELDS
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.config import DOCUMENTGENERATOR_GENERABLE_CONTENT_TYPES
 from plonemeeting.portal.core.config import PUB_FOLDER_ID
+from plonemeeting.portal.core.config import SSO_ACCOUNT_TYPE
 from plonemeeting.portal.core.content.institution import Institution
 from plonemeeting.portal.core.utils import format_meeting_date_and_state
 from plonemeeting.portal.core.utils import get_api_url_for_meetings
@@ -275,6 +276,54 @@ class InstitutionManageableGroupsVocabularyFactory:
 
 
 InstitutionManageableGroupsVocabulary = InstitutionManageableGroupsVocabularyFactory()
+
+
+def _institution_user_term(member):
+    """A ``SimpleTerm`` labelling an institution member by full name and userid."""
+    fullname = (member.getProperty("fullname", "") or "").strip()
+    userid = member.getId()
+    title = f"{fullname} ({userid})" if fullname else userid
+    return SimpleTerm(value=userid, title=title)
+
+
+class InstitutionLocalUsersVocabularyFactory:
+    """Local (non-SSO) accounts of the current institution."""
+
+    def __call__(self, context):
+        # In a DataGridField row the vocabulary is called with context=None.
+        if context is None:
+            context = get_context_from_request()
+        if not isinstance(context, Institution):
+            return SimpleVocabulary([])
+        terms = [
+            _institution_user_term(member)
+            for member in context.get_all_institution_users()
+            if member.getProperty("account_type", "") != SSO_ACCOUNT_TYPE
+        ]
+        return SimpleVocabulary(humansorted(terms, key=lambda term: term.title.lower()))
+
+
+InstitutionLocalUsersVocabulary = InstitutionLocalUsersVocabularyFactory()
+
+
+class InstitutionSSOUsersVocabularyFactory:
+    """SSO (Keycloak-provisioned) accounts of the current institution."""
+
+    def __call__(self, context):
+        # In a DataGridField row the vocabulary is called with context=None.
+        if context is None:
+            context = get_context_from_request()
+        if not isinstance(context, Institution):
+            return SimpleVocabulary([])
+        terms = [
+            _institution_user_term(member)
+            for member in context.get_all_institution_users()
+            if member.getProperty("account_type", "") == SSO_ACCOUNT_TYPE
+        ]
+        return SimpleVocabulary(humansorted(terms, key=lambda term: term.title.lower()))
+
+
+InstitutionSSOUsersVocabulary = InstitutionSSOUsersVocabularyFactory()
 
 
 class TemplatesContentTypesVocabularyFactory(object):
