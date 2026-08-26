@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.5.1 (unreleased)
+2.5.1 (2026-08-26)
 ------------------
 
 - DELIBE-297: Add an admin-only page to manually migrate a user account onto
