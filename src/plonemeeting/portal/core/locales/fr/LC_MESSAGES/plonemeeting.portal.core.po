@@ -1232,9 +1232,11 @@ msgstr "Annuler"
 msgid "label_confirm_migration"
 msgstr "Confirmer la migration"
 
-#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}."
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}, failed ${failed}."
 msgid "msg_users_migrated"
-msgstr "${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s), ${skipped} ignoré(s)."
+msgstr ""
+"${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s), ${skipped} "
+"ignoré(s), ${failed} en échec."
 
 #. Default: "Migrate a user to another user"
 msgid "label_migrate_user_to_user"

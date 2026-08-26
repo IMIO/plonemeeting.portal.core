@@ -7,6 +7,7 @@ from plonemeeting.portal.core.migrations import PlonemeetingMigrator
 from plonemeeting.portal.core.oidc import disable_oidc_challenge_if_unconfigured
 from plonemeeting.portal.core.oidc import setup_oidc_plugin
 from plonemeeting.portal.core.utils import get_members_group_id
+from Products.CMFCore.interfaces import IContentish
 
 import difflib
 import logging
@@ -62,6 +63,24 @@ class MigrateTo2500(PlonemeetingMigrator):
                     continue
                 member.setMemberProperties(mapping={"account_type": LOCAL_ACCOUNT_TYPE})
 
+    def _uncatalog_tools(self):
+        """Uncatalog the portal's tools.
+
+        ``reindexObjectSecurity()`` calls ``ob.reindexObject(idxs=...,
+        update_metadata=0)`` on every brain of the subtree, but a tool's
+        ``reindexObject()`` takes a positional ``object``
+        (``CatalogTool.reindexObject``). A site-wide security reindex -- which
+        every user deletion runs -- therefore raises TypeError and loses the
+        caller's whole transaction.
+        """
+        for obj in self.portal.objectValues():
+            if IContentish.providedBy(obj):
+                continue
+            path = "/".join(obj.getPhysicalPath())
+            if path in self.catalog._catalog.uids:
+                logger.warning("Uncataloging %s: not content", path)
+                self.catalog.uncatalog_object(path)
+
     def _setup_oidc_plugin(self):
         """Install pas.plugins.oidc and configure its site-wide plugin.
 
@@ -86,6 +105,7 @@ class MigrateTo2500(PlonemeetingMigrator):
         self._backfill_sso_realm_ids()
         self._backfill_account_types()
         self._setup_oidc_plugin()
+        self._uncatalog_tools()
         logger.info("Migration to plonemeeting.portal.core 2500 done.")
 
 

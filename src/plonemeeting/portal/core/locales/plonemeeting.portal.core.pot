@@ -1231,7 +1231,7 @@ msgstr ""
 msgid "label_confirm_migration"
 msgstr ""
 
-#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}."
+#. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}, failed ${failed}."
 msgid "msg_users_migrated"
 msgstr ""
 
