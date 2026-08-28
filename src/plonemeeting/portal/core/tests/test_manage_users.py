@@ -12,6 +12,9 @@ from plonemeeting.portal.core.utils import get_decisions_managers_group_id
 from plonemeeting.portal.core.utils import get_managers_group_id
 from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
+from Acquisition import aq_base
+from Products.statusmessages.interfaces import IStatusMessage
+from unittest.mock import patch
 from zExceptions import Unauthorized
 from zope.component import getMultiAdapter
 
@@ -356,3 +359,132 @@ class TestManageUsers(PmPortalDemoFunctionalTestCase):
         self.assertIn(self.members_group_id, user_groups)  # Should still be in the institution
         self.assertNotIn(self.decisions_managers_group_id, user_groups)  # Should be removed
         self.assertIn(self.publications_managers_group_id, user_groups)  # Should be added
+
+    def _error_messages(self):
+        return [m for m in IStatusMessage(self.request).show() if m.type == "error"]
+
+    def test_unregister_user_from_institution_default_group_tool(self):
+        """The module-level helper looks up portal_groups itself when not given one."""
+        from plonemeeting.portal.core.browser.manage_users import unregister_user_from_institution
+
+        self.login_as_admin()
+        api.group.add_user(groupname=self.members_group_id, username="testuser")
+        api.group.add_user(groupname=self.decisions_managers_group_id, username="testuser")
+        unregister_user_from_institution(self.institution, "testuser")
+        groups = self._get_user_groups_id("testuser")
+        self.assertNotIn(self.members_group_id, groups)
+        self.assertNotIn(self.decisions_managers_group_id, groups)
+
+    def test_create_form_handle_cancel_redirects(self):
+        self.login_as_admin()
+        self.create_form()
+        self.create_form.handleCancel(action="cancel", form=self.create_form)
+        self.assertIn("manage-users-listing", self.request.response.getHeader("location") or "")
+
+    def test_create_form_handleSave_with_errors_stays(self):
+        """Extraction errors keep the form open with an error message."""
+        self.login_as_admin()
+        self.request.form["form.buttons.save"] = "Save"  # no username/email
+        self.create_form()
+        self.create_form.handleSave(action="save", form=self.create_form)
+        self.assertTrue(self._error_messages())
+
+    def test_create_form_handleSave_success_redirects(self):
+        """A clean create shows the success message and redirects to the listing."""
+        from plonemeeting.portal.core.browser.manage_users import ManageCreateUserForm
+
+        self.login_as_admin()
+        # Drop any leftover button from the shared request so update() does not
+        # auto-run the handler before we drive it explicitly below.
+        for key in [k for k in self.request.form if k.startswith("form.buttons")]:
+            del self.request.form[key]
+        self.create_form.update()
+        data = {
+            "username": "notifyuser",
+            "email": "notify@example.com",
+            "fullname": "Notify User",
+            "user_groups": [],
+        }
+        with patch.object(ManageCreateUserForm, "extractData", return_value=(data, [])), patch.object(
+            type(aq_base(self.create_form.registration)), "registeredNotify"
+        ):
+            self.create_form.handleSave(action="save", form=self.create_form)
+        self.assertIsNotNone(api.user.get(username="notifyuser"))
+        info = [m for m in IStatusMessage(self.request).show() if m.type == "info"]
+        self.assertTrue(info)
+
+    def test_edit_form_update_unregister_flow(self):
+        """``unregister=1`` on the edit form removes the user and redirects."""
+        self.login_as_admin()
+        api.group.add_user(groupname=self.members_group_id, username="testuser")
+        self.request.form["unregister"] = "1"
+        self.request.form["username"] = "testuser"
+        self.edit_form.update()
+        self.assertNotIn(self.members_group_id, self._get_user_groups_id("testuser"))
+        self.assertIn("manage-users-listing", self.request.response.getHeader("location") or "")
+
+    def test_edit_form_updateWidgets_unknown_user(self):
+        """updateWidgets bails out cleanly for an unknown username."""
+        self.login_as_admin()
+        self.request.form["username"] = "nonexistent-user-xyz"
+        self.edit_form.update()
+        self.assertNotEqual(self.edit_form.widgets["username"].value, "nonexistent-user-xyz")
+
+    def test_edit_form_handleSave_with_errors_stays(self):
+        self.login_as_admin()
+        self.request.form["form.buttons.save"] = "Save"  # missing required email
+        self.edit_form()
+        self.edit_form.handleSave(action="save", form=self.edit_form)
+        self.assertTrue(self._error_messages())
+
+    def test_edit_form_handleSave_rejects_non_member(self):
+        """Editing an existing account that is not a member of this institution is refused."""
+        self.login_as_admin()
+        self.request.form["form.widgets.username"] = "testuser"  # exists, not a member
+        self.request.form["form.widgets.email"] = "testuser@example.com"
+        self.request.form["form.widgets.fullname"] = "Test User"
+        self.request.form["form.buttons.save"] = "Save"
+        self.edit_form()
+        self.edit_form.handleSave(action="save", form=self.edit_form)
+        self.assertTrue(self._error_messages())
+        self.assertIn("manage-users-listing", self.request.response.getHeader("location") or "")
+
+    def test_edit_form_handleSave_creates_new_user(self):
+        """The edit form provisions a brand new account when the username is unknown."""
+        self.login_as_admin()
+        self.request.form["form.widgets.username"] = "editnew"
+        self.request.form["form.widgets.email"] = "editnew@example.com"
+        self.request.form["form.widgets.fullname"] = "Edit New"
+        self.request.form["form.buttons.save"] = "Save"
+        self.edit_form()
+        with patch.object(type(aq_base(self.edit_form.registration)), "registeredNotify"):
+            self.edit_form.handleSave(action="save", form=self.edit_form)
+        self.assertIsNotNone(api.user.get(username="editnew"))
+
+    def test_edit_form_handleSave_create_failure(self):
+        """A failure while provisioning surfaces an error message."""
+        self.login_as_admin()
+        self.request.form["form.widgets.username"] = "editfail"
+        self.request.form["form.widgets.email"] = "editfail@example.com"
+        self.request.form["form.widgets.fullname"] = "Edit Fail"
+        self.request.form["form.buttons.save"] = "Save"
+        self.edit_form()
+        with patch.object(self.edit_form.registration, "addMember", side_effect=Exception("boom")):
+            self.edit_form.handleSave(action="save", form=self.edit_form)
+        self.assertTrue(self._error_messages())
+
+    def test_invite_form_with_errors(self):
+        self.login_as_admin()
+        self.request.form["form.buttons.invite"] = "Invite"  # no username
+        self.invite_form()
+        self.invite_form.handleInvite(action="invite", form=self.invite_form)
+        self.assertTrue(self._error_messages())
+
+    def test_invite_form_rejects_unknown_user(self):
+        self.login_as_admin()
+        self.request.form["form.widgets.username"] = "ghost-user"
+        self.request.form["form.buttons.invite"] = "Invite"
+        self.invite_form()
+        self.invite_form.handleInvite(action="invite", form=self.invite_form)
+        members = api.group.get(self.members_group_id).getGroupMemberIds()
+        self.assertNotIn("ghost-user", members)

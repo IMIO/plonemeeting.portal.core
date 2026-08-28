@@ -148,3 +148,41 @@ class TestBrowserStatistics(PmPortalDemoFunctionalTestCase):
         self.login_as_institution_manager()
         with self.assertRaises(Unauthorized):
             self.portal.restrictedTraverse("@@plausible-statistics")
+
+    def test_create_site_non_2xx_is_logged_not_raised(self):
+        # A non-2xx from the "create site" call is only logged (the site most
+        # often already exists); it must never raise.
+        from plonemeeting.portal.core.plausible import create_site
+
+        site_id = "deliberations.be/amityville"
+        when(requests).post(
+            SITES_URL, json={"domain": site_id}, headers=API_HEADERS, timeout=TIMEOUT
+        ).thenReturn(mock({"status_code": 400, "json": lambda: {}, "text": "already exists"}))
+        create_site(site_id)
+        verify(requests, times=1).post(
+            SITES_URL, json={"domain": site_id}, headers=API_HEADERS, timeout=TIMEOUT
+        )
+
+    def test_get_shared_link_token_without_auth_raises(self):
+        # A 200 whose shared-link URL carries no ``auth`` query is unusable.
+        from plonemeeting.portal.core.plausible import get_shared_link_token
+        from plonemeeting.portal.core.plausible import PlausibleError
+
+        site_id = "deliberations.be/amityville"
+        name = f"Statistiques {site_id}"
+        when(requests).put(
+            SHARED_LINKS_URL,
+            json={"site_id": site_id, "name": name},
+            headers=API_HEADERS,
+            timeout=TIMEOUT,
+        ).thenReturn(
+            mock(
+                {
+                    "status_code": 200,
+                    "json": lambda: {"url": "https://plausible.imio.be/share/x"},
+                    "text": "",
+                }
+            )
+        )
+        with self.assertRaises(PlausibleError):
+            get_shared_link_token(site_id, name)
