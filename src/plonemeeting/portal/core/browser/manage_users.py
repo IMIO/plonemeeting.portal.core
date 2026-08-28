@@ -29,6 +29,7 @@ from zope.interface import alsoProvides
 from zope.interface import Interface
 
 import os
+import transaction
 
 
 def get_user_manageable_institution_groups(username, institution):
@@ -588,7 +589,9 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
     """Migrate account ``old_id`` onto ``new_id`` within ``institution``.
 
     Copy the source account's group memberships to the target, reassign the
-    content the source owns in the institution, then delete the source account.
+    content the source owns in the institution, then delete the source account
+    -- unless it still owns content in another institution, in which case it is
+    kept and gets deleted when that institution is migrated in turn.
     Returns the number of content items reassigned.
     """
     if catalog is None:
@@ -602,7 +605,23 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
     count = _reassign_content_ownership(
         catalog, institution_path, old_id, api.user.get(userid=new_id).getUser()
     )
-    api.user.delete(username=old_id)
+    # Content still owned lives in another institution; deleting the account
+    # would orphan its Creator. Keep it (it converges when that institution is
+    # migrated) but strip it from this institution's groups.
+    remaining = len(catalog.unrestrictedSearchResults(Creator=old_id))
+    if remaining:
+        unregister_user_from_institution(institution, old_id, group_tool=group_tool)
+        logger.info(
+            "Kept user %s: %d content item(s) left in other institution(s)",
+            old_id, remaining,
+        )
+    else:
+        # delete_localroles=0: the default runs a site-wide security reindex
+        # (minutes/account) that _reassign_content_ownership already made moot.
+        getToolByName(institution, "portal_membership").deleteMembers(
+            (old_id,), delete_localroles=0
+        )
+    logger.info("Migrated user %s -> %s: %d content item(s)", old_id, new_id, count)
     return count
 
 
@@ -613,31 +632,62 @@ def migrate_institution_local_users(institution):
     userid is that email): copy its group memberships to the SSO account,
     reassign the content it owns in the institution, then delete the local
     account. Returns a summary dict with ``migrated`` (list of (old, new)),
-    ``skipped`` (list of old ids without a matching SSO account) and
-    ``content`` (number of reassigned objects).
+    ``skipped`` (list of old ids without a matching SSO account), ``failed``
+    (list of old ids whose migration raised) and ``content`` (number of
+    reassigned objects).
 
     The institution's Keycloak accounts are synced first, so freshly
     provisioned SSO identities are matchable; when that sync fails nothing
     is migrated and ``None`` is returned.
     """
+    institution_id = institution.getId()
     if sync_institution_keycloak_users(institution) is None:
+        logger.warning("User migration for %s: Keycloak sync failed", institution_id)
         return None
     catalog = getToolByName(institution, "portal_catalog")
     group_tool = getToolByName(institution, "portal_groups")
-    summary = {"migrated": [], "skipped": [], "content": 0}
+    summary = {"migrated": [], "skipped": [], "failed": [], "content": 0}
     for member in institution.get_all_institution_users():
         old_id = member.getId()
         if member.getProperty("account_type", "") == SSO_ACCOUNT_TYPE:
             continue
         email = (member.getProperty("email", "") or "").strip()
-        new_member = api.user.get(userid=email) if email else None
-        if not email or email == old_id or new_member is None:
+        if not email:
+            reason = "no email address"
+        elif email == old_id:
+            reason = "userid is already an email address"
+        elif api.user.get(userid=email) is None:
+            reason = "no SSO account for {0}".format(email)
+        else:
+            reason = None
+        if reason:
+            logger.info(
+                "User migration for %s: skipping %s (%s)", institution_id, old_id, reason
+            )
             summary["skipped"].append(old_id)
             continue
-        summary["content"] += migrate_institution_user(
-            institution, old_id, email, catalog=catalog, group_tool=group_tool
-        )
+        # One failing account must not void the whole institution's run.
+        savepoint = transaction.savepoint(optimistic=True)
+        try:
+            summary["content"] += migrate_institution_user(
+                institution, old_id, email, catalog=catalog, group_tool=group_tool
+            )
+        except Exception:
+            savepoint.rollback()
+            logger.exception(
+                "User migration for %s: %s -> %s failed", institution_id, old_id, email
+            )
+            summary["failed"].append(old_id)
+            continue
         summary["migrated"].append((old_id, email))
+    logger.info(
+        "User migration for %s: migrated=%d skipped=%d failed=%d content=%d",
+        institution_id,
+        len(summary["migrated"]),
+        len(summary["skipped"]),
+        len(summary["failed"]),
+        summary["content"],
+    )
     return summary
 
 
@@ -685,11 +735,12 @@ class MigrateInstitutionUsersView(BrowserView):
                     _(
                         "msg_users_migrated",
                         default="Migrated ${migrated} account(s), reassigned ${content} "
-                        "content item(s), skipped ${skipped}.",
+                        "content item(s), skipped ${skipped}, failed ${failed}.",
                         mapping={
                             "migrated": len(summary["migrated"]),
                             "content": summary["content"],
                             "skipped": len(summary["skipped"]),
+                            "failed": len(summary["failed"]),
                         },
                     ),
                     type="info",

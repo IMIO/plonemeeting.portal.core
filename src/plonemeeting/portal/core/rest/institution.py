@@ -29,5 +29,6 @@ class MigrateInstitutionUsersService(Service):
         return {
             "migrated": [{"old": old, "new": new} for old, new in summary["migrated"]],
             "skipped": summary["skipped"],
+            "failed": summary["failed"],
             "content": summary["content"],
         }
