@@ -25,7 +25,7 @@ register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selec
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
-register(InstitutionsMap, "x-institution-map", []);
+register(InstitutionsMap, "x-institution-map", ["tiles-url", "attribution"]);
 register(PdfViewer, "x-pdf-viewer", ["file"]);
 register(TimestampCheck, "x-timestamp-check", []);
 register(TableOfContent, "x-table-of-content", []);
