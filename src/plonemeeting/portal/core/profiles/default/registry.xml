@@ -199,6 +199,24 @@
     <value purge="false">deliberations.be</value>
   </record>
 
+  <!-- Homepage institutions map -->
+  <record name="plonemeeting.portal.core.map_tiles_url">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Map tile server URL</title>
+      <description i18n:translate="">URL template of the tile server used by the homepage institutions map. Supports the Leaflet placeholders {s}, {z}, {x}, {y} and {r}.</description>
+      <required>False</required>
+    </field>
+    <value purge="false">https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png</value>
+  </record>
+  <record name="plonemeeting.portal.core.map_attribution">
+    <field type="plone.registry.field.TextLine">
+      <title i18n:translate="">Map attribution</title>
+      <description i18n:translate="">Attribution HTML displayed on the homepage institutions map tile layer.</description>
+      <required>False</required>
+    </field>
+    <value purge="false">Carte &amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; | Données &amp;copy; &lt;a href="https://www.ngi.be/website/fr/"&gt;NGI-IGN&lt;/a&gt;</value>
+  </record>
+
   <!-- collective.autopublishing -->
   <record
     name="collective.autopublishing.browser.autopublishsettings.IAutopublishSettingsSchema.clear_expiration_on_publish"
