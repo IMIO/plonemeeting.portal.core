@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.5.2 (unreleased)
+2.5.2 (2026-08-28)
 ------------------
 
 - DELIBE-331: Make the homepage map tile server URL and attribution
