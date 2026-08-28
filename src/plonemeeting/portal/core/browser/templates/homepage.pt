@@ -58,7 +58,10 @@
     <section id="institutions-map" class="row mb-3">
 
       <h2>Couverture géographique</h2>
-      <x-institution-map></x-institution-map>
+      <x-institution-map
+        tal:attributes="tiles-url view/get_map_tiles_url;
+                        attribution view/get_map_attribution"
+      ></x-institution-map>
 
     </section>
 
