@@ -10,6 +10,10 @@ import useWindowSize from "../hooks/useWindowSize";
 
 const ReactLeaflet = loadable.lib(() => import("react-leaflet"));
 
+const DEFAULT_TILES_URL = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+const DEFAULT_ATTRIBUTION =
+    'Carte &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> | Données &copy; <a href="https://www.ngi.be/website/fr/">NGI-IGN</a> ';
+
 /**
  * Display a Leaflet Map with institutions geoJSON locations
  * TODO: Split this in multiple sub-components
@@ -68,8 +72,8 @@ const InstitutionsMap = (props) => {
                     >
                         <ZoomControl position={"bottomright"}/>
                         <TileLayer
-                            attribution='Carte &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> | Données &copy; <a href="https://www.ngi.be/website/fr/">NGI-IGN</a> '
-                            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                            attribution={props["attribution"] || DEFAULT_ATTRIBUTION}
+                            url={props["tiles-url"] || DEFAULT_TILES_URL}
                         />
                         {regionBoundaries && <Mask data={regionBoundaries}/>}
                         {institutionLocations &&

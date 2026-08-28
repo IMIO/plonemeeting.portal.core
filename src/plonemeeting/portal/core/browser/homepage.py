@@ -42,6 +42,14 @@ class HomepageView(BrowserView):
         serializer = queryMultiAdapter((vocabulary, self.request), ISerializeToJson)
         return json.dumps(serializer("institution_type"))
 
+    def get_map_tiles_url(self):
+        """Tile server URL template for the homepage institutions map."""
+        return api.portal.get_registry_record("plonemeeting.portal.core.map_tiles_url", default="")
+
+    def get_map_attribution(self):
+        """Attribution HTML for the homepage institutions map tile layer."""
+        return api.portal.get_registry_record("plonemeeting.portal.core.map_attribution", default="")
+
     def get_faq_items(self):
         """
         Get all FAQ items from this portal.
