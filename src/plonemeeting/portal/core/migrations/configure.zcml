@@ -319,4 +319,12 @@
     destination="2500"
     handler="plonemeeting.portal.core.migrations.migrate_to_2500.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2501"
+    description="Add the homepage map tile server URL and attribution registry records."
+    source="2500"
+    destination="2501"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2501.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>
