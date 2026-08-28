@@ -605,22 +605,19 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
     count = _reassign_content_ownership(
         catalog, institution_path, old_id, api.user.get(userid=new_id).getUser()
     )
-    # Everything this account still owns is now outside ``institution``:
-    # deleting it would leave that content with a Creator pointing at a user
-    # that no longer exists.
+    # Content still owned lives in another institution; deleting the account
+    # would orphan its Creator. Keep it (it converges when that institution is
+    # migrated) but strip it from this institution's groups.
     remaining = len(catalog.unrestrictedSearchResults(Creator=old_id))
     if remaining:
+        unregister_user_from_institution(institution, old_id, group_tool=group_tool)
         logger.info(
             "Kept user %s: %d content item(s) left in other institution(s)",
             old_id, remaining,
         )
     else:
-        # Not api.user.delete(): deleteMembers() defaults to
-        # delete_localroles=1, which walks every folderish object of the whole
-        # portal and then runs a full-catalog reindexObjectSecurity() --
-        # minutes per account here, and it raises TypeError on any non-content
-        # object left in the catalog. _reassign_content_ownership() just moved
-        # this account's local roles, so it has nothing left to do.
+        # delete_localroles=0: the default runs a site-wide security reindex
+        # (minutes/account) that _reassign_content_ownership already made moot.
         getToolByName(institution, "portal_membership").deleteMembers(
             (old_id,), delete_localroles=0
         )
