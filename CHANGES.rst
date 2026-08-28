@@ -4,7 +4,11 @@ Changelog
 2.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-331: Make the homepage map tile server URL and attribution
+  configurable through two Plone registry records, passed to the
+  institutions map component with the previous Carto values kept as
+  defaults/fallbacks.
+  [aduchene]
 
 
 2.5.1 (2026-08-26)
