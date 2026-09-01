@@ -10,6 +10,9 @@ from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
+from plonemeeting.portal.core.locking import get_sync_lock_context
+from plonemeeting.portal.core.locking import sync_lock
+from plonemeeting.portal.core.locking import SyncAlreadyRunning
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import sync_meeting
@@ -32,6 +35,7 @@ import copy
 import json
 import requests
 import time
+import transaction
 
 
 class IImportMeetingForm(Interface):
@@ -463,17 +467,44 @@ def _sync_meeting(
     institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
 ):  # pragma: no cover
     try:
-        start_time = time.time()
-        logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
-        if new_meeting_uid:
-            brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
+        with sync_lock(institution):
+            start_time = time.time()
+            logger.info("SYNC starting...")
+            status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
+            if new_meeting_uid:
+                brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
 
-            if brains:
-                request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
-                api.portal.show_message(message=status, request=request, type="info")
-        else:
-            api.portal.show_message(message=status, request=request, type="error")
-        logger.info(end_time(start_time, "SYNC PROCESSED IN "))
+                if brains:
+                    request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
+                    api.portal.show_message(message=status, request=request, type="info")
+            else:
+                api.portal.show_message(message=status, request=request, type="error")
+            logger.info(end_time(start_time, "SYNC PROCESSED IN "))
+            # Commit here so that a ConflictError raised by this import is
+            # handled by sync_lock instead of by the publisher's final commit,
+            # which would happen after the lock was already released into the
+            # doomed transaction.
+            transaction.commit()
+    except SyncAlreadyRunning as error:
+        decisions = get_sync_lock_context(institution)
+        logger.warning(
+            "SYNC refused on %s, a synchronization is already running "
+            "(retry_count=%s, lock=%r)",
+            "/".join(decisions.getPhysicalPath()),
+            getattr(request, "retry_count", 0),
+            error.lock_info,
+        )
+        api.portal.show_message(
+            message=_(
+                "msg_sync_already_running",
+                default="A synchronisation is already running for this institution "
+                "(started by ${creator}). Please wait for it to finish before "
+                "starting a new one.",
+                mapping={"creator": error.creator},
+            ),
+            request=request,
+            type="warning",
+        )
+        redirect(request, decisions.absolute_url())
     except ValueError as error:
         api.portal.show_message(message=error.args[0], request=request, type="error")
