@@ -4,7 +4,8 @@ Changelog
 2.5.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
+  [aduchene]
 
 
 2.5.2 (2026-08-28)
