@@ -32,4 +32,10 @@
       for="plonemeeting.portal.core.interfaces.IPublicationsFolder"
       />
 
+  <adapter
+      factory=".locking.MeetingsFolderLockSettings"
+      provides="plone.locking.interfaces.ILockSettings"
+      for="plonemeeting.portal.core.interfaces.IMeetingsFolder"
+      />
+
 </configure>
