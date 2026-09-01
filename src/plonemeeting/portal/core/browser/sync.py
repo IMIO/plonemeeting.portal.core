@@ -38,6 +38,24 @@ import time
 import transaction
 
 
+#: Neutralise the fast double/triple click before it ever reaches the load
+#: balancer. The server-side lock in ``_sync_meeting`` is what actually
+#: guarantees correctness; this only spares the user a pointless round trip.
+#: The buttons are disabled from a timeout rather than inline, because a
+#: control disabled before the browser serializes the form is dropped from the
+#: payload -- and z3c.form dispatches on the submit button's own name.
+DISABLE_ON_SUBMIT_JS = (
+    "if (this.dataset.submitting) { return false; }"
+    "this.dataset.submitting = '1';"
+    "var f = this.form;"
+    "window.setTimeout(function () {"
+    " f.querySelectorAll('button[type=submit]')"
+    ".forEach(function (b) { b.disabled = true; });"
+    "}, 0);"
+    "return true;"
+)
+
+
 class IImportMeetingForm(Interface):
     """ """
 
@@ -248,6 +266,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
         super().updateActions()
         self.actions["sync"].klass = "submit-widget btn btn-primary"
         self.actions["remove"].addClass("btn-danger")
+        self.actions["sync"].onclick = DISABLE_ON_SUBMIT_JS
+        self.actions["remove"].onclick = DISABLE_ON_SUBMIT_JS
 
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
@@ -450,6 +470,7 @@ class PreImportReportForm(AutoExtensibleForm, Form):
     def updateActions(self):
         super().updateActions()
         self.actions["import"].addClass("btn-primary")
+        self.actions["import"].onclick = DISABLE_ON_SUBMIT_JS
 
 
 def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
