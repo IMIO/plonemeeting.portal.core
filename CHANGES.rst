@@ -7,6 +7,10 @@ Changelog
 - Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
   [aduchene]
 
+- SUP-55384: The Keycloak sync and the local-to-SSO migration grant the
+  ``Member`` role to SSO accounts that have no role.
+  [aduchene]
+
 
 2.5.2 (2026-08-28)
 ------------------

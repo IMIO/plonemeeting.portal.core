@@ -62,6 +62,19 @@ def unregister_user_from_institution(institution, username, group_tool=None):
     group_tool.removePrincipalFromGroup(username, get_members_group_id(institution))
 
 
+def ensure_member_role(acl_users, userid):
+    """Grant the global ``Member`` role to ``userid`` when it is missing.
+
+    ``portal_registration.addMember`` grants it, but an account provisioned by
+    the OIDC plugin on a first SSO login is created without any role. The
+    portal grants "Access inactive portal content" to ``Member`` only, so the
+    catalog hides every planned (future effective date) and unpublished
+    (expired) publication from such an account. Idempotent; returns whether
+    the role was actually added.
+    """
+    return acl_users.portal_role_manager.assignRoleToPrincipal("Member", userid)
+
+
 # ================================ Local Users =================================
 
 class ManageUsersListingView(BrowserView):
@@ -439,6 +452,8 @@ def sync_institution_keycloak_users(institution):
         member = portal_membership.getMemberById(userid)
         if member is not None and member.getProperty("account_type", "") != SSO_ACCOUNT_TYPE:
             member.setMemberProperties(mapping={"account_type": SSO_ACCOUNT_TYPE})
+        # Accounts created by the OIDC plugin at first login have no role at all.
+        ensure_member_role(acl_users, userid)
 
         group_tool.addPrincipalToGroup(userid, members_group_id)
 
@@ -601,6 +616,8 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
     for group in api.group.get_groups(username=old_id):
         if group.getId() != "AuthenticatedUsers":
             group_tool.addPrincipalToGroup(new_id, group.getId())
+    # The target may have been created roleless by the OIDC plugin at first login.
+    ensure_member_role(getToolByName(institution, "acl_users"), new_id)
     institution_path = "/".join(institution.getPhysicalPath())
     count = _reassign_content_ownership(
         catalog, institution_path, old_id, api.user.get(userid=new_id).getUser()
