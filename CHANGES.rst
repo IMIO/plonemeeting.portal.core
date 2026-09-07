@@ -7,6 +7,13 @@ Changelog
 - Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
   [aduchene]
 
+- SUP-55384: Grant the global ``Member`` role to SSO accounts that were created
+  without any role by the OIDC plugin on a first login, in the Keycloak sync
+  and in the local-to-SSO migration. Without it, "Access inactive portal
+  content" was denied and planned/unpublished publications were hidden from
+  the listing.
+  [aduchene]
+
 
 2.5.2 (2026-08-28)
 ------------------
