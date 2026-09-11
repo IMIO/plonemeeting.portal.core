@@ -15,6 +15,7 @@ from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
 from plonemeeting.portal.core.config import SSO_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users
+from plonemeeting.portal.core.notifications import notify_user_migrated_to_sso
 from plonemeeting.portal.core.utils import get_members_group_id
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
@@ -639,6 +640,7 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
             (old_id,), delete_localroles=0
         )
     logger.info("Migrated user %s -> %s: %d content item(s)", old_id, new_id, count)
+    notify_user_migrated_to_sso(institution, old_id, new_id)
     return count
 
 

@@ -1035,6 +1035,26 @@ msgstr ""
 msgid "effective_date_in_past_msg"
 msgstr ""
 
+#. Default: "Log in with Wallonie Connect"
+#: ../notifications.py:96
+msgid "email_cta_sso_migrated"
+msgstr ""
+
+#. Default: "Your access to ${institution} on Délibérations.be is now managed by Wallonie Connect. From now on, log in with Wallonie Connect using the address ${email}. Your former username ${username} and its password no longer work."
+#: ../notifications.py:70
+msgid "email_intro_sso_migrated"
+msgstr ""
+
+#. Default: "Your Délibérations.be account now uses Wallonie Connect"
+#: ../notifications.py:83
+msgid "email_subject_sso_migrated"
+msgstr ""
+
+#. Default: "Your account now uses Wallonie Connect"
+#: ../notifications.py:89
+msgid "email_title_sso_migrated"
+msgstr ""
+
 #. Default: "Enable autopublishing?"
 #: ../behaviors/autopublish.py:19
 msgid "enableAutopublishing"

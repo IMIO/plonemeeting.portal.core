@@ -1036,6 +1036,26 @@ msgstr "Ici, vous pouvez gérer les utilisateurs de votre institution. Si, lors 
 msgid "effective_date_in_past_msg"
 msgstr "Cet élément ne peut pas être publié car sa date de publication est dans le passé. Pour publier maintenant, supprimez la date. Pour planifier une publication, choisissez une date future."
 
+#. Default: "Log in with Wallonie Connect"
+#: ../notifications.py:96
+msgid "email_cta_sso_migrated"
+msgstr "Se connecter avec Wallonie Connect"
+
+#. Default: "Your access to ${institution} on Délibérations.be is now managed by Wallonie Connect. From now on, log in with Wallonie Connect using the address ${email}. Your former username ${username} and its password no longer work."
+#: ../notifications.py:70
+msgid "email_intro_sso_migrated"
+msgstr "Votre accès à ${institution} sur Délibérations.be est désormais géré par Wallonie Connect. Connectez-vous dorénavant avec Wallonie Connect, en utilisant l’adresse ${email}. Votre ancien identifiant ${username} et son mot de passe ne fonctionnent plus."
+
+#. Default: "Your Délibérations.be account now uses Wallonie Connect"
+#: ../notifications.py:83
+msgid "email_subject_sso_migrated"
+msgstr "Votre compte Délibérations.be utilise désormais Wallonie Connect"
+
+#. Default: "Your account now uses Wallonie Connect"
+#: ../notifications.py:89
+msgid "email_title_sso_migrated"
+msgstr "Votre compte utilise désormais Wallonie Connect"
+
 #. Default: "Enable autopublishing?"
 #: ../behaviors/autopublish.py:19
 msgid "enableAutopublishing"
