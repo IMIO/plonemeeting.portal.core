@@ -11,6 +11,9 @@ import MeetingAgenda from "./components/MeetingAgenda";
 import Tooltip from "./components/Tooltip";
 import TableOfContent from "./components/TableOfContent";
 
+// Patternslib patterns, they register themselves in Plone's global registry
+import "./patterns/single-submit";
+
 // Loadable components, for code-splitting and lazy loading
 const TimestampCheck = loadable(() => import('./components/TimestampCheck'))
 const PdfViewer = loadable(() => import('./components/PdfViewer'));
