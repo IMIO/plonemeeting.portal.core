@@ -62,6 +62,7 @@ setup(
         "plone.api>=2.1.0",
         "plone.app.dexterity",
         "plone.formwidget.hcaptcha>=1.0.3",
+        "plone.locking",
         "plone.restapi",
         "requests",
         "z3c.jbot",
