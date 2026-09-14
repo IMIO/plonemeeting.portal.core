@@ -1,0 +1,18 @@
+<tal:body
+  ><span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_title_sso_migrated">Your account now uses Wallonie Connect</span>
+
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_sso_migrated_lead">Your access to <span i18n:name="institution" tal:omit-tag="" tal:content="institution">the institution</span> on Délibérations.be is now managed by Wallonie Connect, the single sign-on service of the Walloon local authorities. Nothing you published changes; only the way you log in does.</span>
+
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_card_your_account">Your account</span> : <span tal:omit-tag="" tal:content="email" />
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_field_institution">Institution</span> : <span tal:omit-tag="" tal:content="institution" />
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_field_former_username">Former username</span> : <span tal:omit-tag="" tal:content="username" />
+
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_cta_sso_migrated">Log in with Wallonie Connect</span> : <span tal:omit-tag="" tal:content="login_url" />
+
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_callout_password">Your password</span>
+<span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_sso_migrated_password">Your former username <span i18n:name="username" tal:omit-tag="" tal:content="username">username</span> and its password no longer work. Your password is now the one on your Wallonie Connect account, and that is where you change it.</span>
+<tal:account tal:condition="account_url | nothing"><span tal:omit-tag="" i18n:domain="plonemeeting.portal.core" i18n:translate="email_sso_migrated_account_link">Manage my Wallonie Connect account</span> : <span tal:omit-tag="" tal:content="account_url" />
+</tal:account>
+--
+<span tal:omit-tag="" i18n:domain="imio.emailkit" i18n:translate="email_footer_default">This message was sent automatically. Please do not reply to it.</span>
+</tal:body>

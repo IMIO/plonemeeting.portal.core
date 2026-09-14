@@ -1,0 +1,4 @@
+# Dev-only build artifacts of the Maizzle project. The compiled `.pt` output is
+# committed, but it lives in the package's `templates/` directory, not here.
+node_modules/
+.maizzle/
