@@ -77,6 +77,30 @@ def disable_oidc_challenge_if_unconfigured():
     return plugin
 
 
+def get_account_url():
+    """URL of the Wallonie Connect account console, or None.
+
+    Where a user changes the password and the two-factor settings of the
+    identity they now log in with -- the portal holds neither, so it can only
+    point at them.  Keycloak serves that console at ``<issuer>/account/``;
+    ``keycloak_account_url`` overrides it for a realm that is fronted
+    elsewhere.
+
+    None when the plugin is missing or has no issuer configured, so callers
+    leave the link out rather than point at nothing.
+    """
+    override = os.environ.get("keycloak_account_url", "").strip()
+    if override:
+        return override
+    plugin = get_oidc_plugin()
+    if plugin is None:
+        return None
+    issuer = (plugin.getProperty("issuer") or "").strip()
+    if not issuer:
+        return None
+    return "{0}/account/".format(issuer.rstrip("/"))
+
+
 def get_login_url(came_from=None):
     """URL that starts the OIDC login flow, or None when the plugin is
     missing or has no issuer configured (callers then fall back to the

@@ -305,6 +305,20 @@
     <value key="resource">++plone++bootstrap-icons/card-heading.svg</value>
   </record>
 
+  <!-- imio.emailkit theme tokens. The records themselves come from the kit's
+       own :base profile, which our metadata.xml depends on, so only the value
+       is set here.
+
+       Only primary_color: logo_url stays empty on purpose, because every logo
+       this portal owns is an SVG and no mail client worth naming renders one
+       (Gmail and Outlook drop it outright), so pointing the record at one
+       would ship a broken image in every mail header. Fill it in Site Setup
+       once a raster logo exists. footer_html stays empty too, so the kit's own
+       translated footer applies instead of wording frozen in a profile. -->
+  <record name="imio.emailkit.theme.primary_color">
+    <value>#DE007B</value>
+  </record>
+
   <!--Products.CMFPlone.interfaces.IBundleRegistry (Theming) -->
   <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">

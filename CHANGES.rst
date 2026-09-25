@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.5.3 (unreleased)
+2.6.0 (unreleased)
 ------------------
 
 - Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.

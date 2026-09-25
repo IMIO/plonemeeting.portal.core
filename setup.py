@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.5.3.dev0",
+    version="2.6.0.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     long_description_content_type="text/x-rst",
@@ -65,6 +65,7 @@ setup(
         "plone.restapi",
         "requests",
         "z3c.jbot",
+        "imio.emailkit",
         "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
         "imio.omnia.assistant",

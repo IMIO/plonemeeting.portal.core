@@ -27,6 +27,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
+        import imio.emailkit
         import imio.omnia.assistant
         import imio.omnia.core
         import imio.omnia.tinymce
@@ -35,6 +36,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
 
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=collective.documentgenerator)
+        self.loadZCML(package=imio.emailkit)
         self.loadZCML(package=imio.omnia.core)
         self.loadZCML(package=imio.omnia.assistant)
         self.loadZCML(package=imio.omnia.tinymce)
