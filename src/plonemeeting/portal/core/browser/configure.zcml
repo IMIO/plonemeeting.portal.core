@@ -18,21 +18,6 @@
     directory="static"
   />
 
-  <!-- The same directory again, under `++resource++`, for the mails.
-
-       A mail cannot use `++plone++`: `bin/preview-emails` builds an image url
-       as `<portal_url>/++resource++<package>/...` out of each package's
-       `browser/static`, and that convention is the only thing that makes the
-       Wallonie Connect mark visible while somebody is authoring the template.
-       The url has to be the one production serves, so the registration is here
-       rather than the preview being lied to.
-
-       `emails/src/templates/user_migrated_to_sso.vue` is the only user. -->
-  <browser:resourceDirectory
-    name="plonemeeting.portal.core"
-    directory="static"
-  />
-
   <browser:page
     name="homepage_view"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"

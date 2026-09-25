@@ -15,7 +15,6 @@
   <include package="plone.formwidget.hcaptcha"/>
 
   <include file="adapters.zcml"/>
-  <include file="emails.zcml"/>
   <include file="permissions.zcml"/>
 
   <include package=".behaviors"/>

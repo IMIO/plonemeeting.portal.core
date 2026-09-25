@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Transactional notifications, rendered and sent through ``imio.emailkit``.
+"""Transactional notifications, sent through ``imio.emailkit``.
 
-The portal sent no mail of its own before this module; installing the kit also
-restyles the mails Plone itself sends (password reset, registration,
-username reminder), which needs no code.
-
-Our own mails are Maizzle templates under ``emails/``, compiled into
-``templates/`` and registered in ``emails.zcml``.  What stays here is the part a
-template cannot do: gather the context, and decide who gets the mail.  Nothing
-is translated here -- the wording lives in the template as msgids, the subject
-and the preheader in the registration, and the kit translates all of them into
-each recipient's own language at send time.
+The kit owns the templates and their translations. This module only collects
+the context and selects the recipient.
 """
 from imio.emailkit import Email
 from plone import api
@@ -19,7 +11,8 @@ from plonemeeting.portal.core.oidc import get_account_url
 from plonemeeting.portal.core.oidc import get_login_url
 
 
-SSO_MIGRATED_TEMPLATE = "plonemeeting.portal.core:user_migrated_to_sso"
+SSO_MIGRATED_TEMPLATE = "imio.emailkit:user_migrated_to_sso"
+SITE_NAME = "Délibérations.be"
 
 
 def sso_login_url(institution):
@@ -53,6 +46,7 @@ def notify_user_migrated_to_sso(institution, old_id, new_id):
     try:
         member = api.user.get(userid=new_id)
         Email(SSO_MIGRATED_TEMPLATE).to(member or new_id).with_context(
+            site_name=SITE_NAME,
             institution=institution.Title(),
             email=new_id,
             username=old_id,
