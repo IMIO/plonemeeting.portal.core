@@ -81,7 +81,6 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         # only a few picked items
         item_external_uids = [
-            "ecd55a85b1ee4039bfe22c7c4988876d",
             "12e7d68685074605a2750f0888b0bf52",
             "765ec8ae7ec145b987ab9b21ec45ef14",
             "aa79bc1b61884e289849999c014acc67",
@@ -92,28 +91,25 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(
             meeting, json_items, self.institution, item_external_uids=item_external_uids + ["fake uid"]
         )
-        self.assertEqual(4, results.get("created"))
+        self.assertEqual(3, results.get("created"))
         self.assertListEqual(item_external_uids, [item.plonemeeting_uid for item in meeting.values()])
         self.login_as_admin()
         api.content.delete(objects=meeting.values())
         self.login_as_decisions_manager()
         # all items
         results = sync_items_data(meeting, self.json_meeting_items, self.institution)
-        self.assertEqual(28, results.get("created"))
+        self.assertEqual(27, results.get("created"))
         self.assertEqual(0, results.get("modified"))
         self.assertEqual(0, results.get("deleted"))
-        self.assertEqual(meeting.values()[0].number, "1")
-        self.assertEqual(meeting.values()[0].sortable_number, 100)
-        self.assertEqual(meeting.values()[0].category, "urbanisme")
-        self.assertEqual(meeting.values()[1].number, "2")
-        self.assertEqual(meeting.values()[1].sortable_number, 200)
-        self.assertEqual(meeting.values()[1].category, "comptabilite")
-        self.assertEqual(meeting.values()[10].number, "11")
-        self.assertEqual(meeting.values()[10].sortable_number, 1100)
-        self.assertEqual(meeting.values()[10].category, "personnel")
-        self.assertEqual(meeting.values()[20].number, "21")
-        self.assertEqual(meeting.values()[20].sortable_number, 2100)
-        self.assertEqual(meeting.values()[20].category, "locations")
+        self.assertEqual(meeting.values()[0].number, "2")
+        self.assertEqual(meeting.values()[0].sortable_number, 200)
+        self.assertEqual(meeting.values()[0].category, "comptabilite")
+        self.assertEqual(meeting.values()[9].number, "11")
+        self.assertEqual(meeting.values()[9].sortable_number, 1100)
+        self.assertEqual(meeting.values()[9].category, "personnel")
+        self.assertEqual(meeting.values()[19].number, "21")
+        self.assertEqual(meeting.values()[19].sortable_number, 2100)
+        self.assertEqual(meeting.values()[19].category, "locations")
         self.assertEqual(meeting.values()[-1].number, "28")
         self.assertEqual(meeting.values()[-1].sortable_number, 2800)
         self.assertEqual(meeting.values()[-1].category, "locations")
@@ -121,10 +117,9 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.institution.delib_category_field = "classifier"
         results = sync_items_data(meeting, self.json_meeting_items, self.institution, True)
         self.assertEqual(len(meeting.items()), results.get("modified"))
-        self.assertEqual(meeting.values()[0].category, "patrimoine")
-        self.assertEqual(meeting.values()[1].category, "finance")
-        self.assertEqual(meeting.values()[10].category, "administration")
-        self.assertEqual(meeting.values()[20].category, "batiment")
+        self.assertEqual(meeting.values()[0].category, "finance")
+        self.assertEqual(meeting.values()[9].category, "administration")
+        self.assertEqual(meeting.values()[19].category, "batiment")
         self.assertEqual(meeting.values()[-1].category, "batiment")
 
         self.institution.representatives_mappings = None
@@ -134,7 +129,6 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         # only a few picked items
         item_external_uids = [
-            "ecd55a85b1ee4039bfe22c7c4988876d",
             "12e7d68685074605a2750f0888b0bf52",
             "765ec8ae7ec145b987ab9b21ec45ef14",
             "aa79bc1b61884e289849999c014acc67",
@@ -145,12 +139,11 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         results = sync_items_data(
             meeting, json_items, self.institution, item_external_uids=item_external_uids + ["fake uid"]
         )
-        self.assertEqual(4, results.get("created"))
+        self.assertEqual(3, results.get("created"))
         self.assertEqual(0, results.get("modified"))
         self.assertEqual(0, results.get("deleted"))
 
         item_external_uids = [
-            "ecd55a85b1ee4039bfe22c7c4988876d",
             "e66269c9342f4e6c861eaff123b20bcb",  # replace
             "765ec8ae7ec145b987ab9b21ec45ef14",
             "aa79bc1b61884e289849999c014acc67",
@@ -169,11 +162,10 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(1, results.get("modified"))
         # the item absent from item_external_uids is not deleted but ignored
         self.assertEqual(0, results.get("deleted"))
-        self.assertEqual(5, len(meeting.values()))
-        # th 4 item in item_external_uids + the ignored one
+        self.assertEqual(4, len(meeting.values()))
+        # th 3 item in item_external_uids + the ignored one
         self.assertListEqual(
             [
-                "ecd55a85b1ee4039bfe22c7c4988876d",
                 "12e7d68685074605a2750f0888b0bf52",  # ignored
                 "765ec8ae7ec145b987ab9b21ec45ef14",
                 "aa79bc1b61884e289849999c014acc67",
@@ -183,7 +175,6 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         )
         # one item in the list is not returned -> deleted
         item_external_uids = [
-            "ecd55a85b1ee4039bfe22c7c4988876d",
             "12e7d68685074605a2750f0888b0bf52",  # back but not in json
             "e66269c9342f4e6c861eaff123b20bcb",
             "765ec8ae7ec145b987ab9b21ec45ef14",
@@ -196,10 +187,9 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.assertEqual(0, results.get("modified"))
         # the item present from item_external_uids is not deleted but absent from json is deleted
         self.assertEqual(1, results.get("deleted"))
-        self.assertEqual(4, len(meeting.values()))
+        self.assertEqual(3, len(meeting.values()))
         self.assertListEqual(
             [
-                "ecd55a85b1ee4039bfe22c7c4988876d",
                 "765ec8ae7ec145b987ab9b21ec45ef14",
                 "aa79bc1b61884e289849999c014acc67",
                 "e66269c9342f4e6c861eaff123b20bcb",
@@ -248,7 +238,7 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         self.json_meeting_items.get("items")[0].get("decision").update(decision)
         results = sync_items_data(meeting, self.json_meeting_items, self.institution, force=True)
         self.assertEqual(results.get("created"), 0)
-        self.assertEqual(results.get("modified"), 28)
+        self.assertEqual(results.get("modified"), 27)
         items = meeting.listFolderContents(contentFilter={"portal_type": "Item"})
         first_item = items[0]
         self.assertEqual(first_item.decision.raw, "<p>Nouvelle décision</p>")
@@ -340,18 +330,14 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
         meeting = sync_meeting_data(self.institution, self.json_meeting.get("items")[0])
         sync_items_data(meeting, self.json_meeting_items, self.institution)
 
-        self.assertEqual(["dummy_mapped_uid_1", "dummy_mapped_uid_2"], meeting.values()[0].representatives_in_charge)
-        self.assertEqual(
-            ["dummy_mapped_uid_1", "dummy_mapped_uid_2"], meeting.values()[0].long_representatives_in_charge
-        )
-        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[1].representatives_in_charge)
-        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[1].long_representatives_in_charge)
-        self.assertEqual([], meeting.values()[2].representatives_in_charge)
-        self.assertEqual([], meeting.values()[2].long_representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[0].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_1"], meeting.values()[0].long_representatives_in_charge)
+        self.assertEqual([], meeting.values()[1].representatives_in_charge)
+        self.assertEqual([], meeting.values()[1].long_representatives_in_charge)
         #  Check if order from PM is preserved
-        self.assertEqual(["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[3].representatives_in_charge)
+        self.assertEqual(["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[2].representatives_in_charge)
         self.assertEqual(
-            ["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[3].long_representatives_in_charge
+            ["dummy_mapped_uid_2", "dummy_mapped_uid_1"], meeting.values()[2].long_representatives_in_charge
         )
 
     def test_item_title_formatting_tal(self):
