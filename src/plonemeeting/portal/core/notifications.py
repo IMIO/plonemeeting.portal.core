@@ -8,7 +8,6 @@ from imio.emailkit import Email
 from plone import api
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.oidc import get_account_url
-from plonemeeting.portal.core.oidc import sso_login_url
 
 
 SSO_MIGRATED_TEMPLATE = "imio.emailkit:user_migrated_to_sso"
@@ -36,7 +35,6 @@ def notify_user_migrated_to_sso(institution, old_id, new_id):
             institution=institution.Title(),
             email=new_id,
             username=old_id,
-            login_url=sso_login_url(institution),
             # Use "" and not None, so that the template removes the
             # "change it there" link and does not show "None".
             account_url=get_account_url() or "",

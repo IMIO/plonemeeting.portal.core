@@ -111,15 +111,3 @@ def get_login_url(came_from=None):
     if came_from:
         url = "{0}?came_from={1}".format(url, quote(came_from))
     return url
-
-
-def sso_login_url(institution):
-    """URL where a migrated user logs in again.
-
-    The OIDC login URL goes through Wallonie Connect and back to the
-    institution. Without an issuer, the fallback is ``@@login-choice``. That
-    view exists only on the site root, so its URL cannot start from the
-    institution.
-    """
-    login_url = get_login_url(came_from=institution.absolute_url())
-    return login_url or f"{api.portal.get().absolute_url()}/@@login-choice"
