@@ -14,6 +14,19 @@ Changelog
   the listing.
   [aduchene]
 
+- DELIBE-293: Add ``imio.emailkit``. The portal uses it to send styled
+  emails. The emails use the portal primary color and a PNG logo.
+  The ``2600`` upgrade step installs the add-on and sets these two values.
+  [aduchene]
+
+- DELIBE-293: Send an email to the user after the portal migrates a local
+  account onto an SSO account. All migration paths send it: the bulk
+  migration, the REST endpoint and the manual user-to-user form. The email
+  gives a link to the Wallonie Connect account page. Set the
+  ``keycloak_account_url`` environment variable to change this link.
+  A mail failure does not stop the migration.
+  [aduchene]
+
 
 2.5.2 (2026-08-28)
 ------------------
