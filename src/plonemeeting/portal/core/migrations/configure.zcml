@@ -327,4 +327,12 @@
     destination="2501"
     handler="plonemeeting.portal.core.migrations.migrate_to_2501.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2600"
+    description="Install imio.emailkit and set the email theme primary colour."
+    source="2501"
+    destination="2600"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2600.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>
