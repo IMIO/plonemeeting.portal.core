@@ -65,7 +65,7 @@ setup(
         "plone.restapi",
         "requests",
         "z3c.jbot",
-        "imio.emailkit",
+        "imio.emailkit>=1.0.0b2",
         "imio.helpers>=1.0.0rc2",
         "imio.migrator>=1.34",
         "imio.omnia.assistant",
