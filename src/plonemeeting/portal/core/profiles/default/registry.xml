@@ -305,17 +305,14 @@
     <value key="resource">++plone++bootstrap-icons/card-heading.svg</value>
   </record>
 
-  <!-- Theme tokens of imio.emailkit. The :base profile of the kit adds the
-       records, and the metadata.xml of this package depends on that profile.
-       Thus this file sets only the value.
+  <!-- imio.emailkit theme tokens. The records come from the :base profile of
+       the kit. metadata.xml depends on that profile, so this file sets only
+       values.
 
-       This file sets only primary_color. logo_url stays empty on purpose.
-       All logos of this portal are SVG files, and the major mail clients do
-       not show SVG (Gmail and Outlook remove it). Thus an SVG logo gives a
-       broken image in the header of each mail. Set logo_url in Site Setup
-       when a raster logo is available. footer_html also stays empty. Then
-       the kit shows its own translated footer, not fixed text from a
-       profile. -->
+       logo_url stays empty. All portal logos are SVG, and mail clients such
+       as Gmail and Outlook do not show SVG. Set it in Site Setup when a
+       raster logo is available. footer_html stays empty, so the kit shows
+       its own translated footer. -->
   <record name="imio.emailkit.theme.primary_color">
     <value>#DE007B</value>
   </record>

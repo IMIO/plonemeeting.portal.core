@@ -80,14 +80,13 @@ def disable_oidc_challenge_if_unconfigured():
 def get_account_url():
     """URL of the Wallonie Connect account console, or None.
 
-    In this console, a user changes the password and the two-factor settings
-    of the identity that they now use to log in. The portal keeps neither of
-    them, so it can only link to the console. Keycloak serves the console at
-    ``<issuer>/account/``. ``keycloak_account_url`` overrides this URL for a
-    realm behind a different front end.
+    Users change their SSO password and two-factor settings there, because
+    the portal keeps neither. Keycloak serves the console at
+    ``<issuer>/account/``. ``keycloak_account_url`` overrides it for a realm
+    behind a different front end.
 
-    None when the plugin is missing or has no issuer. Callers then omit the
-    link, so that it does not point at nothing.
+    Returns None when the plugin is missing or has no issuer. Callers then
+    omit the link.
     """
     override = os.environ.get("keycloak_account_url", "").strip()
     if override:
@@ -117,11 +116,10 @@ def get_login_url(came_from=None):
 def sso_login_url(institution):
     """URL where a migrated user logs in again.
 
-    The OIDC login URL sends the user directly to Wallonie Connect. After the
-    login, it sends the user back to their institution. When the plugin has
-    no issuer, ``get_login_url`` returns ``None``. This function then returns
-    the ``@@login-choice`` page of the portal. That view exists only on the
-    site root, so the function cannot build its URL from the institution.
+    The OIDC login URL goes through Wallonie Connect and back to the
+    institution. Without an issuer, the fallback is ``@@login-choice``. That
+    view exists only on the site root, so its URL cannot start from the
+    institution.
     """
     login_url = get_login_url(came_from=institution.absolute_url())
     return login_url or f"{api.portal.get().absolute_url()}/@@login-choice"

@@ -18,17 +18,16 @@ SITE_NAME = "Délibérations.be"
 def notify_user_migrated_to_sso(institution, old_id, new_id):
     """Tell ``new_id`` that the portal moved ``old_id`` onto their SSO account.
 
-    Each successful migration sends this mail, from all sources: the bulk
-    ``@@migrate-institution-users`` run, its ``@migrate-users-to-sso`` REST
-    equivalent, and the manual ``@@migrate-user-to-user`` form.
+    Each successful migration sends this mail: the bulk ``@@migrate-institution-users``
+    run, the ``@migrate-users-to-sso`` REST endpoint and the manual
+    ``@@migrate-user-to-user`` form.
 
-    This function never raises. A failure to build or queue the mail must not
-    undo a migration that succeeded. The bulk run wraps each account in a
-    transaction savepoint, and an error rolls back all of that account.
-    Returns ``True`` when the kit queues the mail, otherwise ``False``.
+    It never raises. A mail failure must not undo a migration that succeeded.
+    The bulk run wraps each account in a savepoint, and an error rolls back
+    that account. Returns ``True`` when the kit queues the mail, else ``False``.
 
-    Delivery uses the default mode of the kit, which follows the transaction.
-    If the request that migrates the account aborts, no mail reaches the MTA.
+    Delivery follows the transaction. If the request aborts, no mail reaches
+    the MTA.
     """
     try:
         member = api.user.get(userid=new_id)
@@ -38,9 +37,8 @@ def notify_user_migrated_to_sso(institution, old_id, new_id):
             email=new_id,
             username=old_id,
             login_url=sso_login_url(institution),
-            # Use "" and not None when Keycloak has no configuration. Then the
-            # template removes the "change it there" link and does not show
-            # "None" to the reader.
+            # Use "" and not None, so that the template removes the
+            # "change it there" link and does not show "None".
             account_url=get_account_url() or "",
         ).send()
     except Exception:
