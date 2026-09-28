@@ -9,9 +9,8 @@ import logging
 logger = logging.getLogger("plonemeeting.portal.core")
 
 PRIMARY_COLOR_RECORD = "imio.emailkit.theme.primary_color"
-# The portal's magenta, and the colour the kit ships as its own default. An
-# untouched record holds the latter, which is how this step knows nobody has
-# picked a colour by hand yet.
+# The magenta of the portal, and the default colour of the kit. A record that
+# holds the kit default tells this step that nobody set a colour by hand.
 PORTAL_PRIMARY_COLOR = "#DE007B"
 KIT_PRIMARY_COLOR = "#e6007e"
 
@@ -20,22 +19,23 @@ class MigrateTo2600(PlonemeetingMigrator):
     def _install_emailkit(self):
         """Install imio.emailkit.
 
-        The metadata.xml dependency on imio.emailkit:default only applies on a
-        fresh (re)install of our profile, so upgraded sites have to install the
-        add-on here or they get neither the restyled Plone mails nor the theme
-        records the next step writes to.
+        The metadata.xml dependency on imio.emailkit:default applies only when
+        a site installs or reinstalls this profile. Thus upgraded sites must
+        install the add-on here. Otherwise they do not get the restyled Plone
+        mails, and they do not get the theme records that the next step sets.
         """
         if not self.qi.is_product_installed("imio.emailkit"):
             self.qi.install_product("imio.emailkit")
             logger.info("Installed imio.emailkit")
 
     def _set_email_primary_color(self):
-        """Point the kit's primary_color at the portal's magenta.
+        """Set the primary_color of the kit to the magenta of the portal.
 
-        One record, written by hand: re-importing our whole registry step would
-        reset every value a site has customized since (the Plausible API key,
-        the homepage map tile server). A colour somebody already picked in Site
-        Setup is left alone, which also makes the step re-runnable.
+        This step writes one record only. A new import of the full registry
+        step resets all values that a site changed after the install, for
+        example the Plausible API key and the tile server of the homepage map.
+        The step keeps a colour that a user set in Site Setup. Thus it is safe
+        to run the step again.
         """
         registry = getUtility(IRegistry)
         if PRIMARY_COLOR_RECORD not in registry.records:
@@ -60,8 +60,8 @@ class MigrateTo2600(PlonemeetingMigrator):
 
 
 def migrate(context):
-    """Install imio.emailkit and set the email theme's primary colour to the
-    portal's magenta."""
+    """Install imio.emailkit. Set the primary colour of the email theme to the
+    magenta of the portal."""
     migrator = MigrateTo2600(context)
     migrator.run()
     migrator.finish()
