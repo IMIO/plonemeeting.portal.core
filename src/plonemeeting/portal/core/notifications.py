@@ -8,24 +8,11 @@ from imio.emailkit import Email
 from plone import api
 from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.oidc import get_account_url
-from plonemeeting.portal.core.oidc import get_login_url
+from plonemeeting.portal.core.oidc import sso_login_url
 
 
 SSO_MIGRATED_TEMPLATE = "imio.emailkit:user_migrated_to_sso"
 SITE_NAME = "Délibérations.be"
-
-
-def sso_login_url(institution):
-    """Where a migrated user should go to log in again.
-
-    The OIDC login URL takes them straight to Wallonie Connect and back to
-    their own institution. It is ``None`` when the plugin has no issuer
-    configured, and the portal's login-choice page is then the honest
-    fallback: that view is registered on the site root only, so it cannot be
-    built from the institution.
-    """
-    login_url = get_login_url(came_from=institution.absolute_url())
-    return login_url or f"{api.portal.get().absolute_url()}/@@login-choice"
 
 
 def notify_user_migrated_to_sso(institution, old_id, new_id):
