@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12"]
-        plone-version: ["6.1"]
+        python-version: ["3.14"]
+        plone-version: ["6.2"]
         experimental: [false]
     steps:
       - name: Run tests
@@ -21,7 +21,7 @@ jobs:
           cache-name: cache-eggs
         with:
           PYTHON_VERSION: ${{ matrix.python-version }}
-          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-Plone6.1-${{ matrix.python-version }}
+          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-Plone6.2-${{ matrix.python-version }}
           TEST_COMMAND: bin/test
           INSTALL_DEPENDENCIES_COMMANDS: 'pip install -r requirements-tests.txt'
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
@@ -31,8 +31,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12"]
-        plone-version: ["6.1"]
+        python-version: ["3.14"]
+        plone-version: ["6.2"]
         experimental: [false]
     steps:
       - name: Run coverage
@@ -41,7 +41,7 @@ jobs:
           cache-name: cache-eggs
         with:
           PYTHON_VERSION: ${{ matrix.python-version }}
-          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-Plone6.1-${{ matrix.python-version }}
+          CACHE_KEY: ${{ runner.os }}-build-${{ env.cache-name }}-Plone6.2-${{ matrix.python-version }}
           TEST_COMMAND: coverage run bin/test
           INSTALL_DEPENDENCIES_COMMANDS: 'pip install -r requirements-tests.txt'
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}

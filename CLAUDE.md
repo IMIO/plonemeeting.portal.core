@@ -3,7 +3,7 @@
 The main application package behind **Délibérations.be / iA.Délib citizen
 portal**. It exposes municipal decisions and publications coming from
 `Products.PloneMeeting` (iA.Délib backend) to the public, through a
-Plone 6.1 site styled by `plonetheme.deliberations`.
+Plone 6.2 site styled by `plonetheme.deliberations`.
 
 This is its **own git repository**, checked out by `mr.developer` into
 `src/plonemeeting.portal.core/` of the `buildout.pm.portal` shell. Edits
@@ -16,7 +16,7 @@ here go upstream — they do **not** belong to the buildout repo.
 
 ## Stack
 
-- **Plone**: 6.1.x (classic, not Volto)
+- **Plone**: 6.2.x (classic, not Volto)
 - **Python**: 3.12 (`python_requires=">=3.12"`)
 - **Content types**: Dexterity
 - **Listings**: `eea.facetednavigation`
@@ -86,7 +86,7 @@ bin/instance run scripts/run_portal_upgrades.py
 ```
 
 The `Makefile` here is for **standalone** development of the package
-(creates its own venv, runs `test-6.1.cfg`). Most of the time you do
+(creates its own venv, runs `test-6.2.cfg`). Most of the time you do
 not need it — work through the buildout shell instead.
 
 ```bash
