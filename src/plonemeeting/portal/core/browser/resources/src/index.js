@@ -49,10 +49,18 @@ function setUpEnvironmentLabel() {
 }
 
 function displayInSettingsPath() {
-  let settingsTab = document.body.querySelector(".institution_settings");
-  if (settingsTab && document.body.className.includes("portaltype-institution")) {
-    settingsTab.className = settingsTab.className + " current inPath"
+  const settingsTab = document.body.querySelector(".institution_settings");
+  if (!settingsTab || !document.body.classList.contains("portaltype-institution")) {
+    return;
   }
+  const mark = () => settingsTab.classList.add("current", "inPath");
+  mark();
+  // pat-navigationmarker can run after this code and remove the classes.
+  new MutationObserver(() => {
+    if (!settingsTab.classList.contains("inPath")) {
+      mark();
+    }
+  }).observe(settingsTab, { attributes: true, attributeFilter: ["class"] });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
