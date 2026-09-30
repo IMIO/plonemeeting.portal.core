@@ -1345,6 +1345,14 @@ msgstr "Aucun utilisateur trouvé."
 msgid "msg_expiration_date_removed"
 msgstr "La date d'expiration a été enlevée."
 
+#. Default: "A synchronisation is already running for this institution (started by ${creator}). Please wait for it to finish before starting a new one."
+#: ../browser/sync.py:489
+msgid "msg_sync_already_running"
+msgstr ""
+"Une synchronisation est déjà en cours pour cette institution (démarrée par "
+"${creator}). Veuillez attendre qu'elle se termine avant d'en lancer une "
+"nouvelle."
+
 #: ../events/publication.py:25
 msgid "msg_timestamp_removed"
 msgstr "L'horodatage a été supprimé car le contenu a été modifié."

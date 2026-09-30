@@ -185,3 +185,47 @@ x-tooltip > div[slot="content"] {
   color: #495057;
   font-weight: 500;
 }
+
+// pat-single-submit: a form on its way to the server. The buttons stay
+// enabled so they keep their place in the payload, they are only made
+// unclickable, with a spinner on the one that was pressed.
+form.is-submitting {
+  cursor: progress;
+
+  [type="submit"] {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  [type="submit"].is-submitting {
+    position: relative;
+    padding-right: 2.5rem;
+    opacity: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0.75rem;
+      width: 1em;
+      height: 1em;
+      margin-top: -0.5em;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: single-submit-spin 0.75s linear infinite;
+    }
+  }
+}
+
+@keyframes single-submit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  form.is-submitting [type="submit"].is-submitting::after {
+    animation: none;
+  }
+}

@@ -2,6 +2,7 @@
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone.app.z3cform.interfaces import IPloneFormLayer
+from plone.locking.interfaces import ITTWLockable
 from zope.interface import Interface
 
 
@@ -13,8 +14,13 @@ class IPlonemeetingPortalConfigFolder(Interface):
     """Marker interface for Plonemeeting config folder"""
 
 
-class IMeetingsFolder(IFacetedNavigable):
-    """Marker interface for Meetings folder"""
+class IMeetingsFolder(IFacetedNavigable, ITTWLockable):
+    """Marker interface for Meetings folder
+
+    ITTWLockable makes ``ILockable(decisions_folder)`` resolvable through
+    plone.locking's own adapter, which the meeting synchronization guard
+    relies on to serialize concurrent imports.
+    """
 
 
 class IPublicationsFolder(IFacetedNavigable):
