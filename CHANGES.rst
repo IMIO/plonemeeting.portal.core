@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.6.1 (unreleased)
+2.6.1 (2026-11-04)
 ------------------
 
 - DELIBE-309: Support Plone 6.2 on Python 3.12 to 3.14, and run the tests
