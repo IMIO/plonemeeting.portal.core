@@ -4,7 +4,24 @@ Changelog
 2.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-309: Support Plone 6.2 on Python 3.12 to 3.14, and run the tests
+  against Plone 6.2.
+  [aduchene]
+- DELIBE-309: Fix the "Settings" tab marked as current on every institution
+  page with Plone 6.2.
+  [aduchene]
+- DELIBE-309: Keep ``logo_raster.png`` when the frontend bundle is built.
+  [aduchene]
+- DELIBE-320: Bust the cache of the institution custom colors CSS when an
+  institution is added or modified.
+  [aduchene]
+- Set the institution authentication method after the migration of its users
+  to SSO: ``oidc`` when no local account remains, else a new ``both`` value
+  that sends the login link to ``@@login-choice``.
+  [aduchene]
+- DELIBE-341: Reserve the institution "Authentication" fieldset to Zope
+  admins. Institution managers could see and edit it.
+  [aduchene]
 
 
 2.6.0 (2026-09-28)

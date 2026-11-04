@@ -130,6 +130,13 @@ however you like — `pipx install ruff zpretty`, `uvx`, or your editor.
 - Translations: import `_` from `plonemeeting.portal.core` (and
   `plone_` for the `plone` domain). Wrap user-visible strings.
 
+## Changelog
+
+Every PR adds its entry to `CHANGES.rst`, in the `(unreleased)` section
+(replace "Nothing changed yet."): `- <TICKET>: <change>.` then
+`  [<author>]` on the next line. Leave out the ticket when there is none.
+Test-only and CI-only changes get no entry.
+
 ## Adding things
 
 - **A new content type**: Dexterity schema in `content/<type>.py` →
