@@ -29,20 +29,23 @@ class FooterView(BrowserView):
 
         Inside an institution the link follows the institution's
         authentication method: straight to the OIDC (Keycloak) flow when SSO
-        is selected, the classic Plone login form otherwise.  On the portal
-        home page the visitor is sent to an intermediate page to choose
-        between the two systems.  When OIDC is not configured everything
-        degrades to the classic login form.
+        is selected, the classic Plone login form for Plone, and an
+        intermediate page to choose between the two systems for "both".  On
+        the portal home page the visitor also gets the intermediate page.
+        When OIDC is not configured everything degrades to the classic login
+        form.
         """
         nav_root = api.portal.get_navigation_root(self.context)
         root_url = nav_root.absolute_url()
         came_from = self.request.get("ACTUAL_URL", "")
         if IInstitution.providedBy(nav_root):
-            if getattr(nav_root, "authentication", "plone") == "oidc":
+            authentication = getattr(nav_root, "authentication", "plone")
+            if authentication == "oidc":
                 oidc_url = get_login_url(came_from=came_from)
                 if oidc_url:
                     return oidc_url
-            return f"{root_url}/login"
+            if authentication != "both":
+                return f"{root_url}/login"
         if get_login_url() is None:
             return f"{root_url}/login"
         url = f"{root_url}/@@login-choice"

@@ -17,6 +17,7 @@ from plonemeeting.portal.core.config import SSO_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users
 from plonemeeting.portal.core.notifications import notify_user_migrated_to_sso
 from plonemeeting.portal.core.utils import get_members_group_id
+from plonemeeting.portal.core.vocabularies import AuthenticationMethodsVocabulary
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -81,7 +82,7 @@ def ensure_member_role(acl_users, userid):
 class ManageUsersListingView(BrowserView):
     """Unified listing of the institution's users (local and SSO).
 
-    For SSO institutions (``authentication == 'oidc'``) the members are
+    For SSO institutions (``authentication`` is ``'oidc'`` or ``'both'``) the members are
     reconciled with Keycloak on every load; a sync failure is surfaced as
     an error (``sso_sync_failed``) rather than shown as a stale or
     misclassified list.
@@ -91,7 +92,7 @@ class ManageUsersListingView(BrowserView):
     description = _("desc_manage_users")
 
     def __call__(self):
-        self.is_sso_institution = getattr(self.context, "authentication", "plone") == "oidc"
+        self.is_sso_institution = getattr(self.context, "authentication", "plone") in ("oidc", "both")
         self.sso_sync_failed = False
         if self.is_sso_institution:
             # The sync performs ZODB writes (creating users, group
@@ -652,8 +653,12 @@ def migrate_institution_local_users(institution):
     reassign the content it owns in the institution, then delete the local
     account. Returns a summary dict with ``migrated`` (list of (old, new)),
     ``skipped`` (list of old ids without a matching SSO account), ``failed``
-    (list of old ids whose migration raised) and ``content`` (number of
-    reassigned objects).
+    (list of old ids whose migration raised), ``content`` (number of
+    reassigned objects) and ``authentication`` (the new authentication method
+    of the institution).
+
+    After the run, the institution's authentication method is set to
+    ``oidc`` when no local account remains, or to ``both`` otherwise.
 
     The institution's Keycloak accounts are synced first, so freshly
     provisioned SSO identities are matchable; when that sync fails nothing
@@ -699,13 +704,18 @@ def migrate_institution_local_users(institution):
             summary["failed"].append(old_id)
             continue
         summary["migrated"].append((old_id, email))
+    # Each skipped or failed account is a local account that remains.
+    authentication = "both" if summary["skipped"] or summary["failed"] else "oidc"
+    institution.authentication = authentication
+    summary["authentication"] = authentication
     logger.info(
-        "User migration for %s: migrated=%d skipped=%d failed=%d content=%d",
+        "User migration for %s: migrated=%d skipped=%d failed=%d content=%d authentication=%s",
         institution_id,
         len(summary["migrated"]),
         len(summary["skipped"]),
         len(summary["failed"]),
         summary["content"],
+        authentication,
     )
     return summary
 
@@ -738,6 +748,9 @@ class MigrateInstitutionUsersView(BrowserView):
             )
         return rows
 
+    def _authentication_title(self, value):
+        return AuthenticationMethodsVocabulary(self.context).getTerm(value).title
+
     def __call__(self):
         if self.request.method == "POST":
             summary = migrate_institution_local_users(self.context)
@@ -761,6 +774,14 @@ class MigrateInstitutionUsersView(BrowserView):
                             "skipped": len(summary["skipped"]),
                             "failed": len(summary["failed"]),
                         },
+                    ),
+                    type="info",
+                )
+                IStatusMessage(self.request).addStatusMessage(
+                    _(
+                        "msg_authentication_method_set",
+                        default="Authentication method set to \"${method}\".",
+                        mapping={"method": self._authentication_title(summary["authentication"])},
                     ),
                     type="info",
                 )

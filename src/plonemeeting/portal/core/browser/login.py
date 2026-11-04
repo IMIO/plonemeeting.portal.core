@@ -6,8 +6,9 @@ from urllib.parse import quote
 
 
 class LoginChoiceView(BrowserView):
-    """Intermediate page shown on the portal home page: the visitor chooses
-    between the classic Plone login and the SSO (OIDC) one.
+    """Intermediate page shown on the portal home page and on institutions
+    that use both authentication methods: the visitor chooses between the
+    classic Plone login and the SSO (OIDC) one.
 
     When OIDC is not configured there is nothing to choose from, so the view
     redirects straight to the classic login form.
