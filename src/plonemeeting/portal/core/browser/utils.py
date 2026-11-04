@@ -79,7 +79,9 @@ class UtilsView(BrowserView):
 
     def get_settings_url(self):
         institution = self.get_current_institution()
-        return f"{institution.absolute_url()}/@@manage-settings"
+        # No "@@": pat-navigationmarker cuts links at "@@" and then marks
+        # every page in the institution as in the path of this tab.
+        return f"{institution.absolute_url()}/manage-settings"
 
     def show_settings_tab(self):
         portal_membership = getToolByName(self.context, "portal_membership")
