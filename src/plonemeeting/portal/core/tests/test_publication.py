@@ -1,4 +1,5 @@
 from collective.timestamp.interfaces import ITimeStamper
+from collective.timestamp.utils import get_timestamp_date
 from datetime import datetime
 from datetime import timedelta
 from DateTime import DateTime
@@ -14,8 +15,10 @@ from plonemeeting.portal.core.behaviors.supersede import validate_no_already_sup
 from plonemeeting.portal.core.tests import PM_ADMIN_USER
 from plonemeeting.portal.core.tests import PM_USER_PASSWORD
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from pyasn1.codec.der import decoder
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.statusmessages.interfaces import IStatusMessage
+from rfc3161ng import TimeStampResp
 from unittest import mock
 from zExceptions import Redirect
 from zExceptions import Unauthorized
@@ -39,7 +42,14 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.unpublished_publication = self.institution.publications["publication-27"]
         mock_tsr_path = Path(__file__).parent / "resources/mock_tsr_file.tsr"
         with open(mock_tsr_path, "rb") as f:
-            self.published_publication.timestamp = NamedBlobFile(data=f.read(), filename="timestamp.tsr")
+            raw_tsr = f.read()
+        self.published_publication.timestamp = NamedBlobFile(data=raw_tsr, filename="timestamp.tsr")
+        # Do not call the remote timestamping service. Return the mock response.
+        tsr, _ = decoder.decode(raw_tsr, asn1Spec=TimeStampResp())
+        self.mock_timestamp_date = get_timestamp_date(tsr.time_stamp_token)
+        timestamper_patch = mock.patch("rfc3161ng.api.RemoteTimestamper.__call__", return_value=tsr)
+        timestamper_patch.start()
+        self.addCleanup(timestamper_patch.stop)
         self.login_as_test()
 
     def test_publication_add_form(self):
@@ -604,8 +614,8 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.workflow.doActionFor(future_pub, "publish")
         self.assertEqual(api.content.get_state(future_pub), "published")
         self.assertIsNotNone(future_pub.effective_date)
-        # The effective date is set to now
-        self.assertAlmostEqual(future_pub.effective().asdatetime(), datetime.now(pytz.UTC), delta=timedelta(seconds=10))
+        # The effective date is the timestamp date
+        self.assertEqual(future_pub.effective().asdatetime(), self.mock_timestamp_date)
 
         # Given a past publication
         past_pub = api.content.create(
@@ -623,8 +633,8 @@ class TestPublicationView(PmPortalDemoFunctionalTestCase):
         self.workflow.doActionFor(past_pub, "publish")
         self.assertEqual(api.content.get_state(past_pub), "published")
         self.assertIsNotNone(past_pub.effective_date)
-        # The effective date is set to now
-        self.assertAlmostEqual(past_pub.effective().asdatetime(), datetime.now(pytz.UTC), delta=timedelta(seconds=10))
+        # The effective date is the timestamp date
+        self.assertEqual(past_pub.effective().asdatetime(), self.mock_timestamp_date)
 
         # Given a past publication without timestamping enabled
         past_pub_no_ts = api.content.create(
