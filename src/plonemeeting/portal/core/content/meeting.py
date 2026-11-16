@@ -7,7 +7,6 @@ from plone.folder.unordered import UnorderedOrdering
 from plone.supermodel import model
 from plonemeeting.portal.core import _
 from plonemeeting.portal.core.content.item import IItem
-from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as plone_
 from zope import schema
@@ -26,7 +25,7 @@ class IMeeting(model.Schema):
         readonly=True,
     )
 
-    directives.write_permission(date_time=ManagePortal)
+    directives.write_permission(date_time="cmf.ManagePortal")
     date_time = schema.Datetime(
         title=plone_("Date"),
         required=True,
