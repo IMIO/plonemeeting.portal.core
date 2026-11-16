@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.6.2 (unreleased)
+2.6.2 (2026-11-16)
 ------------------
 
 - DELIBE-333: Refuse a meeting import or synchronization when another one is
