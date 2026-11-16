@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from contextlib import contextmanager
 from imio.migrator.utils import end_time
 from plone import api
 from plone.api.content import get_state
@@ -10,9 +11,6 @@ from plonemeeting.portal.core import plone_
 from plonemeeting.portal.core.config import DEC_FOLDER_ID
 from plonemeeting.portal.core.content.item import IItem
 from plonemeeting.portal.core.interfaces import IMeetingsFolder
-from plonemeeting.portal.core.locking import get_sync_lock_context
-from plonemeeting.portal.core.locking import sync_lock
-from plonemeeting.portal.core.locking import SyncAlreadyRunning
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
 from plonemeeting.portal.core.sync_utils import _json_date_to_datetime
 from plonemeeting.portal.core.sync_utils import sync_meeting
@@ -246,12 +244,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["sync"].klass = "submit-widget btn btn-primary"
-        self.actions["remove"].addClass("btn-danger")
-        # pat-single-submit drops an impatient second click client-side; the
-        # lock in _sync_meeting is what actually guarantees correctness.
-        self.actions["sync"].addClass("pat-single-submit")
-        self.actions["remove"].addClass("pat-single-submit")
+        self.actions["sync"].klass = "submit-widget btn btn-primary single-submit"
+        self.actions["remove"].addClass("btn-danger single-submit")
 
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
@@ -453,10 +447,7 @@ class PreImportReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["import"].addClass("btn-primary")
-        # pat-single-submit drops an impatient second click client-side; the
-        # lock in _sync_meeting is what actually guarantees correctness.
-        self.actions["import"].addClass("pat-single-submit")
+        self.actions["import"].addClass("btn-primary single-submit")
 
 
 def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
@@ -470,11 +461,44 @@ def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
     return json.loads(response.text)
 
 
+# Seconds. A lock that an instance did not release expires after this time.
+SYNC_LOCK_TIMEOUT = 15 * 60
+
+
+class SyncAlreadyRunning(Exception):
+    """A synchronization already runs in this folder."""
+
+
+@contextmanager
+def _sync_lock(folder):  # pragma: no cover
+    """Let only one synchronization at a time run in p_folder.
+
+    The lock is a timestamp on the folder. Each change of the lock is
+    committed immediately, thus all instances see it.
+    """
+    if time.time() - getattr(folder, "_sync_started", 0) < SYNC_LOCK_TIMEOUT:
+        raise SyncAlreadyRunning()
+    folder._sync_started = time.time()
+    # When two requests take the lock at the same time, one commit raises a
+    # ConflictError. The publisher replays that request, which is then refused.
+    transaction.commit()
+    try:
+        yield
+        transaction.commit()
+    except Exception:
+        transaction.abort()
+        raise
+    finally:
+        folder._sync_started = 0
+        transaction.commit()
+
+
 def _sync_meeting(
     institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
 ):  # pragma: no cover
+    decisions = institution[DEC_FOLDER_ID]
     try:
-        with sync_lock(institution):
+        with _sync_lock(decisions):
             start_time = time.time()
             logger.info("SYNC starting...")
             status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
@@ -487,27 +511,13 @@ def _sync_meeting(
             else:
                 api.portal.show_message(message=status, request=request, type="error")
             logger.info(end_time(start_time, "SYNC PROCESSED IN "))
-            # Commit here so that a ConflictError raised by this import is
-            # handled by sync_lock instead of by the publisher's final commit,
-            # which would happen after the lock was already released into the
-            # doomed transaction.
-            transaction.commit()
-    except SyncAlreadyRunning as error:
-        decisions = get_sync_lock_context(institution)
-        logger.warning(
-            "SYNC refused on %s, a synchronization is already running "
-            "(retry_count=%s, lock=%r)",
-            "/".join(decisions.getPhysicalPath()),
-            getattr(request, "retry_count", 0),
-            error.lock_info,
-        )
+    except SyncAlreadyRunning:
+        logger.warning("SYNC refused, a synchronization already runs in %s", "/".join(decisions.getPhysicalPath()))
         api.portal.show_message(
             message=_(
                 "msg_sync_already_running",
-                default="A synchronisation is already running for this institution "
-                "(started by ${creator}). Please wait for it to finish before "
-                "starting a new one.",
-                mapping={"creator": error.creator},
+                default="A synchronisation is already running for this institution. "
+                "Please wait for it to finish before starting a new one.",
             ),
             request=request,
             type="warning",

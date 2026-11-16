@@ -11,9 +11,6 @@ import MeetingAgenda from "./components/MeetingAgenda";
 import Tooltip from "./components/Tooltip";
 import TableOfContent from "./components/TableOfContent";
 
-// Patternslib patterns, they register themselves in Plone's global registry
-import "./patterns/single-submit";
-
 // Loadable components, for code-splitting and lazy loading
 const TimestampCheck = loadable(() => import('./components/TimestampCheck'))
 const PdfViewer = loadable(() => import('./components/PdfViewer'));
@@ -57,6 +54,21 @@ function displayInSettingsPath() {
     settingsTab.className = settingsTab.className + " current inPath"
   }
 }
+
+// Send a form only one time when its button has the "single-submit" class.
+document.addEventListener("submit", (event) => {
+  const form = event.target;
+  if (form.classList.contains("is-submitting")) {
+    event.preventDefault();
+  } else if (!event.defaultPrevented && event.submitter?.classList.contains("single-submit")) {
+    form.classList.add("is-submitting");
+  }
+});
+
+// The browser can show the page again from its history cache.
+window.addEventListener("pageshow", () => {
+  document.querySelectorAll("form.is-submitting").forEach((form) => form.classList.remove("is-submitting"));
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   setUpEnvironmentLabel();

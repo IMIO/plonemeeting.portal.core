@@ -6,6 +6,10 @@ Changelog
 
 - Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
   [aduchene]
+- DELIBE-333: Refuse a meeting import or synchronization when another one is
+  running for the same institution, and send the import and synchronization
+  forms only one time.
+  [aduchene]
 
 
 2.5.2 (2026-08-28)
