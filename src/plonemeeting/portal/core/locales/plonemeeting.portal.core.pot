@@ -1345,6 +1345,11 @@ msgstr ""
 msgid "msg_expiration_date_removed"
 msgstr ""
 
+#. Default: "A synchronisation is already running for this institution. Please wait for it to finish before starting a new one."
+#: ../browser/sync.py:517
+msgid "msg_sync_already_running"
+msgstr ""
+
 #: ../events/publication.py:25
 msgid "msg_timestamp_removed"
 msgstr ""

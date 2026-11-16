@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from contextlib import contextmanager
 from imio.migrator.utils import end_time
 from plone import api
 from plone.api.content import get_state
@@ -32,6 +33,7 @@ import copy
 import json
 import requests
 import time
+import transaction
 
 
 class IImportMeetingForm(Interface):
@@ -242,8 +244,8 @@ class PreSyncReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["sync"].klass = "submit-widget btn btn-primary"
-        self.actions["remove"].addClass("btn-danger")
+        self.actions["sync"].klass = "submit-widget btn btn-primary single-submit"
+        self.actions["remove"].addClass("btn-danger single-submit")
 
     @button.buttonAndHandler(_("Cancel"))
     def handle_cancel(self, action):
@@ -445,7 +447,7 @@ class PreImportReportForm(AutoExtensibleForm, Form):
 
     def updateActions(self):
         super().updateActions()
-        self.actions["import"].addClass("btn-primary")
+        self.actions["import"].addClass("btn-primary single-submit")
 
 
 def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
@@ -459,21 +461,67 @@ def _fetch_preview_items(context, meeting_external_uid):  # pragma: no cover
     return json.loads(response.text)
 
 
+# Seconds. A lock that an instance did not release expires after this time.
+SYNC_LOCK_TIMEOUT = 15 * 60
+
+
+class SyncAlreadyRunning(Exception):
+    """A synchronization already runs in this folder."""
+
+
+@contextmanager
+def _sync_lock(folder):
+    """Let only one synchronization at a time run in p_folder.
+
+    The lock is a timestamp on the folder. Each change of the lock is
+    committed immediately, thus all instances see it.
+    """
+    if time.time() - getattr(folder, "_sync_started", 0) < SYNC_LOCK_TIMEOUT:
+        raise SyncAlreadyRunning()
+    folder._sync_started = time.time()
+    # When two requests take the lock at the same time, one commit raises a
+    # ConflictError. The publisher replays that request, which is then refused.
+    transaction.commit()
+    try:
+        yield
+        transaction.commit()
+    except Exception:
+        transaction.abort()
+        raise
+    finally:
+        folder._sync_started = 0
+        transaction.commit()
+
+
 def _sync_meeting(
     institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
-):  # pragma: no cover
+):
+    decisions = institution[DEC_FOLDER_ID]
     try:
-        start_time = time.time()
-        logger.info("SYNC starting...")
-        status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
-        if new_meeting_uid:
-            brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
+        with _sync_lock(decisions):
+            start_time = time.time()
+            logger.info("SYNC starting...")
+            status, new_meeting_uid = sync_meeting(institution, meeting_uid, force, with_annexes, item_external_uids)
+            if new_meeting_uid:
+                brains = api.content.find(context=institution, object_provides=IMeetingsFolder.__identifier__)
 
-            if brains:
-                request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
-                api.portal.show_message(message=status, request=request, type="info")
-        else:
-            api.portal.show_message(message=status, request=request, type="error")
-        logger.info(end_time(start_time, "SYNC PROCESSED IN "))
+                if brains:
+                    request.response.redirect("{0}#seance={1}".format(brains[0].getURL(), new_meeting_uid))
+                    api.portal.show_message(message=status, request=request, type="info")
+            else:
+                api.portal.show_message(message=status, request=request, type="error")
+            logger.info(end_time(start_time, "SYNC PROCESSED IN "))
+    except SyncAlreadyRunning:
+        logger.warning("SYNC refused, a synchronization already runs in %s", "/".join(decisions.getPhysicalPath()))
+        api.portal.show_message(
+            message=_(
+                "msg_sync_already_running",
+                default="A synchronisation is already running for this institution. "
+                "Please wait for it to finish before starting a new one.",
+            ),
+            request=request,
+            type="warning",
+        )
+        redirect(request, decisions.absolute_url())
     except ValueError as error:
         api.portal.show_message(message=error.args[0], request=request, type="error")

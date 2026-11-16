@@ -63,6 +63,21 @@ function displayInSettingsPath() {
   }).observe(settingsTab, { attributes: true, attributeFilter: ["class"] });
 }
 
+// Send a form only one time when its button has the "single-submit" class.
+document.addEventListener("submit", (event) => {
+  const form = event.target;
+  if (form.classList.contains("is-submitting")) {
+    event.preventDefault();
+  } else if (!event.defaultPrevented && event.submitter?.classList.contains("single-submit")) {
+    form.classList.add("is-submitting");
+  }
+});
+
+// The browser can show the page again from its history cache.
+window.addEventListener("pageshow", () => {
+  document.querySelectorAll("form.is-submitting").forEach((form) => form.classList.remove("is-submitting"));
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   setUpEnvironmentLabel();
   displayInSettingsPath();

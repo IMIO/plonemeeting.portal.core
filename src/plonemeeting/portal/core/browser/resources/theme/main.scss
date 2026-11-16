@@ -185,3 +185,8 @@ x-tooltip > div[slot="content"] {
   color: #495057;
   font-weight: 500;
 }
+
+form.is-submitting [type="submit"] {
+  pointer-events: none;
+  opacity: 0.6;
+}

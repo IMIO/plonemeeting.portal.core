@@ -4,7 +4,10 @@ Changelog
 2.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-333: Refuse a meeting import or synchronization when another one is
+  running for the same institution, and send the import and synchronization
+  forms only one time.
+  [aduchene]
 
 
 2.6.1 (2026-11-04)
