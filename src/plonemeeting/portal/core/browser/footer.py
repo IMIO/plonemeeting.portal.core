@@ -11,6 +11,26 @@ from urllib.parse import quote
 import os
 
 
+VERSION_FILE = ".version"
+
+
+@forever.memoize
+def read_version_file():
+    """Read the version file in the working directory.
+
+    The image build writes this file. Each line is "key=value". Return the
+    pairs in a dict. Return an empty dict when the file is not there.
+    """
+    info = {}
+    if os.path.exists(VERSION_FILE):
+        with open(VERSION_FILE) as f:
+            for line in f:
+                key, sep, value = line.partition("=")
+                if sep:
+                    info[key.strip()] = value.strip()
+    return info
+
+
 class FooterView(BrowserView):
     """Footer view"""
 
@@ -59,17 +79,22 @@ class FooterView(BrowserView):
         actions = [ActionInfo(action, ec) for action in actions]
         return actions
 
-    @forever.memoize
     def get_version(self):
-        """Get the application version"""
+        """Get the application version.
+
+        Give the release version from the version file. When it is not
+        there, give the version of plonemeeting.portal.core.
+        """
+        app_version = read_version_file().get("version")
+        if app_version:
+            return app_version
         try:
             return version("plonemeeting.portal.core")
         except PackageNotFoundError:
             return ""
 
-    @forever.memoize
     def get_build(self):
         """Get the build number"""
-        if os.path.exists(".build_number"):
-            with open(".build_number") as f:
-                return "build " + f.read().strip()
+        build = read_version_file().get("build")
+        if build:
+            return "build " + build

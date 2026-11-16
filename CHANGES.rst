@@ -7,6 +7,12 @@ Changelog
 - DELIBE-333: Refuse a meeting import or synchronization when another one is
   running for the same institution, and send the import and synchronization
   forms only one time.
+- DELIBE-328: Show the buildout release version in the footer instead of the
+  plonemeeting.portal.core version. The footer reads the version and the build
+  number from one ``.version`` file (``version=...`` and ``build=...`` lines)
+  in the instance working directory. It no longer reads ``.build_number``.
+  When the file is not there, it shows the plonemeeting.portal.core version
+  and no build number.
   [aduchene]
 
 
