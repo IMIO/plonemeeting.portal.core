@@ -470,7 +470,7 @@ class SyncAlreadyRunning(Exception):
 
 
 @contextmanager
-def _sync_lock(folder):  # pragma: no cover
+def _sync_lock(folder):
     """Let only one synchronization at a time run in p_folder.
 
     The lock is a timestamp on the folder. Each change of the lock is
@@ -495,7 +495,7 @@ def _sync_lock(folder):  # pragma: no cover
 
 def _sync_meeting(
     institution, meeting_uid, request, force=False, with_annexes=True, item_external_uids=[]
-):  # pragma: no cover
+):
     decisions = institution[DEC_FOLDER_ID]
     try:
         with _sync_lock(decisions):

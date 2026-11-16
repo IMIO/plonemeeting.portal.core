@@ -7,6 +7,10 @@ from mockito import when
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
+from plonemeeting.portal.core.browser.sync import _sync_lock
+from plonemeeting.portal.core.browser.sync import _sync_meeting
+from plonemeeting.portal.core.browser.sync import SYNC_LOCK_TIMEOUT
+from plonemeeting.portal.core.browser.sync import SyncAlreadyRunning
 from plonemeeting.portal.core.config import API_HEADERS
 from plonemeeting.portal.core.content.meeting import IMeeting
 from plonemeeting.portal.core.sync_utils import _call_delib_rest_api
@@ -18,6 +22,7 @@ from plonemeeting.portal.core.sync_utils import sync_items_number
 from plonemeeting.portal.core.sync_utils import sync_meeting
 from plonemeeting.portal.core.sync_utils import sync_meeting_data
 from plonemeeting.portal.core.tests.portal_test_case import PmPortalDemoFunctionalTestCase
+from Products.statusmessages.interfaces import IStatusMessage
 from unittest.mock import patch
 
 import copy
@@ -25,6 +30,7 @@ import json
 import os
 import pytz
 import requests
+import time
 import transaction
 
 
@@ -861,3 +867,52 @@ class TestMeetingSynchronization(PmPortalDemoFunctionalTestCase):
 
         self.assertEqual(set(result.keys()), {"unchanged"})
         self.assertEqual(result["unchanged"]["count"], 1)
+
+    def test_sync_lock(self):
+        decisions = self.institution.decisions
+        with _sync_lock(decisions):
+            # A second synchronization is refused while the first one runs.
+            with self.assertRaises(SyncAlreadyRunning):
+                with _sync_lock(decisions):
+                    pass
+        self.assertEqual(0, decisions._sync_started)
+
+        # An error aborts the changes and releases the lock.
+        with self.assertRaises(KeyError):
+            with _sync_lock(decisions):
+                decisions.title = "Changed"
+                raise KeyError()
+        self.assertNotEqual("Changed", decisions.title)
+        self.assertEqual(0, decisions._sync_started)
+
+        # A lock that was not released expires.
+        decisions._sync_started = time.time() - SYNC_LOCK_TIMEOUT - 1
+        with _sync_lock(decisions):
+            pass
+
+    @patch("plonemeeting.portal.core.browser.sync.sync_meeting")
+    def test_sync_meeting_messages(self, sync_meeting_mock):
+        request = self.portal.REQUEST
+        decisions = self.institution.decisions
+        meeting_uid = self.meeting.UID()
+
+        def last_message_type():
+            return IStatusMessage(request).show()[-1].type
+
+        sync_meeting_mock.return_value = ("Meeting imported !", meeting_uid)
+        _sync_meeting(self.institution, "external_uid", request)
+        self.assertEqual(f"{decisions.absolute_url()}#seance={meeting_uid}", request.response.getHeader("location"))
+        self.assertEqual("info", last_message_type())
+
+        sync_meeting_mock.side_effect = ValueError("Web service connection error !")
+        _sync_meeting(self.institution, "external_uid", request)
+        self.assertEqual("error", last_message_type())
+        self.assertEqual(0, decisions._sync_started)
+
+        # A synchronization that already runs makes the new one stop.
+        sync_meeting_mock.reset_mock()
+        decisions._sync_started = time.time()
+        _sync_meeting(self.institution, "external_uid", request)
+        sync_meeting_mock.assert_not_called()
+        self.assertEqual(decisions.absolute_url(), request.response.getHeader("location"))
+        self.assertEqual("warning", last_message_type())
