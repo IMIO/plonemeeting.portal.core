@@ -383,4 +383,21 @@
     class=".docgen.PMDocumentGenerationView"
     permission="zope2.View"/>
 
+  <!-- The 404 page. An anonymous visitor also gets it for hidden content. -->
+  <browser:page
+    name="index.html"
+    for="zope.publisher.interfaces.INotFound"
+    class=".exceptions.NotFoundExceptionView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
+  <browser:page
+    name="index.html"
+    for="zExceptions.Unauthorized"
+    class=".exceptions.NotFoundExceptionView"
+    permission="zope.Public"
+    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
+  />
+
 </configure>

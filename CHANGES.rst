@@ -4,7 +4,11 @@ Changelog
 2.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-313: Send a 404 page to anonymous visitors for content that they
+  cannot view. They got a redirection to the login form, which showed that the
+  content exists. The 404 page has a new text and a link to the home page of
+  the institution or of the portal.
+  [aduchene]
 
 
 2.6.2 (2026-11-16)
