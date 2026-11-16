@@ -6,10 +6,12 @@
 # from Products.CMFPlone.interfaces import IBundleRegistry
 # from zope.component import getUtility
 
+from datetime import datetime
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
 from plone.api.exc import CannotGetPortalError
 from plone.api.portal import get_registry_record
+from plone.api.portal import set_registry_record
 from plone.base.interfaces.syndication import IFeedSettings
 from plone.protect.utils import addTokenToUrl
 from plonemeeting.portal.core import _
@@ -28,9 +30,25 @@ from plonemeeting.portal.core.utils import get_publications_creators_group_id
 from plonemeeting.portal.core.utils import get_publications_reviewers_group_id
 from plonemeeting.portal.core.utils import get_publications_managers_group_id
 from plonemeeting.portal.core.utils import set_constrain_types
+from Products.CMFPlone.resources.browser.resource import update_resource_registry_mtime
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import alsoProvides
+
+
+CUSTOM_COLORS_CSS_RECORD = "plone.bundles/plonemeeting.portal.core-custom.csscompilation"
+
+
+def bump_custom_colors_css_version():
+    """Give the custom colors CSS a new URL, so that caches load the new colors.
+
+    Plone does not read a bundle that has a query string in its path.
+    It makes the URL hash from the path. A new "v" value thus gives a new URL.
+    """
+    path = get_registry_record(CUSTOM_COLORS_CSS_RECORD).split("?")[0]
+    version = datetime.now().strftime("%Y%m%d%H%M%S")
+    set_registry_record(CUSTOM_COLORS_CSS_RECORD, f"{path}?v={version}")
+    update_resource_registry_mtime()
 
 
 def sync_website_link(institution):
@@ -137,6 +155,7 @@ def handle_institution_creation(obj, event):
     create_templates_folder(obj)
 
     sync_website_link(obj)
+    bump_custom_colors_css_version()
 
     request = getRequest()
     if request:  # Request can be `None` during test setup
@@ -173,6 +192,7 @@ def handle_institution_modified(institution, event):
             api.content.transition(obj=tab, to_state=new_state_id)
 
     sync_website_link(institution)
+    bump_custom_colors_css_version()
 
 
 def institution_state_changed(institution, event):

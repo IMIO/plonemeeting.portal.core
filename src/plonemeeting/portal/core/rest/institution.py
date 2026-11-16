@@ -10,7 +10,9 @@ class MigrateInstitutionUsersService(Service):
 
     Same operation as the ``@@migrate-institution-users`` button: sync the
     institution's Keycloak accounts, then migrate its local accounts (group
-    memberships, owned content, deletion) to their SSO identity.  Exposed as
+    memberships, owned content, deletion) to their SSO identity, and set the
+    institution's authentication method (``oidc``, or ``both`` when local
+    accounts remain).  Exposed as
     a REST endpoint so it can be triggered remotely (e.g. from Rundeck).
     """
 
@@ -31,4 +33,5 @@ class MigrateInstitutionUsersService(Service):
             "skipped": summary["skipped"],
             "failed": summary["failed"],
             "content": summary["content"],
+            "authentication": summary["authentication"],
         }

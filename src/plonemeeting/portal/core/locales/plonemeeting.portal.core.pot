@@ -536,6 +536,10 @@ msgstr ""
 msgid "OIDC/Keycloak"
 msgstr ""
 
+#: ../vocabularies.py:43
+msgid "Both"
+msgstr ""
+
 #: ../behaviors/configure.zcml:17
 msgid "PM Autopublishing"
 msgstr ""
@@ -1233,6 +1237,10 @@ msgstr ""
 
 #. Default: "Migrated ${migrated} account(s), reassigned ${content} content item(s), skipped ${skipped}, failed ${failed}."
 msgid "msg_users_migrated"
+msgstr ""
+
+#. Default: "Authentication method set to \"${method}\"."
+msgid "msg_authentication_method_set"
 msgstr ""
 
 #. Default: "Migrate a user to another user"

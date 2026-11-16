@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12"]
-        plone-version: ["6.1"]
+        python-version: ["3.14"]
+        plone-version: ["6.2"]
         experimental: [false]
     steps:
       - name: Run tests

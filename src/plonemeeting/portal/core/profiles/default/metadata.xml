@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <metadata>
-  <version>2501</version>
+  <version>2600</version>
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
@@ -15,5 +15,6 @@
     <dependency>profile-imio.omnia.assistant:default</dependency>
     <dependency>profile-imio.omnia.tinymce:default</dependency>
     <dependency>profile-pas.plugins.oidc:default</dependency>
+    <dependency>profile-imio.emailkit:default</dependency>
   </dependencies>
 </metadata>

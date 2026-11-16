@@ -541,6 +541,10 @@ msgstr "Aucun élément"
 msgid "OIDC/Keycloak"
 msgstr "OIDC/Keycloak"
 
+#: ../vocabularies.py:43
+msgid "Both"
+msgstr "Les deux"
+
 #: ../behaviors/configure.zcml:17
 msgid "PM Autopublishing"
 msgstr "Publication automatique d'une Publication \"Planifiée\""
@@ -1237,6 +1241,10 @@ msgid "msg_users_migrated"
 msgstr ""
 "${migrated} compte(s) migré(s), ${content} contenu(s) réattribué(s), ${skipped} "
 "ignoré(s), ${failed} en échec."
+
+#. Default: "Authentication method set to \"${method}\"."
+msgid "msg_authentication_method_set"
+msgstr "Méthode d'authentification définie sur « ${method} »."
 
 #. Default: "Migrate a user to another user"
 msgid "label_migrate_user_to_user"

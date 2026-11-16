@@ -15,7 +15,9 @@ from plonemeeting.portal.core import logger
 from plonemeeting.portal.core.config import MANAGEABLE_INSTITUTION_SUFFIXES
 from plonemeeting.portal.core.config import SSO_ACCOUNT_TYPE
 from plonemeeting.portal.core.keycloak import fetch_institution_keycloak_users
+from plonemeeting.portal.core.notifications import notify_user_migrated_to_sso
 from plonemeeting.portal.core.utils import get_members_group_id
+from plonemeeting.portal.core.vocabularies import AuthenticationMethodsVocabulary
 from plonemeeting.portal.core.vocabularies import InstitutionManageableGroupsVocabulary
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -62,12 +64,25 @@ def unregister_user_from_institution(institution, username, group_tool=None):
     group_tool.removePrincipalFromGroup(username, get_members_group_id(institution))
 
 
+def ensure_member_role(acl_users, userid):
+    """Grant the global ``Member`` role to ``userid`` when it is missing.
+
+    ``portal_registration.addMember`` grants it, but an account provisioned by
+    the OIDC plugin on a first SSO login is created without any role. The
+    portal grants "Access inactive portal content" to ``Member`` only, so the
+    catalog hides every planned (future effective date) and unpublished
+    (expired) publication from such an account. Idempotent; returns whether
+    the role was actually added.
+    """
+    return acl_users.portal_role_manager.assignRoleToPrincipal("Member", userid)
+
+
 # ================================ Local Users =================================
 
 class ManageUsersListingView(BrowserView):
     """Unified listing of the institution's users (local and SSO).
 
-    For SSO institutions (``authentication == 'oidc'``) the members are
+    For SSO institutions (``authentication`` is ``'oidc'`` or ``'both'``) the members are
     reconciled with Keycloak on every load; a sync failure is surfaced as
     an error (``sso_sync_failed``) rather than shown as a stale or
     misclassified list.
@@ -77,7 +92,7 @@ class ManageUsersListingView(BrowserView):
     description = _("desc_manage_users")
 
     def __call__(self):
-        self.is_sso_institution = getattr(self.context, "authentication", "plone") == "oidc"
+        self.is_sso_institution = getattr(self.context, "authentication", "plone") in ("oidc", "both")
         self.sso_sync_failed = False
         if self.is_sso_institution:
             # The sync performs ZODB writes (creating users, group
@@ -439,6 +454,8 @@ def sync_institution_keycloak_users(institution):
         member = portal_membership.getMemberById(userid)
         if member is not None and member.getProperty("account_type", "") != SSO_ACCOUNT_TYPE:
             member.setMemberProperties(mapping={"account_type": SSO_ACCOUNT_TYPE})
+        # Accounts created by the OIDC plugin at first login have no role at all.
+        ensure_member_role(acl_users, userid)
 
         group_tool.addPrincipalToGroup(userid, members_group_id)
 
@@ -601,6 +618,8 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
     for group in api.group.get_groups(username=old_id):
         if group.getId() != "AuthenticatedUsers":
             group_tool.addPrincipalToGroup(new_id, group.getId())
+    # The target may have been created roleless by the OIDC plugin at first login.
+    ensure_member_role(getToolByName(institution, "acl_users"), new_id)
     institution_path = "/".join(institution.getPhysicalPath())
     count = _reassign_content_ownership(
         catalog, institution_path, old_id, api.user.get(userid=new_id).getUser()
@@ -622,6 +641,7 @@ def migrate_institution_user(institution, old_id, new_id, catalog=None, group_to
             (old_id,), delete_localroles=0
         )
     logger.info("Migrated user %s -> %s: %d content item(s)", old_id, new_id, count)
+    notify_user_migrated_to_sso(institution, old_id, new_id)
     return count
 
 
@@ -633,8 +653,12 @@ def migrate_institution_local_users(institution):
     reassign the content it owns in the institution, then delete the local
     account. Returns a summary dict with ``migrated`` (list of (old, new)),
     ``skipped`` (list of old ids without a matching SSO account), ``failed``
-    (list of old ids whose migration raised) and ``content`` (number of
-    reassigned objects).
+    (list of old ids whose migration raised), ``content`` (number of
+    reassigned objects) and ``authentication`` (the new authentication method
+    of the institution).
+
+    After the run, the institution's authentication method is set to
+    ``oidc`` when no local account remains, or to ``both`` otherwise.
 
     The institution's Keycloak accounts are synced first, so freshly
     provisioned SSO identities are matchable; when that sync fails nothing
@@ -680,13 +704,18 @@ def migrate_institution_local_users(institution):
             summary["failed"].append(old_id)
             continue
         summary["migrated"].append((old_id, email))
+    # Each skipped or failed account is a local account that remains.
+    authentication = "both" if summary["skipped"] or summary["failed"] else "oidc"
+    institution.authentication = authentication
+    summary["authentication"] = authentication
     logger.info(
-        "User migration for %s: migrated=%d skipped=%d failed=%d content=%d",
+        "User migration for %s: migrated=%d skipped=%d failed=%d content=%d authentication=%s",
         institution_id,
         len(summary["migrated"]),
         len(summary["skipped"]),
         len(summary["failed"]),
         summary["content"],
+        authentication,
     )
     return summary
 
@@ -719,6 +748,9 @@ class MigrateInstitutionUsersView(BrowserView):
             )
         return rows
 
+    def _authentication_title(self, value):
+        return AuthenticationMethodsVocabulary(self.context).getTerm(value).title
+
     def __call__(self):
         if self.request.method == "POST":
             summary = migrate_institution_local_users(self.context)
@@ -742,6 +774,14 @@ class MigrateInstitutionUsersView(BrowserView):
                             "skipped": len(summary["skipped"]),
                             "failed": len(summary["failed"]),
                         },
+                    ),
+                    type="info",
+                )
+                IStatusMessage(self.request).addStatusMessage(
+                    _(
+                        "msg_authentication_method_set",
+                        default="Authentication method set to \"${method}\".",
+                        mapping={"method": self._authentication_title(summary["authentication"])},
                     ),
                     type="info",
                 )

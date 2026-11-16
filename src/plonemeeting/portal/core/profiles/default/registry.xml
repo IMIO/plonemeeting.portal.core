@@ -305,6 +305,21 @@
     <value key="resource">++plone++bootstrap-icons/card-heading.svg</value>
   </record>
 
+  <!-- imio.emailkit theme tokens. The records come from the :base profile of
+       the kit. metadata.xml depends on that profile, so this file sets only
+       values.
+
+       logo_url is absolute, because mail clients cannot resolve a relative
+       URL. It is a PNG, because mail clients such as Gmail and Outlook do
+       not show SVG. footer_html stays empty, so the kit shows its own
+       translated footer. -->
+  <record name="imio.emailkit.theme.primary_color">
+    <value>#DE007B</value>
+  </record>
+  <record name="imio.emailkit.theme.logo_url">
+    <value>https://www.deliberations.be/++plone++plonemeeting.portal.core/assets/logo_raster.png</value>
+  </record>
+
   <!--Products.CMFPlone.interfaces.IBundleRegistry (Theming) -->
   <records prefix="plone.bundles/plonemeeting.portal.core" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources">

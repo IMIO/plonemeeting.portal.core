@@ -1,14 +1,49 @@
 Changelog
 =========
 
-2.5.3 (unreleased)
+2.6.2 (unreleased)
+------------------
+
+- DELIBE-333: Refuse a meeting import or synchronization when another one is
+  running for the same institution, and send the import and synchronization
+  forms only one time.
+  [aduchene]
+
+
+2.6.1 (2026-11-04)
+------------------
+
+- DELIBE-309: Support Plone 6.2 on Python 3.12 to 3.14, and run the tests
+  against Plone 6.2.
+  [aduchene]
+- DELIBE-309: Fix the "Settings" tab marked as current on every institution
+  page with Plone 6.2.
+  [aduchene]
+- DELIBE-309: Keep ``logo_raster.png`` when the frontend bundle is built.
+  [aduchene]
+- DELIBE-320: Bust the cache of the institution custom colors CSS when an
+  institution is added or modified.
+  [aduchene]
+- Set the institution authentication method after the migration of its users
+  to SSO: ``oidc`` when no local account remains, else a new ``both`` value
+  that sends the login link to ``@@login-choice``.
+  [aduchene]
+- DELIBE-341: Reserve the institution "Authentication" fieldset to Zope
+  admins. Institution managers could see and edit it.
+  [aduchene]
+
+
+2.6.0 (2026-09-28)
 ------------------
 
 - Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
   [aduchene]
-- DELIBE-333: Refuse a meeting import or synchronization when another one is
-  running for the same institution, and send the import and synchronization
-  forms only one time.
+- DELIBE-293: Add ``imio.emailkit`` to send styled emails.
+  [aduchene]
+- DELIBE-293: Send an email to the user when their account moves to SSO.
+  [aduchene]
+- SUP-55384: The Keycloak sync and the local-to-SSO migration grant the
+  ``Member`` role to SSO accounts that have no role.
   [aduchene]
 
 

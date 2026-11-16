@@ -40,6 +40,7 @@ class AuthenticationMethodsVocabularyFactory:
             (
                 SimpleTerm(value="plone", title=_("Plone")),
                 SimpleTerm(value="oidc", title=_("OIDC/Keycloak")),
+                SimpleTerm(value="both", title=_("Both")),
             ),
         )
 

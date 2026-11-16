@@ -131,6 +131,22 @@ class TestBrowserInstitution(PmPortalDemoFunctionalTestCase):
         data.__context__.representatives_mappings = None # Could be None in Plone 6
         representatives_mappings_invariant(data)
 
+    def _edit_form_group_names(self, institution):
+        form = institution.restrictedTraverse("@@edit")
+        form.updateFields()
+        return [group.__name__ for group in form.groups]
+
+    def test_zope_admin_fieldsets_reserved_to_admin(self):
+        self.login_as_admin()
+        group_names = self._edit_form_group_names(self.amityville)
+        self.assertIn("authentication", group_names)
+        self.assertIn("settings", group_names)
+
+        self.login_as_institution_manager()
+        group_names = self._edit_form_group_names(self.amityville)
+        self.assertNotIn("authentication", group_names)
+        self.assertNotIn("settings", group_names)
+
     def test_manager_may_access_institution(self):
         self.login_as_institution_manager()
         view = self.amityville.restrictedTraverse("@@manage-settings")
