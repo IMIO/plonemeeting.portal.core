@@ -1,10 +1,22 @@
 Changelog
 =========
 
-2.6.4 (unreleased)
+2.7.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-321: Give each publication a machine-generated text version of its
+  PDF file, with the new ``imio.omnia.ocr`` add-on. The text is generated when
+  a PDF file is saved. The publication page holds the text, with a disclaimer:
+  only the PDF file is authoritative. The ``pat-pdf-viewer`` viewer shows it in
+  a "Text version" tab: this needs a version of ``imio.pdfviewer`` that has
+  this tab. In ``SearchableText``, the text version replaces the text that
+  Plone extracts from the PDF file. A duplicated publication with the same PDF
+  file takes the text version of the original. The generation does not modify
+  the publication, so its qualified timestamp stays valid. The upgrade step to
+  2700 installs the add-on and enables its behavior on publications. It does
+  not generate the text of the existing publications: run the
+  ``scripts/ocr_backfill.py`` script of the buildout for that.
+  [aduchene]
 
 
 2.6.3 (2026-11-20)

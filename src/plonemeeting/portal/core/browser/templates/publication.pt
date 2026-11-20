@@ -267,11 +267,28 @@
     </section>
     <section id= "pdf-section" class="row mb-3" tal:condition="file"
              data-toc="Document" i18n:attributes="data-toc">
-      <div class="col-12">
+      <div class="col-12"
+           tal:define="ocr python: view.ocr_info()">
         <h2 i18n:translate="">Document</h2>
-        <div class="pat-pdf-viewer">
+        <div tal:replace="structure python: view.ocr_manage_panel()" />
+        <div class="pat-pdf-viewer"
+             tal:attributes="data-pat-pdf-viewer python: view.pdf_viewer_options()">
           <a tal:attributes="href python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"
              i18n:translate="">Télécharger le document</a>
+          <div class="publication-text-version"
+               data-pdf-viewer-text=""
+               tal:condition="python: ocr is not None">
+            <p role="note"
+               tal:attributes="class python: 'ocr-disclaimer alert alert-warning' if ocr.low_confidence() else 'ocr-disclaimer alert alert-info'"
+               tal:content="python: ocr.disclaimer()">Only the PDF file is authoritative.</p>
+            <div class="ocr-text"
+                 tal:content="structure python: ocr.html(heading_level=3)">Text version</div>
+            <p class="publication-text-version-more"
+               tal:condition="python: ocr.truncated()">
+              <a tal:attributes="href python: ocr.full_text_url()"
+                 i18n:translate="">Read the full text version (<tal:count i18n:name="count" content="python: ocr.page_count()">12</tal:count> pages)</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
+from imio.omnia.ocr import api as ocr_api
+from imio.omnia.ocr.config import STATUS_DONE as OCR_STATUS_DONE
 from plone import api
 from plone.app.textfield.value import IRichTextValue
 from plone.app.textfield.value import RichTextValue
@@ -464,3 +466,23 @@ def get_linked_items_chain(context, relationship, reverse=False, unrestricted=Fa
             stack.append(next_obj)
 
     return chain
+
+
+def reuse_text_version(original, publication):
+    """Give ``publication`` the text version of ``original`` when the two have the same PDF file.
+
+    The copy needs no call to the OCR. It sends no event.
+    Return True when the text was copied.
+    """
+    source = ocr_api.get_text(original)
+    target = ocr_api.get_text(publication)
+    if source is None or target is None:
+        return False
+    if source.status != OCR_STATUS_DONE or source.is_stale():
+        return False
+    if target.file_hash() != source.source_hash:
+        return False
+    target.store_result({"pages": source.pages, "model": source.model}, source.source_hash)
+    target.set_hidden(source.hidden)
+    ocr_api.reindex(publication)
+    return True
