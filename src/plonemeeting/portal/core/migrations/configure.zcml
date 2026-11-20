@@ -335,4 +335,12 @@
     destination="2600"
     handler="plonemeeting.portal.core.migrations.migrate_to_2600.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2601"
+    description="Install imio.map.wallonia, the add-on that provides the homepage map."
+    source="2600"
+    destination="2601"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2601.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

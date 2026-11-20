@@ -4,7 +4,11 @@ Changelog
 2.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- DELIBE-351: Move the homepage map to the new ``imio.map.wallonia`` add-on,
+  as the ``pat-wallonia-map`` pattern. The homepage uses it in place of the
+  ``x-institution-map`` element and gives it one link for each published
+  institution. The upgrade step to 2601 installs the add-on.
+  [aduchene]
 
 
 2.6.2 (2026-11-16)

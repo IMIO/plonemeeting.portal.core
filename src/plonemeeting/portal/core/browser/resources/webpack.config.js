@@ -127,7 +127,6 @@ module.exports = (env, argv) => {
         react: "preact/compat",
         "react-dom/test-utils": "preact/test-utils",
         "react-dom": "preact/compat",
-        leaflet$: "leaflet/dist/leaflet",
       },
       extensions: ["", ".js", ".jsx"],
     },
