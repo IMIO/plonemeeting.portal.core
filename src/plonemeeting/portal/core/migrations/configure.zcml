@@ -343,4 +343,12 @@
     destination="2601"
     handler="plonemeeting.portal.core.migrations.migrate_to_2601.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2602"
+    description="Install imio.pdfviewer, the add-on that provides the PDF viewer."
+    source="2601"
+    destination="2602"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2602.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

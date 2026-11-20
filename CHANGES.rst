@@ -4,6 +4,13 @@ Changelog
 2.6.3 (unreleased)
 ------------------
 
+- DELIBE-353: Show the PDF of a publication with the ``pat-pdf-viewer``
+  pattern of the new ``imio.pdfviewer`` add-on, in place of the
+  ``x-pdf-viewer`` element. The viewer has a text layer and clickable links,
+  continuous scroll, fit to width or page, touch gestures and a real full
+  screen, and loads pdf.js from the site. The upgrade step to 2602 installs
+  the add-on.
+  [aduchene]
 - DELIBE-351: Move the homepage map to the new ``imio.map.wallonia`` add-on,
   as the ``pat-wallonia-map`` pattern. The homepage uses it in place of the
   ``x-institution-map`` element and gives it one link for each published
