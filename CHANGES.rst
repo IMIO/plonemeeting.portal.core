@@ -9,6 +9,10 @@ Changelog
   ``x-institution-map`` element and gives it one link for each published
   institution. The upgrade step to 2601 installs the add-on.
   [aduchene]
+- DELIBE-352: Remove the ``institution-locations`` view and the municipality
+  locations it stored on the portal. The map data now ships with
+  ``imio.map.wallonia``. The upgrade step to 2601 removes the stored data.
+  [aduchene]
 
 
 2.6.2 (2026-11-16)
