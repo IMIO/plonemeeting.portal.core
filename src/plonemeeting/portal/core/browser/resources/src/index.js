@@ -13,7 +13,6 @@ import TableOfContent from "./components/TableOfContent";
 
 // Loadable components, for code-splitting and lazy loading
 const TimestampCheck = loadable(() => import('./components/TimestampCheck'))
-const PdfViewer = loadable(() => import('./components/PdfViewer'));
 
 import "../theme/main.scss";
 
@@ -24,7 +23,6 @@ register(MasonryColumns, "x-masonry-columns", ["container-selector", "item-selec
 register(LayoutSelect, "x-layout-select", ["id", "target-selector", "default-option"]);
 register(DarkModeToggle, "x-dark-mode-toggle", []);
 register(MeetingAgenda, "x-meeting-agenda", ["count", "meeting-url"]);
-register(PdfViewer, "x-pdf-viewer", ["file"]);
 register(TimestampCheck, "x-timestamp-check", []);
 register(TableOfContent, "x-table-of-content", []);
 

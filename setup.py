@@ -74,6 +74,7 @@ setup(
         "imio.omnia.assistant",
         "imio.omnia.core",
         "imio.omnia.tinymce",
+        "imio.pdfviewer",
         "imio.pyutils",
         "rich",
         "shutup",

@@ -269,7 +269,10 @@
              data-toc="Document" i18n:attributes="data-toc">
       <div class="col-12">
         <h2 i18n:translate="">Document</h2>
-        <x-pdf-viewer tal:attributes="file python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"></x-pdf-viewer>
+        <div class="pat-pdf-viewer">
+          <a tal:attributes="href python: '{}/@@download/file/{}'.format(context.absolute_url(), file.filename)"
+             i18n:translate="">Télécharger le document</a>
+        </div>
       </div>
     </section>
     <metal:use use-macro="context/@@pm_macros/annexes-section"/>
