@@ -69,6 +69,7 @@ setup(
         "z3c.jbot",
         "imio.emailkit>=1.0.0b2",
         "imio.helpers>=1.0.0rc2",
+        "imio.map.wallonia",
         "imio.migrator>=1.34",
         "imio.omnia.assistant",
         "imio.omnia.core",

@@ -21,7 +21,7 @@ class TestHomepageView(PmPortalDemoFunctionalTestCase):
             browser.headers.get('status')
         )
 
-        self.assertIn("x-institution-map", html_content)
+        self.assertIn('class="pat-wallonia-map"', html_content)
         self.assertIn("x-institution-select", html_content)
 
     def test_get_json_institution_type_vocabulary(self):

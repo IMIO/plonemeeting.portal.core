@@ -6,14 +6,6 @@
 
   <!-- Views -->
   <browser:page
-    name="institution-locations"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".site.InstitutionLocationsAPIView"
-    permission="zope2.View"
-    layer="plonemeeting.portal.core.interfaces.IPlonemeetingPortalCoreLayer"
-  />
-
-  <browser:page
     name="agenda"
     for="plonemeeting.portal.core.content.meeting.IMeeting"
     class=".meeting.MeetingAgendaAPIView"

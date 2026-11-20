@@ -28,6 +28,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import imio.emailkit
+        import imio.map.wallonia
         import imio.omnia.assistant
         import imio.omnia.core
         import imio.omnia.tinymce
@@ -40,6 +41,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         self.loadZCML(package=imio.omnia.core)
         self.loadZCML(package=imio.omnia.assistant)
         self.loadZCML(package=imio.omnia.tinymce)
+        self.loadZCML(package=imio.map.wallonia)
         self.loadZCML(package=pas.plugins.oidc)
         self.loadZCML(package=plonemeeting.portal.core)
 

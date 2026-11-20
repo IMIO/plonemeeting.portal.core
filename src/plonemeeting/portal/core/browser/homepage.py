@@ -50,6 +50,28 @@ class HomepageView(BrowserView):
         """Attribution HTML for the homepage institutions map tile layer."""
         return api.portal.get_registry_record("plonemeeting.portal.core.map_attribution", default="")
 
+    def get_map_options(self):
+        """Return the options of the homepage map pattern as a JSON string.
+
+        The pattern has a default for each option. An empty registry value
+        gives no key.
+        """
+        options = {
+            "tiles-url": self.get_map_tiles_url(),
+            "attribution": self.get_map_attribution(),
+        }
+        return json.dumps({key: value for key, value in options.items() if value})
+
+    def get_institution_links(self):
+        """Return the title and the URL of each published institution.
+
+        The homepage map draws one municipality for each link.
+        """
+        brains = api.content.find(portal_type="Institution",
+                                  review_state="published",
+                                  sort_on="sortable_title")
+        return [{"title": brain.Title, "url": brain.getURL()} for brain in brains]
+
     def get_faq_items(self):
         """
         Get all FAQ items from this portal.
