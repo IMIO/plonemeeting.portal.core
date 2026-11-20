@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.6.3 (unreleased)
+2.6.3 (2026-11-20)
 ------------------
 
 - DELIBE-353: Show the PDF of a publication with the ``pat-pdf-viewer``
