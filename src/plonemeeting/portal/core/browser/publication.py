@@ -12,21 +12,25 @@ from plonemeeting.portal.core import _
 from plonemeeting.portal.core.behaviors.supersede import SupersedeAdapter
 from plonemeeting.portal.core.browser import BaseAddForm
 from plonemeeting.portal.core.browser import BaseEditForm
+from plonemeeting.portal.core.utils import reuse_text_version
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import _checkPermission
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
+from urllib.parse import urlencode
 from plone.dexterity.interfaces import IDexterityFTI
 from z3c.form import button
 from z3c.form.interfaces import IDataConverter
 from zExceptions import Unauthorized
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.interface import alsoProvides
 from ZPublisher.Iterators import filestream_iterator
 
 import copy
+import json
 import logging
 import os
 import pathlib
@@ -86,12 +90,43 @@ class AddForm(PublicationForm, BaseAddForm):
             return _("Duplicate ${name}", mapping={"name": fti.Title()})
         return super().label
 
-    def updateWidgets(self):
-        super().updateWidgets()
+    @property
+    def action(self):
+        """Keep the duplicated publication in the URL of the form.
+
+        The request that saves the form needs it.
+        """
+        url = super().action
         duplicate_of = self.request.get("duplicate_of")
         if duplicate_of:
-            original = api.content.get(UID=duplicate_of)
-            if original is not None and original.portal_type == "Publication":
+            url = f"{url}?{urlencode({'duplicate_of': duplicate_of})}"
+        return url
+
+    def _duplicated_publication(self):
+        """Return the publication that the form duplicates.
+
+        Return None when the form does not duplicate a publication.
+        """
+        duplicate_of = self.request.get("duplicate_of")
+        if not duplicate_of:
+            return None
+        original = api.content.get(UID=duplicate_of)
+        if original is None or original.portal_type != "Publication":
+            return None
+        return original
+
+    def add(self, object):
+        super().add(object)
+        original = self._duplicated_publication()
+        if original is not None:
+            reuse_text_version(original, self.container._getOb(object.id))
+
+    def updateWidgets(self):
+        super().updateWidgets()
+        # The request that saves the form has the values of the user.
+        if self.request.method != "POST":
+            original = self._duplicated_publication()
+            if original is not None:
                 self._prefill_from_original(original)
                 return
         self.widgets['text'].value = copy.deepcopy(self.institution.default_publication_text)
@@ -185,6 +220,36 @@ class PublicationView(DefaultView):
             ):
                 api.portal.show_message(_("effective_date_in_past_msg"), request=self.request, type="warning")
         return super(PublicationView, self).__call__()
+
+    @memoize
+    def ocr_info(self):
+        """Return the ``@@ocr-info`` view of the text version of the PDF file.
+
+        Return None when there is no text version to show.
+        """
+        info = queryMultiAdapter((self.context, self.request), name="ocr-info")
+        if info is None or not info.available():
+            return None
+        return info
+
+    def ocr_manage_panel(self):
+        """Return the HTML of the panel that manages the text version.
+
+        The result is empty for a user who cannot manage the text version.
+        """
+        panel = queryMultiAdapter((self.context, self.request), name="ocr-manage-panel")
+        return panel() if panel is not None else ""
+
+    def pdf_viewer_options(self):
+        """Return the options of the PDF viewer as JSON. Return None when the viewer needs no option.
+
+        The page holds only the first pages of a long text version.
+        The viewer gets the full text from the ``text-url`` option.
+        """
+        info = self.ocr_info()
+        if info is None or not info.truncated():
+            return None
+        return json.dumps({"text-url": info.text_url()})
 
     def get_effective_date(self):
         return self.context.effective_date.strftime("%d/%m/%Y à %H:%M") if self.context.effective_date else "-"

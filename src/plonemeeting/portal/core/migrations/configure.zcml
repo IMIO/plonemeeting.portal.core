@@ -351,4 +351,12 @@
     destination="2602"
     handler="plonemeeting.portal.core.migrations.migrate_to_2602.migrate"
     profile="plonemeeting.portal.core:default"/>
+
+  <genericsetup:upgradeStep
+    title="Go to portal 2700"
+    description="Install imio.omnia.ocr, the add-on that generates the text version of a PDF file, and enable its behavior on publications."
+    source="2602"
+    destination="2700"
+    handler="plonemeeting.portal.core.migrations.migrate_to_2700.migrate"
+    profile="plonemeeting.portal.core:default"/>
 </configure>

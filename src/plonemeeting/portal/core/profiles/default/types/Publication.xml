@@ -43,6 +43,7 @@
     <element value="plone.locking" />
     <element value="pm.autopublishing" />
     <element value="pm.supersede" />
+    <element value="imio.omnia.ocr" />
   </property>
 
   <!-- View information -->

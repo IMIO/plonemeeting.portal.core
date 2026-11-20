@@ -32,6 +32,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         import imio.pdfviewer
         import imio.omnia.assistant
         import imio.omnia.core
+        import imio.omnia.ocr
         import imio.omnia.tinymce
         import pas.plugins.oidc
         import plone.restapi
@@ -42,6 +43,7 @@ class PlonemeetingPortalCoreLayer(PloneSandboxLayer):
         self.loadZCML(package=imio.omnia.core)
         self.loadZCML(package=imio.omnia.assistant)
         self.loadZCML(package=imio.omnia.tinymce)
+        self.loadZCML(package=imio.omnia.ocr)
         self.loadZCML(package=imio.map.wallonia)
         self.loadZCML(package=imio.pdfviewer)
         self.loadZCML(package=pas.plugins.oidc)

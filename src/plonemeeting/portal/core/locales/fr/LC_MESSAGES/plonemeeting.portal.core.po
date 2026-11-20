@@ -648,6 +648,10 @@ msgstr "Paramètres pour obtenir les champs des Points à importer"
 msgid "Published Items query filter"
 msgstr "Paramètres pour obtenir la liste des Points à importer"
 
+#: ../browser/templates/publication.pt:289
+msgid "Read the full text version (${count} pages)"
+msgstr "Lire la version texte complète (${count} pages)"
+
 #: ../browser/templates/publication.pt:372
 msgid "Related items"
 msgstr ""

@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 )
 setup(
     name="plonemeeting.portal.core",
-    version="2.6.4.dev0",
+    version="2.7.0.dev0",
     description="Plonemeeting decisions publication portal",
     long_description=long_description,
     long_description_content_type="text/x-rst",
@@ -73,6 +73,7 @@ setup(
         "imio.migrator>=1.34",
         "imio.omnia.assistant",
         "imio.omnia.core",
+        "imio.omnia.ocr",
         "imio.omnia.tinymce",
         "imio.pdfviewer",
         "imio.pyutils",

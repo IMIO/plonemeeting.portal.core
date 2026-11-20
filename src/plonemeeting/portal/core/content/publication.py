@@ -4,8 +4,12 @@ from collective.timestamp.interfaces import ITimeStamper
 from DateTime import DateTime
 from imio.helpers import EMPTY_DATETIME
 from imio.helpers.content import object_values
+from imio.omnia.ocr.api import searchable_text as ocr_searchable_text
 from plone import api
 from plone.app.contenttypes.content import File
+from plone.app.contenttypes.indexers import _unicode_save_string_concat
+from plone.app.contenttypes.indexers import SearchableText
+from plone.app.contenttypes.indexers import SearchableText_file
 from plone.app.contenttypes.interfaces import IFile
 from plone.app.dexterity.textindexer import searchable
 from plone.app.textfield import RichText
@@ -237,6 +241,18 @@ def get_pretty_category(obj):
 def get_pretty_document_type(obj):
     document_types = api.portal.get_registry_record(name="plonemeeting.portal.core.document_types")
     return document_types.copy().get(obj.document_type, [])
+
+
+@indexer(IPublication)
+def get_searchable_text(obj):
+    """Index the text version of the PDF file in place of the text that Plone extracts from the file.
+
+    Without a text version that can be in the search, the indexer of the File type does the work.
+    """
+    ocr_text = ocr_searchable_text(obj)
+    if not ocr_text:
+        return SearchableText_file(obj)()
+    return _unicode_save_string_concat(SearchableText(obj), ocr_text)
 
 
 @indexer(IPublication)

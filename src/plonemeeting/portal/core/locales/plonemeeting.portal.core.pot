@@ -647,6 +647,10 @@ msgstr ""
 msgid "Published Items query filter"
 msgstr ""
 
+#: ../browser/templates/publication.pt:289
+msgid "Read the full text version (${count} pages)"
+msgstr ""
+
 #: ../browser/templates/publication.pt:372
 msgid "Related items"
 msgstr ""
