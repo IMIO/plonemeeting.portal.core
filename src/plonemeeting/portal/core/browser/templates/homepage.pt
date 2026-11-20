@@ -60,13 +60,17 @@
       <h2>Couverture géographique</h2>
       <div class="pat-wallonia-map"
            tal:attributes="data-pat-wallonia-map view/get_map_options">
-        <ul data-layer="municipalities">
+        <ul data-layer="municipalities"
+            hidden="hidden">
           <li tal:repeat="link view/get_institution_links">
             <a tal:attributes="href link/url"
                tal:content="link/title"></a>
           </li>
         </ul>
       </div>
+      <noscript>
+        <style>#institutions-map [data-layer] { display: block !important; }</style>
+      </noscript>
 
     </section>
 
